@@ -28,6 +28,7 @@ const TerritoryDrawerContents: React.FC<Props> = ({ territory }) => {
         <LocalParamsProvider overrides={{ limit: -1, entType: EntityType.Territory }}>
           <EntityMap
             maxWidth={400}
+            allowColorBar={false}
             entities={[
               territory,
               ...getTerritoryDescendants(territory, territory.scope === TerritoryScope.Country),

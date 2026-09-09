@@ -14,7 +14,6 @@ const ScaleFactorSelector: React.FC = () => {
   }, [scaleFactor]);
 
   useEffect(() => {
-    // if(scaleFactor === localFactor) return;
     // debounce
     const timeout = setTimeout(() => updatePageParams({ scaleFactor: localFactor }), 100);
     return () => clearTimeout(timeout);
@@ -23,11 +22,11 @@ const ScaleFactorSelector: React.FC = () => {
   return (
     <Slider
       value={localFactor}
-      min={0}
+      min={0.1}
       max={10}
       step={0.1}
       onValueChange={(value) => {
-        const newValue = typeof value === 'number' ? value : 1;
+        const newValue = Array.isArray(value) ? value[0] : value;
         setLocalFactor(newValue);
       }}
     />

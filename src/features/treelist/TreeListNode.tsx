@@ -57,8 +57,8 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false, 
   );
 
   const color = useMemo(() => {
-    if (colorBy === Field.None) return 'var(--primary)';
-    if (getColor) return getColor(ent) ?? 'var(--muted-foreground)';
+    if (colorBy === Field.None || !getColor) return 'var(--primary)';
+    return getColor(ent) ?? 'var(--muted-foreground)';
   }, [colorBy, getColor, ent]);
 
   return (

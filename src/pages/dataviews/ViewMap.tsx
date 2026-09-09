@@ -44,7 +44,10 @@ function ViewMap() {
     <MapContainer>
       <div>{getMapDescription(entType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
-      <EntityMap entities={filteredEntities} allowSidebar={true} />
+      <EntityMap
+        entities={filteredEntities}
+        allowSidebar={false /* turned off until we have a better UX plan for the sidebar */}
+      />
       {entsWithoutCoordinates.length > 0 && (
         <div>
           The following {getEntityTypeLabelPlural(entType)} do not have defined coordinates:{' '}
