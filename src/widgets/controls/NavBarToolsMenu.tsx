@@ -7,21 +7,12 @@ import { Button } from '@shared/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
 import { navBarItemClassName } from './NavBarLink';
-import {
-  DECODER_TOOL,
-  getToolURL,
-  NAV_BAR_TOOLS,
-  NavBarTool,
-  REPORT_TOOLS,
-  useIsToolOpen,
-} from './navBarTools';
+import { getToolURL, NAV_BAR_TOOLS, NavBarTool, useIsToolOpen } from './navBarTools';
 
 const NavBarToolsMenu: React.FC = () => {
   const isToolOpen = useIsToolOpen();
@@ -39,13 +30,9 @@ const NavBarToolsMenu: React.FC = () => {
         }
       />
       <DropdownMenuContent className="w-max">
-        <ToolMenuItem tool={DECODER_TOOL} isActive={isToolOpen(DECODER_TOOL)} />
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>Reports</DropdownMenuLabel>
-          {REPORT_TOOLS.map((tool) => (
-            <ToolMenuItem key={tool.label} tool={tool} isActive={isToolOpen(tool)} />
-          ))}
-        </DropdownMenuGroup>
+        {NAV_BAR_TOOLS.map((tool) => (
+          <ToolMenuItem key={tool.label} tool={tool} isActive={isToolOpen(tool)} />
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

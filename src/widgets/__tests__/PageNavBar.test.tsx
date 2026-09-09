@@ -67,7 +67,12 @@ describe('PageNavBar', () => {
       'href',
       CENSUS_VALIDATION_HREF,
     );
-    expect(screen.getByRole('menuitem', { name: 'Plurals' })).toBeInTheDocument();
+    expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual([
+      'Language Decoder',
+      'Census Validation',
+      'Plurals',
+    ]);
+    expect(screen.queryByText('Reports')).toBeNull();
   });
 
   it('marks the tools trigger current while a tools page is open', async () => {

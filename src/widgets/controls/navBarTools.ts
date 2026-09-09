@@ -15,13 +15,12 @@ export type NavBarTool = {
   params: Partial<PageParams>;
 };
 
-export const DECODER_TOOL: NavBarTool = {
-  label: 'Language Decoder',
-  page: LangNavPageName.Decoder,
-  params: { entType: EntityType.Language },
-};
-
-export const REPORT_TOOLS: NavBarTool[] = [
+export const NAV_BAR_TOOLS: NavBarTool[] = [
+  {
+    label: 'Language Decoder',
+    page: LangNavPageName.Decoder,
+    params: { entType: EntityType.Language },
+  },
   {
     label: 'Census Validation',
     page: LangNavPageName.Data,
@@ -37,8 +36,6 @@ export const REPORT_TOOLS: NavBarTool[] = [
     },
   },
 ];
-
-export const NAV_BAR_TOOLS: NavBarTool[] = [DECODER_TOOL, ...REPORT_TOOLS];
 
 export function getToolURL({ page, params }: NavBarTool): string {
   const query = getNewURLSearchParams(params).toString();
