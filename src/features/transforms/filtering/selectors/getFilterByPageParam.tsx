@@ -68,6 +68,7 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
     case PageParamKey.scaleFactor:
     case PageParamKey.searchBy:
     case PageParamKey.sortBehavior:
+    case PageParamKey.secondarySortBehavior:
     case PageParamKey.view:
       return Field.None;
 

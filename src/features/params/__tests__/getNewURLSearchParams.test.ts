@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { EntityType, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 describe('getNewURLSearchParams', () => {
   it('migrates searchString to languageFilter when switching from Language', () => {
@@ -90,6 +91,26 @@ describe('getNewURLSearchParams', () => {
 
     expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
     expect(result.get('secondarySortBy')).toBe(Field.Population);
+  });
+
+  it('if there is a new sort by, it passes the current sorting behavior to the secondary sort', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+      sortBehavior: SortBehavior.Reverse.toString(),
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    expect(result.get('sortBehavior')).toBeNull(); // default is unspecified
+    expect(result.get('secondarySortBy')).toBe(Field.Population);
+    expect(result.get('secondarySortBehavior')).toBe(SortBehavior.Reverse.toString());
+
+    const newResult = getNewURLSearchParams({ sortBy: Field.Population }, result);
+    expect(newResult.get('sortBy')).toBeNull(); // default is unspecified
+    expect(newResult.get('sortBehavior')).toBeNull(); // default is unspecified
+    expect(newResult.get('secondarySortBy')).toBe(Field.VitalityMetascore);
+    expect(newResult.get('secondarySortBehavior')).toBeNull(); // default is unspecified
   });
 
   it('when new primary was the old secondary (A then B → user picks B), result is B then A', () => {

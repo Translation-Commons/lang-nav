@@ -66,6 +66,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   searchString: '',
   secondarySortBy: Field.None,
   sortBehavior: SortBehavior.Normal,
+  secondarySortBehavior: SortBehavior.Normal,
   sortBy: Field.Population,
   territoryFilter: '',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],

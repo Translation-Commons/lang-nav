@@ -1,5 +1,6 @@
 import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import PopulationFocus from '@entities/types/PopulationFocus';
 
@@ -111,7 +112,7 @@ function clearContextDependentParams(
   next: URLSearchParams,
   prev?: URLSearchParams,
 ): URLSearchParams {
-  const prevOrDefault = getDefaultParams(
+  const prevDefault = getDefaultParams(
     prev?.get('entType') as EntityType,
     prev?.get('view') as View,
     prev?.get('profile') as ProfileType,
@@ -119,7 +120,7 @@ function clearContextDependentParams(
     prev?.get('colorBy') as Field,
   );
 
-  if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
+  if (newParams.view !== undefined && newParams.view !== prevDefault.view) {
     if (newParams.limit == null) next.delete('limit');
     if (newParams.page == null) next.delete('page');
     if (newParams.colorBy == null) next.delete('colorBy');
@@ -128,18 +129,18 @@ function clearContextDependentParams(
     if (newParams.chartX == null) next.delete('chartX');
   }
 
-  if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {
+  if (newParams.entType !== undefined && newParams.entType !== prevDefault.entType) {
     next.delete('pinned');
     if (newParams.reportID == null) next.delete('reportID');
     if (newParams.page == null) next.delete('page');
     const oldSearchString = prev?.get('searchString');
     if (oldSearchString) {
       next.delete('searchString');
-      if (prevOrDefault.entType === EntityType.Language) {
+      if (prevDefault.entType === EntityType.Language) {
         next.set('languageFilter', oldSearchString);
-      } else if (prevOrDefault.entType === EntityType.Territory) {
+      } else if (prevDefault.entType === EntityType.Territory) {
         next.set('territoryFilter', oldSearchString);
-      } else if (prevOrDefault.entType === EntityType.WritingSystem) {
+      } else if (prevDefault.entType === EntityType.WritingSystem) {
         next.set('writingSystemFilter', oldSearchString);
       }
     }
@@ -150,14 +151,19 @@ function clearContextDependentParams(
 
   // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker).
   // Do not overwrite if user explicitly set secondarySortBy in this update (e.g. to None).
-  const prevSortBy = prev?.get(PageParamKey.sortBy);
-  if (
-    newParams.sortBy !== undefined &&
-    prevSortBy &&
-    newParams.sortBy !== prevSortBy &&
-    newParams.secondarySortBy === undefined
-  ) {
-    next.set(PageParamKey.secondarySortBy, prevSortBy);
+  const prevSortBy = prev?.get(PageParamKey.sortBy) ?? prevDefault.sortBy;
+  if (newParams.sortBy != null && prevSortBy && newParams.sortBy !== prevSortBy) {
+    // Promote the previous primary sortBy to secondarySortBy if the user hasn't explicitly set it.
+    if (newParams.secondarySortBy == null) next.set(PageParamKey.secondarySortBy, prevSortBy);
+
+    // Move the current sort direction to the secondary one and reset the sort direction to normal
+    if (newParams.secondarySortBehavior == null)
+      next.set(
+        PageParamKey.secondarySortBehavior,
+        prev?.get(PageParamKey.sortBehavior) ?? SortBehavior.Normal.toString(),
+      );
+    if (newParams.sortBehavior == null)
+      next.set(PageParamKey.sortBehavior, SortBehavior.Normal.toString());
   }
 
   return next;

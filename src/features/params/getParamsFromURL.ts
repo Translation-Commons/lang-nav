@@ -114,6 +114,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.sortBehavior:
         params.sortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
         break;
+      case PageParamKey.secondarySortBehavior:
+        params.secondarySortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
+        break;
       case PageParamKey.colorGradient:
         params.colorGradient = parseInt(value) as ColorGradient;
         break;

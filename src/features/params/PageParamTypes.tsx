@@ -83,6 +83,7 @@ export enum PageParamKey {
   searchBy = 'searchBy',
   searchString = 'searchString',
   secondarySortBy = 'secondarySortBy',
+  secondarySortBehavior = 'secondarySortBehavior',
   sortBehavior = 'sortBehavior',
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
@@ -125,6 +126,7 @@ export type PageParams = {
   sortBy: Field;
   secondarySortBy: Field;
   sortBehavior: SortBehavior;
+  secondarySortBehavior: SortBehavior;
   colorBy: Field;
   colorGradient: ColorGradient;
   scaleBy: Field;

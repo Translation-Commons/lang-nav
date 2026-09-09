@@ -13,20 +13,21 @@ import { SortBehavior, SortDirection } from './SortTypes';
 export type SortByFunctionType = (a: EntityData, b: EntityData) => number;
 
 export function getSortFunction(): SortByFunctionType {
-  const { sortBy, secondarySortBy, sortBehavior } = usePageParams();
+  const { sortBy, secondarySortBy, sortBehavior, secondarySortBehavior } = usePageParams();
 
-  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy);
+  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy, secondarySortBehavior);
 }
 
 export function getSortFunctionParameterized(
   sortBy: Field,
-  sortDirection: SortBehavior = SortBehavior.Normal,
+  sortBehavior: SortBehavior = SortBehavior.Normal,
   secondarySortBy?: Field,
+  secondarySortBehavior: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
-  const direction = getNormalSortDirection(sortBy) * sortDirection;
+  const direction = getNormalSortDirection(sortBy) * sortBehavior;
   const secondaryDirection =
     secondarySortBy != null && secondarySortBy !== Field.None
-      ? getNormalSortDirection(secondarySortBy) * sortDirection
+      ? getNormalSortDirection(secondarySortBy) * secondarySortBehavior
       : null;
 
   const effectiveSecondary: Field | null =
