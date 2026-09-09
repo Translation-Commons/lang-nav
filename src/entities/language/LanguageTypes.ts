@@ -9,13 +9,14 @@ import type { RetirementReason } from '@features/data/load/extra_entities/ISORet
 
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
 import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import type { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 
-import type {
+import {
   DigitalSupportScore,
   PlatformSupportData,
   UniversalDeclarationOfHumanRightsData,
@@ -130,6 +131,7 @@ export interface LanguageData extends EntityBase {
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  orthographies?: LanguageOrthography[];
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
@@ -166,6 +168,7 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     names: [name],
     variants: [],
     locales: [],
+    orthographies: [],
     writingSystems: {},
     childLanguages: [],
     warnings: {},
