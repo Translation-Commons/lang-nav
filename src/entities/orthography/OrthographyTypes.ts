@@ -5,8 +5,7 @@
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export type LanguageOrthography = {
-	scriptName: string;
-	writingSystem?: WritingSystemData;
-	baseCharacters?: string;
-}
-
+  scriptName: string;
+  writingSystem?: WritingSystemData;
+  baseCharacters?: string;
+};

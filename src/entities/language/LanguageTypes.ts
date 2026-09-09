@@ -10,13 +10,13 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 import { EntityBase } from '../types/DataTypes';
 
-import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
 import {
   DigitalSupportScore,
   PlatformSupportData,
