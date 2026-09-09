@@ -1,89 +1,86 @@
 import { SearchIcon } from 'lucide-react';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
-import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
+import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+import { Button } from '@shared/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
+import { Separator } from '@shared/ui/separator';
 
+import NavBarLink from './controls/NavBarLink';
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
+import NavMenuDrawer from './controls/NavMenuDrawer';
 import SettingsButton from './controls/SettingsButton';
 
 const SearchCombobox = React.lazy(() => import('@features/transforms/search/SearchCombobox'));
 
-const PageNavBar: React.FC = () => {
-  const { pageBrightness } = usePageParams().brightness;
+const getSearchParams = (value: Suggestion) => ({ entID: value.entID, entType: value.ent?.type });
 
+const PageNavBar: React.FC = () => {
   return (
-    <nav className="flex flex-wrap items-center gap-x-2 text-lg text-(--color-text-on-color) bg-(--color-button-primary)">
-      <NavBarTitle>
-        <img
-          src={`${import.meta.env.BASE_URL}logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
-          width="60px"
-          alt="LangNav Logo"
-        />
-        <span className="hidden sm:inline md:hidden">
-          <strong>LangNav</strong> <em>β</em>
-        </span>
-        <span className="hidden md:inline">
-          <strong>Lang</strong>uage <strong>Nav</strong>igator <em>β</em>
-        </span>
-      </NavBarTitle>
-      <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
-      <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
-      <NavBarToolsMenu />
+    <nav className="flex h-12 shrink-0 items-center gap-1 border-b bg-background px-2 sm:h-14 sm:px-3">
+      <NavMenuDrawer />
+      <NavBarBrand />
+      <Separator
+        orientation="vertical"
+        className="mx-1.5 hidden h-5 sm:block data-vertical:self-center"
+      />
+      <div className="hidden items-center gap-0.5 sm:flex">
+        <NavBarLink page={LangNavPageName.Data}>Data</NavBarLink>
+        <NavBarToolsMenu />
+        <NavBarLink page={LangNavPageName.About}>About</NavBarLink>
+      </div>
       <ContainErrorsAndSuspense>
-        <PopupCard
-          buttonClassName="primary lg:hidden"
-          buttonLabel={<SearchIcon />}
-          buttonStyle={{ padding: '8px' }}
-          body={
-            <SearchCombobox
-              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
-            />
-          }
-        />
-        <div className="flex-1">
-          <div className="hidden lg:flex">
-            <SearchCombobox
-              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
-            />
-          </div>
+        <div className="mx-auto hidden w-full min-w-0 max-w-[380px] md:block">
+          <SearchCombobox getNewParams={getSearchParams} />
         </div>
       </ContainErrorsAndSuspense>
-      <FeedbackForm />
-      <SettingsButton />
+      <div className="ml-auto flex items-center gap-1">
+        <Popover>
+          <PopoverTrigger
+            render={
+              <Button variant="ghost" size="icon-lg" aria-label="Search" className="md:hidden">
+                <SearchIcon />
+              </Button>
+            }
+          />
+          <PopoverContent className="w-fit">
+            <ContainErrorsAndSuspense>
+              <SearchCombobox getNewParams={getSearchParams} />
+            </ContainErrorsAndSuspense>
+          </PopoverContent>
+        </Popover>
+        <FeedbackForm />
+        <SettingsButton />
+      </div>
     </nav>
   );
 };
 
-const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path, children }) => {
-  return (
-    <NavLink
-      className="primary text-xl p-2 rounded-sm hover:bg-(--color-button-hover) active:no-underline"
-      to={path}
-      style={({ isActive }) => ({
-        textDecoration: 'none',
-        fontWeight: isActive ? 'bold' : 'lighter',
-      })}
-    >
-      {children}
-    </NavLink>
-  );
-};
+const NavBarBrand: React.FC = () => {
+  const { pageBrightness } = usePageParams().brightness;
+  const logoVariant = pageBrightness === 'dark' ? 'Dark' : '';
 
-const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <InternalLink
-      className="primary flex gap-1 items-center text-2xl p-2 rounded-sm hover:bg-(--color-button-hover) active:no-underline overflow-nowrap"
       page={LangNavPageName.Intro}
+      className="flex shrink-0 items-center gap-2 rounded-md px-1.5 py-1 no-underline transition-colors hover:bg-muted hover:no-underline"
     >
-      {children}
+      <img
+        src={`${import.meta.env.BASE_URL}logo/LangNavLogo${logoVariant}.svg`}
+        className="h-7 w-auto"
+        alt="LangNav Logo"
+      />
+      <span className="hidden text-sm/tight whitespace-nowrap lg:inline">
+        <strong className="font-semibold">Lang</strong>uage{' '}
+        <strong className="font-semibold">Nav</strong>igator <em>β</em>
+      </span>
     </InternalLink>
   );
 };
