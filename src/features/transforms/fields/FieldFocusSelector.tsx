@@ -12,7 +12,7 @@ const FieldFocusSelector: React.FC = () => {
   const { view, fieldFocus } = usePageParams();
 
   // Only applies to the TreeList view for now, but could be expanded to other views in the future
-  if (view !== View.Hierarchy && view !== View.Map) return null;
+  if (view !== View.Hierarchy && view !== View.Map && view !== View.Details) return null;
 
   return (
     <TransformOptionsPopup

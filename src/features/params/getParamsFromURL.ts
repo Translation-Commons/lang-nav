@@ -46,6 +46,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
   const params: Partial<PageParams> = {};
   urlParams.forEach((value, keyUntyped) => {
     const key = keyUntyped as PageParamKey;
+    if (!Object.values(PageParamKey).includes(key)) return; // Ignore parameters with old names
+
     switch (key) {
       // Numeric values
       case PageParamKey.page:

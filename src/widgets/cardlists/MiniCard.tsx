@@ -36,12 +36,14 @@ const MiniCard: React.FC<{ ent: EntityData; labelSource?: EntityNameLabelSource 
       </strong>
       <div className="font-mono text-[10px]">{ent.codeDisplay}</div>
       {fields.map((field) => {
-        const res = getField(ent, field);
-        if (res == null) return null;
+        const val = getField(ent, field);
+        if (val == null) return null;
         return (
           <div key={field} className="flex items-center gap-1">
             <FieldIcon field={field} />
-            <EntityFieldDisplay ent={ent} field={field} />
+            <div className="max-w-20 truncate overflow-hidden" title={val?.toString()}>
+              <EntityFieldDisplay ent={ent} field={field} />
+            </div>
           </div>
         );
       })}

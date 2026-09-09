@@ -15,7 +15,6 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
-  Field.WritingSystemScope,
 ];
 
 /**
