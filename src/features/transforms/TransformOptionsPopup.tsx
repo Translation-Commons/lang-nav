@@ -4,7 +4,7 @@ import { Button } from '@shared/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
 
 type Props = {
-  description: ReactNode;
+  description?: ReactNode;
   isActive?: boolean;
   label: ReactNode;
   options: Record<string, ReactNode>;

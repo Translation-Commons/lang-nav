@@ -8,6 +8,8 @@ import Field from '../fields/Field';
 import FieldDropdown from '../sorting/FieldDropdown';
 import TransformOptionsPopup from '../TransformOptionsPopup';
 
+import ScaleFactorSelector from './ScaleFactorSelector';
+
 const ScalePopupCard: React.FC = () => {
   const { scaleBy, view } = usePageParams();
 
@@ -26,6 +28,7 @@ const ScalePopupCard: React.FC = () => {
       }
       options={{
         'Scale By': <FieldDropdown pageParam="scaleBy" />,
+        'Scale Factor': <ScaleFactorSelector />,
       }}
     />
   );
