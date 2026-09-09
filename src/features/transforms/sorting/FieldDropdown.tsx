@@ -17,6 +17,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
+import { Separator } from '@shared/ui/separator';
 
 import Field from '../fields/Field';
 import { FieldGroup, getFieldGroup, getFieldGroupLabel } from '../fields/FieldGroup';
@@ -25,6 +26,8 @@ import { getTransformForPageParam } from '../TransformEnum';
 type Props = {
   pageParam: keyof PageParams;
 };
+
+const commonFields = [Field.Population, Field.Name, Field.DigitalSupport];
 
 const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
   const params = usePageParams();
@@ -40,7 +43,10 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
+          <Button
+            className={currentValue === Field.None ? 'text-muted-foreground' : ''}
+            variant="outline"
+          >
             <div className="truncate text-ellipsis">{currentValue}</div>
           </Button>
         }
@@ -50,6 +56,20 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
           value={currentValue}
           onValueChange={(value) => updatePageParams({ [pageParam]: value })}
         >
+          {commonFields
+            .filter((field) => applicableFields.includes(field))
+            .map((field) => (
+              <DropdownMenuRadioItem
+                className={`cursor-pointer ${
+                  field === currentValue ? 'bg-accent font-medium text-accent-foreground' : ''
+                }`}
+                value={field}
+                key={'common-' + field}
+              >
+                {field}
+              </DropdownMenuRadioItem>
+            ))}
+          <Separator />
           {groupedFields.map(([group, fields]) => {
             const fieldGroup = Number(group) as FieldGroup;
 

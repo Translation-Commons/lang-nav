@@ -171,7 +171,7 @@ const Text: React.FC<TextProps> = ({ ent, scale, showCircle, zoomFactor }) => {
   const { fieldFocus } = usePageParams();
 
   if (fieldFocus === Field.None) return null;
-  if (zoomFactor < 1.5) return null;
+  // if (zoomFactor < 1.5) return null;
 
   return (
     <text

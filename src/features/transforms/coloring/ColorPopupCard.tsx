@@ -21,7 +21,9 @@ const ColorPopupCard: React.FC = () => {
       label={
         <>
           <PaletteIcon />
-          <div className="truncate text-ellipsis">{colorBy}</div>
+          <div className={'truncate text-ellipsis' + (colorBy === Field.None ? ' hidden' : '')}>
+            {colorBy}
+          </div>
         </>
       }
       options={{

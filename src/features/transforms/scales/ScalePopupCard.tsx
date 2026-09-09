@@ -19,7 +19,9 @@ const ScalePopupCard: React.FC = () => {
       label={
         <>
           <ScalingIcon />
-          <div className="truncate text-ellipsis">{scaleBy}</div>
+          <div className={'truncate text-ellipsis' + (scaleBy === Field.None ? ' hidden' : '')}>
+            {scaleBy}
+          </div>
         </>
       }
       options={{
