@@ -16,6 +16,7 @@ import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSy
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 import { EntityBase } from '../types/DataTypes';
 
+import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
 import {
   DigitalSupportScore,
   PlatformSupportData,
@@ -127,6 +128,7 @@ export interface LanguageData extends EntityBase {
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  orthographies?: LanguageOrthography[];
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
@@ -163,6 +165,7 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     names: [name],
     variants: [],
     locales: [],
+    orthographies: [],
     writingSystems: {},
     childLanguages: [],
     warnings: {},

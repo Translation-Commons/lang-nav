@@ -23,6 +23,9 @@ These datasets are aggregated and curated by the LangNav team. In some places th
   - https://ldml.api.sil.org/langtags.json
   - public domain
   - accessed 2026-08-10
+- hyperglot.tsv
+  - https://github.com/rosettatype/hyperglot
+  - accessed 2026-8-18
 
 Additionally, there are folders containing multiple datasets, grouped by the originating source:
 
