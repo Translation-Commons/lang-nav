@@ -1,1 +1,0 @@
-import{r as s}from"./index-BmYEJ9es.js";const o=({children:r})=>s.jsx("div",{className:"@container",children:s.jsx("div",{className:"grid gap-6 grid-cols-1 @md:grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5",children:r})});export{o as R};

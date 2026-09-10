@@ -1,0 +1,1 @@
+import{r as i}from"./vendor-react-CxwveuaZ.js";import{x as s}from"./index-Bb4NbBra.js";function a(){const{page:n,limit:t}=s();return{getCurrentEntities:i.useCallback(e=>t<1||e.length<t?e:e.length<=t*(n-1)?e.slice(0,t):e.slice(t*(n-1),t*n),[n,t])}}export{a as u};

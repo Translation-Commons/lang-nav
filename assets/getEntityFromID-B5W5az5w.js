@@ -1,0 +1,1 @@
+import{u as r}from"./useDataContext-9PnG4W9k.js";import{x as a}from"./index-Bb4NbBra.js";function m(n){const{entID:e}=a(),{censuses:o,getEntity:s}=r(),t=n??e;if(t!=null)return o[t]??s(t)}export{m as g};
