@@ -124,9 +124,8 @@ function clearContextDependentParams(
     if (newParams.page == null) next.delete('page');
     if (newParams.colorBy == null) next.delete('colorBy');
     if (newParams.cmpID == null) next.delete('cmpID');
-
-    if (newParams.view === View.Hierarchy && newParams.colorBy == null)
-      next.set('colorBy', Field.Depth);
+    if (newParams.chartY == null) next.delete('chartY');
+    if (newParams.chartX == null) next.delete('chartX');
   }
 
   if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {
@@ -145,6 +144,8 @@ function clearContextDependentParams(
       }
     }
     if (newParams.cmpID == null) next.delete('cmpID');
+    if (newParams.chartY == null) next.delete('chartY');
+    if (newParams.chartX == null) next.delete('chartX');
   }
 
   // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker).

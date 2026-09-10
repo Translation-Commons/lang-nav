@@ -18,7 +18,7 @@ type Props = { ents: EntityData[]; colorBy?: Field };
 export type ColoringFunctions = {
   colorBy: Field;
   getColor: (ent: EntityData) => string | undefined;
-  getNormalizedValue: (value: number) => number;
+  getNormalizedValue: (value: number | string) => number;
   getDenormalizedValue: (normalized: number) => number;
   maxValue: number;
   minValue: number;
@@ -99,6 +99,7 @@ function shouldUseLogarithmicScale(colorBy: Field): boolean {
   switch (colorBy) {
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationSpeaking:
     case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:

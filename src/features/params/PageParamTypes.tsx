@@ -28,6 +28,7 @@ export enum View {
   Table = 'Table',
   Hierarchy = 'Hierarchy',
   Map = 'Map',
+  Chart = 'Chart',
   Reports = 'Reports',
   Details = 'Details',
 }
@@ -52,6 +53,8 @@ export enum LocaleSeparator {
 export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 
 export enum PageParamKey {
+  chartX = 'chartX',
+  chartY = 'chartY',
   cmpID = 'cmpID',
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
@@ -125,4 +128,6 @@ export type PageParams = {
   scaleBy: Field;
   scaleFactor: number;
   fieldFocus: Field; // To see data but not necessarily sort or color by it
+  chartX: Field;
+  chartY: Field;
 };

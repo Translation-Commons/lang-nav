@@ -117,10 +117,12 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
 function getLimitThreshold(view: View): number {
   switch (view) {
     case View.Map:
+    case View.Chart:
       return 1000;
     case View.Table:
       return 200;
     case View.CardList:
+      return 40;
     case View.Details:
       return 20;
     case View.Hierarchy:
