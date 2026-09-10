@@ -143,6 +143,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.fieldFocus:
         params.fieldFocus = value as Field;
         break;
+      case PageParamKey.chartX:
+        params.chartX = value as Field;
+        break;
+      case PageParamKey.chartY:
+        params.chartY = value as Field;
+        break;
 
       //These are string arrays
       case PageParamKey.pinned:

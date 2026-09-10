@@ -4,6 +4,7 @@ import {
   Grid2x2Icon,
   ListTreeIcon,
   MapIcon,
+  ScatterChartIcon,
   Table2Icon,
 } from 'lucide-react';
 import React from 'react';
@@ -24,6 +25,8 @@ export function getViewIcon(view: View): React.ReactNode {
       return <Table2Icon />;
     case View.Reports:
       return <ChartColumnBigIcon />;
+    case View.Chart:
+      return <ScatterChartIcon />;
   }
 }
 
@@ -41,5 +44,7 @@ export function getViewLabel(view: View): string {
       return 'Table';
     case View.Reports:
       return 'Reports';
+    case View.Chart:
+      return 'Chart';
   }
 }
