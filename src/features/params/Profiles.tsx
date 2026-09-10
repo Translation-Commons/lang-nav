@@ -131,7 +131,7 @@ export function getDefaultParams(
       if (params.entType === EntityType.Language) params.languageScopes.push(LanguageScope.Family);
       if (params.entType === EntityType.Territory)
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
-      params.colorBy = Field.Depth;
+      if (params.colorBy === Field.None) params.colorBy = Field.Depth;
       break;
     case View.Table:
       // Show more results in table view since it's easier to scan

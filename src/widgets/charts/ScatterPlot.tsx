@@ -41,7 +41,7 @@ const ScatterPlot: React.FC = () => {
         <g transform="translate(0, 0)">
           <path d="M 0 200 h 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
           <path d="M 0 0   v 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
-          {ents.reverse().map((ent, index) => {
+          {[...ents].reverse().map((ent, index) => {
             const fieldXValue = getField(ent, chartX) ?? 0;
             const fieldYValue = getField(ent, chartY) ?? 0;
             const x = xValue.getNormalizedValue(fieldXValue) * 200;
