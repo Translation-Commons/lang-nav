@@ -158,7 +158,12 @@ export function getDefaultParams(
     case View.Chart:
       params.chartX = Field.Population;
       params.chartY = Field.Literacy;
-      params.colorBy = Field.DigitalSupport;
+      if (params.entType === EntityType.Language) params.colorBy = Field.DigitalSupport;
+      if (params.entType === EntityType.Locale) params.colorBy = Field.DigitalSupport;
+      if (params.entType === EntityType.Locale) params.chartY = Field.PercentOfTerritoryPopulation;
+      if (params.entType === EntityType.Territory) params.chartY = Field.CountOfLanguages;
+      if (params.entType === EntityType.WritingSystem) params.chartY = Field.CountOfKeyboards;
+      if (params.entType === EntityType.Census) params.chartY = Field.CountOfLanguages;
       break;
   }
 

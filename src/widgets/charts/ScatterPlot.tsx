@@ -29,48 +29,44 @@ const ScatterPlot: React.FC = () => {
   );
 
   return (
-    <div data-testid="scatter-plot">
-      <div className="flex flex-row gap-4 justify-center w-full">
-        <div>
-          X axis: <FieldDropdown pageParam="chartX" />
-        </div>
-        <div>
-          Y axis: <FieldDropdown pageParam="chartY" />
-        </div>
+    <div data-testid="scatter-plot" className="max-w-[600px] mx-auto relative">
+      <div className="absolute top-1/2 left-0 transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
+        <FieldDropdown pageParam="chartY" />
       </div>
-      <div className="max-w-[600px] mx-auto">
-        <svg viewBox="-10 -10 230 230">
-          <g transform="translate(0, 0)">
-            <path d="M 0 200 h 200" stroke="black" fill="none" />
-            <path d="M 0 0   v 200" stroke="black" fill="none" />
-            {ents.map((ent, index) => {
-              const fieldXValue = getField(ent, chartX) ?? 0;
-              const fieldYValue = getField(ent, chartY) ?? 0;
-              const x = xValue.getNormalizedValue(fieldXValue) * 200;
-              const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
-              return (
-                <g
-                  transform={`translate(${x}, ${y})`}
-                  key={ent.ID}
-                  onMouseEnter={buildOnMouseEnter(ent)}
-                  onMouseLeave={onMouseLeaveTriggeringElement}
-                >
-                  <circle
-                    r={scaleFactor}
-                    onClick={() => updatePageParams({ entID: ent.ID })}
-                    fill={coloring.getColor(ent)}
-                  />
-                  {limit > index && (
-                    <text fontSize="4" textAnchor="middle" alignmentBaseline="middle">
-                      {getField(ent, fieldFocus)}
-                    </text>
-                  )}
-                </g>
-              );
-            })}
-          </g>
-        </svg>
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+        <FieldDropdown pageParam="chartX" />
       </div>
+      <svg viewBox="-10 -10 230 230">
+        <g transform="translate(0, 0)">
+          <path d="M 0 200 h 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
+          <path d="M 0 0   v 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
+          {ents.map((ent, index) => {
+            const fieldXValue = getField(ent, chartX) ?? 0;
+            const fieldYValue = getField(ent, chartY) ?? 0;
+            const x = xValue.getNormalizedValue(fieldXValue) * 200;
+            const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
+            return (
+              <g
+                transform={`translate(${x}, ${y})`}
+                key={ent.ID}
+                onMouseEnter={buildOnMouseEnter(ent)}
+                onMouseLeave={onMouseLeaveTriggeringElement}
+              >
+                <circle
+                  r={scaleFactor}
+                  onClick={() => updatePageParams({ entID: ent.ID })}
+                  fill={coloring.getColor(ent) ?? 'var(--primary)'}
+                />
+                {limit > index && (
+                  <text fontSize="4" textAnchor="middle" alignmentBaseline="middle">
+                    {getField(ent, fieldFocus)}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
+      </svg>
     </div>
   );
 };
