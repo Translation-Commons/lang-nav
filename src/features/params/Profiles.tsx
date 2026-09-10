@@ -33,8 +33,8 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
-  chartX: Field.PopulationSpeaking,
-  chartY: Field.Literacy,
+  chartX: Field.None,
+  chartY: Field.None,
   cmpID: '',
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
@@ -154,6 +154,11 @@ export function getDefaultParams(
       // Reports easily become too dense, so we limit them more aggressively by default
       params.limit = 10;
       params.fieldFocus = Field.Code;
+      break;
+    case View.Chart:
+      params.chartX = Field.Population;
+      params.chartY = Field.Literacy;
+      params.colorBy = Field.DigitalSupport;
       break;
   }
 

@@ -13,7 +13,7 @@ import ScaleFactorSelector from './ScaleFactorSelector';
 const ScalePopupCard: React.FC = () => {
   const { scaleBy, view } = usePageParams();
 
-  if (view !== View.Map) return null;
+  if (view !== View.Map && view !== View.Chart) return null;
 
   return (
     <TransformOptionsPopup

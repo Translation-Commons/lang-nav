@@ -13,7 +13,8 @@ import ColorGradientSelector from './ColorGradientSelector';
 const ColorPopupCard: React.FC = () => {
   const { colorBy, view } = usePageParams();
 
-  if (view !== View.Map && view !== View.CardList && view !== View.Hierarchy) return null;
+  if (view !== View.Map && view !== View.CardList && view !== View.Hierarchy && view !== View.Chart)
+    return null;
 
   return (
     <TransformOptionsPopup

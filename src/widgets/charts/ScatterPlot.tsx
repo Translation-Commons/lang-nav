@@ -11,11 +11,13 @@ import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
 import { EntityData } from '@entities/types/DataTypes';
 
 const ScatterPlot: React.FC = () => {
-  const { limit, chartX, chartY, fieldFocus } = usePageParams();
+  const { limit, chartX, chartY, colorBy, fieldFocus, updatePageParams, scaleFactor } =
+    usePageParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
-  const xColoring = useColors({ ents, colorBy: chartX });
-  const yColoring = useColors({ ents, colorBy: chartY });
+  const xValue = useColors({ ents, colorBy: chartX });
+  const yValue = useColors({ ents, colorBy: chartY });
+  const coloring = useColors({ ents, colorBy });
 
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
@@ -27,7 +29,7 @@ const ScatterPlot: React.FC = () => {
   );
 
   return (
-    <div>
+    <div data-testid="scatter-plot">
       <div className="flex flex-row gap-4 justify-center w-full">
         <div>
           X axis: <FieldDropdown pageParam="chartX" />
@@ -44,8 +46,8 @@ const ScatterPlot: React.FC = () => {
             {ents.map((ent, index) => {
               const fieldXValue = getField(ent, chartX) ?? 0;
               const fieldYValue = getField(ent, chartY) ?? 0;
-              const x = xColoring.getNormalizedValue(fieldXValue) * 200;
-              const y = 200 - yColoring.getNormalizedValue(fieldYValue) * 200;
+              const x = xValue.getNormalizedValue(fieldXValue) * 200;
+              const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
               return (
                 <g
                   transform={`translate(${x}, ${y})`}
@@ -53,7 +55,11 @@ const ScatterPlot: React.FC = () => {
                   onMouseEnter={buildOnMouseEnter(ent)}
                   onMouseLeave={onMouseLeaveTriggeringElement}
                 >
-                  <circle r={1} />
+                  <circle
+                    r={scaleFactor}
+                    onClick={() => updatePageParams({ entID: ent.ID })}
+                    fill={coloring.getColor(ent)}
+                  />
                   {limit > index && (
                     <text fontSize="4" textAnchor="middle" alignmentBaseline="middle">
                       {getField(ent, fieldFocus)}
