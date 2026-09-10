@@ -10,89 +10,131 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
       return entType + ' code';
 
     case Field.Name:
+      return 'Name';
     case Field.Endonym:
-      return '';
+      return 'Endonym';
 
     // Scope
     case Field.LanguageScope:
       return 'Language Level';
     case Field.WritingSystemScope:
+      return 'Writing System Scope';
     case Field.TerritoryScope:
+      return 'Territory Scope';
     case Field.VariantType:
+      return 'Variant Type';
     case Field.SourceType:
-      return '';
+      return 'Source Type';
 
     // Status
     case Field.Modality:
-      return '';
+      return 'Medium of Use';
 
     case Field.Indigeneity:
+      return 'Indigeneity';
     case Field.HistoricPresence:
+      return 'Historic Presence (>1500 CE)';
     case Field.LanguageFormedHere:
+      return 'Language Formed Here';
     case Field.GovernmentStatus:
+      return 'Government Status';
     case Field.ECRMLProtection:
-      return '';
+      return 'ECRML Protection';
 
     case Field.DigitalSupport:
+      return 'Digital Support';
     case Field.CLDRCoverage:
+      return 'CLDR Coverage';
     case Field.UnicodeVersion:
-      return '';
+      return 'Unicode Version';
 
     case Field.VitalityMetascore:
+      return 'Vitality Metascore';
     case Field.ISOStatus:
-      return '';
+      return 'ISO Status';
 
     // Relation
     case Field.Language:
+      return 'Language';
     case Field.LanguageFamily:
+      return 'Language Family';
     case Field.WritingSystem:
+      if (entType === EntityType.Keyboard) return 'Input Script';
+      return 'Writing System';
     case Field.OutputScript:
+      return 'Output Script';
     case Field.Territory:
+      return 'Territory';
     case Field.Region:
+      return 'Region';
     case Field.Variant:
+      return 'Variant';
     case Field.Platform:
+      return 'Platform';
     case Field.SourceForLanguage:
+      return 'Source for Language';
     case Field.SourceForPopulation:
-      return '';
+      return 'Source for Population';
 
     // CountOf
     case Field.CountOfLanguages:
+      return '# of Languages';
     case Field.CountOfKeyboards:
+      return '# of Keyboards';
     case Field.CountOfWritingSystems:
+      return '# of Writing Systems';
     case Field.CountOfChildTerritories:
+      return '# of Child Territories';
     case Field.CountOfCountries:
+      return '# of Countries';
     case Field.CountOfCensuses:
+      return '# of Censuses';
     case Field.CountOfVariants:
       return '';
 
     // Quantity
     case Field.Area:
+      return 'Area (km²)';
     case Field.Depth:
+      return 'Depth';
     case Field.Coordinates:
+      return 'Coordinates';
     case Field.Latitude:
+      return 'Latitude';
     case Field.Longitude:
+      return 'Longitude';
     case Field.Literacy:
-      return '';
+      return 'Literacy';
 
     // Population
     case Field.Population:
+      return 'Population';
     case Field.PopulationDirectlySourced:
+      return 'Population Directly Sourced';
     case Field.PopulationSpeaking:
+      return 'Population Speaking';
     case Field.PopulationWriting:
+      return 'Population Writing';
     case Field.PopulationOfDescendants:
-      return '';
+      return 'Population of Descendants';
 
     case Field.PercentOfTerritoryPopulation:
+      return '% of Territory Population';
     case Field.PercentOfOverallLanguageSpeakers:
+      return '% of Overall Language Speakers';
     case Field.PopulationPercentInBiggestDescendantLanguage:
-      return '';
+      return '% of Population in Biggest Descendant Language';
 
     // Other
     case Field.Date:
-    case Field.None:
+      return 'Date';
     case Field.Description:
+      return 'Description';
     case Field.Example:
-      return '';
+      return 'Example';
+
+    case Field.None:
+      return 'None';
 
     default:
       enforceExhaustiveSwitch(field);
