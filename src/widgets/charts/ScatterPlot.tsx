@@ -4,6 +4,7 @@ import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import MapHoverCard from '@features/map/MapHoverCard';
 import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
+import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
@@ -29,7 +30,7 @@ const ScatterPlot: React.FC = () => {
   );
 
   return (
-    <div data-testid="scatter-plot" className="max-w-[600px] mx-auto relative">
+    <div data-testid="scatter-plot" className="w-[600px] mx-auto relative">
       <div className="absolute top-1/2 left-0 transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
         <FieldDropdown pageParam="chartY" />
       </div>
@@ -40,7 +41,7 @@ const ScatterPlot: React.FC = () => {
         <g transform="translate(0, 0)">
           <path d="M 0 200 h 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
           <path d="M 0 0   v 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
-          {ents.map((ent, index) => {
+          {ents.reverse().map((ent, index) => {
             const fieldXValue = getField(ent, chartX) ?? 0;
             const fieldYValue = getField(ent, chartY) ?? 0;
             const x = xValue.getNormalizedValue(fieldXValue) * 200;
@@ -55,7 +56,11 @@ const ScatterPlot: React.FC = () => {
                 <circle
                   r={scaleFactor}
                   onClick={() => updatePageParams({ entID: ent.ID })}
-                  fill={coloring.getColor(ent) ?? 'var(--primary)'}
+                  fill={
+                    colorBy === Field.None
+                      ? 'var(--primary)'
+                      : (coloring.getColor(ent) ?? 'var(--secondary)')
+                  }
                 />
                 {limit > index && (
                   <text fontSize="4" textAnchor="middle" alignmentBaseline="middle">
