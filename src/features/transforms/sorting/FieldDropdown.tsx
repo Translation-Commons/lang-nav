@@ -49,7 +49,7 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
             className={currentValue === Field.None ? 'text-muted-foreground' : ''}
             variant="outline"
           >
-            <div className="truncate text-ellipsis">{currentValue}</div>
+            <div className="truncate text-ellipsis">{getFieldLabel(currentValue, entType)}</div>
           </Button>
         }
       />
@@ -68,7 +68,7 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
                 value={field}
                 key={'common-' + field}
               >
-                {field}
+                {getFieldLabel(field, entType)}
               </DropdownMenuRadioItem>
             ))}
           <Separator />

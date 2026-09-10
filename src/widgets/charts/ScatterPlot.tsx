@@ -4,22 +4,27 @@ import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import MapHoverCard from '@features/map/MapHoverCard';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
+import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
+import getTickMarks from '@features/transforms/getTickMarks';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
+import useNormalizedValues from '@features/transforms/useNormalizedValues';
 
 import { EntityData } from '@entities/types/DataTypes';
 
 const ScatterPlot: React.FC = () => {
-  const { entType, limit, chartX, chartY, colorBy, fieldFocus, updatePageParams, scaleFactor } =
+  const { limit, chartX, chartY, colorBy, fieldFocus, updatePageParams, scaleFactor } =
     usePageParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
-  const xValue = useColors({ ents, colorBy: chartX });
-  const yValue = useColors({ ents, colorBy: chartY });
+  const xValue = useNormalizedValues({ ents, field: chartX });
+  const yValue = useNormalizedValues({ ents, field: chartY });
   const coloring = useColors({ ents, colorBy });
+  const xTicks = getTickMarks(xValue, 200);
+  const yTicks = getTickMarks(yValue, 200);
 
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
@@ -33,16 +38,43 @@ const ScatterPlot: React.FC = () => {
   return (
     <div>
       <div data-testid="scatter-plot" className="w-[600px] mx-auto relative">
-        <div className="absolute top-1/2 left-0 transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
+        <div className="absolute top-1/2 left-[-20px] transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
           Y axis: <FieldDropdown pageParam="chartY" />
         </div>
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
           X axis: <FieldDropdown pageParam="chartX" />
         </div>
-        <svg viewBox="-10 -10 230 230">
+        <svg viewBox="-12 -10 230 230">
           <g transform="translate(0, 0)">
+            {/* Axis labels */}
             <path d="M 0 200 h 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
             <path d="M 0 0   v 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
+            {xTicks.map((tick, i) => (
+              <g key={i} transform={`translate(${tick.position * 200}, 200)`}>
+                <path d="M 0 5 v -205" stroke="var(--secondary)" strokeWidth={0.5} />
+                <text y={2} fontSize="4" textAnchor="middle" alignmentBaseline="hanging">
+                  {tick.label}
+                </text>
+              </g>
+            ))}
+            {yTicks.map((tick, i) => (
+              <g key={i} transform={`translate(0, ${200 - tick.position * 200})`}>
+                <path d="M -5 0 h 205" stroke="var(--secondary)" strokeWidth={0.5} />
+                <text
+                  key={i}
+                  x={tick.label.length > 5 ? 0 : -2}
+                  y={tick.label.length > 5 ? -4 : 0}
+                  fontSize="4"
+                  textAnchor={tick.label.length > 5 ? 'middle' : 'end'}
+                  alignmentBaseline="middle"
+                  transform={tick.label.length > 5 ? 'rotate(-90)' : undefined}
+                >
+                  {tick.label}
+                </text>
+              </g>
+            ))}
+
+            {/* Circles */}
             {[...ents].reverse().map((ent, index) => {
               const fieldXValue = getField(ent, chartX) ?? 0;
               const fieldYValue = getField(ent, chartY) ?? 0;
@@ -75,8 +107,8 @@ const ScatterPlot: React.FC = () => {
       </div>
       <div>
         <ColorBar coloringFunctions={coloring} />
-        <div>
-          Colored by <FieldDropdown pageParam="colorBy" />
+        <div className="flex items-center justify-center gap-2">
+          Colored by <FieldDropdown pageParam="colorBy" /> <ColorGradientSelector />
         </div>
       </div>
     </div>

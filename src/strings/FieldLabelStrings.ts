@@ -90,7 +90,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.CountOfCensuses:
       return '# of Censuses';
     case Field.CountOfVariants:
-      return '';
+      return '# of Variants';
 
     // Quantity
     case Field.Area:

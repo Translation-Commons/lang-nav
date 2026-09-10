@@ -3,19 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import usePageParams from '@features/params/usePageParams';
 import { getFieldValueType } from '@features/table/getValueType';
 import TableValueType from '@features/table/TableValueType';
-
-import { LanguageScope } from '@entities/language/LanguageTypes';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
-import { LanguageModality } from '@entities/language/writing/LanguageModality';
-import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-
-import { numberToSigFigs } from '@shared/lib/numberUtils';
-import { convertAlphaToNumber } from '@shared/lib/stringUtils';
-
-import { getModalityFromLabel, getModalityLabel } from '@strings/LanguageModalityStrings';
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
-import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+import getTickMarks from '@features/transforms/getTickMarks';
 
 import Field from '../fields/Field';
 
@@ -44,7 +32,7 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   }, []);
 
   const ticks = useMemo(
-    () => getTicks(coloringFunctions, colorBarWidth),
+    () => getTickMarks(coloringFunctions, colorBarWidth),
     [coloringFunctions, colorBarWidth],
   );
   const renormalize = isFieldWholeNumbersOnly(coloringFunctions.colorBy)
@@ -54,9 +42,7 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
         )
     : undefined;
 
-  if (minValue === undefined || maxValue === undefined) {
-    return null;
-  }
+  if (minValue === undefined || maxValue === undefined) return null;
 
   return (
     <div ref={colorBarRef} style={{ width: '100%' }}>
@@ -93,141 +79,6 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   );
 };
 
-/**
- * Gets tick marks and their labels for a color bar based on the coloring functions.
- *
- * @returns An array of tuples where each tuple contains a normalized position (0 to 1) and its corresponding label.
- */
-function getTicks(
-  coloringFunctions: ColoringFunctions,
-  widthPx: number,
-): { position: number; label: string }[] {
-  const { colorBy, minValue, maxValue, getDenormalizedValue, getNormalizedValue } =
-    coloringFunctions;
-  if (colorBy === Field.None) return [];
-  const numberOfTicks = getIdealNumberOfTicks(colorBy);
-
-  // Some early exit cases for categorical fields with predefined labels
-  switch (colorBy) {
-    case Field.Name:
-    case Field.Endonym:
-    case Field.Code:
-    case Field.Language:
-    case Field.LanguageFamily:
-    case Field.WritingSystem:
-    case Field.Territory:
-      return pickDistributedTicksFromRange(
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-        numberOfTicks,
-      ).map((letter) => ({
-        position: getNormalizedValue(convertAlphaToNumber(letter)),
-        label: letter,
-      }));
-    case Field.Modality:
-      return pickDistributedTicksFromRange(
-        [
-          LanguageModality.Written,
-          LanguageModality.MostlyWritten,
-          LanguageModality.SpokenAndWritten,
-          LanguageModality.MostlySpoken,
-          LanguageModality.Spoken,
-          LanguageModality.Sign,
-        ].map((v) => getModalityLabel(v)!),
-        numberOfTicks,
-      ).map((label) => ({
-        position: getNormalizedValue(getModalityFromLabel(label) ?? 0),
-        label,
-      }));
-    case Field.ISOStatus:
-      return pickDistributedTicksFromRange(
-        [
-          LanguageISOStatus.Extinct,
-          LanguageISOStatus.Historical,
-          LanguageISOStatus.Constructed,
-          LanguageISOStatus.Living,
-        ],
-        numberOfTicks,
-      ).map((value) => ({
-        position: getNormalizedValue(value),
-        label: getLanguageISOStatusLabel(value),
-      }));
-    case Field.LanguageScope:
-      return pickDistributedTicksFromRange(
-        Object.values(LanguageScope).filter((value) => typeof value === 'number'),
-        numberOfTicks,
-      ).map((value) => ({
-        position: getNormalizedValue(value),
-        label: getLanguageScopeLabel(value) ?? '',
-      }));
-    case Field.TerritoryScope:
-      return pickDistributedTicksFromRange(
-        Object.values(TerritoryScope)
-          .filter((v) => typeof v === 'number')
-          .filter((v) => v <= maxValue),
-        numberOfTicks,
-      ).map((value) => ({
-        position: getNormalizedValue(value),
-        label: getTerritoryScopeLabel(value) ?? '',
-      }));
-    default:
-      break;
-  }
-
-  const formatter = new Intl.NumberFormat(undefined, {
-    notation: 'compact',
-    compactDisplay: widthPx < 700 ? 'short' : 'long',
-    maximumFractionDigits: 1,
-  });
-
-  const suffix = getSuffixForField(colorBy);
-  const wholeNumbersOnly = isFieldWholeNumbersOnly(colorBy);
-  let lastPosition = 0;
-
-  return Array.from({ length: numberOfTicks }, (_, index) => {
-    if (index === 0)
-      return {
-        position: 0,
-        label:
-          wholeNumbersOnly && minValue === -1
-            ? 'Unknown or 0'
-            : formatter.format(minValue) + suffix,
-      };
-    if (index === numberOfTicks - 1)
-      return { position: 1, label: formatter.format(maxValue) + suffix };
-    const normalizedValue = index / (numberOfTicks - 1); // on a scale from 0 to 1
-    const value = wholeNumbersOnly
-      ? Math.round(getDenormalizedValue(normalizedValue))
-      : getDenormalizedValue(normalizedValue);
-    const position = wholeNumbersOnly ? getNormalizedValue(value) : normalizedValue;
-    if (position <= lastPosition) return null; // skip ticks that would be in the same position as the previous tick
-    lastPosition = position;
-
-    return {
-      position: position,
-      label: formatter.format(numberToSigFigs(value, 2)) + suffix,
-    };
-  }).filter((t) => t != null);
-}
-
-// By default, we don't show suffixes / units when showing numbers because they often repeat.
-// However in the colorbar we should show the units.
-function getSuffixForField(field: Field): string {
-  switch (field) {
-    case Field.Literacy:
-    case Field.PercentOfTerritoryPopulation:
-    case Field.PercentOfOverallLanguageSpeakers:
-    case Field.PopulationPercentInBiggestDescendantLanguage:
-      return '%';
-    case Field.Latitude:
-    case Field.Longitude:
-      return '°';
-    case Field.Area:
-      return ' km²';
-    default:
-      return '';
-  }
-}
-
 function isFieldWholeNumbersOnly(field: Field): boolean {
   const valueType = getFieldValueType(field);
   return (
@@ -235,37 +86,6 @@ function isFieldWholeNumbersOnly(field: Field): boolean {
     valueType === TableValueType.Enum ||
     valueType === TableValueType.Population
   );
-}
-
-function pickDistributedTicksFromRange<T>(range: T[], count: number): T[] {
-  if (range.length <= count) {
-    return range;
-  }
-  const step = (range.length - 1) / (count - 1);
-  const ticks: T[] = [];
-  for (let i = 0; i < count; i++) {
-    const index = Math.round(i * step);
-    ticks.push(range[index]);
-  }
-  return ticks;
-}
-
-function getIdealNumberOfTicks(field: Field): number {
-  switch (getFieldValueType(field)) {
-    case TableValueType.String:
-      return 26; // All letters since they are small
-    case TableValueType.Enum:
-      return 10; // This should render every enum category.
-    case TableValueType.Count:
-      // Usually small numbers like 0 and 1
-      return 12;
-    case TableValueType.Decimal:
-      return 11; // Particularly for percentages
-    case TableValueType.Date:
-      return 10;
-    case TableValueType.Population:
-      return 8;
-  }
 }
 
 export default ColorBar;
