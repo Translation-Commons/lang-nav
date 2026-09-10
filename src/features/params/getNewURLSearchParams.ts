@@ -124,6 +124,9 @@ function clearContextDependentParams(
     if (newParams.page == null) next.delete('page');
     if (newParams.colorBy == null) next.delete('colorBy');
     if (newParams.cmpID == null) next.delete('cmpID');
+
+    if (newParams.view === View.Hierarchy && newParams.colorBy == null)
+      next.set('colorBy', Field.Depth);
   }
 
   if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {

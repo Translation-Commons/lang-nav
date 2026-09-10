@@ -46,6 +46,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
   const params: Partial<PageParams> = {};
   urlParams.forEach((value, keyUntyped) => {
     const key = keyUntyped as PageParamKey;
+    if (!Object.values(PageParamKey).includes(key)) return; // Ignore parameters with old names
+
     switch (key) {
       // Numeric values
       case PageParamKey.page:
@@ -53,6 +55,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.limit:
         params.limit = parseInt(value) || 10; // Default to 10 if parsing fails
+        break;
+      case PageParamKey.scaleFactor:
+        params.scaleFactor = parseFloat(value) || 1;
         break;
       case PageParamKey.populationMin:
         params.populationMin = parseInt(value) >= -1 ? parseInt(value) : undefined;

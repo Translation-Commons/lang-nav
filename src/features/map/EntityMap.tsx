@@ -18,26 +18,27 @@ import { EntityData } from '@entities/types/DataTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
-import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
 import './map.css';
 import MapCentroids from './MapCentroids';
-import {
-  MAP_ASPECT_RATIO,
-  MAP_INTERNAL_WIDTH,
-  MAP_ROBINSON_X_SCALE,
-  MAP_ROBINSON_Y_SCALE,
-} from './MapConsts';
+import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
+import computeEntityBounds from './zoom/computeEntityBounds';
 import ZoomControls from './ZoomControls';
 
 type Props = {
   entities: EntityData[];
   maxWidth?: number;
   allowSidebar?: boolean;
+  allowColorBar?: boolean;
 };
 
-const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = false }) => {
+const EntityMap: React.FC<Props> = ({
+  entities,
+  maxWidth = 2000,
+  allowSidebar = false,
+  allowColorBar = true,
+}) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
   const sortFunction = getSortFunction();
@@ -105,34 +106,10 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
 
   // Bounding box (in map coordinates) of the entities that will be drawn as centroids,
   // so we can zoom the map to fit them instead of always showing the whole world.
-  const entityBounds = useMemo(() => {
-    // The centroid SVG uses viewBox "-180 -90 360 180" with preserveAspectRatio
-    // "xMidYMid meet", rendered into the content element (MAP_INTERNAL_WIDTH x mapHeight).
-    const svgScale = Math.min(MAP_INTERNAL_WIDTH / 360, mapHeight / 180);
-    const offsetX = (MAP_INTERNAL_WIDTH - 360 * svgScale) / 2;
-    const offsetY = (mapHeight - 180 * svgScale) / 2;
-
-    let minX = Infinity;
-    let minY = Infinity;
-    let maxX = -Infinity;
-    let maxY = -Infinity;
-    let count = 0;
-
-    drawableEntities.forEach((ent) => {
-      const { x, y } = getRobinsonCoordinatesShifted(ent);
-      if (x == 0 && y == 0) return; // Sorry null island, not today
-      const mapX = (x * MAP_ROBINSON_X_SCALE + 180) * svgScale + offsetX;
-      const mapY = (-y * MAP_ROBINSON_Y_SCALE + 90) * svgScale + offsetY;
-      minX = Math.min(minX, mapX);
-      maxX = Math.max(maxX, mapX);
-      minY = Math.min(minY, mapY);
-      maxY = Math.max(maxY, mapY);
-      count++;
-    });
-
-    if (count === 0) return null;
-    return { minX, minY, maxX, maxY };
-  }, [drawableEntities, mapHeight]);
+  const entityBounds = useMemo(
+    () => computeEntityBounds(drawableEntities, mapHeight),
+    [drawableEntities, mapHeight],
+  );
 
   const hasInitialFitRef = useRef(false);
   const lastAutoFitBoundsRef = useRef<string | null>(null);
@@ -214,7 +191,9 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
           </div>
         </div>
 
-        {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+        {colorBy !== Field.None && allowColorBar && (
+          <ColorBar coloringFunctions={coloringFunctions} />
+        )}
         {allowSidebar && <PinnedMiniCardList />}
       </div>
     </div>

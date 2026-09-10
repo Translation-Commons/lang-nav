@@ -60,13 +60,17 @@ export function buildFilterByLanguageSource(languageSource: LanguageSource): Fil
 export function getLanguageSourcesForEntity(ent: EntityData): LanguageSource[] {
   const language = getLanguageForEntity(ent);
   if (!language) return [];
+
   const sources: LanguageSource[] = [];
   if (language.ISO.code != null && language.ISO.retirementReason == null) {
     sources.push(LanguageSource.ISO);
-    sources.push(LanguageSource.BCP);
   }
-  if (language.Glottolog.code != null) sources.push(LanguageSource.Glottolog);
   if (language.CLDR.code != null && language.CLDR.dataProvider == null)
     sources.push(LanguageSource.CLDR);
+  if (language.Glottolog.code != null) sources.push(LanguageSource.Glottolog);
+  if (language.ISO.code != null && language.ISO.retirementReason == null) {
+    // Yes, we're repeating a check but we're doing this in order
+    sources.push(LanguageSource.BCP);
+  }
   return sources;
 }
