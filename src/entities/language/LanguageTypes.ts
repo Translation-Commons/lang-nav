@@ -10,6 +10,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -127,6 +128,7 @@ export interface LanguageData extends EntityBase {
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  orthographies?: LanguageOrthography[];
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
@@ -163,6 +165,7 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     names: [name],
     variants: [],
     locales: [],
+    orthographies: [],
     writingSystems: {},
     childLanguages: [],
     warnings: {},
