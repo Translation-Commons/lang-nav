@@ -93,17 +93,20 @@ NOT_IMPLEMENTED = {
         "grouping change: 146 of the 254 ISO family languoids ALSO carry "
         "curated locales, which have no source, so they would split from the "
         "generated ones into two regional rows where the frontend produces one. "
-        "Decided and deferred 2026-08-05; see FP-013 step 4"
+        "Decided and deferred 2026-08-05: giving regional locales their own "
+        "source dimension is the alternative, and it needs a rule for "
+        "combining a source-less curated row with a source-bearing one"
     ),
     "language_population_precedence_per_source": (
         "D8 for the six NON-Combined trees. The Combined tree is implemented - "
         "see rebuild_language_populations - and the SQL function already takes "
         "a source parameter, so this is a call-site change rather than a "
         "rewrite. Deferred because nothing consumes a per-source language "
-        "estimate until the API exists, and because FP-014 bites harder here: "
-        "D5 rolls up ISO family locales only, so a non-ISO family has no World "
-        "locale and would fall through to the descendants branch, giving a "
-        "systematically lower number than the same languoid under ISO"
+        "estimate until the API exists, and because the regional roll-up gap "
+        "bites harder here: D5 rolls up ISO family locales only, so a non-ISO "
+        "family has no World locale and would fall through to the descendants "
+        "branch, giving a systematically lower number than the same languoid "
+        "under ISO"
     ),
     "parent_child_population_contradictions": (
         "The data_quality_finding half of D8. The frontend's "
@@ -492,7 +495,8 @@ def rebuild_language_populations(conn: psycopg.Connection, run_id: str) -> dict[
         # Far smaller than the number of languoids WITH children, and that is
         # correct: the descendants branch is the last resort, so a family that
         # D5 gave a World row takes the territories branch instead. What is
-        # left is the FP-014 gap.
+        # left is the gap from D5 rolling up ISO family locales only: a
+        # family that exists solely under another source has no World row.
         "speaking_descendants": """
             SELECT count(pop_speaking_of_descendants) FROM language
         """,

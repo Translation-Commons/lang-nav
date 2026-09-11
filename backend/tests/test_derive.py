@@ -129,7 +129,7 @@ def test_the_deferred_regional_dimension_says_why_it_is_not_just_a_grouping():
     find and would otherwise be re-derived."""
     reason = derive.NOT_IMPLEMENTED["regional_locales_per_source"]
     assert "146" in reason
-    assert "FP-013" in reason
+    assert "curated" in reason
 
 
 def test_the_family_locale_sources_run_iso_first():
@@ -1318,7 +1318,7 @@ def test_d7_baselines_attribute_rows_at_zero_not_null():
 
 
 def test_descendant_count_lost_its_default_in_both_files():
-    """FP-010. Both columns shipped as `int NOT NULL DEFAULT 0`, so they read as
+    """Both columns shipped as `int NOT NULL DEFAULT 0`, so they read as
     100% populated - 27,299 / 27,299 and 60,173 / 60,173 - while D7 had never
     run and every value was 0. Nothing could tell "no descendants" from "nobody
     counted", which is the exact failure mode derive.py raises
@@ -1339,11 +1339,11 @@ def test_descendant_count_lost_its_default_in_both_files():
 
 
 def test_the_schema_records_why_not_null_is_unreachable():
-    """FP-010 asked for NOT NULL once D7 filled the column. It is not reachable:
+    """NOT NULL was the obvious follow-up once D7 filled the column. It is not reachable:
     004_alter.sql is applied BEFORE the COPY phase and no loader supplies
-    descendant_count, so the column is legitimately NULL between the COPY and D7
-    on every run. Someone will try to add it back, so the reason has to live in
-    the file rather than only in the future-plan log."""
+    descendant_count, so the column is legitimately NULL between the COPY and D7 on
+    every run. Someone will try to add it back, so the reason has to live in the file
+    itself."""
     assert "NOT NULL IS NOT REACHABLE" in ALTER_SQL
     assert "COPY" in ALTER_SQL
 
@@ -2004,8 +2004,8 @@ def test_d11_never_writes_the_declared_column():
 
 
 def test_d11_falls_back_to_the_iso_then_glottolog_scope():
-    """FP-016 again. lsa.scope is NULL for every Combined row that is not one
-    of the 115 ISO 639-5 families, so the raw column finds 0 dialects where the
+    """lsa.scope is NULL for every Combined row that is not one of the 115 ISO
+    639-5 families, so the raw column finds 0 dialects where the
     frontend sees 40. Same reconstruction as D9, same order: the load-time base
     is ISO's scope with Glottolog filling the gaps."""
     body = d11_body()

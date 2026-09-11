@@ -84,7 +84,7 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
       // Scoped to the path this loader requests, NOT `${API_URL}/*`. jsdom's
       // base URL is also http://localhost:3000, so a wildcard matches the
       // relative file fetches too and, because server.use() PREPENDS, would
-      // shadow the file handlers registered beside it. See FP-041.
+      // shadow the file handlers registered beside it.
       http.get(`${API_URL}/territory`, () => passthrough()),
     );
 
@@ -102,7 +102,7 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
     const fromFiles = await loadFromFiles();
 
     // The file side must be non-empty before anything is compared: a field
-    // loop over zero keys compares nothing and passes. See FP-041.
+    // loop over zero keys compares nothing and passes.
     expect(Object.keys(fromFiles).length).toBeGreaterThan(0);
 
     expect(Object.keys(fromApi).sort()).toEqual(Object.keys(fromFiles).sort());

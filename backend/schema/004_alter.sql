@@ -79,8 +79,8 @@ ALTER TABLE locale ADD COLUMN IF NOT EXISTS pop_writing_unadjusted_derived  bigi
 -- the max of them, so one column cannot serve all three. The full reasoning is
 -- on the columns in 001_schema.sql.
 --
--- Nullable with no default, deliberately, for the reason FP-010 records: a
--- populated-looking zero cannot be told apart from "D8 has not run".
+-- Nullable with no default, deliberately: a populated-looking zero cannot be
+-- told apart from "D8 has not run".
 ALTER TABLE language ADD COLUMN IF NOT EXISTS pop_speaking_estimate        bigint;
 ALTER TABLE language ADD COLUMN IF NOT EXISTS pop_writing_estimate         bigint;
 ALTER TABLE language ADD COLUMN IF NOT EXISTS pop_speaking_estimate_source population_source_category;
@@ -172,7 +172,7 @@ BEGIN
 END $$;
 
 
--- ── 2026-08-05, for D6 across all classification sources (FP-013) ──────────
+-- ── 2026-08-05, for D6 across all classification sources ──────────────────
 -- A family locale is only meaningful under a stated classification. 257
 -- languoids are a family in more than one source and for 80 of them the CHILD
 -- SET differs, so the same (language, territory) has a genuinely different
@@ -255,7 +255,7 @@ BEGIN
 END $$;
 
 
--- ── 2026-08-06, for D7 (FP-010) ────────────────────────────────────────────
+-- ── 2026-08-06, for D7 ─────────────────────────────────────────────────────
 -- Both descendant_count columns shipped as `int NOT NULL DEFAULT 0`. That made
 -- them read as 100% populated - 27,299 / 27,299 and 60,173 / 60,173 - while D7
 -- had never run and every single value was 0. Nothing could distinguish "this
@@ -269,11 +269,11 @@ END $$;
 -- population_estimate DESC NULLS LAST, descendant_count DESC was ordering every
 -- row by 0, silently doing nothing rather than being visibly unavailable.
 --
--- NOT NULL IS NOT REACHABLE, and FP-010 has been amended to say so. This file
--- is applied BEFORE the COPY phase - test_schema_files_are_applied_before_the_
--- copy_phase pins that, and it has to be that way because the load issues SET
--- CONSTRAINTS ALL DEFERRED and Postgres then refuses to ALTER a table with
--- pending trigger events. No loader supplies descendant_count, so a NOT NULL
+-- NOT NULL IS NOT REACHABLE. This file is applied BEFORE the COPY phase -
+-- test_schema_files_are_applied_before_the_copy_phase pins that, and it has to
+-- be that way because the load issues SET CONSTRAINTS ALL DEFERRED and
+-- Postgres then refuses to ALTER a table with pending trigger events. No
+-- loader supplies descendant_count, so a NOT NULL
 -- column with no default makes the COPY fail outright, and even if it did not,
 -- the column is legitimately NULL between the COPY and D7 on every run. The
 -- honest end state is nullable, with NULL meaning uncounted.

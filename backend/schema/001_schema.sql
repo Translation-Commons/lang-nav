@@ -517,7 +517,7 @@ CREATE TABLE language (
   -- SUPERSEDED by pop_speaking_from_locales / pop_writing_from_locales below,
   -- and left unfilled by D8. It predates PR #742's split and has no single-value
   -- meaning any more: the two uses read different columns off the World locale.
-  -- Kept rather than dropped so the change is additive; see FP-015.
+  -- Kept rather than dropped so the change is additive.
   population_from_locales    bigint,
   largest_descendant_id      text REFERENCES language(id),
 
@@ -552,7 +552,7 @@ CREATE TABLE language (
   -- and read as 100% populated while D7 had never run and every value was 0,
   -- so nothing could tell "no descendants" from "nobody has counted" - the
   -- exact failure mode derive.py raises DeriveStepNotImplemented to avoid,
-  -- reintroduced one layer down. NULL now means D7 has not run. See FP-010.
+  -- reintroduced one layer down. NULL now means D7 has not run.
   descendant_count int,
 
   created_at timestamptz NOT NULL DEFAULT now(),
@@ -609,7 +609,7 @@ COMMENT ON COLUMN language.descendant_count IS
   '27,299 measured 2026-08-06, almost all Glottolog dialects. A leaf that IS '
   'in the tree reads 0. The column was NOT NULL DEFAULT 0 until 2026-08-06, '
   'which made every audit report it as fully populated while D7 had never run; '
-  'see FP-010. NOT NULL is not reachable: 004_alter.sql is applied before the '
+  'NOT NULL is not reachable: 004_alter.sql is applied before the '
   'COPY phase and no loader supplies this column, so it is legitimately NULL '
   'between the COPY and D7 on every single run.';
 

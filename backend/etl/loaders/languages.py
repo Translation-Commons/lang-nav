@@ -150,14 +150,13 @@ def load(ds: Dataset, root: Path) -> None:
         if parent == lid:
             continue
         if parent not in known:
-            # The parent is a language family, created later by the authorities
-            # loader - the FP-035 ordering bug. Deferring the UNESCO half was
-            # tried and REVERTED: those families never get a UNESCO row of
-            # their own (addISOLanguageFamilyData writes families to Combined,
-            # ISO and BCP but not UNESCO), so the deferred edge pointed at a
-            # node outside its own tree. D10 could not assign a depth and its
-            # structural check "depth 0 disagreeing with having no parent"
-            # went from 0 to 9.
+            # The parent is a language family, created later by the authorities loader,
+            # so the edge is dropped on the first pass. Deferring the UNESCO half was
+            # tried and REVERTED: those families never get a UNESCO row of their own
+            # (addISOLanguageFamilyData writes families to Combined, ISO and BCP but not
+            # UNESCO), so the deferred edge pointed at a node outside its own tree. D10
+            # could not assign a depth and its structural check "depth 0 disagreeing
+            # with having no parent" went from 0 to 9.
             #
             # The frontend holds the same value harmlessly, because there it is
             # a plain string with no tree to be consistent with. Here it is a
@@ -278,7 +277,7 @@ def apply_glottolog_gaps(ds: Dataset) -> None:
     disappear with no error. The alias table carries the code but has no room
     for a parent, and its (alias_code, alias_kind) key means a glottocode
     contested by two languages resolves to only one of them anyway - see the
-    `zua`/`zem` case in FP-037.
+    case where `zua` and `zem` contend for the glottocode `zeem1243`.
 
     Parents are resolved through the same alias-or-id lookup the frontend uses,
     so a parent glottocode naming a node that exists under its ISO code still

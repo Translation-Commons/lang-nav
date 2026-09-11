@@ -198,7 +198,8 @@ def _retirements(ds: Dataset, path: Path) -> None:
 
     221 codes take that branch - `fri`, `amd`, `jap` and the rest of the ones
     withdrawn before they reached languages.tsv. Skipping them left the two
-    paths with different languoids, which is half of FP-038; the other half is
+    paths with different languoids, which is half of the ETL/frontend
+    disagreement about which languoids exist; the other half is
     the glottocodes glottolog.tsv names them by, handled in _glottolog.
 
     They are SpecialCode, so the default view (Macrolanguage and Language) does

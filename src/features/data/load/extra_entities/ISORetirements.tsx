@@ -38,7 +38,7 @@ export async function loadISORetirements(): Promise<ISORetirementData[] | void> 
           // left all three - and the header row survived the length guard below
           // because it has exactly six columns, becoming a languoid with ID 'Id'
           // named 'Ref_Name'. The sibling loaders in ISOData.tsx have always
-          // filtered this way. Found by the API/TSV identity diff. See FP-042.
+          // filtered this way. Found by the API/TSV identity diff.
           .filter((line) => line.trim() !== '' && !line.startsWith('#'))
           .slice(1)
           .map((line) => {

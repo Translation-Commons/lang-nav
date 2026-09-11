@@ -753,7 +753,7 @@ BEGIN
             -- dimension was the alternative and was deferred, because 146 of
             -- the 254 ISO family languoids also carry curated locales - which
             -- have no source - and would split into two regional rows where the
-            -- frontend produces one. See FP-013.
+            -- frontend produces one.
             SELECT l.language_id, l.script_id, l.variant_key,
                    l.pop_speaking_unadjusted         AS cutoff,
                    l.pop_speaking_unadjusted_derived AS s_unadj,
@@ -932,7 +932,7 @@ COMMENT ON FUNCTION rebuild_territory_rollup(uuid) IS
 -- The frontend hardcodes ISO (createFamilyLocales.ts:13) because generating
 -- every source needed ~125 MB of browser heap. That limit does not apply here,
 -- so p_source parameterises the tree and run.py calls this once per source.
--- FP-013 has the full history; three things about it are load-bearing.
+-- Three things about that are load-bearing.
 --
 -- 1. locale.language_source EXISTS BECAUSE OF THIS STEP. 257 languoids are a
 --    family in more than one source, and for 80 of them the CHILD SET differs -
@@ -1434,7 +1434,7 @@ COMMENT ON FUNCTION rebuild_family_locales(uuid, language_source) IS
   '80 languoids have a different child set in different sources and both '
   'answers are correct. Idempotent per source: deletes every row it owns for '
   'that source before rebuilding. Must run after D4 and before D5. Note D5 '
-  'aggregates ISO family locales ONLY; see FP-013.';
+  'aggregates ISO family locales ONLY.';
 
 
 -- ── D7  Writing system populations ─────────────────────────────────────────
@@ -1859,10 +1859,10 @@ COMMENT ON FUNCTION rebuild_language_population_from_locales(uuid) IS
   'D8, first half. Ports updateLanguagesPopulationFromLocale(world): takes the '
   'largest World (001) locale for each language and copies its adjusted '
   'speaking and writing figures onto the language. Source-independent, and '
-  'must run before rebuild_language_populations on any source. FP-014 bites '
-  'here: D5 generates World rows for ISO families only, so a family that '
-  'exists solely under another source has none and falls through to the '
-  'descendants branch of the precedence rule.';
+  'must run before rebuild_language_populations on any source. The regional '
+  'roll-up gap bites here: D5 generates World rows for ISO families only, so '
+  'a family that exists solely under another source has none and falls '
+  'through to the descendants branch of the precedence rule.';
 
 
 -- ── D9  Largest descendant ─────────────────────────────────────────────────
@@ -1892,7 +1892,7 @@ COMMENT ON FUNCTION rebuild_language_population_from_locales(uuid) IS
 --    column alone would classify 48 real families as non-families. Measured
 --    effect on the answer: 3 languoids (eml, kgd, tid) change side and 2
 --    ancestors (itd, ncq) change from naming a family to naming nothing.
---    Recomputed here rather than materialised; see FP-016.
+--    Recomputed here rather than materialised.
 --
 -- 3. A NULL SCOPE MEANS NON-FAMILY, NOT UNKNOWN. The TypeScript compares
 --    `child.scope !== LanguageScope.Family`, and undefined passes that test,
@@ -1998,7 +1998,7 @@ COMMENT ON FUNCTION rebuild_largest_descendants(uuid, language_source) IS
   'telescopes into a plain max. Depends on D1 for the closure and D8 for the '
   'estimates, so it can only answer for a source D8 has walked. The Family '
   'test uses the per-source scope falling back to ISO then Glottolog, which is '
-  'what the frontend reads; see FP-016.';
+  'what the frontend reads.';
 
 
 -- ── D10  Depth ─────────────────────────────────────────────────────────────
@@ -2306,7 +2306,9 @@ COMMENT ON FUNCTION rebuild_recursive_language_data(uuid, language_source) IS
 --    modality, and exactly one of those with a nonzero population - `rsm`
 --    Miriwoong Sign Language, population 3 - so a 3-speaker sign language
 --    takes 100% of the weight and the whole family derives to Sign. Faithful
---    to the live site. Logged as FP-019.
+--    to the live site, and a data-quality question rather than a porting
+--    one: a family modality decided by whichever children happen to have
+--    one is wrong upstream, not here.
 --
 -- 4. THE FRONTEND DIVIDES BY ZERO ONCE AND JAVASCRIPT HIDES IT. `sio` Siouan
 --    has one child with a declared modality and no population, so totalPop is
@@ -2314,7 +2316,8 @@ COMMENT ON FUNCTION rebuild_recursive_language_data(uuid, language_source) IS
 --    in turn - so the function falls out of the bottom and returns
 --    SpokenAndWritten. Postgres would raise instead, which makes this the one
 --    branch that has to be written down deliberately. Ported as written, with
---    a golden check naming the languoid; the fix belongs upstream (FP-020).
+--    a golden check naming the languoid; the fix belongs upstream, where
+--    dividing by a zero total population is the actual defect.
 --
 -- 5. IT WRITES language_source_attribute.modality AND NEVER language.modality.
 --    Two independent reasons, either sufficient. `language.modality` holds the
@@ -2327,14 +2330,15 @@ COMMENT ON FUNCTION rebuild_recursive_language_data(uuid, language_source) IS
 --    changes when the user switches source belongs on the per-source table.
 --
 -- 6. THE SCOPE FALLBACK IS NEEDED AGAIN, and the dialect guard it feeds is a
---    no-op today. `lsa.scope` is NULL for every Combined row that is not one of
---    the 115 ISO 639-5 families, so the raw column finds 0 dialects where the
---    frontend sees 40. The FP-016 reconstruction is rebuilt below. Measured
---    consequence: none, because NONE of those 40 has children, and a childless
---    node reaches the same answer down either path. The guard is therefore
---    node-level rather than subtree-level, which is exact only while that 0
---    holds - verify() asserts it, and the day it fails the TypeScript's
---    behaviour of skipping the dialect's WHOLE SUBTREE has to be implemented.
+--    no-op today. `lsa.scope` is NULL for every Combined row that is not one
+--    of the 115 ISO 639-5 families, so the raw column finds 0 dialects where
+--    the frontend sees 40. The per-source scope reconstruction is rebuilt
+--    below. Measured consequence: none, because NONE of those 40 has children,
+--    and a childless node reaches the same answer down either path. The guard
+--    is therefore node-level rather than subtree-level, which is exact only
+--    while that 0 holds - verify() asserts it, and the day it fails the
+--    TypeScript's behaviour of skipping the dialect's WHOLE SUBTREE has to be
+--    implemented.
 --
 -- 7. THE ARITHMETIC IS numeric, NOT double precision. The scores are compared
 --    against five fixed thresholds, and the tightest call in the dataset is
@@ -2376,7 +2380,7 @@ BEGIN
   CREATE TEMP TABLE _lm_node ON COMMIT DROP AS
   SELECT a.language_id,
          a.parent_language_id,
-         -- FP-016. lang.scope is `specific.scope ?? lang.scope`, where the base
+         -- lang.scope is `specific.scope ?? lang.scope`, where the base
          -- is the load-time ISO value with Glottolog filling the gaps. Same
          -- reconstruction as D9, same order.
          COALESCE(a.scope, iso.scope, glot.scope) AS scope,

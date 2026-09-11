@@ -141,7 +141,7 @@ function mergedLanguageNames(imports: (CensusImport | void)[]): Record<LanguageC
  * Eight estimates across six censuses. Listed rather than skipped so that a
  * SEVENTH code appearing - a real language quietly dropped - still fails.
  * Fixing them means correcting the source files or adding the languages, which
- * is a data-quality decision and not part of the API migration. See FP-031.
+ * is a data-quality decision and not part of the API migration.
  */
 const CODES_THE_DATABASE_REFUSES = ['iso code', 'sai?', 'mul_Brai', 'mende', 'nta', 'art-slovio'];
 
