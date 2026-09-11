@@ -1,1 +1,0 @@
-import{e as r,D as e}from"./index-Bb4NbBra.js";function n(a){switch(a){case e.Overall:return"Overall";case e.Keyboards:return"Keyboards";case e.Documentation:return"Documentation";case e.I18nFrameworks:return"I18n Frameworks";case e.MachineTranslation:return"Machine Translation";case e.Interfaces:return"Interfaces";default:r(a)}}export{n as g};
