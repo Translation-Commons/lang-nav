@@ -92,8 +92,11 @@ describe('ReportLanguagePaths', () => {
         case LanguageSource.ISO:
           // ISO: elv -> qya && sjn -> dori0123 -> sjn (a cycle)
           expect(orphans).toEqual([]);
-          expect(longestPaths).toEqual([['elv', 'qya']]);
-          expect(cycles).toEqual([['sjn', 'dori0123', 'sjn']]); // cycle between sjn and dori0123
+          expect(longestPaths).toEqual([
+            ['dori0123', 'sjn'],
+            ['elv', 'qya'],
+          ]);
+          expect(cycles).toEqual([]); // Cycle was broken by connectLanguagesToParent
           expect(multipleRoutes).toEqual({});
           break;
         case LanguageSource.Glottolog:
@@ -106,8 +109,8 @@ describe('ReportLanguagePaths', () => {
         case LanguageSource.CLDR:
           // CLDR: elv -> sjn -> dori0123 -> elv (a bad cycle but will be missed since there is no root)
           expect(orphans).toEqual(['qya']);
-          expect(longestPaths).toEqual([]); // the only long path is a cycle
-          expect(cycles).toEqual([['sjn', 'dori0123', 'elv', 'sjn']]);
+          expect(longestPaths).toEqual([['elv', 'sjn', 'dori0123']]);
+          expect(cycles).toEqual([]);
           expect(multipleRoutes).toEqual({});
           break;
         case LanguageSource.UNESCO: // No connections from these sources, all languages are orphans

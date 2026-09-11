@@ -55,6 +55,10 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
           loadTerritoryNames(dataContext.getTerritory),
         ];
 
+  const variantSupplements = isApiEnabled()
+    ? []
+    : [loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage)];
+
   // Load multiple supplemental data sources in parallel, these changes will modify entities
   // but they should not modify the same fields.
   await Promise.all([
@@ -69,7 +73,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadIos(dataContext.getLanguage),
     loadMacos(dataContext.getLanguage),
     loadUDHR(dataContext.getLanguage),
-    loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
+    ...variantSupplements,
     loadWin11LanguagePacks(dataContext.getLanguage),
     loadLangTags(dataContext.getLanguage),
   ]);
