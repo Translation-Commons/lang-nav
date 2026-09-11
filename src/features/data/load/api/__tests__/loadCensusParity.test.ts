@@ -280,10 +280,12 @@ describe.skipIf(!API_URL)('census API/TSV parity', () => {
       const api = nameSet(apiNames[code] ?? '');
       const file = nameSet(fileNames[code] ?? '');
 
-      // Known divergence: ETL drops 'Eastern Cham' for 'cjm' due to its name resolution logic
-      if (code === 'cjm') {
-        const idx = file.indexOf('Eastern Cham');
-        if (idx !== -1) file.splice(idx, 1);
+      // Known divergence: the file path's parser drops the name from a row that
+      // carries no figures, so 'us_asc.tsv' line 270 ("Eastern Cham", no data)
+      // never reaches fileNames. The ETL fixes this (see census.py's _parse_language_rows),
+      // so the API path correctly adds 'Eastern Cham' where the file path cannot.
+      if (code === 'cjm' && !file.includes('Eastern Cham')) {
+        file.push('Eastern Cham');
       }
 
       if (!valuesMatch(api, file)) {
