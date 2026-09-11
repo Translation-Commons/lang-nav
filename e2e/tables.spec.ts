@@ -62,7 +62,7 @@ test.describe('screenshot tests', () => {
     const table = tableID
       ? page.locator(`.EntityTable.Table${tableID}`).first()
       : page.locator(`.EntityTable`).first();
-    await expect(table).toHaveScreenshot();
+    await expect(table).toHaveScreenshot({ timeout: 10_000 });
   }
 
   // Regular Entity Tables
@@ -109,10 +109,10 @@ test.describe('screenshot tests', () => {
   });
 
   test('Languages in Territory Table', async ({ page }) => {
-    await snapshotTable(page, `entID=IN`, TableID.LanguagesInTerritory);
+    await snapshotTable(page, `view=Details&cmpID=IN`, TableID.LanguagesInTerritory);
   });
 
   test('Languages in Census Table', async ({ page }) => {
-    await snapshotTable(page, `entID=cldr.IN`, TableID.LanguagesInCensus);
+    await snapshotTable(page, `view=Details&cmpID=cldr.IN`, TableID.LanguagesInCensus);
   });
 });

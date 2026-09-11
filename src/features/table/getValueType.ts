@@ -24,6 +24,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.Latitude:
     case Field.Area:
     case Field.UnicodeVersion:
+    case Field.DigitalSupport:
       return TableValueType.Decimal;
 
     case Field.Date:
@@ -69,7 +70,6 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.HistoricPresence:
     case Field.LanguageFormedHere:
     case Field.CLDRCoverage:
-    case Field.DigitalSupport:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
       return TableValueType.Enum;

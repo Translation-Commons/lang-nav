@@ -96,7 +96,7 @@ function Tab({ isActive, description, label, navTo }: TabOptionProps) {
   return (
     <NewHoverable
       hoverContent={description}
-      className={'TabHoverable' + (isActive ? ' active' : '')}
+      className={'text-nowrap TabHoverable' + (isActive ? ' active' : '')}
       key={label}
     >
       <Link to={navTo} className="Tab">

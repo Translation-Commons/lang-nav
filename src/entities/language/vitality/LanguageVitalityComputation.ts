@@ -1,4 +1,4 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData } from '../LanguageTypes';
 
 import { VitalitySource } from './VitalityTypes';
 

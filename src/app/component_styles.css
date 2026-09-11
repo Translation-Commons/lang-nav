@@ -1,11 +1,11 @@
-a {
+a:not([data-slot]) {
   /* font-weight: 500; */
   text-decoration: inherit;
   color: inherit;
   cursor: pointer;
 }
 
-a:hover {
+a:not([data-slot]):hover {
   color: inherit;
   text-decoration: underline;
 }

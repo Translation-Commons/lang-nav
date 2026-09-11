@@ -1,3 +1,4 @@
+import { ConstructionIcon } from 'lucide-react';
 import React from 'react';
 
 import {
@@ -10,6 +11,8 @@ import { getApplicableFields } from '@features/transforms/fields/FieldApplicabil
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import SearchCombobox from '@features/transforms/search/SearchCombobox';
 import TransformEnum from '@features/transforms/TransformEnum';
+
+import { Alert, AlertDescription, AlertTitle } from '@shared/ui/alert';
 
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
@@ -68,6 +71,11 @@ export const AllApplicableFilterSelectors: React.FC = () => {
 
   return (
     <SelectorDisplayProvider display={SelectorDisplay.FilterList}>
+      <Alert className="max-w-md">
+        <ConstructionIcon />
+        <AlertTitle>Under construction</AlertTitle>
+        <AlertDescription>The filter panel is currently being reworked.</AlertDescription>
+      </Alert>
       {primaryFilters.map((filterBy) => (
         <FilterSelector field={filterBy} key={filterBy} />
       ))}

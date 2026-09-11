@@ -7,6 +7,7 @@ import { PathContainer } from '@widgets/pathnav/PathNav';
 import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
 import ColorPopupCard from '@features/transforms/coloring/ColorPopupCard';
+import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import FilterPath from '@features/transforms/filtering/FilterPath';
 import ScalePopupCard from '@features/transforms/scales/ScalePopupCard';
 import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
@@ -34,6 +35,7 @@ const DataPageBody: React.FC = () => {
           </PathContainer>
         </div>
         <div className="DataPageBodyViewOptions">
+          <FieldFocusSelector />
           <ScalePopupCard />
           <ColorPopupCard />
           <SortPopupCard />

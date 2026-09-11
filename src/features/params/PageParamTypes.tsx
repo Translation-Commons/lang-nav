@@ -4,9 +4,9 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
@@ -28,6 +28,7 @@ export enum View {
   Table = 'Table',
   Hierarchy = 'Hierarchy',
   Map = 'Map',
+  Chart = 'Chart',
   Reports = 'Reports',
   Details = 'Details',
 }
@@ -52,10 +53,14 @@ export enum LocaleSeparator {
 export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 
 export enum PageParamKey {
+  chartX = 'chartX',
+  chartY = 'chartY',
   cmpID = 'cmpID',
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
+  entID = 'entID',
+  entType = 'entType',
   fieldFocus = 'fieldFocus',
   isoStatus = 'isoStatus',
   languageFamilyFilter = 'languageFamilyFilter',
@@ -65,8 +70,6 @@ export enum PageParamKey {
   limit = 'limit',
   localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
-  entID = 'entID',
-  entType = 'entType',
   page = 'page',
   pinned = 'pinned',
   populationFocus = 'populationFocus',
@@ -75,6 +78,7 @@ export enum PageParamKey {
   profile = 'profile',
   reportID = 'reportID',
   scaleBy = 'scaleBy',
+  scaleFactor = 'scaleFactor',
   searchBy = 'searchBy',
   searchString = 'searchString',
   secondarySortBy = 'secondarySortBy',
@@ -88,17 +92,7 @@ export enum PageParamKey {
 
 export type PageParams = {
   cmpID: string;
-  colorBy: Field;
-  scaleBy: Field;
-  colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
-  isoStatus: LanguageISOStatus[];
-  fieldFocus: Field; // To see data but not necessarily sort or color by it
-  languageFilter: string;
-  languageFamilyFilter: string;
-  languageScopes: LanguageScope[];
-  modalityFilter: LanguageModality[];
-  languageSource: LanguageSource;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
   entID?: string;
@@ -106,17 +100,34 @@ export type PageParams = {
   page: number; // 1 indexed
   pinned: string[];
   populationFocus: PopulationFocus;
-  populationMax: number;
-  populationMin: number;
   profile: ProfileType;
   reportID: ReportID;
   searchBy: SearchableField;
   searchString: string;
-  secondarySortBy: Field;
-  sortBehavior: SortBehavior;
-  sortBy: Field;
+  view: View;
+
+  // Filters
+  isoStatus: LanguageISOStatus[];
+  languageFilter: string;
+  languageFamilyFilter: string;
+  languageScopes: LanguageScope[];
+  languageSource: LanguageSource;
+  modalityFilter: LanguageModality[];
+  populationMax: number;
+  populationMin: number;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
-  view: View;
   writingSystemFilter: string;
+
+  // Field Displays
+  sortBy: Field;
+  secondarySortBy: Field;
+  sortBehavior: SortBehavior;
+  colorBy: Field;
+  colorGradient: ColorGradient;
+  scaleBy: Field;
+  scaleFactor: number;
+  fieldFocus: Field; // To see data but not necessarily sort or color by it
+  chartX: Field;
+  chartY: Field;
 };

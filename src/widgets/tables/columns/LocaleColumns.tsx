@@ -7,7 +7,7 @@ import Field from '@features/transforms/fields/Field';
 import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
-} from '@entities/language/LanguageFamilyUtils';
+} from '@entities/language/relations/LanguageFamilyUtils';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';

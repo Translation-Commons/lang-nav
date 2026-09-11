@@ -6,6 +6,7 @@ import { DataContextType } from '../context/useDataContext';
 
 import { isApiEnabled } from './api/apiConfig';
 import { loadCensusData } from './extra_entities/loadCensusData';
+import { loadAndroid } from './supplemental/loadAndroid';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
 import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
@@ -55,6 +56,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLanguageNamesFrench(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
+    loadAndroid(dataContext.getLanguage),
     loadGoogleTranslate(dataContext.getLanguage),
     loadIos(dataContext.getLanguage),
     loadMacos(dataContext.getLanguage),

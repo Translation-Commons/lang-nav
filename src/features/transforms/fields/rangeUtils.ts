@@ -1,19 +1,22 @@
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import { maxBy } from '@shared/lib/setUtils';
+import { maxBy, minBy } from '@shared/lib/setUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './Field';
 import getField from './getField';
 
-export function getMinimumValue(field?: Field, populationMin?: number): number {
+export function getMinimumValue(ents: EntityData[], field?: Field, populationMin?: number): number {
   if (field == null) return 0; // default min for when no field is selected
   switch (field) {
+    case Field.Date:
+      return minBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Longitude:
       return -180;
     case Field.Latitude:
@@ -52,8 +55,6 @@ export function getMinimumValue(field?: Field, populationMin?: number): number {
       return LanguageScope.SpecialCode;
     case Field.TerritoryScope:
       return TerritoryScope.Dependency;
-    case Field.Date:
-      return new Date(0).getTime();
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
@@ -98,6 +99,8 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
       return 10;
     case Field.Modality:
       return LanguageModality.Sign;
+    case Field.CLDRCoverage:
+      return CLDRCoverageLevel.Modern;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
@@ -156,7 +159,6 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
     case Field.SourceType:
-    case Field.CLDRCoverage:
     case Field.Coordinates:
     case Field.VariantType:
       return 0;

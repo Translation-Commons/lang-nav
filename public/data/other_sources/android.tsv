@@ -1,0 +1,249 @@
+### Metadata ###			
+#topic	Android Localization Support		
+#url	https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/res/res/values/locale_config.xml		
+#dateAccessed	2026-06-25		
+#documentName	locale_config.xml (AOSP frameworks/base)		
+#sectionName	supported_locales string-array		
+#author	Android Open Source Project (AOSP)		
+			
+Language Code	Language	Locale	Writing System
+afr	Afrikaans		
+agq	Aghem		
+aka	Akan		
+sqi	Albanian		
+amh	Amharic		
+blo	Anii		
+ara	Arabic		
+hye	Armenian		
+asm	Assamese		
+ast	Asturian		
+asa	Asu		
+aze	Azerbaijani (Cyrillic)		Cyrillic
+aze	Azerbaijani (Latin)		Latin
+ksf	Bafia		
+man/bam	Bambara		
+ben	Bangla		
+bas	Basaa		
+eus	Basque		
+bel	Belarusian		
+bem	Bemba		
+bez	Bena		
+bho	Bhojpuri		
+brx	Bodo		
+hbs/bos	Bosnian (Cyrillic)		Cyrillic
+hbs/bos	Bosnian (Latin)		Latin
+bre	Breton		
+bul	Bulgarian		
+mya	Burmese		
+zho/yue	Cantonese (Simplified)		Simplified
+zho/yue	Cantonese (Traditional)		Traditional
+cat	Catalan		
+ceb	Cebuano		
+tzm	Central Atlas Tamazight		
+che	Chechen		
+chr	Cherokee		
+cgg	Chiga		
+zho/cmn	Chinese (Simplified)		Simplified
+zho/cmn	Chinese (Traditional)		Traditional
+chv	Chuvash		
+ksh	Colognian		
+cor	Cornish		
+hbs/hrv	Croatian		
+ces	Czech		
+dan	Danish		
+doi	Dogri		
+dua	Duala		
+nld	Dutch		
+dzo	Dzongkha		
+mer	Embu		
+eng	English		
+epo	Esperanto		
+est	Estonian		
+ewe	Ewe		
+ewo	Ewondo		
+fao	Faroese		
+fil	Filipino		
+fin	Finnish		
+fra	French		
+fur	Friulian		
+ful	Fula (Adlam)		Adlam
+ful	Fula (Latin)		Latin
+glg	Galician		
+lug	Ganda		
+kat	Georgian		
+deu	German		
+ell	Greek		
+guj	Gujarati		
+guz	Gusii		
+bgc	Haryanvi		
+hau	Hausa		
+haw	Hawaiian		
+heb	Hebrew		
+hin	Hindi		
+hin	Hindi (Latin)		Latin
+hun	Hungarian		
+isl	Icelandic		
+ibo	Igbo		
+smn	Inari Sami		
+msa/ind	Indonesian		
+ina	Interlingua		
+inte1262	Interlingue		
+gle	Irish		
+ita	Italian		
+jpn	Japanese		
+jav	Javanese		
+dyo	Jola-Fonyi		
+kea	Kabuverdianu		
+kab	Kabyle		
+kgp	Kaingang		
+kkj	Kako		
+iku/kal	Kalaallisut		
+kln	Kalenjin		
+kam	Kamba		
+doi/xnr	Kangri		
+kan	Kannada		
+kas	Kashmiri (Arabic)		Arabic
+kas	Kashmiri (Devanagari)		Devanagari
+kaz	Kazakh		
+khm	Khmer		
+kik	Kikuyu		
+kin	Kinyarwanda		
+kok/knn	Konkani		
+kor	Korean		
+khq	Koyra Chiini		
+ses	Koyraboro Senni		
+kur	Kurdish		
+kxv	Kuvi (Devanagari)		Devanagari
+kxv	Kuvi (Latin)		Latin
+kxv	Kuvi (Odia)		Odia
+kxv	Kuvi (Telugu)		Telugu
+kir	Kyrgyz		
+lkt	Lakota		
+lag	Langi		
+lao	Lao		
+lav	Latvian		
+lij	Ligurian		
+lin	Lingala		
+lit	Lithuanian		
+lmo	Lombard		
+nds	Low German		
+dsb	Lower Sorbian		
+lub	Luba-Katanga		
+luw	Luo		
+ltz	Luxembourgish		
+luy	Luyia		
+mkd	Macedonian		
+jmc	Machame		
+mai	Maithili		
+vmw	Makhuwa		
+mgh	Makhuwa-Meetto		
+kde	Makonde		
+mlg	Malagasy		
+msa	Malay		
+mal	Malayalam		
+mlt	Maltese		
+mni	Manipuri		
+glv	Manx		
+mri	Maori		
+mar	Marathi		
+mas	Masai		
+mzn	Mazanderani		
+mer	Meru		
+mgo	Meta		
+mon	Mongolian		
+mfe	Morisyen		
+nqo	N'Ko		
+naq	Nama		
+nep	Nepali		
+nnh	Ngiemboon		
+jgo	Ngomba		
+yrl	Nheengatu		
+pcm	Nigerian Pidgin		
+nde	North Ndebele		
+sme	Northern Sami		
+nor/nob	Norwegian Bokmal		
+nor/nno	Norwegian Nynorsk		
+nus	Nuer		
+nyn	Nyankole		
+oci	Occitan		
+ori	Odia		
+orm	Oromo		
+oss	Ossetic		
+pus	Pashto		
+fas	Persian		
+pol	Polish		
+por	Portuguese		
+prg	Prussian		
+pan	Punjabi (Arabic)		Arabic
+pan	Punjabi (Gurmukhi)		Gurmukhi
+que	Quechua		
+raj	Rajasthani		
+ron	Romanian		
+roh	Romansh		
+rof	Rombo		
+run	Rundi		
+rus	Russian		
+rwk	Rwa		
+saq	Samburu		
+sag	Sango		
+sbp	Sangu		
+san	Sanskrit		
+sat	Santali		
+srd	Sardinian		
+gla	Scottish Gaelic		
+seh	Sena		
+hbs/srp	Serbian (Cyrillic)		Cyrillic
+hbs/srp	Serbian (Latin)		Latin
+ksb	Shambala		
+sna	Shona		
+iii	Sichuan Yi		
+szl	Silesian		
+snd	Sindhi (Arabic)		Arabic
+snd	Sindhi (Devanagari)		Devanagari
+sin	Sinhala		
+slk	Slovak		
+slv	Slovenian		
+xog	Soga		
+som	Somali		
+spa	Spanish		
+tzm/zgh	Standard Moroccan Tamazight		
+sun	Sundanese		
+swa	Swahili		
+cre/csw	Swampy Cree		
+swe	Swedish		
+gsw	Swiss German		
+syr	Syriac		
+dav	Taita		
+tgk	Tajik		
+tam	Tamil		
+twq	Tasawaq		
+tat	Tatar		
+tel	Telugu		
+teo	Teso		
+tha	Thai		
+bod	Tibetan		
+tir	Tigrinya		
+ton	Tongan		
+tur	Turkish		
+tuk	Turkmen		
+ukr	Ukrainian		
+hsb	Upper Sorbian		
+urd	Urdu		
+uig	Uyghur		
+uzb	Uzbek (Arabic)		Arabic
+uzb	Uzbek (Cyrillic)		Cyrillic
+uzb	Uzbek (Latin)		Latin
+vec	Venetian		
+vie	Vietnamese		
+vun	Vunjo		
+wae	Walser		
+cym	Welsh		
+fry	Western Frisian		
+wol	Wolof		
+xho	Xhosa		
+sah	Yakut		
+yav	Yangben		
+yor	Yoruba		
+dje	Zarma		
+zha	Zhuang		
+zul	Zulu		

@@ -1,3 +1,4 @@
+import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import {
   getBaseLanguageData,
   Glottocode,
@@ -7,7 +8,6 @@ import {
   LanguageScope,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
-import { setLanguageNames } from '@entities/language/setLanguageNames';
 
 const DEBUG = false;
 

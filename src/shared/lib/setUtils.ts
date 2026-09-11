@@ -65,6 +65,15 @@ export function areArraysIdentical<T>(a: T[], b: T[]): boolean {
   return a.every((item) => setB.has(item));
 }
 
+export function minBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
+  return items.reduce<K | undefined>((min, child) => {
+    const current = valueFn(child);
+    if (current == null) return min;
+    if (min == null) return current;
+    return min < current ? min : current;
+  }, undefined);
+}
+
 export function maxBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
   return items.reduce<K | undefined>((max, child) => {
     const current = valueFn(child);
@@ -111,4 +120,12 @@ export function partition<T>(items: T[], partFn: (item: T) => boolean): [T[], T[
     (partFn(v) ? a : b).push(v);
   }
   return [a, b];
+}
+
+export function sortBy<T>(items: T[], valueFn: (item: T) => number | undefined): T[] {
+  return [...items].sort((a, b) => {
+    const aValue = valueFn(a) ?? 0;
+    const bValue = valueFn(b) ?? 0;
+    return bValue - aValue;
+  });
 }

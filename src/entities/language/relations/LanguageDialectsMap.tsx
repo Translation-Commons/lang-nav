@@ -9,11 +9,11 @@ import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-
 import { partition } from '@shared/lib/setUtils';
 import { Button } from '@shared/ui/button';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { LanguageData, LanguageScope } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

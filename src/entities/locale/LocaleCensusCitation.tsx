@@ -27,7 +27,7 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, focus, size = 'full' })
   )
     return <CensusCitation census={census} />;
   if (source != null) return <PopulationSource populationSource={source} size={size} />;
-  return <Deemphasized>n/a</Deemphasized>;
+  return <Deemphasized>citation needed</Deemphasized>;
 };
 
 const CensusCitation: React.FC<{ census: CensusData }> = ({ census }) => {
