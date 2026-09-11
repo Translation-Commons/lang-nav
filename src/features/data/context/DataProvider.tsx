@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -26,7 +26,28 @@ const DataProvider: React.FC<{
   const { coreData, loadCoreData } = useCoreData();
   const [loadProgress, setLoadProgress] = useState<LoadingStage>(LoadingStage.Initial);
 
+  // Core data loads exactly once per page load, even though StrictMode mounts
+  // this effect twice in development.
+  //
+  // The second run does not just waste a load, it CORRUPTS the data. The
+  // connect* functions append to arrays on the entities they are given, so
+  // running the pipeline twice over the same entities doubles those arrays.
+  // connectKeyboards is the visible case: it deduplicates a keyboard's
+  // `languages` with `includes(language)`, an object-identity check that
+  // cannot help when a second pass appends to an array the first pass filled.
+  //
+  // Only the API path showed the doubling, which is what made it look like a
+  // backend bug. The TSV loaders re-fetch and re-parse on every call, so the
+  // second pass builds fresh entities with empty arrays and silently discards
+  // the first pass's work. The API loaders cache their resolved promise at
+  // module scope, so the second pass gets back the SAME entity objects, still
+  // carrying the first pass's connections, and appends to them.
+  const hasStartedLoading = useRef(false);
+
   useEffect(() => {
+    if (hasStartedLoading.current) return;
+    hasStartedLoading.current = true;
+
     const loadPrimaryData = async () => {
       await loadCoreData();
       setLoadProgress(LoadingStage.HasCoreData);
