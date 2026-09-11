@@ -105,6 +105,12 @@ function discountPopulationEstimatesIfSimilarToParentRecursive(
   lang: LanguageData,
   depth: number = 0,
 ): void {
+  if (depth > 40) console.debug('Potential infinite recursion for: ', lang.ID, 'depth: ', depth);
+  // Matches the cap in getLanguagePopulationFollowingDescendants and
+  // computeRecursiveDataOnLanguage above/nearby: this function was missing the
+  // actual `return`, so an unusually deep or malformed parent/child chain ran
+  // past the debug warning and overflowed the call stack instead of stopping.
+  if (depth > 50) return;
   const parent = lang.parentLanguage;
   if (parent && lang.pop.overall != null && parent.pop.overall != null) {
     // Discount population if the population is greater than or same of its parent
