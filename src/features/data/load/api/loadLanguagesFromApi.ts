@@ -1,3 +1,4 @@
+import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
@@ -54,7 +55,7 @@ type ApiLanguageSourceAttribute = {
   scope: number | null;
   parent_language_id: string | null;
   code_6391: string | null;
-  retirement_reason: string | null;
+  retirement_reason?: string | null;
 };
 
 export type ApiLanguage = {
@@ -68,7 +69,7 @@ export type ApiLanguage = {
   // NOT viability_confidence / viability_explanation. See RECOMMENDATION_COLUMNS.
   recommendation: string | null;
   recommendation_reason: string | null;
-  iso_status: number | null;
+  iso_status?: number | null;
   language_source_attribute: ApiLanguageSourceAttribute[];
   language_code_alias: ApiLanguageCodeAlias[];
 };
@@ -339,7 +340,7 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
 
   // addISORetirementsToLanguages, from iso-639-3_Retirements.tab.
   const retirementReason = orUndefined(iso?.retirement_reason);
-  if (retirementReason) language.ISO.retirementReason = retirementReason;
+  if (retirementReason) language.ISO.retirementReason = retirementReason as RetirementReason;
 
   // addGlottologLanguages, from glottolog.tsv.
   if (glottolog != null) {

@@ -204,7 +204,9 @@ describe('loadLocalesFromApi', () => {
 
   it('requests only the StableDatabase rows, ordered, with named columns', async () => {
     vi.stubEnv('VITE_API_URL', 'http://example.test');
-    const fetchMock = vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve([]) }));
+    const fetchMock = vi.fn<(...args: unknown[]) => Promise<unknown>>(() =>
+      Promise.resolve({ ok: true, json: () => Promise.resolve([]) }),
+    );
     vi.stubGlobal('fetch', fetchMock);
 
     await loadLocalesFromApi();

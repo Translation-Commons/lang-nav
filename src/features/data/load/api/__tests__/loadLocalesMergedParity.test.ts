@@ -151,6 +151,7 @@ describe.skipIf(!API_URL)('locale API/TSV parity, after the IANA variant step', 
       ...(await Promise.all(PIPELINE_FILES.map(makeFileAvailable))),
       http.get(`${API_URL}/locale`, () => passthrough()),
       http.get(`${API_URL}/language`, () => passthrough()),
+      http.get(`${API_URL}/variant`, () => passthrough()),
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
