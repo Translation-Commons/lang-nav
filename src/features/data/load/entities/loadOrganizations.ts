@@ -2,9 +2,21 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadOrganizationsFromApi } from '../api/loadOrganizationsFromApi';
+
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadOrganizations(): Promise<Record<string, OrganizationData> | void> {
+  // Try the API first when configured; fall back to the TSV file on any
+  // failure instead of leaving the app stuck.
+  if (isApiEnabled()) {
+    const fromApi = await loadOrganizationsFromApi();
+    if (fromApi != null) {
+      return fromApi;
+    }
+    console.warn('Organization API load failed; falling back to TSV files.');
+  }
   return await loadEntitiesFromFile<OrganizationData>(
     'data/tc/organizations.tsv',
     parseOrganizationLine,
