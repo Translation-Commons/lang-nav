@@ -25,7 +25,20 @@ Read by `src/features/data/load/api/apiConfig.ts`. Unset means files.
 | Territories     | API, one request                  |
 | Organizations   | API, one request                  |
 | Writing systems | API, one request                  |
-| Everything else | still TSV files                   |
+| Languages       | API, one request (plus 4 files)   |
+| Locales         | API, one request                  |
+| Census          | API, one request                  |
+| Keyboards       | API, one request (both platforms) |
+| Variants        | still TSV files                   |
+
+Variants are the last core entity on the file path. The supplemental loaders in
+`SupplementalData.tsx` are a separate question: only the four territory ones
+are skipped when the API is on, so the rest still fetch their files even where
+the ETL has already merged the same data.
+
+The four files languages still needs alongside the API are transformations, not
+facts the database lacks - `CoreData.tsx` explains which and why at the call
+site.
 
 Territories were first because they are small (289 rows), self-contained, and
 exercise the awkward parts: natural text primary keys, two self-referencing
@@ -61,12 +74,46 @@ column, because the ETL never writes to `writing_system.name_display_original`
 even though it exists; and the `names` array uses `!= null` rather than a
 truthy filter, so it would keep an empty string rather than drop it.
 
-**`loadWritingSystems` falls back to the TSV file if the API call fails;
-Territory, Language and Locale currently do not** - they return the API
+Keyboards are one request for BOTH platforms. The file path needs two loaders
+because there are two files (`google/gboards.tsv` and `keyman/keyboards.tsv`),
+but they are rows of one `keyboard` table told apart by a `platform` column, so
+`loadKeyboardsGBoard` returns everything and `loadKeyboardsKeyman` returns `{}`.
+Both still call the API loader, which shares one in-flight promise between them
+- they run in the same `Promise.all`, so the second would otherwise race a
+duplicate request rather than hit the HTTP cache.
+
+Three things about keyboards were fixed while wiring them, each worth knowing
+before touching the mapping:
+
+- **The Keyman `Lang codes` cell names languages by BCP-47 code**, which is the
+  two-letter 639-1 code wherever one exists (`ak,ee,gaa,dag`). A two-letter code
+  is never a `language` id, so reading the cell literally dropped 902 of 4,883
+  links across 169 distinct codes. The ETL now resolves through
+  `language_code_alias` first, exactly as `familiesToLanguages.tsv` already did.
+  A consequence: `languageCodes` holds resolved ids on the API path and raw
+  source codes on the file path. Both reach the same `LanguageData`, because
+  `connectKeyboards` looks the file path's codes up in the BCP dictionary.
+- **Both junctions carry a `position` column**, like `locale_variant`.
+  `KeyboardDetails` renders both lists verbatim with `.join(', ')`, and the
+  source order is not alphabetical - 1,021 of 1,085 platform lists and 150
+  language lists would render differently if sorted. The source is not even
+  self-consistent (`linux,macos,windows` and `windows,macos,linux` both occur),
+  so no sort reproduces it.
+- **`keyboard.variant_code_raw` exists because `variant_id` cannot hold every
+  subtag.** Three GBoard keyboards carry BCP-47 private-use subtags (`x-upper`,
+  `x-snd`) registered in no variant source, so the foreign key is NULL while the
+  raw subtag is kept. The frontend displays the subtag whether or not it
+  resolves, so the mapper reads the raw column; for registered variants the two
+  columns are equal.
+
+**`loadWritingSystems` and the two keyboard loaders fall back to the TSV files
+if the API call fails; Territory, Language and Locale currently do not** - they return the API
 loader's `undefined` straight through, which surfaces as `CoreData.tsx`'s
 blocking "Error loading data" alert. This is deliberate here, not an
 oversight: building exactly this recovery path was the original goal of the
-migration's Phase 0. Whether every entity should eventually get it is an open
+migration's Phase 0. Keyboards follow writing systems rather than territory
+because a missing keyboard degrades a detail panel while a missing territory
+invalidates the page. Whether every entity should eventually get it is an open
 question for the team, not something this file resolves.
 
 ## The rule the loaders follow

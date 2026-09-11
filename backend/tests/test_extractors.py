@@ -15,7 +15,10 @@ from etl.loaders.census import (
 )
 from pathlib import Path
 
+from etl.loaders import keyboards as loaders_keyboards
 from etl.loaders import territories as loaders_territories
+from etl.loaders.authorities import iso_639_1_to_id
+from etl.registry import Dataset
 from etl.loaders.languages import _split_subtitle
 from etl.loaders.locales import parse_locale_id
 from etl.loaders.vocab import is_ignored_language_code
@@ -247,3 +250,89 @@ def test_the_territory_loader_asks_for_semicolons():
     source = (Path(loaders_territories.__file__)).read_text(encoding="utf-8")
     assert 'split_multi(row.get("Other Endonyms"), seps=";")' in source
     assert 'split_multi(row.get("Other Names"), seps=";")' in source
+
+
+# --- keyboards ------------------------------------------------------------
+#
+# Three separate defects, all of them the silent kind: each produced a
+# plausible-looking row with data missing from it.
+
+
+def test_keyman_language_codes_resolve_through_the_639_1_alias():
+    """The Keyman cell names languages by BCP-47 code.
+
+    That is the TWO-letter 639-1 code wherever one exists, and a two-letter
+    code is never a `language` id, so looking the cell up literally dropped 902
+    of 4,883 links across 169 distinct codes. `ak,ee,gaa,dag` is the shape:
+    two resolvable aliases and two codes that are already ids.
+    """
+    ds = Dataset()
+    for lid, alias in (("aka", "ak"), ("ewe", "ee")):
+        ds["language"].upsert(id=lid)
+        ds["language_code_alias"].upsert(
+            language_id=lid, alias_code=alias, alias_kind="iso639-1"
+        )
+    for lid in ("gaa", "dag"):
+        ds["language"].upsert(id=lid)
+
+    assert iso_639_1_to_id(ds) == {"ak": "aka", "ee": "ewe"}
+
+
+def test_keyboard_language_position_survives_a_repeated_code():
+    """`ku,kmr,ku,ckb` is three links, not four.
+
+    `ku` resolves to `kur` and its second occurrence is dropped by the
+    junction's primary key. The surviving row must keep the position of the
+    FIRST occurrence, and no conflict may be recorded - the source is merely
+    repetitive, not inconsistent, and 25 rows in the file look like this.
+    """
+    ds = Dataset()
+    seen: set[str] = set()
+    for index, code in enumerate(["kur", "kmr", "kur", "ckb"]):
+        if code in seen:
+            continue
+        seen.add(code)
+        ds["keyboard_language"].upsert(
+            keyboard_id="keyman_x", language_id=code, position=index
+        )
+    ds.report_conflicts()
+
+    positions = {
+        key[1]: row["position"] for key, row in ds["keyboard_language"].rows.items()
+    }
+    assert positions == {"kur": 0, "kmr": 1, "ckb": 3}
+    assert ds.findings == []
+
+
+def test_the_keyboard_loader_deduplicates_before_upserting():
+    """Reads the loader itself.
+
+    Without the `seen` guards, upsert overwrites with the LATER position and
+    files a data-quality finding for every repeat. Nothing else in the suite
+    would fail if they were removed, because the sort order happens to survive.
+    """
+    source = Path(loaders_keyboards.__file__).read_text(encoding="utf-8")
+    assert "seen_languages" in source
+    assert "seen_os" in source
+
+
+def test_a_private_use_variant_subtag_keeps_its_raw_code():
+    """'x-upper' and 'x-snd' are BCP-47 private-use subtags.
+
+    They are registered in no variant source, so variant_id has nothing to
+    point at. The raw subtag still has to be stored: the frontend renders it as
+    text whether or not it resolves, so losing it blanks a field the TSV path
+    shows on three GBoard keyboards.
+    """
+    ds = Dataset()
+    ds.register_entity("gboard_x", "Keyboard")
+    ds["keyboard"].upsert(
+        id="gboard_x",
+        platform="GBoard",
+        variant_id=None,
+        variant_code_raw="x-upper",
+    )
+
+    row = ds["keyboard"].rows[("gboard_x",)]
+    assert row["variant_id"] is None
+    assert row["variant_code_raw"] == "x-upper"

@@ -13,6 +13,7 @@ from pathlib import Path
 
 from ..registry import Dataset
 from ..sources import read_table, split_multi, to_int
+from .authorities import iso_639_1_to_id
 
 ENTITY_TYPE = "Keyboard"
 
@@ -36,6 +37,7 @@ def _scripts(ds: Dataset, kid: str, row, column: str) -> str | None:
 
 def _gboard(ds: Dataset, path: Path) -> None:
     known_languages = ds["language"].ids()
+    by_6391 = iso_639_1_to_id(ds)
     known_territories = ds["territory"].ids()
     known_variants = ds["variant"].ids()
 
@@ -54,11 +56,18 @@ def _gboard(ds: Dataset, path: Path) -> None:
                     f"{row.origin()}: territory {territory!r} is unknown; left NULL")
             territory = None
 
-        variant = row.get("Variant")
-        variant = variant.lower() if variant else None
+        # Two columns, deliberately. `variant_code_raw` keeps the subtag as
+        # written; `variant_id` is the foreign key and only gets set when a
+        # registered variant actually exists. The three private-use subtags in
+        # this file ('x-upper', 'x-snd') are registered nowhere, so they have a
+        # raw code and no id - and the frontend renders the raw code either way.
+        variant_raw = row.get("Variant")
+        variant_raw = variant_raw.lower() if variant_raw else None
+        variant = variant_raw
         if variant and variant not in known_variants:
             ds.warn(kid, "keyboard.variant_id",
-                    f"{row.origin()}: variant {variant!r} is unknown; left NULL")
+                    f"{row.origin()}: variant {variant!r} is unknown; "
+                    f"kept as variant_code_raw, foreign key left NULL")
             variant = None
 
         ds["keyboard"].upsert(
@@ -68,17 +77,23 @@ def _gboard(ds: Dataset, path: Path) -> None:
             input_script_id=_scripts(ds, kid, row, "Input Script ISO"),
             output_script_id=_scripts(ds, kid, row, "Output Script ISO"),
             variant_id=variant,
+            variant_code_raw=variant_raw,
             source_ref=path.name,
         )
 
-        # GBoard: exactly one language per keyboard.
+        # GBoard: exactly one language per keyboard, so position is always 0.
         language = row.get("Lang code")
-        if language and language in known_languages:
-            ds["keyboard_language"].upsert(keyboard_id=kid, language_id=language)
+        if language:
+            language = by_6391.get(language, language)
+            if language in known_languages:
+                ds["keyboard_language"].upsert(
+                    keyboard_id=kid, language_id=language, position=0
+                )
 
 
 def _keyman(ds: Dataset, path: Path) -> None:
     known_languages = ds["language"].ids()
+    by_6391 = iso_639_1_to_id(ds)
 
     for row in read_table(path):
         kid = row.get("ID")
@@ -100,10 +115,42 @@ def _keyman(ds: Dataset, path: Path) -> None:
         )
 
         # Keyman: one or more languages, comma separated in a single cell.
-        for language in split_multi(row.get("Lang codes"), seps=","):
-            if language in known_languages:
-                ds["keyboard_language"].upsert(keyboard_id=kid, language_id=language)
+        #
+        # The cell names languages by their BCP-47 code, which is the TWO-LETTER
+        # 639-1 code wherever one exists - `ak,ee,gaa,dag` mixes both widths in
+        # a single row. A two-letter code is never a `language` id, so reading
+        # the cell literally dropped 902 of 4,883 links across 169 distinct
+        # codes. Resolving through the alias table first is what the frontend
+        # already does: connectKeyboards.ts looks the same cell up in the BCP
+        # dictionary, which is keyed on 639-1.
+        #
+        # `position` preserves the cell's order, which the frontend renders
+        # verbatim. A repeated code keeps the position of its FIRST appearance:
+        # `ku,kmr,ku,ckb` yields ku=0, kmr=1, ckb=3. The gap at 2 is harmless
+        # since only the sort order is read, never the absolute value.
+        #
+        # The `seen` guard is doing real work: upsert overwrites with the later
+        # value and records a conflict, so without it 25 rows across the file
+        # (`pt,pt`, `en,en,en`, fv_all's 9 repeats) would both take the wrong
+        # position and file a data-quality finding for a file that is merely
+        # repetitive, not inconsistent.
+        seen_languages: set[str] = set()
+        for index, language in enumerate(split_multi(row.get("Lang codes"), seps=",")):
+            language = by_6391.get(language, language)
+            if language in seen_languages or language not in known_languages:
+                continue
+            seen_languages.add(language)
+            ds["keyboard_language"].upsert(
+                keyboard_id=kid, language_id=language, position=index
+            )
 
-        # 'windows,macos,ios' unpivoted into one row per operating system.
-        for os_name in split_multi(row.get("Platform Support"), seps=","):
-            ds["keyboard_platform_support"].upsert(keyboard_id=kid, os=os_name)
+        # 'windows,macos,ios' unpivoted into one row per operating system,
+        # keeping the source order for the same reason and with the same guard.
+        seen_os: set[str] = set()
+        for index, os_name in enumerate(split_multi(row.get("Platform Support"), seps=",")):
+            if os_name in seen_os:
+                continue
+            seen_os.add(os_name)
+            ds["keyboard_platform_support"].upsert(
+                keyboard_id=kid, os=os_name, position=index
+            )

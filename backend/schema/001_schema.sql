@@ -989,6 +989,15 @@ CREATE TABLE keyboard (
   input_script_id  text REFERENCES writing_system(id),
   output_script_id text REFERENCES writing_system(id),
   variant_id       text REFERENCES variant(id),         -- GBoard only
+  -- The variant subtag AS WRITTEN in the source, kept because variant_id
+  -- cannot hold all of them: three GBoard keyboards carry BCP-47 PRIVATE-USE
+  -- subtags ('x-upper', 'x-snd') which are registered nowhere, so no variant
+  -- row exists to point at and the foreign key above is NULLed. The frontend
+  -- displays this subtag as raw text whether or not it resolves to a variant,
+  -- so dropping it would silently blank a field the TSV path shows.
+  -- Equal to variant_id for every registered variant; set without it only for
+  -- the private-use cases.
+  variant_code_raw text,                                -- GBoard only
   downloads        int,                                 -- Keyman only
   total_downloads  int,                                 -- Keyman only
 
@@ -1000,7 +1009,8 @@ CREATE TABLE keyboard (
   -- set for their own platform. Without this, nonsense (a GBoard keyboard with
   -- a download count) accumulates silently.
   CONSTRAINT keyboard_platform_fields CHECK (
-    (platform = 'Keyman' AND territory_id IS NULL AND variant_id IS NULL)
+    (platform = 'Keyman' AND territory_id IS NULL AND variant_id IS NULL
+                         AND variant_code_raw IS NULL)
     OR
     (platform = 'GBoard' AND downloads IS NULL AND total_downloads IS NULL)
   )
@@ -1046,16 +1056,24 @@ CREATE TABLE writing_system_contains (
 );
 
 -- GBoard: exactly 1 row per keyboard. Keyman: 1 or more.
+-- ORDER matters, as it does for locale_variant above: KeyboardDetails renders
+-- this list with .join(', '), so a keyboard listing 'ku,kmr,ckb' must not come
+-- back alphabetised. 150 of the 1,085 Keyman rows are not in sorted order.
 CREATE TABLE keyboard_language (
-  keyboard_id text NOT NULL REFERENCES keyboard(id) ON DELETE CASCADE,
-  language_id text NOT NULL REFERENCES language(id),
+  keyboard_id text     NOT NULL REFERENCES keyboard(id) ON DELETE CASCADE,
+  language_id text     NOT NULL REFERENCES language(id),
+  position    smallint NOT NULL,
   PRIMARY KEY (keyboard_id, language_id)
 );
 
--- 'windows,macos,ios' unpivoted.
+-- 'windows,macos,ios' unpivoted. Ordered for the same reason, and more often:
+-- the source uses several orderings ('linux,macos,windows' and
+-- 'windows,macos,linux' both occur), so there is no canonical sort to fall
+-- back on - 1,021 of 1,085 rows would render differently if alphabetised.
 CREATE TABLE keyboard_platform_support (
-  keyboard_id text NOT NULL REFERENCES keyboard(id) ON DELETE CASCADE,
-  os          text NOT NULL,
+  keyboard_id text     NOT NULL REFERENCES keyboard(id) ON DELETE CASCADE,
+  os          text     NOT NULL,
+  position    smallint NOT NULL,
   PRIMARY KEY (keyboard_id, os)
 );
 

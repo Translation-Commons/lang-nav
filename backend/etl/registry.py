@@ -394,7 +394,8 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
     TableSpec(
         "keyboard",
         ("id", "platform", "territory_id", "input_script_id", "output_script_id",
-         "variant_id", "downloads", "total_downloads", "source_ref"),
+         "variant_id", "variant_code_raw", "downloads", "total_downloads",
+         "source_ref"),
         ("id",),
         (("territory_id", "territory", True),
          ("input_script_id", "writing_system", True),
@@ -428,13 +429,13 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
     ),
     TableSpec(
         "keyboard_language",
-        ("keyboard_id", "language_id"),
+        ("keyboard_id", "language_id", "position"),
         ("keyboard_id", "language_id"),
         (("keyboard_id", "keyboard", False), ("language_id", "language", False)),
     ),
     TableSpec(
         "keyboard_platform_support",
-        ("keyboard_id", "os"),
+        ("keyboard_id", "os", "position"),
         ("keyboard_id", "os"),
         (("keyboard_id", "keyboard", False),),
     ),

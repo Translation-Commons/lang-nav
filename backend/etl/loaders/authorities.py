@@ -202,11 +202,17 @@ def _trim_family_name(name: str | None) -> str | None:
     return _re.sub(r"\s+languages|\s+\(family\)", "", name, flags=_re.I).strip() or name
 
 
-def _iso_639_1_to_id(ds: Dataset) -> dict[str, str]:
+def iso_639_1_to_id(ds: Dataset) -> dict[str, str]:
     """ISO 639-1 code -> language id, from the aliases _iso_639_3 recorded.
 
     `zh` -> `zho`, `en` -> `eng`. Built once per call rather than per member,
     which turns a scan of every alias row into one dict lookup.
+
+    Public because two loaders need it. Any source that names a language by its
+    BCP-47 code hits the same wall: the two-letter code is never a `language`
+    id, so a literal lookup silently drops every languoid that has one.
+    keyboards.py imports this for the Keyman `Lang codes` cell, which cost 902
+    of 4,883 links before it did.
     """
     return {
         row["alias_code"]: row["language_id"]
@@ -225,12 +231,12 @@ def _families_to_languages(ds: Dataset, path: Path) -> None:
 
     The frontend resolves the same cell through `languagesBySource.BCP` first,
     which is keyed on 639-1, and falls back to the ISO and Combined
-    dictionaries. `_iso_639_1_to_id` below is that lookup: the alias table
+    dictionaries. `iso_639_1_to_id` below is that lookup: the alias table
     already records the equivalence, written by _iso_639_3 further up this
     file, so this consults what was loaded rather than deriving anything new.
     """
     known = ds["language"].ids()
-    by_6391 = _iso_639_1_to_id(ds)
+    by_6391 = iso_639_1_to_id(ds)
     missing = 0
     for row in read_table(path):
         family = row.get("ISO 639-5")
