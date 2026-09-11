@@ -41,21 +41,26 @@ import { fetchFromApi } from './apiConfig';
  * to stay green when a merge step is removed.
  */
 
-/** One `language_code_alias` row. Only the kinds this mapper reads are selected. */
+/**
+ * One aggregated `language_code_alias` row from `api.language`.
+ *
+ * The keys are short because they repeat once per alias per language across
+ * 27,378 rows; the view documents which column each maps to.
+ */
 type ApiLanguageCodeAlias = {
-  alias_code: string;
-  alias_kind: string;
+  /** alias_code */ a: string;
+  /** alias_kind */ k: string;
 };
 
-/** One `language_source_attribute` row, one per (language, source) pair. */
+/** One aggregated `language_source_attribute` row, one per (language, source). */
 type ApiLanguageSourceAttribute = {
-  source: string;
-  code: string | null;
-  name: string | null;
-  scope: number | null;
-  parent_language_id: string | null;
-  code_6391: string | null;
-  retirement_reason?: string | null;
+  /** source */ s: string;
+  /** code */ c: string | null;
+  /** name */ n: string | null;
+  /** scope */ sc: number | null;
+  /** parent_language_id */ p: string | null;
+  /** code_6391 */ c1: string | null;
+  /** retirement_reason */ rr: string | null;
 };
 
 export type ApiLanguage = {
@@ -69,9 +74,25 @@ export type ApiLanguage = {
   // NOT viability_confidence / viability_explanation. See RECOMMENDATION_COLUMNS.
   recommendation: string | null;
   recommendation_reason: string | null;
-  iso_status?: number | null;
-  language_source_attribute: ApiLanguageSourceAttribute[];
-  language_code_alias: ApiLanguageCodeAlias[];
+  iso_status: number | null;
+  latitude: number | null;
+  longitude: number | null;
+  coords_source: string | null;
+
+  // The Combined parent as STORED - a foreign key, so NULL wherever the parent
+  // is not itself in the Combined tree - and the Glottolog parent beside it.
+  // The view keeps them separate rather than pre-COALESCEing so the mapper can
+  // tell a real tree edge from a display-only glottocode.
+  parent_language_id: string | null;
+  glottolog_parent_language_id: string | null;
+
+  retirement_reason: string | null;
+  retirement_change_to: string | null;
+  retirement_remedy: string | null;
+  retirement_effective_date: string | null;
+
+  sources: ApiLanguageSourceAttribute[];
+  aliases: ApiLanguageCodeAlias[];
 };
 
 /**
@@ -127,12 +148,19 @@ const FAMILY_SCOPE = 5;
 const LANGUAGE_QUERY =
   '/language?select=id,name_canonical,name_subtitle,name_endonym,modality,' +
   `primary_script_id,population_rough,iso_status,${RECOMMENDATION_COLUMNS},` +
-  'language_source_attribute!language_source_attribute_language_id_fkey' +
-  '(source,code,name,scope,parent_language_id,code_6391,retirement_reason),' +
-  'language_code_alias(alias_code,alias_kind)' +
-  '&language_code_alias.alias_kind=in.(glottocode,iso639-2b)' +
-  '&language_source_attribute.order=source.asc' +
-  '&language_code_alias.order=alias_code.asc&order=id.asc';
+  'latitude,longitude,coords_source,' +
+  'parent_language_id,glottolog_parent_language_id,' +
+  'retirement_reason,retirement_change_to,retirement_remedy,' +
+  'retirement_effective_date,sources,aliases' +
+  '&order=id.asc';
+
+/**
+ * The schema holding the view. Passed as `Accept-Profile`, because
+ * postgrest.conf lists "public,api" and resolves an unqualified name against
+ * public first - so the base tables keep working and this is reached only by
+ * asking for it.
+ */
+const API_SCHEMA = 'api';
 
 export async function loadLanguagesFromApi(): Promise<LanguageDictionary | void> {
   // Resolves to undefined on failure, never rejects. CoreData.tsx awaits every
@@ -140,7 +168,7 @@ export async function loadLanguagesFromApi(): Promise<LanguageDictionary | void>
   // promise skips that check entirely, so the alert never runs and the loading
   // indicator sticks forever with the cause only in the console.
   try {
-    const rows = await fetchFromApi<ApiLanguage[]>(LANGUAGE_QUERY);
+    const rows = await fetchFromApi<ApiLanguage[]>(LANGUAGE_QUERY, API_SCHEMA);
     const languages = toDictionary(rows.map(parseApiLanguage), (lang) => lang.ID);
     return resolveGlottologParents(languages, rows);
   } catch (err) {
@@ -157,7 +185,7 @@ function orUndefined<T>(value: T | null): T | undefined {
 }
 
 export function parseApiLanguage(row: ApiLanguage): LanguageData {
-  const attributes = new Map(row.language_source_attribute.map((a) => [a.source, a]));
+  const attributes = new Map(row.sources.map((a) => [a.s, a]));
   const combined = attributes.get(LanguageSource.Combined);
   const glottolog = attributes.get(LanguageSource.Glottolog);
 
@@ -183,18 +211,26 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // Where a language carries several glottocode aliases the attribute row's own
   // code wins above; this only ever supplies one for a language that has no
   // Glottolog row at all, so the first is the only one on offer.
-  const glottocodeAlias = orUndefined(
-    row.language_code_alias.find((a) => a.alias_kind === 'glottocode')?.alias_code ?? null,
-  );
+  const glottocodeAlias = orUndefined(row.aliases.find((a) => a.k === 'glottocode')?.a ?? null);
 
   // `code6392b` is '' for most languages on the file path, not undefined:
   // parseISOLanguage6393Line reads iso-639-3.tab column 2 unconditionally and
   // that column is empty for all but 420 rows. The database stores only the
   // 420 real ones, as `iso639-2b` aliases, so the empty string has to be put
   // back or every language without a 639-2b code would differ.
-  const iso6392bAlias = row.language_code_alias.find((a) => a.alias_kind === 'iso639-2b');
+  const iso6392bAlias = row.aliases.find((a) => a.k === 'iso639-2b');
 
-  const parentLanguageCode = orUndefined(combined?.parent_language_id);
+  // THE COMBINED PARENT, taken from the view's own column rather than from the
+  // Combined attribute row.
+  //
+  // This is the difference the view exists for. `parent_language_id` on the
+  // attribute row is a FOREIGN KEY, so it is NULL wherever the browser holds a
+  // glottocode - `kor` -> `kore1284`, on 1,902 languoids - and no query against
+  // the base table can return that value. The view computes it: the stored edge
+  // where there is one, the Glottolog parent where there is not, which is
+  // exactly `addGlottologLanguages`'s `??=`.
+  const parentLanguageCode =
+    orUndefined(row.parent_language_id) ?? orUndefined(row.glottolog_parent_language_id);
 
   const language: LanguageData = {
     type: EntityType.Language,
@@ -251,8 +287,8 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
       // The file path has no such gap - parseLanguageLine reads column 2
       // unconditionally - so the alias is what reproduces it. It is the same
       // column, not a derived value.
-      code: orUndefined(glottolog?.code) ?? glottocodeAlias,
-      parentLanguageCode: orUndefined(glottolog?.parent_language_id),
+      code: orUndefined(glottolog?.c) ?? glottocodeAlias,
+      parentLanguageCode: orUndefined(glottolog?.p),
     },
     ISO: {},
     BCP: {},
@@ -274,9 +310,9 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // `dyl` and `lfb` still lack a UNESCO parent the file gives them. Two rows,
   // and it needs an answer about what the UNESCO tree contains rather than a
   // rule here.
-  const isoParent = orUndefined(attributes.get(LanguageSource.ISO)?.parent_language_id);
-  const bcpParent = orUndefined(attributes.get(LanguageSource.BCP)?.parent_language_id);
-  const unescoParent = orUndefined(attributes.get(LanguageSource.UNESCO)?.parent_language_id);
+  const isoParent = orUndefined(attributes.get(LanguageSource.ISO)?.p);
+  const bcpParent = orUndefined(attributes.get(LanguageSource.BCP)?.p);
+  const unescoParent = orUndefined(attributes.get(LanguageSource.UNESCO)?.p);
 
   if (isoParent) language.ISO.parentLanguageCode = isoParent;
   if (bcpParent) language.BCP.parentLanguageCode = bcpParent;
@@ -316,36 +352,40 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // addISODataToLanguages, from iso-639-3.tab.
   if (iso != null) {
     if (isInIso6393) {
-      language.ISO.code = orUndefined(iso.code);
-      language.ISO.code6391 = orUndefined(iso.code_6391);
-      language.ISO.code6392b = iso6392bAlias?.alias_code ?? '';
+      language.ISO.code = orUndefined(iso.c);
+      language.ISO.code6391 = orUndefined(iso.c1);
+      language.ISO.code6392b = iso6392bAlias?.a ?? '';
       // A column of `language`, not of the ISO attribute row - it is a property
       // of the languoid rather than of its ISO identity.
       language.ISO.status = orUndefined(row.iso_status) as LanguageISOStatus | undefined;
     }
-    language.ISO.name = orUndefined(iso.name);
-    language.ISO.scope = orUndefined(iso.scope) as LanguageScope | undefined;
+    language.ISO.name = orUndefined(iso.n);
+    language.ISO.scope = orUndefined(iso.sc) as LanguageScope | undefined;
     // addISODataToLanguages sets the TOP-LEVEL scope from the ISO row too, and
     // groupLanguagesBySource filters the CLDR dictionary on it.
-    if (isInIso6393) language.scope = orUndefined(iso.scope) as LanguageScope | undefined;
+    if (isInIso6393) language.scope = orUndefined(iso.sc) as LanguageScope | undefined;
   }
   if (bcp != null) {
-    if (isInIso6393) language.BCP.code = orUndefined(bcp.code);
-    language.BCP.name = orUndefined(bcp.name);
-    language.BCP.scope = orUndefined(bcp.scope) as LanguageScope | undefined;
+    if (isInIso6393) language.BCP.code = orUndefined(bcp.c);
+    language.BCP.name = orUndefined(bcp.n);
+    language.BCP.scope = orUndefined(bcp.sc) as LanguageScope | undefined;
   }
   if (unesco != null && isInIso6393) {
-    language.UNESCO.code = orUndefined(unesco.code);
+    language.UNESCO.code = orUndefined(unesco.c);
   }
 
-  // addISORetirementsToLanguages, from iso-639-3_Retirements.tab.
-  const retirementReason = orUndefined(iso?.retirement_reason);
-  if (retirementReason) language.ISO.retirementReason = retirementReason as RetirementReason;
+  // addISORetirementsToLanguages, from iso-639-3_Retirements.tab. The cast is
+  // what the file path already does with the same column - ISORetirements.tsx
+  // parses `Ret_Reason` straight to the enum without checking it - so casting
+  // here keeps the two paths producing identical values, which is what the
+  // parity tests compare.
+  const retirementReason = orUndefined(iso?.rr) as RetirementReason | undefined;
+  if (retirementReason) language.ISO.retirementReason = retirementReason;
 
   // addGlottologLanguages, from glottolog.tsv.
   if (glottolog != null) {
-    language.Glottolog.name = orUndefined(glottolog.name);
-    language.Glottolog.scope = orUndefined(glottolog.scope) as LanguageScope | undefined;
+    language.Glottolog.name = orUndefined(glottolog.n);
+    language.Glottolog.scope = orUndefined(glottolog.sc) as LanguageScope | undefined;
   }
 
   // The Combined SCOPE, which no column of languages.tsv carries - and only for
@@ -359,8 +399,8 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // `sit`, `zhx` and 5 more - keeps an UNDEFINED Combined.scope even though its
   // top-level scope becomes Family. The database records the scope either way,
   // so copying it unguarded gave those 8 a value the file path never gives them.
-  if (combined != null && combined.scope !== FAMILY_SCOPE) {
-    language.Combined.scope = orUndefined(combined.scope) as LanguageScope | undefined;
+  if (combined != null && combined.sc !== FAMILY_SCOPE) {
+    language.Combined.scope = orUndefined(combined.sc) as LanguageScope | undefined;
   }
 
   // The TOP-LEVEL scope for a family, which is the other half of the same
@@ -370,14 +410,14 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // families639-5.tsv no longer fetched, this is what supplies it - and it
   // matters beyond display, because groupLanguagesBySource excludes a Family
   // from the CLDR dictionary.
-  if (language.scope == null && combined?.scope === FAMILY_SCOPE) {
+  if (language.scope == null && combined?.sc === FAMILY_SCOPE) {
     language.scope = LanguageScope.Family;
   }
 
   // addISODataToLanguages again: CLDR is keyed on the BCP-47 code, and only for
   // languoids that file actually names.
   if (isInIso6393) {
-    const cldrCode = orUndefined(iso?.code_6391) ?? orUndefined(iso?.code);
+    const cldrCode = orUndefined(iso?.c1) ?? orUndefined(iso?.c);
     if (cldrCode) language.CLDR.code = cldrCode;
   }
 
@@ -412,10 +452,8 @@ function resolveGlottologParents(
 ): LanguageDictionary {
   const glottocodeById = new Map<string, string>();
   for (const row of rows) {
-    const glottolog = row.language_source_attribute.find(
-      (a) => a.source === LanguageSource.Glottolog,
-    );
-    if (glottolog?.code != null) glottocodeById.set(row.id, glottolog.code);
+    const glottolog = row.sources.find((a) => a.s === LanguageSource.Glottolog);
+    if (glottolog?.c != null) glottocodeById.set(row.id, glottolog.c);
   }
 
   for (const language of Object.values(languages)) {

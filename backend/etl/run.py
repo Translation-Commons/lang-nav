@@ -1542,6 +1542,12 @@ def main(argv: list[str] | None = None) -> int:
             db.run_sql_file(conn, SCHEMA_DIR / "005_roles.sql")
             print("applying schema/006_rls.sql")
             db.run_sql_file(conn, SCHEMA_DIR / "006_rls.sql")
+            # LAST, because the views select from the tables above and grant to
+            # the role 005_roles.sql creates. A view added while PostgREST is
+            # running is invisible until it reloads its schema cache, which the
+            # file signals itself with NOTIFY pgrst.
+            print("applying schema/007_api_views.sql")
+            db.run_sql_file(conn, SCHEMA_DIR / "007_api_views.sql")
             conn.commit()
             counts = db.object_counts(conn)
             print(f"  created {counts}")

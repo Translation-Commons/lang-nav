@@ -204,8 +204,10 @@ describe('loadLocalesFromApi', () => {
 
   it('requests only the StableDatabase rows, ordered, with named columns', async () => {
     vi.stubEnv('VITE_API_URL', 'http://example.test');
-    const fetchMock = vi.fn<(...args: unknown[]) => Promise<unknown>>(() =>
-      Promise.resolve({ ok: true, json: () => Promise.resolve([]) }),
+    // The `url` parameter is declared because the assertions below read it back
+    // off `mock.calls`; without it the call tuple infers as empty.
+    const fetchMock = vi.fn((url: string) =>
+      Promise.resolve({ ok: true, json: () => Promise.resolve([]), url }),
     );
     vi.stubGlobal('fetch', fetchMock);
 

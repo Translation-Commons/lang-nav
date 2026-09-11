@@ -19,6 +19,22 @@ import { ApiLanguage, loadLanguagesFromApi, parseApiLanguage } from '../loadLang
 /** Spanish: an ordinary language, several sources represented. */
 const spanish: ApiLanguage = {
   id: 'spa',
+  // The view's own columns. `parent_language_id` is the stored
+  // Combined edge and `glottolog_parent_language_id` the Glottolog
+  // one already resolved through the alias table; the mapper reads
+  // the first and falls back to the second.
+  parent_language_id: 'roa',
+  glottolog_parent_language_id: 'ibe',
+  retirement_reason: null,
+  retirement_change_to: null,
+  retirement_remedy: null,
+  retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
+  latitude: null,
+  longitude: null,
+  coords_source: null,
   name_canonical: 'Spanish',
   name_subtitle: null,
   name_endonym: 'espanol',
@@ -27,54 +43,75 @@ const spanish: ApiLanguage = {
   population_rough: 485000000,
   recommendation: 'Yes',
   recommendation_reason: 'Widely spoken',
-  language_source_attribute: [
+  sources: [
     {
-      source: 'Combined',
-      code: 'spa',
-      name: 'Spanish',
-      scope: 3,
-      parent_language_id: 'roa',
-      code_6391: null,
+      s: 'Combined',
+      c: 'spa',
+      n: 'Spanish',
+      sc: 3,
+      p: 'roa',
+      c1: null,
+      rr: null,
     },
     {
-      source: 'Glottolog',
-      code: 'stan1288',
-      name: 'Spanish',
-      scope: 3,
-      parent_language_id: 'ibe',
-      code_6391: null,
+      s: 'Glottolog',
+      c: 'stan1288',
+      n: 'Spanish',
+      sc: 3,
+      p: 'ibe',
+      c1: null,
+      rr: null,
     },
     {
-      source: 'ISO',
-      code: 'spa',
-      name: 'Spanish',
-      scope: 3,
-      parent_language_id: 'roa',
-      code_6391: 'es',
+      s: 'ISO',
+      c: 'spa',
+      n: 'Spanish',
+      sc: 3,
+      p: 'roa',
+      c1: 'es',
+      rr: null,
     },
     {
-      source: 'BCP',
-      code: 'es',
-      name: 'Spanish',
-      scope: 3,
-      parent_language_id: 'roa',
-      code_6391: 'es',
+      s: 'BCP',
+      c: 'es',
+      n: 'Spanish',
+      sc: 3,
+      p: 'roa',
+      c1: 'es',
+      rr: null,
     },
     {
-      source: 'UNESCO',
-      code: 'spa',
-      name: 'Spanish',
-      scope: 3,
-      parent_language_id: 'roa',
-      code_6391: null,
+      s: 'UNESCO',
+      c: 'spa',
+      n: 'Spanish',
+      sc: 3,
+      p: 'roa',
+      c1: null,
+      rr: null,
     },
   ],
-  language_code_alias: [{ alias_code: 'stan1288', alias_kind: 'glottocode' }],
+  aliases: [{ a: 'stan1288', k: 'glottocode' }],
 };
 
 /** Marwari: the name is ALREADY split by the ETL. */
 const marwari: ApiLanguage = {
   id: 'rwr',
+  // The view's own columns. `parent_language_id` is the stored
+  // Combined edge and `glottolog_parent_language_id` the Glottolog
+  // one already resolved through the alias table; the mapper reads
+  // the first and falls back to the second.
+  parent_language_id: null,
+  glottolog_parent_language_id: null,
+  retirement_reason: null,
+  retirement_change_to: null,
+  retirement_remedy: null,
+  retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
+  latitude: null,
+  longitude: null,
+  coords_source: null,
   name_canonical: 'Marwari',
   name_subtitle: 'India',
   name_endonym: null,
@@ -83,22 +120,39 @@ const marwari: ApiLanguage = {
   population_rough: null,
   recommendation: null,
   recommendation_reason: null,
-  language_source_attribute: [
+  sources: [
     {
-      source: 'Combined',
-      code: 'rwr',
-      name: 'Marwari',
-      scope: 3,
-      parent_language_id: 'mwr',
-      code_6391: null,
+      s: 'Combined',
+      c: 'rwr',
+      n: 'Marwari',
+      sc: 3,
+      p: 'mwr',
+      c1: null,
+      rr: null,
     },
   ],
-  language_code_alias: [],
+  aliases: [],
 };
 
 /** Chinese: a macrolanguage with NO Glottolog attribute row, only an alias. */
 const chinese: ApiLanguage = {
   id: 'zho',
+  // The view's own columns. `parent_language_id` is the stored
+  // Combined edge and `glottolog_parent_language_id` the Glottolog
+  // one already resolved through the alias table; the mapper reads
+  // the first and falls back to the second.
+  parent_language_id: null,
+  glottolog_parent_language_id: null,
+  retirement_reason: null,
+  retirement_change_to: null,
+  retirement_remedy: null,
+  retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
+  latitude: null,
+  longitude: null,
+  coords_source: null,
   name_canonical: 'Chinese languages',
   name_subtitle: null,
   name_endonym: '中文',
@@ -107,25 +161,27 @@ const chinese: ApiLanguage = {
   population_rough: 1296041185,
   recommendation: 'Yes, with caveat',
   recommendation_reason: 'Huge macrolanguage category',
-  language_source_attribute: [
+  sources: [
     {
-      source: 'Combined',
-      code: 'zho',
-      name: 'Chinese languages',
-      scope: 4,
-      parent_language_id: null,
-      code_6391: null,
+      s: 'Combined',
+      c: 'zho',
+      n: 'Chinese languages',
+      sc: 4,
+      p: null,
+      c1: null,
+      rr: null,
     },
     {
-      source: 'ISO',
-      code: 'zho',
-      name: 'Chinese',
-      scope: 4,
-      parent_language_id: null,
-      code_6391: 'zh',
+      s: 'ISO',
+      c: 'zho',
+      n: 'Chinese',
+      sc: 4,
+      p: null,
+      c1: 'zh',
+      rr: null,
     },
   ],
-  language_code_alias: [{ alias_code: 'clas1255', alias_kind: 'glottocode' }],
+  aliases: [{ a: 'clas1255', k: 'glottocode' }],
 };
 
 describe('parseApiLanguage', () => {
@@ -191,14 +247,20 @@ describe('parseApiLanguage', () => {
   it('leaves the ISO-family parents unset when the parent is a glottocode', () => {
     const language = parseApiLanguage({
       ...marwari,
-      language_source_attribute: [
+      // The VIEW's column is what the mapper reads for the Combined parent, so
+      // the glottocode goes here rather than only on the attribute row. The
+      // point of the test is unchanged: a glottocode parent must not reach the
+      // ISO-family sources.
+      parent_language_id: 'indo1319',
+      sources: [
         {
-          source: 'Combined',
-          code: 'rwr',
-          name: 'Marwari',
-          scope: 3,
-          parent_language_id: 'indo1319',
-          code_6391: null,
+          s: 'Combined',
+          c: 'rwr',
+          n: 'Marwari',
+          sc: 3,
+          p: 'indo1319',
+          c1: null,
+          rr: null,
         },
       ],
     });
@@ -278,28 +340,30 @@ describe('loadLanguagesFromApi', () => {
             Promise.resolve([
               {
                 ...spanish,
-                language_source_attribute: [
+                sources: [
                   {
-                    source: 'Glottolog',
-                    code: 'stan1288',
-                    name: 'Spanish',
-                    scope: 3,
-                    parent_language_id: 'ibe',
-                    code_6391: null,
+                    s: 'Glottolog',
+                    c: 'stan1288',
+                    n: 'Spanish',
+                    sc: 3,
+                    p: 'ibe',
+                    c1: null,
+                    rr: null,
                   },
                 ],
               },
               {
                 ...marwari,
                 id: 'ibe',
-                language_source_attribute: [
+                sources: [
                   {
-                    source: 'Glottolog',
-                    code: 'iber1250',
-                    name: 'Ibero-Romance',
-                    scope: 5,
-                    parent_language_id: null,
-                    code_6391: null,
+                    s: 'Glottolog',
+                    c: 'iber1250',
+                    n: 'Ibero-Romance',
+                    sc: 5,
+                    p: null,
+                    c1: null,
+                    rr: null,
                   },
                 ],
               },

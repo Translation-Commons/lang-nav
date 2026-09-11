@@ -56,14 +56,19 @@ function apiHeaders(): HeadersInit {
  * indefinitely with the cause visible only in the console. That was measured
  * with PostgREST stopped, not imagined.
  */
-export async function fetchFromApi<T>(path: string): Promise<T> {
+export async function fetchFromApi<T>(path: string, schema?: string): Promise<T> {
   const base = getApiBaseUrl();
   if (base == null) {
     throw new Error('fetchFromApi called with no VITE_API_URL configured');
   }
 
+  // `Accept-Profile` selects a non-default schema. postgrest.conf exposes
+  // "public,api" and resolves an unqualified name against public first, so the
+  // base tables keep working unchanged and a view in `api` is reached only by
+  // asking for it. Reversing that order would shadow every base table at once.
   const url = `${base}${path}`;
-  const response = await fetch(url, { headers: apiHeaders() });
+  const headers = { ...apiHeaders(), ...(schema ? { 'Accept-Profile': schema } : {}) };
+  const response = await fetch(url, { headers });
   if (!response.ok) {
     throw new Error(`API request failed: ${response.status} ${response.statusText} for ${url}`);
   }
