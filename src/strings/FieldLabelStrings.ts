@@ -78,6 +78,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
 
     // CountOf
     case Field.CountOfLanguages:
+      if (entType === EntityType.Language) return '# of Languages and Dialects';
       return '# of Languages';
     case Field.CountOfKeyboards:
       return '# of Keyboards';

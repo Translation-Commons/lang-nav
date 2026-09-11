@@ -28,7 +28,7 @@ const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
     [ents, field, populationMin],
   );
   const maxValue = useMemo(() => getMaximumValue(ents, field), [ents, field]);
-  const shouldUseLogScale = shouldUseLogarithmicScale(field);
+  const shouldUseLogScale = shouldUseLogarithmicScale(field) && maxValue - minValue > 10;
   const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;
 
   const getNormalizedValue = useCallback(
