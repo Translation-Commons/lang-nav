@@ -50,6 +50,17 @@ const TextInput: React.FC<Props> = ({
     setCurrentValue(value);
   }, [value, setCurrentValue]);
   const isUpdatingFromSuggestions = useRef(false);
+  // Tracks the pending "hide suggestions" timer so a later submit - or unmount -
+  // can cancel it. Without this the timer fires after the component is gone and
+  // resets currentValue, clobbering whatever was typed in the meantime.
+  const hideSuggestionsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (hideSuggestionsTimer.current != null) clearTimeout(hideSuggestionsTimer.current);
+    },
+    [],
+  );
 
   // Handle suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -67,14 +78,13 @@ const TextInput: React.FC<Props> = ({
       onSubmit(value, submitSource);
 
       // Hide suggestions after submission, with a slight delay to allow click events to register
-      const timer = setTimeout(() => {
-        {
-          setShowSuggestions(false);
-          setCurrentValue(value);
-          isUpdatingFromSuggestions.current = false;
-        }
+      if (hideSuggestionsTimer.current != null) clearTimeout(hideSuggestionsTimer.current);
+      hideSuggestionsTimer.current = setTimeout(() => {
+        hideSuggestionsTimer.current = null;
+        setShowSuggestions(false);
+        setCurrentValue(value);
+        isUpdatingFromSuggestions.current = false;
       }, 200);
-      return () => clearTimeout(timer);
     },
     [onSubmit, setShowSuggestions],
   );
