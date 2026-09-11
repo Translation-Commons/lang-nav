@@ -12,6 +12,7 @@ import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHe
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { EntityData } from '@entities/types/DataTypes';
+import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
@@ -137,6 +138,8 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return ent.type === EntityType.Language && <LanguageDigitalSupportMeter lang={ent} />;
 
     case Field.CLDRCoverage:
+      return <EntityCLDRCoverageLevel ent={ent} />;
+
     case Field.SourceType:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:

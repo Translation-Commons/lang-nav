@@ -19,6 +19,8 @@ import {
 } from '@shared/ui/dropdown-menu';
 import { Separator } from '@shared/ui/separator';
 
+import { getFieldLabel } from '@strings/FieldLabelStrings';
+
 import Field from '../fields/Field';
 import { FieldGroup, getFieldGroup, getFieldGroupLabel } from '../fields/FieldGroup';
 import { getTransformForPageParam } from '../TransformEnum';
@@ -47,7 +49,7 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
             className={currentValue === Field.None ? 'text-muted-foreground' : ''}
             variant="outline"
           >
-            <div className="truncate text-ellipsis">{currentValue}</div>
+            <div className="truncate text-ellipsis">{getFieldLabel(currentValue, entType)}</div>
           </Button>
         }
       />
@@ -66,7 +68,7 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
                 value={field}
                 key={'common-' + field}
               >
-                {field}
+                {getFieldLabel(field, entType)}
               </DropdownMenuRadioItem>
             ))}
           <Separator />
@@ -94,6 +96,7 @@ const DropdownGroup: React.FC<{
   currentValue: Field;
 }> = ({ group, fields, currentValue }) => {
   const isActiveGroup = group === getFieldGroup(currentValue);
+  const { entType } = usePageParams();
 
   if (fields.length === 1)
     return (
@@ -104,7 +107,7 @@ const DropdownGroup: React.FC<{
         value={fields[0]}
         key={fields[0]}
       >
-        {fields[0]}
+        {getFieldLabel(fields[0], entType)}
       </DropdownMenuRadioItem>
     );
 
@@ -125,7 +128,7 @@ const DropdownGroup: React.FC<{
               value={field}
               key={field}
             >
-              {field}
+              {getFieldLabel(field, entType)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuSubContent>

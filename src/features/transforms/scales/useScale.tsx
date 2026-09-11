@@ -20,7 +20,10 @@ export type ScalingFunctions = {
 const useScale = ({ ents, scaleBy }: Props): ScalingFunctions => {
   const { populationMin, scaleFactor } = usePageParams();
   // If caller didn't pass, they'd use page params via usePageParams normally
-  const minValue = getMinimumValue(scaleBy, populationMin);
+  const minValue = useMemo(
+    () => getMinimumValue(ents, scaleBy, populationMin),
+    [ents, scaleBy, populationMin],
+  );
   const maxValue = useMemo(() => getMaximumValue(ents, scaleBy), [ents, scaleBy]);
 
   const transformValue = (v: number) => Math.pow(Math.max(v, 0), 0.5);
@@ -30,6 +33,7 @@ const useScale = ({ ents, scaleBy }: Props): ScalingFunctions => {
 
   const range = tMax - tMin;
 
+  // Not using the common useNormalizingFunction because this uses square root modification not log
   const getNormalizedValue = useCallback(
     (value: number | string): number => {
       let numericValue: number;
