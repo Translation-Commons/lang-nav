@@ -4,7 +4,7 @@ import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/W
 
 import { toDictionary } from '@shared/lib/setUtils';
 
-import { fetchFromApi } from './apiConfig';
+import { fetchFromApi, orUndefined } from './apiConfig';
 
 /**
  * Loads writing systems from the API instead of from `writingSystems.tsv`.
@@ -71,12 +71,6 @@ export async function loadWritingSystemsFromApi(): Promise<Record<
     console.error('Error loading writing systems from the API:', err);
     return undefined;
   }
-}
-
-/** JSON `null` means absent; every optional field this mapper produces is
- *  `?:`, not nullable. */
-function orUndefined<T>(value: T | null): T | undefined {
-  return value ?? undefined;
 }
 
 export function parseApiWritingSystem(row: ApiWritingSystem): WritingSystemData {

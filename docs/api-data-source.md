@@ -23,6 +23,7 @@ Read by `src/features/data/load/api/apiConfig.ts`. Unset means files.
 | Entity          | Source when `VITE_API_URL` is set |
 | --------------- | --------------------------------- |
 | Territories     | API, one request                  |
+| Organizations   | API, one request                  |
 | Writing systems | API, one request                  |
 | Everything else | still TSV files                   |
 
@@ -36,6 +37,16 @@ hierarchies, and names spread across several tables.
 `SupplementalData.tsx` skips the four supplemental territory loaders when the
 API is enabled. That skip, not the swap in `loadTerritories`, is where the
 saving actually is.
+
+Organizations followed for a different reason: not because they exercise hard
+cases, but because they don't have any. Every row maps straight across -
+`organization.parent_id` and `hq_territory_id` are already stored in the exact
+string format the frontend expects (`org.`-prefixed ids, bare territory
+codes), and there's no derived/rolled-up value to withhold, since nothing
+analogous to `computeContainedTerritoryStats` exists for organizations. There
+are also no supplemental TSV files to skip, so `loadOrganizations()`'s
+fallback doesn't need to coordinate with anything else the way territory's
+does.
 
 Writing systems are also one request, including their grouping relation
 (`writing_system_contains`, e.g. Jpan contains Hani + Hira + Kana) — embedded via
@@ -114,5 +125,7 @@ is both set and reachable - unset, or set with the backend stopped, it skips
 itself rather than failing. Start PostgREST (see `backend/README.md`) and run
 `npm run test` to exercise it for real.
 
-The same two-layer approach applies to writing systems - see
-`loadWritingSystemsFromApi.test.ts` and `loadWritingSystemsParity.test.ts`.
+The same two-layer approach applies to organizations - see
+`loadOrganizationsFromApi.test.ts` and `loadOrganizationsParity.test.ts`,
+and to writing systems - see `loadWritingSystemsFromApi.test.ts` and
+`loadWritingSystemsParity.test.ts`.
