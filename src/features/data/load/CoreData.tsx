@@ -19,10 +19,9 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { connectEntitiesAndCreateDerivedData } from '../compute/connectEntities';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
-import { isApiEnabled } from './api/apiConfig';
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
-import { loadLanguages } from './entities/loadLanguages';
+import { didLanguagesLoadFromApi, loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
 import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
@@ -88,8 +87,21 @@ export function useCoreData(): {
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
 
   async function loadCoreData(): Promise<void> {
+    // Awaited on its own, ahead of the Promise.all below, so the four ISO
+    // files can be skipped based on whether THIS call actually reached the
+    // API - not on isApiEnabled() alone. With the API on but unreachable,
+    // loadLanguages() now falls back to languages.tsv, which does not carry
+    // what those four files supply; skipping them on isApiEnabled() alone in
+    // that case would leave every language quietly missing its ISO family and
+    // macrolanguage data, with no error. Splitting this one call out of the
+    // Promise.all is what makes didLanguagesLoadFromApi() correct by the time
+    // the four lines below read it - inside a single array literal every
+    // entry is decided before any of them resolve, so the flag would still
+    // hold the PREVIOUS call's outcome.
+    const initialLangs = await loadLanguages();
+    const languagesServedFromApi = didLanguagesLoadFromApi();
+
     const [
-      initialLangs,
       isoLangs,
       macroLangs,
       langFamilies,
@@ -106,7 +118,6 @@ export function useCoreData(): {
       keyboardsKeyman,
       organizations,
     ] = await Promise.all([
-      loadLanguages(),
       // FOUR of the eight language files are skipped when the API is on, and
       // the other four are not. Which is which was settled by measurement, not
       // by reading: each file was withheld from the API path in turn and the
@@ -182,10 +193,10 @@ export function useCoreData(): {
       //    replaces the whole languoid because `cca` is retired with no
       //    changeTo, and the overrides file is what restores `sai`. Load-
       //    bearing for exactly as long as the two steps before them run.
-      isApiEnabled() ? Promise.resolve([]) : loadISOLanguages(),
-      isApiEnabled() ? Promise.resolve([]) : loadISOMacrolanguages(),
-      isApiEnabled() ? Promise.resolve([]) : loadISOLanguageFamilies(),
-      isApiEnabled() ? Promise.resolve({}) : loadISOFamiliesToLanguages(),
+      languagesServedFromApi ? Promise.resolve([]) : loadISOLanguages(),
+      languagesServedFromApi ? Promise.resolve([]) : loadISOMacrolanguages(),
+      languagesServedFromApi ? Promise.resolve([]) : loadISOLanguageFamilies(),
+      languagesServedFromApi ? Promise.resolve({}) : loadISOFamiliesToLanguages(),
       loadISORetirements(),
       loadGlottologLanguages(),
       loadGlottocodeToISO(),
@@ -194,6 +205,10 @@ export function useCoreData(): {
       loadLocales(),
       loadWritingSystems(),
       loadIANAVariants(),
+      // With the API on, loadKeyboardsGBoard returns BOTH platforms from one
+      // request and loadKeyboardsKeyman resolves to {}: they are rows of the
+      // same `keyboard` table, so asking twice would fetch the same payload
+      // twice. The merge below is a plain spread either way.
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
       loadOrganizations(),

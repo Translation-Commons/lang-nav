@@ -26,7 +26,18 @@ export async function loadCensusData(): Promise<(CensusImport | void)[]> {
   // ReportCensusInputTool parses user-pasted TSV with it, which is not a
   // network path and has to keep working whichever way the app is configured.
   if (isApiEnabled()) {
-    return await loadCensusFromApi();
+    const fromApi = await loadCensusFromApi();
+    // loadCensusFromApi resolves to [] on any failure rather than rejecting -
+    // see its own comment - so a genuine "the API returned zero censuses" and
+    // "the API call failed" look the same here. Falling back to the 169 files
+    // whenever the array is empty is the same call the other loaders make: it
+    // costs nothing when the API is healthy (600+ censuses, never empty) and
+    // recovers the data instead of leaving the app on CoreData's blocking
+    // "Error loading data" alert when it is not.
+    if (fromApi.length > 0) {
+      return fromApi;
+    }
+    console.warn('Census API load failed; falling back to TSV files.');
   }
 
   // Load census filenames from the text file

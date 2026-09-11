@@ -5,6 +5,7 @@ import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
 
 import { isApiEnabled } from './api/apiConfig';
+import { didTerritoryLoadFromApi } from './entities/loadTerritories';
 import { loadCensusData } from './extra_entities/loadCensusData';
 import { loadAndroid } from './supplemental/loadAndroid';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
@@ -38,14 +39,21 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   // already there. Skipping them is where Phase 1's "5 requests become 1" is
   // actually banked; the branch in loadTerritories only changes where the first
   // one comes from.
-  const territorySupplements = isApiEnabled()
-    ? []
-    : [
-        loadTerritoryGDPLiteracy(dataContext.getTerritory),
-        loadCountryCoordinates(dataContext.getTerritory),
-        loadLandArea(dataContext.getTerritory),
-        loadTerritoryNames(dataContext.getTerritory),
-      ];
+  //
+  // Gated on `didTerritoryLoadFromApi()`, not just `isApiEnabled()`: with the
+  // API on but unreachable, loadTerritories now falls back to territories.tsv,
+  // which does not carry these four files' data. Skipping them on
+  // `isApiEnabled()` alone would leave every territory quietly missing GDP,
+  // literacy, coordinates and land area in that case, with no error.
+  const territorySupplements =
+    isApiEnabled() && didTerritoryLoadFromApi()
+      ? []
+      : [
+          loadTerritoryGDPLiteracy(dataContext.getTerritory),
+          loadCountryCoordinates(dataContext.getTerritory),
+          loadLandArea(dataContext.getTerritory),
+          loadTerritoryNames(dataContext.getTerritory),
+        ];
 
   // Load multiple supplemental data sources in parallel, these changes will modify entities
   // but they should not modify the same fields.
