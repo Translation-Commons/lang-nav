@@ -6,6 +6,7 @@ import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityS
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { getCoverageLevelName } from '@entities/ui/CLDRCoverageLevels';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
@@ -99,7 +100,8 @@ function getTickMarks(
 
   const getLabel = (value: number) => {
     if (isNaN(value)) return '';
-    if (field == Field.Date) return new Intl.DateTimeFormat(undefined, {}).format(value);
+    if (field === Field.Date) return new Intl.DateTimeFormat(undefined, {}).format(value);
+    if (field === Field.CLDRCoverage) return getCoverageLevelName(value);
     return new Intl.NumberFormat(undefined, {
       notation: 'compact',
       compactDisplay: widthPx < 700 ? 'short' : 'long',

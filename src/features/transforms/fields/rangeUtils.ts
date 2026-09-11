@@ -2,6 +2,7 @@ import { LanguageScope } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -98,6 +99,8 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
       return 10;
     case Field.Modality:
       return LanguageModality.Sign;
+    case Field.CLDRCoverage:
+      return CLDRCoverageLevel.Modern;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
@@ -156,7 +159,6 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
     case Field.SourceType:
-    case Field.CLDRCoverage:
     case Field.Coordinates:
     case Field.VariantType:
       return 0;

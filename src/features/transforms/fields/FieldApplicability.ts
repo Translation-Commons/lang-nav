@@ -14,7 +14,6 @@ const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Popula
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.SourceType,
   Field.Indigeneity,
-  Field.CLDRCoverage,
   Field.VitalityMetascore, // identical to the ISO status right now
 ];
 
