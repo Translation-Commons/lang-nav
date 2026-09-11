@@ -172,7 +172,6 @@ export function getDefaultParams(
 
   // Get default gradient for colorBys
   if (params.colorBy !== Field.None) {
-    console.log(params.colorBy, params.view);
     params.colorGradient = getColorGradientForField(params.colorBy);
   }
 

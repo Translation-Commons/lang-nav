@@ -5,15 +5,17 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import { maxBy } from '@shared/lib/setUtils';
+import { maxBy, minBy } from '@shared/lib/setUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './Field';
 import getField from './getField';
 
-export function getMinimumValue(field?: Field, populationMin?: number): number {
+export function getMinimumValue(ents: EntityData[], field?: Field, populationMin?: number): number {
   if (field == null) return 0; // default min for when no field is selected
   switch (field) {
+    case Field.Date:
+      return minBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Longitude:
       return -180;
     case Field.Latitude:
@@ -52,8 +54,6 @@ export function getMinimumValue(field?: Field, populationMin?: number): number {
       return LanguageScope.SpecialCode;
     case Field.TerritoryScope:
       return TerritoryScope.Dependency;
-    case Field.Date:
-      return new Date(0).getTime();
     case Field.Name:
     case Field.Endonym:
     case Field.Code:

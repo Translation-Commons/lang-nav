@@ -97,12 +97,15 @@ function getTickMarks(
       break;
   }
 
-  const formatter = new Intl.NumberFormat(undefined, {
-    notation: 'compact',
-    compactDisplay: widthPx < 700 ? 'short' : 'long',
-    maximumFractionDigits: 1,
-  });
-
+  const getLabel = (value: number) => {
+    if (isNaN(value)) return '';
+    if (field == Field.Date) return new Intl.DateTimeFormat(undefined, {}).format(value);
+    return new Intl.NumberFormat(undefined, {
+      notation: 'compact',
+      compactDisplay: widthPx < 700 ? 'short' : 'long',
+      maximumFractionDigits: 1,
+    }).format(value);
+  };
   const suffix = getSuffixForField(field);
   const wholeNumbersOnly = isFieldWholeNumbersOnly(field);
   let lastPosition = 0;
@@ -111,13 +114,9 @@ function getTickMarks(
     if (index === 0)
       return {
         position: 0,
-        label:
-          wholeNumbersOnly && minValue === -1
-            ? 'Unknown or 0'
-            : formatter.format(minValue) + suffix,
+        label: wholeNumbersOnly && minValue === -1 ? 'Unknown or 0' : getLabel(minValue) + suffix,
       };
-    if (index === numberOfTicks - 1)
-      return { position: 1, label: formatter.format(maxValue) + suffix };
+    if (index === numberOfTicks - 1) return { position: 1, label: getLabel(maxValue) + suffix };
     const normalizedValue = index / (numberOfTicks - 1); // on a scale from 0 to 1
     const value = wholeNumbersOnly
       ? Math.round(getDenormalizedValue(normalizedValue))
@@ -128,7 +127,7 @@ function getTickMarks(
 
     return {
       position: position,
-      label: formatter.format(numberToSigFigs(value, 2)) + suffix,
+      label: getLabel(numberToSigFigs(value, 2)) + suffix,
     };
   }).filter((t) => t != null);
 }

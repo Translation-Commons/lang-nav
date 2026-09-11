@@ -23,7 +23,10 @@ export type NormalizingFunctions = {
 const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
   const { populationMin } = usePageParams();
 
-  const minValue = getMinimumValue(field, populationMin);
+  const minValue = useMemo(
+    () => getMinimumValue(ents, field, populationMin),
+    [ents, field, populationMin],
+  );
   const maxValue = useMemo(() => getMaximumValue(ents, field), [ents, field]);
   const shouldUseLogScale = shouldUseLogarithmicScale(field);
   const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;

@@ -10,19 +10,20 @@ import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getTickMarks from '@features/transforms/getTickMarks';
+import useScale from '@features/transforms/scales/useScale';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
 import useNormalizedValues from '@features/transforms/useNormalizedValues';
 
 import { EntityData } from '@entities/types/DataTypes';
 
 const ScatterPlot: React.FC = () => {
-  const { limit, chartX, chartY, colorBy, fieldFocus, updatePageParams, scaleFactor } =
-    usePageParams();
+  const { chartX, chartY, scaleBy, colorBy, fieldFocus, updatePageParams } = usePageParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
   const xValue = useNormalizedValues({ ents, field: chartX });
   const yValue = useNormalizedValues({ ents, field: chartY });
   const coloring = useColors({ ents, colorBy });
+  const scaling = useScale({ ents, scaleBy });
   const xTicks = getTickMarks(xValue, 200);
   const yTicks = getTickMarks(yValue, 200);
 
@@ -75,12 +76,13 @@ const ScatterPlot: React.FC = () => {
             ))}
 
             {/* Circles */}
-            {[...ents].reverse().map((ent, index) => {
+            {[...ents].reverse().map((ent) => {
               const fieldXValue = getField(ent, chartX) ?? 0;
               const fieldYValue = getField(ent, chartY) ?? 0;
               const x = xValue.getNormalizedValue(fieldXValue) * 200;
               const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
               const color = coloring.getColor(ent);
+              const scale = scaling.getScale(ent);
               return (
                 <g
                   transform={`translate(${x}, ${y})`}
@@ -89,13 +91,13 @@ const ScatterPlot: React.FC = () => {
                   onMouseLeave={onMouseLeaveTriggeringElement}
                 >
                   <circle
-                    r={scaleFactor}
+                    r={scale}
                     onClick={() => updatePageParams({ entID: ent.ID })}
                     opacity={colorBy === Field.None || color ? 1 : 0.5}
                     fill={colorBy === Field.None ? 'var(--primary)' : (color ?? 'var(--secondary)')}
                   />
-                  {limit > index && (
-                    <text fontSize="4" textAnchor="middle" alignmentBaseline="middle">
+                  {fieldFocus != Field.None && (
+                    <text fontSize={2 * scale} textAnchor="middle" alignmentBaseline="middle">
                       {getField(ent, fieldFocus)}
                     </text>
                   )}
@@ -106,7 +108,7 @@ const ScatterPlot: React.FC = () => {
         </svg>
       </div>
       <div>
-        <ColorBar coloringFunctions={coloring} />
+        {colorBy !== Field.None && <ColorBar coloringFunctions={coloring} />}
         <div className="flex items-center justify-center gap-2">
           Colored by <FieldDropdown pageParam="colorBy" /> <ColorGradientSelector />
         </div>
