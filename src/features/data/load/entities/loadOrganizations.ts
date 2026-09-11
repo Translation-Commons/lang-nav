@@ -34,6 +34,21 @@ function parseOrganizationLine(line: string): OrganizationData | undefined {
   if (line.startsWith('#') || parts.length < 6) return undefined;
   const [codeDisplay, nameDisplay, nameEndonym, headquartersCode, parentCode, url] = parts;
 
+  // `collectorType` is deliberately not set here, and that is an asymmetry
+  // with `parseApiOrganization`, which does map it from the API's
+  // `organization.collector_type`. organizations.tsv has no such column - its
+  // six columns are the ones shown above - so the file path has nothing to
+  // read it from.
+  //
+  // Both paths yield undefined today only because the ETL never populates that
+  // column either: `backend/etl/loaders/organizations.py` upserts url,
+  // hq_territory_id, parent_id and source_ref, and no collector_type. (The
+  // census loader does populate its own, separate census.collector_type; that
+  // is a different table.) If anyone starts populating the organization
+  // column, these two paths diverge and loadOrganizationsParity.test.ts fails
+  // on a field this function never mentions - which is why it is named here.
+  // The fix at that point is to add the column to the TSV and read it, not to
+  // drop it from the comparison.
   return {
     type: EntityType.Org,
     ID: `org.${codeDisplay}`,

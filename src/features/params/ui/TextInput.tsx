@@ -50,10 +50,20 @@ const TextInput: React.FC<Props> = ({
     setCurrentValue(value);
   }, [value, setCurrentValue]);
   const isUpdatingFromSuggestions = useRef(false);
+  // Set by Escape so the blur it induces does not submit the discarded text.
+  const justCancelled = useRef(false);
   // Tracks the pending "hide suggestions" timer so a later submit - or unmount -
   // can cancel it. Without this the timer fires after the component is gone and
   // resets currentValue, clobbering whatever was typed in the meantime.
   const hideSuggestionsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Mirrors currentValue so the delayed callback in submit() can read what the
+  // box holds when it fires, rather than what it held when it was scheduled.
+  // Written in an effect, not during render, so double-invoked renders under
+  // StrictMode cannot leave it out of step with the committed state.
+  const currentValueRef = useRef(currentValue);
+  useEffect(() => {
+    currentValueRef.current = currentValue;
+  }, [currentValue]);
 
   useEffect(
     () => () => {
@@ -79,10 +89,17 @@ const TextInput: React.FC<Props> = ({
 
       // Hide suggestions after submission, with a slight delay to allow click events to register
       if (hideSuggestionsTimer.current != null) clearTimeout(hideSuggestionsTimer.current);
+      const valueAtSubmit = currentValueRef.current;
       hideSuggestionsTimer.current = setTimeout(() => {
         hideSuggestionsTimer.current = null;
         setShowSuggestions(false);
-        setCurrentValue(value);
+        // Restore the submitted value only if the box has not been edited since
+        // this submit. A clicked suggestion needs the restore to stick, but a
+        // blur-submit can be followed within the 200ms by fresh typing, and
+        // reinstating the old text there would discard those keystrokes and
+        // leave currentValue disagreeing with the DOM - the next Enter would
+        // then submit the stale text.
+        if (currentValueRef.current === valueAtSubmit) setCurrentValue(value);
         isUpdatingFromSuggestions.current = false;
       }, 200);
     },
@@ -109,7 +126,12 @@ const TextInput: React.FC<Props> = ({
         event.preventDefault();
         submit(currentValue, SubmissionSource.InputBox);
       } else if (event.key === 'Escape') {
-        // Undoes the edits
+        // Undoes the edits. Escape means "cancel", so it must not submit -
+        // but hiding the dropdown unmounts whatever inside it had focus, and
+        // the focus falling back to <body> fires the input's onBlur, which
+        // would otherwise submit the very text Escape just discarded. Suppress
+        // that one blur; a genuine later blur sets the flag back.
+        justCancelled.current = true;
         setCurrentValue(value);
         setShowSuggestions(false);
       }
@@ -157,7 +179,13 @@ const TextInput: React.FC<Props> = ({
         className={currentValue === '' ? 'empty' : ''}
         id={pageParameter}
         onChange={(ev) => setCurrentValue(ev.target.value)}
-        onBlur={() => submit(currentValue, SubmissionSource.InputBox)}
+        onBlur={() => {
+          if (justCancelled.current) {
+            justCancelled.current = false;
+            return;
+          }
+          submit(currentValue, SubmissionSource.InputBox);
+        }}
         onFocus={() => setShowSuggestions(true)}
         onKeyDown={onKeyDown} // If enter key, submit
         placeholder={placeholder}
