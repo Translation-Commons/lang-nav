@@ -33,29 +33,32 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
+  chartX: Field.None,
+  chartY: Field.None,
   cmpID: '',
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
-  fieldFocus: Field.None,
-  isoStatus: [],
-  languageFilter: '',
-  languageFamilyFilter: '',
-  languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
-  languageSource: LanguageSource.Combined,
-  limit: 12,
-  localeSeparator: LocaleSeparator.Underscore,
-  modalityFilter: [],
   entID: undefined,
   entType: EntityType.Language,
+  fieldFocus: Field.None,
+  isoStatus: [],
+  languageFamilyFilter: '',
+  languageFilter: '',
+  languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+  languageSource: LanguageSource.Combined,
+  limit: 20,
+  localeSeparator: LocaleSeparator.Underscore,
+  modalityFilter: [],
   page: 1,
   pinned: [],
-  profile: ProfileType.LanguageEthusiast,
   populationFocus: PopulationFocus.Overall,
   populationMax: 10_000_000_000, // higher than the world population
   populationMin: -1, // allow undefined population as well as definite 0s
+  profile: ProfileType.LanguageEthusiast,
   reportID: ReportID.EntitiesMissingFields,
   scaleBy: Field.None,
+  scaleFactor: 1,
   searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
   secondarySortBy: Field.None,
@@ -128,6 +131,7 @@ export function getDefaultParams(
       if (params.entType === EntityType.Language) params.languageScopes.push(LanguageScope.Family);
       if (params.entType === EntityType.Territory)
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
+      if (params.colorBy === Field.None) params.colorBy = Field.Depth;
       break;
     case View.Table:
       // Show more results in table view since it's easier to scan
@@ -135,7 +139,7 @@ export function getDefaultParams(
       break;
     case View.Map:
       // Show more results in map view since it's easier to view
-      params.limit = 200;
+      params.limit = 1000;
 
       // Add default colorBys since we're showing X in territories
       if (params.colorBy === Field.None) {
@@ -149,6 +153,20 @@ export function getDefaultParams(
     case View.Reports:
       // Reports easily become too dense, so we limit them more aggressively by default
       params.limit = 10;
+      params.fieldFocus = Field.Code;
+      break;
+    case View.Chart:
+      params.chartX = Field.Population;
+      params.chartY = Field.Literacy;
+      if (params.entType === EntityType.Locale) params.chartY = Field.PercentOfTerritoryPopulation;
+      if (params.entType === EntityType.Territory) params.chartY = Field.CountOfLanguages;
+      if (params.entType === EntityType.WritingSystem) params.chartY = Field.CountOfKeyboards;
+      if (params.entType === EntityType.Census) params.chartY = Field.CountOfLanguages;
+
+      if (params.colorBy === Field.None) {
+        if (params.entType === EntityType.Language) params.colorBy = Field.DigitalSupport;
+        if (params.entType === EntityType.Locale) params.colorBy = Field.DigitalSupport;
+      }
       break;
   }
 

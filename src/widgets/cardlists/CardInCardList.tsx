@@ -47,7 +47,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
   return (
     <div
       aria-label={`${ent.nameDisplay} card, click to open details`}
-      className={`CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
+      className={`text-xs CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"

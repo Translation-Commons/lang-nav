@@ -1,3 +1,4 @@
+import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import {
   getBaseLanguageData,
   ISO6391LanguageCode,
@@ -9,7 +10,6 @@ import {
   LanguagesBySource,
   LanguageScope,
 } from '@entities/language/LanguageTypes';
-import { setLanguageNames } from '@entities/language/setLanguageNames';
 import { parseLanguageISOStatus } from '@entities/language/vitality/VitalityParsing';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 

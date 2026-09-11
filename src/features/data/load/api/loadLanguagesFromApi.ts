@@ -1,7 +1,6 @@
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
 import {
   LanguageData,
   LanguageDictionary,
@@ -9,6 +8,7 @@ import {
   LanguageSource,
 } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import { toDictionary } from '@shared/lib/setUtils';
 

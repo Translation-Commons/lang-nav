@@ -18,7 +18,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
-} from '@entities/language/LanguageFamilyUtils';
+} from '@entities/language/relations/LanguageFamilyUtils';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 

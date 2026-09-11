@@ -6,10 +6,10 @@ import { SearchableField } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';

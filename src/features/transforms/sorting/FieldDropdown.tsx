@@ -17,6 +17,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
+import { Separator } from '@shared/ui/separator';
+
+import { getFieldLabel } from '@strings/FieldLabelStrings';
 
 import Field from '../fields/Field';
 import { FieldGroup, getFieldGroup, getFieldGroupLabel } from '../fields/FieldGroup';
@@ -25,6 +28,8 @@ import { getTransformForPageParam } from '../TransformEnum';
 type Props = {
   pageParam: keyof PageParams;
 };
+
+const commonFields = [Field.Population, Field.Name, Field.DigitalSupport];
 
 const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
   const params = usePageParams();
@@ -40,8 +45,11 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
-            <div className="truncate text-ellipsis">{currentValue}</div>
+          <Button
+            className={currentValue === Field.None ? 'text-muted-foreground' : ''}
+            variant="outline"
+          >
+            <div className="truncate text-ellipsis">{getFieldLabel(currentValue, entType)}</div>
           </Button>
         }
       />
@@ -50,6 +58,20 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
           value={currentValue}
           onValueChange={(value) => updatePageParams({ [pageParam]: value })}
         >
+          {commonFields
+            .filter((field) => applicableFields.includes(field))
+            .map((field) => (
+              <DropdownMenuRadioItem
+                className={`cursor-pointer ${
+                  field === currentValue ? 'bg-accent font-medium text-accent-foreground' : ''
+                }`}
+                value={field}
+                key={'common-' + field}
+              >
+                {getFieldLabel(field, entType)}
+              </DropdownMenuRadioItem>
+            ))}
+          <Separator />
           {groupedFields.map(([group, fields]) => {
             const fieldGroup = Number(group) as FieldGroup;
 
@@ -74,6 +96,7 @@ const DropdownGroup: React.FC<{
   currentValue: Field;
 }> = ({ group, fields, currentValue }) => {
   const isActiveGroup = group === getFieldGroup(currentValue);
+  const { entType } = usePageParams();
 
   if (fields.length === 1)
     return (
@@ -84,7 +107,7 @@ const DropdownGroup: React.FC<{
         value={fields[0]}
         key={fields[0]}
       >
-        {fields[0]}
+        {getFieldLabel(fields[0], entType)}
       </DropdownMenuRadioItem>
     );
 
@@ -105,7 +128,7 @@ const DropdownGroup: React.FC<{
               value={field}
               key={field}
             >
-              {field}
+              {getFieldLabel(field, entType)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuSubContent>

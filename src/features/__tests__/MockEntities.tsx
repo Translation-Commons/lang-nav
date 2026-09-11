@@ -9,13 +9,13 @@ import { CoreDataArrays } from '@features/data/load/CoreData';
 import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LanguageModality } from '@entities/language/LanguageModality';
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageScope,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityDictionary } from '@entities/types/DataTypes';

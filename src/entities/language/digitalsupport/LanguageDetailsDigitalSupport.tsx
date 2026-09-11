@@ -152,6 +152,13 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
               <Deemphasized>Not available</Deemphasized>
             )}
           </DetailsField>
+          <DetailsField title="Android">
+            {lang.android?.length ? (
+              lang.android.length + ' language pack' + (lang.android.length > 1 ? 's' : '')
+            ) : (
+              <Deemphasized>Not available</Deemphasized>
+            )}
+          </DetailsField>
           <DetailsField title="MacOS">
             {lang.macos?.length ? (
               lang.macos.length + ' language pack' + (lang.macos.length > 1 ? 's' : '')

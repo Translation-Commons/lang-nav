@@ -2,13 +2,13 @@ import React from 'react';
 
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 
-import { UniversalDeclarationOfHumanRightsData } from '@entities/language/digitalsupport/DigitalSupportTypes';
-
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 import { LanguageData, LanguageScope } from '../LanguageTypes';
+
+import { UniversalDeclarationOfHumanRightsData } from './DigitalSupportTypes';
 
 export const LanguageUDHRDescription =
   'The Universal Declaration of Human Rights has been translated into over 500 languages. This shows the number of translations available for this language, and links to them.';

@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import computeLanguageFamiliesModality from '../computeLanguageFamiliesModality';
 

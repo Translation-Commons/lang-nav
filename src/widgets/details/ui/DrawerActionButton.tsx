@@ -1,33 +1,23 @@
+import { ArrowUpLeftIcon } from 'lucide-react';
 import React from 'react';
 
-import { getViewIcon, getViewLabel } from '@widgets/controls/selectors/ViewDisplay';
+import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 
 import { Button } from '@shared/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams> }> = ({
   view,
   baseParams,
 }) => {
-  const updatePage = usePageParamNavigation({});
+  const updatePage = usePageParamNavigation({ keepOldParams: false });
   return (
-    <HoverCard>
-      <HoverCardTrigger
-        delay={10}
-        render={
-          <Button variant="ghost" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
-            {getViewIcon(view)}
-          </Button>
-        }
-      />
-      <HoverCardContent className="w-fit">
-        {getViewLabel(view)} of{' '}
-        {baseParams.entType === EntityType.Language ? 'dialects' : 'territories with this language'}
-      </HoverCardContent>
-    </HoverCard>
+    <Button variant="outline" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
+      <ArrowUpLeftIcon />
+      {getViewIcon(view)} {view}
+    </Button>
   );
 };
 

@@ -4,10 +4,9 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { toTitleCase } from '@shared/lib/stringUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { getCLDRCoverageColor } from './CLDRCoverageLevels';
+import { getCLDRCoverageColor, getCoverageLevelName } from './CLDRCoverageLevels';
 
 export const EntityCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) => {
   if (ent.type !== EntityType.Language) return null;
@@ -24,7 +23,9 @@ export const EntityCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) 
 
   const coverageLevel = coverage.actualCoverageLevel;
   return (
-    <span style={{ color: getCLDRCoverageColor(coverageLevel) }}>{toTitleCase(coverageLevel)}</span>
+    <span style={{ color: getCLDRCoverageColor(coverageLevel) }}>
+      {getCoverageLevelName(coverageLevel)}
+    </span>
   );
 };
 

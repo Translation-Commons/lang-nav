@@ -14,8 +14,7 @@ const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Popula
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.SourceType,
   Field.Indigeneity,
-  Field.CLDRCoverage,
-  Field.WritingSystemScope,
+  Field.VitalityMetascore, // identical to the ISO status right now
 ];
 
 /**
@@ -60,7 +59,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.Modality,
 
-        // Field.DigitalSupport, // not yet supported
+        Field.DigitalSupport, // indirectly supported, from languages
         Field.CLDRCoverage,
 
         Field.Indigeneity,

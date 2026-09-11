@@ -51,9 +51,10 @@ function computeDigitalSupportScore(
     case DigitalSupportDimension.Interfaces:
       return (
         ((lang.win11LanguagePacks?.length ? 1 : 0) +
+          (lang.android?.length ? 1 : 0) +
           (lang.ios?.length ? 1 : 0) +
           (lang.macos?.length ? 1 : 0)) *
-        (10 / 3)
+        (10 / 4)
       );
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? 10 : 0;

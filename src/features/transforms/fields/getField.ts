@@ -1,6 +1,6 @@
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { getRootLanguageFamilyForEntity } from '@entities/language/LanguageFamilyUtils';
+import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
   getCountOfKeyboards,
@@ -95,6 +95,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return getCensusForEntity(ent)?.collectorType;
 
     case Field.DigitalSupport:
+      if (ent.type === EntityType.Locale) return getField(ent.language, field);
       return ent.type === EntityType.Language ? ent.digitalSupportScore?.overall : undefined;
     case Field.UnicodeVersion:
       return ent.type === EntityType.WritingSystem ? ent.unicodeVersion : undefined;

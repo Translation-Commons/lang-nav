@@ -96,7 +96,11 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
 
   return (
     <div>
-      <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
+      <TriangleAlertIcon
+        className="inline-block"
+        size="1em"
+        style={{ color: 'var(--color-yellow)' }}
+      />
       There are <strong>{nShown?.toLocaleString()}</strong> items visible, this may impact page
       performance. Consider reducing the limit to{' '}
       <HoverableButton
@@ -113,10 +117,12 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
 function getLimitThreshold(view: View): number {
   switch (view) {
     case View.Map:
+    case View.Chart:
       return 1000;
     case View.Table:
       return 200;
     case View.CardList:
+      return 40;
     case View.Details:
       return 20;
     case View.Hierarchy:

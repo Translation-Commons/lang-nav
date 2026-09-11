@@ -2,8 +2,10 @@ import React, { useCallback, useMemo } from 'react';
 
 import LimitInput from '@features/pagination/LimitInput';
 import usePageParams from '@features/params/usePageParams';
+import useColors from '@features/transforms/coloring/useColors';
 import { useFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { EntityData } from '@entities/types/DataTypes';
@@ -35,11 +37,13 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       filterBySubstring(ent) && filterByConnections(ent) && filterByVitality(ent),
     [filterBySubstring, filterByConnections, filterByVitality],
   );
+  const ents = useFilteredEntities({}).filteredEntities;
+  const { getColor } = useColors({ ents });
 
   return (
-    <div className="TreeListView">
+    <div className="text-left max-w-[600px] mx-auto my-0  text-xs">
       <TreeListOptionsProvider>
-        <div style={{ marginBottom: '.5em' }}>
+        <div className="mb-2 text-sm">
           {description}
           {limit < rootNodes.length && (
             <>
@@ -55,6 +59,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
             .map((node) => filterBranch(node, filterActive ? filterFunction : undefined))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
+          getColor={getColor}
         />
         <TreeListOptionsSelectors />
       </TreeListOptionsProvider>

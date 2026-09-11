@@ -1,13 +1,12 @@
 import React from 'react';
 
-import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
 import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
 
 import ResizablePanel from './ResizablePanel';
 import useFilterPanel from './useFilterPanel';
 
 const FilterPanel: React.FC = () => {
-  usePageArrowKeys();
+  // usePageArrowKeys();
 
   const filterPanel = useFilterPanel();
 

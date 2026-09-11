@@ -1,5 +1,5 @@
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import { sumBy } from '@shared/lib/setUtils';
 

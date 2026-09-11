@@ -1,21 +1,25 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
-import LanguageModalityIcon from '@entities/language/LanguageModalityIcon';
+import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
+import LanguageModalityIcon from '@entities/language/writing/LanguageModalityIcon';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { EntityData } from '@entities/types/DataTypes';
+import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
@@ -83,6 +87,9 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.Variant:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
+    case Field.WritingSystemScope:
+    case Field.Example:
+    case Field.UnicodeVersion:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
@@ -119,14 +126,25 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
         : fieldValue;
 
     case Field.Description:
-    case Field.Example:
-    case Field.UnicodeVersion:
-    case Field.CLDRCoverage:
+      return fieldValue ? (
+        <Hoverable hoverContent={fieldValue} className="truncate ellipsis max-w-30">
+          {fieldValue}
+        </Hoverable>
+      ) : (
+        <Deemphasized>—</Deemphasized>
+      );
+
     case Field.DigitalSupport:
+      return ent.type === EntityType.Language && <LanguageDigitalSupportMeter lang={ent} />;
+
+    case Field.CLDRCoverage:
+      return <EntityCLDRCoverageLevel ent={ent} />;
+
     case Field.SourceType:
-    case Field.WritingSystemScope:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
+      return fieldValue;
+
     case Field.None:
       return undefined;
 

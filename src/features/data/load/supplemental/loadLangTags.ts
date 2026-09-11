@@ -2,8 +2,8 @@
 // offline builds. If refreshing this file, re-fetch from the URL above.
 // See scripts/convertLangTagsToTsv.mjs for the JSON -> TSV conversion.
 
+import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { setLanguageNames } from '@entities/language/setLanguageNames';
 
 export async function loadLangTags(
   getLanguage: (id: string) => LanguageData | undefined,

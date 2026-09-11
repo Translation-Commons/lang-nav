@@ -1,10 +1,13 @@
-import { getEntityChildren } from '@widgets/pathnav/getParentsAndDescendants';
+import {
+  getEntityChildren,
+  getEntityFullDescendants,
+} from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
 import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -64,7 +67,11 @@ export function getEntityDate(ent: EntityData): Date | undefined {
 export function getCountOfLanguages(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Language:
-      return ent.childLanguages.length;
+      return getEntityFullDescendants(ent).filter(
+        (l) =>
+          l.type === EntityType.Language &&
+          (l.scope === LanguageScope.Language || l.scope === LanguageScope.Dialect),
+      ).length;
     case EntityType.Locale:
       return getEntityChildren(ent).length;
     case EntityType.Census:

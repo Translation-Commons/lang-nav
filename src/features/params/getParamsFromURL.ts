@@ -5,9 +5,9 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -46,6 +46,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
   const params: Partial<PageParams> = {};
   urlParams.forEach((value, keyUntyped) => {
     const key = keyUntyped as PageParamKey;
+    if (!Object.values(PageParamKey).includes(key)) return; // Ignore parameters with old names
+
     switch (key) {
       // Numeric values
       case PageParamKey.page:
@@ -53,6 +55,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.limit:
         params.limit = parseInt(value) || 10; // Default to 10 if parsing fails
+        break;
+      case PageParamKey.scaleFactor:
+        params.scaleFactor = parseFloat(value) || 1;
         break;
       case PageParamKey.populationMin:
         params.populationMin = parseInt(value) >= -1 ? parseInt(value) : undefined;
@@ -137,6 +142,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.fieldFocus:
         params.fieldFocus = value as Field;
+        break;
+      case PageParamKey.chartX:
+        params.chartX = value as Field;
+        break;
+      case PageParamKey.chartY:
+        params.chartY = value as Field;
         break;
 
       //These are string arrays

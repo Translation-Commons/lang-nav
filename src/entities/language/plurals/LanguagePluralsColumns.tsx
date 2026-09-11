@@ -5,29 +5,30 @@ import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
-import LanguagePluralCategory from '@entities/language/plurals/LanguagePluralCategory';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
+import { LanguageData } from '../LanguageTypes';
+
+import LanguagePluralCategories from './LanguagePluralCategories';
+import LanguagePluralCategory from './LanguagePluralCategory';
 import {
   convertStringRulesToRuleDeterminer,
   findLanguagePluralRules,
   PluralRuleKey,
-} from '@entities/language/plurals/LanguagePluralComputation';
-import LanguagePluralExample from '@entities/language/plurals/LanguagePluralExample';
-import LanguagePluralGrid from '@entities/language/plurals/LanguagePluralGrid';
-import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
+} from './LanguagePluralComputation';
+import LanguagePluralExample from './LanguagePluralExample';
+import LanguagePluralGrid from './LanguagePluralGrid';
+import LanguagePluralGridButton from './LanguagePluralGridToggle';
 import {
   COMPACT_NUM_LABELS,
   COMPACT_NUMS,
   LARGE_NUMS,
   PROTOTYPICAL_NUMS,
   SMALL_NUMS,
-} from '@entities/language/plurals/PluralNumberSets';
-import PluralRuleEquation from '@entities/language/plurals/PluralRuleEquation';
-import PluralRuleExampleSet from '@entities/language/plurals/PluralRuleExampleSet';
-import { getPluralRuleKeyLabel } from '@entities/language/plurals/PluralStrings';
-
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+} from './PluralNumberSets';
+import PluralRuleEquation from './PluralRuleEquation';
+import PluralRuleExampleSet from './PluralRuleExampleSet';
+import { getPluralRuleKeyLabel } from './PluralStrings';
 
 function getLanguagePluralsColumns(): TableColumn<LanguageData>[] {
   function getRuleColumn(
