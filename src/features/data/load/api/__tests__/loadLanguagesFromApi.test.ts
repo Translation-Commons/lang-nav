@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import { ApiLanguage, loadLanguagesFromApi, parseApiLanguage } from '../loadLanguagesFromApi';
 
