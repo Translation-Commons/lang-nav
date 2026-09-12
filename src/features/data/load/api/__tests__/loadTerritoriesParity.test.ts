@@ -37,6 +37,17 @@ const API_URL = import.meta.env.VITE_API_URL;
  *  unaffected: their values come from the source files on both paths. */
 const LEAF_ONLY_FIELDS = ['literacyPercent', 'gdp', 'landArea', 'latitude', 'longitude'] as const;
 
+/**
+ * The number of territories `territories.tsv` defines, and therefore the
+ * number of rows in the `territory` table.
+ *
+ * Asserted as a literal, not just against the other path's count: a
+ * field-by-field diff cannot see a row missing from BOTH inputs at once, and
+ * that exact false-green shape has shipped before on other entities in this
+ * migration.
+ */
+const EXPECTED_TERRITORY_COUNT = 289;
+
 /** Everything loadTerritories() plus the four TSV supplements assign, in the
  *  same shape loadTerritoriesFromApi() maps the API response into. */
 const ALWAYS_FIELDS = [
@@ -101,9 +112,10 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
 
     const fromFiles = await loadFromFiles();
 
-    // The file side must be non-empty before anything is compared: a field
-    // loop over zero keys compares nothing and passes.
-    expect(Object.keys(fromFiles).length).toBeGreaterThan(0);
+    // Asserted against a literal, not just against each other: a field-by-field
+    // diff cannot see a row missing from BOTH inputs at once.
+    expect(Object.keys(fromFiles).length).toBe(EXPECTED_TERRITORY_COUNT);
+    expect(Object.keys(fromApi).length).toBe(EXPECTED_TERRITORY_COUNT);
 
     expect(Object.keys(fromApi).sort()).toEqual(Object.keys(fromFiles).sort());
 

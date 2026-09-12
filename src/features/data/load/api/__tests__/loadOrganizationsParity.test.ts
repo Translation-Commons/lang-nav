@@ -34,11 +34,47 @@ const FIELDS = [
   'hqID',
 ] as const satisfies readonly (keyof OrganizationData)[];
 
+/**
+ * The number of rows `organizations.tsv` defines, and therefore the number of
+ * rows in the `organization` table.
+ *
+ * Asserted as a literal, not just against the other path's count: a
+ * field-by-field diff cannot see a row missing from BOTH inputs at once, and
+ * that exact false-green shape has shipped before on other entities in this
+ * migration.
+ */
+const EXPECTED_ORGANIZATION_COUNT = 58;
+
 function valuesMatch(a: unknown, b: unknown): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
 describe.skipIf(!API_URL)('organization API/TSV parity', () => {
+  it('loads every organization the source file defines, on both paths', async (ctx) => {
+    const server = await getServer();
+    server.use(
+      await makeFileAvailable('data/tc/organizations.tsv'),
+      http.get(`${API_URL}/*`, () => passthrough()),
+    );
+
+    vi.stubEnv('VITE_API_URL', API_URL);
+    const fromApi = await loadOrganizations();
+
+    if (!fromApi) {
+      vi.unstubAllEnvs();
+      ctx.skip();
+      return;
+    }
+
+    vi.stubEnv('VITE_API_URL', '');
+    const fromFiles = await loadOrganizations();
+    vi.unstubAllEnvs();
+    if (!fromFiles) throw new Error('TSV organization load failed');
+
+    expect(Object.keys(fromFiles).length).toBe(EXPECTED_ORGANIZATION_COUNT);
+    expect(Object.keys(fromApi).length).toBe(EXPECTED_ORGANIZATION_COUNT);
+  }, 30_000);
+
   it('agrees with the TSV path on every field of all organizations', async (ctx) => {
     const server = await getServer();
     // organizations.tsv isn't in getServer()'s default file list, so it needs

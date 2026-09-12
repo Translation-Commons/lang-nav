@@ -24,11 +24,94 @@ async function loadFromFiles(): Promise<Record<string, VariantData>> {
   return variants;
 }
 
+/**
+ * The number of variants `iana/variants.txt` defines, and therefore the
+ * number of rows in the `variant` table.
+ *
+ * Asserted as a literal, not just against the other path's count: a
+ * field-by-field diff cannot see a row missing from BOTH inputs at once, and
+ * that exact false-green shape has shipped before on other entities in this
+ * migration.
+ */
+const EXPECTED_VARIANT_COUNT = 139;
+
 function valuesMatch(a: unknown, b: unknown): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
 describe.skipIf(!API_URL)('variant API/TSV parity', () => {
+  it('loads every variant the source file defines, on both paths', async (ctx) => {
+    const server = await getServer();
+    server.use(
+      await makeFileAvailable('data/iana/variants.txt'),
+      await makeFileAvailable('data/tc/variant_annotations.tsv'),
+      http.get(`${API_URL}/variant`, () => passthrough()),
+    );
+
+    vi.stubEnv('VITE_API_URL', '');
+    const fromFiles = await loadFromFiles();
+    vi.unstubAllEnvs();
+
+    vi.stubEnv('VITE_API_URL', API_URL);
+    const fromApi = await loadIANAVariants();
+    vi.unstubAllEnvs();
+
+    if (!fromApi) {
+      ctx.skip();
+      return;
+    }
+
+    expect(Object.keys(fromFiles).length).toBe(EXPECTED_VARIANT_COUNT);
+    expect(Object.keys(fromApi).length).toBe(EXPECTED_VARIANT_COUNT);
+  });
+
+  it('gives every variant a non-empty display name and names list on both paths', async (ctx) => {
+    const server = await getServer();
+    server.use(
+      await makeFileAvailable('data/iana/variants.txt'),
+      await makeFileAvailable('data/tc/variant_annotations.tsv'),
+      http.get(`${API_URL}/variant`, () => passthrough()),
+    );
+
+    vi.stubEnv('VITE_API_URL', '');
+    const fromFiles = await loadFromFiles();
+    vi.unstubAllEnvs();
+
+    vi.stubEnv('VITE_API_URL', API_URL);
+    const fromApi = await loadIANAVariants();
+    vi.unstubAllEnvs();
+
+    if (!fromApi) {
+      ctx.skip();
+      return;
+    }
+
+    // The Python ETL and the JS TSV parser format names differently (see the
+    // comment below), so this can't be an exact-match check. What both paths
+    // must still agree on: nobody ends up with a blank name, and nameDisplay
+    // is always one of the entries in names.
+    const problems: string[] = [];
+    for (const key of Object.keys(fromFiles)) {
+      const apiVal = fromApi[key];
+      if (!apiVal) continue; // reported by the ID-set test above
+
+      for (const [label, val] of [
+        ['file', fromFiles[key]],
+        ['api', apiVal],
+      ] as const) {
+        if (!val.nameDisplay || val.nameDisplay.trim() === '') {
+          problems.push(`${key} (${label}): empty nameDisplay`);
+        }
+        if (val.names.length === 0) {
+          problems.push(`${key} (${label}): empty names`);
+        } else if (!val.names.includes(val.nameDisplay)) {
+          problems.push(`${key} (${label}): names does not include nameDisplay`);
+        }
+      }
+    }
+    expect(problems).toEqual([]);
+  });
+
   it('agrees with the TSV path on every field of all variants', async (ctx) => {
     const server = await getServer();
     server.use(
