@@ -164,17 +164,33 @@ LEFT JOIN language_retirement ret
 LEFT JOIN language_code_alias galias
        ON galias.alias_code = glot.parent_language_id
       AND galias.alias_kind = 'glottocode'
--- Aggregated in LATERAL subqueries rather than a GROUP BY over the whole join,
--- so the row count stays one per language and the aggregation runs per row
--- against the indexed foreign key.
-LEFT JOIN LATERAL (
+-- GROUPED ONCE AND JOINED, not aggregated per row.
+--
+-- These were LATERAL subqueries, which read naturally - "for this language,
+-- collect its rows" - and are an N+1 in disguise. A LATERAL correlated on
+-- `l.id` runs ONCE PER OUTER ROW: EXPLAIN showed `Index Searches: 27378` and
+-- `loops=27378` for each of the two, and `api.language` took 1,237 ms of which
+-- the base columns were only 151 ms. Grouping first runs each aggregate in a
+-- single pass and joins the result, which is the same answer in one scan
+-- instead of 27,378 index lookups.
+--
+-- Measured on the `sources` aggregate alone: 666 ms LATERAL, 582 ms grouped.
+-- A 13% saving rather than the order of magnitude the loop count suggests,
+-- because the remaining cost is building 60,441 json objects rather than
+-- finding the rows. Worth taking - it is free and it removes the shape that
+-- gets worse as the table grows - but the payload, not the plan, is what
+-- dominates: this response is 17.7 MB, of which `sources` alone is 6.3 MB,
+-- and its time-to-first-byte is 1,664 ms against 5 ms of wire time on
+-- localhost. Sending less is the next lever, not a faster plan.
+LEFT JOIN (
     -- SHORT KEYS, deliberately. The key names repeat once per source per
     -- language - five times across 27,378 rows - so `parent_language_id`
     -- against `p` is about 2 MB of the response. The mapper reads these in one
     -- place and the column they come from is named in the comment above.
     --   s=source  c=code  n=name  sc=scope  p=parent_language_id
     --   c1=code_6391  rr=retirement_reason
-    SELECT json_agg(json_build_object(
+    SELECT a.language_id,
+           json_agg(json_build_object(
                's', a.source,
                'c', a.code,
                'n', a.name,
@@ -184,19 +200,24 @@ LEFT JOIN LATERAL (
                'rr', a.retirement_reason
            ) ORDER BY a.source) AS rows
       FROM language_source_attribute a
-     WHERE a.language_id = l.id
-) attrs ON true
-LEFT JOIN LATERAL (
+     GROUP BY a.language_id
+) attrs ON attrs.language_id = l.id
+LEFT JOIN (
     -- Only the kinds the mapper reads. `iso639-2t` is stored and never used.
     -- Same reasoning: a=alias_code, k=alias_kind.
-    SELECT json_agg(json_build_object(
+    --
+    -- The WHERE stays INSIDE the grouped subquery. Moving it to the outer
+    -- query would filter after the join and drop languages that have no
+    -- matching alias, turning this LEFT JOIN into an inner one.
+    SELECT c.language_id,
+           json_agg(json_build_object(
                'a', c.alias_code,
                'k', c.alias_kind
            ) ORDER BY c.alias_code) AS rows
       FROM language_code_alias c
-     WHERE c.language_id = l.id
-       AND c.alias_kind IN ('glottocode', 'iso639-2b')
-) aliases ON true;
+     WHERE c.alias_kind IN ('glottocode', 'iso639-2b')
+     GROUP BY c.language_id
+) aliases ON aliases.language_id = l.id;
 
 GRANT SELECT ON api.language TO langnav_read;
 
