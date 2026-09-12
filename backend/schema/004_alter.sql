@@ -368,4 +368,46 @@ COMMENT ON COLUMN language_source_attribute.modality IS
   'clear-then-rebuild safe where language.latitude''s was not.';
 
 
+-- ── 2026-09-12, for keyboards ───────────────────────────────────────────────
+-- These three columns shipped straight into 001_schema.sql when keyboards was
+-- wired to the API, because that work's own reload was a --fresh install. They
+-- were never added here, so an existing database that reaches this load as a
+-- plain --load (no --fresh) still lacks them, and the COPY into keyboard,
+-- keyboard_language or keyboard_platform_support fails with UndefinedColumn -
+-- on any installation that was not itself --fresh reloaded after the columns
+-- were added to 001_schema.sql.
+--
+-- position on both junctions is NOT NULL with no natural default, so it uses
+-- the same DEFAULT-then-DROP shape as descendant_count above: a fresh install
+-- and a migrated one end up identical, and the DEFAULT never lingers to hide
+-- a loader that stops supplying the column.
+ALTER TABLE keyboard_language         ADD COLUMN IF NOT EXISTS position smallint NOT NULL DEFAULT 0;
+ALTER TABLE keyboard_language         ALTER COLUMN position DROP DEFAULT;
+ALTER TABLE keyboard_platform_support ADD COLUMN IF NOT EXISTS position smallint NOT NULL DEFAULT 0;
+ALTER TABLE keyboard_platform_support ALTER COLUMN position DROP DEFAULT;
+
+ALTER TABLE keyboard ADD COLUMN IF NOT EXISTS variant_code_raw text;
+
+-- Same gap, one table over: census_language_estimate.is_name_bearing shipped
+-- straight into 001_schema.sql for the same reason. Unlike position above, the
+-- default here is a real steady state rather than a placeholder - a row this
+-- ETL never touches again should stay `false` - so it is kept rather than
+-- dropped, matching is_suppressed's own NOT NULL DEFAULT false beside it.
+ALTER TABLE census_language_estimate
+  ADD COLUMN IF NOT EXISTS is_name_bearing boolean NOT NULL DEFAULT false;
+
+-- The CHECK shipped in 001_schema.sql already reads the widened form (Keyman
+-- rows must also have variant_code_raw NULL), so a database whose keyboard
+-- table predates entry 16 is still enforcing the narrower original. DROP+ADD
+-- rather than a data-dependent guard, because a CHECK constraint has no
+-- ALTER form - replacing it is the only idempotent way to widen one.
+ALTER TABLE keyboard DROP CONSTRAINT IF EXISTS keyboard_platform_fields;
+ALTER TABLE keyboard ADD CONSTRAINT keyboard_platform_fields CHECK (
+  (platform = 'Keyman' AND territory_id IS NULL AND variant_id IS NULL
+                       AND variant_code_raw IS NULL)
+  OR
+  (platform = 'GBoard' AND downloads IS NULL AND total_downloads IS NULL)
+);
+
+
 COMMIT;

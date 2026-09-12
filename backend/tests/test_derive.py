@@ -278,6 +278,24 @@ ALTERED_COLUMNS = [
     ("locale", "pop_writing_source_derived"),
     ("locale", "language_source"),
     ("territory", "population_writing"),
+    ("keyboard", "variant_code_raw"),
+    ("keyboard_language", "position"),
+    ("keyboard_platform_support", "position"),
+    ("census_language_estimate", "is_name_bearing"),
+    ("language", "pop_speaking_estimate"),
+    ("language", "pop_writing_estimate"),
+    ("language", "pop_speaking_estimate_source"),
+    ("language", "pop_writing_estimate_source"),
+    ("language", "pop_speaking_from_locales"),
+    ("language", "pop_writing_from_locales"),
+    ("language", "pop_speaking_of_descendants"),
+    ("language", "pop_writing_of_descendants"),
+    ("language_source_attribute", "pop_speaking_estimate"),
+    ("language_source_attribute", "pop_writing_estimate"),
+    ("language_source_attribute", "pop_speaking_estimate_source"),
+    ("language_source_attribute", "pop_writing_estimate_source"),
+    ("language_source_attribute", "pop_speaking_of_descendants"),
+    ("language_source_attribute", "pop_writing_of_descendants"),
 ]
 
 
@@ -288,6 +306,37 @@ def test_altered_columns_are_also_declared_in_the_base_schema(table, column):
     )
     assert re.search(rf"^\s+{column}\s+\w", SCHEMA_SQL, re.MULTILINE), (
         f"{column} was added to 004_alter.sql but not to 001_schema.sql"
+    )
+
+
+# The mirror of the test above, and the one that would actually have caught
+# the gap: every ADD COLUMN IF NOT EXISTS in 004_alter.sql must be one of the
+# pairs ALTERED_COLUMNS tracks. The test above only proves the pairs someone
+# remembered to list are declared in both files - it says nothing about a pair
+# that exists in 004_alter.sql but was never added to the list, which is a
+# smaller version of the same blind spot (the real gap was a column missing
+# from 004 entirely, not from this list) but is the one half of the
+# relationship a test CAN check without re-deriving "is this column original or
+# added later" from 001_schema.sql, which has no marker for that distinction.
+#
+# The actual defect - keyboard.variant_code_raw, keyboard_language.position,
+# keyboard_platform_support.position and census_language_estimate.
+# is_name_bearing missing from 004_alter.sql outright - has no automatic
+# detector: 001_schema.sql does not record when a column was introduced, so
+# nothing here can distinguish a baseline column from one added later except a
+# human noticing. ALTERED_COLUMNS is that human record; keeping this list
+# complete is what closes the gap in practice, and this test only keeps the
+# list honest about what 004_alter.sql already contains.
+def test_altered_columns_list_covers_everything_004_actually_adds():
+    declared_in_004 = set(re.findall(
+        r"ALTER TABLE (\w+)\s+ADD COLUMN IF NOT EXISTS (\w+)\b",
+        code_only(ALTER_SQL),
+    ))
+    tracked = set(ALTERED_COLUMNS)
+
+    assert declared_in_004 - tracked == set(), (
+        "004_alter.sql adds a column ALTERED_COLUMNS does not track: "
+        f"{declared_in_004 - tracked}. Add it to ALTERED_COLUMNS above."
     )
 
 
