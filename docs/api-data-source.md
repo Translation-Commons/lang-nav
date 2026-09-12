@@ -5,6 +5,10 @@ migration is underway to serve that same data from a PostgreSQL database instead
 (see `backend/README.md`), and this page describes the switch that chooses
 between the two.
 
+**All eight core entities have moved; the supplemental loaders largely have
+not.** So the file path is still live, and is now a deliberate fallback rather
+than the only way to run the app.
+
 **Nothing here is required to work on the app.** With `VITE_API_URL` unset, the
 app loads every entity from files, which is what it has always done and what
 production does today.
@@ -20,6 +24,8 @@ Read by `src/features/data/load/api/apiConfig.ts`. Unset means files.
 
 ## What has moved so far
 
+**Every core entity now loads from the API.**
+
 | Entity          | Source when `VITE_API_URL` is set |
 | --------------- | --------------------------------- |
 | Territories     | API, one request                  |
@@ -29,12 +35,25 @@ Read by `src/features/data/load/api/apiConfig.ts`. Unset means files.
 | Locales         | API, one request                  |
 | Census          | API, one request                  |
 | Keyboards       | API, one request (both platforms) |
-| Variants        | still TSV files                   |
+| Variants        | API, one request                  |
 
-Variants are the last core entity on the file path. The supplemental loaders in
-`SupplementalData.tsx` are a separate question: only the four territory ones
-are skipped when the API is on, so the rest still fetch their files even where
-the ETL has already merged the same data.
+The supplemental loaders in `SupplementalData.tsx` are a separate question, and
+mostly still open. Only the four territory loaders and the variant annotations
+are skipped when the API is on; the rest still fetch their files even where the
+ETL has already merged the same data. Five tables are loaded by the ETL, hold
+rows, and are read by nothing in the frontend: `language_cldr_coverage`,
+`language_cldr_missing_feature`, `language_udhr`, `wikipedia_edition` and
+`wikipedia_edition_script`. Two more supplemental sources - Android and macOS
+language support - have no ETL loader at all, so they cannot be wired until one
+is written.
+
+Note the two skips are gated differently, and the difference is deliberate.
+Territory's checks `didTerritoryLoadFromApi()` rather than `isApiEnabled()`,
+because with the API on but unreachable `loadTerritories` falls back to
+`territories.tsv`, which does not carry those four files' data - skipping them
+on `isApiEnabled()` alone would leave every territory quietly missing GDP,
+literacy, coordinates and land area, with no error. The variant skip does not
+need that guard because it has no equivalent data to lose.
 
 The four files languages still needs alongside the API are transformations, not
 facts the database lacks - `CoreData.tsx` explains which and why at the call
@@ -62,7 +81,7 @@ fallback doesn't need to coordinate with anything else the way territory's
 does.
 
 Writing systems are also one request, including their grouping relation
-(`writing_system_contains`, e.g. Jpan contains Hani + Hira + Kana) — embedded via
+(`writing_system_contains`, e.g. Jpan contains Hani + Hira + Kana) - embedded via
 PostgREST rather than fetched separately, so Postgres does that join instead
 of the browser. The junction table has two foreign keys to `writing_system`,
 so the embed needs a disambiguation hint naming the exact constraint:
@@ -79,8 +98,9 @@ because there are two files (`google/gboards.tsv` and `keyman/keyboards.tsv`),
 but they are rows of one `keyboard` table told apart by a `platform` column, so
 `loadKeyboardsGBoard` returns everything and `loadKeyboardsKeyman` returns `{}`.
 Both still call the API loader, which shares one in-flight promise between them
+
 - they run in the same `Promise.all`, so the second would otherwise race a
-duplicate request rather than hit the HTTP cache.
+  duplicate request rather than hit the HTTP cache.
 
 Three things about keyboards were fixed while wiring them, each worth knowing
 before touching the mapping:
@@ -106,15 +126,54 @@ before touching the mapping:
   resolves, so the mapper reads the raw column; for registered variants the two
   columns are equal.
 
-**`loadWritingSystems` and the two keyboard loaders fall back to the TSV files
-if the API call fails; Territory, Language and Locale currently do not** - they return the API
-loader's `undefined` straight through, which surfaces as `CoreData.tsx`'s
-blocking "Error loading data" alert. This is deliberate here, not an
-oversight: building exactly this recovery path was the original goal of the
-migration's Phase 0. Keyboards follow writing systems rather than territory
-because a missing keyboard degrades a detail panel while a missing territory
-invalidates the page. Whether every entity should eventually get it is an open
-question for the team, not something this file resolves.
+Variants were the last core entity to move, on 2026-09-11. `variant_prefix` is
+embedded in the same request; prefixes are stored as text rather than as foreign
+keys, because a prefix may be composite (`zh-Latn`, `oc-lengadoc`) and not a
+plain language code. `addIANAVariantLocales` stays on the frontend and is fed
+from whichever source loaded, rather than moving the locale attachment into the
+mapper.
+
+**Every entity now falls back to its TSV file if the API call fails.** The
+loader logs a warning and returns the file data rather than propagating
+`undefined`, which would otherwise surface as `CoreData.tsx`'s blocking "Error
+loading data" alert and leave the app stuck.
+
+This was not always true. Writing systems and keyboards had the fallback first
+and territories, languages, locales and census did not; the open question this
+file used to record - whether every entity should get it - has since been
+answered yes for all of them.
+
+The fallback is only as good as what the file still contains, which is why
+territory's supplemental skip is gated on `didTerritoryLoadFromApi()` rather
+than on `isApiEnabled()`. A fallback that silently drops four files' worth of
+columns is worse than the alert it replaces.
+
+## Truncation is detected, not assumed
+
+PostgREST caps every response at `db-max-rows`, currently 100,000, and **a
+capped response is indistinguishable from a complete one**: the rows parse, the
+loader maps them, the page renders, and the only symptom is numbers quietly too
+small. A parity test cannot see it either, because both paths would be missing
+the same rows. `locale` is the one to watch at 59,549 rows.
+
+`fetchFromApi` therefore sends `Prefer: count=exact` and throws when PostgREST
+answers 206. That is one chokepoint all eight loaders already share, so no
+loader needed changing.
+
+**Use `count=exact`, not `count=planned`.** `planned` returns the planner's
+estimate, which on a filtered query is a selectivity guess rather than a count,
+and PostgREST derives its status by comparing what it sent against the total it
+was given - so a wrong total produces a wrong status. The locale query filters
+`locale_source=eq.StableDatabase`, and `planned` reported `0-11015/19850` with
+status 206 on a healthy full response, which made the loader fall back to TSV.
+The usual argument for `planned` is cost, and at this size it does not hold:
+`exact` measured inside the noise and beat `planned` on two of three queries,
+because Postgres counts during the scan it is already doing.
+
+Two details worth knowing before touching this: an empty result reports a bare
+asterisk in the range half and is never truncation, and the count covers
+**parent rows only** - `census` with its 13,718 embedded estimates still reports
+`0-606/607`, which is what `db-max-rows` actually caps.
 
 ## The rule the loaders follow
 
@@ -172,7 +231,39 @@ is both set and reachable - unset, or set with the backend stopped, it skips
 itself rather than failing. Start PostgREST (see `backend/README.md`) and run
 `npm run test` to exercise it for real.
 
-The same two-layer approach applies to organizations - see
-`loadOrganizationsFromApi.test.ts` and `loadOrganizationsParity.test.ts`,
-and to writing systems - see `loadWritingSystemsFromApi.test.ts` and
-`loadWritingSystemsParity.test.ts`.
+The same two-layer approach applies to every entity. In
+`src/features/data/load/api/__tests__/`:
+
+| Entity          | Mapping test (no network)           | Parity test (needs a backend)                                      |
+| --------------- | ----------------------------------- | ------------------------------------------------------------------ |
+| Territories     | `loadTerritoriesFromApi.test.ts`    | `loadTerritoriesParity.test.ts`                                    |
+| Organizations   | `loadOrganizationsFromApi.test.ts`  | `loadOrganizationsParity.test.ts`                                  |
+| Writing systems | `loadWritingSystemsFromApi.test.ts` | `loadWritingSystemsParity.test.ts`                                 |
+| Languages       | `loadLanguagesFromApi.test.ts`      | `loadLanguagesParity.test.ts`, `loadLanguagesMergedParity.test.ts` |
+| Locales         | `loadLocalesFromApi.test.ts`        | `loadLocalesParity.test.ts`, `loadLocalesMergedParity.test.ts`     |
+| Census          | `loadCensusFromApi.test.ts`         | `loadCensusParity.test.ts`                                         |
+| Keyboards       | `loadKeyboardsFromApi.test.ts`      | `loadKeyboardsParity.test.ts`                                      |
+| Variants        | -                                   | `loadVariantsParity.test.ts`                                       |
+
+Languages and locales have a second `MergedParity` test because comparing the
+loader's output is not enough for them: what matters is the state after
+`CoreData.tsx` has run its merge steps, and those steps run in a different order
+on the two paths.
+
+### Two ways a parity test passes without testing anything
+
+Both were found here, and neither is theoretical.
+
+**The comparison can read the API on both sides.** `.env` sets `VITE_API_URL`
+and `vi.unstubAllEnvs()` RESTORES it rather than unsetting it, so the "file"
+half silently loads from the API too. Census's parity test passed against a
+deliberately sabotaged mapper for this reason. Force the file path off with
+`vi.stubEnv('VITE_API_URL', '')`.
+
+**The file side can be empty.** A loop over the file path's keys makes zero
+comparisons when there are zero keys, and reports green. Assert the file side is
+non-empty before comparing.
+
+The rule both point at: **break your mapper on purpose once and watch the test
+go red before you trust it.** A green result from a comparison you have never
+seen fail is not evidence.
