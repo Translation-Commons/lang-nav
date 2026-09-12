@@ -195,9 +195,12 @@ carries two settings worth knowing about, both defaulted for a local developer:
   table rather than a comfortable page size. A capped response is
   indistinguishable from a complete one - `Content-Range` reports `0-99999/*`,
   with a literal asterisk for the total - so a cap that can actually be reached
-  would silently truncate the data. Lowering it requires the loaders to detect
-  truncation first, for which `Prefer: count=planned` makes `Content-Range`
-  report the real total at no measurable cost.
+  would silently truncate the data. **The loaders detect truncation as of
+  2026-09-12**: `fetchFromApi` sends `Prefer: count=exact` and throws on a 206,
+  so this cap may be lowered to a page size once something pages. It is `exact`
+  rather than `planned` because the planner's estimate is a selectivity guess on
+  filtered queries and made a complete locale response look truncated; `exact`
+  measured no slower.
 
 `backend/tools/` is gitignored in full, because `postgrest.conf` contains a
 database password and the binary does not belong in git either.

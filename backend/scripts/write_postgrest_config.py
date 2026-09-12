@@ -65,12 +65,19 @@ server-cors-allowed-origins = "{cors_origins}"
 # data and every downstream number would be quietly wrong.
 #
 # The value is therefore set ABOVE the largest table rather than to a
-# comfortable page size. The number to beat is `locale`, at 54,731 rows.
+# comfortable page size. The number to beat is `locale`, at 59,549 rows
+# (measured 2026-09-12; it was 54,731 when this cap was chosen).
 #
-# To tighten this, the loaders must first detect truncation. The mechanism
-# exists and is cheap: `Prefer: count=planned` makes Content-Range report the
-# real total (`0-27298/27299`) using the planner's estimate rather than a COUNT,
-# and measured no slower than omitting it.
+# The loaders DO detect truncation, as of 2026-09-12: `fetchFromApi` sends
+# `Prefer: count=exact` and throws when the response comes back 206. So this
+# value may now be lowered to a page size once something actually pages.
+#
+# `exact` and NOT `planned`. `planned` reports the planner's estimate, which on
+# a FILTERED query is a selectivity guess rather than a count - it reported
+# 19,850 for a locale query that returned all 11,016 of its rows, so a complete
+# response looked truncated and the loader fell back to TSV. `exact` costs
+# nothing at this size: 480 ms against `planned`'s 497 ms on that same query,
+# because Postgres counts the rows during the scan it is already doing.
 db-max-rows = {max_rows}
 
 # No JWT secret is set, so there is no way to authenticate as anything other

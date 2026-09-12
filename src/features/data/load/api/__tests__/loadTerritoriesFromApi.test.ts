@@ -249,16 +249,22 @@ describe('API request headers', () => {
     return fetchMock.mock.calls[0][1]?.headers as Record<string, string> | undefined;
   };
 
+  // These assert the AUTH headers only, not the whole set. `Prefer` is added
+  // unconditionally by fetchFromApi for truncation detection and is nothing to
+  // do with auth; asserting the exact object made an unrelated header a
+  // breaking change, which is what happened when Prefer was added.
   it('sends no auth headers when no key is configured', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
     vi.stubEnv('VITE_API_KEY', '');
-    expect(await captureHeaders()).toEqual({});
+    const headers = await captureHeaders();
+    expect(headers).not.toHaveProperty('apikey');
+    expect(headers).not.toHaveProperty('Authorization');
   });
 
   it('sends the key as both apikey and bearer when one is configured', async () => {
     vi.stubEnv('VITE_API_URL', 'https://project.supabase.co/rest/v1');
     vi.stubEnv('VITE_API_KEY', 'test-anon-key');
-    expect(await captureHeaders()).toEqual({
+    expect(await captureHeaders()).toMatchObject({
       apikey: 'test-anon-key',
       Authorization: 'Bearer test-anon-key',
     });

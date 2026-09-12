@@ -223,14 +223,20 @@ def test_cors_is_not_left_open_by_default():
 def test_max_rows_cannot_silently_truncate_the_largest_table():
     """db-max-rows is a backstop, not a page size.
 
-    A capped response is INDISTINGUISHABLE from a complete one: Content-Range
-    reports `0-99999/*`, with a literal asterisk for the total, and no loader
-    asks for a count today. So the cap must stay above every table or it would
-    truncate the data with nothing to say it had.
+    A capped response is INDISTINGUISHABLE from a complete one by inspection:
+    Content-Range reports `0-99999/*`, with a literal asterisk for the total,
+    unless the client asks for a count. Since 2026-09-12 the frontend does ask -
+    `fetchFromApi` sends `Prefer: count=exact` and throws on a 206 - so a
+    truncation would now be loud rather than silent.
 
-    `locale` is the largest at 54,731 rows. The margin is deliberate: this fails
-    if someone tunes the cap down to a comfortable-looking page size."""
-    largest_table_rows = 54_731
+    The cap still stays above every table, because detecting truncation is not
+    the same as tolerating it: nothing pages yet, so a cap that bites would
+    break the load rather than degrade it.
+
+    `locale` is the largest at 59,549 rows, measured 2026-09-12; it was 54,731
+    when this cap was chosen, which is the margin being consumed. This fails if
+    someone tunes the cap down to a comfortable-looking page size."""
+    largest_table_rows = 59_549
     assert int(postgrest_settings().max_rows) > largest_table_rows
 
 
