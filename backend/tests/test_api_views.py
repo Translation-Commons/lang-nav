@@ -69,3 +69,30 @@ def test_the_alias_filter_stays_inside_the_grouped_subquery():
         "the alias_kind filter moved out of the grouped subquery, which turns "
         "its LEFT JOIN into an inner join"
     )
+
+
+def test_the_json_aggregates_strip_nulls():
+    """Absent keys, not `"c1":null`, on every aggregated row.
+
+    `json_build_object` emits every key on every row whether or not it has a
+    value, so `code_6391` and `retirement_reason` - 368 and 388 non-null values
+    out of 60,441 - shipped as explicit nulls 60,000+ times each. Stripping
+    them took the sources payload from 5.90 MB to 3.30 MB and the whole
+    language response from 17.68 MB to 15.05 MB.
+
+    Safe because the mapper reads every field through `orUndefined`, which is
+    `?? undefined`, and `??` cannot tell an absent key from a null. Verified by
+    comparing all 27,378 rows before and after with nulls and absent keys
+    treated alike: semantically identical.
+
+    Pinned because dropping the wrapper is invisible locally - the wire time is
+    ~5 ms against a 1.7 s time-to-first-byte, so nothing gets slower on a dev
+    machine. It costs bandwidth on a real network instead.
+    """
+    aggregates = API_VIEWS_SQL.count("json_agg(")
+    stripped = API_VIEWS_SQL.count("json_agg(json_strip_nulls(")
+    assert aggregates > 0, "api.language no longer aggregates anything"
+    assert stripped == aggregates, (
+        f"{aggregates - stripped} of {aggregates} json_agg calls no longer "
+        "strip nulls, so absent values ship as explicit null on every row"
+    )

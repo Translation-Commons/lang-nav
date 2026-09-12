@@ -189,8 +189,21 @@ LEFT JOIN (
     -- place and the column they come from is named in the comment above.
     --   s=source  c=code  n=name  sc=scope  p=parent_language_id
     --   c1=code_6391  rr=retirement_reason
+    --
+    -- json_strip_nulls FOR THE SAME REASON, and it is worth more than the short
+    -- keys are. `json_build_object` emits every key on every row, so
+    -- `"c1":null,"rr":null` shipped 60,441 times for columns that are 99.4%
+    -- empty - 368 and 388 non-null values respectively. Dropping absent keys
+    -- takes the sources payload from 5.90 MB to 3.30 MB, a 44% cut, with no
+    -- data lost: an absent key and a null both arrive as undefined.
+    --
+    -- SAFE BECAUSE THE MAPPER NEVER DISTINGUISHES THEM. Every field is read
+    -- through `orUndefined`, which is `?? undefined`, and `??` treats a missing
+    -- key exactly as it treats null. The two direct comparisons against
+    -- FAMILY_SCOPE (5) are unaffected too - null and undefined are both `!== 5`
+    -- and neither is `=== 5`.
     SELECT a.language_id,
-           json_agg(json_build_object(
+           json_agg(json_strip_nulls(json_build_object(
                's', a.source,
                'c', a.code,
                'n', a.name,
@@ -198,7 +211,7 @@ LEFT JOIN (
                'p', a.parent_language_id,
                'c1', a.code_6391,
                'rr', a.retirement_reason
-           ) ORDER BY a.source) AS rows
+           )) ORDER BY a.source) AS rows
       FROM language_source_attribute a
      GROUP BY a.language_id
 ) attrs ON attrs.language_id = l.id
@@ -210,10 +223,10 @@ LEFT JOIN (
     -- query would filter after the join and drop languages that have no
     -- matching alias, turning this LEFT JOIN into an inner one.
     SELECT c.language_id,
-           json_agg(json_build_object(
+           json_agg(json_strip_nulls(json_build_object(
                'a', c.alias_code,
                'k', c.alias_kind
-           ) ORDER BY c.alias_code) AS rows
+           )) ORDER BY c.alias_code) AS rows
       FROM language_code_alias c
      WHERE c.alias_kind IN ('glottocode', 'iso639-2b')
      GROUP BY c.language_id
