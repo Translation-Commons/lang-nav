@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { getServer, makeFileAvailable } from '@tests/testServer';
 
+import { setApiOverride } from '../../api/apiConfig';
 import { loadOrganizations } from '../loadOrganizations';
 
 // Before this fix, an unreachable PostgREST meant loadOrganizations() resolved
@@ -12,6 +13,7 @@ import { loadOrganizations } from '../loadOrganizations';
 describe('loadOrganizations falls back to TSV when the API is unreachable', () => {
   afterEach(() => {
     vi.unstubAllEnvs();
+    setApiOverride(null);
   });
 
   it('resolves with real organization data instead of undefined', async () => {
@@ -21,6 +23,7 @@ describe('loadOrganizations falls back to TSV when the API is unreachable', () =
       http.get('http://localhost:3000/organization', () => HttpResponse.error()),
     );
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
 
     const organizations = await loadOrganizations();
 
@@ -45,6 +48,7 @@ describe('loadOrganizations falls back to TSV when the API is unreachable', () =
       ),
     );
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
 
     const organizations = await loadOrganizations();
 

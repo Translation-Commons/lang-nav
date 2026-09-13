@@ -10,6 +10,7 @@ import { loadCountryCoordinates } from '../../supplemental/loadCountryCoordinate
 import { loadLandArea } from '../../supplemental/loadLandArea';
 import { loadTerritoryGDPLiteracy } from '../../supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from '../../supplemental/loadTerritoryNames';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * This is the check `loadTerritoriesFromApi.test.ts` explicitly says it cannot
@@ -100,8 +101,10 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadTerritories();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (!fromApi) {
       // Configured but not answering right now (e.g. PostgREST not started

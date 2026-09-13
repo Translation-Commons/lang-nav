@@ -7,6 +7,7 @@ import { getServer, makeFileAvailable } from '@tests/testServer';
 
 import { loadKeyboardsGBoard } from '../../entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from '../../entities/loadKeyboardsKeyman';
+import { setApiOverride } from '../apiConfig';
 import { resetKeyboardApiCache } from '../loadKeyboardsFromApi';
 
 /**
@@ -69,6 +70,7 @@ describe.skipIf(!API_URL)('keyboard API/TSV parity', () => {
   afterEach(() => {
     resetKeyboardApiCache();
     vi.unstubAllEnvs();
+    setApiOverride(null);
   });
 
   async function loadBothPaths() {
@@ -95,9 +97,11 @@ describe.skipIf(!API_URL)('keyboard API/TSV parity', () => {
     // below would hide a doubled payload.
     resetKeyboardApiCache();
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadKeyboardsGBoard();
     const keymanFromApi = await loadKeyboardsKeyman();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       return null;

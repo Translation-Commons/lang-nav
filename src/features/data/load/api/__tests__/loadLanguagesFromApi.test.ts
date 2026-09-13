@@ -4,6 +4,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
+import { setApiOverride } from '../apiConfig';
 import { ApiLanguage, loadLanguagesFromApi, parseApiLanguage } from '../loadLanguagesFromApi';
 
 /**
@@ -309,6 +310,7 @@ describe('loadLanguagesFromApi', () => {
   afterEach(() => {
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('resolves to undefined rather than rejecting when the API is unreachable', async () => {
@@ -316,6 +318,7 @@ describe('loadLanguagesFromApi', () => {
     // null. A rejected promise skips that check: the alert never runs and the
     // loading indicator sticks at "1 of 4" with the cause only in the console.
     vi.stubEnv('VITE_API_URL', 'http://localhost:9');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -331,6 +334,7 @@ describe('loadLanguagesFromApi', () => {
     // wrong for this field: parseLanguageLine reads the parent GLOTTOCODE from
     // column 9. Left alone this would not converge.
     vi.stubEnv('VITE_API_URL', 'http://example.test');
+    setApiOverride('on');
     vi.stubGlobal(
       'fetch',
       vi.fn(() =>

@@ -4,6 +4,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
+import { setApiOverride } from '../apiConfig';
 import { ApiTerritory, loadTerritoriesFromApi, parseApiTerritory } from '../loadTerritoriesFromApi';
 
 /**
@@ -193,10 +194,12 @@ describe('loadTerritoriesFromApi failure handling', () => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('resolves to undefined rather than rejecting when the API is unreachable', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -209,6 +212,7 @@ describe('loadTerritoriesFromApi failure handling', () => {
 
   it('resolves to undefined rather than rejecting on a non-200', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -235,6 +239,7 @@ describe('API request headers', () => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   const captureHeaders = async () => {
@@ -255,6 +260,7 @@ describe('API request headers', () => {
   // breaking change, which is what happened when Prefer was added.
   it('sends no auth headers when no key is configured', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.stubEnv('VITE_API_KEY', '');
     const headers = await captureHeaders();
     expect(headers).not.toHaveProperty('apikey');
@@ -263,6 +269,7 @@ describe('API request headers', () => {
 
   it('sends the key as both apikey and bearer when one is configured', async () => {
     vi.stubEnv('VITE_API_URL', 'https://project.supabase.co/rest/v1');
+    setApiOverride('on');
     vi.stubEnv('VITE_API_KEY', 'test-anon-key');
     expect(await captureHeaders()).toMatchObject({
       apikey: 'test-anon-key',

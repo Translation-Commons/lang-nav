@@ -9,6 +9,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { getServer, makeFileAvailable } from '@tests/testServer';
 
 import { loadLanguages } from '../../entities/loadLanguages';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Whether the API path AGREES with the TSV path, which is the check the
@@ -294,9 +295,11 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadLanguages();
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -308,6 +311,7 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadLanguages();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromFiles == null) return null;
 

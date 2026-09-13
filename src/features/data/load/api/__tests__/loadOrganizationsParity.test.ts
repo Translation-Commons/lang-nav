@@ -6,6 +6,7 @@ import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { getServer, makeFileAvailable } from '@tests/testServer';
 
 import { loadOrganizations } from '../../entities/loadOrganizations';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Checks what a unit test can't: whether the API path agrees with the TSV
@@ -58,10 +59,12 @@ describe.skipIf(!API_URL)('organization API/TSV parity', () => {
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadOrganizations();
 
     if (!fromApi) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       ctx.skip();
       return;
     }
@@ -69,6 +72,7 @@ describe.skipIf(!API_URL)('organization API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadOrganizations();
     vi.unstubAllEnvs();
+    setApiOverride(null);
     if (!fromFiles) throw new Error('TSV organization load failed');
 
     expect(Object.keys(fromFiles).length).toBe(EXPECTED_ORGANIZATION_COUNT);
@@ -85,12 +89,14 @@ describe.skipIf(!API_URL)('organization API/TSV parity', () => {
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadOrganizations();
 
     if (!fromApi) {
       // Configured but not answering right now - not the same thing as the
       // two paths disagreeing.
       vi.unstubAllEnvs();
+      setApiOverride(null);
       ctx.skip();
       return;
     }
@@ -101,6 +107,7 @@ describe.skipIf(!API_URL)('organization API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadOrganizations();
     vi.unstubAllEnvs();
+    setApiOverride(null);
     if (!fromFiles) throw new Error('TSV organization load failed');
 
     expect(Object.keys(fromApi).sort()).toEqual(Object.keys(fromFiles).sort());

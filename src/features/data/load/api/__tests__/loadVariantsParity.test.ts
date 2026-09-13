@@ -7,6 +7,7 @@ import { getServer, makeFileAvailable } from '@tests/testServer';
 
 import { loadIANAVariants } from '../../extra_entities/IANAData';
 import { loadVariantAnnotations } from '../../supplemental/loadVariantAnnotations';
+import { setApiOverride } from '../apiConfig';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -53,8 +54,10 @@ describe.skipIf(!API_URL)('variant API/TSV parity', () => {
     vi.unstubAllEnvs();
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadIANAVariants();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (!fromApi) {
       ctx.skip();
@@ -78,8 +81,10 @@ describe.skipIf(!API_URL)('variant API/TSV parity', () => {
     vi.unstubAllEnvs();
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadIANAVariants();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (!fromApi) {
       ctx.skip();
@@ -125,8 +130,10 @@ describe.skipIf(!API_URL)('variant API/TSV parity', () => {
     vi.unstubAllEnvs();
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadIANAVariants();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (!fromApi) {
       // Configured but not answering right now (e.g. PostgREST not started

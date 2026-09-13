@@ -28,6 +28,14 @@ jobs:
         run: npm run build
         env:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          # Public by design - the anon key ships inside the built JS regardless
+          # of how it gets here. What actually limits a caller is the anon
+          # role's grants and the RLS policies in backend/schema/006_rls.sql,
+          # not secrecy of this value. The About-page toggle stays off by
+          # default (see apiConfig.ts) even with these set, so this alone does
+          # not change what a visitor sees.
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
       - name: Copy index.html to 404.html
         run: cp dist/index.html dist/404.html

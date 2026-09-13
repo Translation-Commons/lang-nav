@@ -4,6 +4,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { LocaleSource, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
+import { setApiOverride } from '../apiConfig';
 import { ApiLocale, loadLocalesFromApi, parseApiLocale } from '../loadLocalesFromApi';
 
 /**
@@ -184,10 +185,12 @@ describe('loadLocalesFromApi', () => {
     vi.unstubAllEnvs();
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('keys the dictionary by the rebuilt ID', async () => {
     vi.stubEnv('VITE_API_URL', 'http://example.test');
+    setApiOverride('on');
     vi.stubGlobal(
       'fetch',
       vi.fn(() =>
@@ -204,6 +207,7 @@ describe('loadLocalesFromApi', () => {
 
   it('requests only the StableDatabase rows, ordered, with named columns', async () => {
     vi.stubEnv('VITE_API_URL', 'http://example.test');
+    setApiOverride('on');
     // The `url` parameter is declared because the assertions below read it back
     // off `mock.calls`; without it the call tuple infers as empty.
     const fetchMock = vi.fn((url: string) =>
@@ -231,6 +235,7 @@ describe('loadLocalesFromApi', () => {
     // null. A rejected promise skips that check, so the alert never runs and
     // the loading indicator sticks forever.
     vi.stubEnv('VITE_API_URL', 'http://example.test');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',

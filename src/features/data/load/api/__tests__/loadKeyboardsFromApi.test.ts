@@ -4,6 +4,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardPlatform } from '@entities/keyboard/KeyboardTypes';
 
+import { setApiOverride } from '../apiConfig';
 import {
   ApiKeyboard,
   loadKeyboardsFromApi,
@@ -304,10 +305,12 @@ describe('loadKeyboardsFromApi failure handling', () => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('resolves to undefined rather than rejecting when the API is unreachable', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -320,6 +323,7 @@ describe('loadKeyboardsFromApi failure handling', () => {
 
   it('resolves to undefined rather than rejecting on a non-200', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -337,6 +341,7 @@ describe('loadKeyboardsFromApi failure handling', () => {
    */
   it('retries after a failure rather than replaying it', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     const fetchMock = vi.fn(() => Promise.reject(new TypeError('Failed to fetch')));
     vi.stubGlobal('fetch', fetchMock);
@@ -365,10 +370,12 @@ describe('loadKeyboardsFromApi request sharing', () => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('issues one request for two concurrent callers', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     const fetchMock = vi.fn(() =>
       Promise.resolve({ ok: true, json: () => Promise.resolve([gboardAfar]) } as Response),
     );
@@ -382,6 +389,7 @@ describe('loadKeyboardsFromApi request sharing', () => {
 
   it('keys the dictionary by keyboard id', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.stubGlobal(
       'fetch',
       vi.fn(() =>

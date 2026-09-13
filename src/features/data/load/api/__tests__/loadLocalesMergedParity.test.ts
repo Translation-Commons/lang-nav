@@ -31,6 +31,7 @@ import {
   addISORetirementsToLanguages,
   loadISORetirements,
 } from '../../extra_entities/ISORetirements';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Parity for the locale DICTIONARY after `addIANAVariantLocales` has run, which
@@ -155,9 +156,11 @@ describe.skipIf(!API_URL)('locale API/TSV parity, after the IANA variant step', 
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadAndMerge();
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -167,6 +170,7 @@ describe.skipIf(!API_URL)('locale API/TSV parity, after the IANA variant step', 
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadAndMerge();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromFiles == null) return null;
 

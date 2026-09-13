@@ -2,9 +2,11 @@
  * Configuration for the read-only API, which serves the same data the TSV files
  * in `public/data` do.
  *
- * The API is OPTIONAL and off by default. With `VITE_API_URL` unset the app
- * loads everything from files exactly as it always has, so a contributor who
- * has never run the backend sees no difference and needs no database.
+ * The API is OPTIONAL and off by default - even with `VITE_API_URL`
+ * configured, a build loads from files until someone explicitly opts in via
+ * the About-page toggle (see setApiOverride). A contributor who has never
+ * run the backend, and never touched that toggle, sees no difference and
+ * needs no database.
  *
  * This is deliberate rather than transitional. The migration converts one
  * entity at a time (territories first, in Phase 1), and until every entity has
@@ -12,10 +14,63 @@
  * `npm run dev` depend on a local PostgreSQL and PostgREST.
  */
 
-/** Trailing slashes are stripped so callers can always write `${base}/path`. */
-export function getApiBaseUrl(): string | undefined {
+/** Raw URL from the build, ignoring any runtime override. Trailing slashes stripped. */
+function configuredApiUrl(): string | undefined {
   const url = import.meta.env.VITE_API_URL?.trim();
   return url ? url.replace(/\/+$/, '') : undefined;
+}
+
+/** Whether the build itself configured an API to switch to. The toggle has
+ *  nothing to offer when this is false - there is no URL behind "on". */
+export function hasConfiguredApiUrl(): boolean {
+  return configuredApiUrl() != null;
+}
+
+const API_OVERRIDE_KEY = 'langnav:apiOverride';
+
+/**
+ * Runtime override for isApiEnabled/getApiBaseUrl, set by the About-page
+ * toggle. `null` means "no override, defer to VITE_API_URL" - the state every
+ * user who has never opened the toggle stays in.
+ *
+ * Browsers throw on localStorage when the user blocks site data for the
+ * origin; every entity loader calls through getApiBaseUrl(), so letting that
+ * escape here would white-screen the whole app rather than just ignore the
+ * override. Same guard as usePageBrightness.tsx's readStoredPreference.
+ */
+function getApiOverride(): 'on' | 'off' | null {
+  try {
+    const value = localStorage.getItem(API_OVERRIDE_KEY);
+    return value === 'on' || value === 'off' ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Pass `null` to clear the override and defer to VITE_API_URL again. */
+export function setApiOverride(value: 'on' | 'off' | null): void {
+  try {
+    if (value == null) localStorage.removeItem(API_OVERRIDE_KEY);
+    else localStorage.setItem(API_OVERRIDE_KEY, value);
+  } catch {
+    // The override still applies for this session's in-memory state, it just
+    // will not survive a reload - which is the only time it is read again.
+  }
+}
+
+/**
+ * Trailing slashes are stripped so callers can always write `${base}/path`.
+ *
+ * Files are the default: with no override set (a first visit, or any browser
+ * that has never touched the About-page toggle) this returns `undefined`
+ * even when `VITE_API_URL` is configured, so the app loads from the TSV
+ * files exactly as it always has. The API is opt-in - it only turns on once
+ * the toggle has explicitly stored 'on'.
+ */
+export function getApiBaseUrl(): string | undefined {
+  const override = getApiOverride();
+  // 'on' with nothing configured has no URL to enable - stays undefined.
+  return override === 'on' ? configuredApiUrl() : undefined;
 }
 
 export function isApiEnabled(): boolean {

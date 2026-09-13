@@ -29,6 +29,7 @@ import {
   addISORetirementsToLanguages,
   loadISORetirements,
 } from '../../extra_entities/ISORetirements';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Parity AFTER the merge steps run, which is the state the app actually renders.
@@ -387,9 +388,11 @@ describe.skipIf(!API_URL)('language API/TSV parity, after the merge steps', () =
     // same state as the file path WITH all of them. Keep this list in step with
     // CoreData.tsx - it is what makes the deletion honest rather than assumed.
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadAndMerge(SKIPPED_WHEN_THE_API_IS_ON);
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -399,6 +402,7 @@ describe.skipIf(!API_URL)('language API/TSV parity, after the merge steps', () =
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadAndMerge();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromFiles == null) return null;
     return { fromApi, fromFiles };
@@ -492,9 +496,11 @@ describe.skipIf(!API_URL)('language API/TSV parity, after the merge steps', () =
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const withFile = await loadAndMerge([]);
     const withoutFile = await loadAndMerge(['macrolanguages']);
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (withFile == null || withoutFile == null) {
       ctx.skip();

@@ -34,6 +34,10 @@ jobs:
         run: npm run build:cf
         env:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          # Public by design - see the same comment in deploy.yml. The
+          # About-page toggle stays off by default even with these set.
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
       - name: Deploy to Cloudflare Pages (production)
         uses: cloudflare/wrangler-action@v3

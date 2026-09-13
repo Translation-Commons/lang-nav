@@ -4,6 +4,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
+import { setApiOverride } from '../apiConfig';
 import {
   ApiWritingSystem,
   loadWritingSystemsFromApi,
@@ -158,10 +159,12 @@ describe('loadWritingSystemsFromApi failure handling', () => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('resolves to undefined rather than rejecting when the API is unreachable', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -174,6 +177,7 @@ describe('loadWritingSystemsFromApi failure handling', () => {
 
   it('resolves to undefined rather than rejecting on a non-200', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',

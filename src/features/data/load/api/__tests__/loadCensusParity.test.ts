@@ -10,6 +10,7 @@ import { LanguageCode } from '@entities/language/LanguageTypes';
 import { getServer, makeFileAvailable } from '@tests/testServer';
 
 import { CensusImport, loadCensusData } from '../../extra_entities/loadCensusData';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * The check `loadCensusFromApi.test.ts` explicitly cannot make: whether the API
@@ -187,11 +188,13 @@ describe.skipIf(!API_URL)('census API/TSV parity', () => {
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const apiImports = await loadCensusData();
 
     const fromApi = byId(apiImports);
     if (Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -204,6 +207,7 @@ describe.skipIf(!API_URL)('census API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fileImports = await loadCensusData();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     return {
       fromApi,

@@ -6,6 +6,7 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { getServer } from '@tests/testServer';
 
 import { loadWritingSystems } from '../../entities/loadWritingSystems';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Whether the API path AGREES with the TSV path, which is the check the
@@ -133,10 +134,12 @@ describe.skipIf(!API_URL)('writing system API/TSV parity', () => {
     server.use(http.get(`${API_URL}/writing_system`, () => passthrough()));
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadWritingSystems();
 
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -147,6 +150,7 @@ describe.skipIf(!API_URL)('writing system API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadWritingSystems();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromFiles == null) return null;
 

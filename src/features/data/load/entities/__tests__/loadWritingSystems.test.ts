@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { getServer } from '@tests/testServer';
 
+import { setApiOverride } from '../../api/apiConfig';
 import { loadWritingSystems } from '../loadWritingSystems';
 
 /**
@@ -18,10 +19,12 @@ describe('loadWritingSystems', () => {
   afterEach(() => {
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    setApiOverride(null);
   });
 
   it('falls back to the TSV file when the API is unreachable', async () => {
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     const server = await getServer();
     server.use(
@@ -58,6 +61,7 @@ describe('loadWritingSystems', () => {
   // be updated alongside it, not treated as broken.
   it('treats an empty API response as a successful, if empty, load', async () => {
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     const server = await getServer();
     server.use(http.get(`${API_URL}/writing_system`, () => HttpResponse.json([])));
@@ -70,6 +74,7 @@ describe('loadWritingSystems', () => {
 
   it('uses the API response when the API succeeds', async () => {
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const server = await getServer();
     server.use(
       http.get(`${API_URL}/writing_system`, () =>

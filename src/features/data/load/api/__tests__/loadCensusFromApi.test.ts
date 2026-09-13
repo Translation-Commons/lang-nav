@@ -8,6 +8,7 @@ import {
   CensusQuantity,
 } from '@entities/census/CensusTypes';
 
+import { setApiOverride } from '../apiConfig';
 import {
   ApiCensus,
   censusIdFromSourceRef,
@@ -290,12 +291,14 @@ describe('loadCensusFromApi', () => {
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllEnvs();
+    setApiOverride(null);
   });
 
   /** An API loader must NEVER reject. CoreData and SupplementalData await the
    *  loaders and check results afterwards; a rejection skips that entirely. */
   it('resolves to an empty array when the API is unreachable', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('Failed to fetch')));
 
@@ -308,6 +311,7 @@ describe('loadCensusFromApi', () => {
 
   it('resolves to an empty array on a non-200 response', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -320,6 +324,7 @@ describe('loadCensusFromApi', () => {
   it('resolves to an empty array on malformed JSON', async () => {
     // Phase 1 left this case untested for territories; it is covered here.
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.stubGlobal(
       'fetch',
@@ -335,6 +340,7 @@ describe('loadCensusFromApi', () => {
 
   it('returns one CensusImport with no warnings', async () => {
     vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue({ ok: true, status: 200, json: () => Promise.resolve([canada]) }),

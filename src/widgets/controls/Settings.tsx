@@ -5,6 +5,7 @@ import { LangNavPageName } from '@app/PageRoutes.tsx';
 
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
+import ApiToggle from './selectors/ApiToggle';
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
@@ -14,6 +15,7 @@ import ProfileSelector from './selectors/ProfileSelector';
 const Settings = (): React.ReactNode => {
   const location = useLocation();
   const isDataPage = location.pathname === '/' + LangNavPageName.Data;
+  const isAboutPage = location.pathname === '/' + LangNavPageName.About;
 
   return (
     <div className="grid grid-cols-2 gap-2 items-center">
@@ -25,6 +27,7 @@ const Settings = (): React.ReactNode => {
           <ClearAllPinsButton />
         </>
       )}
+      {isAboutPage && <ApiToggle />}
       <SearchBySelector />
       <PageBrightnessSelector />
     </div>

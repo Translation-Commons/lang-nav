@@ -1,6 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { fetchFromApi } from '../apiConfig';
+import {
+  fetchFromApi,
+  getApiBaseUrl,
+  hasConfiguredApiUrl,
+  isApiEnabled,
+  setApiOverride,
+} from '../apiConfig';
 
 /**
  * Truncation detection, tested against the exact responses the live API was
@@ -25,10 +31,12 @@ function postgrestResponse(status: number, contentRange: string | null, body: un
 describe('fetchFromApi truncation detection', () => {
   beforeEach(() => {
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    setApiOverride(null);
     vi.restoreAllMocks();
   });
 
@@ -122,5 +130,65 @@ describe('fetchFromApi truncation detection', () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(postgrestResponse(500, null, {}));
 
     await expect(fetchFromApi('/territory?select=id')).rejects.toThrow(/API request failed: 500/);
+  });
+});
+
+describe('the About-page API/files override', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    localStorage.clear();
+  });
+
+  it('defaults to files when no override has ever been set, even with VITE_API_URL configured', () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    expect(isApiEnabled()).toBe(false);
+
+    vi.stubEnv('VITE_API_URL', '');
+    expect(isApiEnabled()).toBe(false);
+  });
+
+  it('turns the API off even though VITE_API_URL is configured', () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('off');
+
+    expect(isApiEnabled()).toBe(false);
+    expect(getApiBaseUrl()).toBeUndefined();
+  });
+
+  it('turning the override back on restores the configured URL', () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('off');
+    setApiOverride('on');
+
+    expect(getApiBaseUrl()).toBe('http://localhost:3000');
+  });
+
+  it('clearing the override (null) falls back to files, the no-override default', () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('on');
+    setApiOverride(null);
+
+    expect(isApiEnabled()).toBe(false);
+  });
+
+  it('"on" has nothing to enable when the build never configured a URL', () => {
+    // A stale override left over from a build that HAD an API configured must
+    // not fabricate a connection once VITE_API_URL is unset - there is no
+    // fetchFromApi call this could ever complete.
+    vi.stubEnv('VITE_API_URL', '');
+    setApiOverride('on');
+
+    expect(isApiEnabled()).toBe(false);
+    expect(hasConfiguredApiUrl()).toBe(false);
+  });
+
+  it('hasConfiguredApiUrl reports the build config, ignoring the override', () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3000');
+    setApiOverride('off');
+
+    // The toggle needs this to stay true so it keeps rendering itself even
+    // while switched off - otherwise turning the API off would hide the only
+    // control that can turn it back on.
+    expect(hasConfiguredApiUrl()).toBe(true);
   });
 });

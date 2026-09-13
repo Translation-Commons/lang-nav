@@ -6,6 +6,7 @@ import { LocaleData } from '@entities/locale/LocaleTypes';
 import { getServer } from '@tests/testServer';
 
 import { loadLocales } from '../../entities/loadLocales';
+import { setApiOverride } from '../apiConfig';
 
 /**
  * Whether the API path AGREES with the TSV path, which is the check the
@@ -136,10 +137,12 @@ describe.skipIf(!API_URL)('locale API/TSV parity', () => {
     server.use(http.get(`${API_URL}/locale`, () => passthrough()));
 
     vi.stubEnv('VITE_API_URL', API_URL);
+    setApiOverride('on');
     const fromApi = await loadLocales();
 
     if (fromApi == null || Object.keys(fromApi).length === 0) {
       vi.unstubAllEnvs();
+      setApiOverride(null);
       return null;
     }
 
@@ -152,6 +155,7 @@ describe.skipIf(!API_URL)('locale API/TSV parity', () => {
     vi.stubEnv('VITE_API_URL', '');
     const fromFiles = await loadLocales();
     vi.unstubAllEnvs();
+    setApiOverride(null);
 
     if (fromFiles == null) return null;
 
