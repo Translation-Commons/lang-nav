@@ -396,6 +396,18 @@ ALTER TABLE keyboard ADD COLUMN IF NOT EXISTS variant_code_raw text;
 ALTER TABLE census_language_estimate
   ADD COLUMN IF NOT EXISTS is_name_bearing boolean NOT NULL DEFAULT false;
 
+-- ── 2026-09-13, for variant_prefix ──────────────────────────────────────────
+-- variant_prefix had no ordering column at all: PostgREST makes no promise
+-- about row order for an embedded resource with no `order=` clause, and
+-- api.language's own row order confirmed it - local Postgres happened to
+-- return 'ao1990' prefixes in file order (physical storage luck), Supabase
+-- did not. Same DEFAULT-then-DROP shape as keyboard_language.position above,
+-- for the same reason: an existing install's rows get a harmless placeholder
+-- rather than failing NOT NULL, and the DEFAULT does not linger to hide a
+-- loader that stops supplying the column.
+ALTER TABLE variant_prefix ADD COLUMN IF NOT EXISTS position smallint NOT NULL DEFAULT 0;
+ALTER TABLE variant_prefix ALTER COLUMN position DROP DEFAULT;
+
 -- The CHECK shipped in 001_schema.sql already reads the widened form (Keyman
 -- rows must also have variant_code_raw NULL), so a database whose keyboard
 -- table predates entry 16 is still enforcing the narrower original. DROP+ADD

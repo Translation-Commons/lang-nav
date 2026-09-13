@@ -35,7 +35,7 @@ export type ApiVariant = {
 const VARIANT_QUERY =
   '/variant?select=id,description,date_added,variant_type,equivalent_language_id,' +
   'entity(name_display,entity_name(kind,name)),variant_prefix(prefix)' +
-  '&entity.entity_name.order=id.asc&order=id.asc';
+  '&entity.entity_name.order=id.asc&variant_prefix.order=position.asc&order=id.asc';
 
 export async function loadVariantsFromApi(): Promise<VariantDictionary | void> {
   try {

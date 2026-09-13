@@ -417,7 +417,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
     ),
     TableSpec(
         "variant_prefix",
-        ("variant_id", "prefix"),
+        ("variant_id", "prefix", "position"),
         ("variant_id", "prefix"),
         (("variant_id", "variant", False),),
     ),

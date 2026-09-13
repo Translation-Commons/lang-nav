@@ -44,8 +44,8 @@ def _iana(ds: Dataset, path: Path) -> None:
             source_ref=path.name,
         )
 
-        for prefix in record.all("Prefix"):
-            ds["variant_prefix"].upsert(variant_id=vid, prefix=prefix)
+        for index, prefix in enumerate(record.all("Prefix")):
+            ds["variant_prefix"].upsert(variant_id=vid, prefix=prefix, position=index)
 
 
 def _annotations(ds: Dataset, path: Path) -> None:
