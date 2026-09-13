@@ -28,7 +28,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'node scripts/preview-root.mjs',
+    command: 'node preview-root.mjs',
     url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
   },
