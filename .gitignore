@@ -49,3 +49,6 @@ public/diff/
 
 # Rollup visualizer output
 stats.html
+
+# Subagent-driven-development scratch workspace (ledgers, briefs, review packages)
+.superpowers/
