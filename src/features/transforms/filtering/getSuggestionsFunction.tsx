@@ -29,6 +29,7 @@ export function getSuggestionsFunction<T extends EntityData>(
         );
         const searchString = ent.nameDisplay + ' [' + ent.ID + ']';
         return {
+          ent,
           entID: ent.ID,
           searchString,
           label,

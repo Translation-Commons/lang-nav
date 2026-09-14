@@ -46,13 +46,6 @@ const LanguageFamilyFilterSelector: React.FC = () => {
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="Language Family"
-      selectorDescription={
-        <>
-          Filter results to those relevant to a specific language family. This list only includes
-          ISO language families because we have the most data for them.
-        </>
-      }
       pageParameter={PageParamKey.languageFamilyFilter}
     />
   );
