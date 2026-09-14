@@ -178,3 +178,14 @@
     cursor: pointer;
   }
 }
+
+@utility bg-checkered {
+  background-image: conic-gradient(
+    var(--checker-tint) 25%,
+    transparent 0 50%,
+    var(--checker-tint) 0 75%,
+    transparent 0
+  );
+  background-size: 8rem 8rem;
+  --checker-tint: color-mix(in oklch, var(--foreground) 1.5%, transparent);
+}
