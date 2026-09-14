@@ -1,0 +1,1 @@
+import{r}from"./vendor-react-qLRreErP.js";import{F as t}from"./FilterPanelContext-JiwltW_M.js";const s=()=>{const e=r.useContext(t);if(!e)throw new Error("useFilterPanel must be used within FilterPanelProvider");return e};export{s as u};

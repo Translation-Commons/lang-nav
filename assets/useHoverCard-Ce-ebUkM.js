@@ -1,0 +1,1 @@
+import{r as o}from"./vendor-react-qLRreErP.js";import{cZ as e}from"./index-uofKWnp9.js";const a=()=>{const r=o.useContext(e);if(!r)throw new Error("useHoverCard must be used within a HoverCardProvider");return r};export{a as u};
