@@ -17,10 +17,10 @@ const IntroPage: React.FC = () => {
         <div className="absolute inset-0 -z-10 bg-checkered mask-b-from-10%" aria-hidden="true" />
         <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-8 px-4 py-8 text-center">
           <div className="flex w-full flex-col items-center">
-            <h1 className="text-4xl leading-tight sm:text-5xl">
+            <h1 className="text-3xl leading-tight sm:text-4xl lg:text-5xl">
               Explore the world&apos;s languages
             </h1>
-            <p className="mt-3 max-w-[620px] text-base/relaxed text-muted-foreground">
+            <p className="mt-3 max-w-[620px] text-sm/relaxed text-muted-foreground sm:text-base/relaxed">
               Everything you need to understand a language, where it&apos;s spoken, how it&apos;s
               written, and how well it&apos;s supported today.
             </p>

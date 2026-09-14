@@ -4,7 +4,9 @@ import useEntities from '@features/data/context/useEntities';
 import { EntityType } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import { isTerritoryGroup } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -21,8 +23,6 @@ export default function useIntroSearchSuggestions(): (query: string) => Promise<
 
   return useCallback(
     async (query: string) => {
-      if (!query) return [];
-      const matches = getSubstringFilterOnQuery(query, searchBy);
       const toSuggestion = (group: string) => (ent: EntityData) => ({
         entID: ent.ID,
         searchString: getSearchableField(ent, searchBy),
@@ -30,13 +30,33 @@ export default function useIntroSearchSuggestions(): (query: string) => Promise<
         group,
         ent,
       });
+      const countries = territories.filter(
+        (ent) => ent.type === EntityType.Territory && !isTerritoryGroup(ent.scope),
+      );
+
+      // No query yet: show the biggest languages and countries instead of an empty list.
+      if (!query) {
+        const topLanguages = languages.filter(
+          (ent) =>
+            ent.type === EntityType.Language &&
+            (ent.scope === LanguageScope.Language || ent.scope === LanguageScope.Macrolanguage),
+        );
+        return [
+          ...[...topLanguages]
+            .sort(sortByPopulation)
+            .slice(0, GROUP_LIMIT)
+            .map(toSuggestion('Languages')),
+          ...[...countries]
+            .sort(sortByPopulation)
+            .slice(0, GROUP_LIMIT)
+            .map(toSuggestion('Countries')),
+        ];
+      }
+
+      const matches = getSubstringFilterOnQuery(query, searchBy);
       return [
         ...languages.filter(matches).slice(0, GROUP_LIMIT).map(toSuggestion('Languages')),
-        ...territories
-          .filter((ent) => ent.type === EntityType.Territory && !isTerritoryGroup(ent.scope))
-          .filter(matches)
-          .slice(0, GROUP_LIMIT)
-          .map(toSuggestion('Countries')),
+        ...countries.filter(matches).slice(0, GROUP_LIMIT).map(toSuggestion('Countries')),
       ];
     },
     [languages, territories, searchBy],

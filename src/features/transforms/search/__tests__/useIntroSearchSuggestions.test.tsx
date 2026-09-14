@@ -3,21 +3,27 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { getBaseLanguageData } from '@entities/language/LanguageTypes';
+import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import useIntroSearchSuggestions from '../useIntroSearchSuggestions';
 
-const territory = (ID: string, name: string, scope = TerritoryScope.Country) => ({
+const territory = (ID: string, name: string, overall: number, scope = TerritoryScope.Country) => ({
   type: EntityType.Territory as const,
   ID,
   codeDisplay: ID,
   nameDisplay: name,
   names: [name],
   scope,
-  pop: { overall: 0 },
+  pop: { overall },
+});
+
+const language = (code: string, name: string, overall: number, scope = LanguageScope.Language) => ({
+  ...getBaseLanguageData(code, name),
+  scope,
+  pop: { speaking: {}, writing: {}, overall },
 });
 
 vi.mock('@features/params/usePageParams', () => ({
@@ -26,11 +32,15 @@ vi.mock('@features/params/usePageParams', () => ({
 vi.mock('@features/data/context/useEntities', () => ({
   default: vi.fn((entType: EntityType) =>
     entType === EntityType.Language
-      ? [getBaseLanguageData('eng', 'English'), getBaseLanguageData('ind', 'Indonesian')]
+      ? [
+          language('ind', 'Indonesian', 200),
+          language('eng', 'English', 1500),
+          language('aze', 'Turkic', 9000, LanguageScope.Family),
+        ]
       : [
-          territory('IN', 'India'),
-          territory('ID', 'Indonesia'),
-          territory('035', 'Indochina', TerritoryScope.Region),
+          territory('IN', 'India', 1400),
+          territory('ID', 'Indonesia', 270),
+          territory('035', 'Indochina', 100, TerritoryScope.Region),
         ],
   ),
 }));
@@ -48,9 +58,16 @@ describe('useIntroSearchSuggestions', () => {
     ]);
   });
 
-  it('returns nothing for an empty query', async () => {
+  it('returns top results by population for an empty query, skipping language families', async () => {
     const { result } = renderHook(() => useIntroSearchSuggestions());
 
-    expect(await result.current('')).toEqual([]);
+    const suggestions = await result.current('');
+
+    expect(suggestions.map((s) => [s.group, s.entID])).toEqual([
+      ['Languages', 'eng'],
+      ['Languages', 'ind'],
+      ['Countries', 'IN'],
+      ['Countries', 'ID'],
+    ]);
   });
 });
