@@ -8,7 +8,7 @@ import Field from '@features/transforms/fields/Field';
 const mockUpdatePageParams = vi.fn();
 
 export const createMockUsePageParams = (
-  overrides: Partial<PageParams> = {},
+  overrides: Partial<PageParamsContextState> = {},
 ): PageParamsContextState => {
   return {
     ...getDefaultParams(),

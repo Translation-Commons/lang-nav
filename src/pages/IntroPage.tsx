@@ -3,6 +3,7 @@ import React from 'react';
 
 import IntroHeroSearch from '@widgets/intro/IntroHeroSearch';
 import IntroHighlights from '@widgets/intro/IntroHighlights';
+import IntroLanguageLandscape from '@widgets/intro/IntroLanguageLandscape';
 import IntroTaskCards from '@widgets/intro/IntroTaskCards';
 
 import { Badge } from '@shared/ui/badge';
@@ -37,6 +38,9 @@ const IntroPage: React.FC = () => {
           </div>
           <IntroHighlights />
         </div>
+      </div>
+      <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-4 px-4 py-6">
+        <IntroLanguageLandscape />
       </div>
       <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-10 px-4 py-10">
         <section className="w-full" aria-labelledby={HELP_HEADING_ID}>

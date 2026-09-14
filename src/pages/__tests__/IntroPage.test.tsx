@@ -13,6 +13,9 @@ vi.mock('@features/transforms/search/useTrackSearch', () => ({ default: () => vi
 vi.mock('@features/transforms/search/useIntroSearchSuggestions', () => ({
   default: () => async () => [],
 }));
+vi.mock('@widgets/intro/IntroLanguageLandscape', () => ({
+  default: () => <div data-testid="language-landscape" />,
+}));
 
 describe('IntroPage', () => {
   it('points the "not sure where to start" link at the help section', async () => {
@@ -28,5 +31,17 @@ describe('IntroPage', () => {
     const target = link.getAttribute('href')?.replace('#', '');
     expect(target).toBeTruthy();
     expect(document.getElementById(target!)).toHaveTextContent('How can Language Navigator help?');
+  });
+
+  it('renders the Language Landscape module between the highlights and the task cards', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <IntroPage />
+        </MemoryRouter>,
+      );
+    });
+
+    expect(screen.getByTestId('language-landscape')).toBeInTheDocument();
   });
 });
