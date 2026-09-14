@@ -14,6 +14,29 @@ export enum DigitalSupportDimension {
   Interfaces = 'interfaces',
 }
 
+/** The dimensions that describe one capability -- everything except the aggregate. */
+export type DigitalSupportCategory = Exclude<
+  DigitalSupportDimension,
+  DigitalSupportDimension.Overall
+>;
+
+/**
+ * A semantic reading of a dimension, used instead of a bare 0-10 score so that gaps
+ * (things that are missing entirely or only partly available) are easy to spot.
+ */
+export enum DigitalSupportStatus {
+  Supported = 'supported',
+  Partial = 'partial',
+  NotSupported = 'notSupported',
+  Unknown = 'unknown',
+}
+
+export type DigitalSupportStatusSummary = {
+  status: DigitalSupportStatus;
+  /** Contextual wording where the data allows it, eg. "1 of 4 platforms", otherwise the status. */
+  label: string;
+};
+
 export enum WikipediaStatus {
   Active = 'Active',
   Closed = 'Closed',
