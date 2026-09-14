@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-import SelectorOption from '@features/params/ui/SelectorOption';
 import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 
+import { Button } from '@shared/ui/button';
+
 type Props = {
   getSuggestions: (query: string) => Promise<Suggestion[]>;
-  onSubmit: (value: string) => void;
-  value: string;
+  onSubmit: (value: Suggestion) => void;
+  currentID: string;
 };
 
-const EntityFilterSuggestionButtons: React.FC<Props> = ({ getSuggestions, onSubmit, value }) => {
+const EntityFilterSuggestionButtons: React.FC<Props> = ({
+  getSuggestions,
+  onSubmit,
+  currentID,
+}) => {
   // Create a state variable to store the suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
 
@@ -40,14 +45,13 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({ getSuggestions, onSubm
   ]);
 
   return suggestions.map((suggestion) => (
-    <SelectorOption
-      optionStyle={{ marginLeft: '1em' }}
+    <Button
       key={suggestion.searchString}
-      option={suggestion.searchString}
-      onClick={onSubmit}
-      isSelected={suggestion.searchString === value}
-      getOptionLabel={() => suggestion.label}
-    />
+      onClick={() => onSubmit(suggestion)}
+      variant={suggestion.entID === currentID ? 'default' : 'secondary'}
+    >
+      {suggestion.label}
+    </Button>
   ));
 };
 

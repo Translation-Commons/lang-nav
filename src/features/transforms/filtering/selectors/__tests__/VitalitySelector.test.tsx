@@ -4,13 +4,14 @@ import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import { LanguageISOStatusSelector } from '../VitalitySelector';
+import FilterSelector from '../FilterSelector';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
@@ -43,7 +44,7 @@ describe('VitalitySelector', () => {
   describe('LanguageISOStatusSelector', () => {
     it('displays all ISO vitality options', async () => {
       const user = userEvent.setup();
-      render(<LanguageISOStatusSelector />);
+      render(<FilterSelector field={Field.ISOStatus} />);
 
       const expected = Object.values(LanguageISOStatus).filter((v) => typeof v === 'number');
 
@@ -62,7 +63,7 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(<LanguageISOStatusSelector />);
+      const { rerender } = render(<FilterSelector field={Field.ISOStatus} />);
 
       // Test selection
       const livingButton = screen.getByRole('option', { name: 'Living' });
@@ -73,7 +74,7 @@ describe('VitalitySelector', () => {
       // Update mock to simulate selected state and rerender
       setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
 
-      rerender(<LanguageISOStatusSelector />);
+      rerender(<FilterSelector field={Field.ISOStatus} />);
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('option', { name: 'Living' });

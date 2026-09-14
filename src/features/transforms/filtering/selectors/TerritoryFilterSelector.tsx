@@ -12,7 +12,11 @@ import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
 import EntityFilterSelector from './EntityFilterSelector';
 
-const TerritoryFilterSelector: React.FC = () => {
+type Props = {
+  showButtons?: boolean;
+};
+
+const TerritoryFilterSelector: React.FC<Props> = ({ showButtons = true }) => {
   const { territories } = useDataContext();
   const filterByScope = useScopeFilter();
   const filterLabels = useFilterLabels();
@@ -35,9 +39,8 @@ const TerritoryFilterSelector: React.FC = () => {
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="In Territory"
-      selectorDescription="Filter results by ones relevant in a territory."
       pageParameter={PageParamKey.territoryFilter}
+      showButtons={showButtons}
     />
   );
 };

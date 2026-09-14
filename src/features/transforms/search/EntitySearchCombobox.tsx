@@ -44,6 +44,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
     (value: Suggestion | null) => {
       if (!value) return;
       trackSearch(value.searchString + value.entID, 'suggestion');
+      setSearchString((value.ent?.nameDisplay ?? '') + ' [' + value.entID + ']');
       onSelect(value);
     },
     [trackSearch, onSelect],
