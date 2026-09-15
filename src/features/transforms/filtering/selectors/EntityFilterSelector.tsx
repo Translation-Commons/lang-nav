@@ -30,7 +30,7 @@ const EntityFilterSelector: React.FC<Props> = ({
   );
 
   return (
-    <div>
+    <div className="flex flex-col gap-1">
       {showButtons && (
         <EntityFilterSuggestionButtons
           getSuggestions={getSuggestions}

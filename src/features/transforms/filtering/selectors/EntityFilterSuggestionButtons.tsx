@@ -44,16 +44,20 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({
     writingSystemFilter,
   ]);
 
-  return suggestions.map((suggestion) => (
-    <Button
-      key={suggestion.searchString}
-      data-testid="entity-suggestion-button"
-      onClick={() => onSubmit(suggestion)}
-      variant={suggestion.entID === currentID ? 'default' : 'secondary'}
-    >
-      {suggestion.label}
-    </Button>
-  ));
+  return (
+    <div className="truncate text-clip">
+      {suggestions.map((suggestion) => (
+        <Button
+          key={suggestion.searchString}
+          data-testid="entity-suggestion-button"
+          onClick={() => onSubmit(suggestion)}
+          variant={suggestion.entID === currentID ? 'default' : 'secondary'}
+        >
+          {suggestion.label}
+        </Button>
+      ))}
+    </div>
+  );
 };
 
 export default EntityFilterSuggestionButtons;
