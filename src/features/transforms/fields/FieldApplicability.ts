@@ -396,17 +396,17 @@ function getFieldsForTransform(transform: Transform): Field[] {
       // Ordered by preferred UI grouping: connections first, then vitality, then text fields
       // This also affects which filters happen first
       return [
+        Field.Name,
         Field.TerritoryList,
-        Field.WritingSystem,
         Field.LanguageList,
         Field.LanguageFamily,
         Field.SourceForLanguage,
+        Field.WritingSystem,
         Field.Organization,
         Field.Modality,
         Field.LanguageScope,
         Field.TerritoryScope,
         Field.ISOStatus,
-        Field.Name, // Technically filters name and code right now, depending on SearchBy
         Field.Population,
       ];
     default:

@@ -24,7 +24,7 @@ const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true })
 
   // Add to the subtitle are if we are searching by all names and we have to find the value by searching a new name
   let searchNamesSubtitle = null;
-  if (searchBy === SearchableField.NameAny) {
+  if (searchBy === SearchableField.NameAny || searchBy === SearchableField.CodeOrNameAny) {
     const lowercaseSearchString = searchString.toLowerCase();
     if (
       !ent.nameDisplay.toLowerCase().includes(lowercaseSearchString) &&

@@ -177,7 +177,10 @@ export function getFilterTitle(field: Field, entType?: EntityType): string {
       if (entType === EntityType.WritingSystem) return 'Potential Population';
       return 'Population';
     case Field.Organization:
+      if (entType === EntityType.Locale) return 'Census Organization';
       return 'Organization';
+    case Field.Name:
+      return 'Name';
     default:
       return 'Unknown Filter';
   }
