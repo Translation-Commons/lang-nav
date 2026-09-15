@@ -100,7 +100,12 @@ const EntitySearchCombobox: React.FC<Props> = ({
                 </ComboboxLabel>
               )}
               {items.map((suggestion) => (
-                <ComboboxItem key={suggestion.entID} value={suggestion} className="cursor-pointer">
+                <ComboboxItem
+                  key={suggestion.entID}
+                  value={suggestion}
+                  className="cursor-pointer"
+                  data-testid="entity-combobox-suggestion"
+                >
                   <div>{suggestion.label}</div>
                   <div className="ml-auto font-mono text-xs text-muted-foreground">
                     {suggestion.entID}
