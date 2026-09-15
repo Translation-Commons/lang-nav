@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { PageParamKey } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/Suggestion';
+import usePageParams from '@features/params/usePageParams';
 
 import { groupBy } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
@@ -25,6 +27,7 @@ type Props = {
   ariaLabel?: string;
   emptyMessage?: string;
   className?: string;
+  pageParameter?: PageParamKey;
 };
 
 const EntitySearchCombobox: React.FC<Props> = ({
@@ -35,9 +38,13 @@ const EntitySearchCombobox: React.FC<Props> = ({
   ariaLabel,
   emptyMessage,
   className,
+  pageParameter,
 }) => {
+  const params = usePageParams();
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState(
+    (pageParameter && (params[pageParameter] as string)) || '',
+  );
   const trackSearch = useTrackSearch();
 
   const onSubmit = useCallback(

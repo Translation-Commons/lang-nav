@@ -59,7 +59,7 @@ describe('VitalitySelector', () => {
 
       // Test selection
       const livingButton = screen.getByRole('option', { name: 'Living' });
-      expect(livingButton).not.toHaveClass('bg-secondary');
+      expect(livingButton).not.toHaveClass('bg-accent');
       await user.click(livingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [LanguageISOStatus.Living] });
 
@@ -70,7 +70,7 @@ describe('VitalitySelector', () => {
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('option', { name: 'Living' });
-      expect(selectedLivingButton).toHaveClass('bg-secondary');
+      expect(selectedLivingButton).toHaveClass('bg-accent');
       await user.click(selectedLivingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
     });
