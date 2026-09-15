@@ -33,7 +33,7 @@ const EnumButtonsMultiSelect = <T extends Key>({ options, paramKey, getLabel }: 
         <Button
           key={o}
           onClick={() => toggle(o)}
-          variant={(paramValue as T[]).includes(o) ? 'default' : 'secondary'}
+          variant={(paramValue as T[]).includes(o) ? 'secondary' : 'ghost'}
           role="option"
         >
           {getLabel ? getLabel(o) : String(o)}
@@ -44,8 +44,8 @@ const EnumButtonsMultiSelect = <T extends Key>({ options, paramKey, getLabel }: 
         onClick={() => updatePageParams({ [paramKey]: [] })}
         variant={
           (paramValue as T[]).length === 0 || (paramValue as T[]).length === options.length
-            ? 'default'
-            : 'secondary'
+            ? 'secondary'
+            : 'ghost'
         }
         role="option"
       >

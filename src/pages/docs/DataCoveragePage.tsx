@@ -4,7 +4,6 @@ import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
-const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
 const FieldCoverageTable = React.lazy(
   () => import('@features/transforms/fields/FieldCoverageTable'),
 );
@@ -26,9 +25,7 @@ const DataCoveragePage: React.FC = () => {
       <div className="overflow-x-auto 2xl:-mx-[300px]">
         <div className="mx-auto w-fit">
           <ContainErrorsAndSuspense>
-            <FilterPanelProvider>
-              <FieldCoverageTable />
-            </FilterPanelProvider>
+            <FieldCoverageTable />
           </ContainErrorsAndSuspense>
         </div>
       </div>

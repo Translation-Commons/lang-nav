@@ -25,7 +25,7 @@ const EnumButtons = <T extends Key>({ options, paramKey, getLabel }: Props<T>) =
     <Button
       key={o}
       onClick={() => click(o)}
-      variant={paramValue === o ? 'default' : 'secondary'}
+      variant={paramValue === o ? 'secondary' : 'ghost'}
       role="option"
     >
       {getLabel ? getLabel(o) : String(o)}
