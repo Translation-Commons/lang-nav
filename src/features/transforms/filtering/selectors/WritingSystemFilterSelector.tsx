@@ -24,8 +24,6 @@ const WritingSystemFilterSelector: React.FC = () => {
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="Written in"
-      selectorDescription="Filter results by ones written in this script."
       pageParameter={PageParamKey.writingSystemFilter}
     />
   );

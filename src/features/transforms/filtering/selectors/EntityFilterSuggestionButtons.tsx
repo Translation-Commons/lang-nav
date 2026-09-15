@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-import SelectorOption from '@features/params/ui/SelectorOption';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
+
+import { Button } from '@shared/ui/button';
 
 type Props = {
   getSuggestions: (query: string) => Promise<Suggestion[]>;
-  onSubmit: (value: string) => void;
-  value: string;
+  onSubmit: (value: Suggestion) => void;
+  currentID: string;
 };
 
-const EntityFilterSuggestionButtons: React.FC<Props> = ({ getSuggestions, onSubmit, value }) => {
+const EntityFilterSuggestionButtons: React.FC<Props> = ({
+  getSuggestions,
+  onSubmit,
+  currentID,
+}) => {
   // Create a state variable to store the suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
 
@@ -27,7 +32,7 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({ getSuggestions, onSubm
   // When component loads, call getSuggestions('') and store results
   useEffect(() => {
     getSuggestions('').then((results) => {
-      setSuggestions(results.slice(0, 5));
+      setSuggestions(results.slice(0, 8));
     });
   }, [
     getSuggestions,
@@ -39,16 +44,20 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({ getSuggestions, onSubm
     writingSystemFilter,
   ]);
 
-  return suggestions.map((suggestion) => (
-    <SelectorOption
-      optionStyle={{ marginLeft: '1em' }}
-      key={suggestion.searchString}
-      option={suggestion.searchString}
-      onClick={onSubmit}
-      isSelected={suggestion.searchString === value}
-      getOptionLabel={() => suggestion.label}
-    />
-  ));
+  return (
+    <div className="max-h-16 overflow-hidden flex flex-wrap gap-1">
+      {suggestions.map((suggestion) => (
+        <Button
+          key={suggestion.searchString}
+          data-testid="entity-suggestion-button"
+          onClick={() => onSubmit(suggestion)}
+          variant={suggestion.entID === currentID ? 'active' : 'outline'}
+        >
+          {suggestion.label}
+        </Button>
+      ))}
+    </div>
+  );
 };
 
 export default EntityFilterSuggestionButtons;

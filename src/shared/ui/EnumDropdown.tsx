@@ -26,7 +26,7 @@ function EnumDropdown<T extends React.Key>({
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
+          <Button className="cursor-pointer" variant="outline" role="dropdown">
             <div className="truncate text-ellipsis">{getLabel(value)}</div>
           </Button>
         }

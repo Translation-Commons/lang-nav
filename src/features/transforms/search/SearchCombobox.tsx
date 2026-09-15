@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
-import { PageParams } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { PageParamKey, PageParams } from '@features/params/PageParamTypes';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
@@ -28,6 +28,7 @@ const SearchCombobox: React.FC<Props> = ({ getNewParams }) => {
       onSelect={onSelect}
       placeholder={'search ' + getEntityTypeLabelPlural(entType)}
       className="min-w-[300px]"
+      pageParameter={PageParamKey.entID}
     />
   );
 };

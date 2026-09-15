@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
-import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion, SUGGESTION_LIMIT } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';

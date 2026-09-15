@@ -1,8 +1,7 @@
+import { PlusIcon } from 'lucide-react';
 import React from 'react';
 
-import FilterPanelToggle from '@widgets/controls/FilterPanelToggle';
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
-import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
@@ -13,28 +12,35 @@ import ScalePopupCard from '@features/transforms/scales/ScalePopupCard';
 import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+import { Button } from '@shared/ui/button';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 import LanguageFocusTabs from './dataviews/LanguageFocusTabs';
 
-import './datapage.css';
-
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
-const DataPageBody: React.FC = () => {
+type Props = {
+  sidebarIsOpen: boolean;
+  openSidebar: () => void;
+};
+
+const DataPageBody: React.FC<Props> = ({ sidebarIsOpen, openSidebar }) => {
   return (
-    <main className="DataPageBody">
+    <main className="px-4 py-2 flex-1 w-full h-full overflow-auto">
       <EntityTypeTabs />
       <LanguageFocusTabs />
-      <div className="DataPageBodyResultCountAndViewOptions">
-        <div className="DataPageBodyResultCount">
-          <FilterPanelToggle />
+      <div className="flex items-center justify-between w-full mb-4">
+        <div className="flex items-center gap-2 text-sm">
           <ResultCount />
-          <PathContainer>
-            <FilterPath />
-          </PathContainer>
+          <FilterPath />
+          {!sidebarIsOpen && (
+            <Button variant="outline" style={{ padding: '0.25em' }} onClick={openSidebar}>
+              <PlusIcon />
+              filters
+            </Button>
+          )}
         </div>
-        <div className="DataPageBodyViewOptions">
+        <div className="flex items-center justify-end gap-2">
           <FieldFocusSelector />
           <ScalePopupCard />
           <ColorPopupCard />
@@ -42,7 +48,7 @@ const DataPageBody: React.FC = () => {
           <ViewSelector />
         </div>
       </div>
-      <div className="DataPageBodyContents">
+      <div className="max-w-5xl mx-auto p-4 text-center">
         <ContainErrorsAndSuspense>
           <DataViews />
         </ContainErrorsAndSuspense>

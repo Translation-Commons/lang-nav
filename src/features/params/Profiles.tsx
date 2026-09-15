@@ -32,6 +32,8 @@ export enum ProfileType {
   // TODO add custom profile
 }
 
+export const POPULATION_MAX = 10_000_000_000;
+
 const GLOBAL_DEFAULTS: PageParams = {
   chartX: Field.None,
   chartY: Field.None,
@@ -53,7 +55,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   page: 1,
   pinned: [],
   populationFocus: PopulationFocus.Overall,
-  populationMax: 10_000_000_000, // higher than the world population
+  populationMax: POPULATION_MAX, // higher than the world population
   populationMin: -1, // allow undefined population as well as definite 0s
   profile: ProfileType.LanguageEthusiast,
   reportID: ReportID.EntitiesMissingFields,
