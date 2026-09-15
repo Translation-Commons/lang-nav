@@ -19,9 +19,13 @@ const IntroLanguageLandscape: React.FC = () => {
         </p>
       </div>
       <Tabs value={tab} onValueChange={setTab} className="w-full items-center">
-        <TabsList>
-          <TabsTrigger value="territory">By territory</TabsTrigger>
-          <TabsTrigger value="scale">By scale</TabsTrigger>
+        <TabsList className="h-11 p-1">
+          <TabsTrigger value="territory" className="px-5 py-2 text-sm">
+            By territory
+          </TabsTrigger>
+          <TabsTrigger value="scale" className="px-5 py-2 text-sm">
+            By scale
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="territory" className="w-full">
           <IntroLandscapeByTerritory />

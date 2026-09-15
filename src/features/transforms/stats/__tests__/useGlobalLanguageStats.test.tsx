@@ -19,12 +19,22 @@ const indoEuropean = makeLanguage({
   nameDisplay: 'Indo-European',
   scope: LanguageScope.Family,
   ISO: { status: LanguageISOStatus.Living },
+  depth: 0,
+});
+const westGermanic = makeLanguage({
+  ID: 'wgmc',
+  nameDisplay: 'West Germanic',
+  scope: LanguageScope.Family,
+  ISO: { status: LanguageISOStatus.Living },
+  depth: 1,
+  parentLanguage: indoEuropean,
 });
 const sinoTibetan = makeLanguage({
   ID: 'sit',
   nameDisplay: 'Sino-Tibetan',
   scope: LanguageScope.Family,
   ISO: { status: LanguageISOStatus.Living },
+  depth: 0,
 });
 const english = makeLanguage({
   ID: 'eng',
@@ -32,7 +42,7 @@ const english = makeLanguage({
   scope: LanguageScope.Language,
   ISO: { status: LanguageISOStatus.Living },
   pop: { overall: 60, speaking: {}, writing: {} },
-  parentLanguage: indoEuropean,
+  parentLanguage: westGermanic,
   primaryWritingSystem: { ID: 'Latn' } as WritingSystemData,
 });
 const spanish = makeLanguage({
@@ -61,7 +71,15 @@ const extinctLang = makeLanguage({
 
 vi.mock('@features/data/context/useDataContext', () => ({
   useDataContext: vi.fn(() => ({
-    languagesInSelectedSource: [indoEuropean, sinoTibetan, english, spanish, mandarin, extinctLang],
+    languagesInSelectedSource: [
+      indoEuropean,
+      westGermanic,
+      sinoTibetan,
+      english,
+      spanish,
+      mandarin,
+      extinctLang,
+    ],
     writingSystems: [{ ID: 'Latn' }, { ID: 'Hans' }] as WritingSystemData[],
   })),
 }));
@@ -72,9 +90,9 @@ describe('useGlobalLanguageStats', () => {
     expect(result.current.totalLivingLanguages).toBe(3); // english, spanish, mandarin
   });
 
-  it('counts Family-scope entries separately', () => {
+  it('counts only root-level (depth 0) Family-scope entries', () => {
     const { result } = renderHook(() => useGlobalLanguageStats());
-    expect(result.current.familyCount).toBe(2); // indoEuropean, sinoTibetan
+    expect(result.current.familyCount).toBe(2);
   });
 
   it('finds the language with the most speakers', () => {

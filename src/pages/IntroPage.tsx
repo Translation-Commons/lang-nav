@@ -39,7 +39,7 @@ const IntroPage: React.FC = () => {
           <IntroHighlights />
         </div>
       </div>
-      <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-4 px-4 py-6">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-4 py-10">
         <IntroLanguageLandscape />
       </div>
       <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-10 px-4 py-10">

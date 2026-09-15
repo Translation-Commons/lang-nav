@@ -26,8 +26,10 @@ export default function useGlobalLanguageStats(): GlobalLanguageStats {
 
   return useMemo(() => {
     const livingLanguages = languagesInSelectedSource.filter(isLivingLanguage);
+    // Glottolog marks every intermediate branching node as scope Family too, so
+    // depth === 0 is required to count only root-level families.
     const familyCount = languagesInSelectedSource.filter(
-      (lang) => lang.scope === LanguageScope.Family,
+      (lang) => lang.scope === LanguageScope.Family && lang.depth === 0,
     ).length;
 
     const sortedByPopulation = [...livingLanguages].sort(sortByPopulation);
