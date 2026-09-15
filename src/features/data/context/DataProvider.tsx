@@ -105,7 +105,7 @@ const DataProvider: React.FC<{
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
 
-    return coreData.allLanguoids.filter((lang) => lang[languageSource].code != null);
+    return coreData.allLanguoids.filter((lang) => lang[languageSource]?.code != null);
   }, [coreData, languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(

@@ -218,18 +218,21 @@ export function addISOLanguageFamilyData(
           code: family.code,
           parentLanguageCode: family.parent,
           scope: LanguageScope.Family,
+          childLanguages: [],
         },
         ISO: {
           code: family.code,
           name,
           parentLanguageCode: family.parent,
           scope: LanguageScope.Family,
+          childLanguages: [],
         },
         BCP: {
           code: family.code,
           name,
           parentLanguageCode: family.parent,
           scope: LanguageScope.Family,
+          childLanguages: [],
         },
       };
 

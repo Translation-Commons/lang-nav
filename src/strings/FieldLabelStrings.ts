@@ -72,7 +72,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.Platform:
       return 'Platform';
     case Field.SourceForLanguage:
-      return 'Source for Language';
+      return 'Language List / Language Standard';
     case Field.SourceForPopulation:
       return 'Source for Population';
 

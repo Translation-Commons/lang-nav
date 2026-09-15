@@ -23,19 +23,14 @@ function getLargestDescendant(
   depth: number,
 ): LanguageData | undefined {
   // If it has already been computed, return it.
-  if (language.largestDescendant !== undefined) {
-    return language.largestDescendant;
-  }
+  if (!language) return undefined;
+  if (language.largestDescendant !== undefined) return language.largestDescendant;
 
   // Stop if recursion limit is reached
-  if (depth >= RECURSION_LIMIT) {
-    return undefined;
-  }
+  if (depth >= RECURSION_LIMIT) return undefined;
 
-  const children = language[languageSource].childLanguages ?? [];
-  if (children.length === 0) {
-    return undefined;
-  }
+  const children = language[languageSource]?.childLanguages ?? [];
+  if (children.length === 0) return undefined;
 
   // Skip language families and use populationEstimate
   const result = children.reduce<LanguageData | undefined>((largest, child) => {
