@@ -16,7 +16,7 @@ const FilterPanel: React.FC<Props> = ({ closeSidebar }) => {
     <div className="p-4">
       <div className="w-full flex justify-center text-center relative px-2 text-2xl">
         <Button
-          variant="secondary"
+          variant="ghost"
           className="absolute top-0 right-0 size-6"
           onClick={closeSidebar}
           aria-label="Close"
