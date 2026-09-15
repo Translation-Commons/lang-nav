@@ -47,6 +47,7 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({
   return suggestions.map((suggestion) => (
     <Button
       key={suggestion.searchString}
+      data-testid="entity-suggestion-button"
       onClick={() => onSubmit(suggestion)}
       variant={suggestion.entID === currentID ? 'default' : 'secondary'}
     >
