@@ -42,6 +42,7 @@ const EntityFilterSelector: React.FC<Props> = ({
         placeholder="Name or code"
         getSuggestions={getSuggestions}
         onSelect={onSubmit}
+        pageParameter={pageParameter}
       />
     </div>
   );

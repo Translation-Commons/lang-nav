@@ -31,7 +31,6 @@ const DataPage: React.FC = () => {
         <ResizableHandle withHandle />
         <ResizablePanel>
           <DataPageBody sidebarIsOpen={sidebarIsOpen} openSidebar={openSidebar} />
-          <EntityDetailsDrawer />
         </ResizablePanel>
       </ResizablePanelGroup>
       <EntityDetailsDrawer />
