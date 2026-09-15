@@ -2,17 +2,8 @@ import * as amplitude from '@amplitude/unified';
 
 import { hasAnalyticsConsent } from '@features/consent/consentStorage';
 
+import { AMPLITUDE_API_KEY } from './amplitudeConfig';
 import { getLoggedDefaults, parseSearchParams, remapKeys } from './amplitudeFormat';
-
-/**
- * Tracking runs in prod by default. Set VITE_AMPLITUDE_DEV_ENABLED=true to
- * also send events from `npm run dev`.
- */
-const AMPLITUDE_DEV_ENABLED = import.meta.env.VITE_AMPLITUDE_DEV_ENABLED === 'true';
-const AMPLITUDE_API_KEY =
-  import.meta.env.PROD || AMPLITUDE_DEV_ENABLED
-    ? import.meta.env.VITE_AMPLITUDE_API_KEY
-    : undefined;
 
 let hasInitializedAmplitude = false;
 let lastTrackedPathname = '';
@@ -137,13 +128,7 @@ export function trackDetailSwitched(
 
 const AMPLITUDE_STORAGE_KEY_PATTERN = /^(AMP_|amplitude_|amp_|amplitude)/i;
 
-/**
- * Removes every Amplitude-owned entry from localStorage.
- *
- * Exported for tests and defense in depth; `amplitude.reset()` alone only
- * regenerates the device ID rather than deleting the persisted entry, so we
- * sweep the storage manually after opt-out.
- */
+// amplitude.reset() only regenerates the device ID, so we sweep storage manually.
 export function clearAmplitudeLocalStorage() {
   if (typeof window === 'undefined') return;
   try {
@@ -158,12 +143,7 @@ export function clearAmplitudeLocalStorage() {
   }
 }
 
-/**
- * Deletes any `AMP_*` cookies left over from a time when the SDK was
- * configured with its default cookie-based identity storage. We now pass
- * `identityStorage: 'localStorage'` at init, so no new cookies are written,
- * but existing visitors may still have stale cookies from a prior session.
- */
+// Cleans up cookies from before identityStorage: 'localStorage' was the default.
 export function clearAmplitudeCookies() {
   if (typeof document === 'undefined') return;
   const cookies = document.cookie ? document.cookie.split(';') : [];
@@ -174,37 +154,16 @@ export function clearAmplitudeCookies() {
   }
 }
 
-/**
- * Clears all persisted Amplitude state: localStorage entries and any
- * leftover cookies from a previous cookie-based configuration.
- */
 export function clearAmplitudeStorage() {
   clearAmplitudeLocalStorage();
   clearAmplitudeCookies();
 }
 
-/* Sweep stale AMP_* cookies once at module load so visitors upgrading from
-   the cookie-based version get cleaned up even if they never open the
-   banner. Safe to run before consent because it only removes, never writes. */
+// Runs before consent so visitors upgrading from the cookie-based version get cleaned up.
 if (typeof window !== 'undefined') clearAmplitudeCookies();
 
-/**
- * Called when a user revokes consent. Three layers of defense:
- *
- *   1. `setOptOut(true)`: Amplitude's documented "stop sending" switch, so
- *      anything still buffered in memory won't flush.
- *   2. `reset()`: clears the in-memory device/user identity.
- *   3. `clearAmplitudeStorage()`: removes the persisted device ID and any
- *      unsent-event buffers from localStorage, so a later re-consent starts
- *      with a genuinely new identity.
- *
- * The module-level `hasInitializedAmplitude` flag stays true: the SDK code
- * is already loaded into the page and can't be unloaded without a reload.
- */
 export function optOutAmplitude() {
   if (!hasInitializedAmplitude) {
-    /* Stale entries from a prior visit may still be on disk even if we
-       never initialized the SDK this session; wipe them. */
     clearAmplitudeStorage();
     return;
   }
@@ -212,7 +171,7 @@ export function optOutAmplitude() {
   try {
     amplitude.reset();
   } catch {
-    // Suppress: reset can throw if SDK never fully loaded.
+    // reset() can throw if the SDK never fully loaded.
   }
   clearAmplitudeStorage();
   lastTrackedPathname = '';
