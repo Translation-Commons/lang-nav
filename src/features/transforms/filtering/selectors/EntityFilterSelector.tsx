@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 

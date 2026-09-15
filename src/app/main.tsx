@@ -7,7 +7,6 @@ import App from './App.tsx';
 import './tailwind.css';
 
 import './colors.css';
-import './controls.css';
 
 import './component_styles.css';
 

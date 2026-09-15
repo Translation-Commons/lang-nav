@@ -131,7 +131,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;
@@ -142,8 +142,7 @@ div h3:first-child {
   margin-bottom: 1em;
 }
 
-.hoverableText,
-.selector .hoverableText {
+.hoverableText {
   background-color: transparent;
   text-decoration: underline dotted var(--color-text-secondary);
   cursor: pointer;
@@ -152,8 +151,7 @@ div h3:first-child {
   margin: 0 -0.25em;
 }
 
-.hoverableText:hover,
-.selector .hoverableText:hover {
+.hoverableText:hover {
   color: var(--color-button-primary);
 }
 

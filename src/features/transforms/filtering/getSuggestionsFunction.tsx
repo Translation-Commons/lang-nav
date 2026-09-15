@@ -1,5 +1,5 @@
 import { SearchableField } from '@features/params/PageParamTypes';
-import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion, SUGGESTION_LIMIT } from '@features/params/Suggestion';
 
 import { EntityData } from '@entities/types/DataTypes';
 

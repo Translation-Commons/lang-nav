@@ -2,11 +2,11 @@ import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
 import { EntityType } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
+import EnumDropdown from '@shared/ui/EnumDropdown';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
@@ -68,12 +68,14 @@ const LocaleIndigeneityReport: React.FC = () => {
         </ExternalLink>
         .
       </div>
-      <Selector<IncludeCriteria>
-        selectorLabel="Include Locales that..."
-        selected={includeCriteria}
-        onChange={setIncludeCriteria}
-        options={Object.values(IncludeCriteria)}
-      />
+      <div>
+        Include Locales that...
+        <EnumDropdown
+          value={includeCriteria}
+          onChange={setIncludeCriteria}
+          options={Object.values(IncludeCriteria)}
+        />
+      </div>
       <LocaleIndigeneityTable locales={viewedLocales} addToChangedLocales={addToChangedLocales} />
       <button
         onClick={copyChangedLocales}

@@ -2,9 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { PageParamKey } from '@features/params/PageParamTypes';
-import TextInput from '@features/params/ui/TextInput';
+import { Suggestion } from '@features/params/Suggestion';
 import { getSuggestionsFunction } from '@features/transforms/filtering/getSuggestionsFunction';
+import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
@@ -83,8 +83,8 @@ const VariantLanguoidToggle: React.FC<{
     case LanguageSelectorMode.Manual:
       predictedText = (
         <LanguageSelector
-          submit={(value) => {
-            const id = value.split(/\[|\]/)[1]?.trim(); // In case they paste in something with extra info like "valencia [cat_valencia]"
+          submit={(value: Suggestion) => {
+            const id = value.entID;
             if (!id) return;
             variant.equivalentLanguageCode = id;
             addToChangedVariants(variant);
@@ -111,7 +111,7 @@ const VariantLanguoidToggle: React.FC<{
 };
 
 const LanguageSelector: React.FC<{
-  submit: (languageString: string) => void;
+  submit: (suggestion: Suggestion) => void;
 }> = ({ submit }) => {
   const { languagesInSelectedSource: languages } = useDataContext();
 
@@ -123,17 +123,11 @@ const LanguageSelector: React.FC<{
   }, [languages]);
 
   return (
-    <TextInput
-      inputStyle={{
-        minWidth: '6em',
-        backgroundColor: 'var(--color-background)',
-        color: 'var(--color-text)',
-      }}
+    <EntitySearchCombobox
       getSuggestions={getSuggestions}
-      onSubmit={submit}
-      pageParameter={PageParamKey.languageFilter}
-      placeholder="Name or code"
-      value=""
+      onSelect={submit}
+      placeholder={'language name or code'}
+      className="w-40"
     />
   );
 };
