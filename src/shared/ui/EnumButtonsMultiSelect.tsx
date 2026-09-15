@@ -28,12 +28,12 @@ const EnumButtonsMultiSelect = <T extends Key>({ options, paramKey, getLabel }: 
   );
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-1">
       {options.map((o) => (
         <Button
           key={o}
           onClick={() => toggle(o)}
-          variant={(paramValue as T[]).includes(o) ? 'secondary' : 'ghost'}
+          variant={(paramValue as T[]).includes(o) ? 'active' : 'outline'}
           role="option"
         >
           {getLabel ? getLabel(o) : String(o)}
@@ -44,8 +44,8 @@ const EnumButtonsMultiSelect = <T extends Key>({ options, paramKey, getLabel }: 
         onClick={() => updatePageParams({ [paramKey]: [] })}
         variant={
           (paramValue as T[]).length === 0 || (paramValue as T[]).length === options.length
-            ? 'secondary'
-            : 'ghost'
+            ? 'active'
+            : 'outline'
         }
         role="option"
       >

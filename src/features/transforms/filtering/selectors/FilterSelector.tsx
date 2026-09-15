@@ -14,7 +14,6 @@ import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import EnumButtonsMultiSelect from '@shared/ui/EnumButtonsMultiSelect';
-import { Separator } from '@shared/ui/separator';
 
 import { getFieldLabel } from '@strings/FieldLabelStrings';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
@@ -97,12 +96,11 @@ export const AllApplicableFilterSelectors: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {primaryFilters.map((filterBy) => (
-        <div key={filterBy}>
+        <div key={filterBy} className="mb-4">
           <div>{getFieldLabel(filterBy, entType)}</div>
           <FilterSelector field={filterBy} />
-          <Separator className="my-2" />
         </div>
       ))}
       {otherFilters.length > 0 && (
@@ -110,7 +108,10 @@ export const AllApplicableFilterSelectors: React.FC = () => {
           <summary>Extra filters</summary>
           Entities shown on the page may be filtered by additional criteria.
           {otherFilters.map((filterBy) => (
-            <FilterSelector field={filterBy} key={filterBy} />
+            <div key={filterBy} className="mb-4">
+              <div>{getFieldLabel(filterBy, entType)}</div>
+              <FilterSelector field={filterBy} />
+            </div>
           ))}
         </details>
       )}

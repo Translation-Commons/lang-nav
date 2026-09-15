@@ -21,16 +21,20 @@ const EnumButtons = <T extends Key>({ options, paramKey, getLabel }: Props<T>) =
     [paramValue, paramKey, updatePageParams],
   );
 
-  return options.map((o) => (
-    <Button
-      key={o}
-      onClick={() => click(o)}
-      variant={paramValue === o ? 'secondary' : 'ghost'}
-      role="option"
-    >
-      {getLabel ? getLabel(o) : String(o)}
-    </Button>
-  ));
+  return (
+    <div className="flex flex-wrap gap-1">
+      {options.map((o) => (
+        <Button
+          key={o}
+          onClick={() => click(o)}
+          variant={paramValue === o ? 'active' : 'outline'}
+          role="option"
+        >
+          {getLabel ? getLabel(o) : String(o)}
+        </Button>
+      ))}
+    </div>
+  );
 };
 
 export default EnumButtons;

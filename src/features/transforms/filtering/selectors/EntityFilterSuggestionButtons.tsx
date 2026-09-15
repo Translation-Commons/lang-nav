@@ -45,13 +45,13 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({
   ]);
 
   return (
-    <div className="max-h-14 overflow-hidden">
+    <div className="max-h-16 overflow-hidden flex flex-wrap gap-1">
       {suggestions.map((suggestion) => (
         <Button
           key={suggestion.searchString}
           data-testid="entity-suggestion-button"
           onClick={() => onSubmit(suggestion)}
-          variant={suggestion.entID === currentID ? 'secondary' : 'ghost'}
+          variant={suggestion.entID === currentID ? 'active' : 'outline'}
         >
           {suggestion.label}
         </Button>
