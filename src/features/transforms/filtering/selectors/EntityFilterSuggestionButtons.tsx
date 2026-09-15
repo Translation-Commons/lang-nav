@@ -32,7 +32,7 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({
   // When component loads, call getSuggestions('') and store results
   useEffect(() => {
     getSuggestions('').then((results) => {
-      setSuggestions(results.slice(0, 5));
+      setSuggestions(results.slice(0, 8));
     });
   }, [
     getSuggestions,
@@ -45,7 +45,7 @@ const EntityFilterSuggestionButtons: React.FC<Props> = ({
   ]);
 
   return (
-    <div className="truncate text-clip">
+    <div className="max-h-14 overflow-hidden">
       {suggestions.map((suggestion) => (
         <Button
           key={suggestion.searchString}
