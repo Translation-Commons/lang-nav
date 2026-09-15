@@ -250,9 +250,11 @@ export function addISOLanguageFamilyData(
         familyEntry.nameDisplay = family.name;
       }
       familyEntry.Combined.parentLanguageCode ??= family.parent;
+      familyEntry.ISO.code ??= family.code;
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
       familyEntry.ISO.name = name;
+      familyEntry.BCP.code ??= family.code;
       familyEntry.BCP.parentLanguageCode = family.parent;
       familyEntry.BCP.scope = LanguageScope.Family;
       familyEntry.BCP.name = name;
