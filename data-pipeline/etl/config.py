@@ -1,6 +1,6 @@
 """Environment and path configuration for the lang-nav ETL.
 
-Reads backend/.env (gitignored). Nothing here has a default password: if a
+Reads data-pipeline/.env (gitignored). Nothing here has a default password: if a
 password is missing the ETL fails loudly rather than silently trying to
 connect as the current OS user.
 """
@@ -13,7 +13,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# backend/etl/config.py -> backend/ -> repository root
+# data-pipeline/etl/config.py -> data-pipeline/ -> repository root
 BACKEND_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = BACKEND_DIR.parent
 SCHEMA_DIR = BACKEND_DIR / "schema"
@@ -29,8 +29,8 @@ def _require(name: str) -> str:
     value = os.environ.get(name, "").strip()
     if not value:
         raise ConfigError(
-            f"{name} is not set. Fill it in at backend/.env "
-            f"(copy backend/.env.example if the file is missing)."
+            f"{name} is not set. Fill it in at data-pipeline/.env "
+            f"(copy data-pipeline/.env.example if the file is missing)."
         )
     return value
 

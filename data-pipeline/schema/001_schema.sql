@@ -9,7 +9,7 @@
 --
 --  ---------------------------------------------------------------------------
 --  STATUS: IN USE. Applied against a live PostgreSQL 18 server with the full
---  dataset loaded; see backend/README.md. Of the three questions in §0.2, Q1 is
+--  dataset loaded; see data-pipeline/README.md. Of the three questions in §0.2, Q1 is
 --  resolved and Q3 is adopted. Q2 alone is still open.
 --  ---------------------------------------------------------------------------
 --
@@ -18,12 +18,12 @@
 --        python -m etl.run --schema
 --    which applies this file and then 004_alter.sql, 003_derive.sql,
 --    005_roles.sql and 006_rls.sql, in that order. To apply this file alone:
---        psql -d langnav -f backend/schema/001_schema.sql
+--        psql -d langnav -f data-pipeline/schema/001_schema.sql
 --
 --    Blue/green deploy (the publish stage of the ingest pipeline):
 --        CREATE SCHEMA staging;
 --        SET search_path TO staging;
---        \i backend/schema/001_schema.sql
+--        \i data-pipeline/schema/001_schema.sql
 --        -- …load data, verify, then swap:
 --        ALTER SCHEMA public  RENAME TO old_20260726;
 --        ALTER SCHEMA staging RENAME TO public;
@@ -53,7 +53,7 @@
 --  Indexes live in 002_indexes.sql and are applied AFTER the bulk COPY,
 --  because indexes make COPY dramatically slower.
 --
---  Apply with:  psql -d langnav -f backend/schema/001_schema.sql
+--  Apply with:  psql -d langnav -f data-pipeline/schema/001_schema.sql
 -- ===========================================================================
 
 BEGIN;

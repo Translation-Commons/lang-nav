@@ -13,7 +13,7 @@
 --  RULE: every COLUMN added here MUST also be added to 001_schema.sql, and
 --  every INDEX added here MUST also be added to 002_indexes.sql, so those two
 --  files stay the single readable description of the schema. A test asserts
---  they agree; see backend/tests/test_derive.py.
+--  they agree; see data-pipeline/tests/test_derive.py.
 --
 --  Apply after 001_schema.sql. Order against 002 and 003 does not matter.
 -- ═══════════════════════════════════════════════════════════════════════════

@@ -41,7 +41,7 @@
 --  The split follows the privilege boundary exactly.
 --
 --  NO PASSWORD APPEARS IN THIS FILE, and none may ever be added. The
---  authenticator's password is set by the bootstrap script from backend/.env.
+--  authenticator's password is set by the bootstrap script from data-pipeline/.env.
 --  A test asserts the absence, because a credential committed to git is not
 --  undone by deleting it later.
 --
@@ -119,7 +119,7 @@ BEGIN
     --
     -- No FOR ROLE clause: it defaults to the role executing this file, which is
     -- the role that creates the tables. Naming the application role here would
-    -- hardcode a value backend/.env lets an installer change.
+    -- hardcode a value data-pipeline/.env lets an installer change.
     --
     -- Belt and braces rather than the primary mechanism: run.py re-applies this
     -- file on every load, so the explicit grant would catch up on the next run

@@ -100,7 +100,7 @@ function parseLanguageLine(line: string): LanguageData {
   // Min varieties beside them. Testing only the parent gave those an ISO, BCP
   // and UNESCO parent while they have no code in any of the three, so the edge
   // pointed into a tree its own node was not part of. The database declines to
-  // write those rows for the same reason (backend/etl/loaders/languages.py
+  // write those rows for the same reason (data-pipeline/etl/loaders/languages.py
   // guards on the languoid's own id length), and a parent without a node is
   // exactly the dangling edge that breaks a per-source hierarchy.
   if (parentISOCode && code.length <= MAX_ISO_LANG_CODE_LENGTH) {

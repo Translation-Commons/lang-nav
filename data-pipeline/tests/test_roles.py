@@ -244,7 +244,7 @@ def test_the_generator_writes_into_the_gitignored_tools_directory():
     """postgrest.conf holds a credential. It must not land anywhere tracked."""
     assert 'out_dir = BACKEND_DIR / "tools"' in GENERATOR
     gitignore = (SCHEMA_DIR.parent.parent / ".gitignore").read_text(encoding="utf-8")
-    assert "backend/tools/" in gitignore
+    assert "data-pipeline/tools/" in gitignore
 
 
 # ── 006_rls.sql ────────────────────────────────────────────────────────────

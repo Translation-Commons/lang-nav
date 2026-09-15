@@ -47,7 +47,7 @@ export function parseWritingSystem(line: string): WritingSystemData {
 
 /**
  * Parses the boolean spellings used across these TSV files, matching the
- * backend ETL's `to_bool` (backend/etl/sources.py) value-for-value.
+ * backend ETL's `to_bool` (data-pipeline/etl/sources.py) value-for-value.
  *
  * This used to compare against the literals 'Yes' and 'no' case-sensitively.
  * Today's writingSystems.tsv happens to use exactly those two spellings, so

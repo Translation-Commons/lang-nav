@@ -2,7 +2,7 @@
 
 Lang Navigator loads its data from the ~191 TSV files in `public/data`. A
 migration is underway to serve that same data from a PostgreSQL database instead
-(see `backend/README.md`), and this page describes the switch that chooses
+(see `data-pipeline/README.md`), and this page describes the switch that chooses
 between the two.
 
 **All eight core entities have moved; the supplemental loaders largely have
@@ -228,7 +228,7 @@ respectively, and every one of them would have survived a handful of samples.
 
 The parity test needs a running backend, so it only runs when `VITE_API_URL`
 is both set and reachable - unset, or set with the backend stopped, it skips
-itself rather than failing. Start PostgREST (see `backend/README.md`) and run
+itself rather than failing. Start PostgREST (see `data-pipeline/README.md`) and run
 `npm run test` to exercise it for real.
 
 The same two-layer approach applies to every entity. In

@@ -70,7 +70,7 @@ const COMPARED_FIELDS = [
  * the file path's `parentWritingSystemCode` is the string `"Unknown"`.
  *
  * The database disagrees, correctly: `resolve_foreign_keys()`
- * (`backend/etl/registry.py`) nulls out any nullable foreign key that doesn't
+ * (`data-pipeline/etl/registry.py`) nulls out any nullable foreign key that doesn't
  * resolve to a real row, with a warning, so `parent_writing_system_id` is
  * NULL for all 13 and the API path yields `undefined`.
  *

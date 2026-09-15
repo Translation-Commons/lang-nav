@@ -88,7 +88,7 @@ export function isApiEnabled(): boolean {
  *
  * The key is not a secret. It is compiled into the published JavaScript and is
  * meant to be public; what actually constrains a caller is the anonymous role's
- * grants and the row level security policies in `backend/schema/006_rls.sql`.
+ * grants and the row level security policies in `data-pipeline/schema/006_rls.sql`.
  * Never put a service-role key here - that one bypasses RLS entirely.
  */
 function apiHeaders(): HeadersInit {

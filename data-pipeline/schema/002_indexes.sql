@@ -5,7 +5,7 @@
 --  tables is far faster than maintaining them during the load, and the
 --  planner statistics gathered by the trailing ANALYZE are then accurate.
 --
---  Apply with:  psql -d langnav -f backend/schema/002_indexes.sql
+--  Apply with:  psql -d langnav -f data-pipeline/schema/002_indexes.sql
 --          or:  python -m etl.run --indexes
 --
 --  EVERY STATEMENT HERE IS `IF NOT EXISTS`, so this file is re-runnable and is
@@ -141,7 +141,7 @@ CREATE INDEX IF NOT EXISTS lsa_cldr_provider_idx
 -- delete-and-rebuild step, against a larger table.
 --
 -- test_every_single_column_foreign_key_is_indexed_or_exempt() in
--- backend/tests/test_derive.py enforces this mechanically, so a new foreign key
+-- data-pipeline/tests/test_derive.py enforces this mechanically, so a new foreign key
 -- cannot be added without a decision being made about it.
 
 -- The closure tables. Their composite indexes lead with `source` and

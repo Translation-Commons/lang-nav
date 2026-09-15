@@ -114,7 +114,7 @@ leaving a column empty for a caller to misread as zero.
 ## Setup
 
 ```bash
-cd backend
+cd data-pipeline
 pip install -r requirements.txt
 cp .env.example .env        # then fill in the two passwords
 ```
@@ -176,7 +176,7 @@ python -m etl.run --roles
 
 Then download the PostgREST binary for your platform from
 [its releases page](https://github.com/PostgREST/postgrest/releases) into
-`backend/tools/` (gitignored), and generate its config from `.env`:
+`data-pipeline/tools/` (gitignored), and generate its config from `.env`:
 
 ```bash
 python scripts/write_postgrest_config.py
@@ -202,7 +202,7 @@ carries two settings worth knowing about, both defaulted for a local developer:
   filtered queries and made a complete locale response look truncated; `exact`
   measured no slower.
 
-`backend/tools/` is gitignored in full, because `postgrest.conf` contains a
+`data-pipeline/tools/` is gitignored in full, because `postgrest.conf` contains a
 database password and the binary does not belong in git either.
 
 Three endpoints worth trying first:

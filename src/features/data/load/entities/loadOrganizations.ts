@@ -41,7 +41,7 @@ function parseOrganizationLine(line: string): OrganizationData | undefined {
   // read it from.
   //
   // Both paths yield undefined today only because the ETL never populates that
-  // column either: `backend/etl/loaders/organizations.py` upserts url,
+  // column either: `data-pipeline/etl/loaders/organizations.py` upserts url,
   // hq_territory_id, parent_id and source_ref, and no collector_type. (The
   // census loader does populate its own, separate census.collector_type; that
   // is a different table.) If anyone starts populating the organization

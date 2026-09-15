@@ -55,8 +55,8 @@ __pycache__/
 venv/
 
 # PostgREST: a downloaded binary, and a config file holding the database
-# password. Neither belongs in git. See backend/README.md for the setup.
-backend/tools/
+# password. Neither belongs in git. See data-pipeline/README.md for the setup.
+data-pipeline/tools/
 
 # Local agent and editor tooling. Each developer's own; none of it is shared.
 .claude
