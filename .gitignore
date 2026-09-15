@@ -47,5 +47,22 @@ public/diff/
 # Wrangler local cache (wrangler pages dev)
 .wrangler/
 
+# Python (backend ETL)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# PostgREST: a downloaded binary, and a config file holding the database
+# password. Neither belongs in git. See data-pipeline/README.md for the setup.
+data-pipeline/tools/
+
+# Local agent and editor tooling. Each developer's own; none of it is shared.
+.claude
+.mcp.json
+.repowise/
+.private/
+
 # Rollup visualizer output
 stats.html

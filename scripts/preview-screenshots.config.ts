@@ -11,6 +11,13 @@ export default defineConfig({
   fullyParallel: true,
   reporter: 'list',
 
+  expect: {
+    // Same rationale as playwright.config.ts: the app loads the full dataset
+    // before painting, measured at ~8 s from a cold cache, so the 5 s default
+    // fires while it is still on an earlier loading stage.
+    timeout: 30_000,
+  },
+
   use: {
     baseURL: 'http://localhost:4173/',
     trace: 'on-first-retry',
@@ -28,7 +35,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'VITE_BASE_PATH=/ npm run build && VITE_BASE_PATH=/ npm run preview',
+    command: 'node preview-root.mjs',
     url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
   },

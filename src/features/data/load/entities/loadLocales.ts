@@ -8,9 +8,28 @@ import {
   PopulationSourceCategory,
 } from '@entities/locale/LocaleTypes';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadLocalesFromApi } from '../api/loadLocalesFromApi';
+
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadLocales(): Promise<Record<string, LocaleData> | void> {
+  // The file path is kept, not replaced. With VITE_API_URL unset - the default,
+  // and how anyone without a database runs the app - this is unchanged, and it
+  // is also the side the parity test compares against.
+  //
+  // Falls back to the TSV file on any API failure, matching organizations,
+  // writing systems and keyboards, instead of leaving the app stuck on
+  // CoreData's blocking "Error loading data" alert. Locales have no
+  // supplemental files layered on top the way territory does, so there is no
+  // equivalent skip logic to keep in step with this fallback.
+  if (isApiEnabled()) {
+    const fromApi = await loadLocalesFromApi();
+    if (fromApi != null) {
+      return fromApi;
+    }
+    console.warn('Locale API load failed; falling back to TSV files.');
+  }
   return await loadEntitiesFromFile<LocaleData>('data/tc/locales.tsv', parseLocaleLine);
 }
 

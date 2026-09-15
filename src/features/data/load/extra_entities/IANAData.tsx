@@ -7,7 +7,13 @@ import { VariantData, VariantDictionary } from '@entities/variant/VariantTypes';
 
 import { toDictionary, unique } from '@shared/lib/setUtils';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadVariantsFromApi } from '../api/loadVariantsFromApi';
+
 export async function loadIANAVariants(): Promise<VariantDictionary | void> {
+  if (isApiEnabled()) {
+    return await loadVariantsFromApi();
+  }
   return await fetch(`data/iana/variants.txt`)
     .then((res) => res.text())
     .then((text) => text.split('%%'))
@@ -178,6 +184,15 @@ export function connectVariants(
         // console.warn(`Language code ${langCode} not found for variant ${variant.ID}`);
       }
     });
+
+    // Link equivalent language if present
+    if (variant.equivalentLanguageCode) {
+      const equivalentLanguage = languages[variant.equivalentLanguageCode];
+      if (equivalentLanguage && equivalentLanguage.ID !== 'mis') {
+        variant.equivalentLanguage = equivalentLanguage;
+        equivalentLanguage.equivalentVariant = variant;
+      }
+    }
   });
 
   // Link locales to variants and vice versa

@@ -2,9 +2,8 @@ import {
   LanguageDictionary,
   LanguagesBySource,
   LanguageScope,
+  MAX_ISO_LANG_CODE_LENGTH,
 } from '@entities/language/LanguageTypes';
-
-const MAX_ISO_LANG_CODE_LENGTH = 3;
 
 /**
  * Recompose the structure of languages, leaving the primary index intact but also

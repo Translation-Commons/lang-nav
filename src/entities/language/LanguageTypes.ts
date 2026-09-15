@@ -48,6 +48,10 @@ export type ISO6392LanguageCode = ISO6393LanguageCode | ISO6395LanguageCode; // 
 export type Glottocode = string; // eg. stan1293, stan1288, clas1255, mand1415, indo1319
 export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocode | string;
 
+/** ISO 639 codes are 2 or 3 characters; a glottocode is 8. The length is what
+ *  separates them everywhere the two are stored in the same column. */
+export const MAX_ISO_LANG_CODE_LENGTH = 3;
+
 export enum LanguageScope {
   Family = 5, // larger value = broader scope
   Macrolanguage = 4,

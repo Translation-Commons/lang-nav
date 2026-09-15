@@ -21,7 +21,7 @@ import { groupLanguagesBySource } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
-import { loadLanguages } from './entities/loadLanguages';
+import { didLanguagesLoadFromApi, loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
 import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
@@ -87,8 +87,21 @@ export function useCoreData(): {
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
 
   async function loadCoreData(): Promise<void> {
+    // Awaited on its own, ahead of the Promise.all below, so the four ISO
+    // files can be skipped based on whether THIS call actually reached the
+    // API - not on isApiEnabled() alone. With the API on but unreachable,
+    // loadLanguages() now falls back to languages.tsv, which does not carry
+    // what those four files supply; skipping them on isApiEnabled() alone in
+    // that case would leave every language quietly missing its ISO family and
+    // macrolanguage data, with no error. Splitting this one call out of the
+    // Promise.all is what makes didLanguagesLoadFromApi() correct by the time
+    // the four lines below read it - inside a single array literal every
+    // entry is decided before any of them resolve, so the flag would still
+    // hold the PREVIOUS call's outcome.
+    const initialLangs = await loadLanguages();
+    const languagesServedFromApi = didLanguagesLoadFromApi();
+
     const [
-      initialLangs,
       isoLangs,
       macroLangs,
       langFamilies,
@@ -105,11 +118,85 @@ export function useCoreData(): {
       keyboardsKeyman,
       organizations,
     ] = await Promise.all([
-      loadLanguages(),
-      loadISOLanguages(),
-      loadISOMacrolanguages(),
-      loadISOLanguageFamilies(),
-      loadISOFamiliesToLanguages(),
+      // FOUR of the eight language files are skipped when the API is on, and
+      // the other four are not. Which is which was settled by measurement, not
+      // by reading: each file was withheld from the API path in turn and the
+      // result diffed against the full file path, since the question is never
+      // "does the database hold this data" but "does a LATER step overwrite
+      // what the database supplied".
+      //
+      // ALL LANGUAGE DATA COMES FROM THE DATABASE. The four files below run
+      // transformations; they do not carry facts the API lacks. See the note
+      // above that list.
+      //
+      // SKIPPED - withholding these changes nothing:
+      //
+      //  - iso-639-3.tab. It supplied ISO/BCP/UNESCO/CLDR codes, names, scopes
+      //    and 639-1/639-2b codes - 31,866 field differences before the loader
+      //    sent them. They are all columns of `language_source_attribute`, and
+      //    the query now selects them.
+      //  - families639-5.tsv. Family names, scopes and parents, 230 of them,
+      //    likewise now carried on the ISO and BCP attribute rows.
+      //  - macrolanguages.tsv. addISOMacrolanguageData assigns NOTHING: every
+      //    branch of it is a console.debug behind `DEBUG = false`.
+      //  - familiesToLanguages.tsv. It lists members by their ISO 639-1 code
+      //    where they have one - `zhx` contains `zh`, not `zho` - and the ETL
+      //    read the cell literally, so 182 of those edges were dropped and
+      //    `zho` had no ISO parent at all. The loader now resolves each member
+      //    through the 639-1 alias first, exactly as the frontend resolves it
+      //    through languagesBySource.BCP, and the edges are in the database.
+      //
+      // KEPT - and THE DATABASE HOLDS EVERY FACT THESE FOUR FILES CONTAIN.
+      //
+      // That is worth stating plainly, because the obvious reading of this list
+      // is "four columns still missing" and it is wrong. Verified against a
+      // loaded database: language_retirement has all 388 retirement rows with
+      // their remedy text and effective dates, language_code_alias has all
+      // 9,157 glottocode and ISO aliases, and 69 attribute rows carry
+      // is_manual_override for the override file. Nothing here is waiting on a
+      // schema change.
+      //
+      // What these four still supply is LOGIC, not data: a display rule, a
+      // browser-only convention, and two files that repair what the other two
+      // overwrite. Reproducing them in the mapper means reproducing the ORDER
+      // in which CoreData mutates the dictionaries, and that is what defeats
+      // it - groupLanguagesBySource runs BEFORE the retirement step and AFTER
+      // the mapper, so a glottocode the mapper must supply for the dictionary
+      // to register it is the same glottocode the end state must not have.
+      //
+      // Measured, on the file path: of 26,740 Combined parents, exactly ONE
+      // points at a languoid the Combined dictionary does not hold. So the two
+      // trees are not far apart - what differs is which layer applies the rule,
+      // not what the answer is.
+      //
+      // Five parallel requests is the deliberate stopping point. These files
+      // are static, CDN-cacheable and about 755 KB gzipped, against a query
+      // that already sends 16 MB raw to absorb the three that did move. The
+      // remaining saving is round trips at page load, and it is not worth
+      // changing what the Combined tree means to collect it.
+      //
+      //  - iso-639-3_Retirements.tab DELETES retired codes from the ISO, BCP,
+      //    CLDR and UNESCO dictionaries and rebuilds their Combined entry from
+      //    scratch. The database keeps those languoids fully populated - `ajp`
+      //    has a name, a scope and a parent in every source - because stripping
+      //    them is a display decision, not a fact about the data. No payload
+      //    can express a deletion the receiver is supposed to perform.
+      //  - glottolog.tsv sets Combined.parentLanguageCode to a GLOTTOCODE
+      //    (`kor` -> `kore1284`). The database deliberately never writes that:
+      //    there a parent is a foreign key, so the same value grafts the
+      //    Glottolog forest onto the Combined tree - language_ancestry 281k ->
+      //    477k, D10 failing on 994 rows.
+      //  - glottocodeToISO.tsv and languageFamilyCombinedOverrides.tsv are both
+      //    RESTORATIVE. They run after addGlottologLanguages and put back what
+      //    it overwrote. `cca` is the clearest case: the API delivers its
+      //    Combined parent `sai` correctly, addISORetirementsToLanguages then
+      //    replaces the whole languoid because `cca` is retired with no
+      //    changeTo, and the overrides file is what restores `sai`. Load-
+      //    bearing for exactly as long as the two steps before them run.
+      languagesServedFromApi ? Promise.resolve([]) : loadISOLanguages(),
+      languagesServedFromApi ? Promise.resolve([]) : loadISOMacrolanguages(),
+      languagesServedFromApi ? Promise.resolve([]) : loadISOLanguageFamilies(),
+      languagesServedFromApi ? Promise.resolve({}) : loadISOFamiliesToLanguages(),
       loadISORetirements(),
       loadGlottologLanguages(),
       loadGlottocodeToISO(),
@@ -118,6 +205,10 @@ export function useCoreData(): {
       loadLocales(),
       loadWritingSystems(),
       loadIANAVariants(),
+      // With the API on, loadKeyboardsGBoard returns BOTH platforms from one
+      // request and loadKeyboardsKeyman resolves to {}: they are rows of the
+      // same `keyboard` table, so asking twice would fetch the same payload
+      // twice. The merge below is a plain spread either way.
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
       loadOrganizations(),

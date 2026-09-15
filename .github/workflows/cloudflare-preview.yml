@@ -35,6 +35,12 @@ jobs:
         run: npm run build:cf
         env:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          # Public by design - see the same comment in deploy.yml. Safe for
+          # fork PRs too: this workflow uses `pull_request`, not
+          # `pull_request_target`, so GitHub withholds repo secrets from
+          # fork-originated runs regardless.
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
       - name: Deploy to Cloudflare Pages
         id: deploy

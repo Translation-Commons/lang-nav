@@ -1,0 +1,12 @@
+# lang-nav backend ETL
+#
+# Deliberately minimal. pandas is NOT used: the whole dataset is roughly
+# 78,000 rows, so plain dicts keyed by natural primary key are both faster
+# and lighter than DataFrames here, and they avoid a heavyweight dependency
+# for what is fundamentally string parsing plus hash joins.
+
+psycopg[binary]>=3.2
+python-dotenv>=1.0
+
+# Tests only
+pytest>=8.0

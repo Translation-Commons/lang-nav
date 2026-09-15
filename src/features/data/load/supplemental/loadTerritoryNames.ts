@@ -1,5 +1,24 @@
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
+/** Splits a semicolon-separated column, drops entries that repeat one of
+ *  `exclude` and duplicates within the column itself, and returns undefined
+ *  rather than an empty array - matching parseApiTerritory's treatment of the
+ *  same data (nameOtherEndonyms excludes only the endonym, nameOtherExonyms
+ *  only the display name - an "other endonym" equal to the display name is
+ *  legitimate, e.g. a territory whose local-language name coincides with its
+ *  English one), so a name doesn't appear twice under "other names" in the
+ *  UI. */
+function otherNames(
+  raw: string | undefined,
+  exclude: (string | undefined)[],
+): string[] | undefined {
+  if (!raw) return undefined;
+  const names = [...new Set(raw.split(';').map((s) => s.trim()))].filter(
+    (name) => !exclude.includes(name),
+  );
+  return names.length > 0 ? names : undefined;
+}
+
 export function loadTerritoryNames(
   getTerritory: (id: string) => TerritoryData | undefined,
 ): Promise<void> {
@@ -19,12 +38,8 @@ export function loadTerritoryNames(
         if (!territory) return;
 
         territory.nameEndonym = parts[2] ? parts[2].trim() : undefined;
-        territory.nameOtherEndonyms = parts[4]
-          ? parts[4].split(';').map((s) => s.trim())
-          : undefined;
-        territory.nameOtherExonyms = parts[5]
-          ? parts[5].split(';').map((s) => s.trim())
-          : undefined;
+        territory.nameOtherEndonyms = otherNames(parts[4], [territory.nameEndonym]);
+        territory.nameOtherExonyms = otherNames(parts[5], [territory.nameDisplay]);
         territory.names = [
           territory.nameDisplay,
           territory.nameEndonym,

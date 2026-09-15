@@ -10,6 +10,11 @@ export default defineConfig({
   snapshotPathTemplate: '{snapshotDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
 
   expect: {
+    // The app loads the full dataset before it paints a table - measured at
+    // ~8 s from a cold cache - so the 5 s default fires while it is still on
+    // "Loading stage: 2 of 4". Every table test waits on that text, so without
+    // this they all fail on a machine where the webServer actually starts.
+    timeout: 30_000,
     toHaveScreenshot: {
       maxDiffPixelRatio: 0.005,
       threshold: 0.1,
@@ -33,7 +38,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'VITE_BASE_PATH=/ npm run build && VITE_BASE_PATH=/ npm run preview',
+    command: 'node scripts/preview-root.mjs',
     url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
   },
