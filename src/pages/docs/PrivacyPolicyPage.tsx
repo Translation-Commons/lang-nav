@@ -10,7 +10,7 @@ const PrivacyPolicyPage: React.FC = () => {
     <DocsPageContainer title="Privacy Policy">
       <div>Last updated: September 2026</div>
       <div>
-        Language Navigator ("LangNav") is an open-source project with information about languages,
+        Language Navigator (LangNav) is an open-source project with information about languages,
         writing systems, and how they&apos;re used. We only collect the data we need to run and
         improve the site, and anything beyond that happens only if you agree to it.
       </div>
