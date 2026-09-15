@@ -1,4 +1,4 @@
-import { SlashIcon, XIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
@@ -185,7 +185,11 @@ const FilterPath: React.FC = () => {
   ];
 
   if (filters.filter((f) => f).length === 0) {
-    return <Deemphasized>No filters applied</Deemphasized>;
+    return (
+      <span className="text-xs">
+        <Deemphasized>No filters applied</Deemphasized>
+      </span>
+    );
   }
 
   return (
@@ -193,10 +197,7 @@ const FilterPath: React.FC = () => {
       {filters
         .filter((f) => f)
         .map((filter, i) => (
-          <Fragment key={i}>
-            {i !== 0 && <SlashIcon size="1em" />}
-            {filter}
-          </Fragment>
+          <Fragment key={i}>{filter}</Fragment>
         ))}
     </span>
   );
