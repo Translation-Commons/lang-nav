@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
 import { EntityType } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 

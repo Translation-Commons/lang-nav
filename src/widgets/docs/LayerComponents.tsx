@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import Modal from '@features/layers/modal/ModalButton';
 import { getNewURL } from '@features/params/getNewURL';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 
-import { toSentenceCase } from '@shared/lib/stringUtils';
 import { Button } from '@shared/ui/button';
 import { ButtonGroup } from '@shared/ui/button-group';
+import EnumDropdown from '@shared/ui/EnumDropdown';
 import LinkButton from '@shared/ui/LinkButton';
 
 import DocsCard from './DocsCard';
@@ -52,10 +50,13 @@ const LayerComponents: React.FC = () => {
         <DocsCard title="Selector">
           Selectors are used for selecting from a list of options. There are various display styles:
           <DocsCardGrid>
-            <DocsCard title="Inline Dropdown">
-              More compact, works in short text segments (does not support line wrapping well
-              though).
-              <DropdownExample display={SelectorDisplay.InlineDropdown} />
+            <DocsCard title="Dropdown">
+              More compact, can be used separately or inline.
+              <EnumDropdown
+                options={['Option 1', 'Option 2', 'Option 3', 'Option 4']}
+                value="Option 2"
+                onChange={() => {}}
+              />
             </DocsCard>
             <DocsCard title="Button Group">
               When you want to show all options. Best with short options. Use the shadcn{' '}
@@ -65,10 +66,6 @@ const LayerComponents: React.FC = () => {
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="outline">Outline</Button>
               </ButtonGroup>
-            </DocsCard>
-            <DocsCard title="Vertical List">
-              When showing options in a vertical column. If the list is too long it is clipped.
-              <DropdownExample display={SelectorDisplay.FilterList} />
             </DocsCard>
           </DocsCardGrid>
         </DocsCard>
@@ -98,21 +95,6 @@ const LayerComponents: React.FC = () => {
         </DocsCard>
       </DocsSection>
     </>
-  );
-};
-
-const DropdownExample: React.FC<{ display: SelectorDisplay }> = ({ display }) => {
-  const [selected, setSelected] = useState('Option 2');
-  return (
-    <Selector
-      display={display}
-      selectorLabel={'Example ' + toSentenceCase(display)}
-      selectorDescription="Selector description goes here."
-      options={['Option 1', 'Option 2', 'Option 3', 'Option 4']}
-      onChange={setSelected}
-      selected={selected}
-      getOptionDescription={(v) => v + ' description'}
-    />
   );
 };
 

@@ -14,14 +14,6 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import FilterSelector from '../FilterSelector';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
-  useSelectorDisplay: vi.fn().mockReturnValue({ display: 'filterList' }),
-  SelectorDisplay: { Dropdown: 'dropdown', FilterList: 'filterList' },
-  SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
-}));
 
 describe('VitalitySelector', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
