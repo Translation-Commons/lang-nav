@@ -64,9 +64,9 @@ function updateEntityNamesAndCodes(
   // Update language codes and other values used for filtering
   languages.forEach((lang) => {
     const specific = lang[languageSource];
-    lang.codeDisplay = specific.code ?? lang.ID;
-    lang.nameDisplay = specific.name ?? lang.nameCanonical;
-    lang.scope = specific.scope ?? lang.scope;
+    lang.codeDisplay = specific?.code ?? lang.ID;
+    lang.nameDisplay = specific?.name ?? lang.nameCanonical;
+    lang.scope = specific?.scope ?? lang.scope;
   });
 
   // Update locales too, their codes and their names

@@ -16,13 +16,7 @@ const EnumButtons = <T extends Key>({ options, paramKey, getLabel }: Props<T>) =
 
   const click = useCallback(
     (option: T) => {
-      if ((paramValue as T[]).includes(option)) {
-        updatePageParams({
-          [paramKey]: (paramValue as T[]).filter((m) => m !== option),
-        });
-      } else {
-        updatePageParams({ [paramKey]: [...(paramValue as T[]), option] });
-      }
+      updatePageParams({ [paramKey]: option });
     },
     [paramValue, paramKey, updatePageParams],
   );
