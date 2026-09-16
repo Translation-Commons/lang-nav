@@ -163,6 +163,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.languageFamilyFilter:
       case PageParamKey.territoryFilter:
       case PageParamKey.writingSystemFilter:
+      case PageParamKey.orgFilter:
         params[key] = value; // Default to undefined if empty
         break;
       default:

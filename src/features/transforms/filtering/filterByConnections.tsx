@@ -32,13 +32,23 @@ export function getFilterByConnections({
   const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
   const filterByLanguage = lang ? filterBy[Field.Language] : () => true;
   const filterByLanguageFamily = lang ? filterBy[Field.LanguageFamily] : () => true;
+  const filterByOrganization = filterBy[Field.Organization]
+    ? filterBy[Field.Organization]
+    : () => true;
   return useCallback(
     (ent: EntityData) =>
       filterByTerritory(ent) &&
       filterByWritingSystem(ent) &&
       filterByLanguage(ent) &&
-      filterByLanguageFamily(ent),
-    [filterByTerritory, filterByWritingSystem, filterByLanguage, filterByLanguageFamily],
+      filterByLanguageFamily(ent) &&
+      filterByOrganization(ent),
+    [
+      filterByTerritory,
+      filterByWritingSystem,
+      filterByLanguage,
+      filterByLanguageFamily,
+      filterByOrganization,
+    ],
   );
 }
 

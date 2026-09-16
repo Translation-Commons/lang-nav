@@ -71,6 +71,8 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
       return 'Variant';
     case Field.Platform:
       return 'Platform';
+    case Field.Organization:
+      return 'Organization';
     case Field.SourceForLanguage:
       return 'Language List / Language Standard';
     case Field.SourceForPopulation:
@@ -192,6 +194,7 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
     case Field.Region:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       return '';

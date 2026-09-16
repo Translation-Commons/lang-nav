@@ -115,7 +115,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
                 >
                   <div>{suggestion.label}</div>
                   <div className="ml-auto font-mono text-xs text-muted-foreground">
-                    {suggestion.entID}
+                    {suggestion.ent?.codeDisplay ?? suggestion.entID}
                   </div>
                 </ComboboxItem>
               ))}

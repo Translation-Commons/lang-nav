@@ -4,7 +4,11 @@ import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
-import { getLanguageForEntity, getTerritoryForEntity } from '../fields/getEntityConnection';
+import {
+  getLanguageForEntity,
+  getOrganizationsForEntity,
+  getTerritoryForEntity,
+} from '../fields/getEntityConnection';
 
 import { FilterFunctionType } from './filter';
 
@@ -54,6 +58,17 @@ export function buildFilterByLanguageSource(languageSource: LanguageSource): Fil
     if (!language) return true;
     const sources = getLanguageSourcesForEntity(ent);
     return sources.includes(languageSource);
+  };
+}
+
+export function buildFilterByOrganization(
+  orgFilter: string /* Organization ID */,
+): FilterFunctionType {
+  if (!orgFilter) return () => true;
+
+  return (ent: EntityData): boolean => {
+    const orgs = getOrganizationsForEntity(ent);
+    return orgs?.some((org) => org.ID === orgFilter) ?? false;
   };
 }
 
