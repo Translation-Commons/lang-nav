@@ -58,7 +58,7 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const input = screen.getByPlaceholderText('Name or code');
+    const input = screen.getByPlaceholderText('Search for a language');
     // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(input));
 
@@ -100,7 +100,7 @@ describe('LanguageFilterSelector', () => {
       expect(buttons[i]).toHaveTextContent(text),
     );
 
-    const btn = screen.getByPlaceholderText('Name or code');
+    const btn = screen.getByPlaceholderText('Search for a language');
     // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(btn));
 
@@ -125,7 +125,7 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const btn = screen.getByPlaceholderText('Name or code');
+    const btn = screen.getByPlaceholderText('Search for a language');
     // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(btn));
 
@@ -151,7 +151,7 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const btn = screen.getByPlaceholderText('Name or code');
+    const btn = screen.getByPlaceholderText('Search for a language');
     // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(btn));
 
