@@ -1,0 +1,54 @@
+#codeDisplay		axl.gm	#ethinicity
+#nameDisplay		AXL Gambia	
+#isoRegionCode	GM		
+#yearCollected	2023		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Home		
+### Population Surveyed ###			
+#population	2,673,700		
+#responsesPerIndividual	1		
+### Data Constraints ###			
+#quantity	count		
+### Creator ###			
+#collectorType	Secondary		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/afrique/gambie.htm		
+#datePublished	2023-11-16		
+#dateAccessed	2026-05-28		
+#documentName	Gambie		
+#tableName	Les ethnies		
+#columnName	État fédéré; Superficie; Population		
+#citation	Canvin, M. (1996). The educational implications of multilingualism for Cameroon and the Gambia: A comparative study(Master's thesis, University of Reading, Whiteknights, United Kingdom).		
+			
+Language Code	Language maternelle	Population	Ethnie
+man/mnk	Mandinka	1 137 000	Mandingues
+ful/fuc	Peul	459 000	Fulani
+wol/wof	Wolof	382 000	Wolof
+snk	Soninke	158 000	Soninké
+dyo	Jola-Fonyi	142 000	Jola-Fonyi
+krx	Karone	80 000	Jola-Karon
+srr	Serer	64 000	Sérère
+mfv	Manjak	46 000	Mandjaque
+ara/mey	Hassaniya Arabic	39 000	Maure
+bcz	Bainouk	35 000	Bainouk
+man/mlq	Maninka	31 500	Maninké
+pov	Portuguese Creole	27 000	Créole
+man/bam	Bambara	26 000	Bambara
+kri	Krio	21 000	Aku
+hau	Hausa	13 000	Haoussa
+yor	Yoruba	13 000	Yorouba
+ibo	Igbo	7 700	Igbo
+man/jad	Jahanka	6 200	Jahanka
+sus	Susu	5 200	Soussou
+ara/apc	Lebanese Arabic	3 800	Libanais
+bjt	Balanta-Ganja	3 400	Balanta
+man/kao	Khassonke	2 700	Khassonké
+msw	Mansoanka	2 700	Maswanka
+eng	English	2 600	Britannique
+knf	Mankanya	2 500	Mankanya
+bda	Bayot	1 300	Jola-Bayote
+fra	French	1 100	Français
+mul	Others	33 000	Autres

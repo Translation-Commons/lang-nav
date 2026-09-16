@@ -9075,7 +9075,6 @@ ehs_JP	Miyakubo Sign Language (Japan)	宮窪手話
 eja_GW	Ejamat (Guinea-Bissau)				
 ekc_AU	Karnic, Eastern (Australia)				
 elx_IR	Elamite (Iran)				
-emk_GM	Eastern Maninkakan (Gambia)				
 emk_GN	Eastern Maninkakan (Guinea)				
 emm_MX	Mamulique (Mexico)				
 emq_CN	Eastern Minyag (China)				
@@ -9925,7 +9924,6 @@ wma_NG	Mawa (Nigeria) (Nigeria)
 wmg_CN	Western Minyag (China)				
 wmn_NC	Waamwang (New Caledonia)				
 wnn_AU	Wunumara (Australia)				
-wof_GM	Gambian Wolof (Gambia)				
 woy_ET	Weyto (Ethiopia)				
 wtb_TZ	Matambwe (Tanzania)				
 wum_GA	Wumbvu (Gabon)				
@@ -11016,3 +11014,20 @@ ddn_NE	Dendi (Niger)			102000
 dzg_NE	Dazaga (Niger)			86000	
 kbl_NE	Kanembu (Niger)			25000	
 thz_NE	Tayart Tamajeq (Niger)			833000	
+emk_ML	Eastern Maninka (Mali)				
+emk_CI	Eastern Maninka (Ivory Coast)				
+mlq_GM	Western Maninka (Gambia)			31500	
+mlq_ML	Western Maninka (Mali)				
+wof_GM	Gambian Wolof (Gambia)			382000	
+dyo_GM	Jola-Fonyi (Gambia)			142000	
+ara_GM	Arabic (Gambia)			42800	
+mey_GM	Hassaniyya (Gambia)			39000	
+pov_GM	Upper Guinea Crioulo (Gambia)			27000	
+jad_GM	Jahanka (Gambia)			6200	
+bjt_GM	Balanta-Ganja (Gambia)			3400	
+kao_GM	Xaasongaxango (Gambia)			2700	
+knf_GM	Mankanya (Gambia)			2500	
+krx_GM	Karon (Gambia)			80000	
+bcz_GM	Bainouk-Gunyaamolo (Gambia)			35000	
+msw_GM	Mansoanka (Gambia)			2700	
+bda_GM	Bayot (Gambia)			1300	
