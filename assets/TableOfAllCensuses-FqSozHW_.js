@@ -1,0 +1,1 @@
+import{bm as m,r as u}from"./index-qaZNjn4o.js";import{r}from"./vendor-react-qLRreErP.js";import{I as l,T as c}from"./TableID-BJ-ZP8P8.js";import{g as o}from"./LocaleColumns-CUmSuCpJ.js";const x=({organization:s})=>{const{censuses:e}=m(),t=r.useMemo(()=>o(),[]);return u.jsx(l,{tableID:c.Censuses,ents:s?(s==null?void 0:s.censuses)??[]:Object.values(e),columns:t})};export{x as T};
