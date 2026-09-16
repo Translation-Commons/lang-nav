@@ -10,7 +10,7 @@ import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableColumnHeader from './TableColumnHeader';
 import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
-import TableID, { isPrimaryEntityTable } from './TableID';
+import TableID from './TableID';
 import TableValueType from './TableValueType';
 
 type Props<T> = {
@@ -20,7 +20,7 @@ type Props<T> = {
 };
 
 function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
-  const isTall = isPrimaryEntityTable(tableID); // needed for vertical overflow
+  const isTall = false; // isPrimaryEntityTable(tableID); // needed for vertical overflow
 
   return (
     <div className={'w-full relative text-xs overflow-x-auto' + (isTall ? ' h-screen' : '')}>

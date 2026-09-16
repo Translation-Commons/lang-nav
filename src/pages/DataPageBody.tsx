@@ -2,6 +2,7 @@ import { PlusIcon } from 'lucide-react';
 import React from 'react';
 
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
+import PageFooter from '@widgets/PageFooter';
 
 import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
@@ -26,35 +27,38 @@ type Props = {
 
 const DataPageBody: React.FC<Props> = ({ sidebarIsOpen, openSidebar }) => {
   return (
-    <main className="px-4 py-2 flex-1 w-full h-full overflow-auto">
-      <EntityTypeTabs />
-      <LanguageFocusTabs />
-      <div className="flex items-center justify-between w-full mb-4">
-        <div className="flex items-center gap-2 text-sm">
-          <ResultCount />
-          <FilterPath />
-          {!sidebarIsOpen && (
-            <Button variant="outline" style={{ padding: '0.25em' }} onClick={openSidebar}>
-              <PlusIcon />
-              filters
-            </Button>
-          )}
+    <div className="flex-1 w-full h-full overflow-auto">
+      <main className="px-4 py-2 ">
+        <EntityTypeTabs />
+        <LanguageFocusTabs />
+        <div className="flex items-center justify-between w-full mb-4">
+          <div className="flex items-center gap-2 text-sm">
+            <ResultCount />
+            <FilterPath />
+            {!sidebarIsOpen && (
+              <Button variant="outline" style={{ padding: '0.25em' }} onClick={openSidebar}>
+                <PlusIcon />
+                filters
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center justify-end gap-2">
+            <FieldFocusSelector />
+            <ScalePopupCard />
+            <ColorPopupCard />
+            <SortPopupCard />
+            <ViewSelector />
+          </div>
         </div>
-        <div className="flex items-center justify-end gap-2">
-          <FieldFocusSelector />
-          <ScalePopupCard />
-          <ColorPopupCard />
-          <SortPopupCard />
-          <ViewSelector />
+        <div className="max-w-5xl mx-auto p-4 text-center">
+          <ContainErrorsAndSuspense>
+            <DataViews />
+          </ContainErrorsAndSuspense>
         </div>
-      </div>
-      <div className="max-w-5xl mx-auto p-4 text-center">
-        <ContainErrorsAndSuspense>
-          <DataViews />
-        </ContainErrorsAndSuspense>
-      </div>
-      <LoadingStageDisplay />
-    </main>
+        <LoadingStageDisplay />
+      </main>
+      <PageFooter />
+    </div>
   );
 };
 

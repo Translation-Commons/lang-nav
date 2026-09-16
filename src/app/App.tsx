@@ -26,22 +26,15 @@ function App() {
           <AmplitudeTracker />
           <PageNavBar />
           <div
-            style={
-              fitsViewport
-                ? {
-                    flex: 1,
-                    minWidth: 0,
-                    minHeight: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'auto',
-                  }
-                : { flex: 1, minWidth: 0 }
+            className={
+              'flex-1 min-w-0' + (fitsViewport ? ' flex flex-col min-h-0 overflow-auto' : '')
             }
           >
             <PageRoutes />
           </div>
-          <PageFooter />
+
+          {/* Footer is in the data content on the data page (rather than being globally set here) */}
+          {!location.pathname.includes(LangNavPageName.Data) && <PageFooter />}
           <ConsentBanner />
         </HoverCardProvider>
       </DeferredDataProvider>
