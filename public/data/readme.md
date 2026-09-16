@@ -25,7 +25,7 @@ These datasets are aggregated and curated by the LangNav team. In some places th
   - accessed 2026-08-10
 - hyperglot.tsv
   - https://github.com/rosettatype/hyperglot
-  - accessed 2026-8-18
+  - accessed 2026-08-18
 
 Additionally, there are folders containing multiple datasets, grouped by the originating source:
 
