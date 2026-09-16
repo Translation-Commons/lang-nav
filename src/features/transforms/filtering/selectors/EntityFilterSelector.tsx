@@ -1,61 +1,49 @@
 import React, { useCallback } from 'react';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
-import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
-import TextInput from '@features/params/ui/TextInput';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
+import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 
 import EntityFilterSuggestionButtons from './EntityFilterSuggestionButtons';
 
 type Props = {
-  selectorLabel: string;
-  selectorDescription?: React.ReactNode;
   getSuggestions: (query: string) => Promise<Suggestion[]>;
   pageParameter: PageParamKey;
+  showButtons?: boolean;
 };
 
 const EntityFilterSelector: React.FC<Props> = ({
-  selectorLabel,
-  selectorDescription,
   getSuggestions,
   pageParameter,
+  showButtons = true,
 }) => {
   const params = usePageParams();
-  const { display } = useSelectorDisplay();
 
-  const value = params[pageParameter] as string;
+  const currentID = params[pageParameter] as string;
   const onSubmit = useCallback(
-    (value: string) => {
-      if (params[pageParameter] === value) params.updatePageParams({ [pageParameter]: '' });
-      else params.updatePageParams({ [pageParameter]: value });
+    (s: Suggestion) => {
+      if (params[pageParameter] === s.entID) params.updatePageParams({ [pageParameter]: '' });
+      else params.updatePageParams({ [pageParameter]: s.entID });
     },
     [params.updatePageParams, params[pageParameter], pageParameter],
   );
 
   return (
-    <div className={'selector ' + display}>
-      {display !== SelectorDisplay.InlineDropdown && (
-        <SelectorLabel label={selectorLabel} description={selectorDescription} />
-      )}
-      {display !== SelectorDisplay.InlineDropdown && (
+    <div className="flex flex-col gap-1">
+      {showButtons && (
         <EntityFilterSuggestionButtons
           getSuggestions={getSuggestions}
           onSubmit={onSubmit}
-          value={value}
+          currentID={currentID}
         />
       )}
-      <div>
-        <TextInput
-          inputStyle={{ minWidth: '8em' }}
-          placeholder="Name or code"
-          getSuggestions={getSuggestions}
-          onSubmit={onSubmit}
-          pageParameter={pageParameter}
-          value={value}
-        />
-      </div>
+      <EntitySearchCombobox
+        placeholder="Name or code"
+        getSuggestions={getSuggestions}
+        onSelect={onSubmit}
+        pageParameter={pageParameter}
+      />
     </div>
   );
 };

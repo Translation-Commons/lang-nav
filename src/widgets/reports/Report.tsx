@@ -33,7 +33,9 @@ const ReportVariantsAnnotationTool = React.lazy(() => import('./ReportVariantsAn
 const Report: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
   return (
     <ContainErrorsAndSuspense>
-      <SpecificReport reportID={reportID} />
+      <div className="text-sm">
+        <SpecificReport reportID={reportID} />
+      </div>
     </ContainErrorsAndSuspense>
   );
 };

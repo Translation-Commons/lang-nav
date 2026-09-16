@@ -5,7 +5,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';

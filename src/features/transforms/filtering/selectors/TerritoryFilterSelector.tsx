@@ -2,26 +2,37 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
-import { useScopeFilter } from '../filter';
 import { useFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
+import useFilters from '../useFilters';
 
 import EntityFilterSelector from './EntityFilterSelector';
 
-const TerritoryFilterSelector: React.FC = () => {
+type Props = {
+  showButtons?: boolean;
+};
+
+const TerritoryFilterSelector: React.FC<Props> = ({ showButtons = true }) => {
   const { territories } = useDataContext();
-  const filterByScope = useScopeFilter();
+  const filters = useFilters();
   const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
-    const getMatchDistance = (territory: TerritoryData): number =>
-      filterByScope(territory) ? 0 : 1;
+    const getMatchDistance = (territory: TerritoryData): number => {
+      let score = 0;
+      if (!filters[Field.TerritoryScope](territory)) score += 1;
+      if (!filters[Field.LanguageFamily](territory)) score += 2;
+      return score;
+    };
     const getMatchGroup = (territory: TerritoryData): string => {
-      if (!filterByScope(territory)) return 'not ' + filterLabels.territoryScope;
+      if (!filters[Field.TerritoryScope](territory)) return 'not ' + filterLabels.territoryScope;
+      if (!filters[Field.LanguageFamily](territory))
+        return 'not ' + filterLabels.languageFamilyFilter;
       return 'matched';
     };
 
@@ -30,14 +41,13 @@ const TerritoryFilterSelector: React.FC = () => {
       getMatchDistance,
       getMatchGroup,
     );
-  }, [territories, filterByScope, filterLabels]);
+  }, [territories, filters, filterLabels]);
 
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="In Territory"
-      selectorDescription="Filter results by ones relevant in a territory."
       pageParameter={PageParamKey.territoryFilter}
+      showButtons={showButtons}
     />
   );
 };

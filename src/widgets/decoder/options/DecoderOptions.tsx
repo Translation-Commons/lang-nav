@@ -1,10 +1,6 @@
 import { SquareCheckIcon, SquareIcon } from 'lucide-react';
 import React from 'react';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import TerritoryFilterSelector from '@features/transforms/filtering/selectors/TerritoryFilterSelector';
 
 import { Button } from '@shared/ui/button';
@@ -48,11 +44,7 @@ const DecoderOptions: React.FC = () => {
             <DecoderLanguageSourceSelector />
             <tr>
               <td>Relevant to territory</td>
-              <td className="text-sm">
-                <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-                  <TerritoryFilterSelector />
-                </SelectorDisplayProvider>
-              </td>
+              <TerritoryFilterSelector showButtons={false} />
             </tr>
             {direction === DecoderDirection.NamesToCodes && (
               <tr>

@@ -6,7 +6,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 import LoadingStage from '@features/data/context/LoadingStage';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { EntityType, View } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion } from '@features/params/Suggestion';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 import useIntroSearchSuggestions from '@features/transforms/search/useIntroSearchSuggestions';

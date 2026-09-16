@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { PageParamKey } from '@features/params/PageParamTypes';
+import { Suggestion } from '@features/params/Suggestion';
+import usePageParams from '@features/params/usePageParams';
 
 import { groupBy } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
@@ -25,6 +27,7 @@ type Props = {
   ariaLabel?: string;
   emptyMessage?: string;
   className?: string;
+  pageParameter?: PageParamKey;
 };
 
 const EntitySearchCombobox: React.FC<Props> = ({
@@ -35,15 +38,20 @@ const EntitySearchCombobox: React.FC<Props> = ({
   ariaLabel,
   emptyMessage,
   className,
+  pageParameter,
 }) => {
+  const params = usePageParams();
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState(
+    (pageParameter && (params[pageParameter] as string)) || '',
+  );
   const trackSearch = useTrackSearch();
 
   const onSubmit = useCallback(
     (value: Suggestion | null) => {
       if (!value) return;
       trackSearch(value.searchString + value.entID, 'suggestion');
+      setSearchString((value.ent?.nameDisplay ?? '') + ' [' + value.entID + ']');
       onSelect(value);
     },
     [trackSearch, onSelect],
@@ -99,7 +107,12 @@ const EntitySearchCombobox: React.FC<Props> = ({
                 </ComboboxLabel>
               )}
               {items.map((suggestion) => (
-                <ComboboxItem key={suggestion.entID} value={suggestion} className="cursor-pointer">
+                <ComboboxItem
+                  key={suggestion.entID}
+                  value={suggestion}
+                  className="cursor-pointer"
+                  data-testid="entity-combobox-suggestion"
+                >
                   <div>{suggestion.label}</div>
                   <div className="ml-auto font-mono text-xs text-muted-foreground">
                     {suggestion.entID}

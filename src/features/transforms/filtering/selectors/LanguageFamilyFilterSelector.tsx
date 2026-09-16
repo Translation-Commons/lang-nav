@@ -23,11 +23,13 @@ const LanguageFamilyFilterSelector: React.FC = () => {
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {
       let dist = 0;
-      if (!filterByWritingSystem(language)) dist += 1;
-      if (!filterByTerritory(language)) dist += 2;
+      if (language?.parentLanguage != null) dist += 1;
+      if (!filterByWritingSystem(language)) dist += 2;
+      if (!filterByTerritory(language)) dist += 4;
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
+      if (language?.parentLanguage != null) return 'not a top-level language family';
       if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
       return 'matched';
@@ -46,13 +48,6 @@ const LanguageFamilyFilterSelector: React.FC = () => {
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="Language Family"
-      selectorDescription={
-        <>
-          Filter results to those relevant to a specific language family. This list only includes
-          ISO language families because we have the most data for them.
-        </>
-      }
       pageParameter={PageParamKey.languageFamilyFilter}
     />
   );

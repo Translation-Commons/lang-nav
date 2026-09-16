@@ -14,6 +14,9 @@ import LanguageFilterSelector from '../LanguageFilterSelector';
 
 const mockUpdatePageParams = vi.fn();
 
+vi.mock('react-router-dom', () => ({
+  useLocation: vi.fn().mockReturnValue({ pathname: '/data' }),
+}));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
@@ -45,7 +48,10 @@ describe('LanguageFilterSelector', () => {
 
   it('basically renders', async () => {
     await waitFor(async () => render(<LanguageFilterSelector />));
-    expect(screen.getByText(/Language/)).toBeTruthy();
+    const buttons = screen.getAllByTestId('entity-suggestion-button');
+    expect(buttons.length, 'buttons appear').toBeGreaterThan(0);
+    const dropdownItems = screen.queryAllByTestId('entity-combobox-suggestion');
+    expect(dropdownItems.length, 'dropdown is not visible yet').toBe(0);
   });
 
   it('suggests all languages when no search string is provided', async () => {
@@ -57,9 +63,8 @@ describe('LanguageFilterSelector', () => {
     await waitFor(async () => await user.click(input));
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
+    const items = screen.getAllByTestId('entity-combobox-suggestion');
     const rows = [
-      'Pick a suggestion or type to filter',
       // Does not suggest language families
       'English',
       'Spanish',
@@ -69,21 +74,19 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Esperanto',
       'Chinese',
-      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
 
     // User types in German, suggestions should filter to German
     await waitFor(async () => await user.type(input, 'German'));
-    const rows2 = ['Pick a suggestion or press [enter] to filter by "German"', 'German'];
-    expect(items.length).toBe(rows2.length + 1);
-    rows2.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
-    expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
+    const newItems = screen.getAllByTestId('entity-combobox-suggestion');
+    expect(newItems.length).toBe(1);
+    expect(newItems[0]).toHaveTextContent('German');
 
     // User clicks on German, the button text should update and updatePageParams called
-    await waitFor(async () => await user.click(items[0]));
-    expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German' });
+    await waitFor(async () => await user.click(newItems[0]));
+    expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'deu' });
   });
 
   it('without scope filter, language families appear in original order', async () => {
@@ -91,14 +94,19 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
+    // After click the mocked TextInput will render suggestion items
+    const buttons = screen.getAllByTestId('entity-suggestion-button');
+    ['English', 'Spanish', 'French', 'German', 'Italian'].forEach((text, i) =>
+      expect(buttons[i]).toHaveTextContent(text),
+    );
+
     const btn = screen.getByPlaceholderText('Name or code');
     // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(btn));
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
+    const items = screen.getAllByTestId('entity-combobox-suggestion');
     const rows = [
-      'Pick a suggestion or type to filter',
       'English',
       'Spanish',
       'French',
@@ -107,7 +115,6 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Esperanto',
       'Chinese',
-      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
@@ -123,19 +130,17 @@ describe('LanguageFilterSelector', () => {
     await waitFor(async () => await user.click(btn));
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
+    const items = screen.getAllByTestId('entity-combobox-suggestion');
     const rows = [
-      'Pick a suggestion or type to filter',
       'English',
       'German',
-      'not related to language family with code "gem"',
+      // 'not related to language family with code "gem"',
       'Spanish',
       'French',
       'Italian',
       'Russian',
       'Esperanto',
       'Chinese',
-      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
@@ -151,9 +156,8 @@ describe('LanguageFilterSelector', () => {
     await waitFor(async () => await user.click(btn));
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
+    const items = screen.getAllByTestId('entity-combobox-suggestion');
     const rows = [
-      'Pick a suggestion or type to filter',
       'English',
       'Spanish',
       'French',
@@ -161,9 +165,8 @@ describe('LanguageFilterSelector', () => {
       'Italian',
       'Russian',
       'Esperanto',
-      'not individual language',
+      // 'not individual language',
       'Chinese',
-      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
