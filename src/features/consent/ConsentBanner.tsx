@@ -1,8 +1,13 @@
+import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
+
+import { Button } from '@shared/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@shared/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@shared/ui/collapsible';
 
 import useConsent from './useConsent';
 
@@ -12,43 +17,51 @@ const ConsentBanner: React.FC = () => {
   if (!needsDecision) return null;
 
   return (
-    <div
+    <Card
       role="dialog"
       aria-modal="false"
       aria-label="Cookie consent"
-      style={{
-        position: 'fixed',
-        left: '1em',
-        right: '1em',
-        bottom: '1em',
-        maxWidth: '640px',
-        margin: '0 auto',
-        padding: '1em',
-        backgroundColor: 'var(--color-background)',
-        color: 'var(--color-text)',
-        border: '1px solid var(--color-text-secondary)',
-        borderRadius: '0.75em',
-        boxShadow: '0 8px 24px var(--color-shadow)',
-        zIndex: 1000,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75em',
-      }}
+      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl shadow-lg"
     >
-      <div>
-        We use analytics to understand how people use this site and improve it. You can accept or
-        decline non-essential analytics. Read more in our{' '}
-        <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink>.
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em', justifyContent: 'flex-end' }}>
-        <button type="button" className="primary" onClick={decline}>
+      <CardHeader>
+        <CardDescription>
+          We collect some data to understand how people use this site and improve it. Read more in
+          our <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink>.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Collapsible>
+          <CollapsibleTrigger
+            render={
+              <Button variant="ghost" size="sm" className="group/trigger -ml-2">
+                What counts as essential vs. analytics?
+                <ChevronDownIcon
+                  data-icon="inline-end"
+                  className="transition-transform group-data-[panel-open]/trigger:rotate-180"
+                />
+              </Button>
+            }
+          />
+          <CollapsibleContent className="flex flex-col gap-2 pt-2 text-xs/relaxed text-muted-foreground">
+            <div>
+              <strong className="text-foreground">Essential (always on):</strong> an anonymous visit
+              count with the page path and referrer. No cookies and no ID that persists between
+              visits.
+            </div>
+            <div>
+              <strong className="text-foreground">Analytics (your choice):</strong> page views with
+              their filters, searches, sorting and exports, so we can see which features get used.
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </CardContent>
+      <CardFooter className="justify-end gap-2">
+        <Button variant="outline" onClick={decline}>
           Decline
-        </button>
-        <button type="button" className="primary" onClick={accept}>
-          Accept
-        </button>
-      </div>
-    </div>
+        </Button>
+        <Button onClick={accept}>Accept</Button>
+      </CardFooter>
+    </Card>
   );
 };
 
