@@ -1,6 +1,5 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { OrthographyDictionary } from '@entities/orthography/OrthographyTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 export async function loadOrthographies(): Promise<OrthographyDictionary | void> {
   return await fetch('data/other_sources/hyperglot.tsv')
