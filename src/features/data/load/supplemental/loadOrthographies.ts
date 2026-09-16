@@ -1,11 +1,11 @@
 import { LanguageCode } from '@entities/language/LanguageTypes';
-import { LanguageOrthography } from '@entities/orthography/OrthographyTypes';
+import { Orthography } from '@entities/orthography/OrthographyTypes';
 
 export async function loadOrthographies(): Promise<Record<
   LanguageCode,
-  LanguageOrthography[]
+  Orthography[]
 > | void> {
-  return await fetch('data/orthographies/hyperglot.tsv')
+  return await fetch('data/other_sources/hyperglot.tsv')
     .then((res) => res.text())
     .then((text) =>
       text
@@ -14,17 +14,17 @@ export async function loadOrthographies(): Promise<Record<
         .filter((line) => line.trim() !== '' && !line.startsWith('#')),
     )
     .then((lines) => {
-      const result: Record<LanguageCode, LanguageOrthography[]> = {};
+      const result: Record<LanguageCode, Orthography[]> = {};
 
       lines.forEach((line) => {
         const parts = line.split('\t');
         const code = parts[0];
         const scriptName = parts[1];
-        const baseCharacters = parts[2];
+        const baseCharacters = parts[2].replace(/\p{Lu}/gu, "");
         if (!code || !scriptName || !baseCharacters) return;
 
         if (!result[code]) result[code] = [];
-        result[code].push({ scriptName, baseCharacters });
+        result[code].push({ languageCode: code, scriptName, baseCharacters });
       });
 
       return result;
