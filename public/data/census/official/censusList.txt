@@ -5,6 +5,9 @@ az1999
 bj2013
 bs2013
 ca2021
+ch2000
+ch2010
+ch2024
 cl2024
 cn-cmn2020
 co

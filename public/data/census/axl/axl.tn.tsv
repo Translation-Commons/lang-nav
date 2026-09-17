@@ -1,0 +1,50 @@
+#codeDisplay		axl.tn
+#nameDisplay		AXL Tunisia
+#isoRegionCode		TN
+#yearCollected		2015
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		L1
+#domain		Home
+### Population Surveyed ###		
+#population		11,261,700
+#responsesPerIndividual		1
+### Data Constraints ###		
+#quantity		count
+#geographicScope		whole country
+#age		0+
+#nationality		residents
+#languagesIncluded		All
+### Creator ###		
+#collectorType		Secondary
+#presentedBy		AXL
+### Source Document ###		
+#url		https://www.axl.cefan.ulaval.ca/afrique/tunisie.htm
+#datePublished		2025-08-30
+#dateAccessed		2026-05-18
+#documentName		Tunisia
+#sectionName		2 Données démolinguistiques
+#tableName		Ethnie; Population; Pourcentage; Langue principale; Filiation linguistique; Religion principale
+#columnName		État fédéré; Superficie; Population
+Language Code	Language Name	Population
+ara/aeb	Tunisian Arabic	10 414 000
+ara/ayl	Libyan Arabic	293 000
+ara/arq	Algerian Arabic	268 000
+ara/aeb	Tunisian Arabic	50 000
+shy	Chaouia	48 000
+ara/aao	Saharan Algerian Arabic	46 000
+jbn	Nafusi	31 000
+ara/apc	North Levantine Arabic	23 000
+ara/aao	Saharan Algerian Arabic	22 000
+jbn	Nafusi	10 000
+jbn	Nafusi	4 800
+jbn	Nafusi	3 800
+mlt	Maltese	3 400
+gha	Ghadames	3 100
+eng	English	1 500
+fra	French	1 200
+ita	Italian	1 100
+jbn	Nafusi	1 100
+tur	Turkish	1 100
+ara/aeb/ajt	Judeo-Tunisian Arabic	900
+jbn	Nafusi	700

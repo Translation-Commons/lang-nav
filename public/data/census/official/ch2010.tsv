@@ -1,0 +1,35 @@
+#codeDisplay		ch2010home	ch2020home	ch2024home	ch2010work	ch2020work	ch2024work
+#nameDisplay		Switzerland 2010 Home	Switzerland 2020 Home	Switzerland 2024 Home	Switzerland 2010 Work	Switzerland 2020 Work	Switzerland 2024 Work
+#isoRegionCode	CH						
+#yearCollected		2010	2020	2024	2010	2020	2024
+### Language Criteria ###							
+#languageUse	Speaks						
+#acquisitionOrder	Any						
+#domain		Home	Home	Home	Work	Work	Work
+### Population Surveyed ###							
+#population		6,519,253	7,187,715	7,507,509	2,938,314	2,958,328	3,099,859
+#populationSource					Employed people only	Employed people only	Employed people only
+### Data Constraints ###							
+#geographicScope	whole country						
+#age	15+						
+#nationality	residents						
+#quantity	count						
+### Creator ###							
+#collectorType	Government						
+#collectorName	Swiss Federal Statistical Office						
+#collectorNameShort	FSO CH						
+### Source Document ###							
+#url		https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399616.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399616.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399616.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399620.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399620.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.assetdetail.36399620.html
+#datePublished	2026-03-05						
+#dateAccessed	2026-09-16						
+#documentName		Languages spoken at home by various socio-demographic characteristics in Switzerland					
+#notes					Employed people only	Employed people only	Employed people only
+Language Code	Language Name	2010	2020	2024	2010	2020	2024
+gsw	Swiss German	3,994,836	4,076,947	4,106,673	1,950,636	1,821,229	1,832,283
+deu	German	623,272	797,345	882,164	953,249	994,023	1,097,182
+fra	#French (or Swiss French patois)	1,514,887	1,671,733	1,721,911	859,973	821,395	858,696
+lmo/tici1238	#Ticino or Grisons Italian dialect	112,584	97,995	88,566	35,403	27,777	24,288
+ita	Italian	534,289	598,019	623,927	270,429	249,048	266,351
+roh	Rhaeto-Romansch	38,785	35,595	35,927	12,937	9,175	9,556
+eng	English	266,091	439,478	525,433	536,980	681,612	820,405
+mul	Other language/s	1,035,575	1,406,671	1,613,082	192,388	203,319	242,671

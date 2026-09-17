@@ -1,0 +1,43 @@
+#codeDisplay		ch1970	ch1980	ch1990	ch2000
+#nameDisplay		Switzerland 1970 	Switzerland 1980	Switzerland 1990	Switzerland 2000
+#isoRegionCode	CH				
+#yearCollected		1970	1980	1900	2000
+### Language Criteria ###					
+#languageUse	Speaks				
+#acquisitionOrder	Any				
+#domain	Any				
+### Population Surveyed ###					
+#population		6,269,783	6,365,960	6,873,687	7,288,010
+#sampleRate		1	1	1	1
+#responsesPerIndividual	1				
+### Data Constraints ###					
+#geographicScope	whole country				
+#nationality	residents				
+#quantity	count				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Swiss Federal Statistical Office				
+#collectorNameShort	FSO CH				
+### Source Document ###					
+#url	https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-4001000000_123/px-x-4001000000_123/px-x-4001000000_123.px/				
+#dateAccessed	2026-09-01				
+#documentName	Swiss Federal Population Census				
+#sectionName	Main language				
+#tableName	Resident population by type of residence, institutional geographic levels, main language and nationality (category)				
+#columnName		1970	1980	1990	2000
+#citation	Swiss Federal Statistical Office (FSO). Federal Population Census 1970. Resident population by type of residence, institutional geographic levels, main language and nationality (category).				
+#notes	Official FSO Federal Population Census counts. Data represent main language and are not explicitly mother-tongue/L1 data. In FSO STAT-TAB, select Year: 1970, 1980, 1990, 2000; Canton / District / Commune: Switzerland; Main language: Select all; Nationality (category): Total.				
+Language Code	Language	Population (1970)	Population (1980)	Population (1990)	Population (2000)
+deu	German	4,071,289	4,140,901	4,374,694	4,640,359
+fra	French	1,134,010	1,172,502	1,321,695	1,485,056
+ita	Italian	743,760	622,226	524,116	470,961
+roh	Romansh	50,339	51,128	39,632	35,095
+eng	English	32,509	38,494	60,786	73,425
+nld	Dutch	11,935	13,228	11,895	11,840
+gmq	Scandinavian languages	8,216	8,527	9,533	9,810
+ell	Greek	9,038	9,713	7,487	4,792
+spa	Spanish	123,708	118,169	116,818	77,506
+sla	#Slavic languages (excluding Czech and Slovak)	30,429	65,779	119,541	120,853
+sla/czec1260	#Czech and Slovak	13,028	14,570	8,552	7,462
+hun	Hungarian	12,642	13,842	8,491	6,194
+mul	#Other languages	28,880	96,881	270,447	344,657

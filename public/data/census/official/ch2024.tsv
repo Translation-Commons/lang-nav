@@ -1,0 +1,43 @@
+#codeDisplay		ch2024w-prec	ch2024h-prec
+#nameDisplay		Switzerland 2024 Works Employed Percent	Switzerland 2024 Home Percent
+#isoRegionCode	CH		
+#yearCollected	2024		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	Any		
+#domain		Work	Home
+### Population Surveyed ###			
+#population		3,099,859	7,507,509
+#responsesPerIndividual	1+		
+### Data Constraints ###			
+#geographicScope	whole country		
+#age	15+		
+#nationality	residents		
+#quantity	percent		
+### Creator ###			
+#collectorType	Government		
+#collectorName	Swiss Federal Statistical Office		
+#collectorNameShort	FSO CH		
+### Source Document ###			
+#url		https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.html	https://www.bfs.admin.ch/bfs/en/home/statistics/population/languages-religions/languages.html
+#datePublished	2026		
+#dateAccessed	2026-09-16		
+#documentName	Languages		
+#sectionName		Language at work	Language at home
+#tableName		Languages usually spoken at work	Languages usually spoken at home
+#columnName			
+#citation			
+#notes		Employed people only	
+Language Code	Language		
+gsw	Swiss German	60.8	54.7
+deu	German	35.6	11.8
+fra	French	27.6	22.9
+ita	Italian	8	8.3
+roh	Romansh	0.3	0.5
+eng	English	23.6	7.0
+spa	Spanish	2	3.0
+mul	#Other languages	1.9	9.7
+por	Portuguese	2.1	3.7
+sqi	Albanian	1	3.4
+lmo/tici1238	#Dialect from Ticino, italo-grison	0.7	1.2
+hbs	#Serbian, Croatian	0.7	2.3
