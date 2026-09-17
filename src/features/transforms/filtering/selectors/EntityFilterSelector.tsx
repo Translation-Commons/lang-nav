@@ -6,6 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 
 import EntityFilterSuggestionButtons from './EntityFilterSuggestionButtons';
+import { getFilterLabelByPageParam } from './getFilterByPageParam';
 
 type Props = {
   getSuggestions: (query: string) => Promise<Suggestion[]>;
@@ -39,7 +40,11 @@ const EntityFilterSelector: React.FC<Props> = ({
         />
       )}
       <EntitySearchCombobox
-        placeholder="Name or code"
+        placeholder={
+          'Search by ' +
+          getFilterLabelByPageParam(pageParameter, params.entType).toLowerCase() +
+          ' names or code'
+        }
         getSuggestions={getSuggestions}
         onSelect={onSubmit}
         pageParameter={pageParameter}

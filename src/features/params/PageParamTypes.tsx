@@ -70,6 +70,7 @@ export enum PageParamKey {
   limit = 'limit',
   localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
+  orgFilter = 'orgFilter',
   page = 'page',
   pinned = 'pinned',
   populationFocus = 'populationFocus',
@@ -113,6 +114,7 @@ export type PageParams = {
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   modalityFilter: LanguageModality[];
+  orgFilter: string;
   populationMax: number;
   populationMin: number;
   territoryFilter: string;

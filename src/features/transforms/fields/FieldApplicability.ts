@@ -83,6 +83,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Territory,
         Field.Region,
         Field.Variant,
+        Field.Organization,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
 
@@ -179,6 +180,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.Territory,
         Field.Region,
+        Field.Organization,
         Field.SourceForPopulation,
 
         Field.CountOfLanguages,
@@ -261,6 +263,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Endonym,
 
         Field.SourceType,
+        Field.Organization,
 
         // Field.CountOfLanguages,
         Field.CountOfCensuses,
@@ -368,6 +371,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Language,
         Field.LanguageFamily,
         Field.SourceForLanguage,
+        Field.Organization,
         Field.Modality,
         Field.LanguageScope,
         Field.TerritoryScope,

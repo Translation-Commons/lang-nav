@@ -143,7 +143,9 @@ const SubReport: React.FC<{
       >
         Copy visible locales to Clipboard
       </button>
-      <PotentialLocalesTable locales={locales} />
+      <div className="h-fit">
+        <PotentialLocalesTable locales={locales} />
+      </div>
     </CollapsibleReport>
   );
 };

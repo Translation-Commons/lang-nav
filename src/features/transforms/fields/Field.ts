@@ -38,6 +38,7 @@ enum Field {
   Territory = 'Territory',
   Variant = 'Variant',
   Platform = 'Platform',
+  Organization = 'Organization',
   SourceForPopulation = 'Source for Population',
   SourceForLanguage = 'Source for Language',
 

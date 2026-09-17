@@ -13,7 +13,7 @@ export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'
 export enum CensusCollectorType {
   Government = 'Government',
   Study = 'Study', // Academic study
-  NGO = 'NGO', // Non-governmental organization eg. Endangered Languages Project, Joshua Project
+  NGO = 'NGO', // Non-governmental organization eg. Afrobarometer, Endangered Languages Project
   Media = 'Media', // News article, blog, or other media sources
   Secondary = 'Secondary', // Data repackaged by secondary sources without a clear source of where it came from, eg. Wikipedia, CLDR
   Unknown = 'Unknown', // Unknown or unranked

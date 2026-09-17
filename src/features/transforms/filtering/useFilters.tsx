@@ -17,6 +17,7 @@ import {
   buildFilterByLanguageScope,
   buildFilterByLanguageSource,
   buildFilterByModality,
+  buildFilterByOrganization,
   buildFilterByTerritoryScope,
 } from './filterByEnum';
 import { buildFilterByPopulation } from './filterByRange';
@@ -37,6 +38,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     modalityFilter,
     populationMax,
     populationMin,
+    orgFilter,
     searchBy,
     searchString,
     territoryFilter,
@@ -74,6 +76,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     () => buildFilterByLanguageSource(languageSource),
     [languageSource],
   );
+  const filterByOrganization = useMemo(() => buildFilterByOrganization(orgFilter), [orgFilter]);
 
   // Vitality
   const filterByISOStatus = useMemo(() => buildFilterByISOStatus(isoStatus), [isoStatus]);
@@ -103,6 +106,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.WritingSystem]: filterByWritingSystem,
       [Field.Territory]: filterByTerritory,
       [Field.SourceForLanguage]: filterByLanguageSource,
+      [Field.Organization]: filterByOrganization,
 
       // Ranges
       [Field.Population]: filterByPopulation,
@@ -112,7 +116,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Platform]: alwaysTrue, // TODO
       [Field.OutputScript]: alwaysTrue, // TODO
       [Field.Variant]: alwaysTrue, // TODO
-      [Field.SourceForPopulation]: alwaysTrue, // TODO
+      [Field.SourceForPopulation]: alwaysTrue, // maybe TODO
 
       [Field.None]: alwaysTrue,
       [Field.Code]: alwaysTrue,

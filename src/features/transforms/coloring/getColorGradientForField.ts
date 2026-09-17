@@ -73,6 +73,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Territory:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       // These values are the names of related entities, not ideal for coloring with a gradient, but

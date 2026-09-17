@@ -39,6 +39,7 @@ import {
   getCensusForEntity,
   getKeyboardForEntity,
   getLanguageForEntity,
+  getOrganizationsForEntity,
   getTerritoryForEntity,
   getVariantsForEntity,
   getWritingSystemForEntity,
@@ -138,6 +139,8 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:
       return getVariantsForEntity(ent)?.[0]?.nameDisplay;
+    case Field.Organization:
+      return getOrganizationsForEntity(ent)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
       return getCensusForEntity(ent)?.collectorName;
     case Field.SourceForLanguage:

@@ -22,6 +22,7 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
+import OrganizationFilterSelector from './OrganizationFilterSelector';
 import PopulationFilterSelector from './PopulationFilterSelector';
 import TerritoryFilterSelector from './TerritoryFilterSelector';
 import WritingSystemFilterSelector from './WritingSystemFilterSelector';
@@ -76,6 +77,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return <LanguageSourceSelector />;
     case Field.Population:
       return <PopulationFilterSelector />;
+    case Field.Organization:
+      return <OrganizationFilterSelector />;
     default:
       return null;
   }

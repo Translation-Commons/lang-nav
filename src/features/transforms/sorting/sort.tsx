@@ -83,6 +83,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Region:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Coordinates:

@@ -49,12 +49,24 @@ const EntitySearchCombobox: React.FC<Props> = ({
 
   const onSubmit = useCallback(
     (value: Suggestion | null) => {
-      if (!value) return;
-      trackSearch(value.searchString + value.entID, 'suggestion');
-      setSearchString((value.ent?.nameDisplay ?? '') + ' [' + value.entID + ']');
-      onSelect(value);
+      if (value) {
+        trackSearch(value.searchString + value.entID, 'suggestion');
+        setSearchString((value.ent?.nameDisplay ?? '') + ' [' + value.entID + ']');
+        onSelect(value);
+      } else {
+        setSearchString('');
+        onSelect({ entID: '', label: '', searchString: '' });
+      }
     },
     [trackSearch, onSelect],
+  );
+
+  const onInputChange = useCallback(
+    (value: string) => {
+      setSearchString(value);
+      onQueryChange?.(value);
+    },
+    [onQueryChange],
   );
 
   useEffect(() => {
@@ -91,10 +103,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
         aria-label={ariaLabel}
         showClear
         value={searchString}
-        onChange={(e) => {
-          setSearchString(e.target.value);
-          onQueryChange?.(e.target.value);
-        }}
+        onChange={(e) => onInputChange(e.target.value)}
       />
       <ComboboxContent>
         {emptyMessage && suggestions.length === 0 && <ComboboxEmpty>{emptyMessage}</ComboboxEmpty>}
@@ -115,7 +124,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
                 >
                   <div>{suggestion.label}</div>
                   <div className="ml-auto font-mono text-xs text-muted-foreground">
-                    {suggestion.entID}
+                    {suggestion.ent?.codeDisplay ?? suggestion.entID}
                   </div>
                 </ComboboxItem>
               ))}
