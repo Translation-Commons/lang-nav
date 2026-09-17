@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { usePanelRef } from 'react-resizable-panels';
 
-
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@shared/ui/resizable';
 
