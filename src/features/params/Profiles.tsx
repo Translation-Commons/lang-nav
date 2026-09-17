@@ -52,6 +52,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   limit: 20,
   localeSeparator: LocaleSeparator.Underscore,
   modalityFilter: [],
+  orgFilter: '',
   page: 1,
   pinned: [],
   populationFocus: PopulationFocus.Overall,

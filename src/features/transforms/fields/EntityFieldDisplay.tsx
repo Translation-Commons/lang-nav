@@ -85,6 +85,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.Platform:
     case Field.OutputScript:
     case Field.Variant:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.WritingSystemScope:

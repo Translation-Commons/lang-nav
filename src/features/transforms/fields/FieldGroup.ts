@@ -50,6 +50,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.Region:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       return FieldGroup.Relation;

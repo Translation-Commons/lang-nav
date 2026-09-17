@@ -63,6 +63,7 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.VariantType:
       return BlocksIcon;
     case Field.SourceType:
+    case Field.Organization:
       return BuildingIcon;
 
     // Status
