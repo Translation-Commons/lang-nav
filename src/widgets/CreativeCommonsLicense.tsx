@@ -29,30 +29,6 @@ const CreativeCommonsLicense: React.FC = () => {
         </span>
       </HoverCardContent>
     </HoverCard>
-    // <Hoverable
-    //   className="flex"
-    //   hoverContent={
-    //     <span>
-    //       This work is licensed under a{' '}
-    //       <ExternalLink href="https://creativecommons.org/licenses/by-sa/4.0/">
-    //         Creative Commons Attribution-ShareAlike 4.0 International License
-    //       </ExternalLink>
-    //       .
-    //     </span>
-    //   }
-    // >
-    //   <a
-    //     className="h-fit"
-    //     href="https://creativecommons.org/licenses/by-sa/4.0/"
-    //     target="_blank"
-    //     rel="noopener noreferrer"
-    //   >
-    //     <img
-    //       alt="Creative Commons License"
-    //       src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-    //     />
-    //   </a>
-    // </Hoverable>
   );
 };
 

@@ -13,7 +13,7 @@ const PageFooter: React.FC = () => {
   const { reset } = useConsent();
 
   return (
-    <footer className=" shrink-0 w-full overflow-auto p-2 flex flex-row gap-2 text-muted-foreground items-center justify-between border-t-1 text-xs">
+    <footer className=" shrink-0 w-full overflow-auto p-2 flex flex-row gap-2 text-muted-foreground items-center justify-between border-t text-xs">
       <div>
         © {new Date().getFullYear()}{' '}
         <ExternalLink href="https://translationcommons.org">Translation Commons</ExternalLink>

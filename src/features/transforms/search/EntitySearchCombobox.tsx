@@ -66,7 +66,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
       setSearchString(value);
       onQueryChange?.(value);
     },
-    [onQueryChange, onSelect],
+    [onQueryChange],
   );
 
   useEffect(() => {

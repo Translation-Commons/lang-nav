@@ -22,20 +22,4 @@ enum TableID {
   LanguagePlurals, // 16
 }
 
-export const isPrimaryEntityTable = (tableID: TableID) => {
-  switch (tableID) {
-    case TableID.Censuses:
-    case TableID.Languages:
-    case TableID.Locales:
-    case TableID.Territories:
-    case TableID.Variants:
-    case TableID.WritingSystems:
-    case TableID.Keyboards:
-    case TableID.Organizations:
-      return true;
-    default:
-      return false;
-  }
-};
-
 export default TableID;

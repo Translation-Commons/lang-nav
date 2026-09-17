@@ -20,10 +20,8 @@ type Props<T> = {
 };
 
 function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
-  const isTall = false; // isPrimaryEntityTable(tableID); // needed for vertical overflow
-
   return (
-    <div className={'w-full relative text-xs overflow-x-auto' + (isTall ? ' h-screen' : '')}>
+    <div className="w-full relative text-xs overflow-x-auto">
       <table className={'EntityTable Table' + tableID + ' text-left w-max mx-auto'}>
         <thead className="sticky top-0 bg-background z-10">
           <tr>
