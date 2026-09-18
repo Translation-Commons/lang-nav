@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
@@ -13,6 +14,7 @@ import EntityTitle from '@entities/ui/EntityTitle';
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
 
+import { getFieldLabel } from '@strings/FieldLabelStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageDigitalSupportMetascore from './digitalsupport/LanguageDigitalSupportMetascore';
@@ -25,12 +27,21 @@ interface Props {
 }
 
 const LanguageCard: React.FC<Props> = ({ lang }) => {
-  const { view } = usePageParams();
   const sortFunction = getSortFunction();
   const countryLocales = uniqueBy(
     lang.locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',
   );
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.Endonym,
+    Field.Code,
+    Field.Population,
+    Field.PopulationSpeaking,
+    Field.PopulationWriting,
+    Field.Territory,
+    Field.DigitalSupport,
+  ]);
 
   return (
     <div>
@@ -67,15 +78,11 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         </CardField>
       )}
 
-      {view === View.Map && lang.longitude != null && lang.latitude != null && (
-        <CardField
-          title="Coordinates"
-          field={Field.Coordinates}
-          description="The latitude and longitude for the modern and/or historic center of the language."
-        >
-          {lang.latitude.toFixed(2)}°, {lang.longitude.toFixed(2)}°
+      {extraFields.map((field) => (
+        <CardField key={field} title={getFieldLabel(field, lang.type)} field={field}>
+          <EntityFieldDisplay ent={lang} field={field} />
         </CardField>
-      )}
+      ))}
     </div>
   );
 };

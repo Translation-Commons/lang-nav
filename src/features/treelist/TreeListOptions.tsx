@@ -1,6 +1,5 @@
 import React from 'react';
 
-import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 
 interface TreeListOptions {
   allExpanded: boolean;
@@ -80,9 +79,6 @@ export function TreeListOptionsSelectors() {
           />
           Show Entity IDs
         </label>
-      </div>
-      <div className="flex gap-2">
-        <FieldFocusSelector />
       </div>
     </div>
   );
