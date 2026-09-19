@@ -102,8 +102,10 @@ export function getFieldIcon(field: Field): LucideIcon {
       return NotebookTextIcon;
     case Field.Region:
       return EarthIcon;
-    case Field.Territory:
+    case Field.TerritoryPrimary:
       return MapPinnedIcon;
+    case Field.TerritoryList:
+      return EarthIcon;
     case Field.Platform:
       return MonitorSmartphoneIcon;
     case Field.Variant:

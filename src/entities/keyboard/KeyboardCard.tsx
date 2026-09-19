@@ -28,7 +28,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
     Field.Name,
     Field.Platform,
     Field.LanguageList,
-    Field.Territory,
+    Field.TerritoryPrimary,
     Field.WritingSystem,
     Field.OutputScript,
     Field.Variant,
@@ -67,7 +67,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       )}
 
       {territory != null && (
-        <CardField field={Field.Territory}>
+        <CardField field={Field.TerritoryPrimary}>
           {territory != null && <HoverableEntityName ent={territory} />}
         </CardField>
       )}

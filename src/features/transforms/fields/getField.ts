@@ -141,8 +141,15 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return getKeyboardForEntity(ent)?.outputWritingSystem?.nameDisplay;
     case Field.Region:
       return getTerritoryForEntity(ent)?.parentUNRegion?.nameDisplay;
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+      if (ent.type === EntityType.Territory) return ent.nameDisplay;
       return getContainingTerritories(ent)?.[0]?.nameDisplay;
+    case Field.TerritoryList:
+      return (
+        getContainingTerritories(ent)
+          ?.map((t) => t.nameDisplay)
+          .join(', ') || undefined
+      );
     case Field.Platform:
       return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:

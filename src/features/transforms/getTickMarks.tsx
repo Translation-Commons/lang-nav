@@ -41,7 +41,8 @@ function getTickMarks(
     case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.OutputScript:
     case Field.Platform:
     case Field.Variant:

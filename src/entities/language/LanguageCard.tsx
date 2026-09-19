@@ -39,7 +39,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
     Field.Code,
     Field.Population,
     popField,
-    Field.Territory,
+    Field.TerritoryList,
     Field.DigitalSupport,
   ]);
 
@@ -73,7 +73,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {countryLocales.length > 0 && (
         <CardField
           title="Territories"
-          field={Field.Territory}
+          field={Field.TerritoryList}
           description="Locations that the language can be found in, sorted by population."
         >
           <LanguageTerritoryList lang={lang} />

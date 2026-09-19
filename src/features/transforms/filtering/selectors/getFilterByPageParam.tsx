@@ -15,7 +15,7 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
       return Field.LanguageScope;
 
     case PageParamKey.territoryFilter:
-      return Field.Territory;
+      return Field.TerritoryList;
     case PageParamKey.territoryScopes:
       return Field.TerritoryScope;
 

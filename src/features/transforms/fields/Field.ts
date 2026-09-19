@@ -36,7 +36,8 @@ enum Field {
   WritingSystem = 'Writing System',
   OutputScript = 'Output Script',
   Region = 'Region', // primary region or parent territory
-  Territory = 'Territory',
+  TerritoryPrimary = 'TerritoryPrimary',
+  TerritoryList = 'TerritoryList',
   Variant = 'Variant',
   Platform = 'Platform',
   Organization = 'Organization',

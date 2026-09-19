@@ -21,7 +21,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
   const languageUse = getCensusLanguageUse(census);
   const extraFields = useActiveTransforms([
     Field.Name,
-    Field.Territory,
+    Field.TerritoryPrimary,
     Field.Organization,
     Field.CountOfLanguages,
     Field.Modality,
@@ -33,7 +33,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={census} />
       </div>
-      <CardField field={Field.Territory}>
+      <CardField field={Field.TerritoryPrimary}>
         {territory != null ? <HoverableEntityName ent={territory} /> : isoRegionCode}
       </CardField>
 

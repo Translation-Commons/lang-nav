@@ -24,11 +24,11 @@ const OrganizationFilterSelector: React.FC<Props> = ({ showButtons = true }) => 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (org: OrganizationData): number => {
       let score = 0;
-      if (!filters[Field.Territory](org)) score += 1;
+      if (!filters[Field.TerritoryList](org)) score += 1;
       return score;
     };
     const getMatchGroup = (org: OrganizationData): string => {
-      if (!filters[Field.Territory](org)) return 'not ' + filterLabels.territoryFilter;
+      if (!filters[Field.TerritoryList](org)) return 'not ' + filterLabels.territoryFilter;
       return '';
     };
 

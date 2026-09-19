@@ -71,7 +71,8 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.WritingSystem:
     case Field.OutputScript:
     case Field.Region:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Variant:
     case Field.Platform:
     case Field.Organization:

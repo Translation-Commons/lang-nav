@@ -28,7 +28,7 @@ export function getFilterByConnections({
 }: { lang?: boolean; territory?: boolean; writing?: boolean } = {}): FilterFunctionType {
   const filterBy = useFilters();
 
-  const filterByTerritory = territory ? filterBy[Field.Territory] : () => true;
+  const filterByTerritory = territory ? filterBy[Field.TerritoryList] : () => true;
   const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
   const filterByLanguage = lang ? filterBy[Field.LanguageList] : () => true;
   const filterByLanguageFamily = lang ? filterBy[Field.LanguageFamily] : () => true;

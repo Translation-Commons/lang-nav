@@ -104,7 +104,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.LanguageList]: filterByLanguage,
       [Field.LanguageFamily]: filterByLanguageFamily,
       [Field.WritingSystem]: filterByWritingSystem,
-      [Field.Territory]: filterByTerritory,
+      [Field.TerritoryList]: filterByTerritory,
       [Field.SourceForLanguage]: filterByLanguageSource,
       [Field.Organization]: filterByOrganization,
 
@@ -113,6 +113,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
 
       // Filters not yet constructed
       [Field.LanguagePrimary]: alwaysTrue,
+      [Field.TerritoryPrimary]: alwaysTrue,
       [Field.Region]: alwaysTrue,
       [Field.Platform]: alwaysTrue,
       [Field.OutputScript]: alwaysTrue,

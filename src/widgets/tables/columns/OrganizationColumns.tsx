@@ -18,7 +18,7 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
       key: 'Headquarters',
       render: (ent) => <HoverableEntityName ent={ent.headquarters} />,
       exportValue: (ent) => ent.headquarters?.ID ?? '',
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
     },
     {
       key: 'Parent Organization',

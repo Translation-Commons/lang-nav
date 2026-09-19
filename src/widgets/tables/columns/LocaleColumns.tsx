@@ -63,7 +63,7 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
       key: 'Territory',
       render: (ent) => <HoverableEntityName ent={ent.territory} />,
       isInitiallyVisible: false,
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
       columnGroup: 'Linked Data',
     },
     {

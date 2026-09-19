@@ -46,7 +46,7 @@ const LocaleIndigeneityTable: React.FC<{
         {
           key: 'Territory',
           render: (locale) => <HoverableEntityName ent={locale.territory} />,
-          field: Field.Territory,
+          field: Field.TerritoryPrimary,
           columnGroup: 'Identity',
         },
         {

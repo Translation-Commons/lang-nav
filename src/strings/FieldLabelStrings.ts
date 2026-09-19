@@ -69,9 +69,11 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
       return 'Writing System';
     case Field.OutputScript:
       return 'Output Script';
-    case Field.Territory:
+    case Field.TerritoryPrimary:
       if (entType === EntityType.Org) return 'Headquartered In';
       return 'Territory';
+    case Field.TerritoryList:
+      return 'Territories';
     case Field.Region:
       return 'Region';
     case Field.Variant:
@@ -248,11 +250,17 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
     case Field.OutputScript:
       return 'The writing system used for the output of this keyboard.';
 
-    case Field.Territory:
+    case Field.TerritoryPrimary:
       if (entType === EntityType.Org) return 'The territory this organization is headquartered in.';
+      if (entType === EntityType.Census) return 'The territory the census was conducted in.';
+      if (entType === EntityType.WritingSystem)
+        return 'The territory this writing system originated from.';
+      return 'The corresponding territory for this entry.';
+    case Field.TerritoryList:
+      if (entType === EntityType.Language) return 'The territories the language can be found in.';
+      if (entType === EntityType.Territory) return 'The territory in the UN regional hierarchy.';
       if (entType === EntityType.Variant)
         return 'The territory(ies) directly associated with this variant.';
-      if (entType === EntityType.Census) return 'The territory the census was conducted in.';
       return 'The corresponding territory for this entry.';
     case Field.Region:
       return 'The broader region this entry is in.';

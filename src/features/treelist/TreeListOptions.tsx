@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 interface TreeListOptions {
   allExpanded: boolean;
   showInfoButton: boolean;

@@ -62,7 +62,8 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
     case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Platform:
     case Field.Organization:
@@ -145,7 +146,8 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Platform:
     case Field.Organization:

@@ -49,7 +49,7 @@ describe('FilterSelector', () => {
     );
     expect(await findByText('Sindarin')).toBeInTheDocument();
 
-    rerender(<FilterSelector field={Field.Territory} />);
+    rerender(<FilterSelector field={Field.TerritoryList} />);
     expect(await findByText('Beleriand')).toBeInTheDocument();
 
     rerender(<FilterSelector field={Field.WritingSystem} />);

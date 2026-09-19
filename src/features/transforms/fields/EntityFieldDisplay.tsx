@@ -116,8 +116,20 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return <HoverableEntityName ent={getKeyboardForEntity(ent)?.outputWritingSystem} />;
     case Field.Region:
       return <HoverableEntityName ent={getTerritoryForEntity(ent)?.parentUNRegion} />;
-    case Field.Territory:
+    case Field.TerritoryPrimary:
       return <HoverableEntityName ent={getContainingTerritories(ent)?.[0]} />;
+    case Field.TerritoryList:
+      return (
+        <CommaSeparated
+          limit={2}
+          limitText="short"
+          separator={ent.type === EntityType.Territory ? ' > ' : ', '}
+        >
+          {getContainingTerritories(ent).map((l) => (
+            <HoverableEntityName key={l.ID} ent={l} />
+          ))}
+        </CommaSeparated>
+      );
     case Field.Platform:
       return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:

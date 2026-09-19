@@ -36,7 +36,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.PopulationOfDescendants,
   ],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
-  [EntityType.Locale]: [Field.LanguageList],
+  [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
   [EntityType.Keyboard]: [
     Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
   ],
@@ -44,6 +44,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
+    Field.TerritoryList,
   ],
   [EntityType.Org]: [Field.Organization, Field.Population, Field.CountOfCountries],
 };
@@ -82,7 +83,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguagePrimary,
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
         Field.Region,
         Field.Variant,
         Field.Organization,
@@ -110,7 +111,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguageList,
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory, // Equivalent to DisplayName for territories
+        Field.TerritoryPrimary, // Equivalent to DisplayName for territories
+        Field.TerritoryList, // UN region schema
         Field.Region,
 
         Field.CountOfLanguages,
@@ -151,7 +153,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguageList, // Language Family Tree
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
         Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
@@ -183,7 +186,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.SourceType,
         Field.Modality,
 
-        Field.Territory,
+        Field.TerritoryPrimary,
         Field.Region,
         Field.Organization,
         Field.SourceForPopulation,
@@ -206,7 +209,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguagePrimary,
         Field.LanguageList,
         Field.WritingSystem, // Equivalent to DisplayName for writing systems
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
 
         Field.CountOfLanguages,
         Field.CountOfKeyboards,
@@ -228,7 +232,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguagePrimary,
         Field.LanguageList,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
         // Field.Keyboard,
 
         Field.CountOfLanguages,
@@ -256,7 +261,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.LanguagePrimary,
         Field.LanguageList,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
         Field.Platform,
         Field.OutputScript,
         Field.Variant,
@@ -275,7 +280,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         // Field.CountOfLanguages,
         Field.CountOfCensuses,
 
-        Field.Territory,
+        Field.TerritoryPrimary,
       ];
     default:
       return enforceExhaustiveSwitch(entType);
@@ -342,6 +347,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
 
         Field.LanguagePrimary,
         Field.LanguageFamily,
+        Field.TerritoryPrimary,
       ];
     case Transform.Scale:
       return [
@@ -373,7 +379,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
       // Ordered by preferred UI grouping: connections first, then vitality, then text fields
       // This also affects which filters happen first
       return [
-        Field.Territory,
+        Field.TerritoryList,
         Field.WritingSystem,
         Field.LanguageList,
         Field.LanguageFamily,

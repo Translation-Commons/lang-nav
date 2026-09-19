@@ -35,7 +35,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return <LanguageFilterSelector />;
     case Field.LanguageFamily:
       return <LanguageFamilyFilterSelector />;
-    case Field.Territory:
+    case Field.TerritoryList:
       return <TerritoryFilterSelector />;
     case Field.WritingSystem:
       return <WritingSystemFilterSelector />;

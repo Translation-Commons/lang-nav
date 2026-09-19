@@ -19,7 +19,7 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
   const extraFields = useActiveTransforms([
     Field.Name,
     Field.Code,
-    Field.Territory,
+    Field.TerritoryPrimary,
     Field.CountOfCensuses,
     Field.Population,
   ]);
@@ -29,7 +29,7 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={org} />
       </div>
-      <CardField field={Field.Territory}>
+      <CardField field={Field.TerritoryPrimary}>
         <HoverableEntityName ent={org.headquarters} />
       </CardField>
 

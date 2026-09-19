@@ -64,7 +64,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     {
       key: 'Area of Origin',
       render: (ent) => <HoverableEntityName ent={ent.territoryOfOrigin} />,
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
     },

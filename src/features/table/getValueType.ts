@@ -47,7 +47,8 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Platform:
     case Field.OutputScript:

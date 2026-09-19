@@ -47,7 +47,8 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Variant:
     case Field.Platform:

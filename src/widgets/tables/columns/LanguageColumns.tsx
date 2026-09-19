@@ -169,7 +169,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
           ))}
         </CommaSeparated>
       ),
-      field: Field.Territory,
+      field: Field.TerritoryList,
       columnGroup: 'Location',
     },
     {

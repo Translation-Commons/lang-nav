@@ -82,7 +82,7 @@ function getVariantColumns(): TableColumn<VariantData>[] {
         </CommaSeparated>
       ),
       isInitiallyVisible: false,
-      field: Field.Territory,
+      field: Field.TerritoryList,
       columnGroup: 'Related Objects',
     },
     {
