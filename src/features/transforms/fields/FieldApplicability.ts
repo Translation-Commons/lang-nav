@@ -29,14 +29,14 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
   [EntityType.Language]: [Field.LanguagePrimary, Field.VariantType],
-  [EntityType.Territory]: [Field.PopulationDirectlySourced],
+  [EntityType.Territory]: [Field.PopulationDirectlySourced, Field.PopulationSpeaking],
   [EntityType.WritingSystem]: [
     Field.WritingSystem,
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
-  [EntityType.Locale]: [],
+  [EntityType.Locale]: [Field.LanguageList],
   [EntityType.Keyboard]: [
     Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
   ],
@@ -148,6 +148,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.ISOStatus,
 
         Field.LanguagePrimary, // Equivalent to DisplayName for languages
+        Field.LanguageList, // Language Family Tree
         Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory,

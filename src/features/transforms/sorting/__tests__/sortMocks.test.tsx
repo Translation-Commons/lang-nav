@@ -402,9 +402,9 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: Language List', () => {
+  it('sortBy: Language Primary', () => {
     const ents = Object.values(mockedEnts) as EntityData[];
-    const sort = getSortFunctionParameterized(Field.LanguageList, SortBehavior.Normal);
+    const sort = getSortFunctionParameterized(Field.LanguagePrimary, SortBehavior.Normal);
     expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'dori0123', // Doriathrin
       'dori0123_ER',
@@ -419,11 +419,40 @@ describe('getSortByParameterized', () => {
       'sjn_ER',
       'Teng',
       'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      // All below have no associated language, stable to input order
+      'HA',
+      'AM',
+      'be0590',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: Language List', () => {
+    const ents = Object.values(mockedEnts) as EntityData[];
+    const sort = getSortFunctionParameterized(Field.LanguageList, SortBehavior.Normal);
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
+      'dori0123_ER', // Doriathrin
+      'dori0123_123',
+      'dori0123_001',
+      'sjn',
+      'BE',
+      'sjn_BE',
+      'sjn_ER',
+      'sjn_Teng_BE',
       'tolkorth',
       'sjn_123',
       'sjn_Teng_123',
       'sjn_001',
       'sjn_Teng_001',
+      '123', // Sindarin, Doriathrin
+      'dori0123',
+      'ER',
+      '001',
+      'Teng',
       // All below have no associated language, stable to input order
       'HA',
       'AM',

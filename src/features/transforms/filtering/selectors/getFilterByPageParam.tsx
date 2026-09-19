@@ -81,6 +81,7 @@ export function getFilterLabelByPageParam(
   pageParameter: PageParamKey,
   filteringEntType: EntityType,
 ): string {
+  if (pageParameter === PageParamKey.languageFilter) return 'Language';
   const field = getFilterFieldByPageParam(pageParameter);
   return getFieldLabel(field, filteringEntType);
 }

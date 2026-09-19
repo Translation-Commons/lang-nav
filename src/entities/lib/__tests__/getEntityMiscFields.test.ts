@@ -76,7 +76,7 @@ describe('getEntityMostImportantLanguageName', () => {
       sjn_Teng_BE: 'Sindarin',
       sjn_ER: 'Sindarin',
       sjn_BE: 'Sindarin',
-      tolkorth: 'Sindarin',
+      tolkorth: undefined,
     });
   });
 });

@@ -128,9 +128,11 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.LanguagePrimary:
       return getEntityMostImportantLanguageName(ent);
     case Field.LanguageList:
-      return getLanguagesRelevantToEntity(ent)
-        .map((l) => l.nameDisplay)
-        .join(', ');
+      return (
+        getLanguagesRelevantToEntity(ent)
+          .map((l) => l.nameDisplay)
+          .join(', ') || undefined
+      );
     case Field.LanguageFamily:
       return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:
