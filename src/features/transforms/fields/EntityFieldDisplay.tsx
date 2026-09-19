@@ -3,6 +3,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import { EntityType } from '@features/params/PageParamTypes';
 
+import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
@@ -53,11 +54,11 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
     case Field.Longitude:
     case Field.Latitude:
-      if (typeof fieldValue === 'number') return fieldValue.toFixed(1);
+      if (typeof fieldValue === 'number') return fieldValue.toFixed(1) + '°';
       return <>{fieldValue}</>;
     case Field.Coordinates:
       if (ent.type === EntityType.Territory || ent.type === EntityType.Language) {
-        return `${ent.latitude?.toFixed(1)}, ${ent.longitude?.toFixed(1)}`;
+        return `${ent.latitude?.toFixed(1)}°, ${ent.longitude?.toFixed(1)}°`;
       }
       return <>{fieldValue}</>;
 
@@ -91,6 +92,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.WritingSystemScope:
     case Field.Example:
     case Field.UnicodeVersion:
+      // TODO: use hoverable entity names
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
@@ -98,6 +100,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return <VitalityField ent={ent} field={field} />;
 
     case Field.Modality:
+      if (ent.type === EntityType.Census) return getCensusLanguageUse(ent);
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
 
     case Field.Date:
@@ -136,7 +139,10 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       );
 
     case Field.DigitalSupport:
-      return ent.type === EntityType.Language && <LanguageDigitalSupportMeter lang={ent} />;
+      if (ent.type === EntityType.Language) return <LanguageDigitalSupportMeter lang={ent} />;
+      if (ent.type === EntityType.Locale && ent.language)
+        return <LanguageDigitalSupportMeter lang={ent.language} />;
+      return null;
 
     case Field.CLDRCoverage:
       return <EntityCLDRCoverageLevel ent={ent} />;
@@ -160,6 +166,8 @@ type VitalityFieldProps = {
 };
 
 function VitalityField({ ent, field }: VitalityFieldProps) {
+  if (ent.type === EntityType.Locale && ent.language)
+    return <VitalityField ent={ent.language} field={field} />;
   if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
   if (field === Field.ISOStatus) src = VitalitySource.ISO;

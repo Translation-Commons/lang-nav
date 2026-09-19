@@ -1,8 +1,10 @@
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -18,9 +20,7 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
-import LocaleIndigeneityDisplay, {
-  getIndigeneityDescription,
-} from './localstatus/LocaleIndigeneityDisplay';
+import LocaleIndigeneityDisplay from './localstatus/LocaleIndigeneityDisplay';
 
 interface Props {
   locale: LocaleData;
@@ -30,6 +30,20 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
   const { populationFocus } = usePageParams();
   const speakingOrWriting = getSpeakingOrWritingFocus(locale, populationFocus);
   const pop = locale.pop[speakingOrWriting];
+  const popField = getFieldForPopulationFocus(populationFocus);
+
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.Code,
+    Field.Population,
+    popField,
+    Field.GovernmentStatus,
+    Field.Indigeneity,
+    Field.HistoricPresence,
+    Field.LanguageFormedHere,
+    Field.SourceForPopulation,
+    Field.PercentOfTerritoryPopulation,
+  ]);
 
   return (
     <div>
@@ -39,40 +53,24 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       </div>
 
       {pop.adjusted != null && (
-        <CardField
-          title="Population"
-          field={getFieldForPopulationFocus(populationFocus)}
-          description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
-        >
+        <CardField field={popField}>
           <LocalePopulationAdjusted locale={locale} focus={populationFocus} />
         </CardField>
       )}
       {pop.adjusted != null && (
-        <CardField
-          title="Source"
-          field={Field.SourceForPopulation}
-          description="The source of the population data."
-        >
+        <CardField field={Field.SourceForPopulation}>
           <LocaleCensusCitation locale={locale} size="short" focus={populationFocus} />
         </CardField>
       )}
 
       {pop.percent != null && (
-        <CardField
-          title="Percent population"
-          field={Field.PercentOfTerritoryPopulation}
-          description="Percent of the Territory population that use this locale."
-        >
+        <CardField field={Field.PercentOfTerritoryPopulation}>
           <DecimalNumber num={pop.percent} alignFraction={false} />% of{' '}
           {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
         </CardField>
       )}
 
-      <CardField
-        title="Government Status"
-        field={Field.GovernmentStatus}
-        description="Whether the locale has official recognition."
-      >
+      <CardField field={Field.GovernmentStatus}>
         {officialStatus != null ? (
           getOfficialLabel(officialStatus)
         ) : (
@@ -80,13 +78,15 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Indigeneity"
-        field={Field.Indigeneity}
-        description={getIndigeneityDescription()}
-      >
+      <CardField field={Field.Indigeneity}>
         <LocaleIndigeneityDisplay loc={locale} />
       </CardField>
+
+      {extraFields.map((field) => (
+        <CardField key={field} field={field}>
+          <EntityFieldDisplay ent={locale} field={field} />
+        </CardField>
+      ))}
     </div>
   );
 };

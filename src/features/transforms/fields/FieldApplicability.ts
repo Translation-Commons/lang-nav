@@ -37,13 +37,15 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
   ],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
   [EntityType.Locale]: [],
-  [EntityType.Keyboard]: [],
+  [EntityType.Keyboard]: [
+    Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
+  ],
   [EntityType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
   ],
-  [EntityType.Org]: [],
+  [EntityType.Org]: [Field.Organization, Field.Population, Field.CountOfCountries],
 };
 
 // Specific fields available per entity type
@@ -60,7 +62,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Modality,
 
         Field.DigitalSupport, // indirectly supported, from languages
-        Field.CLDRCoverage,
+        // Field.CLDRCoverage, // Currently broken
 
         Field.Indigeneity,
         Field.LanguageFormedHere,
@@ -125,7 +127,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Longitude,
 
         Field.PopulationDirectlySourced,
-        Field.PopulationSpeaking,
+        // Field.PopulationSpeaking, // Not currently interesting, we have no information on non-speaking population to contrast
         Field.PopulationWriting,
         Field.PopulationOfDescendants,
         Field.PercentOfTerritoryPopulation,
@@ -177,6 +179,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       return [
         Field.TerritoryScope,
         Field.SourceType,
+        Field.Modality,
 
         Field.Territory,
         Field.Region,
@@ -238,18 +241,17 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       ];
     case EntityType.Keyboard:
       return [
-        Field.LanguageScope,
+        // Field.LanguageScope,
         Field.WritingSystemScope, // Technically possible but uninteresting
         Field.TerritoryScope,
 
-        Field.Modality, // the Language's modality
-        Field.VitalityMetascore,
-        Field.ISOStatus,
+        // Field.Modality, // the Language's modality
+        // Field.VitalityMetascore,
+        // Field.ISOStatus, // TODO get the highest ISO status for the languages associated with this keyboard
 
         Field.Language,
         Field.WritingSystem,
         Field.Territory,
-        Field.Region,
         Field.Platform,
         Field.OutputScript,
         Field.Variant,

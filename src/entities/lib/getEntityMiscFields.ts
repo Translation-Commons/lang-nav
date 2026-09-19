@@ -4,7 +4,10 @@ import {
 } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
-import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
+import {
+  getCensusForEntity,
+  getVariantsForEntity,
+} from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -270,4 +273,18 @@ export function getDepth(ent: EntityData): number | undefined {
     default:
       enforceExhaustiveSwitch(type);
   }
+}
+
+export function getSourceForPopulationAsString(ent: EntityData): string | undefined {
+  const census = getCensusForEntity(ent);
+  if (census) {
+    return (
+      (census.collector?.codeDisplay ?? census.collectorName ?? '') +
+      ' ' +
+      (census.yearCollected ?? '')
+    );
+  }
+  if (ent.type === EntityType.Locale) return ent.pop.speaking.source;
+  if (ent.type === EntityType.Language) return ent.pop.speaking.source;
+  return undefined;
 }

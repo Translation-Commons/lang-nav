@@ -3,7 +3,9 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import EntityTitle from '@entities/ui/EntityTitle';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -31,25 +33,28 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   const population =
     populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
 
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.Code,
+    Field.Population,
+    Field.PopulationWriting,
+    Field.WritingSystemScope,
+    Field.Language,
+    Field.UnicodeVersion,
+    Field.Example,
+  ]);
+
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={writingSystem} />
       </div>
 
-      <CardField
-        title="Sample"
-        field={Field.Example}
-        description="A single character from this writing system."
-      >
+      <CardField field={Field.Example}>
         {sample?.trim() ? <span>{sample}</span> : <Deemphasized>Not available</Deemphasized>}
       </CardField>
 
-      <CardField
-        title="Scope"
-        field={Field.WritingSystemScope}
-        description="How this writing system is categorized (e.g. a standalone system, a group of systems, or a variation of another system)."
-      >
+      <CardField field={Field.WritingSystemScope}>
         {scope != null ? (
           <div>
             {scope}
@@ -82,19 +87,11 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Population"
-        field={Field.Population}
-        description="This is a very rough estimate based on adding the populations that use the languages for this writing system, it's likely 50% to 400% off of the actual population."
-      >
+      <CardField field={Field.Population}>
         <CountOfPeople count={population} />
       </CardField>
 
-      <CardField
-        title="Languages"
-        field={Field.Language}
-        description="Languages that use this writing system."
-      >
+      <CardField field={Field.Language}>
         {languages && Object.values(languages).length > 0 ? (
           <CommaSeparated>
             {Object.values(languages).map((lang) => (
@@ -106,11 +103,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Unicode support"
-        field={Field.UnicodeVersion}
-        description="Whether this writing system is encoded in Unicode, which affects support across fonts, operating systems, and software."
-      >
+      <CardField field={Field.UnicodeVersion}>
         {unicodeVersion === null ? (
           <span>Not supported by Unicode</span>
         ) : unicodeVersion != null ? (
@@ -127,6 +120,12 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           </>
         )}
       </CardField>
+
+      {extraFields.map((field) => (
+        <CardField key={field} field={field}>
+          <EntityFieldDisplay ent={writingSystem} field={field} />
+        </CardField>
+      ))}
     </div>
   );
 };

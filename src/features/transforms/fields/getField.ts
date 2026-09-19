@@ -11,6 +11,7 @@ import {
   getEntityDateAsNumber,
   getEntityLiteracy,
   getEntityMostImportantLanguageName,
+  getSourceForPopulationAsString,
   getWritingSystemsInEntity,
 } from '@entities/lib/getEntityMiscFields';
 import {
@@ -142,7 +143,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.Organization:
       return getOrganizationsForEntity(ent)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
-      return getCensusForEntity(ent)?.collectorName;
+      return getSourceForPopulationAsString(ent);
     case Field.SourceForLanguage:
       return getLanguageSourcesForEntity(ent)?.join(', ') || undefined;
 

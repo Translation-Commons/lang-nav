@@ -1,7 +1,9 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import EntityTitle from '@entities/ui/EntityTitle';
 
@@ -23,16 +25,21 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.Code,
+    Field.Population,
+    Field.Region,
+    Field.TerritoryScope,
+    Field.Language,
+  ]);
+
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={territory} />
       </div>
-      <CardField
-        title="Territory Type"
-        field={Field.TerritoryScope}
-        description="The kind of territory this is (e.g., country, dependency, region, continent)."
-      >
+      <CardField field={Field.TerritoryScope}>
         {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
         {isDependency && sovereign ? (
           <>
@@ -42,11 +49,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         ) : null}
       </CardField>
 
-      <CardField
-        title="UN Region"
-        field={Field.Region}
-        description="The United Nations regional grouping this territory belongs to."
-      >
+      <CardField field={Field.Region}>
         {parentUNRegion ? (
           <HoverableEntityName ent={parentUNRegion} />
         ) : isWorld ? (
@@ -56,21 +59,19 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Population"
-        field={Field.Population}
-        description="How many people live in this territory."
-      >
+      <CardField field={Field.Population}>
         {pop != null ? <CountOfPeople count={pop.overall} /> : <Deemphasized>Unknown</Deemphasized>}
       </CardField>
 
-      <CardField
-        title="Languages"
-        field={Field.Language}
-        description="Languages spoken in this territory."
-      >
+      <CardField field={Field.Language}>
         <TerritoryLanguageList territory={territory} />
       </CardField>
+
+      {extraFields.map((field) => (
+        <CardField key={field} field={field}>
+          <EntityFieldDisplay ent={territory} field={field} />
+        </CardField>
+      ))}
     </div>
   );
 };
