@@ -50,32 +50,18 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <EntitySubtitle ent={lang} />
       </div>
 
-      <CardField
-        title="Language Type"
-        field={Field.LanguageScope}
-        description="Whether this is a Language Family, Macrolanguage, Individual Language, or Dialect."
-      >
-        {getLanguageScopeLabel(lang.scope)}
-      </CardField>
+      <CardField field={Field.LanguageScope}>{getLanguageScopeLabel(lang.scope)}</CardField>
 
       <CardField field={popField}>
         <LanguagePopulationEstimate lang={lang} focus={populationFocus} />
       </CardField>
 
-      <CardField
-        title="Digital Support"
-        field={Field.DigitalSupport}
-        description="An estimate of how well the language is supported digitally, including online presence, software, and digital resources."
-      >
+      <CardField field={Field.DigitalSupport}>
         <LanguageDigitalSupportMetascore lang={lang} />
       </CardField>
 
       {countryLocales.length > 0 && (
-        <CardField
-          title="Territories"
-          field={Field.TerritoryList}
-          description="Locations that the language can be found in, sorted by population."
-        >
+        <CardField field={Field.TerritoryList}>
           <LanguageTerritoryList lang={lang} />
         </CardField>
       )}

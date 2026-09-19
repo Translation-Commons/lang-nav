@@ -37,11 +37,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         {territory != null ? <HoverableEntityName ent={territory} /> : isoRegionCode}
       </CardField>
 
-      <CardField
-        title="Collector"
-        field={Field.SourceType}
-        description="The type of organization that collected this census and/or presented it"
-      >
+      <CardField field={Field.SourceType}>
         <div>
           {census.collector && <HoverableEntityName ent={census.collector} />}
           {census.presenter && (
