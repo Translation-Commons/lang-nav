@@ -42,7 +42,8 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.ISOStatus:
       return FieldGroup.Status; // Vitality
 
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:

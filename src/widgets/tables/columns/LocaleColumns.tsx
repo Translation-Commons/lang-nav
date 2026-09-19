@@ -50,7 +50,7 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
       render: (ent) => <HoverableEntityName ent={ent.language} />,
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
-      field: Field.Language,
+      field: Field.LanguagePrimary,
     },
     {
       key: 'Language Scope',

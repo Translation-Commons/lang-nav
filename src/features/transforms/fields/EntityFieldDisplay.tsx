@@ -78,7 +78,8 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.Code:
       return <>{fieldValue}</>; // Show the string value directly
 
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Region:

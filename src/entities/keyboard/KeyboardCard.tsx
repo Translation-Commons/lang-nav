@@ -27,7 +27,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   const extraFields = useActiveTransforms([
     Field.Name,
     Field.Platform,
-    Field.Language,
+    Field.LanguageList,
     Field.Territory,
     Field.WritingSystem,
     Field.OutputScript,
@@ -43,7 +43,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       <CardField field={Field.Platform}>{platform}</CardField>
 
       {hasLanguages && (
-        <CardField field={Field.Language}>
+        <CardField field={Field.LanguageList}>
           <CommaSeparated>
             {languages.map((lang) => (
               <HoverableEntityName key={lang.ID} ent={lang} />

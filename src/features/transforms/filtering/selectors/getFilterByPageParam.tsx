@@ -8,7 +8,7 @@ import { getFieldLabel } from '@strings/FieldLabelStrings';
 export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
   switch (pageParameter) {
     case PageParamKey.languageFilter:
-      return Field.Language;
+      return Field.LanguageList;
     case PageParamKey.languageFamilyFilter:
       return Field.LanguageFamily;
     case PageParamKey.languageScopes:

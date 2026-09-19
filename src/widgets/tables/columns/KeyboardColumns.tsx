@@ -25,7 +25,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           ))}
         </CommaSeparated>
       ),
-      field: Field.Language,
+      field: Field.LanguageList,
       columnGroup: 'Related Objects',
     },
     {

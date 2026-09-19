@@ -39,7 +39,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     Field.Population,
     Field.PopulationWriting,
     Field.WritingSystemScope,
-    Field.Language,
+    Field.LanguageList,
     Field.UnicodeVersion,
     Field.Example,
   ]);
@@ -91,7 +91,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         <CountOfPeople count={population} />
       </CardField>
 
-      <CardField field={Field.Language}>
+      <CardField field={Field.LanguageList}>
         {languages && Object.values(languages).length > 0 ? (
           <CommaSeparated>
             {Object.values(languages).map((lang) => (

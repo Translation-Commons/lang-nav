@@ -101,7 +101,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.ISOStatus]: filterByISOStatus,
 
       // Connections
-      [Field.Language]: filterByLanguage,
+      [Field.LanguageList]: filterByLanguage,
       [Field.LanguageFamily]: filterByLanguageFamily,
       [Field.WritingSystem]: filterByWritingSystem,
       [Field.Territory]: filterByTerritory,
@@ -112,11 +112,12 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Population]: filterByPopulation,
 
       // Filters not yet constructed
-      [Field.Region]: alwaysTrue, // TODO
-      [Field.Platform]: alwaysTrue, // TODO
-      [Field.OutputScript]: alwaysTrue, // TODO
-      [Field.Variant]: alwaysTrue, // TODO
-      [Field.SourceForPopulation]: alwaysTrue, // maybe TODO
+      [Field.LanguagePrimary]: alwaysTrue,
+      [Field.Region]: alwaysTrue,
+      [Field.Platform]: alwaysTrue,
+      [Field.OutputScript]: alwaysTrue,
+      [Field.Variant]: alwaysTrue,
+      [Field.SourceForPopulation]: alwaysTrue,
 
       [Field.None]: alwaysTrue,
       [Field.Code]: alwaysTrue,

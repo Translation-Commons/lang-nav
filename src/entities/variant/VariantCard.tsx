@@ -31,7 +31,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
     Field.Code,
     Field.VariantType,
     Field.Description,
-    Field.Language,
+    Field.LanguageList,
   ]);
 
   return (
@@ -51,7 +51,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
         {description ? shortDescription : <Deemphasized>No description</Deemphasized>}
       </CardField>
 
-      <CardField field={Field.Language}>
+      <CardField field={Field.LanguageList}>
         {languages.length > 0 ? (
           <CommaSeparated>
             {languages.map((lang) => (

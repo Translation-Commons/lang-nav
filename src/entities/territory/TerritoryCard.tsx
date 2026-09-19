@@ -31,7 +31,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
     Field.Population,
     Field.Region,
     Field.TerritoryScope,
-    Field.Language,
+    Field.LanguageList,
   ]);
 
   return (
@@ -63,7 +63,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         {pop != null ? <CountOfPeople count={pop.overall} /> : <Deemphasized>Unknown</Deemphasized>}
       </CardField>
 
-      <CardField field={Field.Language}>
+      <CardField field={Field.LanguageList}>
         <TerritoryLanguageList territory={territory} />
       </CardField>
 

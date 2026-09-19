@@ -55,9 +55,12 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
       return 'ISO Status';
 
     // Relation
-    case Field.Language:
-      if (entType === EntityType.WritingSystem) return 'Languages';
-      return 'Language';
+    case Field.LanguagePrimary:
+      if (entType === EntityType.Language) return 'Language';
+      if (entType === EntityType.Locale) return 'Language';
+      return 'Primary Language';
+    case Field.LanguageList:
+      return 'Languages';
     case Field.LanguageFamily:
       return 'Language Family';
     case Field.WritingSystem:
@@ -216,12 +219,18 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
       return 'The ISO 639-3 status of the language, indicating its recognition and classification within the ISO standard. Language families take the maximum of their constituents.';
 
     // Relation
-    case Field.Language:
+    case Field.LanguagePrimary:
+      if (entType === EntityType.Territory) return 'The biggest language in this territory.';
+      if (entType === EntityType.WritingSystem)
+        return 'The biggest language using this writing system.';
+      if (entType === EntityType.Variant) return 'Equivalent language entry for this variant';
+      return 'The corresponding language for this entry.';
+    case Field.LanguageList:
       if (entType === EntityType.Territory) return 'Languages present in this territory.';
       if (entType === EntityType.WritingSystem) return 'Languages that use this writing system.';
       if (entType === EntityType.Keyboard) return 'Languages this keyboard supports.';
       if (entType === EntityType.Variant) return 'Languages that use this variant.';
-      return 'The corresponding language for this entry.';
+      return `The languages relevant to this ${entType}.`;
     case Field.LanguageFamily:
       if (entType === EntityType.Territory) return 'The biggest language family in this territory.';
       return `The language family to which this ${entType} belongs.`;

@@ -37,10 +37,15 @@ function getTickMarks(
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.OutputScript:
+    case Field.Platform:
+    case Field.Variant:
+    case Field.Organization:
       return pickDistributedTicksFromRange(
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         numberOfTicks,

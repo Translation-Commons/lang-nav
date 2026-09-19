@@ -30,7 +30,7 @@ export function getFilterByConnections({
 
   const filterByTerritory = territory ? filterBy[Field.Territory] : () => true;
   const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
-  const filterByLanguage = lang ? filterBy[Field.Language] : () => true;
+  const filterByLanguage = lang ? filterBy[Field.LanguageList] : () => true;
   const filterByLanguageFamily = lang ? filterBy[Field.LanguageFamily] : () => true;
   const filterByOrganization = filterBy[Field.Organization]
     ? filterBy[Field.Organization]

@@ -33,6 +33,7 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+import { getLanguagesRelevantToEntity } from '../filtering/filterByConnections';
 import { getLanguageSourcesForEntity } from '../filtering/filterByEnum';
 
 import Field from './Field';
@@ -124,8 +125,12 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return ent.type === EntityType.Locale ? ent.officialStatus : undefined; // Not yet defined
 
     // Related entities
-    case Field.Language:
+    case Field.LanguagePrimary:
       return getEntityMostImportantLanguageName(ent);
+    case Field.LanguageList:
+      return getLanguagesRelevantToEntity(ent)
+        .map((l) => l.nameDisplay)
+        .join(', ');
     case Field.LanguageFamily:
       return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:

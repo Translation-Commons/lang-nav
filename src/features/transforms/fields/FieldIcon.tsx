@@ -91,7 +91,8 @@ export function getFieldIcon(field: Field): LucideIcon {
       return ActivityIcon;
 
     // Relation
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
       return LanguagesIcon;
     case Field.LanguageFamily:
       return NetworkIcon;

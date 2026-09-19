@@ -402,9 +402,9 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: Language', () => {
+  it('sortBy: Language List', () => {
     const ents = Object.values(mockedEnts) as EntityData[];
-    const sort = getSortFunctionParameterized(Field.Language, SortBehavior.Normal);
+    const sort = getSortFunctionParameterized(Field.LanguageList, SortBehavior.Normal);
     expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'dori0123', // Doriathrin
       'dori0123_ER',

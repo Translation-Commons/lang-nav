@@ -17,7 +17,7 @@ import {
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
-import { sumBy } from '@shared/lib/setUtils';
+import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -97,7 +97,22 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
           <HoverableEntityName labelSource="language" ent={getTerritoryBiggestLocale(ent)} />
         ),
       isInitiallyVisible: false,
-      field: Field.Language,
+      field: Field.LanguagePrimary,
+      columnGroup: 'Language',
+    },
+    {
+      key: 'Languages',
+      render: (ent) => (
+        <CommaSeparated limit={1} limitText="short">
+          {ent.locales &&
+            ent.locales.length > 0 &&
+            uniqueBy(ent.locales, (l) => l.languageCode).map((l) => (
+              <HoverableEntityName key={l.languageCode} labelSource="language" ent={l.language} />
+            ))}
+        </CommaSeparated>
+      ),
+      isInitiallyVisible: false,
+      field: Field.LanguageList,
       columnGroup: 'Language',
     },
     {

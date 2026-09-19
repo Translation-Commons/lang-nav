@@ -31,7 +31,7 @@ type Props = { field: Field };
 
 const FilterSelector: React.FC<Props> = ({ field }) => {
   switch (field) {
-    case Field.Language:
+    case Field.LanguageList:
       return <LanguageFilterSelector />;
     case Field.LanguageFamily:
       return <LanguageFamilyFilterSelector />;

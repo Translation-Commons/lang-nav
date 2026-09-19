@@ -23,7 +23,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const getMatchGroup = useCallback(
     (ent: EntityData): string => {
       if (!filterBy[Field.LanguageFamily]?.(ent)) return 'not ' + filterLabels.languageFamilyFilter;
-      if (!filterBy[Field.Language]?.(ent)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.LanguageList]?.(ent)) return 'not ' + filterLabels.languageFilter;
       if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterBy[Field.Territory]?.(ent)) return 'not ' + filterLabels.territoryFilter;
       if (!filterBy[Field.TerritoryScope]?.(ent)) return 'not ' + filterLabels.territoryScope;
@@ -32,7 +32,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       return 'matched';
     },
     [
-      filterBy[Field.Language],
+      filterBy[Field.LanguageList],
       filterBy[Field.LanguageFamily],
       filterBy[Field.WritingSystem],
       filterBy[Field.Territory],
@@ -47,7 +47,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
     (ent: EntityData): number => {
       let dist = 0;
       if (!filterBy[Field.LanguageFamily]?.(ent)) dist += 1;
-      if (!filterBy[Field.Language]?.(ent)) dist += 2;
+      if (!filterBy[Field.LanguageList]?.(ent)) dist += 2;
       if (!filterBy[Field.WritingSystem]?.(ent)) dist += 4;
       if (!filterBy[Field.Territory]?.(ent)) dist += 8;
       if (!filterBy[Field.TerritoryScope]?.(ent)) dist += 16;
@@ -56,7 +56,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       return dist;
     },
     [
-      filterBy[Field.Language],
+      filterBy[Field.LanguageList],
       filterBy[Field.LanguageFamily],
       filterBy[Field.WritingSystem],
       filterBy[Field.Territory],

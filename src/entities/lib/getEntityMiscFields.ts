@@ -30,7 +30,7 @@ export function getEntityMostImportantLanguageName(ent: EntityData): string | un
     case EntityType.Language:
       return ent.nameDisplay;
     case EntityType.Variant:
-      return (ent.equivalentLanguage ?? ent.languages?.[0])?.nameDisplay;
+      return ent.equivalentLanguage?.nameDisplay;
     case EntityType.WritingSystem:
       return ent.languages
         ? Object.values(ent.languages).sort(sortByPopulation)[0].nameDisplay
@@ -38,7 +38,7 @@ export function getEntityMostImportantLanguageName(ent: EntityData): string | un
     case EntityType.Census:
       return undefined;
     case EntityType.Keyboard:
-      return ent.languages?.[0]?.nameDisplay;
+      return ent.languages?.slice().sort(sortByPopulation)[0]?.nameDisplay;
     case EntityType.Org:
       return undefined;
   }
