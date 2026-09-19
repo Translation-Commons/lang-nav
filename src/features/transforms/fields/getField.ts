@@ -1,5 +1,6 @@
 import { EntityType } from '@features/params/PageParamTypes';
 
+import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
@@ -201,6 +202,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.ISOStatus:
       return getLanguageForEntity(ent)?.vitality?.iso;
     case Field.Modality:
+      if (ent.type === EntityType.Census) return getCensusLanguageUse(ent);
       return getLanguageForEntity(ent)?.modality;
 
     case Field.Date:

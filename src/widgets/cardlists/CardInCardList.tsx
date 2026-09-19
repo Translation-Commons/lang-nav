@@ -43,9 +43,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
     },
     [openEntity],
   );
-  let backgroundColor = getBackgroundColor
-    ? (getBackgroundColor(ent) ?? 'hsv(0,0,0,0)')
-    : undefined;
+  let backgroundColor = getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined;
   if (backgroundColor?.match(/\([.0-9]+%? [.0-9]+%? [.0-9]+%?\)$/))
     backgroundColor = 'color-mix(in srgb, ' + backgroundColor + ' 50%, var(--background))';
 

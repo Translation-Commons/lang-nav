@@ -201,7 +201,7 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
     case Field.Indigeneity:
       return 'Whether the language is considered indigenous to the territory. Multiple criteria may apply (eg. creoles, local recognition, historical presence).';
     case Field.HistoricPresence:
-      return 'Whether this language, or its andecendents, had been historically established in the area. The cut-off date being around 1450-1500';
+      return 'Whether this language, or its precursors, had been historically established in the area before 1500';
     case Field.LanguageFormedHere:
       return 'Whether the language was formed in this area or arrived later from migration.';
     case Field.GovernmentStatus:

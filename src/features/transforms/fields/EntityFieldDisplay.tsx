@@ -117,6 +117,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.Region:
       return <HoverableEntityName ent={getTerritoryForEntity(ent)?.parentUNRegion} />;
     case Field.TerritoryPrimary:
+      if (ent.type === EntityType.Territory) return <HoverableEntityName ent={ent} />;
       return <HoverableEntityName ent={getContainingTerritories(ent)?.[0]} />;
     case Field.TerritoryList:
       return (
