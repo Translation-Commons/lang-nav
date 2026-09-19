@@ -227,6 +227,8 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
       if (entType === EntityType.Variant) return 'Equivalent language entry for this variant';
       return 'The corresponding language for this entry.';
     case Field.LanguageList:
+      if (entType === EntityType.Language)
+        return 'The family tree of the language from the root to the language.';
       if (entType === EntityType.Territory) return 'Languages present in this territory.';
       if (entType === EntityType.WritingSystem) return 'Languages that use this writing system.';
       if (entType === EntityType.Keyboard) return 'Languages this keyboard supports.';

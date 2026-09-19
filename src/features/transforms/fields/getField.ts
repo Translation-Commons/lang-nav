@@ -10,7 +10,7 @@ import {
   getDepth,
   getEntityDateAsNumber,
   getEntityLiteracy,
-  getEntityMostImportantLanguageName,
+  getEntityMostImportantLanguage,
   getSourceForPopulationAsString,
   getWritingSystemsInEntity,
 } from '@entities/lib/getEntityMiscFields';
@@ -126,7 +126,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
 
     // Related entities
     case Field.LanguagePrimary:
-      return getEntityMostImportantLanguageName(ent);
+      return getEntityMostImportantLanguage(ent)?.nameDisplay;
     case Field.LanguageList:
       return (
         getLanguagesRelevantToEntity(ent)
