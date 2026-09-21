@@ -2,12 +2,12 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ConsentChoice, ConsentState, CONSENT_VERSION } from '@features/consent/consentStorage';
+import { CONSENT_VERSION, ConsentChoice, ConsentState } from '@features/consent/consentStorage';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
 import { trackEssentialVisit } from '@shared/lib/essentialTracking';
 
-import { AmplitudeTracker } from '../AmplitudeTracker';
+import AmplitudeTracker from '../AmplitudeTracker';
 
 vi.mock('@features/params/useAmplitudeParamEvents', () => ({ default: vi.fn() }));
 
