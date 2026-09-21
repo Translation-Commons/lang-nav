@@ -28,22 +28,25 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * the number of child language nodes.
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
-  [EntityType.Language]: [Field.Language, Field.VariantType],
-  [EntityType.Territory]: [Field.PopulationDirectlySourced],
+  [EntityType.Language]: [Field.LanguagePrimary, Field.VariantType],
+  [EntityType.Territory]: [Field.PopulationDirectlySourced, Field.PopulationSpeaking],
   [EntityType.WritingSystem]: [
     Field.WritingSystem,
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
-  [EntityType.Locale]: [],
-  [EntityType.Keyboard]: [],
+  [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
+  [EntityType.Keyboard]: [
+    Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
+  ],
   [EntityType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
+    Field.TerritoryList,
   ],
-  [EntityType.Org]: [],
+  [EntityType.Org]: [Field.Organization, Field.Population, Field.CountOfCountries],
 };
 
 // Specific fields available per entity type
@@ -60,7 +63,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Modality,
 
         Field.DigitalSupport, // indirectly supported, from languages
-        Field.CLDRCoverage,
+        // Field.CLDRCoverage, // Currently broken
 
         Field.Indigeneity,
         Field.LanguageFormedHere,
@@ -77,10 +80,10 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.PercentOfOverallLanguageSpeakers,
         Field.PercentOfTerritoryPopulation,
 
-        Field.Language,
+        Field.LanguagePrimary,
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
         Field.Region,
         Field.Variant,
         Field.Organization,
@@ -104,10 +107,12 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Endonym,
         Field.TerritoryScope,
 
-        Field.Language,
+        Field.LanguagePrimary,
+        Field.LanguageList,
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory, // Equivalent to DisplayName for territories
+        Field.TerritoryPrimary, // Equivalent to DisplayName for territories
+        Field.TerritoryList, // UN region schema
         Field.Region,
 
         Field.CountOfLanguages,
@@ -125,7 +130,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Longitude,
 
         Field.PopulationDirectlySourced,
-        Field.PopulationSpeaking,
+        // Field.PopulationSpeaking, // Not currently interesting, we have no information on non-speaking population to contrast
         Field.PopulationWriting,
         Field.PopulationOfDescendants,
         Field.PercentOfTerritoryPopulation,
@@ -144,10 +149,12 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.VitalityMetascore,
         Field.ISOStatus,
 
-        Field.Language, // Equivalent to DisplayName for languages
+        Field.LanguagePrimary, // Equivalent to DisplayName for languages
+        Field.LanguageList, // Language Family Tree
         Field.LanguageFamily,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
         Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
@@ -177,8 +184,9 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       return [
         Field.TerritoryScope,
         Field.SourceType,
+        Field.Modality,
 
-        Field.Territory,
+        Field.TerritoryPrimary,
         Field.Region,
         Field.Organization,
         Field.SourceForPopulation,
@@ -198,9 +206,11 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Endonym,
         Field.WritingSystemScope,
 
-        Field.Language,
+        Field.LanguagePrimary,
+        Field.LanguageList,
         Field.WritingSystem, // Equivalent to DisplayName for writing systems
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
 
         Field.CountOfLanguages,
         Field.CountOfKeyboards,
@@ -219,9 +229,11 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       return [
         Field.VariantType,
 
-        Field.Language,
+        Field.LanguagePrimary,
+        Field.LanguageList,
         Field.WritingSystem,
-        Field.Territory,
+        Field.TerritoryPrimary,
+        Field.TerritoryList,
         // Field.Keyboard,
 
         Field.CountOfLanguages,
@@ -238,18 +250,18 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       ];
     case EntityType.Keyboard:
       return [
-        Field.LanguageScope,
+        // Field.LanguageScope,
         Field.WritingSystemScope, // Technically possible but uninteresting
         Field.TerritoryScope,
 
-        Field.Modality, // the Language's modality
-        Field.VitalityMetascore,
-        Field.ISOStatus,
+        // Field.Modality, // the Language's modality
+        // Field.VitalityMetascore,
+        // Field.ISOStatus, // TODO get the highest ISO status for the languages associated with this keyboard
 
-        Field.Language,
+        Field.LanguagePrimary,
+        Field.LanguageList,
         Field.WritingSystem,
-        Field.Territory,
-        Field.Region,
+        Field.TerritoryPrimary,
         Field.Platform,
         Field.OutputScript,
         Field.Variant,
@@ -268,7 +280,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         // Field.CountOfLanguages,
         Field.CountOfCensuses,
 
-        Field.Territory,
+        Field.TerritoryPrimary,
       ];
     default:
       return enforceExhaustiveSwitch(entType);
@@ -333,8 +345,9 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.WritingSystemScope,
         Field.TerritoryScope,
 
-        Field.Language,
+        Field.LanguagePrimary,
         Field.LanguageFamily,
+        Field.TerritoryPrimary,
       ];
     case Transform.Scale:
       return [
@@ -366,9 +379,9 @@ function getFieldsForTransform(transform: Transform): Field[] {
       // Ordered by preferred UI grouping: connections first, then vitality, then text fields
       // This also affects which filters happen first
       return [
-        Field.Territory,
+        Field.TerritoryList,
         Field.WritingSystem,
-        Field.Language,
+        Field.LanguageList,
         Field.LanguageFamily,
         Field.SourceForLanguage,
         Field.Organization,

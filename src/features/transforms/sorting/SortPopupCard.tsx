@@ -21,8 +21,9 @@ const SortPopupCard: React.FC = () => {
       }
       options={{
         'Sort By': <FieldDropdown pageParam="sortBy" />,
+        'Sort Direction': <SortDirectionSelector pageParam="sortBehavior" />,
         'Secondary Sort By': <FieldDropdown pageParam="secondarySortBy" />,
-        'Sort Direction': <SortDirectionSelector />,
+        'Secondary Sort Direction': <SortDirectionSelector pageParam="secondarySortBehavior" />,
       }}
     />
   );

@@ -11,15 +11,8 @@ import Field from './Field';
 const FieldFocusSelector: React.FC = () => {
   const { view, fieldFocus } = usePageParams();
 
-  // Only applies to the TreeList view for now, but could be expanded to other views in the future
-  if (
-    view !== View.Hierarchy &&
-    view !== View.Map &&
-    view !== View.Details &&
-    view !== View.Chart &&
-    view !== View.Reports
-  )
-    return null;
+  // Table view manages columns differently
+  if (view === View.Table) return null;
 
   return (
     <TransformOptionsPopup

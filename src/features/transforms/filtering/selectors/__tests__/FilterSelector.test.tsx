@@ -44,10 +44,12 @@ describe('FilterSelector', () => {
   });
 
   it('renders the correct selector based on the field prop', async () => {
-    const { findByText, getByText, rerender } = render(<FilterSelector field={Field.Language} />);
+    const { findByText, getByText, rerender } = render(
+      <FilterSelector field={Field.LanguageList} />,
+    );
     expect(await findByText('Sindarin')).toBeInTheDocument();
 
-    rerender(<FilterSelector field={Field.Territory} />);
+    rerender(<FilterSelector field={Field.TerritoryList} />);
     expect(await findByText('Beleriand')).toBeInTheDocument();
 
     rerender(<FilterSelector field={Field.WritingSystem} />);

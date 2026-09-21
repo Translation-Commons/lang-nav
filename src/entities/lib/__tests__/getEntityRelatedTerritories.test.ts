@@ -27,11 +27,11 @@ describe('getContainingTerritories', () => {
     );
     expect(results).toEqual({
       '001': 'Arda',
-      '123': 'Middle Earth, Arda',
-      AM: 'Aman, Arda',
-      BE: 'Beleriand, Arda, Middle Earth',
-      ER: 'Eriador, Arda, Middle Earth',
-      HA: 'Harad, Arda, Middle Earth',
+      '123': 'Arda, Middle Earth',
+      AM: 'Arda, Aman',
+      BE: 'Arda, Middle Earth, Beleriand',
+      ER: 'Arda, Middle Earth, Eriador',
+      HA: 'Arda, Middle Earth, Harad',
       Teng: 'Beleriand, Eriador',
       be0590: 'Beleriand',
       dori0123: 'Eriador, Middle Earth, Arda',

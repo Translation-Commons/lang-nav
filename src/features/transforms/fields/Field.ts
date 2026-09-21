@@ -30,12 +30,14 @@ enum Field {
   ISOStatus = 'ISO Status',
 
   // Relation - Objects
-  Language = 'Language',
+  LanguagePrimary = 'Primary Language',
+  LanguageList = 'List of Languages',
   LanguageFamily = 'Language Family',
   WritingSystem = 'Writing System',
   OutputScript = 'Output Script',
   Region = 'Region', // primary region or parent territory
-  Territory = 'Territory',
+  TerritoryPrimary = 'TerritoryPrimary',
+  TerritoryList = 'TerritoryList',
   Variant = 'Variant',
   Platform = 'Platform',
   Organization = 'Organization',

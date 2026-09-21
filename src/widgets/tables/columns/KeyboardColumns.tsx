@@ -25,7 +25,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           ))}
         </CommaSeparated>
       ),
-      field: Field.Language,
+      field: Field.LanguageList,
       columnGroup: 'Related Objects',
     },
     {
@@ -61,7 +61,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     {
       key: 'Territory',
       render: (ent) => <HoverableEntityName ent={ent.territory} />,
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,
     },

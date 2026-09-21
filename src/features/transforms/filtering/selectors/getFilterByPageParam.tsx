@@ -8,14 +8,14 @@ import { getFieldLabel } from '@strings/FieldLabelStrings';
 export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
   switch (pageParameter) {
     case PageParamKey.languageFilter:
-      return Field.Language;
+      return Field.LanguageList;
     case PageParamKey.languageFamilyFilter:
       return Field.LanguageFamily;
     case PageParamKey.languageScopes:
       return Field.LanguageScope;
 
     case PageParamKey.territoryFilter:
-      return Field.Territory;
+      return Field.TerritoryList;
     case PageParamKey.territoryScopes:
       return Field.TerritoryScope;
 
@@ -68,6 +68,7 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
     case PageParamKey.scaleFactor:
     case PageParamKey.searchBy:
     case PageParamKey.sortBehavior:
+    case PageParamKey.secondarySortBehavior:
     case PageParamKey.view:
       return Field.None;
 
@@ -80,6 +81,7 @@ export function getFilterLabelByPageParam(
   pageParameter: PageParamKey,
   filteringEntType: EntityType,
 ): string {
+  if (pageParameter === PageParamKey.languageFilter) return 'Language';
   const field = getFilterFieldByPageParam(pageParameter);
   return getFieldLabel(field, filteringEntType);
 }

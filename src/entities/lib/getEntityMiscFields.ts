@@ -4,7 +4,10 @@ import {
 } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
-import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
+import {
+  getCensusForEntity,
+  getVariantsForEntity,
+} from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -18,24 +21,22 @@ import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
 // Field.Language
-export function getEntityMostImportantLanguageName(ent: EntityData): string | undefined {
+export function getEntityMostImportantLanguage(ent: EntityData): LanguageData | undefined {
   switch (ent.type) {
     case EntityType.Territory:
-      return getTerritoryBiggestLocale(ent)?.language?.nameDisplay;
+      return getTerritoryBiggestLocale(ent)?.language;
     case EntityType.Locale:
-      return ent.language?.nameDisplay;
+      return ent.language;
     case EntityType.Language:
-      return ent.nameDisplay;
+      return ent;
     case EntityType.Variant:
-      return (ent.equivalentLanguage ?? ent.languages?.[0])?.nameDisplay;
+      return ent.equivalentLanguage;
     case EntityType.WritingSystem:
-      return ent.languages
-        ? Object.values(ent.languages).sort(sortByPopulation)[0].nameDisplay
-        : undefined;
+      return ent.languages ? Object.values(ent.languages).sort(sortByPopulation)[0] : undefined;
     case EntityType.Census:
       return undefined;
     case EntityType.Keyboard:
-      return ent.languages?.[0]?.nameDisplay;
+      return ent.languages?.slice().sort(sortByPopulation)[0];
     case EntityType.Org:
       return undefined;
   }
@@ -270,4 +271,18 @@ export function getDepth(ent: EntityData): number | undefined {
     default:
       enforceExhaustiveSwitch(type);
   }
+}
+
+export function getSourceForPopulationAsString(ent: EntityData): string | undefined {
+  const census = getCensusForEntity(ent);
+  if (census) {
+    return (
+      (census.collector?.codeDisplay ?? census.collectorName ?? '') +
+      ' ' +
+      (census.yearCollected ?? '')
+    );
+  }
+  if (ent.type === EntityType.Locale) return ent.pop.speaking.source;
+  if (ent.type === EntityType.Language) return ent.pop.speaking.source;
+  return undefined;
 }

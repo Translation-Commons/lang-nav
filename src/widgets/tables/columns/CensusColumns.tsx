@@ -77,7 +77,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
       key: 'Territory',
       render: (census) => <HoverableEntityName ent={census.territory} />,
       isInitiallyVisible: false,
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
       columnGroup: 'Location',
     },
     {

@@ -8,12 +8,14 @@ import ConsentBanner from '@features/consent/ConsentBanner';
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
 
-import { AmplitudeTracker } from './AmplitudeTracker';
+// import { AmplitudeTracker } from './AmplitudeTracker';
 import PageRoutes, { LangNavPageName } from './PageRoutes';
 
 // Intro and Data are meant to fit within the viewport, scrolling their own content
 // internally, rather than growing the whole document like a normal page of text.
 const VIEWPORT_FITTED_PAGES = [LangNavPageName.Intro, LangNavPageName.Data];
+
+const AmplitudeTracker = React.lazy(() => import('./AmplitudeTracker'));
 
 function App() {
   const location = useLocation();

@@ -1,8 +1,10 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import { getLanguagesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import EntityTitle from '@entities/ui/EntityTitle';
 
@@ -24,16 +26,20 @@ const VariantCard: React.FC<Props> = ({ data }) => {
     description && description.length > 100 ? description.slice(0, 100) + '...' : description;
   const languages = getLanguagesRelevantToEntity(data);
 
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.Code,
+    Field.VariantType,
+    Field.Description,
+    Field.LanguageList,
+  ]);
+
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={data} />
       </div>
-      <CardField
-        title="Type"
-        field={Field.VariantType}
-        description="What kind of variant it is, whether it's a dialectal or orthographic variation."
-      >
+      <CardField field={Field.VariantType}>
         {data.variantType ? (
           getVariantTypeDisplay(data.variantType)
         ) : (
@@ -41,19 +47,11 @@ const VariantCard: React.FC<Props> = ({ data }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Description"
-        field={Field.Description}
-        description="Description of this variant."
-      >
+      <CardField field={Field.Description}>
         {description ? shortDescription : <Deemphasized>No description</Deemphasized>}
       </CardField>
 
-      <CardField
-        title="Languages"
-        field={Field.Language}
-        description="Languages that use this variant."
-      >
+      <CardField field={Field.LanguageList}>
         {languages.length > 0 ? (
           <CommaSeparated>
             {languages.map((lang) => (
@@ -64,6 +62,12 @@ const VariantCard: React.FC<Props> = ({ data }) => {
           <Deemphasized>No languages specified</Deemphasized>
         )}
       </CardField>
+
+      {extraFields.map((field) => (
+        <CardField key={field} field={field}>
+          <EntityFieldDisplay ent={data} field={field} />
+        </CardField>
+      ))}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
 import { trackEssentialVisit } from '@shared/lib/essentialTracking';
 
-export function AmplitudeTracker() {
+function AmplitudeTracker() {
   const location = useLocation();
   const { state } = useConsent();
   const analyticsConsent = state?.analytics === 'granted';
@@ -27,3 +27,5 @@ export function AmplitudeTracker() {
 
   return null;
 }
+
+export default AmplitudeTracker;

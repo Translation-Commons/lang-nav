@@ -43,6 +43,9 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
     },
     [openEntity],
   );
+  let backgroundColor = getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined;
+  if (backgroundColor?.match(/\([.0-9]+%? [.0-9]+%? [.0-9]+%?\)$/))
+    backgroundColor = 'color-mix(in srgb, ' + backgroundColor + ' 50%, var(--background))';
 
   return (
     <div
@@ -51,9 +54,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
-      style={{
-        backgroundColor: getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined,
-      }}
+      style={{ backgroundColor }}
       tabIndex={0}
     >
       <PinButton className="bg-transparent!" ent={ent} />

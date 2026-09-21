@@ -17,7 +17,7 @@ const LanguageFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
   const filterByScope = filterBy[Field.LanguageScope];
-  const filterByTerritory = filterBy[Field.Territory];
+  const filterByTerritory = filterBy[Field.TerritoryList];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterByLanguageFamily = filterBy[Field.LanguageFamily];
   const filterLabels = useFilterLabels();

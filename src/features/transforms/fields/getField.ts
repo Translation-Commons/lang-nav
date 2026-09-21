@@ -1,5 +1,6 @@
 import { EntityType } from '@features/params/PageParamTypes';
 
+import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
@@ -10,7 +11,8 @@ import {
   getDepth,
   getEntityDateAsNumber,
   getEntityLiteracy,
-  getEntityMostImportantLanguageName,
+  getEntityMostImportantLanguage,
+  getSourceForPopulationAsString,
   getWritingSystemsInEntity,
 } from '@entities/lib/getEntityMiscFields';
 import {
@@ -32,6 +34,7 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+import { getLanguagesRelevantToEntity } from '../filtering/filterByConnections';
 import { getLanguageSourcesForEntity } from '../filtering/filterByEnum';
 
 import Field from './Field';
@@ -123,8 +126,14 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return ent.type === EntityType.Locale ? ent.officialStatus : undefined; // Not yet defined
 
     // Related entities
-    case Field.Language:
-      return getEntityMostImportantLanguageName(ent);
+    case Field.LanguagePrimary:
+      return getEntityMostImportantLanguage(ent)?.nameDisplay;
+    case Field.LanguageList:
+      return (
+        getLanguagesRelevantToEntity(ent)
+          .map((l) => l.nameDisplay)
+          .join(', ') || undefined
+      );
     case Field.LanguageFamily:
       return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:
@@ -133,8 +142,15 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
       return getKeyboardForEntity(ent)?.outputWritingSystem?.nameDisplay;
     case Field.Region:
       return getTerritoryForEntity(ent)?.parentUNRegion?.nameDisplay;
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+      if (ent.type === EntityType.Territory) return ent.nameDisplay;
       return getContainingTerritories(ent)?.[0]?.nameDisplay;
+    case Field.TerritoryList:
+      return (
+        getContainingTerritories(ent)
+          ?.map((t) => t.nameDisplay)
+          .join(', ') || undefined
+      );
     case Field.Platform:
       return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:
@@ -142,7 +158,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.Organization:
       return getOrganizationsForEntity(ent)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
-      return getCensusForEntity(ent)?.collectorName;
+      return getSourceForPopulationAsString(ent);
     case Field.SourceForLanguage:
       return getLanguageSourcesForEntity(ent)?.join(', ') || undefined;
 
@@ -186,6 +202,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.ISOStatus:
       return getLanguageForEntity(ent)?.vitality?.iso;
     case Field.Modality:
+      if (ent.type === EntityType.Census) return getCensusLanguageUse(ent);
       return getLanguageForEntity(ent)?.modality;
 
     case Field.Date:

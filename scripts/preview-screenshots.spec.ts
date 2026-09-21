@@ -55,6 +55,7 @@ async function loadPage(page: Page, paramString: string) {
   // await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
   await expect(page.locator('.LoadingStageDisplay')).toHaveText(
     'Loading stage: 4 of 4, algorithms finished',
+    { timeout: 15000 },
   );
 }
 

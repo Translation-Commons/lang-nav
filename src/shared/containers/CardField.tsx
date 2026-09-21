@@ -8,15 +8,13 @@ import FieldIcon from '@features/transforms/fields/FieldIcon';
 import { getFieldDescription, getFieldLabel } from '@strings/FieldLabelStrings';
 
 type Props = PropsWithChildren<{
-  title?: string;
   field: Field;
-  description?: React.ReactNode;
 }>;
 
-const CardField: React.FC<Props> = ({ children, title, field, description }) => {
+const CardField: React.FC<Props> = ({ children, field }) => {
   const { entType } = usePageParams();
-  title ??= getFieldLabel(field, entType);
-  description ??= getFieldDescription(field, entType);
+  const title = getFieldLabel(field, entType);
+  const description = getFieldDescription(field, entType);
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em', gap: '0.5em' }}>

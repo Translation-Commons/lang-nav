@@ -47,7 +47,7 @@ function getVariantColumns(): TableColumn<VariantData>[] {
         if (!ent.equivalentLanguage || ent.equivalentLanguage.ID === 'mis') return null;
         return <HoverableEntityName ent={ent.equivalentLanguage} />;
       },
-      field: Field.Language,
+      field: Field.LanguagePrimary,
       columnGroup: 'Related Objects',
     },
     {
@@ -82,7 +82,7 @@ function getVariantColumns(): TableColumn<VariantData>[] {
         </CommaSeparated>
       ),
       isInitiallyVisible: false,
-      field: Field.Territory,
+      field: Field.TerritoryList,
       columnGroup: 'Related Objects',
     },
     {

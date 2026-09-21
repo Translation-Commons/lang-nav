@@ -16,7 +16,7 @@ import EntityFilterSelector from './EntityFilterSelector';
 const LanguageFamilyFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
-  const filterByTerritory = filterBy[Field.Territory];
+  const filterByTerritory = filterBy[Field.TerritoryList];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterLabels = useFilterLabels();
 

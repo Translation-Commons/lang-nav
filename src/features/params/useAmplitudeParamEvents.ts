@@ -71,7 +71,8 @@ export default function useAmplitudeParamEvents() {
     const sortChanged =
       current.sortBy !== previous.sortBy ||
       current.secondarySortBy !== previous.secondarySortBy ||
-      current.sortBehavior !== previous.sortBehavior;
+      current.sortBehavior !== previous.sortBehavior ||
+      current.secondarySortBehavior !== previous.secondarySortBehavior;
     if (sortChanged) {
       trackSortChanged({
         ...base,
@@ -79,6 +80,7 @@ export default function useAmplitudeParamEvents() {
           current.sortBy ?? currentDefaults.sortBy,
           current.secondarySortBy ?? currentDefaults.secondarySortBy,
           current.sortBehavior ?? currentDefaults.sortBehavior,
+          current.secondarySortBehavior ?? currentDefaults.secondarySortBehavior,
         ),
       });
     }

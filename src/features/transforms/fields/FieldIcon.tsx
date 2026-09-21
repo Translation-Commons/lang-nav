@@ -91,7 +91,8 @@ export function getFieldIcon(field: Field): LucideIcon {
       return ActivityIcon;
 
     // Relation
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
       return LanguagesIcon;
     case Field.LanguageFamily:
       return NetworkIcon;
@@ -101,8 +102,10 @@ export function getFieldIcon(field: Field): LucideIcon {
       return NotebookTextIcon;
     case Field.Region:
       return EarthIcon;
-    case Field.Territory:
+    case Field.TerritoryPrimary:
       return MapPinnedIcon;
+    case Field.TerritoryList:
+      return EarthIcon;
     case Field.Platform:
       return MonitorSmartphoneIcon;
     case Field.Variant:
