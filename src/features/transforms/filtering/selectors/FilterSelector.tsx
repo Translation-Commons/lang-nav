@@ -15,10 +15,11 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import EnumButtonsMultiSelect from '@shared/ui/EnumButtonsMultiSelect';
 
-import { getFieldLabel } from '@strings/FieldLabelStrings';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import { getFilterTitle } from '../FilterLabels';
 
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
@@ -102,7 +103,7 @@ export const AllApplicableFilterSelectors: React.FC = () => {
     <div className="flex flex-col gap-2">
       {primaryFilters.map((filterBy) => (
         <div key={filterBy} className="mb-4">
-          <div>{getFieldLabel(filterBy, entType)}</div>
+          <div>{getFilterTitle(filterBy, entType)}</div>
           <FilterSelector field={filterBy} />
         </div>
       ))}
@@ -112,7 +113,7 @@ export const AllApplicableFilterSelectors: React.FC = () => {
           Entities shown on the page may be filtered by additional criteria.
           {otherFilters.map((filterBy) => (
             <div key={filterBy} className="mb-4">
-              <div>{getFieldLabel(filterBy, entType)}</div>
+              <div className="font-bold">{getFilterTitle(filterBy, entType)}</div>
               <FilterSelector field={filterBy} />
             </div>
           ))}

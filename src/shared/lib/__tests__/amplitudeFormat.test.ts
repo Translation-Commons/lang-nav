@@ -78,10 +78,10 @@ describe('buildSortKeys', () => {
     ).toEqual(['population_desc', 'name_asc']);
   });
 
-  it('flips every direction when the sort behavior is reversed', () => {
+  it('flips only the primary direction when the sort behavior is reversed', () => {
     expect(
       buildSortKeys(Field.Population, Field.Name, SortBehavior.Reverse, SortBehavior.Normal),
-    ).toEqual(['population_asc', 'name_desc']);
+    ).toEqual(['population_asc', 'name_asc']);
   });
 
   it('omits None and a secondary that duplicates the primary', () => {
