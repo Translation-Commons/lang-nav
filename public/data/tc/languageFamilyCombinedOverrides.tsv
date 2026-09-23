@@ -1,6 +1,6 @@
-# Manual overrides for Combined language family hierarchy.
-# ISO-only groupings that Glottolog does not use need explicit Combined parent/child fixes.
-# Only Combined.parentLanguageCode is modified; ISO and Glottolog sources are unchanged.
+# Manual overrides for Combined language family hierarchy.		
+# ISO-only groupings that Glottolog does not use need explicit Combined parent/child fixes.		
+# Only Combined.parentLanguageCode is modified; ISO and Glottolog sources are unchanged.		
 parentLanguageCode	childLanguageCode	notes
 sqj	sqi	Albanian macrolanguage in Albanian family
 qwe	que	Quechuan macrolanguage in Quechuan family
@@ -66,9 +66,9 @@ tbq	kar	Karen in Tibeto-Burman
 tbq	macr1268	Macro-Tani in Tibeto-Burman
 tbq	gema1234	Kman-Meyor in Tibeto-Burman
 newa1247	nwc	Old Newari in Newar
-arak1255	mhv	Arakanese in Arakanese
-mhv	rki	Rakhine in Arakanese
-mhv	rmz	Marma in Arakanese
+#arak1255	mhv	Arakanese in Arakanese
+#mhv	rki	Rakhine in Arakanese
+#mhv	rmz	Marma in Arakanese
 brah1260	mrui1235	Mruic in Brahmaputran
 tbq	dhim1247	Dhimal-Lhokpu-Toto in Tibeto-Burman
 tbq	nung1293	Nungish in Tibeto-Burman

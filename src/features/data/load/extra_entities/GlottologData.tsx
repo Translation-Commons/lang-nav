@@ -96,7 +96,9 @@ export function addGlottologLanguages(
 
     if (lang == null) {
       const combinedScope =
-        scope === LanguageScope.Family && parentGlottocode != null ? LanguageScope.Branch : scope;
+        scope === LanguageScope.Family && parentGlottocode != null
+          ? LanguageScope.Subfamily
+          : scope;
 
       // Create new LanguageData
       const sourceSpecific = {

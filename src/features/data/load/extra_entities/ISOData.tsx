@@ -225,7 +225,7 @@ export function addISOLanguageFamilyData(
         Combined: {
           code: family.code,
           parentLanguageCode: family.parent,
-          scope: family.parent ? LanguageScope.Branch : LanguageScope.Family,
+          scope: family.parent ? LanguageScope.Subfamily : LanguageScope.Family,
           childLanguages: [],
         },
         ISO: {
@@ -261,7 +261,7 @@ export function addISOLanguageFamilyData(
         familyEntry.nameDisplay = family.name;
       }
       familyEntry.Combined.parentLanguageCode ??= family.parent;
-      familyEntry.Combined.scope ??= family.parent ? LanguageScope.Branch : LanguageScope.Family;
+      familyEntry.Combined.scope ??= family.parent ? LanguageScope.Subfamily : LanguageScope.Family;
       familyEntry.ISO.code ??= family.code;
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
@@ -270,7 +270,7 @@ export function addISOLanguageFamilyData(
       familyEntry.BCP.parentLanguageCode = family.parent;
       familyEntry.BCP.scope = LanguageScope.Family;
       familyEntry.BCP.name = name;
-      familyEntry.scope ??= family.parent ? LanguageScope.Branch : LanguageScope.Family;
+      familyEntry.scope ??= family.parent ? LanguageScope.Subfamily : LanguageScope.Family;
     }
   });
 

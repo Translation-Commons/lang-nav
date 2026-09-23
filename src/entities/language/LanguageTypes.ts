@@ -50,11 +50,11 @@ export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocod
 
 export enum LanguageScope {
   // larger value = broader scope
-  RegionalGrouping = 8,
+  BroadGrouping = 8,
   Family = 7,
-  Branch = 6,
+  Subfamily = 6,
   Macrolanguage = 5,
-  Variety = 4,
+  Intermediate = 4,
   Language = 3,
   Dialect = 2,
   SpecialCode = 1,

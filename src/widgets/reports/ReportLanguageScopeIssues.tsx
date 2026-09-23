@@ -95,12 +95,18 @@ const ExpandedLanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => (
 
 function getScopeChar(scope: LanguageScope | undefined): string {
   switch (scope) {
+    case LanguageScope.BroadGrouping:
+      return 'B';
     case LanguageScope.Family:
       return 'F';
+    case LanguageScope.Subfamily:
+      return 'f';
     case LanguageScope.Macrolanguage:
       return 'M';
-    case LanguageScope.Language:
+    case LanguageScope.Intermediate:
       return 'I';
+    case LanguageScope.Language:
+      return 'L';
     case LanguageScope.Dialect:
       return 'D';
     case LanguageScope.SpecialCode:
