@@ -20,9 +20,7 @@ export const LanguageHierarchy: React.FC = () => {
   const filterByScope = useScopeFilter();
 
   const rootNodes = getLanguageTreeNodes(
-    languagesInSelectedSource.filter(
-      (lang) => lang.parentLanguage == null || !filterByScope(lang.parentLanguage),
-    ),
+    languagesInSelectedSource.filter((lang) => lang.parentLanguage == null),
     languageSource,
     sortFunction,
     filterByScope,
@@ -64,10 +62,21 @@ export function getLanguageTreeNodes(
     return [];
   }
   return languages
-    .filter(filterFunction)
-    .sort(sortFunction)
-    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction, depth))
-    .filter((node) => node != null);
+    .flatMap((lang) => {
+      // If it passes the filter, keep the node and keep on recursively processing its children
+      if (filterFunction(lang))
+        return getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction, depth);
+
+      // If it doesn't pass, then evaluate this language's child languages instead
+      return getLanguageTreeNodes(
+        lang.childLanguages ?? [],
+        languageSource,
+        sortFunction,
+        filterFunction,
+        depth + 1,
+      );
+    })
+    .sort((a, b) => sortFunction(a.ent, b.ent));
 }
 
 function getLanguageTreeNode(
