@@ -95,11 +95,14 @@ export function addGlottologLanguages(
       parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
 
     if (lang == null) {
+      const combinedScope =
+        scope === LanguageScope.Family && parentGlottocode != null ? LanguageScope.Branch : scope;
+
       // Create new LanguageData
       const sourceSpecific = {
         Combined: {
           code: glottoCode,
-          scope,
+          scope: combinedScope,
           parentLanguageCode: parentLanguageCode ?? parentGlottocode,
         },
         Glottolog: {
@@ -111,7 +114,7 @@ export function addGlottologLanguages(
       };
       const newLang: LanguageData = {
         ...getBaseLanguageData(glottoCode, name),
-        scope,
+        scope: combinedScope,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Glottolog entry not found in ISO',
         ...sourceSpecific,

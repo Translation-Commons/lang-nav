@@ -10,6 +10,8 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 
 import { EntityData } from '@entities/types/DataTypes';
 
+import { Button } from '@shared/ui/button';
+
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';
 import { TreeListOptionsProvider, TreeListOptionsSelectors } from './TreeListOptions';
@@ -39,6 +41,20 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   );
   const ents = useFilteredEntities({}).filteredEntities;
   const { getColor } = useColors({ ents });
+  const activeRootNodes = useMemo(
+    () =>
+      rootNodes
+        .map((node) => filterBranch(node, filterActive ? filterFunction : undefined))
+        .filter((node) => node != null)
+        .slice(0, limit > 0 ? limit : undefined),
+    [rootNodes, filterActive, filterFunction, limit],
+  );
+
+  const copyDataAsText = useCallback(() => {
+    const data = activeRootNodes.map((node) => treeListNodeToString(node)).join('\n');
+    navigator.clipboard.writeText(data);
+    alert('Data copied to clipboard');
+  }, [activeRootNodes, filterActive, filterFunction, limit]);
 
   return (
     <div className="text-left max-w-[600px] mx-auto my-0  text-xs">
@@ -52,19 +68,26 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
               {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
+          <Button onClick={copyDataAsText}>Copy data as text</Button>
         </div>
 
-        <TreeListRoot
-          rootNodes={rootNodes
-            .map((node) => filterBranch(node, filterActive ? filterFunction : undefined))
-            .filter((node) => node != null)
-            .slice(0, limit > 0 ? limit : undefined)}
-          getColor={getColor}
-        />
+        <TreeListRoot rootNodes={activeRootNodes} getColor={getColor} />
         <TreeListOptionsSelectors />
       </TreeListOptionsProvider>
     </div>
   );
 };
+
+function treeListNodeToString(node: TreeNodeData, depth = 0): string {
+  if (depth > 30) return '';
+  const indent = '  '.repeat(depth);
+  let result = `${indent}${node.ent.nameDisplay} [${node.ent.codeDisplay}]\n`;
+  if (node.children) {
+    for (const child of node.children) {
+      result += treeListNodeToString(child, depth + 1);
+    }
+  }
+  return result;
+}
 
 export default TreeListPageBody;

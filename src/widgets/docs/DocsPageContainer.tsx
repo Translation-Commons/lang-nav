@@ -13,7 +13,7 @@ type Props = React.PropsWithChildren<{
 
 function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
   return (
-    <main className="mx-auto my-8 max-w-[800px] px-4 text-start">
+    <main className="mx-auto my-8 max-w-[800px] px-4 text-start text-sm">
       <div className="flex flex-col gap-4">
         <TitleWithLogo title={title} />
         {showDocsLink && (

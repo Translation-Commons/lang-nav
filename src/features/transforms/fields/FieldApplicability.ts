@@ -150,7 +150,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.ISOStatus,
 
         Field.LanguagePrimary, // Equivalent to DisplayName for languages
-        Field.LanguageList, // Language Family Tree
+        Field.LanguageList, // Language Lineage
         Field.LanguageFamily,
         Field.WritingSystem,
         Field.TerritoryPrimary,

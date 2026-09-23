@@ -7737,7 +7737,7 @@ mwu	mitt1253	Mittu			Latn			gber1234	No	Extinct language
 mwy	mosi1247	Mosiro						okie1247	No	Declared non-existent by ISO
 mxi	moza1249	Mozarabic	مُزَرَب		Latn			unsh1234	Probably not	Historical langauge
 mzg	mona1241	Monastic Sign Language		Sign	Zxxx			auxi1235	Possibly	Sign
-nah		Nahuatl	Náhuatl	Spoken & Written					Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
+nah	azte1234	Nahuatl	Náhuatl	Spoken & Written					Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
 pugl1238	pugl1238	Tarantino						neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
 nci	clas1250	Classical Nahuatl	Nāhuatlahtōlli	Mostly Written	Latn			cent2258	Possibly	Nahuatl has many spoken variations but it appears that most written content (eg. the Nahuatl Wikipedia) is written in Classical Nahuatl since it's the common denominator between the nahua communities.
 ndf		Nadruvian			Cyrl				Probably not	Historical langauge
@@ -8049,7 +8049,7 @@ xpi	pict1238	Pictish			Ogam			uncl1493	Probably not	Historical langauge
 xpj	mpal1238	Mpalitjanh			Latn			mpal1237	No	Extinct language
 xpl	port1278	Port Sorell Tasmanian		Spoken	Latn			west1503	No	Extinct language
 xpm	pump1237	Pumpokol		Spoken	Cyrl			yeni1252	No	Extinct language
-xpo	poch1244	Pochutec			Latn			azte1234	No	Extinct language
+xpo	poch1244	Pochutec			Latn		nah	azte1234	No	Extinct language
 xpp		Puyo-Paekche							Probably not	Historical langauge
 xpq	pequ1242	Mohegan-Pequot			Latn			mohe1244	Yes, with caveat	Some sources report this as extinct, some as active
 xpr	part1239	Parthian			Prti			nort3177	Probably not	Historical langauge
