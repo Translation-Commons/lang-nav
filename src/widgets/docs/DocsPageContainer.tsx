@@ -6,6 +6,8 @@ import InternalLink from '@features/params/InternalLink';
 
 import LargeLangNavLogo from './LargeLangNavLogo';
 
+const EntityDetailsDrawer = React.lazy(() => import('@widgets/details/ui/EntityDetailsDrawer'));
+
 type Props = React.PropsWithChildren<{
   title: ReactNode;
   showDocsLink?: boolean;
@@ -21,6 +23,7 @@ function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
         )}
         {children}
       </div>
+      <EntityDetailsDrawer />
     </main>
   );
 }

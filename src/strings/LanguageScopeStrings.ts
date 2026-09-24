@@ -49,13 +49,13 @@ export function getLanguageScopeDescription(scope: LanguageScope): string {
     case LanguageScope.BroadGrouping:
       return 'An geographic grouping of languages -- not necessarily reflective of an ancestral relationship.';
     case LanguageScope.Family:
-      return 'An ancestral group of languages. Mostly limited to the ones defined by the standard ISO 639-2.';
+      return 'An accepted common ancestry for a group of languages -- limited to the first level of classification.';
     case LanguageScope.Subfamily:
       return 'A subgroup within a language family, representing a collection of languages that share a common ancestry. Most of these come from Glottolog and have been re-classified as subfamilies.';
     case LanguageScope.Macrolanguage:
-      return 'A group of languages that contain a high degree of mutual intelligibility transcending boundaries in politics, writing, or speech.';
+      return 'A group of languages that contain a partial degree of mutual intelligibility transcending boundaries in politics, writing, or speech.';
     case LanguageScope.Intermediate:
-      return 'A subgroup within a macrolanguage, representing a collection of partially intelligible languages that are more common than others within the same macrolanguage.';
+      return 'A subgroup within a macrolanguage, representing a collection of partially intelligible languages that are more common with eachother than others within the same macrolanguage.';
     case LanguageScope.Language:
       return 'A system of communication where users can understand each other better than anyone in other individual languages -- usually with a specific common speaking, writing, or gesturing standard.';
     case LanguageScope.Dialect:
