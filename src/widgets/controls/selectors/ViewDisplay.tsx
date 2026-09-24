@@ -5,7 +5,7 @@ import {
   MapIcon,
   ScatterChartIcon,
   Table2Icon,
-  ToolCaseIcon
+  ToolCaseIcon,
 } from 'lucide-react';
 import React from 'react';
 
