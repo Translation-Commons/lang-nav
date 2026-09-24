@@ -90,7 +90,8 @@ export function addGlottologLanguages(
   // Add new glottocodes from the import
   glottologImport.forEach((importedLanguage) => {
     const { glottoCode, parentGlottocode, scope, name, latitude, longitude } = importedLanguage;
-    const lang = languagesBySource.Glottolog[glottoCode];
+    const lang =
+      languagesBySource.Glottolog[glottoCode] ?? languagesBySource.ISO[glottocodeToISO[glottoCode]];
     const parentLanguageCode =
       parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
 

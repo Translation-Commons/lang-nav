@@ -45,7 +45,11 @@ function parseLanguageLine(line: string): LanguageData {
 
     modality,
     primaryScriptCode: parts[5] || undefined,
-    Combined: { code, name: nameDisplay, parentLanguageCode },
+    Combined: {
+      code,
+      name: nameDisplay,
+      parentLanguageCode: parentLanguageCode ?? parentGlottocode,
+    },
     Glottolog: {
       code: parts[1] !== '' ? parts[1] : undefined,
       parentLanguageCode: parentGlottocode,

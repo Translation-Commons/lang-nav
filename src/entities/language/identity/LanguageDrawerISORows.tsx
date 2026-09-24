@@ -43,8 +43,12 @@ const LanguageDrawerISORows: React.FC<Props> = ({ lang }) => {
             </ExternalLink>
           }
           expandedContent={
-            lang.ISO.scope !== lang.scope &&
-            'Classified as a ' + getLanguageScopeLabel(lang.ISO.scope)
+            <>
+              {lang.ISO.scope !== lang.scope && (
+                <div>Classified as a {getLanguageScopeLabel(lang.ISO.scope)}</div>
+              )}
+              {lang.ISO.name !== lang.nameDisplay && <div>ISO name: {lang.ISO.name}</div>}
+            </>
           }
         >
           {ISO.code}

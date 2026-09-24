@@ -39,8 +39,14 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
               </ExternalLink>
             }
             expandedContent={
-              lang.Glottolog.scope !== lang.scope &&
-              'Classified as a ' + getLanguageScopeLabel(lang.Glottolog.scope)
+              <>
+                {lang.Glottolog.scope !== lang.scope && (
+                  <div>Classified as a {getLanguageScopeLabel(lang.Glottolog.scope)}</div>
+                )}
+                {lang.Glottolog.name !== lang.nameDisplay && (
+                  <div>Glottolog name: {lang.Glottolog.name}</div>
+                )}
+              </>
             }
           >
             {lang.Glottolog.code}

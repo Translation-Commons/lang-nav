@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { useScopeFilter } from '@features/transforms/filtering/filter';
+import Field from '@features/transforms/fields/Field';
+import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
@@ -17,14 +18,27 @@ export const LanguageHierarchy: React.FC = () => {
   const { languageSource, updatePageParams } = usePageParams();
   const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = useScopeFilter();
+  const filters = useFilters();
+  const filterFunction = useCallback(
+    (lang: EntityData) =>
+      filters[Field.LanguageScope](lang) &&
+      filters[Field.TerritoryList](lang) &&
+      filters[Field.WritingSystem](lang) &&
+      filters[Field.Modality](lang) &&
+      filters[Field.ISOStatus](lang),
+    [filters],
+  );
 
-  const rootNodes = getLanguageTreeNodes(
-    languagesInSelectedSource.filter((lang) => lang.parentLanguage == null),
-    languageSource,
-    sortFunction,
-    filterByScope,
-    0,
+  const rootNodes = useMemo(
+    () =>
+      getLanguageTreeNodes(
+        languagesInSelectedSource.filter((lang) => lang[languageSource].parentLanguage == null),
+        languageSource,
+        sortFunction,
+        filterFunction,
+        0,
+      ),
+    [languagesInSelectedSource, languageSource, sortFunction, filterFunction],
   );
 
   return (
@@ -66,6 +80,9 @@ export function getLanguageTreeNodes(
       // If it passes the filter, keep the node and keep on recursively processing its children
       if (filterFunction(lang))
         return getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction, depth);
+
+      // If it doesn't pass, and its the bookkeeping node, don't flatten the child languages because they are deprecated.
+      if (lang.ID === 'book1242') return [];
 
       // If it doesn't pass, then evaluate this language's child languages instead
       return getLanguageTreeNodes(
