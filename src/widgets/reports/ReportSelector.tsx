@@ -21,36 +21,31 @@ import ReportID from './ReportID';
 import ReportLabels from './ReportLabels';
 
 type Props = {
-  variant: 'NavTabs' | 'Buttons' | 'Dropdown';
+  variant: 'Buttons' | 'Dropdown';
 };
 
 const ReportSelector: React.FC<Props> = ({ variant }) => {
   const { view, entType, reportID } = usePageParams();
   const updatePage = usePageParamNavigation({ keepOldParams: true });
   const reportIDs = useMemo(
-    () => [ReportID.EntitiesMissingFields, ...getReportIDsForEntityType(entType)],
+    () => [ReportID.None, ReportID.EntitiesMissingFields, ...getReportIDsForEntityType(entType)],
     [entType],
   );
   const currentReportID = useMemo(() => {
-    if (reportID && reportIDs.includes(reportID)) return reportID;
-    return undefined;
+    if (reportIDs.includes(reportID)) return reportID;
+    return ReportID.None;
   }, [reportID, reportIDs]);
 
   if (view !== View.Reports) return null;
 
-  if (variant === 'NavTabs') {
-    return null;
-  }
   if (variant === 'Dropdown') {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button className="cursor-pointer" variant="outline" role="dropdown">
+            <Button variant="outline" role="dropdown">
               <WrenchIcon />
-              <div className="truncate text-ellipsis">
-                {currentReportID ? ReportLabels[currentReportID] : 'Select a report'}
-              </div>
+              <div className="truncate text-ellipsis">{ReportLabels[currentReportID]}</div>
             </Button>
           }
         />
@@ -76,11 +71,13 @@ const ReportSelector: React.FC<Props> = ({ variant }) => {
         :
       </div>
       <div className="flex flex-col gap-2">
-        {reportIDs.map((reportID) => (
-          <Button key={reportID} variant="secondary" onClick={() => updatePage({ reportID })}>
-            {ReportLabels[reportID]}
-          </Button>
-        ))}
+        {reportIDs
+          .filter((reportID) => reportID !== ReportID.None)
+          .map((reportID) => (
+            <Button key={reportID} variant="secondary" onClick={() => updatePage({ reportID })}>
+              {ReportLabels[reportID]}
+            </Button>
+          ))}
       </div>
     </div>
   );

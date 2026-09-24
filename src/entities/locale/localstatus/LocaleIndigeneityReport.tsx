@@ -6,6 +6,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
+import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
 import EnumDropdown from '@shared/ui/EnumDropdown';
 import ExternalLink from '@shared/ui/ExternalLink';
 
@@ -39,6 +40,8 @@ const LocaleIndigeneityReport: React.FC = () => {
     // If the state doesn't change at all a refresh does not happen
     setChangedLocales((prev) => (prev.includes(locale) ? [...prev] : [...prev, locale]));
   }, []);
+
+  const { copy } = useCopyToClipboard();
   const copyChangedLocales = useCallback(() => {
     const clipboardText = changedLocales
       .filter((locale) => locale.langFormedHere != null || locale.historicPresence != null)
@@ -51,8 +54,8 @@ const LocaleIndigeneityReport: React.FC = () => {
         ].join('\t'),
       )
       .join('\n');
-    navigator.clipboard.writeText(clipboardText);
-  }, [changedLocales]);
+    copy(clipboardText);
+  }, [changedLocales, copy]);
 
   return (
     <>

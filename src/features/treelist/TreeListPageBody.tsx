@@ -10,7 +10,7 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { Button } from '@shared/ui/button';
+import CopyButton from '@shared/ui/CopyButton';
 
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';
@@ -50,11 +50,10 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     [rootNodes, filterActive, filterFunction, limit],
   );
 
-  const copyDataAsText = useCallback(() => {
-    const data = activeRootNodes.map((node) => treeListNodeToString(node)).join('\n');
-    navigator.clipboard.writeText(data);
-    alert('Data copied to clipboard');
-  }, [activeRootNodes, filterActive, filterFunction, limit]);
+  const getDataAsText = useCallback(
+    () => activeRootNodes.map((node) => treeListNodeToString(node)).join('\n'),
+    [activeRootNodes, filterActive, filterFunction, limit],
+  );
 
   return (
     <div className="text-left max-w-[600px] mx-auto my-0  text-xs">
@@ -68,7 +67,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
               {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
-          <Button onClick={copyDataAsText}>Copy data as text</Button>
+          <CopyButton getTextToCopy={getDataAsText}>Copy display as text</CopyButton>
         </div>
 
         <TreeListRoot rootNodes={activeRootNodes} getColor={getColor} />

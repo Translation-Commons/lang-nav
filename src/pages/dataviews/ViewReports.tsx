@@ -19,7 +19,7 @@ const ViewReports: React.FC = () => {
   );
   const currentReportID = useMemo(() => {
     if (reportID && reportIDs.includes(reportID)) return reportID;
-    return undefined;
+    return ReportID.None;
   }, [reportID, reportIDs]);
 
   return (

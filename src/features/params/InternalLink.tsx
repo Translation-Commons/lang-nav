@@ -36,6 +36,7 @@ const InternalLink: React.FC<Props> = ({
       title={to}
       style={style}
       target={newWindow ? '_blank' : undefined}
+      rel={newWindow ? 'noopener noreferrer' : undefined}
     >
       {children}
     </Link>

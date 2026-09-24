@@ -116,10 +116,11 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   );
 
   const handleClipboardExport = useCallback(
-    (exportType: CopyExportType) => {
+    async (exportType: CopyExportType) => {
       const data = prepareDataForExport(exportType);
-      navigator.clipboard.writeText(data);
-      alert('Data copied to clipboard');
+      navigator.clipboard.writeText(data).then(() => {
+        alert('Language data copied to clipboard');
+      });
     },
     [prepareDataForExport],
   );

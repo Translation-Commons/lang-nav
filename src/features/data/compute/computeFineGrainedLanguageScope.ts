@@ -16,7 +16,7 @@ const REASSIGNABLE_SCOPES = [
  *   Anything between a macro & an individual language is "intermediate".
  *   Anything below a language should be a dialect.
  *
- * Other corrections should be done directly with `languageScopeOverrides.tsv` and `
+ * Other corrections should be done directly with `languageScopeOverrides.tsv`
  */
 function computeFineGrainedLanguageScope(languages: LanguageData[]): void {
   // For each language family root
@@ -48,6 +48,7 @@ function computeScopeRecursively(lang: LanguageData, depth: number = 0): Languag
     );
     if (!highestChildScope || highestChildScope === LanguageScope.Dialect) {
       lang.scope = LanguageScope.Dialect;
+      lang.Combined.scope = LanguageScope.Dialect;
     }
   }
 

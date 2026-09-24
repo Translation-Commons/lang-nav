@@ -43,6 +43,8 @@ const Report: React.FC<{ reportID?: ReportID }> = ({ reportID }) => {
 
 const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
   switch (reportID) {
+    case ReportID.None:
+      return <ReportSelector variant="Buttons" />;
     case ReportID.CensusCountries:
       return <ReportCensusCountries />;
     case ReportID.CensusInputTool:

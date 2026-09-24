@@ -1,4 +1,3 @@
-import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo, useState } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
@@ -7,7 +6,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import VariantAnnotationTable from '@entities/variant/VariantAnnotationTable';
 import { VariantData, VariantType } from '@entities/variant/VariantTypes';
 
-import { Button } from '@shared/ui/button';
+import CopyButton from '@shared/ui/CopyButton';
 import EnumDropdown from '@shared/ui/EnumDropdown';
 
 enum IncludeCriteria {
@@ -37,20 +36,22 @@ const ReportVariantsAnnotationTool: React.FC = () => {
     // If the state doesn't change at all a refresh does not happen
     setChangedVariants((prev) => (prev.includes(variant) ? [...prev] : [...prev, variant]));
   }, []);
-  const copyAnnotatedVariants = useCallback(() => {
-    const clipboardText = variants
-      .filter((variant) => variant.variantType != null)
-      .sort(sortByPopulation)
-      .map((variant) =>
-        [
-          variant.ID,
-          variant.variantType,
-          variant.equivalentLanguage?.ID ?? variant.equivalentLanguageCode,
-        ].join('\t'),
-      )
-      .join('\n');
-    navigator.clipboard.writeText('ID\tVariantType\tEquivalentLanguageCode\n' + clipboardText);
-  }, [variants]);
+  const getAnnotatedVariantsString = useCallback(
+    () =>
+      'ID\tVariantType\tEquivalentLanguageCode\n' +
+      variants
+        .filter((variant) => variant.variantType != null)
+        .sort(sortByPopulation)
+        .map((variant) =>
+          [
+            variant.ID,
+            variant.variantType,
+            variant.equivalentLanguage?.ID ?? variant.equivalentLanguageCode,
+          ].join('\t'),
+        )
+        .join('\n'),
+    [variants],
+  );
 
   return (
     <>
@@ -69,14 +70,9 @@ const ReportVariantsAnnotationTool: React.FC = () => {
         variants={viewedVariants}
         addToChangedVariants={addToChangedVariants}
       />
-      <Button
-        onClick={copyAnnotatedVariants}
-        disabled={changedVariants.length === 0}
-        variant="secondary"
-      >
-        <CopyIcon />
+      <CopyButton getTextToCopy={getAnnotatedVariantsString}>
         Copy annotated variants ({changedVariants.length})
-      </Button>
+      </CopyButton>
     </>
   );
 };

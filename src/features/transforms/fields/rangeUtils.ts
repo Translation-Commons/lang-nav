@@ -108,7 +108,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
     case Field.LanguageScope:
-      return LanguageScope.Family; // Larger value = broader scope
+      return LanguageScope.BroadGrouping; // Larger value = broader scope
     case Field.Latitude:
       return 90;
     case Field.PercentOfOverallLanguageSpeakers:
