@@ -4,6 +4,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import ReportID from './ReportID';
+import ReportSelector from './ReportSelector';
 
 const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
@@ -30,11 +31,11 @@ const ReportWritingSystemsLanguagesWithout = React.lazy(
 );
 const ReportVariantsAnnotationTool = React.lazy(() => import('./ReportVariantsAnnotationTool'));
 
-const Report: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
+const Report: React.FC<{ reportID?: ReportID }> = ({ reportID }) => {
   return (
     <ContainErrorsAndSuspense>
       <div className="text-sm">
-        <SpecificReport reportID={reportID} />
+        {reportID ? <SpecificReport reportID={reportID} /> : <ReportSelector variant="Buttons" />}
       </div>
     </ContainErrorsAndSuspense>
   );

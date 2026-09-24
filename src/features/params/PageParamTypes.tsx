@@ -29,8 +29,8 @@ export enum View {
   Hierarchy = 'Hierarchy',
   Map = 'Map',
   Chart = 'Chart',
-  Reports = 'Reports',
   Details = 'Details',
+  Reports = 'Reports',
 }
 
 export enum SearchableField {

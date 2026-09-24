@@ -4,6 +4,8 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+
 import LargeLangNavLogo from './LargeLangNavLogo';
 
 const EntityDetailsDrawer = React.lazy(() => import('@widgets/details/ui/EntityDetailsDrawer'));
@@ -23,7 +25,9 @@ function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
         )}
         {children}
       </div>
-      <EntityDetailsDrawer />
+      <ContainErrorsAndSuspense>
+        <EntityDetailsDrawer />
+      </ContainErrorsAndSuspense>
     </main>
   );
 }

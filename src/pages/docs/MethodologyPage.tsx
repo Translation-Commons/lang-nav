@@ -5,6 +5,8 @@ import DocsSection from '@widgets/docs/DocsSection';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageTaxonomyTable from './LanguageTaxonomyTable';
@@ -45,7 +47,9 @@ const MethodologyPage: React.FC = () => {
             See this table and compare between our framework, glottolog, and ISO standards for
             Serbian (the bibliographic code) & Southeastern Huastec Nahuatl
           </em>
-          <LanguageTaxonomyTable />
+          <ContainErrorsAndSuspense>
+            <LanguageTaxonomyTable />
+          </ContainErrorsAndSuspense>
         </div>
       </DocsSection>
     </DocsPageContainer>

@@ -14,7 +14,7 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { filterLanguagesWithScopeIssues, getLanguagePath } from './getLanguageScopeIssues';
 
 const ReportLanguageScopeIssues: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const { languagesInSelectedSource, getLanguage } = useDataContext();
 
   const languagesWithIssues = useMemo(
     () => filterLanguagesWithScopeIssues(languagesInSelectedSource),
@@ -23,8 +23,14 @@ const ReportLanguageScopeIssues: React.FC = () => {
 
   return (
     <>
-      This report flags languages in the current language source whose scope is broader than their
-      direct parent&apos;s scope, which may indicate a hierarchy inconsistency.
+      This tool is meant to diagnose issues related to language ancestry & language levels. We
+      expect a typical language lineage to look like this: F/f/f/M/L/D/D -- where F = Family, f =
+      Subfamily, M = Macrolanguage, L = Individual Language, D = Dialect. In some cases the family
+      may be superseded by a <strong>B</strong>roader grouping (like the regional group{' '}
+      <HoverableEntityName ent={getLanguage('paa')} /> or a particular aspect like{' '}
+      <HoverableEntityName ent={getLanguage('sgn')} /> ). Some sources offer a lot more language
+      categories than ISO so languoids in between a Macrolanguage and a Language are classified{' '}
+      <strong>I</strong>ntermediate.
       <InteractiveEntityTable<LanguageData>
         tableID={TableID.LanguageScopeIssues}
         shouldFilterUsingSearchBar={false}
