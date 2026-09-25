@@ -2,12 +2,10 @@ import { useCallback } from 'react';
 
 import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
 import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritories';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';

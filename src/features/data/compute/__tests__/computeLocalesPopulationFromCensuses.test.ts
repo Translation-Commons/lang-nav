@@ -6,11 +6,11 @@ import {
   getMockedCoreData,
 } from '@features/__tests__/MockEntities';
 import { CoreData } from '@features/data/load/CoreData';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
-import { EntityDictionary } from '@entities/types/DataTypes';
+import { EntityType } from '@entities/types/EntityTypes';
+import { EntityDictionary } from '@entities/types/EntityTypes';
 
 import { computeRegionalLocalesPopulation } from '../computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';

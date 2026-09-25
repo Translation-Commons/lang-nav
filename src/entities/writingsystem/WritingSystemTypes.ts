@@ -2,13 +2,12 @@
  * Enums and types related to writing systems
  */
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase } from '@entities/types/DataTypes';
+import { EntityType } from '@entities/types/EntityTypes';
+import { EntityBase } from '@entities/types/EntityTypes';
 
 export type ScriptCode = string; // ISO 15924 script code, eg. Latn, Cyrl, etc.
 

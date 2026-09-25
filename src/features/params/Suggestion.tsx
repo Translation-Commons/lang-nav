@@ -1,4 +1,4 @@
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 export type Suggestion = {
   entID?: string;

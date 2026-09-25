@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 const useEntities = (entType?: EntityType): EntityData[] => {
   const { entType: pageEntityType } = usePageParams();

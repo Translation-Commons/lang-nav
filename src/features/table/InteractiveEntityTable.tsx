@@ -2,7 +2,7 @@ import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 

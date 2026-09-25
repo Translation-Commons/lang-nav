@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import SearchCombobox from '@features/transforms/search/SearchCombobox';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
   children,

@@ -1,9 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Field from '@features/transforms/fields/Field';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 const mockUpdatePageParams = vi.fn();
 

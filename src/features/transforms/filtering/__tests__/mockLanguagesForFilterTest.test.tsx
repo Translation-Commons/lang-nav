@@ -1,11 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 export function getMockLanguages() {

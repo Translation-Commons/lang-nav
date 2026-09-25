@@ -6,7 +6,7 @@ import { View } from '@features/params/PageParamTypes';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { Button } from '@shared/ui/button';
 import { DrawerClose } from '@shared/ui/drawer';

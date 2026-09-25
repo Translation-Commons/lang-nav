@@ -1,7 +1,7 @@
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

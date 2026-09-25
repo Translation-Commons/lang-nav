@@ -1,7 +1,6 @@
-import { EntityType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

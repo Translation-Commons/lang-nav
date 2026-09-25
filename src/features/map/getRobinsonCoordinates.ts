@@ -1,6 +1,6 @@
 // Official Robinson table from Snyder (1987), for every 5° of latitude.
 
-import { EntityType } from '@features/params/PageParamTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import DrawableData from './DrawableData';
 

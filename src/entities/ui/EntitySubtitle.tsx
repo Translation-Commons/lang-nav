@@ -5,7 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import { getEntitySubtitle } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

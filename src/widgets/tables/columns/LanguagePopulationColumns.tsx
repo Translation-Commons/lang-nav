@@ -2,7 +2,6 @@ import React from 'react';
 
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
@@ -15,6 +14,7 @@ import LanguagePopulationFromLocales from '@entities/language/population/Languag
 import LanguagePopulationInSelectedTerritory from '@entities/language/population/LanguagePopulationInSelectedTerritory';
 import LanguagePopulationKnownWarning from '@entities/language/population/LanguagePopulationKnownWarning';
 import LanguagePopulationSource from '@entities/language/population/LanguagePopulationSource';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({

@@ -3,7 +3,7 @@
 
 import plurals from 'cldr-core/supplemental/plurals.json';
 
-import { EntityType } from '@features/params/PageParamTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageData } from '../LanguageTypes';
 

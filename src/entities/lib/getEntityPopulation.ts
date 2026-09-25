@@ -1,6 +1,4 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import { sumBy } from '@shared/lib/setUtils';

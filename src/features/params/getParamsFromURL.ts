@@ -8,6 +8,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -15,14 +16,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { parseLanguageScope } from '@strings/LanguageScopeStrings';
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
-import {
-  EntityType,
-  LocaleSeparator,
-  PageParamKey,
-  PageParams,
-  SearchableField,
-  View,
-} from './PageParamTypes';
+import { LocaleSeparator, PageParamKey, PageParams, SearchableField, View } from './PageParamTypes';
 import { ProfileType } from './Profiles';
 
 // Helper function to parse numeric enum arrays from URL strings

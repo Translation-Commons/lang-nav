@@ -2,12 +2,13 @@ import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
-import { EntityType, PageParams } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

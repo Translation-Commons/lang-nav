@@ -1,10 +1,9 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CensusData } from '@entities/census/CensusTypes';
 import { WikipediaData } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase } from '@entities/types/DataTypes';
+import { EntityType } from '@entities/types/EntityTypes';
+import { EntityBase } from '@entities/types/EntityTypes';
 import { VariantData, VariantIANATag } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 

@@ -6,7 +6,7 @@ import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityS
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';

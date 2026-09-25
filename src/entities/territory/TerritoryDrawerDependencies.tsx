@@ -4,8 +4,10 @@ import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
 import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

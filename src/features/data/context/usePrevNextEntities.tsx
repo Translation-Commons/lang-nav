@@ -5,7 +5,7 @@ import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 const usePrevNextEntities = ({ ent }: { ent?: EntityData }) => {
   const { entType, view } = usePageParams();

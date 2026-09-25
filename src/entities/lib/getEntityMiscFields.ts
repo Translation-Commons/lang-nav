@@ -3,7 +3,6 @@ import {
   getEntityFullDescendants,
 } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import {
   getCensusForEntity,
   getVariantsForEntity,
@@ -12,7 +11,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';

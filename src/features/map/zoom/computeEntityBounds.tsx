@@ -1,4 +1,4 @@
-import { EntityType } from '@features/params/PageParamTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import DrawableData from '../DrawableData';
 import { getRobinsonCoordinatesShifted } from '../getRobinsonCoordinates';

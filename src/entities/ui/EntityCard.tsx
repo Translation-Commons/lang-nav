@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import CensusCard from '@entities/census/CensusCard';
 import KeyboardCard from '@entities/keyboard/KeyboardCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
 import OrganizationCard from '@entities/org/OrganizationCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import VariantCard from '@entities/variant/VariantCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
 

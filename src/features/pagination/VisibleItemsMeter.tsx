@@ -11,7 +11,7 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

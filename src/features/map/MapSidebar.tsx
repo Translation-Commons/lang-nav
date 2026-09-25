@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import DrawableData from './DrawableData';
 import MapCard from './MapCard';

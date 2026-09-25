@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { EntityType } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';

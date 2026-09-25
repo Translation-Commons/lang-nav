@@ -3,7 +3,7 @@ import React from 'react';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { BreadcrumbSeparator } from '@shared/ui/breadcrumb';
 import { Button } from '@shared/ui/button';

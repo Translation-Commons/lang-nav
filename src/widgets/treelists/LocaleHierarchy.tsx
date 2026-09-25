@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -9,7 +8,7 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export const LocaleHierarchy: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import './treelist.css';
 
 import TreeListNode, { TreeNodeData } from './TreeListNode';

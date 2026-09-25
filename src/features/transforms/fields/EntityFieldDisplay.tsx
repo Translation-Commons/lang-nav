@@ -2,7 +2,6 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
@@ -19,7 +18,7 @@ import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritor
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';

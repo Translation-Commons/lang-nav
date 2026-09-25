@@ -1,4 +1,4 @@
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -8,6 +8,7 @@ import {
   StandardLocaleCode,
 } from '@entities/locale/LocaleTypes';
 import { isTerritoryGroup, TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 /**
  * Locale input data is contained to countries and dependencies -- this adds up data from

@@ -1,11 +1,10 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import {
   CensusCollectorType,
   CensusData,
   CensusLanguageUse,
   CensusQuantity,
 } from '@entities/census/CensusTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

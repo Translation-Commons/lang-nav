@@ -5,9 +5,10 @@ import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';

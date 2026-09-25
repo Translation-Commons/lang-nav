@@ -8,7 +8,7 @@ import FieldIcon from '@features/transforms/fields/FieldIcon';
 import getField from '@features/transforms/fields/getField';
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import EntityName, { EntityNameLabelSource } from '@entities/ui/EntityName';
 
 import CodeDisplay from '@shared/ui/CodeDisplay';

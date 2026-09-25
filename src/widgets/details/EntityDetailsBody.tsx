@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import getEntityFromID from '@entities/lib/getEntityFromID';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import CensusDetails from './CensusDetails';
 import KeyboardDetails from './KeyboardDetails';

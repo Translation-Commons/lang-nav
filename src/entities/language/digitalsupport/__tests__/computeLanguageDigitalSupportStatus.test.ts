@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { KeyboardData, KeyboardPlatform } from '@entities/keyboard/KeyboardTypes';
 import { getBaseLanguageData, LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import {
   getCLDRCoverage,

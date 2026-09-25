@@ -1,10 +1,9 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import {
   KeyboardData,
   KeyboardDictionary,
   KeyboardPlatform,
 } from '@entities/keyboard/KeyboardTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 

@@ -18,9 +18,10 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
-import { EntityType, LocaleSeparator, PageParams, SearchableField, View } from './PageParamTypes';
+import { LocaleSeparator, PageParams, SearchableField, View } from './PageParamTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default

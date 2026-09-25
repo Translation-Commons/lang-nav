@@ -1,6 +1,5 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 

@@ -8,20 +8,10 @@ import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes'
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { ProfileType } from './Profiles';
-
-export enum EntityType {
-  Language = 'Language',
-  Locale = 'Locale',
-  Territory = 'Territory',
-  WritingSystem = 'Writing System',
-  Census = 'Census',
-  Variant = 'Variant',
-  Keyboard = 'Keyboard',
-  Org = 'Organization',
-}
 
 export enum View {
   CardList = 'Cards',
