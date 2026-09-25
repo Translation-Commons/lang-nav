@@ -11,11 +11,11 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
+import { Orthography } from '@entities/orthography/OrthographyTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
-
 import { connectEntitiesAndCreateDerivedData } from '../compute/connectEntities';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
@@ -46,6 +46,7 @@ import {
   loadISOMacrolanguages,
 } from './extra_entities/ISOData';
 import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
+import { loadOrthographies } from './supplemental/loadOrthographies';
 import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
@@ -53,6 +54,7 @@ export type CoreDataArrays = {
   locales: LocaleData[];
   territories: TerritoryData[];
   variants: VariantData[];
+  orthographies: Orthography[];
   writingSystems: WritingSystemData[];
   keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
@@ -100,6 +102,7 @@ export function useCoreData(): {
       territories,
       locales,
       writingSystems,
+      orthographies,
       variants,
       keyboardsGBoard,
       keyboardsKeyman,
@@ -117,6 +120,7 @@ export function useCoreData(): {
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
+      loadOrthographies(),
       loadIANAVariants(),
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
@@ -129,6 +133,7 @@ export function useCoreData(): {
       locales == null ||
       writingSystems == null ||
       variants == null ||
+      orthographies == null ||
       keyboardsGBoard == null ||
       keyboardsKeyman == null ||
       organizations == null
@@ -153,6 +158,7 @@ export function useCoreData(): {
       languagesBySource,
       territories,
       writingSystems,
+      orthographies,
       locales,
       variants,
       keyboards,
@@ -172,6 +178,7 @@ export function useCoreData(): {
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
+      ...orthographies, // Aaaa.
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
       ...organizations, // These should be prefixed by org.
@@ -188,6 +195,9 @@ export function useCoreData(): {
       variants: Object.values(ents).filter((e): e is VariantData => e.type === EntityType.Variant),
       writingSystems: Object.values(ents).filter(
         (e): e is WritingSystemData => e.type === EntityType.WritingSystem,
+      ),
+      orthographies: Object.values(ents).filter(
+        (e): e is Orthography => e.type === EntityType.Orthography,
       ),
       keyboards: Object.values(ents).filter(
         (e): e is KeyboardData => e.type === EntityType.Keyboard,

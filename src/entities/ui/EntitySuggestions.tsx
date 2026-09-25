@@ -38,6 +38,8 @@ function getEntityIDs(entType: EntityType): string[] {
       return ['valencia', 'grclass', 'rumgr', 'pinyin'];
     case EntityType.WritingSystem:
       return ['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'];
+    case EntityType.Orthography:
+      return [];
     case EntityType.Keyboard:
       return [
         'gboard_eng_Latn_US',

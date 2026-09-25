@@ -31,6 +31,8 @@ export function getEntityTypeLabelPlural(entType: EntityType) {
       return 'territories';
     case EntityType.WritingSystem:
       return 'writing systems';
+    case EntityType.Orthography:
+      return 'orthographies';
     case EntityType.Variant:
       return 'variants';
     case EntityType.Keyboard:

@@ -7,6 +7,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsPopulation from '@entities/language/population/LanguageDetailsPopulation';
 import LanguageDetailsConnections from '@entities/language/relations/LanguageDetailsConnections';
 import LanguageDialectsSection from '@entities/language/relations/LanguageDetailsDialects';
+import LanguageDetailsOrthographies from '@entities/language/relations/LanguageDetailsOrthographies';
 import LanguageDetailsTerritories from '@entities/language/relations/LanguageDetailsTerritories';
 import LanguageDetailsVitality from '@entities/language/vitality/LanguageDetailsVitality';
 
@@ -40,6 +41,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageDialectsSection lang={lang} />
       <LanguageDetailsTerritories lang={lang} />
       <LanguageDetailsAttributes lang={lang} />
+      <LanguageDetailsOrthographies lang={lang} />
       <LanguageDetailsConnections lang={lang} />
     </div>
   );

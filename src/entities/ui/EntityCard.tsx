@@ -1,3 +1,4 @@
+import OrthographyCard from '@entities/orthography/OrthographyCard';
 import React from 'react';
 
 import { EntityType } from '@features/params/PageParamTypes';
@@ -26,6 +27,8 @@ const EntityCard: React.FC<{ ent: EntityData }> = ({ ent }) => {
       return <VariantCard data={ent} />;
     case EntityType.WritingSystem:
       return <WritingSystemCard writingSystem={ent} />;
+    case EntityType.Orthography:
+      return <OrthographyCard orthography={ent} />;
     case EntityType.Keyboard:
       return <KeyboardCard keyboard={ent} />;
     case EntityType.Org:

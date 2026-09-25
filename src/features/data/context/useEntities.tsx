@@ -13,6 +13,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
     locales,
     territories,
     writingSystems,
+    orthographies,
     variants,
     censuses,
     keyboards,
@@ -30,6 +31,8 @@ const useEntities = (entType?: EntityType): EntityData[] => {
         return territories;
       case EntityType.WritingSystem:
         return writingSystems;
+      case EntityType.Orthography:
+        return orthographies;
       case EntityType.Variant:
         return variants;
       case EntityType.Keyboard:
@@ -45,6 +48,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
     locales,
     territories,
     writingSystems,
+    orthographies,
     variants,
     keyboards,
     organizations,

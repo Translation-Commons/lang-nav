@@ -35,6 +35,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
+  [EntityType.Orthography]: [],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
   [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
   [EntityType.Keyboard]: [
@@ -225,6 +226,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Example,
         // Field.Literacy, Data not available yet
       ];
+    case EntityType.Orthography:
+      return [Field.LanguagePrimary, Field.WritingSystem, Field.Example];
     case EntityType.Variant:
       return [
         Field.VariantType,

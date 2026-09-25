@@ -20,6 +20,7 @@ export enum EntityType {
   Census = 'Census',
   Variant = 'Variant',
   Keyboard = 'Keyboard',
+  Orthography = 'Orthography',
   Org = 'Organization',
 }
 
