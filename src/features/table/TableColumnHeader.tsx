@@ -3,7 +3,7 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 

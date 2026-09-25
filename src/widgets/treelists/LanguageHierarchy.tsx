@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
@@ -10,7 +9,7 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import EnumDropdown from '@shared/ui/EnumDropdown';
 

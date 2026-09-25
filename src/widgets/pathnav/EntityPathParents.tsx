@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbSeparator } from '@shared/ui/breadcrumb';
 import { Button } from '@shared/ui/button';

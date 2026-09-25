@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
@@ -10,7 +9,7 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 import * as SortModule from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

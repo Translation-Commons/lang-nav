@@ -3,13 +3,13 @@ import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { getColorGradientFunction } from '@features/transforms/coloring/getColorGradientFunction';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 

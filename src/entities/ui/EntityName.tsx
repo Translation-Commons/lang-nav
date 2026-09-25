@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 export type EntityNameLabelSource =
   | 'name'

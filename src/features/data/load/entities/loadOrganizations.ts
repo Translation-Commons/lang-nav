@@ -1,6 +1,5 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { OrganizationData } from '@entities/org/OrganizationTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 

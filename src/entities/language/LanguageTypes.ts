@@ -6,15 +6,14 @@
 import React from 'react';
 
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
-import { EntityBase } from '../types/DataTypes';
 
 import {
   DigitalSupportScore,

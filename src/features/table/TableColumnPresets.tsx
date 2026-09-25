@@ -2,10 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 
 import { LanguageColumnPresets } from '@widgets/tables/columns/LanguageColumns';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { Button } from '@shared/ui/button';
 

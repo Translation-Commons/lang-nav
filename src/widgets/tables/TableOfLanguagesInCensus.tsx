@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType, SearchableField } from '@features/params/PageParamTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
@@ -21,6 +21,7 @@ import {
 } from '@entities/language/relations/LanguageFamilyUtils';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';

@@ -4,7 +4,6 @@ import {
   addIANAVariantLocales,
   loadIANAVariants,
 } from '@features/data/load/extra_entities/IANAData';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
@@ -12,7 +11,7 @@ import { LanguageData, LanguagesBySource } from '@entities/language/LanguageType
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 

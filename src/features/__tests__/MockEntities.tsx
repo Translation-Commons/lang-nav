@@ -6,7 +6,7 @@ import { addCensusData } from '@features/data/connect/connectCensuses';
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
@@ -18,7 +18,7 @@ import {
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 

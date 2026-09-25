@@ -1,8 +1,6 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 export function getEntityParents(
   ent?: EntityData,
@@ -69,9 +67,12 @@ export function getDescendantsName(ent: EntityData, count: number): string {
       return 'other census' + (count > 1 ? 'es' : '') + ' in the territory';
     case EntityType.Language:
       switch (ent.scope) {
+        case LanguageScope.BroadGrouping:
         case LanguageScope.Family:
+        case LanguageScope.Subfamily:
           return count > 1 ? 'languages or subfamilies' : 'language or subfamily';
         case LanguageScope.Macrolanguage:
+        case LanguageScope.Intermediate:
         case LanguageScope.SpecialCode:
           return 'language' + (count > 1 ? 's' : '');
         case LanguageScope.Language:

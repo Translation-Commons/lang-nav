@@ -5,9 +5,11 @@ import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescenda
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import EntityMap from '@features/map/EntityMap';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { partition } from '@shared/lib/setUtils';
 import { Button } from '@shared/ui/button';

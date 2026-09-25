@@ -5,7 +5,9 @@ import { LangNavPageName } from '@app/PageRoutes';
 import ReportID from '@widgets/reports/ReportID';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import useAreParamsCurrent from './useAreParamsCurrent';
 

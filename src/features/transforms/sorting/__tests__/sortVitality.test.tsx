@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import computeRecursiveLanguageData from '@features/data/compute/computeRecursiveLanguageData';
-import { EntityType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 import { getBaseLanguageData, LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior } from '../SortTypes';

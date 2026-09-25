@@ -1,8 +1,7 @@
 import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 const OKAY_MACRO = ['mlt', 'mar', 'tgk'];
 

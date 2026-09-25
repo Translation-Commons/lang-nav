@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
-import { EntityType, SearchableField } from '@features/params/PageParamTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import { SUGGESTION_LIMIT } from '@features/params/Suggestion';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
 

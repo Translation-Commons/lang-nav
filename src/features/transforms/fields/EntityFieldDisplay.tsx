@@ -2,7 +2,6 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
@@ -19,7 +18,7 @@ import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritor
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
@@ -29,6 +28,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
@@ -140,6 +140,17 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
     // Strings
     case Field.SourceForPopulation:
+      if (typeof fieldValue === 'string') {
+        if (fieldValue.startsWith('http'))
+          return <ExternalLink href={fieldValue} className="text-nowrap truncate ellipsis" />;
+        return (
+          <span className="truncate ellipsis" title={fieldValue}>
+            {fieldValue}
+          </span>
+        );
+      }
+      return fieldValue;
+
     case Field.SourceForLanguage:
     case Field.WritingSystemScope:
     case Field.Example:

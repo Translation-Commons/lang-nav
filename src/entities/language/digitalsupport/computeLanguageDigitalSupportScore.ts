@@ -1,6 +1,5 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

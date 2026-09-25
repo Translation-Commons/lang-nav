@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import { EntityNameLabelSource } from '@entities/ui/EntityName';
 
 import MiniCard from './MiniCard';

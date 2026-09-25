@@ -6,14 +6,14 @@ import {
   getMockedDataContext,
 } from '@features/__tests__/MockEntities';
 import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
-import { EntityDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
 
 import { getExtremeLanguagePaths } from '../ReportLanguagePaths';
 

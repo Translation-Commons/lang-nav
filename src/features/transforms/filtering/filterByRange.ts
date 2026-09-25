@@ -1,7 +1,7 @@
 import { getDefaultParams } from '@features/params/Profiles';
 
 import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { FilterFunctionType } from './filter';
 

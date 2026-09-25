@@ -6,7 +6,8 @@ import DrawerDetailsSection from '@widgets/details/ui/DrawerDetailsSection';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { numberToFixedUnlessSmall, numberToSigFigs } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';

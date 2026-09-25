@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { getDecoderMacroCode } from './DecoderMacrolanguage';
 import DecoderResult from './DecoderResult';

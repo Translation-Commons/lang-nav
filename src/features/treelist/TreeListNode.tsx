@@ -2,12 +2,12 @@ import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
-import { EntityType, SearchableField, View } from '@features/params/PageParamTypes';
+import { SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { Button } from '@shared/ui/button';
 

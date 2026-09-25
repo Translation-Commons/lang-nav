@@ -1,5 +1,4 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
+import { EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';

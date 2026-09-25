@@ -1,10 +1,8 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageCode } from '../language/LanguageTypes';
-import { EntityBase } from '../types/DataTypes';
 
 // Unique identifier for the census or other source of population data
 export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'

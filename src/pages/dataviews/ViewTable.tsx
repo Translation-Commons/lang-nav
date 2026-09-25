@@ -7,8 +7,9 @@ import TerritoryTable from '@widgets/tables/TerritoryTable';
 import VariantTable from '@widgets/tables/VariantTable';
 import WritingSystemTable from '@widgets/tables/WritingSystemTable';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 function ViewTable() {
   const { entType } = usePageParams();

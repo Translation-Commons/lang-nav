@@ -1,8 +1,7 @@
-import { EntityType } from '@features/params/PageParamTypes';
 import { getLanguageForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageData, LanguageScope } from '../LanguageTypes';
 

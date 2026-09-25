@@ -8,10 +8,10 @@ import useEntities from '@features/data/context/useEntities';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { EntityType } from '@features/params/PageParamTypes';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import EntityCard from '@entities/ui/EntityCard';
 
 import { Toggle } from '@shared/ui/toggle';

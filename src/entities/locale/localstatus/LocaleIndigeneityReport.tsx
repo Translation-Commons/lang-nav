@@ -1,10 +1,10 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
 import EnumDropdown from '@shared/ui/EnumDropdown';

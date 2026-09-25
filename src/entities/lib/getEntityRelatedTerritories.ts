@@ -11,7 +11,6 @@
 
 import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -21,7 +20,7 @@ import {
   TerritoryData,
   TerritoryScope,
 } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';

@@ -8,13 +8,15 @@ import getLanguageColumns from '@widgets/tables/columns/LanguageColumns';
 import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 

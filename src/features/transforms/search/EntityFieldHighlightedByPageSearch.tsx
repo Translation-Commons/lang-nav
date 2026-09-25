@@ -3,7 +3,7 @@ import React from 'react';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import getSearchableField from './getSearchableField';
 import HighlightedEntityField from './HighlightedEntityField';

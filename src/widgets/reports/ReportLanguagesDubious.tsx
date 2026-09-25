@@ -9,10 +9,10 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { EntityType } from '@features/params/PageParamTypes';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

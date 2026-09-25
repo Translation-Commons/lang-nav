@@ -1,5 +1,4 @@
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import { EntityType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -11,6 +10,7 @@ import LanguageUDHRInfo, {
   LanguageUDHRDescription,
 } from '@entities/language/digitalsupport/LanguageUDHRInfo';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';

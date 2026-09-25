@@ -1,4 +1,4 @@
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -7,6 +7,7 @@ import {
   OfficialStatus,
   PopulationSourceCategory,
 } from '@entities/locale/LocaleTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 

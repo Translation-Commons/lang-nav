@@ -14,7 +14,7 @@ import useScale from '@features/transforms/scales/useScale';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
 import useNormalizedValues from '@features/transforms/useNormalizedValues';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 const ScatterPlot: React.FC = () => {
   const { chartX, chartY, scaleBy, colorBy, fieldFocus, updatePageParams } = usePageParams();

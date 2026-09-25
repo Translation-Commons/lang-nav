@@ -1,11 +1,9 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CensusData } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 

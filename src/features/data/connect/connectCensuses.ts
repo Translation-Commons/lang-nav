@@ -1,11 +1,10 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CensusData } from '@entities/census/CensusTypes';
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { CensusImport } from '../load/extra_entities/loadCensusData';
 

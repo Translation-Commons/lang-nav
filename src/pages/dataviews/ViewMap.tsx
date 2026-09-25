@@ -6,13 +6,12 @@ import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import InternalLink from '@features/params/InternalLink';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

@@ -1,7 +1,5 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import PopulationFocus from '../types/PopulationFocus';

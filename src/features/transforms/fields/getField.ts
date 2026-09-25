@@ -1,5 +1,3 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import {
@@ -30,7 +28,7 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getEntityRelatedTerritories';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

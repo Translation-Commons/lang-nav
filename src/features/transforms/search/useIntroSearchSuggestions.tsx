@@ -1,14 +1,13 @@
 import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
-import { EntityType } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { isTerritoryGroup } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import getSearchableField from './getSearchableField';
 import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';

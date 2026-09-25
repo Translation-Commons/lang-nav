@@ -6,8 +6,9 @@ import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
 import { VariantHierarchy } from '@widgets/treelists/VariantHierarchy';
 import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 function ViewFamilyTree() {
   const { entType } = usePageParams();
