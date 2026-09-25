@@ -1,8 +1,9 @@
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import { LocaleData, LocaleSource, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import { VariantData, VariantDictionary } from '@entities/variant/VariantTypes';
 
 import { toDictionary, unique } from '@shared/lib/setUtils';

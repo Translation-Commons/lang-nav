@@ -4,7 +4,7 @@ import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEnti
 import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior } from '../SortTypes';

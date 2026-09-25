@@ -1,13 +1,12 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 

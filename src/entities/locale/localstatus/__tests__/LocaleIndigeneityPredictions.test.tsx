@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
-import { EntityType } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { getLocaleFormedHerePrediction } from '../LocaleIndigeneityPredictions';
 

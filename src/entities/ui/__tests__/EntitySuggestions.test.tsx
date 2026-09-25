@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { PageParams, TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';

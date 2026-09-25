@@ -2,7 +2,7 @@ import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes'
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import {
   getLanguageForEntity,

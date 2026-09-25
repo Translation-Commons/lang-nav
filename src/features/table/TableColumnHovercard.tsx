@@ -4,7 +4,7 @@ import FilterSelector from '@features/transforms/filtering/selectors/FilterSelec
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 import TransformEnum from '@features/transforms/TransformEnum';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { Button } from '@shared/ui/button';

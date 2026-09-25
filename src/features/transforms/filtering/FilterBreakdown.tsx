@@ -5,7 +5,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';

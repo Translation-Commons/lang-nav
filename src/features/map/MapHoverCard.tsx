@@ -5,7 +5,7 @@ import Field from '@features/transforms/fields/Field';
 import FieldIcon from '@features/transforms/fields/FieldIcon';
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import CodeDisplay from '@shared/ui/CodeDisplay';
 

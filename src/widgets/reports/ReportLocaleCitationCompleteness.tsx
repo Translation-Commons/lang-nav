@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';

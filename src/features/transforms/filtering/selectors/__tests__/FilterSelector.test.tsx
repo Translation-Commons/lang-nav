@@ -6,11 +6,12 @@ import {
   getMockedDataContext,
 } from '@features/__tests__/MockEntities';
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import Transform from '@features/transforms/TransformEnum';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

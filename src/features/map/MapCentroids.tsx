@@ -2,12 +2,13 @@ import React, { useCallback, useMemo } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePagination from '@features/pagination/usePagination';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 import { getFieldString } from '@features/transforms/fields/getFieldString';
 import useScale from '@features/transforms/scales/useScale';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';

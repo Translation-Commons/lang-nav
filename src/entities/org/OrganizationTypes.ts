@@ -1,8 +1,6 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase } from '@entities/types/DataTypes';
+import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 export interface OrganizationData extends EntityBase {
   type: EntityType.Org;

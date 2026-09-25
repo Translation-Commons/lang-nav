@@ -4,9 +4,8 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { EntityType } from '@features/params/PageParamTypes';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 

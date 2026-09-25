@@ -3,7 +3,7 @@ import React from 'react';
 import { SearchableField } from '@features/params/PageParamTypes';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 type Props = {
   ent: EntityData;

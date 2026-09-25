@@ -1,6 +1,6 @@
 import { SearchableField } from '@features/params/PageParamTypes';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
 

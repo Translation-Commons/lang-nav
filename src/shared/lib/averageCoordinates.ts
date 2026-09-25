@@ -1,7 +1,6 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { sumBy } from './setUtils';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import EntityName, { EntityNameLabelSource } from '@entities/ui/EntityName';
 
 import HoverableEntity from './HoverableEntity';

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';

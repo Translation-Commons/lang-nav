@@ -1,12 +1,11 @@
 /**
  * Enums and types related to keyboards
  */
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase } from '@entities/types/DataTypes';
+import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 

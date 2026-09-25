@@ -1,12 +1,13 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { EntityType, PageParams } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

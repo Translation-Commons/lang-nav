@@ -3,11 +3,10 @@ import { useCallback, useState, useTransition } from 'react';
 
 import EmptyHoverCardProvider from '@features/layers/hovercard/EmptyHoverCardProvider';
 import { PageParamsContext } from '@features/params/PageParamsContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { prepareCLDRLocalePopulationForExport } from '@entities/locale/localstatus/LocaleCLDRExport';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';

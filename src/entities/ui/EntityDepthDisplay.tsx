@@ -3,10 +3,9 @@ import React from 'react';
 import EntityPath from '@widgets/pathnav/EntityPath';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { getDepth } from '@entities/lib/getEntityMiscFields';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

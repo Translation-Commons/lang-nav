@@ -1,7 +1,7 @@
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 export default function getEntityFromID(inputEntID?: string): EntityData | undefined {
   const { entID: pageEntID } = usePageParams();

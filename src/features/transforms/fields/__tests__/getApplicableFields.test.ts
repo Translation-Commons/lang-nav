@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
-import { EntityType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import {
   FIELDS_IN_DEVELOPMENT,
@@ -11,6 +10,8 @@ import {
 } from '@features/transforms/fields/FieldApplicability';
 import getField from '@features/transforms/fields/getField';
 import TransformEnum from '@features/transforms/TransformEnum';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 describe('getApplicableFields', () => {
   it('should not return duplicate Fields values for any EntityType', () => {

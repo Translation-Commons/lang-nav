@@ -2,9 +2,8 @@ import React from 'react';
 
 import NavTabs from '@widgets/controls/NavTabs';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 

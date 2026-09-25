@@ -12,7 +12,7 @@ import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
 import CommaSeparated from '@shared/ui/CommaSeparated';

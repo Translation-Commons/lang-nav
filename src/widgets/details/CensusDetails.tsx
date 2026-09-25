@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
 

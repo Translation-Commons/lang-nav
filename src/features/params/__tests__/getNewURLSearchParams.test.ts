@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 describe('getNewURLSearchParams', () => {
   it('migrates searchString to languageFilter when switching from Language', () => {

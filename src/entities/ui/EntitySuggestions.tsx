@@ -1,7 +1,8 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import getEntityFromID from '../lib/getEntityFromID';
 

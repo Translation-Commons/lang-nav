@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import Highlightable from '@shared/ui/Highlightable';

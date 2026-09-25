@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
