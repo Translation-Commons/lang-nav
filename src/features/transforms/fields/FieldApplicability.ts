@@ -227,7 +227,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         // Field.Literacy, Data not available yet
       ];
     case EntityType.Orthography:
-      return [Field.Language, Field.WritingSystem, Field.Example];
+      return [Field.LanguagePrimary, Field.WritingSystem, Field.Example];
     case EntityType.Variant:
       return [
         Field.VariantType,

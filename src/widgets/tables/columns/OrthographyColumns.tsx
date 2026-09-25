@@ -12,7 +12,7 @@ function getOrthographyColumns(): TableColumn<Orthography>[] {
         {
             key: 'Language',
             render: (ent) => ent.language && <HoverableEntityName ent={ent.language} />,
-            field: Field.Language,
+            field: Field.LanguagePrimary,
             columnGroup: 'Related Objects',
         },
         {

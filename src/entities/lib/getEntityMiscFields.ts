@@ -32,11 +32,9 @@ export function getEntityMostImportantLanguage(ent: EntityData): LanguageData | 
     case EntityType.Variant:
       return ent.equivalentLanguage;
     case EntityType.WritingSystem:
-      return ent.languages
-        ? Object.values(ent.languages).sort(sortByPopulation)[0].nameDisplay
-        : undefined;
+      return ent.languages ? Object.values(ent.languages).sort(sortByPopulation)[0] : undefined;
     case EntityType.Orthography:
-      return ent.language?.nameDisplay;
+      return ent.language;
     case EntityType.Census:
       return undefined;
     case EntityType.Keyboard:

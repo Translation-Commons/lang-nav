@@ -20,11 +20,11 @@ const OrthographyCard: React.FC<Props> = ({ orthography }) => {
                 <EntityTitle ent={orthography} />
             </div>
 
-            <CardField title="Language" field={Field.Language}>
+            <CardField field={Field.LanguagePrimary}>
                 {language ? <HoverableEntityName ent={language} /> : <Deemphasized>Unknown</Deemphasized>}
             </CardField>
 
-            <CardField title="Writing System" field={Field.WritingSystem}>
+            <CardField field={Field.WritingSystem}>
                 {writingSystem ? (
                     <HoverableEntityName ent={writingSystem} />
                 ) : (
@@ -32,7 +32,7 @@ const OrthographyCard: React.FC<Props> = ({ orthography }) => {
                 )}
             </CardField>
 
-            <CardField title="Base Characters" field={Field.Example}>
+            <CardField field={Field.Example}>
                 {baseCharacters ? <span>{baseCharacters}</span> : <Deemphasized>Not available</Deemphasized>}
             </CardField>
         </div>
