@@ -141,11 +141,19 @@ export function addISODataToLanguages(
     lang.scope = isoLang.scope;
     lang.ISO.scope = isoLang.scope;
     lang.ISO.name = isoLang.name;
+
+    // BCP and UNESCO inherit from ISO
     lang.BCP.scope = isoLang.scope;
     lang.BCP.name = isoLang.name;
     lang.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.UNESCO.code = isoLang.codeISO6393;
+
+    // Combined uses the ISO scope
+    if (isoLang.scope == LanguageScope.Language) lang.Combined.scope = isoLang.scope;
+    if (isoLang.scope == LanguageScope.Macrolanguage) lang.Combined.scope = isoLang.scope;
+
+    // Also add alternative names
     setLanguageNames(lang);
   });
 
@@ -173,7 +181,7 @@ export function addISOMacrolanguageData(
   macrolanguages.forEach((relation) => {
     const macro = languages[relation.codeMacro];
     const constituent = languages[relation.codeConstituent];
-    if (parent == null) {
+    if (macro == null) {
       if (DEBUG) console.debug(`Macrolanguage ${relation.codeMacro} not found`);
       return;
     }
@@ -217,7 +225,7 @@ export function addISOLanguageFamilyData(
         Combined: {
           code: family.code,
           parentLanguageCode: family.parent,
-          scope: LanguageScope.Family,
+          scope: family.parent ? LanguageScope.Subfamily : LanguageScope.Family,
           childLanguages: [],
         },
         ISO: {
@@ -253,6 +261,7 @@ export function addISOLanguageFamilyData(
         familyEntry.nameDisplay = family.name;
       }
       familyEntry.Combined.parentLanguageCode ??= family.parent;
+      familyEntry.Combined.scope ??= family.parent ? LanguageScope.Subfamily : LanguageScope.Family;
       familyEntry.ISO.code ??= family.code;
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
@@ -261,7 +270,7 @@ export function addISOLanguageFamilyData(
       familyEntry.BCP.parentLanguageCode = family.parent;
       familyEntry.BCP.scope = LanguageScope.Family;
       familyEntry.BCP.name = name;
-      familyEntry.scope ??= LanguageScope.Family;
+      familyEntry.scope ??= family.parent ? LanguageScope.Subfamily : LanguageScope.Family;
     }
   });
 

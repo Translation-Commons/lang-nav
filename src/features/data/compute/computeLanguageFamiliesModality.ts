@@ -3,7 +3,7 @@ import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import { sumBy } from '@shared/lib/setUtils';
 
-function computeLanguageFamiliesModality(languages: LanguageData[]): void {
+function computeLanguageFamiliesModalityAndScope(languages: LanguageData[]): void {
   // For each language family root
   languages
     .filter((lang) => !lang.parentLanguage)
@@ -62,4 +62,4 @@ function determineCombinedModality(langs: LanguageData[]): LanguageModality | un
   return LanguageModality.SpokenAndWritten;
 }
 
-export default computeLanguageFamiliesModality;
+export default computeLanguageFamiliesModalityAndScope;

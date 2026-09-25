@@ -1,4 +1,3 @@
-import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
@@ -18,6 +17,7 @@ import usePotentialLocales from '@entities/locale/usePotentialLocales';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
+import CopyButton from '@shared/ui/CopyButton';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 const ReportLocalesPotential: React.FC = () => {
@@ -125,24 +125,20 @@ const SubReport: React.FC<{
   const filterByScope = useScopeFilter();
   const sortFunction = getSortFunction();
   const { limit, page } = usePageParams();
-  const exportLocales = locales
-    .filter(filterByScope)
-    .sort(sortFunction)
-    .slice(limit * (page - 1), Math.min(limit * page, locales.length))
-    .map(getLocaleExportString)
-    .join('');
+  const getExportLocales = useCallback(
+    () =>
+      locales
+        .filter(filterByScope)
+        .slice(limit * (page - 1), Math.min(limit * page, locales.length))
+        .sort(sortFunction)
+        .map(getLocaleExportString)
+        .join(''),
+    [locales, filterByScope, sortFunction, limit, page],
+  );
 
   return (
     <CollapsibleReport title={`${title} (${locales.filter(filterByScope).length})`}>
-      {children}{' '}
-      <button
-        style={{ padding: '0.25em' }}
-        onClick={() => {
-          navigator.clipboard.writeText(exportLocales);
-        }}
-      >
-        Copy visible locales to Clipboard
-      </button>
+      {children} <CopyButton getTextToCopy={getExportLocales}>Copy visible locales</CopyButton>
       <div className="h-fit">
         <PotentialLocalesTable locales={locales} />
       </div>
@@ -206,12 +202,7 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Copy',
           render: (ent) => (
-            <button
-              style={{ padding: '0.25em' }}
-              onClick={() => navigator.clipboard.writeText(getLocaleExportString(ent))}
-            >
-              <CopyIcon size="1em" display="block" />
-            </button>
+            <CopyButton getTextToCopy={() => getLocaleExportString(ent)}>Copy</CopyButton>
           ),
         },
       ]}

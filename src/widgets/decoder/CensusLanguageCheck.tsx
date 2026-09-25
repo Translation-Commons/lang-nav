@@ -2,6 +2,8 @@ import React, { ReactNode, useCallback } from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
+import CopyButton from '@shared/ui/CopyButton';
+
 import CensusLanguageCheckRow from './CensusLanguageCheckRow';
 import useCensusLanguageCheck from './useCensusLanguageCheck';
 
@@ -20,12 +22,10 @@ export type CensusLanguageNotes = {
 const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => {
   const languageEvaluations = useCensusLanguageCheck(fileInput);
 
-  const copyLanguageCodes = useCallback(() => {
-    const codesToCopy = languageEvaluations
-      .map((ln) => (ln ? (ln.codePathRec ?? ln.codePath) : ''))
-      .join('\n');
-    navigator.clipboard.writeText(codesToCopy);
-  }, [languageEvaluations]);
+  const getExportText = useCallback(
+    () => languageEvaluations.map((ln) => (ln ? (ln.codePathRec ?? ln.codePath) : '')).join('\n'),
+    [languageEvaluations],
+  );
 
   if (!Object.values(languageEvaluations).some((l) => l && l.issues.length > 0)) {
     return <div>No issues found with language codes or names.</div>;
@@ -49,9 +49,9 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
           )}
         </tbody>
       </table>
-      <button onClick={copyLanguageCodes}>
+      <CopyButton getTextToCopy={getExportText}>
         Copy language codes after optimistic correction
-      </button>{' '}
+      </CopyButton>
     </>
   );
 };

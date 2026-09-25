@@ -1,3 +1,4 @@
+import computeFineGrainedLanguageScope from '../compute/computeFineGrainedLanguageScope';
 import computeLanguageFamiliesModality from '../compute/computeLanguageFamiliesModality';
 import { computeLocalesPopulationFromCensuses } from '../compute/computeLocalesPopulationFromCensuses';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
@@ -14,6 +15,7 @@ import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLangTags } from './supplemental/loadLangTags';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
+import { loadLanguageScopeOverrides } from './supplemental/loadLanguageScopeOverrides';
 import { loadMacos } from './supplemental/loadMacos';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
@@ -51,6 +53,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),
     loadLangTags(dataContext.getLanguage),
+    loadLanguageScopeOverrides(dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();
@@ -86,4 +89,5 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   computeLocalesPopulationFromCensuses(dataContext.locales);
   // Some more population computations moved to updatePopulations
   computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
+  computeFineGrainedLanguageScope(dataContext.allLanguoids);
 }

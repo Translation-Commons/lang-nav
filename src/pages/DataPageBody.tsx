@@ -3,6 +3,7 @@ import React from 'react';
 
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
 import PageFooter from '@widgets/PageFooter';
+import ReportSelector from '@widgets/reports/ReportSelector';
 
 import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
@@ -43,6 +44,7 @@ const DataPageBody: React.FC<Props> = ({ sidebarIsOpen, openSidebar }) => {
             )}
           </div>
           <div className="flex items-center justify-end gap-2">
+            <ReportSelector variant="Dropdown" />
             <FieldFocusSelector />
             <ScalePopupCard />
             <ColorPopupCard />

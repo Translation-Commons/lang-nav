@@ -9,6 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
+import EntityTypeLabel from '@entities/ui/EntityTypeLabel';
 import VariantDrawer from '@entities/variant/VariantDrawer';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
@@ -80,7 +81,11 @@ const DrawerHeaderContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
   return (
     <>
-      {ent && <DrawerDescription>{ent.type}</DrawerDescription>}
+      {ent && (
+        <DrawerDescription>
+          <EntityTypeLabel ent={ent} />
+        </DrawerDescription>
+      )}
       <DrawerTitle className="text-2xl justify-between flex items-center gap-2">
         {ent ? <EntityTitle ent={ent} highlightSearchMatches={false} /> : 'Details'}
       </DrawerTitle>

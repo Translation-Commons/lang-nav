@@ -12,6 +12,7 @@ type Props = React.PropsWithChildren<{
   params?: Partial<PageParams>;
   style?: React.CSSProperties;
   keepOldParams?: boolean;
+  newWindow?: boolean;
 }>;
 
 const InternalLink: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const InternalLink: React.FC<Props> = ({
   params,
   children,
   style,
+  newWindow,
   keepOldParams = false, // Assuming internal link should reset old page parameters by default
 }) => {
   const [oldParams] = useSearchParams({});
@@ -28,7 +30,14 @@ const InternalLink: React.FC<Props> = ({
     : '';
   const to = ['/', page, paramsStr].join('');
   return (
-    <Link className={className} to={to} title={to} style={style}>
+    <Link
+      className={className}
+      to={to}
+      title={to}
+      style={style}
+      target={newWindow ? '_blank' : undefined}
+      rel={newWindow ? 'noopener noreferrer' : undefined}
+    >
       {children}
     </Link>
   );

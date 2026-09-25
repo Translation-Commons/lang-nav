@@ -4,7 +4,11 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+
 import LargeLangNavLogo from './LargeLangNavLogo';
+
+const EntityDetailsDrawer = React.lazy(() => import('@widgets/details/ui/EntityDetailsDrawer'));
 
 type Props = React.PropsWithChildren<{
   title: ReactNode;
@@ -13,7 +17,7 @@ type Props = React.PropsWithChildren<{
 
 function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
   return (
-    <main className="mx-auto my-8 max-w-[800px] px-4 text-start">
+    <main className="mx-auto my-8 max-w-[800px] px-4 text-start text-sm">
       <div className="flex flex-col gap-4">
         <TitleWithLogo title={title} />
         {showDocsLink && (
@@ -21,6 +25,9 @@ function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
         )}
         {children}
       </div>
+      <ContainErrorsAndSuspense>
+        <EntityDetailsDrawer />
+      </ContainErrorsAndSuspense>
     </main>
   );
 }

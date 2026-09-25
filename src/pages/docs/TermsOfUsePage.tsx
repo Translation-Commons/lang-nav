@@ -1,4 +1,3 @@
-import { CopyIcon } from 'lucide-react';
 import React from 'react';
 
 import { LangNavPageName } from '@app/PageRoutes';
@@ -8,9 +7,9 @@ import DocsCard from '@widgets/docs/DocsCard';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
 
+import CopyButton from '@shared/ui/CopyButton';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 const TermsOfUsePage: React.FC = () => {
@@ -117,14 +116,9 @@ const TermsOfUsePage: React.FC = () => {
           If you use Language Navigator in your research, publications, or projects, we ask that you
           cite it as follows:
         </div>
-        <HoverableButton
-          hoverContent="Click to copy citation"
-          className="m-4 flex items-center p-4 text-left"
-          onClick={() => navigator.clipboard.writeText(citation)}
-        >
-          <div>{citation}</div>
-          <CopyIcon />
-        </HoverableButton>
+        <CopyButton getTextToCopy={() => citation} variant="ghost">
+          <div className="text-wrap text-left">{citation}</div>
+        </CopyButton>
       </DocsSection>
       <DocsSection title="Contact">
         <div>

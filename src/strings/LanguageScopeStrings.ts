@@ -4,10 +4,16 @@ export function getLanguageScopeLabel(scope?: LanguageScope): string {
   if (scope == null) return 'Language';
 
   switch (scope) {
+    case LanguageScope.BroadGrouping:
+      return 'Broad Grouping';
     case LanguageScope.Family:
-      return 'Language Family';
+      return 'Family';
+    case LanguageScope.Subfamily:
+      return 'Subfamily';
     case LanguageScope.Macrolanguage:
       return 'Macrolanguage';
+    case LanguageScope.Intermediate:
+      return 'Intermediate';
     case LanguageScope.Language:
       return 'Individual Language';
     case LanguageScope.Dialect:
@@ -19,10 +25,16 @@ export function getLanguageScopeLabel(scope?: LanguageScope): string {
 
 export function getLanguageScopePlural(scope: LanguageScope): string {
   switch (scope) {
+    case LanguageScope.BroadGrouping:
+      return 'broad groupings';
     case LanguageScope.Family:
       return 'language families';
+    case LanguageScope.Subfamily:
+      return 'language subfamilies';
     case LanguageScope.Macrolanguage:
       return 'macrolanguages';
+    case LanguageScope.Intermediate:
+      return 'intermediates';
     case LanguageScope.Language:
       return 'languages';
     case LanguageScope.Dialect:
@@ -34,10 +46,16 @@ export function getLanguageScopePlural(scope: LanguageScope): string {
 
 export function getLanguageScopeDescription(scope: LanguageScope): string {
   switch (scope) {
+    case LanguageScope.BroadGrouping:
+      return 'An geographic grouping of languages -- not necessarily reflective of an ancestral relationship.';
     case LanguageScope.Family:
-      return 'An ancestral and/or geographic group of languages. Most are defined by ISO 639-2 or Glottolog.';
+      return 'An accepted common ancestry for a group of languages -- limited to the first level of classification.';
+    case LanguageScope.Subfamily:
+      return 'A subgroup within a language family, representing a collection of languages that share a common ancestry. Most of these come from Glottolog and have been re-classified as subfamilies.';
     case LanguageScope.Macrolanguage:
-      return 'A group of languages that contain a high degree of mutual intelligibility transcending boundaries in politics, writing, or speech.';
+      return 'A group of languages that contain a partial degree of mutual intelligibility transcending boundaries in politics, writing, or speech.';
+    case LanguageScope.Intermediate:
+      return 'A subgroup within a macrolanguage, representing a collection of partially intelligible languages that are more common with eachother than others within the same macrolanguage.';
     case LanguageScope.Language:
       return 'A system of communication where users can understand each other better than anyone in other individual languages -- usually with a specific common speaking, writing, or gesturing standard.';
     case LanguageScope.Dialect:
@@ -49,13 +67,24 @@ export function getLanguageScopeDescription(scope: LanguageScope): string {
 
 export function parseLanguageScope(scope: string): LanguageScope | undefined {
   switch (scope.trim().toLowerCase()) {
+    case 'broad grouping':
+    case 'broad':
+    case '8': // Numeric value if converted from enum
+      return LanguageScope.BroadGrouping;
     case 'language family':
     case 'family':
-    case '5': // Numeric value if converted from enum
+    case '7':
       return LanguageScope.Family;
+    case 'subfamily':
+    case '6':
+      return LanguageScope.Subfamily;
     case 'macrolanguage':
-    case '4':
+    case 'macro':
+    case '5':
       return LanguageScope.Macrolanguage;
+    case 'intermediate':
+    case '4':
+      return LanguageScope.Intermediate;
     case 'individual language':
     case 'language':
     case '3':

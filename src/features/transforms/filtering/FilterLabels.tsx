@@ -83,7 +83,7 @@ export function getFilterTitle(field: Field, entType?: EntityType): string {
     case Field.Modality:
       return 'Language Use';
     case Field.LanguageScope:
-      return 'Language Type';
+      return 'Language Level';
     case Field.TerritoryScope:
       return 'Territory Type';
     case Field.TerritoryList:

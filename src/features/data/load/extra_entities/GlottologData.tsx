@@ -90,16 +90,22 @@ export function addGlottologLanguages(
   // Add new glottocodes from the import
   glottologImport.forEach((importedLanguage) => {
     const { glottoCode, parentGlottocode, scope, name, latitude, longitude } = importedLanguage;
-    const lang = languagesBySource.Glottolog[glottoCode];
+    const lang =
+      languagesBySource.Glottolog[glottoCode] ?? languagesBySource.ISO[glottocodeToISO[glottoCode]];
     const parentLanguageCode =
       parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
 
     if (lang == null) {
+      const combinedScope =
+        scope === LanguageScope.Family && parentGlottocode != null
+          ? LanguageScope.Subfamily
+          : scope;
+
       // Create new LanguageData
       const sourceSpecific = {
         Combined: {
           code: glottoCode,
-          scope,
+          scope: combinedScope,
           parentLanguageCode: parentLanguageCode ?? parentGlottocode,
         },
         Glottolog: {
@@ -111,7 +117,7 @@ export function addGlottologLanguages(
       };
       const newLang: LanguageData = {
         ...getBaseLanguageData(glottoCode, name),
-        scope,
+        scope: combinedScope,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Glottolog entry not found in ISO',
         ...sourceSpecific,

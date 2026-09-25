@@ -47,7 +47,7 @@ const AboutPage: React.FC = () => {
             An overview of major sources used by LangNav, such as ISO, CLDR, Glottolog, UNESCO,
             Wikipedia, and public demographic datasets.
           </DocsCard>
-          <DocsCard title="Methodology" href="/methodology" isDisabled={true}>
+          <DocsCard title="Methodology" page={LangNavPageName.Methodology}>
             How LangNav reconciles multiple standards, names, classifications, and population
             estimates into a usable reference experience.
           </DocsCard>

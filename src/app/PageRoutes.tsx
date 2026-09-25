@@ -6,6 +6,7 @@ import AboutPage from '@pages/docs/AboutPage';
 import CodeStylePage from '@pages/docs/CodeStylePage';
 import DataCoveragePage from '@pages/docs/DataCoveragePage';
 import DataSourcesPage from '@pages/docs/DataSources';
+import MethodologyPage from '@pages/docs/MethodologyPage';
 import PrivacyPolicyPage from '@pages/docs/PrivacyPolicyPage';
 import TeamPage from '@pages/docs/TeamPage';
 import TermsOfUsePage from '@pages/docs/TermsOfUsePage';
@@ -31,6 +32,7 @@ export default function PageRoutes() {
         <Route path={LangNavPageName.DataCoverage} element={<DataCoveragePage />} />
         <Route path={LangNavPageName.DataSources} element={<DataSourcesPage />} />
         <Route path={LangNavPageName.Decoder} element={<DecoderPage />} />
+        <Route path={LangNavPageName.Methodology} element={<MethodologyPage />} />
       </Routes>
     </>
   );
@@ -67,4 +69,5 @@ export enum LangNavPageName {
   CodeStyle = 'code-style',
   DataCoverage = 'data-coverage',
   DataSources = 'data-sources',
+  Methodology = 'methodology',
 }

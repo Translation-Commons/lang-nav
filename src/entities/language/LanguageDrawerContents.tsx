@@ -8,6 +8,8 @@ import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import LanguageDrawerDigitalSupport from './digitalsupport/LanguageDrawerDigitalSupport';
 import LanguageDrawerISORows from './identity/LanguageDrawerISORows';
 import LanguageDrawerSummary from './LanguageDrawerSummary';
@@ -35,6 +37,16 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
               >
                 glottolog.org
               </ExternalLink>
+            }
+            expandedContent={
+              <>
+                {lang.Glottolog.scope !== lang.scope && (
+                  <div>Classified as a {getLanguageScopeLabel(lang.Glottolog.scope)}</div>
+                )}
+                {lang.Glottolog.name !== lang.nameDisplay && (
+                  <div>Glottolog name: {lang.Glottolog.name}</div>
+                )}
+              </>
             }
           >
             {lang.Glottolog.code}

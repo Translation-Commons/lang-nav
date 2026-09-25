@@ -63,7 +63,7 @@ export function addISORetirementsToLanguages(
   retirements: ISORetirementData[],
 ): void {
   retirements.forEach((retirement) => {
-    let lang = languagesBySource.ISO[retirement.id];
+    let lang = languagesBySource.ISO[retirement.id] ?? languagesBySource.Combined[retirement.id];
     const retirementExplanation = getRetirementExplanation(retirement);
 
     // Remove the language links from ISO based sources or make a new language entry

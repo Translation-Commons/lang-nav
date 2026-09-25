@@ -160,8 +160,9 @@ export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryD
       .map(getLocaleUNESCOData)
       .map((row) => row.join('\t'))
       .join('\n');
-    navigator.clipboard.writeText(data);
-    alert('Language data copied to clipboard');
+    navigator.clipboard.writeText(data).then(() => {
+      alert('Language data copied to clipboard');
+    });
   }, [territory]);
 
   return (

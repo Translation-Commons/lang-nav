@@ -49,8 +49,12 @@ export type Glottocode = string; // eg. stan1293, stan1288, clas1255, mand1415, 
 export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocode | string;
 
 export enum LanguageScope {
-  Family = 5, // larger value = broader scope
-  Macrolanguage = 4,
+  // larger value = broader scope
+  BroadGrouping = 8,
+  Family = 7,
+  Subfamily = 6,
+  Macrolanguage = 5,
+  Intermediate = 4,
   Language = 3,
   Dialect = 2,
   SpecialCode = 1,
