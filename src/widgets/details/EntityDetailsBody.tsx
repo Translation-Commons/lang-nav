@@ -4,12 +4,12 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
-
 import CensusDetails from './CensusDetails';
 import KeyboardDetails from './KeyboardDetails';
 import LanguageDetails from './LanguageDetails';
 import LocaleDetails from './LocaleDetails';
 import OrganizationDetails from './OrganizationDetails';
+import OrthographyDetails from './OrthographyDetails';
 import TerritoryDetails from './TerritoryDetails';
 import VariantDetails from './VariantDetails';
 import WritingSystemDetails from './WritingSystemDetails';
@@ -42,6 +42,8 @@ const EntityDetailsBody: React.FC<Props> = ({ ent, entID }) => {
       return <KeyboardDetails keyboard={ent} />;
     case EntityType.Org:
       return <OrganizationDetails org={ent} />;
+    case EntityType.Orthography:
+      return <OrthographyDetails orthography={ent} />;
   }
 };
 
