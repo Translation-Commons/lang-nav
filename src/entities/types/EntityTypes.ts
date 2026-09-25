@@ -7,6 +7,7 @@ import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
 import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
@@ -22,6 +23,7 @@ export enum EntityType {
   Keyboard = 'Keyboard',
   Org = 'Organization',
   Technology = 'Technology',
+  Orthography = 'Orthography',
 }
 
 export interface EntityBase {
@@ -42,6 +44,7 @@ export type EntityData =
   | VariantData
   | KeyboardData
   | OrganizationData
-  | TechnologyData;
+  | TechnologyData
+  | OrthographyData;
 
 export type EntityDictionary = Record<string, EntityData>;

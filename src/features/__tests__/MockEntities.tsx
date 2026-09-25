@@ -291,6 +291,7 @@ export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays 
     locales: entArray.filter((ent) => ent.type === EntityType.Locale),
     territories: entArray.filter((ent) => ent.type === EntityType.Territory),
     writingSystems: entArray.filter((ent) => ent.type === EntityType.WritingSystem),
+    orthographies: entArray.filter((ent) => ent.type === EntityType.Orthography),
     variants: entArray.filter((ent) => ent.type === EntityType.Variant),
     censuses: { be0590: ents.be0590 as CensusData },
     keyboards: entArray.filter((ent) => ent.type === EntityType.Keyboard),
@@ -376,6 +377,7 @@ export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictio
     languagesBySource,
     territories,
     writingSystems,
+    {}, // orthographies
     locales,
     variants,
     {},
@@ -438,6 +440,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
   const locales = entArray.filter((ent) => ent.type === EntityType.Locale);
   const territories = entArray.filter((ent) => ent.type === EntityType.Territory);
   const writingSystems = entArray.filter((ent) => ent.type === EntityType.WritingSystem);
+  const orthographies = entArray.filter((ent) => ent.type === EntityType.Orthography);
   const variants = entArray.filter((ent) => ent.type === EntityType.Variant);
   const censuses = entArray.reduce(
     (acc, ent) => {
@@ -458,6 +461,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     organizations,
     territories,
     writingSystems,
+    orthographies,
     variants,
     technologies: entArray.filter((ent) => ent.type === EntityType.Technology),
     getEntity: (id: string) => ents[id],

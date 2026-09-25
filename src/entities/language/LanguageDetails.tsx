@@ -12,6 +12,7 @@ import LanguageDetailsConnections from './relations/LanguageDetailsConnections';
 import LanguageDialectsSection from './relations/LanguageDetailsDialects';
 import LanguageDetailsTerritories from './relations/LanguageDetailsTerritories';
 import LanguageDetailsVitality from './vitality/LanguageDetailsVitality';
+import LanguageDetailsOrthographies from './writing/LanguageDetailsOrthographies';
 
 type Props = {
   lang: LanguageData;
@@ -40,6 +41,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageDetailsDigitalSupport lang={lang} />
       <LanguageDialectsSection lang={lang} />
       <LanguageDetailsTerritories lang={lang} />
+      <LanguageDetailsOrthographies lang={lang} />
       <LanguageDetailsAttributes lang={lang} />
       <LanguageDetailsConnections lang={lang} />
     </div>

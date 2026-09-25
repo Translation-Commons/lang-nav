@@ -32,6 +32,8 @@ export function getEntityMostImportantLanguage(ent: EntityData): LanguageData | 
       return ent.equivalentLanguage;
     case EntityType.WritingSystem:
       return ent.languages ? Object.values(ent.languages).sort(sortByPopulation)[0] : undefined;
+    case EntityType.Orthography:
+      return ent.language;
     case EntityType.Census:
       return undefined;
     case EntityType.Keyboard:
@@ -104,6 +106,7 @@ export function getCountOfKeyboards(ent: EntityData): number | undefined {
     case EntityType.Technology:
       return ent.keyboards?.length;
     case EntityType.Territory:
+    case EntityType.Orthography:
     case EntityType.Locale:
     case EntityType.Variant:
     case EntityType.Census:
@@ -181,6 +184,8 @@ export function getWritingSystemsInEntity(ent: EntityData): WritingSystemData[] 
     case EntityType.WritingSystem:
       // returns the number of contained writing systems + 1 for itself
       return [ent, ...(ent.childWritingSystems ?? []), ...(ent.containsWritingSystems ?? [])];
+    case EntityType.Orthography:
+      return ent.writingSystem ? [ent.writingSystem] : undefined;
     case EntityType.Variant:
       return uniqueBy(
         ent.locales
@@ -219,6 +224,7 @@ export function getCountOfCensuses(ent: EntityData): number | undefined {
       return 1;
     case EntityType.Language:
     case EntityType.WritingSystem:
+    case EntityType.Orthography:
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Technology:
@@ -244,6 +250,7 @@ export function getCountOfVariants(ent: EntityData): number | undefined {
     case EntityType.Territory:
     case EntityType.Census:
     case EntityType.WritingSystem:
+    case EntityType.Orthography:
     case EntityType.Org:
     case EntityType.Technology:
       return undefined;
@@ -268,6 +275,8 @@ export function getDepth(ent: EntityData): number | undefined {
       return ent.parentWritingSystem ? getDepth(ent.parentWritingSystem)! + 1 : 0;
     case EntityType.Census:
     case EntityType.Variant:
+    case EntityType.Orthography:
+      return undefined;
     case EntityType.Keyboard:
       return undefined;
     case EntityType.Org:

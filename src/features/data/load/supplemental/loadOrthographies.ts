@@ -1,10 +1,8 @@
-import { LanguageCode } from '@entities/language/LanguageTypes';
-import { Orthography } from '@entities/orthography/OrthographyTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-export async function loadOrthographies(): Promise<Record<
-  LanguageCode,
-  Orthography[]
-> | void> {
+import { OrthographyDictionary } from '@entities/orthography/OrthographyTypes';
+
+export async function loadOrthographies(): Promise<OrthographyDictionary | void> {
   return await fetch('data/other_sources/hyperglot.tsv')
     .then((res) => res.text())
     .then((text) =>
@@ -14,17 +12,26 @@ export async function loadOrthographies(): Promise<Record<
         .filter((line) => line.trim() !== '' && !line.startsWith('#')),
     )
     .then((lines) => {
-      const result: Record<LanguageCode, Orthography[]> = {};
+      const result: OrthographyDictionary = {};
 
       lines.forEach((line) => {
         const parts = line.split('\t');
-        const code = parts[0];
+        const languageCode = parts[0];
         const scriptName = parts[1];
-        const baseCharacters = parts[2].replace(/\p{Lu}/gu, "");
-        if (!code || !scriptName || !baseCharacters) return;
+        const baseCharacters = parts[2]?.replace(/\p{Lu}/gu, '');
+        if (!languageCode || !scriptName || !baseCharacters) return;
 
-        if (!result[code]) result[code] = [];
-        result[code].push({ languageCode: code, scriptName, baseCharacters });
+        const ID = `${languageCode}_${scriptName}`;
+        result[ID] = {
+          type: EntityType.Orthography,
+          ID,
+          codeDisplay: ID,
+          nameDisplay: `${scriptName} (${languageCode})`,
+          names: [scriptName],
+          languageCode,
+          scriptName,
+          baseCharacters,
+        };
       });
 
       return result;
