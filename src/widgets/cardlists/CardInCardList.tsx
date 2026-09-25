@@ -43,17 +43,18 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
     },
     [openEntity],
   );
+  let backgroundColor = getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined;
+  if (backgroundColor?.match(/\([.0-9]+%? [.0-9]+%? [.0-9]+%?\)$/))
+    backgroundColor = 'color-mix(in srgb, ' + backgroundColor + ' 50%, var(--background))';
 
   return (
     <div
       aria-label={`${ent.nameDisplay} card, click to open details`}
-      className={`CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
+      className={`text-xs CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
-      style={{
-        backgroundColor: getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined,
-      }}
+      style={{ backgroundColor }}
       tabIndex={0}
     >
       <PinButton className="bg-transparent!" ent={ent} />

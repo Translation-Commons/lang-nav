@@ -1,27 +1,48 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType } from '@features/params/PageParamTypes';
 
+import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
+import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
+import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import LanguageModalityIcon from '@entities/language/writing/LanguageModalityIcon';
+import {
+  getEntityMostImportantLanguage,
+  getWritingSystemsInEntity,
+} from '@entities/lib/getEntityMiscFields';
+import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritories';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { EntityData } from '@entities/types/DataTypes';
+import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
+import { getLanguagesRelevantToEntity } from '../filtering/filterByConnections';
+
 import Field from './Field';
+import {
+  getKeyboardForEntity,
+  getOrganizationsForEntity,
+  getTerritoryForEntity,
+  getVariantsForEntity,
+} from './getEntityConnection';
 import getField from './getField';
 
 type Props = {
@@ -49,11 +70,11 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
     case Field.Longitude:
     case Field.Latitude:
-      if (typeof fieldValue === 'number') return fieldValue.toFixed(1);
+      if (typeof fieldValue === 'number') return fieldValue.toFixed(1) + '°';
       return <>{fieldValue}</>;
     case Field.Coordinates:
       if (ent.type === EntityType.Territory || ent.type === EntityType.Language) {
-        return `${ent.latitude?.toFixed(1)}, ${ent.longitude?.toFixed(1)}`;
+        return `${ent.latitude?.toFixed(1)}°, ${ent.longitude?.toFixed(1)}°`;
       }
       return <>{fieldValue}</>;
 
@@ -73,16 +94,56 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.Code:
       return <>{fieldValue}</>; // Show the string value directly
 
-    case Field.Language:
+    case Field.LanguagePrimary:
+      return <HoverableEntityName ent={getEntityMostImportantLanguage(ent)} />;
+    case Field.LanguageList:
+      return (
+        <CommaSeparated
+          limit={1}
+          limitText="short"
+          separator={ent.type === EntityType.Language ? ' > ' : ', '}
+        >
+          {getLanguagesRelevantToEntity(ent).map((l) => (
+            <HoverableEntityName key={l.ID} ent={l} />
+          ))}
+        </CommaSeparated>
+      );
     case Field.LanguageFamily:
+      return <HoverableEntityName ent={getRootLanguageFamilyForEntity(ent)} />;
     case Field.WritingSystem:
-    case Field.Region:
-    case Field.Territory:
-    case Field.Platform:
+      return <HoverableEntityName ent={getWritingSystemsInEntity(ent)?.[0]} />;
     case Field.OutputScript:
+      return <HoverableEntityName ent={getKeyboardForEntity(ent)?.outputWritingSystem} />;
+    case Field.Region:
+      return <HoverableEntityName ent={getTerritoryForEntity(ent)?.parentUNRegion} />;
+    case Field.TerritoryPrimary:
+      if (ent.type === EntityType.Territory) return <HoverableEntityName ent={ent} />;
+      return <HoverableEntityName ent={getContainingTerritories(ent)?.[0]} />;
+    case Field.TerritoryList:
+      return (
+        <CommaSeparated
+          limit={2}
+          limitText="short"
+          separator={ent.type === EntityType.Territory ? ' > ' : ', '}
+        >
+          {getContainingTerritories(ent).map((l) => (
+            <HoverableEntityName key={l.ID} ent={l} />
+          ))}
+        </CommaSeparated>
+      );
+    case Field.Platform:
+      return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:
-    case Field.SourceForLanguage:
+      return <HoverableEntityName ent={getVariantsForEntity(ent)?.[0]} />;
+    case Field.Organization:
+      return <HoverableEntityName ent={getOrganizationsForEntity(ent)?.[0]} />;
+
+    // Strings
     case Field.SourceForPopulation:
+    case Field.SourceForLanguage:
+    case Field.WritingSystemScope:
+    case Field.Example:
+    case Field.UnicodeVersion:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
@@ -90,6 +151,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return <VitalityField ent={ent} field={field} />;
 
     case Field.Modality:
+      if (ent.type === EntityType.Census) return getCensusLanguageUse(ent);
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
 
     case Field.Date:
@@ -119,14 +181,28 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
         : fieldValue;
 
     case Field.Description:
-    case Field.Example:
-    case Field.UnicodeVersion:
-    case Field.CLDRCoverage:
+      return fieldValue ? (
+        <Hoverable hoverContent={fieldValue} className="truncate ellipsis max-w-30">
+          {fieldValue}
+        </Hoverable>
+      ) : (
+        <Deemphasized>—</Deemphasized>
+      );
+
     case Field.DigitalSupport:
+      if (ent.type === EntityType.Language) return <LanguageDigitalSupportMeter lang={ent} />;
+      if (ent.type === EntityType.Locale && ent.language)
+        return <LanguageDigitalSupportMeter lang={ent.language} />;
+      return null;
+
+    case Field.CLDRCoverage:
+      return <EntityCLDRCoverageLevel ent={ent} />;
+
     case Field.SourceType:
-    case Field.WritingSystemScope:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
+      return fieldValue;
+
     case Field.None:
       return undefined;
 
@@ -141,6 +217,8 @@ type VitalityFieldProps = {
 };
 
 function VitalityField({ ent, field }: VitalityFieldProps) {
+  if (ent.type === EntityType.Locale && ent.language)
+    return <VitalityField ent={ent.language} field={field} />;
   if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
   if (field === Field.ISOStatus) src = VitalitySource.ISO;

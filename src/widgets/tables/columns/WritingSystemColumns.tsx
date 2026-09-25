@@ -38,7 +38,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
               ))}
           </CommaSeparated>
         ),
-      field: Field.Language,
+      field: Field.LanguageList,
       columnGroup: 'Related Objects',
     },
     {
@@ -64,7 +64,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     {
       key: 'Area of Origin',
       render: (ent) => <HoverableEntityName ent={ent.territoryOfOrigin} />,
-      field: Field.Territory,
+      field: Field.TerritoryPrimary,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
     },

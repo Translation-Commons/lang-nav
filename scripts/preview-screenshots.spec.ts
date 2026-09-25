@@ -55,6 +55,7 @@ async function loadPage(page: Page, paramString: string) {
   // await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
   await expect(page.locator('.LoadingStageDisplay')).toHaveText(
     'Loading stage: 4 of 4, algorithms finished',
+    { timeout: 15000 },
   );
 }
 
@@ -121,4 +122,12 @@ test('capture reports.png — reports page', async ({ page }) => {
   const reportSection = page.locator('[data-testid="reports-view"]');
   const box = await getBox(reportSection);
   await screenshotClip(page, 'reports', { x: box.x - 5, y: box.y - 5 });
+});
+
+test('capture chart.png — chart page', async ({ page }) => {
+  await loadPage(page, 'view=Chart');
+  await page.waitForLoadState('networkidle');
+  const chartSection = page.locator('[data-testid="scatter-plot"]');
+  const box = await getBox(chartSection);
+  await screenshotClip(page, 'chart', { x: box.x - 5, y: box.y - 5 });
 });

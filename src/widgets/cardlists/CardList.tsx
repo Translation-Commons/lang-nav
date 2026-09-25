@@ -24,7 +24,7 @@ const CardList: React.FC = () => {
   const { getColor } = useColors({ ents: filteredEntities });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+    <div className="flex flex-col gap-4 text-sm">
       <VisibleItemsMeter ents={allEntities} />
       {currentEntities.length === 0 && <Deemphasized>No entities found.</Deemphasized>}
 

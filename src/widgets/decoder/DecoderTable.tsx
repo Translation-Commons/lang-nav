@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { Button } from '@shared/ui/button';
+import CopyButton from '@shared/ui/CopyButton';
 
 import { useDecoderDataContext } from './DecoderDataContext';
 import DecoderRow from './DecoderRow';
@@ -11,21 +11,22 @@ const DecoderTable: React.FC = () => {
   const { includeMacroCodes } = useDecoderOptionsContext();
 
   // Export functionality
-  const copyToClipboard = (text: string | string[]) =>
-    navigator.clipboard.writeText(Array.isArray(text) ? text.join('\n') : text);
-  const copyResultingNames = useCallback(() => {
-    copyToClipboard(inputLines.map((l) => getResult(l)?.lang?.nameDisplay ?? ''));
-  }, [inputLines, getResult]);
-  const copyResultingCodes = useCallback(() => {
-    copyToClipboard(
-      inputLines.map((l) => {
-        const result = getResult(l);
-        const code = result?.lang?.codeDisplay ?? '';
-        if (includeMacroCodes) return result?.codeWithMacro ?? code;
-        return code;
-      }),
-    );
-  }, [inputLines, getResult, includeMacroCodes]);
+  const getResultingNames = useCallback(
+    () => inputLines.map((l) => getResult(l)?.lang?.nameDisplay ?? '').join('\n'),
+    [inputLines, getResult],
+  );
+  const getResultingCodes = useCallback(
+    () =>
+      inputLines
+        .map((l) => {
+          const result = getResult(l);
+          const code = result?.lang?.codeDisplay ?? '';
+          if (includeMacroCodes) return result?.codeWithMacro ?? code;
+          return code;
+        })
+        .join('\n'),
+    [inputLines, getResult, includeMacroCodes],
+  );
 
   return (
     <table className="h-fit">
@@ -41,12 +42,8 @@ const DecoderTable: React.FC = () => {
         ))}
         <tr>
           <td colSpan={2}>
-            <Button className="cursor-pointer" onClick={copyResultingCodes}>
-              Copy codes
-            </Button>
-            <Button className="cursor-pointer" onClick={copyResultingNames}>
-              Copy names
-            </Button>
+            <CopyButton getTextToCopy={getResultingCodes}>Copy codes</CopyButton>
+            <CopyButton getTextToCopy={getResultingNames}>Copy names</CopyButton>
           </td>
         </tr>
       </tbody>

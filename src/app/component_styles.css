@@ -1,11 +1,11 @@
-a {
+a:not([data-slot]) {
   /* font-weight: 500; */
   text-decoration: inherit;
   color: inherit;
   cursor: pointer;
 }
 
-a:hover {
+a:not([data-slot]):hover {
   color: inherit;
   text-decoration: underline;
 }
@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
 }
 
-h1 {
+h1:not([class]) {
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -78,21 +78,6 @@ button:not([data-slot]):focus,
   background: var(--color-button-hover);
 }
 
-footer {
-  align-items: center;
-  background-color: var(--color-button-secondary);
-  border: 1px solid var(--color-text-secondary);
-  box-sizing: border-box;
-  color: var(--color-text-secondary);
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 0.8em;
-  gap: 0.5em;
-  justify-content: space-between;
-  padding: 0.25em 1em;
-  width: 100%;
-}
-
 code {
   background-color: var(--color-button-secondary);
   border-radius: 0.25em;
@@ -142,8 +127,7 @@ div h3:first-child {
   margin-bottom: 1em;
 }
 
-.hoverableText,
-.selector .hoverableText {
+.hoverableText {
   background-color: transparent;
   text-decoration: underline dotted var(--color-text-secondary);
   cursor: pointer;
@@ -152,8 +136,7 @@ div h3:first-child {
   margin: 0 -0.25em;
 }
 
-.hoverableText:hover,
-.selector .hoverableText:hover {
+.hoverableText:hover {
   color: var(--color-button-primary);
 }
 

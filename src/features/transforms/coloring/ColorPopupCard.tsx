@@ -13,7 +13,8 @@ import ColorGradientSelector from './ColorGradientSelector';
 const ColorPopupCard: React.FC = () => {
   const { colorBy, view } = usePageParams();
 
-  if (view !== View.Map && view !== View.CardList) return null;
+  if (view !== View.Map && view !== View.CardList && view !== View.Hierarchy && view !== View.Chart)
+    return null;
 
   return (
     <TransformOptionsPopup
@@ -21,7 +22,9 @@ const ColorPopupCard: React.FC = () => {
       label={
         <>
           <PaletteIcon />
-          <div className="truncate text-ellipsis">{colorBy}</div>
+          <div className={'truncate text-ellipsis' + (colorBy === Field.None ? ' hidden' : '')}>
+            {colorBy}
+          </div>
         </>
       }
       options={{

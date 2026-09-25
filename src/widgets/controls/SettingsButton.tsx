@@ -9,16 +9,14 @@ import Settings from './Settings';
 const SettingsButton = (): React.ReactNode => {
   return (
     <Popover>
-      <PopoverTrigger>
-        <Button
-          aria-label="View settings"
-          size="lg"
-          className="py-2 rounded-md h-full hover:bg-accent/10 "
-        >
-          <SettingsIcon className="size-6" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
+      <PopoverTrigger
+        render={
+          <Button variant="ghost" size="icon-lg" aria-label="View settings">
+            <SettingsIcon />
+          </Button>
+        }
+      />
+      <PopoverContent align="end">
         <Settings />
       </PopoverContent>
     </Popover>

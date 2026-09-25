@@ -1,6 +1,8 @@
+import { ArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
-import { PageParams } from '@features/params/PageParamTypes';
+import InternalLink from '@features/params/InternalLink';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
@@ -75,7 +77,20 @@ const HoverableEntity: React.FC<Props> = ({ ent, children, style }) => {
               </div>
             );
           })}
-          <span className="text-muted-foreground">Click to open details.</span>
+          <span
+            className="text-muted-foreground hover:underline hover:cursor-pointer"
+            onClick={openDrawer}
+          >
+            Click to open details drawer
+          </span>
+          <InternalLink
+            className="text-muted-foreground!"
+            params={{ cmpID: ent.ID, entType: ent.type, view: View.Details }}
+            newWindow={true}
+          >
+            or in a new window
+            <ArrowUpRightIcon className="inline-block ml-1 size-3" />
+          </InternalLink>
         </div>
       </HoverCardContent>
     </HoverCard>

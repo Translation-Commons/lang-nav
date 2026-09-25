@@ -65,14 +65,17 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Code:
       // Since the Codes are regularly spaced in the alphabet it works to color maps with scattered values
       return ColorGradient.ScatteredOklab;
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:
     case Field.Region:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       // These values are the names of related entities, not ideal for coloring with a gradient, but

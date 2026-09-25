@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
-import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
+import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { countBy, uniqueBy } from '@shared/lib/setUtils';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+
+import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -17,37 +17,21 @@ type Props = {
 };
 
 const LanguageTerritoryList: React.FC<Props> = ({ lang }) => {
-  return (
-    <LocalParamsProvider
-      overrides={{ languageScopes: lang.scope ? [lang.scope] : [], languageFilter: '' }}
-    >
-      <LanguageTerritoryListContents lang={lang} />
-    </LocalParamsProvider>
-  );
-};
-
-const LanguageTerritoryListContents: React.FC<Props> = ({ lang }) => {
-  const locales = lang.locales?.filter((loc) => loc.territoryCode != null) ?? [];
-  const filteredLocales = useFilteredEntities({
-    inputEnts: locales,
-    useSubstring: false,
-    useConnections: false,
-  }).filteredEntities;
-
-  if (locales.length === 0) return <Deemphasized>Unknown</Deemphasized>;
-  const numberOfTerritories = countBy(locales, (loc) => loc.territoryCode ?? '');
-  const numberOfFilteredTerritories = countBy(filteredLocales, (loc) => loc.territoryCode ?? '');
+  const { territoryScopes } = usePageParams();
+  const locales = (
+    lang.locales?.filter(
+      (loc) =>
+        loc.territory?.scope === TerritoryScope.Country ||
+        (territoryScopes.includes(TerritoryScope.Dependency) &&
+          loc.territory?.scope === TerritoryScope.Dependency),
+    ) ?? []
+  ).sort(sortByPopulation);
 
   return locales.length > 0 ? (
     <CommaSeparated>
-      {uniqueBy(filteredLocales, (loc) => loc.territoryCode ?? '').map((locale) => (
+      {uniqueBy(locales, (loc) => loc.territoryCode ?? '').map((locale) => (
         <HoverableEntityName key={locale.ID} labelSource="territory" ent={locale} />
       ))}
-      {numberOfTerritories > numberOfFilteredTerritories && (
-        <Hoverable hoverContent={<FilterBreakdown ents={locales} />}>
-          +{(numberOfTerritories - numberOfFilteredTerritories).toLocaleString()}
-        </Hoverable>
-      )}
     </CommaSeparated>
   ) : (
     <Deemphasized>Unknown</Deemphasized>

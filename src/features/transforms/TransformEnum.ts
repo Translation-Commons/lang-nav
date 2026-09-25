@@ -11,6 +11,8 @@ enum TransformEnum {
 export function getTransformForPageParam(key: keyof PageParams): TransformEnum | undefined {
   switch (key) {
     case PageParamKey.fieldFocus:
+    case PageParamKey.chartX:
+    case PageParamKey.chartY:
       return undefined; // Not a transform, available for all data
     case PageParamKey.sortBy:
     case PageParamKey.secondarySortBy:

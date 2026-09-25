@@ -8,10 +8,12 @@ import Field from '../fields/Field';
 import FieldDropdown from '../sorting/FieldDropdown';
 import TransformOptionsPopup from '../TransformOptionsPopup';
 
+import ScaleFactorSelector from './ScaleFactorSelector';
+
 const ScalePopupCard: React.FC = () => {
   const { scaleBy, view } = usePageParams();
 
-  if (view !== View.Map) return null;
+  if (view !== View.Map && view !== View.Chart) return null;
 
   return (
     <TransformOptionsPopup
@@ -19,11 +21,14 @@ const ScalePopupCard: React.FC = () => {
       label={
         <>
           <ScalingIcon />
-          <div className="truncate text-ellipsis">{scaleBy}</div>
+          <div className={'truncate text-ellipsis' + (scaleBy === Field.None ? ' hidden' : '')}>
+            {scaleBy}
+          </div>
         </>
       }
       options={{
         'Scale By': <FieldDropdown pageParam="scaleBy" />,
+        'Scale Factor': <ScaleFactorSelector />,
       }}
     />
   );

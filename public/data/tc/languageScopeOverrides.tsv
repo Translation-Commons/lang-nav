@@ -1,0 +1,21 @@
+Code	Name	Scope	Rationale
+nai	North American Indian	Broad Grouping	Geographic
+cai	Central American Indian	Broad Grouping	Geographic
+sai	South American Indian	Broad Grouping	Geographic
+aus	Australian Aboriginal	Broad Grouping	Geographic
+cau	Caucasian	Broad Grouping	Geographic
+paa	Papuan	Broad Grouping	Geographic
+tut	Altaic	Broad Grouping	Controversial
+nic	Niger-Congo	Broad Grouping	Controversial
+ssa	Nilo-Saharan	Broad Grouping	Controversial
+khi	Khoisan	Broad Grouping	Controversial
+crp	Creoles & Pidgins	Broad Grouping	Type of origin, not a family
+sgn	Sign Languages	Broad Grouping	Type of origin, not a family
+art	Artificial Languages	Broad Grouping	Type of origin, not a family
+nan	Min-nan	Macrolanguage	Includes dialects, for which some have been accepted as individual languages
+brb	Lave	Macrolanguage	Glottolog's hierarchy includes other ISO languages krr, krv
+kru	Kurukh	Macrolanguage	Glottolog's hierarchy includes other ISO languages xis, kxl
+west2443	Western Victoria	Macrolanguage	Glottolog considers it a language but ISO considers its dialects as distinct languages
+qer	Dalecarlian	Macrolanguage	Glottolog considers this a language with 40 dialects! one of them (Elfdalian) is considered a language in ISO.
+xin	Xinca	Macrolanguage	ISO only has 1 entry but Glottolog split its into a lot of different pieces
+book1242	Bookkeeping	Broad Grouping	This is a list of deprecated languages that have been removed from the hierarchy

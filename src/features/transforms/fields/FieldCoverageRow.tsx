@@ -5,6 +5,10 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
+import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+
+import { getFieldDescription, getFieldLabel } from '@strings/FieldLabelStrings';
 
 import BaseColorBar from '../coloring/BaseColorBar';
 import getColorGradientForField from '../coloring/getColorGradientForField';
@@ -24,17 +28,27 @@ const FieldCoverageRow: React.FC<{
   tableColumnCoverage: EntityType[];
   showColorBar: boolean;
 }> = ({ field, dataCompleteness, tableColumnCoverage, showColorBar }) => {
+  const entTypeExample = tableColumnCoverage[0] ?? EntityType.Language;
   return (
     <>
       <td>
         {FIELDS_IN_DEVELOPMENT.includes(field) ? (
-          <Hoverable hoverContent="This field is still in development.">{field}</Hoverable>
+          <Hoverable hoverContent="This field is still in development.">
+            {getFieldLabel(field, entTypeExample)}
+          </Hoverable>
         ) : (
-          field
+          getFieldLabel(field, entTypeExample)
         )}
       </td>
       <td>
-        <FieldIcon field={field} />
+        <HoverCard>
+          <HoverCardTrigger>
+            <Button variant="ghost" className="py-0 cursor-auto">
+              <FieldIcon field={field} />
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent>{getFieldDescription(field, entTypeExample)}</HoverCardContent>
+        </HoverCard>
       </td>
       {Object.values(TransformEnum).map((transform) => {
         const hasField = isFieldApplicable(field, transform);

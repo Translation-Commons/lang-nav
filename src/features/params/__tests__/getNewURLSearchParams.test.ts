@@ -1,0 +1,167 @@
+import { describe, expect, it } from 'vitest';
+
+import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
+import { EntityType, View } from '@features/params/PageParamTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
+
+describe('getNewURLSearchParams', () => {
+  it('migrates searchString to languageFilter when switching from Language', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.Language,
+      searchString: 'chinese',
+    });
+
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
+
+    expect(result.get('searchString')).toBeNull();
+    expect(result.get('languageFilter')).toBe('chinese');
+  });
+
+  it('keep searchString to territoryFilter when switching from Territory', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.Territory,
+      searchString: 'China',
+    });
+    const result = getNewURLSearchParams({ entType: EntityType.Language }, prev);
+    expect(result.get('searchString')).toBeNull();
+    expect(result.get('territoryFilter')).toBe('China');
+  });
+
+  it('keep searchString to writingSystemFilter when switching from WritingSystem', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.WritingSystem,
+      searchString: 'Latin',
+    });
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
+    expect(result.get('searchString')).toBeNull();
+    expect(result.get('writingSystemFilter')).toBe('Latin');
+  });
+
+  it('keeps entID when switching entType', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.Language,
+      searchString: 'chinese',
+      entID: '123',
+    });
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
+    expect(result.get('entID')).toBe('123');
+  });
+
+  it('clears page when view changes', () => {
+    const prev = new URLSearchParams({
+      view: 'Table',
+      page: '3',
+    });
+
+    const result = getNewURLSearchParams({ view: View.Map }, prev);
+
+    expect(result.get('page')).toBeNull();
+  });
+
+  it('does not migrate searchString when entType does not change', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.Language,
+      searchString: 'English',
+    });
+
+    const result = getNewURLSearchParams({ entType: EntityType.Language }, prev);
+
+    expect(result.get('searchString')).toBe('English');
+    expect(result.get('languageFilter')).toBeNull();
+  });
+
+  it('does not create a filter when searchString is missing', () => {
+    const prev = new URLSearchParams({
+      entType: EntityType.Language,
+    });
+
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
+
+    expect(result.get('searchString')).toBeNull();
+    expect(result.get('languageFilter')).toBeNull();
+  });
+
+  it('promotes previous sortBy to secondarySortBy when user changes primary sortBy', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    expect(result.get('secondarySortBy')).toBe(Field.Population);
+  });
+
+  it('if there is a new sort by, it passes the current sorting behavior to the secondary sort', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+      sortBehavior: SortBehavior.Reverse.toString(),
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    expect(result.get('sortBehavior')).toBeNull(); // default is unspecified
+    expect(result.get('secondarySortBy')).toBe(Field.Population);
+    expect(result.get('secondarySortBehavior')).toBe(SortBehavior.Reverse.toString());
+
+    const newResult = getNewURLSearchParams({ sortBy: Field.Population }, result);
+    expect(newResult.get('sortBy')).toBeNull(); // default is unspecified
+    expect(newResult.get('sortBehavior')).toBeNull(); // default is unspecified
+    expect(newResult.get('secondarySortBy')).toBe(Field.VitalityMetascore);
+    expect(newResult.get('secondarySortBehavior')).toBeNull(); // default is unspecified
+  });
+
+  it('when new primary was the old secondary (A then B → user picks B), result is B then A', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population, // A
+      secondarySortBy: Field.VitalityMetascore, // B
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore); // B
+    expect(result.get('secondarySortBy')).toBe(Field.Population); // A (old primary), not B
+  });
+
+  it('does not set secondarySortBy when sortBy is unchanged', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.Population }, prev);
+
+    // sortBy may be removed when it equals default (Population); we only assert we did not promote to secondary
+    expect(result.get('secondarySortBy')).toBeNull();
+  });
+
+  it('when user sets secondarySortBy to None only, URL has no secondarySortBy', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Name, // non-default so it stays in URL
+      secondarySortBy: Field.VitalityMetascore,
+    });
+
+    const result = getNewURLSearchParams({ secondarySortBy: Field.None }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.Name);
+    // None is default so it is removed from URL
+    expect(result.get('secondarySortBy')).toBeNull();
+  });
+
+  it('when user changes primary and sets secondary to None in same update, secondary stays None', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+      secondarySortBy: Field.VitalityMetascore,
+    });
+
+    const result = getNewURLSearchParams(
+      { sortBy: Field.VitalityMetascore, secondarySortBy: Field.None },
+      prev,
+    );
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    // User explicitly chose None; must not be overwritten by old primary
+    expect(result.get('secondarySortBy')).toBeNull();
+  });
+});

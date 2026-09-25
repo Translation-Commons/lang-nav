@@ -1,11 +1,14 @@
 import { useMemo } from 'react';
 
 import { PageParamsContextState } from '@features/params/PageParamsContext';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import Field from '../fields/Field';
 
 export function useFilterLabels() {
   const params = usePageParams();
@@ -73,4 +76,36 @@ function getLanguageFamilyFilterLabel({ languageFamilyFilter }: PageParamsContex
   if (languageFamilyFilter.match(/^[a-z]{3}$/))
     return `related to language family with code "${languageFamilyFilter}"`;
   return `related to language family "${languageFamilyFilter}*"`;
+}
+
+export function getFilterTitle(field: Field, entType?: EntityType): string {
+  switch (field) {
+    case Field.Modality:
+      return 'Language Use';
+    case Field.LanguageScope:
+      return 'Language Level';
+    case Field.TerritoryScope:
+      return 'Territory Type';
+    case Field.TerritoryList:
+      if (entType === EntityType.WritingSystem) return 'Originated in...';
+      return 'Found in...';
+    case Field.WritingSystem:
+      if (entType === EntityType.WritingSystem) return 'Originated in...';
+      return 'Written in...';
+    case Field.LanguageList:
+      if (entType === EntityType.WritingSystem) return 'Is written for...';
+      return 'Language';
+    case Field.LanguageFamily:
+      return 'Language Family';
+    case Field.SourceForLanguage:
+      return 'Language List / Language Standard';
+    case Field.ISOStatus:
+      return 'ISO Status';
+    case Field.Population:
+      return 'Population';
+    case Field.Organization:
+      return 'Organization';
+    default:
+      return 'Unknown Filter';
+  }
 }

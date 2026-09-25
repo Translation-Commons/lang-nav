@@ -1,0 +1,139 @@
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { PageParamKey } from '@features/params/PageParamTypes';
+import { Suggestion } from '@features/params/Suggestion';
+import usePageParams from '@features/params/usePageParams';
+
+import { groupBy } from '@shared/lib/setUtils';
+import { cn } from '@shared/lib/utils';
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxLabel,
+  ComboboxList,
+} from '@shared/ui/combobox';
+
+import useTrackSearch from './useTrackSearch';
+
+type Props = {
+  getSuggestions: (query: string) => Promise<Suggestion[]>;
+  onSelect: (value: Suggestion) => void;
+  onQueryChange?: (query: string) => void;
+  placeholder: string;
+  ariaLabel?: string;
+  emptyMessage?: string;
+  className?: string;
+  pageParameter?: PageParamKey;
+};
+
+const EntitySearchCombobox: React.FC<Props> = ({
+  getSuggestions,
+  onSelect,
+  onQueryChange,
+  placeholder,
+  ariaLabel,
+  emptyMessage,
+  className,
+  pageParameter,
+}) => {
+  const params = usePageParams();
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [searchString, setSearchString] = useState(
+    (pageParameter && (params[pageParameter] as string)) || '',
+  );
+  const trackSearch = useTrackSearch();
+
+  const onSubmit = useCallback(
+    (value: Suggestion | null) => {
+      if (value) {
+        trackSearch(value.searchString + value.entID, 'suggestion');
+        setSearchString((value.ent?.nameDisplay ?? '') + ' [' + value.entID + ']');
+        onSelect(value);
+      } else {
+        setSearchString('');
+        onSelect({ entID: '', label: '', searchString: '' });
+      }
+    },
+    [trackSearch, onSelect],
+  );
+
+  const onInputChange = useCallback(
+    (value: string) => {
+      setSearchString(value);
+      onQueryChange?.(value);
+    },
+    [onQueryChange],
+  );
+
+  useEffect(() => {
+    let isActive = true;
+
+    const fetchData = async () => {
+      const suggestions = await getSuggestions(searchString);
+      if (isActive) setSuggestions(suggestions);
+    };
+
+    fetchData();
+    return () => {
+      isActive = false;
+    };
+  }, [searchString, getSuggestions]);
+
+  const groupedItems = useMemo(
+    () => groupBy(suggestions, (item) => item.group ?? ''),
+    [suggestions],
+  );
+
+  return (
+    <Combobox
+      filter={null}
+      itemToStringValue={(item: Suggestion) =>
+        (item.ent?.nameDisplay ?? '') + ' [' + item.entID + ']'
+      }
+      onValueChange={onSubmit}
+      autoHighlight
+    >
+      <ComboboxInput
+        className={cn('w-full', className)}
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        showClear
+        value={searchString}
+        onChange={(e) => onInputChange(e.target.value)}
+      />
+      <ComboboxContent>
+        {emptyMessage && suggestions.length === 0 && <ComboboxEmpty>{emptyMessage}</ComboboxEmpty>}
+        <ComboboxList>
+          {Object.entries(groupedItems).map(([group, items]: [string, Suggestion[]]) => (
+            <ComboboxGroup key={group}>
+              {group && group != 'matched' && (
+                <ComboboxLabel className="px-3 pt-2 pb-1 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
+                  {group}
+                </ComboboxLabel>
+              )}
+              {items.map((suggestion) => (
+                <ComboboxItem
+                  key={suggestion.entID}
+                  value={suggestion}
+                  className="cursor-pointer"
+                  data-testid="entity-combobox-suggestion"
+                >
+                  <div>{suggestion.label}</div>
+                  <div className="ml-auto font-mono text-xs text-muted-foreground">
+                    {suggestion.ent?.codeDisplay ?? suggestion.entID}
+                  </div>
+                </ComboboxItem>
+              ))}
+            </ComboboxGroup>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+
+export default EntitySearchCombobox;

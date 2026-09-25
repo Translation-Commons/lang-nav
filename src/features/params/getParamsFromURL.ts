@@ -46,6 +46,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
   const params: Partial<PageParams> = {};
   urlParams.forEach((value, keyUntyped) => {
     const key = keyUntyped as PageParamKey;
+    if (!Object.values(PageParamKey).includes(key)) return; // Ignore parameters with old names
+
     switch (key) {
       // Numeric values
       case PageParamKey.page:
@@ -53,6 +55,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.limit:
         params.limit = parseInt(value) || 10; // Default to 10 if parsing fails
+        break;
+      case PageParamKey.scaleFactor:
+        params.scaleFactor = parseFloat(value) || 1;
         break;
       case PageParamKey.populationMin:
         params.populationMin = parseInt(value) >= -1 ? parseInt(value) : undefined;
@@ -109,6 +114,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.sortBehavior:
         params.sortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
         break;
+      case PageParamKey.secondarySortBehavior:
+        params.secondarySortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
+        break;
       case PageParamKey.colorGradient:
         params.colorGradient = parseInt(value) as ColorGradient;
         break;
@@ -138,6 +146,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.fieldFocus:
         params.fieldFocus = value as Field;
         break;
+      case PageParamKey.chartX:
+        params.chartX = value as Field;
+        break;
+      case PageParamKey.chartY:
+        params.chartY = value as Field;
+        break;
 
       //These are string arrays
       case PageParamKey.pinned:
@@ -152,6 +166,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.languageFamilyFilter:
       case PageParamKey.territoryFilter:
       case PageParamKey.writingSystemFilter:
+      case PageParamKey.orgFilter:
         params[key] = value; // Default to undefined if empty
         break;
       default:

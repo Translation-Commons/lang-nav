@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
 import { EntityType, SearchableField } from '@features/params/PageParamTypes';
-import { SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
+import { SUGGESTION_LIMIT } from '@features/params/Suggestion';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
@@ -40,7 +40,7 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
       }
 
       // Check if the language is known to be found in the territory
-      if (!filterBy[Field.Territory]?.(ent)) dist += 10;
+      if (!filterBy[Field.TerritoryList]?.(ent)) dist += 10;
 
       // Check if the language is at the right scope level
       if (!filterBy[Field.LanguageScope]?.(ent)) dist += 10;
@@ -50,7 +50,7 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
 
       return dist - popDiscount;
     },
-    [filterBy[Field.Territory], filterBy[Field.LanguageScope]],
+    [filterBy[Field.TerritoryList], filterBy[Field.LanguageScope]],
   );
 
   const getSuggestions = useCallback(

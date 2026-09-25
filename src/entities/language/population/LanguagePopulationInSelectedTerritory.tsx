@@ -14,7 +14,7 @@ import { LanguageData } from '../LanguageTypes';
 
 const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { territoryFilter } = usePageParams();
-  const filterByTerritory = useFilters()[Field.Territory];
+  const filterByTerritory = useFilters()[Field.TerritoryList];
 
   if (!territoryFilter) {
     return (

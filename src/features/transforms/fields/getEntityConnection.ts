@@ -3,6 +3,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 import { CensusData } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -59,5 +60,20 @@ export function getVariantsForEntity(ent: EntityData | undefined): VariantData[]
       [ent.equivalentVariant, ...(ent.variants ?? [])].filter((v) => !!v),
       (v) => v.ID,
     );
+  return undefined;
+}
+
+export function getOrganizationsForEntity(
+  ent: EntityData | undefined,
+): OrganizationData[] | undefined {
+  if (!ent) return undefined;
+  if (ent.type === EntityType.Org) return [ent];
+  if (ent.type === EntityType.Census) return [ent.collector, ent.presenter].filter((org) => !!org);
+  if (ent.type === EntityType.Locale) {
+    const censusOrgs = ent.censusRecords
+      ?.flatMap((rec) => getOrganizationsForEntity(rec.census))
+      .filter((org) => !!org);
+    return censusOrgs != null ? uniqueBy(censusOrgs, (org) => org.ID) : undefined;
+  }
   return undefined;
 }

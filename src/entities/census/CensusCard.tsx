@@ -1,7 +1,9 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
+import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import EntityTitle from '@entities/ui/EntityTitle';
 
@@ -9,44 +11,33 @@ import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { CensusData } from './CensusTypes';
+import { getCensusLanguageUse } from './getCensusLanguageUse';
 
 interface Props {
   census: CensusData;
 }
 const CensusCard: React.FC<Props> = ({ census }) => {
-  const {
-    isoRegionCode,
-    territory,
-    yearCollected,
-    languageUse,
-    acquisitionOrder,
-    domain,
-    languageCount,
-  } = census;
-  const languageUseParts = [
-    languageUse,
-    acquisitionOrder !== 'Any' && acquisitionOrder,
-    domain && `@${domain}`,
-  ].filter(Boolean);
+  const { isoRegionCode, territory, yearCollected, languageCount } = census;
+  const languageUse = getCensusLanguageUse(census);
+  const extraFields = useActiveTransforms([
+    Field.Name,
+    Field.TerritoryPrimary,
+    Field.Organization,
+    Field.CountOfLanguages,
+    Field.Modality,
+    Field.Date,
+  ]);
 
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <EntityTitle ent={census} />
       </div>
-      <CardField
-        title="Territory"
-        field={Field.Territory}
-        description="Where this census was conducted."
-      >
+      <CardField field={Field.TerritoryPrimary}>
         {territory != null ? <HoverableEntityName ent={territory} /> : isoRegionCode}
       </CardField>
 
-      <CardField
-        title="Collector"
-        field={Field.SourceType}
-        description="The type of organization that collected this census and/or presented it"
-      >
+      <CardField field={Field.SourceType}>
         <div>
           {census.collector && <HoverableEntityName ent={census.collector} />}
           {census.presenter && (
@@ -58,33 +49,19 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         </div>
       </CardField>
 
-      <CardField
-        title="Collection Year"
-        field={Field.Date}
-        description="The year this census was collected."
-      >
-        {yearCollected}
+      <CardField field={Field.Date}>{yearCollected}</CardField>
+
+      <CardField field={Field.Modality}>
+        {languageUse != null ? languageUse : <Deemphasized>Unspecified</Deemphasized>}
       </CardField>
 
-      <CardField
-        title="Language Use"
-        field={Field.Modality}
-        description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home").'
-      >
-        {languageUseParts.length > 0 ? (
-          languageUseParts.join(', ')
-        ) : (
-          <Deemphasized>Unspecified</Deemphasized>
-        )}
-      </CardField>
+      <CardField field={Field.CountOfLanguages}>{languageCount.toLocaleString()}</CardField>
 
-      <CardField
-        title="Number of Languages"
-        field={Field.CountOfLanguages}
-        description="How many languages are covered by this census."
-      >
-        {languageCount.toLocaleString()}
-      </CardField>
+      {extraFields.map((field) => (
+        <CardField key={field} field={field}>
+          <EntityFieldDisplay ent={census} field={field} />
+        </CardField>
+      ))}
     </div>
   );
 };

@@ -7,6 +7,9 @@ import {
 } from 'lucide-react';
 import React from 'react';
 
+import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+
 import { getLanguageModalityDescription } from '@strings/LanguageModalityStrings';
 
 import { LanguageModality } from './LanguageModality';
@@ -16,10 +19,20 @@ const LanguageModalityIcon: React.FC<{ modality: LanguageModality | undefined }>
   modality,
 }) => {
   if (modality == null) return null;
+  const description = getLanguageModalityDescription(modality);
   return (
-    <span title={getLanguageModalityDescription(modality)}>
-      <LanguageModalityBaseIcon modality={modality} />
-    </span>
+    <HoverCard>
+      <HoverCardTrigger
+        delay={10}
+        closeDelay={100}
+        render={
+          <Button aria-label={description} className="p-0" variant="ghost">
+            <LanguageModalityBaseIcon modality={modality} />
+          </Button>
+        }
+      />
+      <HoverCardContent className="flex w-fit flex-col gap-0.5">{description}</HoverCardContent>
+    </HoverCard>
   );
 };
 
@@ -31,7 +44,7 @@ const LanguageModalityBaseIcon: React.FC<{ modality: LanguageModality }> = ({ mo
       return (
         <>
           <NotepadTextIcon />
-          <MessageCircleDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
+          <MessageCircleDashedIcon className="text-muted-foreground" />
         </>
       );
     case LanguageModality.SpokenAndWritten:
@@ -44,7 +57,7 @@ const LanguageModalityBaseIcon: React.FC<{ modality: LanguageModality }> = ({ mo
     case LanguageModality.MostlySpoken:
       return (
         <>
-          <NotepadTextDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
+          <NotepadTextDashedIcon className="text-muted-foreground" />
           <MessageCircleIcon />
         </>
       );

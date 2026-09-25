@@ -1,9 +1,7 @@
-import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { EntityType, PageParamKey } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
+import { PageParamKey } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
@@ -19,7 +17,7 @@ const LanguageFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
   const filterByScope = filterBy[Field.LanguageScope];
-  const filterByTerritory = filterBy[Field.Territory];
+  const filterByTerritory = filterBy[Field.TerritoryList];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterByLanguageFamily = filterBy[Field.LanguageFamily];
   const filterLabels = useFilterLabels();
@@ -60,46 +58,9 @@ const LanguageFilterSelector: React.FC = () => {
   return (
     <EntityFilterSelector
       getSuggestions={getSuggestions}
-      selectorLabel="Language"
-      selectorDescription={
-        <>
-          Filter results to those relevant to a specific language, language family, or dialect. You
-          can enter either the language name or its code. For example, entering &quot;Spanish&quot;
-          or <code>spa</code> will filter to entities relevant to Spanish.{' '}
-          <LanguageFilterDescription />
-        </>
-      }
       pageParameter={PageParamKey.languageFilter}
     />
   );
-};
-
-const LanguageFilterDescription: React.FC = () => {
-  const { entType } = usePageParams();
-  switch (entType) {
-    case EntityType.Language:
-      return (
-        <>
-          <strong>Language view only:</strong> Selecting a language family will show the languages
-          in the family. Dialects will also appear if they are enabled.
-        </>
-      );
-    case EntityType.Territory:
-      return <>This will filter territories to ones where the selected language is used.</>;
-    case EntityType.WritingSystem:
-      return <>This will filter writing systems to ones used for the selected language.</>;
-    case EntityType.Variant:
-      return <>This will filter variants for ones that are intended for this language.</>;
-    case EntityType.Locale:
-      return <>This will filter locales with the selected language.</>;
-    case EntityType.Census:
-      return (
-        <>
-          <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} /> Censuses are not
-          currently supported by this filter.
-        </>
-      );
-  }
 };
 
 export default LanguageFilterSelector;

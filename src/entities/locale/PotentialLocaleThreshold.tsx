@@ -18,7 +18,7 @@ export function usePotentialLocaleThreshold(
 
   const percentThresholdSelector = (
     <>
-      <div>
+      <div className="flex items-center gap-1">
         {label}
         <Hoverable hoverContent={description}>
           <InfoIcon size="1em" />

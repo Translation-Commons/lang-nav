@@ -7,12 +7,14 @@ type CommaSeparatedProps = {
   children: React.ReactNode;
   limit?: number | null; // Optionally will clamp the list
   limitText?: 'words' | 'short';
+  separator?: string; // Optionally specify a custom separator between items
 };
 
 const CommaSeparated: React.FC<CommaSeparatedProps> = ({
   children,
   limit = 4,
   limitText = 'words',
+  separator = ', ',
 }) => {
   const childArray = React.Children.toArray(children);
   const [expanded, setExpanded] = useState(false);
@@ -23,7 +25,7 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({
       {childArray.slice(0, !expanded && limit ? limit : undefined).map((child, index) => (
         <React.Fragment key={index}>
           {child}
-          {index < childArray.length - 1 && ', '}
+          {index < childArray.length - 1 && separator}
         </React.Fragment>
       ))}{' '}
       {limit != null && childArray.length > limit && (

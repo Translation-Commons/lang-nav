@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes.tsx';
 
-import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
@@ -20,7 +19,6 @@ const Settings = (): React.ReactNode => {
     <div className="grid grid-cols-2 gap-2 items-center">
       {isDataPage && (
         <>
-          <FieldFocusSelector />
           <PopulationFocusSelector />
           <LocaleSeparatorSelector />
           <ProfileSelector />

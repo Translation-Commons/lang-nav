@@ -1,49 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import PageFooter from '@widgets/PageFooter';
 import PageNavBar from '@widgets/PageNavBar';
 
 import ConsentBanner from '@features/consent/ConsentBanner';
-import useConsent from '@features/consent/useConsent';
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
-import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
-import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
-
+// import { AmplitudeTracker } from './AmplitudeTracker';
 import PageRoutes, { LangNavPageName } from './PageRoutes';
-
-function AmplitudeTracker() {
-  const location = useLocation();
-  const lastPathnameRef = useRef('');
-  const { state } = useConsent();
-  const analyticsConsent = state?.analytics === 'granted';
-
-  useAmplitudeParamEvents();
-
-  useEffect(() => {
-    if (!analyticsConsent) {
-      // User withdrew consent (or never granted it): clear any in-memory
-      // identity so the currently-loaded SDK instance can't keep tracking.
-      optOutAmplitude();
-      return;
-    }
-
-    initAmplitude();
-
-    if (lastPathnameRef.current === location.pathname) return;
-
-    lastPathnameRef.current = location.pathname;
-    trackPageView(location.pathname, location.search);
-  }, [analyticsConsent, location.pathname, location.search]);
-
-  return null;
-}
 
 // Intro and Data are meant to fit within the viewport, scrolling their own content
 // internally, rather than growing the whole document like a normal page of text.
 const VIEWPORT_FITTED_PAGES = [LangNavPageName.Intro, LangNavPageName.Data];
+
+const AmplitudeTracker = React.lazy(() => import('./AmplitudeTracker'));
 
 function App() {
   const location = useLocation();
@@ -56,22 +28,15 @@ function App() {
           <AmplitudeTracker />
           <PageNavBar />
           <div
-            style={
-              fitsViewport
-                ? {
-                    flex: 1,
-                    minWidth: 0,
-                    minHeight: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'auto',
-                  }
-                : { flex: 1, minWidth: 0 }
+            className={
+              'flex-1 min-w-0' + (fitsViewport ? ' flex flex-col min-h-0 overflow-auto' : '')
             }
           >
             <PageRoutes />
           </div>
-          <PageFooter />
+
+          {/* Footer is in the data content on the data page (rather than being globally set here) */}
+          {!location.pathname.includes(LangNavPageName.Data) && <PageFooter />}
           <ConsentBanner />
         </HoverCardProvider>
       </DeferredDataProvider>

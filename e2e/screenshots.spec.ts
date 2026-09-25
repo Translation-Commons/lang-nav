@@ -53,7 +53,7 @@ test.describe('screenshot tests', () => {
 
   test('intro page', async ({ page }) => {
     await page.goto('./intro');
-    await page.getByText('Welcome to the').waitFor();
+    await page.getByText('Explore the world').waitFor();
     await expect(page).toHaveScreenshot('intro-page.png');
   });
 
@@ -161,7 +161,7 @@ test.describe('screenshot tests', () => {
 
   test('consent banner on intro page', async ({ page }) => {
     await page.goto('./intro');
-    await page.getByText('Welcome to the').waitFor();
+    await page.getByText('Explore the world').waitFor();
     await page.getByRole('dialog', { name: 'Cookie consent' }).waitFor();
     await expect(page).toHaveScreenshot('consent-banner.png');
   });

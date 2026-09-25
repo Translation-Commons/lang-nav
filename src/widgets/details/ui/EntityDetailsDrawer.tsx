@@ -9,6 +9,8 @@ import usePageParams from '@features/params/usePageParams';
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
+import EntityTypeLabel from '@entities/ui/EntityTypeLabel';
+import VariantDrawer from '@entities/variant/VariantDrawer';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import {
@@ -79,7 +81,11 @@ const DrawerHeaderContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
   return (
     <>
-      {ent && <DrawerDescription>{ent.type}</DrawerDescription>}
+      {ent && (
+        <DrawerDescription>
+          <EntityTypeLabel ent={ent} />
+        </DrawerDescription>
+      )}
       <DrawerTitle className="text-2xl justify-between flex items-center gap-2">
         {ent ? <EntityTitle ent={ent} highlightSearchMatches={false} /> : 'Details'}
       </DrawerTitle>
@@ -92,11 +98,19 @@ const DrawerHeaderContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
 const DrawerBodyContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   if (!ent) return null;
-  if (ent.type === EntityType.Language) return <LanguageDrawerContents lang={ent} />;
-  if (ent.type === EntityType.Locale) return <LocaleDrawerContents locale={ent} />;
-  if (ent.type === EntityType.Territory) return <TerritoryDrawerContents territory={ent} />;
 
-  return <EntityDetailsBody entID={ent.ID} />;
+  switch (ent.type) {
+    case EntityType.Language:
+      return <LanguageDrawerContents lang={ent} />;
+    case EntityType.Locale:
+      return <LocaleDrawerContents locale={ent} />;
+    case EntityType.Territory:
+      return <TerritoryDrawerContents territory={ent} />;
+    case EntityType.Variant:
+      return <VariantDrawer variant={ent} />;
+    default:
+      return <EntityDetailsBody entID={ent.ID} />;
+  }
 };
 
 export default EntityDetailsDrawer;

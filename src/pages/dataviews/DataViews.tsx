@@ -9,6 +9,7 @@ const CardList = React.lazy(() => import('@widgets/cardlists/CardList'));
 const ViewMap = React.lazy(() => import('./ViewMap'));
 const ViewReports = React.lazy(() => import('./ViewReports'));
 const ViewFamilyTree = React.lazy(() => import('./ViewFamilyTree'));
+const ViewChart = React.lazy(() => import('./ViewChart'));
 const ViewTable = React.lazy(() => import('./ViewTable'));
 const ViewDetails = React.lazy(() => import('./ViewDetails'));
 
@@ -36,6 +37,8 @@ function SpecificDataView({ view }: { view: View }) {
       return <ViewReports />;
     case View.Map:
       return <ViewMap />;
+    case View.Chart:
+      return <ViewChart />;
   }
 }
 

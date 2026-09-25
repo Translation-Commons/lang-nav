@@ -14,6 +14,7 @@ const ReportLabels: Record<ReportID, string> = {
   [ReportID.LocaleIndigeneity]: 'Indigeneity',
   [ReportID.LocalesPotential]: 'Potential Locales',
   [ReportID.LocalesLanguagesWithout]: 'Languages without Locales',
+  [ReportID.None]: 'Select a report or tool',
   [ReportID.VariantsAnnotationTool]: 'Annotation Tool',
   [ReportID.WritingSystemsLanguagesWithout]: 'Languages without Writing Systems',
 };

@@ -13,20 +13,21 @@ import { SortBehavior, SortDirection } from './SortTypes';
 export type SortByFunctionType = (a: EntityData, b: EntityData) => number;
 
 export function getSortFunction(): SortByFunctionType {
-  const { sortBy, secondarySortBy, sortBehavior } = usePageParams();
+  const { sortBy, secondarySortBy, sortBehavior, secondarySortBehavior } = usePageParams();
 
-  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy);
+  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy, secondarySortBehavior);
 }
 
 export function getSortFunctionParameterized(
   sortBy: Field,
-  sortDirection: SortBehavior = SortBehavior.Normal,
+  sortBehavior: SortBehavior = SortBehavior.Normal,
   secondarySortBy?: Field,
+  secondarySortBehavior: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
-  const direction = getNormalSortDirection(sortBy) * sortDirection;
+  const direction = getNormalSortDirection(sortBy) * sortBehavior;
   const secondaryDirection =
     secondarySortBy != null && secondarySortBy !== Field.None
-      ? getNormalSortDirection(secondarySortBy) * sortDirection
+      ? getNormalSortDirection(secondarySortBy) * secondarySortBehavior
       : null;
 
   const effectiveSecondary: Field | null =
@@ -75,14 +76,17 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Description:
     case Field.Modality:
     case Field.VariantType:
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Variant:
     case Field.Platform:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Coordinates:

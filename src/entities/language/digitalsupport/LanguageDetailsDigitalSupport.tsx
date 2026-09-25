@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
@@ -25,17 +24,38 @@ import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '../../ui/CLDRCov
 import EntityWikipediaInfo from '../../ui/EntityWikipediaInfo';
 import { LanguageData } from '../LanguageTypes';
 
+import {
+  DIGITAL_SUPPORT_CATEGORIES,
+  getDigitalSupportStatus,
+  getDigitalSupportStatusSeverity,
+  getInterfacePlatforms,
+} from './computeLanguageDigitalSupportStatus';
+import DigitalSupportCategoryRow from './DigitalSupportCategoryRow';
 import LanguageDigitalSupportMeter from './DigitalSupportMeter';
-import { DigitalSupportDimension } from './DigitalSupportTypes';
+import DigitalSupportStatusIcon from './DigitalSupportStatusIcon';
+import { DigitalSupportCategory, DigitalSupportDimension } from './DigitalSupportTypes';
 import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 
 type Props = { lang: LanguageData };
 
-type SectionView = 'scores' | 'locales';
+type SectionView = 'support' | 'locales';
 
 const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
   const { digitalSupportScore } = lang;
-  const [sectionView, setSectionView] = React.useState<SectionView>('scores');
+  const [sectionView, setSectionView] = React.useState<SectionView>('support');
+  // Show the missing capabilities first, keeping the usual dimension order within a status
+  const categories = useMemo(
+    () =>
+      DIGITAL_SUPPORT_CATEGORIES.map((dimension) => ({
+        dimension,
+        summary: getDigitalSupportStatus(lang, dimension),
+      })).sort(
+        (a, b) =>
+          getDigitalSupportStatusSeverity(a.summary.status) -
+          getDigitalSupportStatusSeverity(b.summary.status),
+      ),
+    [lang],
+  );
 
   if (!digitalSupportScore) return null; // Withhold the section
 
@@ -47,9 +67,9 @@ const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
       headerOptions={
         <Tabs value={sectionView} onValueChange={setSectionView}>
           <TabsList>
-            {['scores', 'locales'].map((v) => (
+            {['support', 'locales'].map((v) => (
               <TabsTrigger key={v} value={v} className="cursor-pointer">
-                {v === 'scores' ? 'Scores' : 'Locales'}
+                {v === 'support' ? 'Support' : 'Locales'}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -57,33 +77,44 @@ const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
       }
     >
       {sectionView === 'locales' && <Locales lang={lang} />}
-      {sectionView === 'scores' && (
-        <ResponsiveGrid>
-          {Object.values(DigitalSupportDimension).map((dimension) => (
-            <div
-              key={dimension}
-              style={{
-                gridColumn: dimension === DigitalSupportDimension.Overall ? '1 / -1' : 'span 1',
-              }}
-            >
-              <strong>{getDigitalSupportDimensionLabel(dimension)}:</strong>{' '}
-              {Math.floor(digitalSupportScore[dimension])}/10
-              <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
-              <DigitalSupportDimensionBreakdown key={dimension} lang={lang} dimension={dimension} />
-            </div>
-          ))}
-        </ResponsiveGrid>
+      {sectionView === 'support' && (
+        <>
+          <DigitalSupportOverview lang={lang} />
+          <ul className="flex flex-col">
+            {categories.map(({ dimension, summary }) => (
+              <DigitalSupportCategoryRow
+                key={dimension}
+                summary={summary}
+                title={getDigitalSupportDimensionLabel(dimension)}
+              >
+                <DigitalSupportDimensionBreakdown lang={lang} dimension={dimension} />
+              </DigitalSupportCategoryRow>
+            ))}
+          </ul>
+        </>
       )}
     </DetailsSection>
   );
 };
 
-type DimProps = { lang: LanguageData; dimension: DigitalSupportDimension };
+const DigitalSupportOverview: React.FC<Props> = ({ lang }) => {
+  const summary = getDigitalSupportStatus(lang, DigitalSupportDimension.Overall);
+
+  return (
+    <div className="flex flex-row flex-wrap items-center gap-2 px-2 pb-2 text-sm">
+      <DigitalSupportStatusIcon status={summary.status} />
+      <span className="flex-1 min-w-0">{summary.label}</span>
+      <div className="max-w-40 grow">
+        <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.Overall} />
+      </div>
+    </div>
+  );
+};
+
+type DimProps = { lang: LanguageData; dimension: DigitalSupportCategory };
 
 const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension }) => {
   switch (dimension) {
-    case DigitalSupportDimension.Overall:
-      return <></>;
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? (
         <CommaSeparated>
@@ -143,36 +174,15 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
     case DigitalSupportDimension.Interfaces:
       return (
         <>
-          <DetailsField title="Windows 11">
-            {lang.win11LanguagePacks?.length ? (
-              lang.win11LanguagePacks.length +
-              ' language pack' +
-              (lang.win11LanguagePacks.length > 1 ? 's' : '')
-            ) : (
-              <Deemphasized>Not available</Deemphasized>
-            )}
-          </DetailsField>
-          <DetailsField title="Android">
-            {lang.android?.length ? (
-              lang.android.length + ' language pack' + (lang.android.length > 1 ? 's' : '')
-            ) : (
-              <Deemphasized>Not available</Deemphasized>
-            )}
-          </DetailsField>
-          <DetailsField title="MacOS">
-            {lang.macos?.length ? (
-              lang.macos.length + ' language pack' + (lang.macos.length > 1 ? 's' : '')
-            ) : (
-              <Deemphasized>Not available</Deemphasized>
-            )}
-          </DetailsField>
-          <DetailsField title="iOS">
-            {lang.ios?.length ? (
-              lang.ios.length + ' language pack' + (lang.ios.length > 1 ? 's' : '')
-            ) : (
-              <Deemphasized>Not available</Deemphasized>
-            )}
-          </DetailsField>
+          {getInterfacePlatforms(lang).map(({ label, entries }) => (
+            <DetailsField key={label} title={label}>
+              {entries.length > 0 ? (
+                `${entries.length} language pack${entries.length > 1 ? 's' : ''}`
+              ) : (
+                <Deemphasized>Not available</Deemphasized>
+              )}
+            </DetailsField>
+          ))}
         </>
       );
     default:

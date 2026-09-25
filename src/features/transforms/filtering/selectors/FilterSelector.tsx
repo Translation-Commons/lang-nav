@@ -1,9 +1,5 @@
 import React from 'react';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
@@ -11,42 +7,79 @@ import LanguageSourceSelector from '@features/transforms/filtering/selectors/Lan
 import SearchCombobox from '@features/transforms/search/SearchCombobox';
 import TransformEnum from '@features/transforms/TransformEnum';
 
+import { LanguageScope } from '@entities/language/LanguageTypes';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+
+import EnumButtonsMultiSelect from '@shared/ui/EnumButtonsMultiSelect';
+
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import { getFilterTitle } from '../FilterLabels';
+
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
-import LanguageModalitySelector from './LanguageModalitySelector';
-import LanguageScopeSelector from './LanguageScopeSelector';
+import OrganizationFilterSelector from './OrganizationFilterSelector';
 import PopulationFilterSelector from './PopulationFilterSelector';
 import TerritoryFilterSelector from './TerritoryFilterSelector';
-import TerritoryScopeSelector from './TerritoryScopeSelector';
-import { LanguageISOStatusSelector } from './VitalitySelector';
 import WritingSystemFilterSelector from './WritingSystemFilterSelector';
 
 type Props = { field: Field };
 
 const FilterSelector: React.FC<Props> = ({ field }) => {
   switch (field) {
-    case Field.Language:
+    case Field.LanguageList:
       return <LanguageFilterSelector />;
     case Field.LanguageFamily:
       return <LanguageFamilyFilterSelector />;
-    case Field.Territory:
+    case Field.TerritoryList:
       return <TerritoryFilterSelector />;
     case Field.WritingSystem:
       return <WritingSystemFilterSelector />;
     case Field.Modality:
-      return <LanguageModalitySelector />;
+      return (
+        <EnumButtonsMultiSelect
+          paramKey="modalityFilter"
+          options={Object.values(LanguageModality).filter((v) => typeof v === 'number')}
+          getLabel={(o) => getModalityLabel(o) ?? ''}
+        />
+      );
     case Field.LanguageScope:
-      return <LanguageScopeSelector />;
+      return (
+        <EnumButtonsMultiSelect
+          paramKey="languageScopes"
+          options={Object.values(LanguageScope).filter((v) => typeof v === 'number')}
+          getLabel={(o) => getLanguageScopeLabel(o) ?? ''}
+        />
+      );
     case Field.TerritoryScope:
-      return <TerritoryScopeSelector />;
+      return (
+        <EnumButtonsMultiSelect
+          paramKey="territoryScopes"
+          options={Object.values(TerritoryScope).filter((v) => typeof v === 'number')}
+          getLabel={(o) => getTerritoryScopeLabel(o) ?? ''}
+        />
+      );
     case Field.ISOStatus:
-      return <LanguageISOStatusSelector />;
+      return (
+        <EnumButtonsMultiSelect
+          paramKey="isoStatus"
+          options={Object.values(LanguageISOStatus).filter((v) => typeof v === 'number')}
+          getLabel={(o) => getLanguageISOStatusLabel(o) ?? ''}
+        />
+      );
     case Field.Name:
       return <SearchCombobox />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
       return <LanguageSourceSelector />;
     case Field.Population:
       return <PopulationFilterSelector />;
+    case Field.Organization:
+      return <OrganizationFilterSelector />;
     default:
       return null;
   }
@@ -67,20 +100,26 @@ export const AllApplicableFilterSelectors: React.FC = () => {
   );
 
   return (
-    <SelectorDisplayProvider display={SelectorDisplay.FilterList}>
+    <div className="flex flex-col gap-2">
       {primaryFilters.map((filterBy) => (
-        <FilterSelector field={filterBy} key={filterBy} />
+        <div key={filterBy} className="mb-4">
+          <div>{getFilterTitle(filterBy, entType)}</div>
+          <FilterSelector field={filterBy} />
+        </div>
       ))}
       {otherFilters.length > 0 && (
         <details style={{ marginTop: '0.5em', fontSize: '0.8em' }}>
           <summary>Extra filters</summary>
           Entities shown on the page may be filtered by additional criteria.
           {otherFilters.map((filterBy) => (
-            <FilterSelector field={filterBy} key={filterBy} />
+            <div key={filterBy} className="mb-4">
+              <div className="font-bold">{getFilterTitle(filterBy, entType)}</div>
+              <FilterSelector field={filterBy} />
+            </div>
           ))}
         </details>
       )}
-    </SelectorDisplayProvider>
+    </div>
   );
 };
 

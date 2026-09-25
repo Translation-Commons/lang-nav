@@ -17,6 +17,7 @@ import {
   buildFilterByLanguageScope,
   buildFilterByLanguageSource,
   buildFilterByModality,
+  buildFilterByOrganization,
   buildFilterByTerritoryScope,
 } from './filterByEnum';
 import { buildFilterByPopulation } from './filterByRange';
@@ -37,6 +38,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     modalityFilter,
     populationMax,
     populationMin,
+    orgFilter,
     searchBy,
     searchString,
     territoryFilter,
@@ -74,6 +76,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     () => buildFilterByLanguageSource(languageSource),
     [languageSource],
   );
+  const filterByOrganization = useMemo(() => buildFilterByOrganization(orgFilter), [orgFilter]);
 
   // Vitality
   const filterByISOStatus = useMemo(() => buildFilterByISOStatus(isoStatus), [isoStatus]);
@@ -98,21 +101,24 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.ISOStatus]: filterByISOStatus,
 
       // Connections
-      [Field.Language]: filterByLanguage,
+      [Field.LanguageList]: filterByLanguage,
       [Field.LanguageFamily]: filterByLanguageFamily,
       [Field.WritingSystem]: filterByWritingSystem,
-      [Field.Territory]: filterByTerritory,
+      [Field.TerritoryList]: filterByTerritory,
       [Field.SourceForLanguage]: filterByLanguageSource,
+      [Field.Organization]: filterByOrganization,
 
       // Ranges
       [Field.Population]: filterByPopulation,
 
       // Filters not yet constructed
-      [Field.Region]: alwaysTrue, // TODO
-      [Field.Platform]: alwaysTrue, // TODO
-      [Field.OutputScript]: alwaysTrue, // TODO
-      [Field.Variant]: alwaysTrue, // TODO
-      [Field.SourceForPopulation]: alwaysTrue, // TODO
+      [Field.LanguagePrimary]: alwaysTrue,
+      [Field.TerritoryPrimary]: alwaysTrue,
+      [Field.Region]: alwaysTrue,
+      [Field.Platform]: alwaysTrue,
+      [Field.OutputScript]: alwaysTrue,
+      [Field.Variant]: alwaysTrue,
+      [Field.SourceForPopulation]: alwaysTrue,
 
       [Field.None]: alwaysTrue,
       [Field.Code]: alwaysTrue,

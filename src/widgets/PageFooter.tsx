@@ -11,12 +11,15 @@ import CreativeCommonsLicense from './CreativeCommonsLicense';
 
 const PageFooter: React.FC = () => {
   const { reset } = useConsent();
+
   return (
-    <footer>
-      <span>
+    <footer className=" shrink-0 w-full overflow-auto p-2 flex flex-row gap-2 text-muted-foreground items-center justify-between border-t text-xs">
+      <div>
         © {new Date().getFullYear()}{' '}
-        <ExternalLink href="https://translationcommons.org">Translation Commons</ExternalLink>.
-        Docs: <InternalLink page={LangNavPageName.About}>About</InternalLink> |{' '}
+        <ExternalLink href="https://translationcommons.org">Translation Commons</ExternalLink>
+      </div>
+      <div className="text-wrap">
+        <InternalLink page={LangNavPageName.About}>About</InternalLink> |{' '}
         <InternalLink page={LangNavPageName.TermsOfUse}>Terms of Use</InternalLink> |{' '}
         <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink> |{' '}
         <a
@@ -32,9 +35,10 @@ const PageFooter: React.FC = () => {
         >
           Cookie settings
         </a>
-        .
-      </span>
-      <CreativeCommonsLicense />
+      </div>
+      <div>
+        <CreativeCommonsLicense />
+      </div>
     </footer>
   );
 };

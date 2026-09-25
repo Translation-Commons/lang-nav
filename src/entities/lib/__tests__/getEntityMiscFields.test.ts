@@ -14,7 +14,7 @@ import {
   getDepth,
   getEntityDate,
   getEntityLiteracy,
-  getEntityMostImportantLanguageName,
+  getEntityMostImportantLanguage,
 } from '@entities/lib/getEntityMiscFields';
 
 const mockedEnts = getFullyInstantiatedMockedEntities();
@@ -50,10 +50,13 @@ describe('getEntityLiteracy', () => {
   });
 });
 
-describe('getEntityMostImportantLanguageName', () => {
+describe('getEntityMostImportantLanguage', () => {
   it('returns most important language name for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityMostImportantLanguageName(ent)]),
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getEntityMostImportantLanguage(ent)?.nameDisplay,
+      ]),
     );
     expect(results).toEqual({
       '001': 'Sindarin',
@@ -76,7 +79,7 @@ describe('getEntityMostImportantLanguageName', () => {
       sjn_Teng_BE: 'Sindarin',
       sjn_ER: 'Sindarin',
       sjn_BE: 'Sindarin',
-      tolkorth: 'Sindarin',
+      tolkorth: undefined,
     });
   });
 });

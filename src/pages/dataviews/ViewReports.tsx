@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 
-import NavTabs from '@widgets/controls/NavTabs';
 import getReportIDsForEntityType from '@widgets/reports/getReportIDsForEntityType';
 import Report from '@widgets/reports/Report';
 import ReportID from '@widgets/reports/ReportID';
-import ReportLabels from '@widgets/reports/ReportLabels';
+import ReportSelector from '@widgets/reports/ReportSelector';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -20,22 +19,16 @@ const ViewReports: React.FC = () => {
   );
   const currentReportID = useMemo(() => {
     if (reportID && reportIDs.includes(reportID)) return reportID;
-    return reportIDs[0];
+    return ReportID.None;
   }, [reportID, reportIDs]);
 
   return (
-    <div
-      data-testid="reports-view"
-      style={{ textAlign: 'start', display: 'flex', flexDirection: 'column', gap: '1em' }}
-    >
-      <NavTabs
-        label="Reports:"
-        options={reportIDs.map((reportID) => ({
-          urlParams: { reportID },
-          label: ReportLabels[reportID],
-        }))}
-      />
-      <Report reportID={currentReportID} />
+    <div data-testid="reports-view" className="text-left">
+      {currentReportID ? (
+        <Report reportID={currentReportID} />
+      ) : (
+        <ReportSelector variant="Buttons" />
+      )}
     </div>
   );
 };

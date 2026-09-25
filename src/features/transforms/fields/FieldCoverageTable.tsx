@@ -4,7 +4,6 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import ZIndex from '@features/layers/ZIndex';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
@@ -26,8 +25,8 @@ const FieldCoverageTable: React.FC = () => {
   const [showColorBars, setShowColorBars] = React.useState(false);
 
   return (
-    <>
-      <table style={{ borderCollapse: 'collapse' }}>
+    <div className="text-xs relative max-h-150 overflow-auto">
+      <table>
         <colgroup>
           <col span={2} />
           <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
@@ -35,14 +34,7 @@ const FieldCoverageTable: React.FC = () => {
           <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
           <col span={entTypes.length} style={{ borderRight: '2px solid transparent' }} />
         </colgroup>
-        <thead
-          style={{
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'var(--color-background)',
-            zIndex: ZIndex.TableStickyRow,
-          }}
-        >
+        <thead className="sticky top-0 bg-background z-10">
           <tr>
             <th colSpan={3}>Field</th>
             <th colSpan={transforms.length}>Capabilities</th>
@@ -118,7 +110,7 @@ const FieldCoverageTable: React.FC = () => {
           it&apos;s always 1 or it&apos;s the same as another field)
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

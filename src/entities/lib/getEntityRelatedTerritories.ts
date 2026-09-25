@@ -32,17 +32,17 @@ import { uniqueBy } from '@shared/lib/setUtils';
  *
  * Sorting matters. The first territory should be the most relevant one.
  * Languages: The first are the biggest countries, then the regions or dependencies
- * Territories: The first is the territory itself, then the regions that contain it
+ * Territories: Goes from the regions that contain it down to the territory itself
  */
 export function getContainingTerritories(ent: EntityData): TerritoryData[] {
   switch (ent.type) {
     case EntityType.Territory:
       return [
-        ent,
         ...getEntityParents(ent).filter(
           (t): t is TerritoryData => t?.type === EntityType.Territory,
         ),
         ent.sovereign,
+        ent,
       ].filter((t) => t != null);
     case EntityType.Locale:
       return [ent.territory].filter((t) => t != null);

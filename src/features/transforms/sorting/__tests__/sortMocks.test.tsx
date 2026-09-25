@@ -402,9 +402,9 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: Language', () => {
+  it('sortBy: Language Primary', () => {
     const ents = Object.values(mockedEnts) as EntityData[];
-    const sort = getSortFunctionParameterized(Field.Language, SortBehavior.Normal);
+    const sort = getSortFunctionParameterized(Field.LanguagePrimary, SortBehavior.Normal);
     expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'dori0123', // Doriathrin
       'dori0123_ER',
@@ -419,11 +419,40 @@ describe('getSortByParameterized', () => {
       'sjn_ER',
       'Teng',
       'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      // All below have no associated language, stable to input order
+      'HA',
+      'AM',
+      'be0590',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: Language List', () => {
+    const ents = Object.values(mockedEnts) as EntityData[];
+    const sort = getSortFunctionParameterized(Field.LanguageList, SortBehavior.Normal);
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
+      'dori0123_ER', // Doriathrin
+      'dori0123_123',
+      'dori0123_001',
+      'sjn',
+      'BE',
+      'sjn_BE',
+      'sjn_ER',
+      'sjn_Teng_BE',
       'tolkorth',
       'sjn_123',
       'sjn_Teng_123',
       'sjn_001',
       'sjn_Teng_001',
+      '123', // Sindarin, Doriathrin
+      'dori0123',
+      'ER',
+      '001',
+      'Teng',
       // All below have no associated language, stable to input order
       'HA',
       'AM',
@@ -461,9 +490,9 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: Territory', () => {
+  it('sortBy: TerritoryPrimary', () => {
     const ents = Object.values(mockedEnts) as EntityData[];
-    const sort = getSortFunctionParameterized(Field.Territory, SortBehavior.Normal);
+    const sort = getSortFunctionParameterized(Field.TerritoryPrimary, SortBehavior.Normal);
     expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'AM', // Aman
       '001', // Arda
@@ -483,6 +512,35 @@ describe('getSortByParameterized', () => {
       'HA', // Harad
       '123', // Middle Earth
       'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      // All below have no associated territory, stable to input order
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: TerritoryList', () => {
+    const ents = Object.values(mockedEnts) as EntityData[];
+    const sort = getSortFunctionParameterized(Field.TerritoryList, SortBehavior.Normal);
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
+      '001', // Arda
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      'AM', // Arda > Aman
+      '123', // Arda > Middle Earth
+      'BE', // Arda > Middle Earth > Beleriand
+      'ER', // Arda > Middle Earth > Eriador
+      'HA', // Arda > Middle Earth > Harad
+      'be0590', // Beleriand
+      'sjn_BE',
+      'sjn_Teng_BE',
+      'Teng',
+      'sjn', // Eriador
+      'sjn_ER',
+      'dori0123_ER',
+      'dori0123',
+      'sjn_123', // Middle Earth
       'sjn_Teng_123',
       'dori0123_123',
       // All below have no associated territory, stable to input order

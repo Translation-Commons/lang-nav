@@ -1,4 +1,4 @@
-import { ChevronRightIcon, CopyIcon } from 'lucide-react';
+import { ChevronRightIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { PageParamsContext } from '@features/params/PageParamsContext';
@@ -6,6 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { reactNodeToString } from '@shared/lib/stringExportUtils';
 import { Button } from '@shared/ui/button';
+import CopyButton from '@shared/ui/CopyButton';
 
 type FieldProps = React.PropsWithChildren<{
   label: string;
@@ -31,13 +32,13 @@ const DrawerDetailsField: React.FC<FieldProps> = ({
         {expandedContent}
       </>
     );
-  const copy = useCallback(() => {
-    navigator.clipboard.writeText(
+  const getText = useCallback(
+    () =>
       reactNodeToString(
         <PageParamsContext.Provider value={pageParams}>{children}</PageParamsContext.Provider>,
       ),
-    );
-  }, [children, pageParams]);
+    [children, pageParams],
+  );
 
   return (
     <div>
@@ -54,9 +55,7 @@ const DrawerDetailsField: React.FC<FieldProps> = ({
             <div className={!hasData ? 'text-muted-foreground italic' : ''}>{children ?? '—'}</div>
             {hasData && (
               <div onClick={(e) => e.stopPropagation()}>
-                <Button onClick={copy} variant="ghost" size="icon-sm" className="p-1">
-                  <CopyIcon />
-                </Button>
+                <CopyButton getTextToCopy={getText} variant="ghost" />
                 {expandedContent && (
                   <Button
                     onClick={() => setIsExpanded((prev) => !prev)}

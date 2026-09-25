@@ -1,75 +1,29 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { numberToSigFigs } from '@shared/lib/numberUtils';
-import { convertAlphaToNumber } from '@shared/lib/stringUtils';
-
 import Field from '../fields/Field';
 import getField from '../fields/getField';
-import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
+import useNormalizedValues, { NormalizingFunctions } from '../useNormalizedValues';
 
 import { getColorGradientFunction } from './getColorGradientFunction';
 
 type Props = { ents: EntityData[]; colorBy?: Field };
 
-export type ColoringFunctions = {
+export type ColoringFunctions = NormalizingFunctions & {
   colorBy: Field;
   getColor: (ent: EntityData) => string | undefined;
-  getNormalizedValue: (value: number) => number;
-  getDenormalizedValue: (normalized: number) => number;
-  maxValue: number;
-  minValue: number;
 };
 
 const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions => {
-  const { colorBy: colorByParam, colorGradient, populationMin } = usePageParams();
+  const { colorBy: colorByParam, colorGradient } = usePageParams();
   const colorBy = colorByInput ?? colorByParam ?? Field.None;
+  const normalizingFunctions = useNormalizedValues({ ents, field: colorBy });
 
-  const minValue = getMinimumValue(colorBy, populationMin);
-  const maxValue = useMemo(() => getMaximumValue(ents, colorBy), [ents, colorBy]);
-  const shouldUseLogScale = shouldUseLogarithmicScale(colorBy);
-  const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;
   const applyColorGradient = getColorGradientFunction(colorGradient);
-
-  const getNormalizedValue = useCallback(
-    (value: number | string): number => {
-      let numericValue: number;
-      if (typeof value === 'number') {
-        numericValue = value;
-      } else {
-        numericValue = convertAlphaToNumber(value);
-      }
-
-      if (maxValue === minValue) return 1; // avoid division by zero
-      if (numericValue > maxValue) return 1;
-
-      // eg. shift to 0-based, eg. -180..+180  =>  0..360
-      numericValue -= minValue;
-      if (numericValue <= 0) return 0;
-      if (shouldUseLogScale) return Math.log10(numericValue) / range;
-      return numericValue / range;
-    },
-    [colorBy, minValue, maxValue, range, shouldUseLogScale],
-  );
-
-  const getDenormalizedValue = useCallback(
-    (normalized: number): number => {
-      let denormalized: number;
-      if (shouldUseLogScale) {
-        denormalized = Math.pow(10, normalized * range);
-      } else {
-        denormalized = normalized * range;
-      }
-      denormalized += minValue;
-      denormalized = numberToSigFigs(denormalized, 3);
-      // Rounding because JS precision may lead to insignificant trailing decimals
-      return denormalized > 1000 ? Math.round(denormalized) : denormalized;
-    },
-    [minValue, range, shouldUseLogScale],
-  );
+  const { getNormalizedValue } = normalizingFunctions;
 
   const getColor = useCallback(
     (ent: EntityData): string | undefined => {
@@ -84,34 +38,10 @@ const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions =>
   );
 
   return {
+    ...normalizingFunctions,
     colorBy,
     getColor,
-    getNormalizedValue,
-    getDenormalizedValue,
-    maxValue,
-    minValue,
   };
 };
 
 export default useColors;
-
-function shouldUseLogarithmicScale(colorBy: Field): boolean {
-  switch (colorBy) {
-    case Field.Population:
-    case Field.PopulationDirectlySourced:
-    case Field.PopulationWriting:
-    case Field.PopulationOfDescendants:
-    case Field.PopulationPercentInBiggestDescendantLanguage:
-    case Field.CountOfLanguages:
-    case Field.CountOfKeyboards:
-    case Field.CountOfWritingSystems:
-    case Field.CountOfCountries:
-    case Field.CountOfChildTerritories:
-    case Field.CountOfCensuses:
-    case Field.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
-    case Field.Area:
-      return true;
-    default:
-      return false;
-  }
-}

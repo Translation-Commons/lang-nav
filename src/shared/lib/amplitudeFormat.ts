@@ -103,13 +103,14 @@ const NUMERIC_ENUM_BY_KEY: Record<string, Record<number, string>> = {
 // Builds the explore_sort_changed `sort` array, e.g. ['population_desc', 'name_asc'].
 export function buildSortKeys(
   sortBy: Field,
-  secondarySortBy: Field | undefined,
+  secondarySortBy: Field,
   sortBehavior: SortBehavior,
+  secondarySortBehavior: SortBehavior,
 ): string[] {
   const keys: string[] = [];
   if (sortBy && sortBy !== Field.None) keys.push(toSortKey(sortBy, sortBehavior));
   if (secondarySortBy && secondarySortBy !== Field.None && secondarySortBy !== sortBy) {
-    keys.push(toSortKey(secondarySortBy, sortBehavior));
+    keys.push(toSortKey(secondarySortBy, secondarySortBehavior));
   }
   return keys;
 }

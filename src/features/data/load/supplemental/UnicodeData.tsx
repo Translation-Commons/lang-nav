@@ -8,7 +8,8 @@ import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
+import { CLDRCoverageImport } from '@entities/types/CLDRTypes';
+import { parseCoverageLevel } from '@entities/ui/CLDRCoverageLevels';
 
 import { DataContextType } from '../../context/useDataContext';
 
@@ -251,8 +252,8 @@ function parseCLDRCoverageLine(line: string): CLDRCoverageImport {
     scriptDefaultCode: parts[3],
     territoryDefaultCode: parts[4],
     countOfCLDRLocales: Number.parseInt(parts[5]),
-    targetCoverageLevel: parts[6] !== '' ? (parts[6] as CLDRCoverageLevel) : CLDRCoverageLevel.Core,
-    actualCoverageLevel: parts[8] !== '' ? (parts[8] as CLDRCoverageLevel) : CLDRCoverageLevel.Core,
+    targetCoverageLevel: parseCoverageLevel(parts[6]),
+    actualCoverageLevel: parseCoverageLevel(parts[8]),
     inICU: parts[9] === 'ICU',
     percentOfValuesConfirmed: Number.parseFloat(parts[10]),
     percentOfModernValuesComplete: Number.parseFloat(parts[11]),

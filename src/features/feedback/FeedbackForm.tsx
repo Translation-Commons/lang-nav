@@ -11,16 +11,20 @@ const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6';
 export function FeedbackForm() {
   return (
     <Popover>
-      <PopoverTrigger>
-        <Button
-          aria-label="View settings"
-          className="py-2 rounded-md h-full text-md font-light hover:bg-accent/10 "
-        >
-          <div className="hidden md:inline">Feedback</div>
-          <MessageCircleQuestionMarkIcon className="inline md:hidden" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="flex flex-col gap-1 w-[300px] p-4">
+      <PopoverTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            aria-label="Feedback"
+            className="gap-1.5 lg:w-auto lg:px-2.5"
+          >
+            <MessageCircleQuestionMarkIcon />
+            <span className="hidden lg:inline">Feedback</span>
+          </Button>
+        }
+      />
+      <PopoverContent align="end" className="flex flex-col gap-1 w-[300px] p-4">
         <label>Tell us about your goals, rate our data, and help us build better futures.</label>
         <LinkButton href={SURVEY_LINK} title="Submit a Google survey">
           <MessageSquareTextIcon />

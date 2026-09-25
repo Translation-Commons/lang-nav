@@ -24,6 +24,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.Latitude:
     case Field.Area:
     case Field.UnicodeVersion:
+    case Field.DigitalSupport:
       return TableValueType.Decimal;
 
     case Field.Date:
@@ -42,14 +43,17 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
-    case Field.Language:
+    case Field.LanguagePrimary:
+    case Field.LanguageList:
     case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
+    case Field.TerritoryPrimary:
+    case Field.TerritoryList:
     case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
     case Field.Variant:
+    case Field.Organization:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:
@@ -69,7 +73,6 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.HistoricPresence:
     case Field.LanguageFormedHere:
     case Field.CLDRCoverage:
-    case Field.DigitalSupport:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
       return TableValueType.Enum;
