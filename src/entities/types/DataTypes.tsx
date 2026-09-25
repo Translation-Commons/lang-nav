@@ -7,10 +7,10 @@ import { EntityType } from '@features/params/PageParamTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
+import { Orthography } from '@entities/orthography/OrthographyTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
-
 import { CensusData } from '../census/CensusTypes';
 import { LanguageData } from '../language/LanguageTypes';
 
@@ -29,6 +29,7 @@ export type EntityData =
   | LocaleData
   | TerritoryData
   | WritingSystemData
+  | Orthography
   | VariantData
   | KeyboardData
   | OrganizationData;

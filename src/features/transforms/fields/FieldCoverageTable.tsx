@@ -129,6 +129,7 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<EntityTy
     [EntityType.Locale]: useEntities(EntityType.Locale),
     [EntityType.Territory]: useEntities(EntityType.Territory),
     [EntityType.WritingSystem]: useEntities(EntityType.WritingSystem),
+    [EntityType.Orthography]: useEntities(EntityType.Orthography),
     [EntityType.Census]: useEntities(EntityType.Census),
     [EntityType.Variant]: useEntities(EntityType.Variant),
     [EntityType.Keyboard]: useEntities(EntityType.Keyboard),

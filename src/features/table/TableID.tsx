@@ -20,6 +20,7 @@ enum TableID {
   VariantAnnotation, // 14
   LanguageScopeIssues, // 15
   LanguagePlurals, // 16
+  Orthographies, // 17
 }
 
 export default TableID;

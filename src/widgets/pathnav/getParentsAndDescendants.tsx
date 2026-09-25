@@ -20,6 +20,8 @@ export function getEntityParents(
       return [...getEntityParents(ent.parentUNRegion, depth + 1), ent.parentUNRegion];
     case EntityType.WritingSystem:
       return [ent.parentWritingSystem];
+    case EntityType.Orthography:
+      return [ent.language];
     case EntityType.Variant:
       return [ent.languages[0]];
     case EntityType.Keyboard:
@@ -47,6 +49,8 @@ export function getEntityChildren(ent?: EntityData): (EntityData | undefined)[] 
       return [...(ent.containsTerritories ?? []), ...(ent.dependentTerritories ?? [])];
     case EntityType.WritingSystem:
       return ent.childWritingSystems ?? [];
+    case EntityType.Orthography:
+      return [];
     case EntityType.Variant:
       return ent.locales;
     case EntityType.Keyboard:
@@ -97,6 +101,8 @@ export function getDescendantsName(ent: EntityData, count: number): string {
       }
     case EntityType.WritingSystem:
       return 'child writing system' + (count > 1 ? 's' : '');
+    case EntityType.Orthography:
+      return 'orthography' + (count > 1 ? 's' : '');
     case EntityType.Variant:
       return 'locale' + (count > 1 ? 's' : '');
     case EntityType.Keyboard:

@@ -25,6 +25,7 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
       ];
     case EntityType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];
+    case EntityType.Orthography:
     case EntityType.Census:
       return [ReportID.CensusCountries, ReportID.CensusInputTool];
     case EntityType.Variant:

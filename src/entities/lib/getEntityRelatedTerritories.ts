@@ -69,6 +69,8 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
           .filter((t): t is TerritoryData => t != null),
         (t) => t.ID,
       );
+    case EntityType.Orthography:
+      return ent.language ? getContainingTerritories(ent.language) : [];
     case EntityType.Variant:
       return getChildTerritoriesInEntity(ent) ?? [];
     case EntityType.Keyboard:
@@ -112,8 +114,8 @@ function getLocaleCountryLocales(locale: LocaleData): LocaleData[] {
   return locale.territory && locale.territory.scope === TerritoryScope.Country
     ? [locale]
     : (locale.relatedLocales?.childTerritories?.flatMap(getLocaleCountryLocales) ?? []).sort(
-        sortByPopulation,
-      );
+      sortByPopulation,
+    );
 }
 
 function getLocaleCountries(locale: LocaleData): TerritoryData[] {
@@ -196,6 +198,8 @@ export function getEntityLocales(ent: EntityData): LocaleData[] {
       return ent.locales;
     case EntityType.WritingSystem:
       return getWritingSystemLocales(ent);
+    case EntityType.Orthography:
+      return ent.language?.locales ?? [];
     case EntityType.Variant:
       return ent.locales;
     case EntityType.Keyboard:

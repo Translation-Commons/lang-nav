@@ -10,6 +10,7 @@ import getKeyboardColumns from './KeyboardColumns';
 import getLanguageColumns from './LanguageColumns';
 import getLocaleColumns from './LocaleColumns';
 import getOrganizationColumns from './OrganizationColumns';
+import getOrthographyColumns from './OrthographyColumns';
 import getTerritoryColumns from './TerritoryColumns';
 import getVariantColumns from './VariantColumns';
 import getWritingSystemColumns from './WritingSystemColumns';
@@ -24,6 +25,8 @@ function getEntityMainTableColumns(entType: EntityType): TableColumn<EntityData>
       return getTerritoryColumns() as TableColumn<EntityData>[];
     case EntityType.WritingSystem:
       return getWritingSystemColumns() as TableColumn<EntityData>[];
+    case EntityType.Orthography:
+      return getOrthographyColumns() as TableColumn<EntityData>[];
     case EntityType.Variant:
       return getVariantColumns() as TableColumn<EntityData>[];
     case EntityType.Keyboard:
