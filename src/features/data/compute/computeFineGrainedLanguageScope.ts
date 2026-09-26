@@ -19,8 +19,15 @@ const REASSIGNABLE_SCOPES = [
  * Other corrections should be done directly with `languageScopeOverrides.tsv`
  */
 function computeFineGrainedLanguageScope(languages: LanguageData[]): void {
-  // For each language family root
-  languages.filter((lang) => !lang.parentLanguage).forEach((lang) => computeScopeRecursively(lang));
+  // For each language family root. Uses Combined links, not the active source's, so the result
+  // does not depend on the source the page loaded with.
+  languages
+    .filter((lang) => !lang.Combined.parentLanguage)
+    .forEach((lang) => computeScopeRecursively(lang));
+}
+
+function getCombinedScope(lang: LanguageData): LanguageScope | undefined {
+  return lang.Combined.scope ?? lang.scope;
 }
 
 function computeScopeRecursively(lang: LanguageData, depth: number = 0): LanguageScope | undefined {
@@ -41,7 +48,7 @@ function computeScopeRecursively(lang: LanguageData, depth: number = 0): Languag
   );
 
   // Look for the highest scope found among the child languages (used to determine if node should be intermediate or dialect)
-  if (lang.scope === LanguageScope.Intermediate) {
+  if (getCombinedScope(lang) === LanguageScope.Intermediate) {
     const highestChildScope = childScopes?.reduce(
       (prev, curr) => (curr && (!prev || curr > prev) ? curr : prev),
       undefined,
@@ -53,25 +60,27 @@ function computeScopeRecursively(lang: LanguageData, depth: number = 0): Languag
   }
 
   // Return this languoid's scope
-  return lang.scope;
+  return getCombinedScope(lang);
 }
 
 // LangNav breaks down the language scope into more fine-grained labels to account for differences in standards
 function reassignLanguageScope(lang: LanguageData): void {
-  if (!!lang.scope && !REASSIGNABLE_SCOPES.includes(lang.scope)) return;
+  const scope = getCombinedScope(lang);
+  if (!!scope && !REASSIGNABLE_SCOPES.includes(scope)) return;
 
   // Reassign the scope of the language
-  const parentScope = lang.parentLanguage?.scope;
+  const parent = lang.Combined.parentLanguage;
+  const parentScope = parent && getCombinedScope(parent);
   let newScope: LanguageScope | undefined;
   switch (parentScope ?? LanguageScope.BroadGrouping) {
     case LanguageScope.BroadGrouping:
-      if (lang.scope === LanguageScope.Subfamily) newScope = LanguageScope.Family;
+      if (scope === LanguageScope.Subfamily) newScope = LanguageScope.Family;
       break;
     case LanguageScope.Family:
-      if (lang.scope === LanguageScope.Family) newScope = LanguageScope.Subfamily;
+      if (scope === LanguageScope.Family) newScope = LanguageScope.Subfamily;
       break;
     case LanguageScope.Subfamily:
-      if (lang.scope !== LanguageScope.Dialect) newScope = LanguageScope.Subfamily;
+      if (scope !== LanguageScope.Dialect) newScope = LanguageScope.Subfamily;
       break;
     case LanguageScope.Macrolanguage:
     case LanguageScope.Intermediate:

@@ -66,7 +66,8 @@ function updateEntityNamesAndCodes(
     const specific = lang[languageSource];
     lang.codeDisplay = specific?.code ?? lang.ID;
     lang.nameDisplay = specific?.name ?? lang.nameCanonical;
-    lang.scope = specific?.scope ?? lang.scope;
+    // Out-of-source languages fall back to Combined, not to the previous source's leftover scope.
+    lang.scope = specific?.scope ?? lang[LanguageSource.Combined]?.scope ?? lang.scope;
   });
 
   // Update locales too, their codes and their names
