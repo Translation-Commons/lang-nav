@@ -1,19 +1,21 @@
 import { SearchIcon } from 'lucide-react';
 import React, { useState } from 'react';
 
+import DetailsRow from '@widgets/details/ui/DetailsRow';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+import DetailsStatContainer from '@widgets/details/ui/DetailsStatContainer';
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
-import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
-import { LocaleData } from '@entities/locale/LocaleTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { Toggle } from '@shared/ui/toggle';
-import '../details.css';
+
+import LocaleCensusCitation from './LocaleCensusCitation';
+import LocalePopulationBreakdown from './LocalePopulationBreakdown';
+import { LocaleData } from './LocaleTypes';
 
 const LocaleDetailsPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { pop } = locale;
@@ -24,7 +26,7 @@ const LocaleDetailsPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <>
-      <div className="DetailsRow">
+      <DetailsRow>
         <MajorPopulationBox
           locale={locale}
           focus={PopulationFocus.Speaking}
@@ -37,7 +39,7 @@ const LocaleDetailsPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) =
           toggleBreakdown={toggleBreakdown}
           showBreakdown={showBreakdown}
         />
-      </div>
+      </DetailsRow>
     </>
   );
 };
@@ -75,7 +77,7 @@ const MajorPopulationBox: React.FC<{
         {pop.adjusted == null ? (
           <Deemphasized>No population data available.</Deemphasized>
         ) : (
-          <div className="DetailsStatContainer">
+          <DetailsStatContainer>
             <DetailsStatBlock
               label={
                 <>
@@ -86,7 +88,7 @@ const MajorPopulationBox: React.FC<{
             >
               <CountOfPeople count={pop.adjusted} />
             </DetailsStatBlock>
-          </div>
+          </DetailsStatContainer>
         )}
       </DetailsSection>
     </div>

@@ -1,18 +1,18 @@
 import React, { useMemo } from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import TableOfLanguagesInCensus from '@widgets/tables/TableOfLanguagesInCensus';
+
 import { useDataContext } from '@features/data/context/useDataContext';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
-import { CensusData } from '@entities/census/CensusTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
-import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
-
-import CensusPopulationCharacteristics from './sections/CensusPopulationCharacteristics';
-import CensusPrimarySection from './sections/CensusPrimarySection';
-import CensusSourceSection from './sections/CensusSourceSection';
-import DetailsSection from './ui/DetailsSection';
+import CensusPopulationCharacteristics from './CensusPopulationCharacteristics';
+import CensusPrimarySection from './CensusPrimarySection';
+import CensusSourceSection from './CensusSourceSection';
+import { CensusData } from './CensusTypes';
 
 type Props = {
   census: CensusData;

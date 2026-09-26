@@ -4,11 +4,10 @@ import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
-
 import Highlightable from '@shared/ui/Highlightable';
 
 import { getLocaleName } from './LocaleStrings';
+import { LocaleData } from './LocaleTypes';
 
 const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { territoryFilter, languageFilter, searchBy, searchString } = usePageParams();

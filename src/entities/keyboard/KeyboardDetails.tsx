@@ -1,14 +1,14 @@
 import React from 'react';
 
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import DetailsField from './ui/DetailsField';
-import DetailsSection from './ui/DetailsSection';
+import { KeyboardData } from './KeyboardTypes';
 
 type Props = {
   keyboard: KeyboardData;

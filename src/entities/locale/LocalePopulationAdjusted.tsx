@@ -3,12 +3,12 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
-import { LocaleData } from '@entities/locale/LocaleTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
+import { LocaleData } from './LocaleTypes';
 
 type Props = {
   locale: LocaleData;

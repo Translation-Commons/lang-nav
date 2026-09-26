@@ -1,16 +1,16 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-
-import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
 
-import DetailsField from './ui/DetailsField';
-import DetailsSection from './ui/DetailsSection';
+import { VariantData } from './VariantTypes';
 
 type Props = {
   variant: VariantData;

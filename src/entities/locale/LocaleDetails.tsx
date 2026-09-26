@@ -6,11 +6,6 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import LocaleIndigeneityDisplay, {
-  getIndigeneityDescription,
-} from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import EntityWikipediaInfo from '@entities/ui/EntityWikipediaInfo';
 
 import { Badge } from '@shared/ui/badge';
@@ -19,8 +14,13 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLocaleSourceLabel } from '@strings/LocaleSourceStrings';
 
-import LocaleDetailsCensuses from './sections/LocaleDetailsCensuses';
-import LocaleDetailsPopulation from './sections/LocaleDetailsPopulation';
+import LocaleDetailsCensuses from './LocaleDetailsCensuses';
+import LocaleDetailsPopulation from './LocaleDetailsPopulation';
+import { getOfficialLabel } from './LocaleStrings';
+import { LocaleData } from './LocaleTypes';
+import LocaleIndigeneityDisplay, {
+  getIndigeneityDescription,
+} from './localstatus/LocaleIndigeneityDisplay';
 
 type Props = {
   locale: LocaleData;

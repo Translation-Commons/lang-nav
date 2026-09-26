@@ -5,10 +5,11 @@ import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
-import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { LocaleData, PopulationSourceCategory } from './LocaleTypes';
 
 type Props = {
   locale: LocaleData;

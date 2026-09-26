@@ -7,13 +7,12 @@ import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerri
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
-
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import TerritoryAttributes from '../../entities/territory/TerritoryAttributes';
-import TerritoryIdentification from '../../entities/territory/TerritoryIdentification';
-import TerritoryLocation from '../../entities/territory/TerritoryLocation';
+import TerritoryAttributes from './TerritoryAttributes';
+import TerritoryIdentification from './TerritoryIdentification';
+import TerritoryLocation from './TerritoryLocation';
+import { TerritoryData } from './TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

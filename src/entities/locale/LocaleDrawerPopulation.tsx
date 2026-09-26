@@ -4,15 +4,15 @@ import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 import DrawerDetailsSection from '@widgets/details/ui/DrawerDetailsSection';
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
-import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
-import { LocaleData } from '@entities/locale/LocaleTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import LocaleCensusCitation from './LocaleCensusCitation';
+import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 import LocalePopulationRecords from './LocalePopulationRecords';
+import { LocaleData } from './LocaleTypes';
 
 const LocaleDrawerPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { pop } = locale;

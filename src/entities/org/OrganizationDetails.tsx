@@ -2,6 +2,8 @@ import React from 'react';
 
 import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
@@ -9,13 +11,10 @@ import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-
 import ExternalLink from '@shared/ui/ExternalLink';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
-import DetailsField from './ui/DetailsField';
-import DetailsSection from './ui/DetailsSection';
+import { OrganizationData } from './OrganizationTypes';
 
 type Props = {
   org: OrganizationData;

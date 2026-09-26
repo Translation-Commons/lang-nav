@@ -2,14 +2,17 @@ import React from 'react';
 
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+import DetailsStatContainer from '@widgets/details/ui/DetailsStatContainer';
 
-import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { LanguageData } from '@entities/language/LanguageTypes';
 import { getStatusColor } from '@entities/ui/EntityWikipediaInfo';
 
 import { Badge } from '@shared/ui/badge';
 import CountCompact from '@shared/ui/CountCompact';
 import ExternalLink from '@shared/ui/ExternalLink';
+
+import { LanguageData } from '../LanguageTypes';
+
+import { WikipediaStatus } from './DigitalSupportTypes';
 
 const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { wikipedias } = lang;
@@ -32,7 +35,7 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
           <ExternalLink href={'http://' + wikipedia.url}>{wikipedia.url}</ExternalLink>
         )}
       </div>
-      <div className="DetailsStatContainer">
+      <DetailsStatContainer>
         <DetailsStatBlock label="Articles">
           {isActive && wikipedia ? (
             <CountCompact count={wikipedia.articles} />
@@ -47,7 +50,7 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
             <NotApplicableDisplay />
           )}
         </DetailsStatBlock>
-      </div>
+      </DetailsStatContainer>
     </DetailsSection>
   );
 };

@@ -1,4 +1,4 @@
-import { ECRMLProtectionLevel, LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
+import { ECRMLProtectionLevel, LocaleData, OfficialStatus } from './LocaleTypes';
 
 export function getLocaleName(
   locale: LocaleData,

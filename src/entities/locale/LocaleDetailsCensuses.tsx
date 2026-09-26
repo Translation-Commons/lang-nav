@@ -2,10 +2,8 @@ import React from 'react';
 
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import LocalePopulationRecords from '@entities/locale/LocalePopulationRecords';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-
-import '../details.css';
+import LocalePopulationRecords from './LocalePopulationRecords';
+import { LocaleData } from './LocaleTypes';
 
 const LocaleDetailsCensuses: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { censusRecords, pop } = locale;

@@ -1,9 +1,9 @@
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { CensusData } from '@entities/census/CensusTypes';
-
-import DetailsField from '../ui/DetailsField';
-import DetailsSection from '../ui/DetailsSection';
+import { CensusData } from './CensusTypes';
 
 function CensusPrimarySection({ census }: { census: CensusData }) {
   const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, languageUse } = census;
