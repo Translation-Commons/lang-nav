@@ -11,7 +11,6 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import VariantDetails from '@entities/variant/VariantDetails';
 import WritingSystemDetails from '@entities/writingsystem/WritingSystemDetails';
 
-
 // You can get the details by an entity or just its ID
 type Props = { ent?: EntityData; entID?: string };
 
