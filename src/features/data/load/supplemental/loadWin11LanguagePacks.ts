@@ -1,5 +1,5 @@
 import { isIgnoredLanguageCode } from '@entities/census/parseCensusLanguageRow';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 /**
  * Load Windows 11 language pack availability data.

@@ -3,11 +3,12 @@ import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import LanguageOtherNames from '@entities/language/identity/LanguageOtherNames';
-import { LanguageData } from '@entities/language/LanguageTypes';
-
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
+
+import type { LanguageData } from '../LanguageTypes';
+
+import LanguageOtherNames from './LanguageOtherNames';
 
 const LanguageNameColumns: TableColumn<LanguageData>[] = [
   { ...NameColumn, isInitiallyVisible: true },

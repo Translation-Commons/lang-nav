@@ -1,6 +1,6 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 type DrawableData = TerritoryData | LanguageData | LocaleData;
 

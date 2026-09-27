@@ -8,10 +8,11 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { getEntityPercentOfTerritoryPopulation } from '@entities/lib/getEntityPopulation';
 
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { CensusCollectorType, CensusData } from './CensusTypes';
 
 function getCensusColumns(): TableColumn<CensusData>[] {
   return [

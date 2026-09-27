@@ -1,4 +1,4 @@
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 function getTerritoryDescendants(
   territory: TerritoryData,

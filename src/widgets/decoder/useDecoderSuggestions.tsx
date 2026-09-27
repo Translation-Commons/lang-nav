@@ -7,7 +7,7 @@ import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { anyWordStartsWith } from '@shared/lib/stringUtils';

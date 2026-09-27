@@ -10,7 +10,7 @@ import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 export const LocaleHierarchy: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();

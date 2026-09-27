@@ -14,7 +14,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
-import { VariantData } from './VariantTypes';
+import type { VariantData } from './VariantTypes';
 
 interface Props {
   data: VariantData;

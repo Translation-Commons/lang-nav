@@ -8,7 +8,7 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
-import { VariantData } from './VariantTypes';
+import type { VariantData } from './VariantTypes';
 
 export const VariantHierarchy: React.FC = () => {
   const { variants } = useDataContext();

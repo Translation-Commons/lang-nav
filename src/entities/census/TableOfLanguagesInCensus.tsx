@@ -14,12 +14,11 @@ import Field from '@features/transforms/fields/Field';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { CensusData } from '@entities/census/CensusTypes';
 import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/relations/LanguageFamilyUtils';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -27,6 +26,8 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
+import type { CensusData } from './CensusTypes';
 
 type Props = {
   census: CensusData;

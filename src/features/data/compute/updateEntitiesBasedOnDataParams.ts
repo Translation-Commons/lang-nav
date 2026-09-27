@@ -3,8 +3,8 @@ import { LocaleSeparator } from '@features/params/PageParamTypes';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { computeLargestDescendant } from './computeLargestDescendant';
 import computeRecursiveLanguageData from './computeRecursiveLanguageData';

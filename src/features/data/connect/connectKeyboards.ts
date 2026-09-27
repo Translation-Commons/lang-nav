@@ -3,7 +3,7 @@ import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTyp
 import { getLanguageRootMacrolanguage } from '@entities/language/relations/LanguageFamilyUtils';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { getLessSpecificLocaleTags } from '../compute/searchLocalesForMissingLinks';

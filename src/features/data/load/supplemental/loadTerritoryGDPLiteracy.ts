@@ -1,4 +1,4 @@
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 const DEBUG = false;
 

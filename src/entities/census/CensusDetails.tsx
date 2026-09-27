@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
+import TableOfLanguagesInCensus from '@entities/census/TableOfLanguagesInCensus';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
-import TableOfLanguagesInCensus from '@widgets/tables/TableOfLanguagesInCensus';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import EntityMap from '@features/map/EntityMap';

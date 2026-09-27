@@ -1,6 +1,6 @@
 import { isIgnoredLanguageCode } from '@entities/census/parseCensusLanguageRow';
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 /**
  * Load UDHR (Universal Declaration of Human Rights) data

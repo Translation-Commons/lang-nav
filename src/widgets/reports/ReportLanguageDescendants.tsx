@@ -8,7 +8,7 @@ import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getEntityPopulation';
 
 import EnumDropdown from '@shared/ui/EnumDropdown';

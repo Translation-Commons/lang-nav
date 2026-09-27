@@ -1,9 +1,10 @@
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguageVitalityCell from '@entities/language/vitality/LanguageVitalityCell';
-import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
+import type { LanguageData } from '../LanguageTypes';
+
+import LanguageVitalityCell from './LanguageVitalityCell';
+import { VitalitySource } from './VitalityTypes';
 
 const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   {

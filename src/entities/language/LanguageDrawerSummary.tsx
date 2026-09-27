@@ -10,7 +10,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData } from './LanguageTypes';
+import type { LanguageData } from './LanguageTypes';
 import LanguageDrawerPopRow from './population/LanguageDrawerPopRow';
 import LanguageDrawerDialectsRow from './relations/LanguageDrawerDialectsRow';
 import LanguageDrawerWritingSystemsRow from './writing/LanguageDrawerWritingSystemsRow';

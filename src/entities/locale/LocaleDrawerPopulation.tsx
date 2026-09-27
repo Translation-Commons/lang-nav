@@ -12,7 +12,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 import LocalePopulationRecords from './LocalePopulationRecords';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 const LocaleDrawerPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { pop } = locale;

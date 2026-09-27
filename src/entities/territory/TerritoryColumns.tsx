@@ -14,7 +14,6 @@ import {
   getTerritoryChildren,
   getTerritoryCountries,
 } from '@entities/lib/getEntityRelatedTerritories';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
@@ -22,6 +21,8 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import type { TerritoryData } from './TerritoryTypes';
 
 function getTerritoryColumns(): TableColumn<TerritoryData>[] {
   return [

@@ -9,11 +9,12 @@ import Field from '@features/transforms/fields/Field';
 import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
 import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
 import { getChildTerritoriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
-import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
+
+import type { VariantData } from './VariantTypes';
 
 function getVariantColumns(): TableColumn<VariantData>[] {
   return [

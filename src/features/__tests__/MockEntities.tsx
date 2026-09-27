@@ -19,7 +19,7 @@ import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';

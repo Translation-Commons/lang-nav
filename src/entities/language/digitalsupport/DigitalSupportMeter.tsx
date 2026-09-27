@@ -2,7 +2,7 @@ import React from 'react';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { DigitalSupportDimension } from './DigitalSupportTypes';
 

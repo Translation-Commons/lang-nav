@@ -1,7 +1,7 @@
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 /**

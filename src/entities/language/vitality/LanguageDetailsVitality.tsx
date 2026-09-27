@@ -5,7 +5,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import ArcGauge from '@shared/ui/ArcGauge';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { getVitalityScore } from './LanguageVitalityComputation';
 import { getVitalityLabel } from './VitalityStrings';

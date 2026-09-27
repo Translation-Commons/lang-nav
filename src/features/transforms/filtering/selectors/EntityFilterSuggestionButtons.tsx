@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Suggestion } from '@features/params/Suggestion';
+import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import { Button } from '@shared/ui/button';

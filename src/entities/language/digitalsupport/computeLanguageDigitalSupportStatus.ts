@@ -10,7 +10,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import { getDigitalSupportStatusLabel } from '@strings/DigitalSupportStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import {
   DigitalSupportCategory,

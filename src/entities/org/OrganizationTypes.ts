@@ -1,6 +1,6 @@
-import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import type { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 export interface OrganizationData extends EntityBase {
   type: EntityType.Org;

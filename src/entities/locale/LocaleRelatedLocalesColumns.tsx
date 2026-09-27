@@ -1,9 +1,9 @@
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import TableColumn from '@features/table/TableColumn';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
-
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import type { LocaleData } from './LocaleTypes';
 
 const columns: TableColumn<LocaleData>[] = [
   {

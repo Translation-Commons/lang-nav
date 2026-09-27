@@ -1,4 +1,4 @@
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { VitalitySource } from './VitalityTypes';
 

@@ -1,4 +1,4 @@
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';

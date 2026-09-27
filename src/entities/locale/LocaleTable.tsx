@@ -5,9 +5,8 @@ import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
-
-import getLocaleColumns from './columns/LocaleColumns';
+import getLocaleColumns from './LocaleColumns';
+import type { LocaleData } from './LocaleTypes';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();

@@ -9,7 +9,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import LanguagePopulationOfDescendants from './LanguagePopulationFromDescendants';
 import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';

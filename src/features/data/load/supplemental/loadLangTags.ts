@@ -3,7 +3,7 @@
 // See scripts/convertLangTagsToTsv.mjs for the JSON -> TSV conversion.
 
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 export async function loadLangTags(
   getLanguage: (id: string) => LanguageData | undefined,

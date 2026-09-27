@@ -2,10 +2,10 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import { getEcrmlDescription, getEcrmlTitle } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { getEcrmlDescription, getEcrmlTitle } from '../LocaleStrings';
+import type { LocaleData } from '../LocaleTypes';
 
 type Props = {
   locale: LocaleData;

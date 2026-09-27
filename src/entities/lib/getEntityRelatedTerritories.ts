@@ -14,7 +14,7 @@ import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import {
   isTerritoryGroup,
   TerritoryData,

@@ -5,7 +5,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';

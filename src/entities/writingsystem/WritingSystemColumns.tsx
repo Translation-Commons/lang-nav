@@ -6,9 +6,10 @@ import Field from '@features/transforms/fields/Field';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { WritingSystemData } from './WritingSystemTypes';
 
 function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
   return [

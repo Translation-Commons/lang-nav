@@ -4,9 +4,9 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
 
-import getCensusColumns from './columns/CensusColumns';
+import getCensusColumns from './CensusColumns';
 
 type Props = {
   organization?: OrganizationData;

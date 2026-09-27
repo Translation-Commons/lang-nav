@@ -10,7 +10,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
 
-import { VariantData } from './VariantTypes';
+import type { VariantData } from './VariantTypes';
 
 type Props = {
   variant: VariantData;

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import MiniCardList from '@widgets/cardlists/MiniCardList';
-import getLocaleColumns from '@widgets/tables/columns/LocaleColumns';
 
 import EntityMap from '@features/map/EntityMap';
 import InternalLink from '@features/params/InternalLink';
@@ -14,13 +13,14 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import getLocaleColumns from '@entities/locale/LocaleColumns';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

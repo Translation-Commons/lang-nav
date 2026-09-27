@@ -6,14 +6,16 @@ import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import LanguageRetirementReason from '@entities/language/identity/LanguageRetirementReason';
-import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
 import ContextIcon from '@shared/ui/ContextIcon';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
+
+import { LanguageData, LanguageField, LanguageSource } from '../LanguageTypes';
+
+import LanguageRetirementReason from './LanguageRetirementReason';
 
 const columns: TableColumn<LanguageData>[] = [
   {

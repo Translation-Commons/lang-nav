@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 const cldrLinkExistsCache = new Map<string, string>();
 

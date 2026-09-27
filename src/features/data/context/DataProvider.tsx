@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';

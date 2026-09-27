@@ -5,7 +5,7 @@ import DrawerDetailsSection from '@widgets/details/ui/DrawerDetailsSection';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

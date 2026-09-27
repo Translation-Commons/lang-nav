@@ -4,8 +4,9 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import getLanguagePluralsColumns from '@entities/language/plurals/LanguagePluralsColumns';
+import type { LanguageData } from '../LanguageTypes';
+
+import getLanguagePluralsColumns from './LanguagePluralsColumns';
 
 const LanguagePluralsTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();

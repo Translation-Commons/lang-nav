@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import getVariantColumns from './columns/VariantColumns';
+import getVariantColumns from './VariantColumns';
 
 const VariantTable: React.FC = () => {
   const { variants } = useDataContext();

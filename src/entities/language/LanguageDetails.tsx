@@ -6,7 +6,7 @@ import DetailsRow from '@widgets/details/ui/DetailsRow';
 import LanguageDetailsDigitalSupport from './digitalsupport/LanguageDetailsDigitalSupport';
 import LanguageDetailsIdentity from './identity/LanguageDetailsIdentity';
 import LanguageDetailsAttributes from './LanguageDetailsAttributes';
-import { LanguageData } from './LanguageTypes';
+import type { LanguageData } from './LanguageTypes';
 import LanguageDetailsPopulation from './population/LanguageDetailsPopulation';
 import LanguageDetailsConnections from './relations/LanguageDetailsConnections';
 import LanguageDialectsSection from './relations/LanguageDetailsDialects';

@@ -6,7 +6,7 @@ import TableID from '@features/table/TableID';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
-import getKeyboardColumns from './columns/KeyboardColumns';
+import getKeyboardColumns from './KeyboardColumns';
 
 const KeyboardTable: React.FC = () => {
   const { keyboards } = useDataContext();

@@ -8,7 +8,7 @@ import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { LangFormedHereFieldDescription } from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import { HistoricPresenceFieldDescription } from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 
@@ -17,8 +17,8 @@ import ExternalLink from '@shared/ui/ExternalLink';
 
 import { getLanguagesBiggestCountryLocale } from './LocaleIndigeneityPredictions';
 import {
-  HistoricPresencePredictionToggle,
-  LocaleFormedHerePredictionToggle,
+    HistoricPresencePredictionToggle,
+    LocaleFormedHerePredictionToggle,
 } from './LocaleIndigeneityPredictionToggle';
 
 const LocaleIndigeneityTable: React.FC<{

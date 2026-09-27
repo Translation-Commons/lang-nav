@@ -2,7 +2,7 @@ import React from 'react';
 
 import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/ActivityLevelDisplay';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { getVitalityScore } from './LanguageVitalityComputation';
 import VitalityExplanation from './VitalityExplanation';

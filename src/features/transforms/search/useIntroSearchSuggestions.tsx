@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
-import { Suggestion } from '@features/params/Suggestion';
+import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 

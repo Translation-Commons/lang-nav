@@ -4,10 +4,10 @@ import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonCol
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
+
+import type { OrganizationData } from './OrganizationTypes';
 
 function getOrganizationColumns(): TableColumn<OrganizationData>[] {
   return [

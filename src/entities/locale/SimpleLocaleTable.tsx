@@ -9,7 +9,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 /** To place in areas with little space */
 const SimpleLocaleTable: React.FC<{

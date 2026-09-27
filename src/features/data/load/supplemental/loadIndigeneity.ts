@@ -1,4 +1,4 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 // this is intended to be run after the main data is loaded (and symlinks exist)
 export async function loadIndigeneity(

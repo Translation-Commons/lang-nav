@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';

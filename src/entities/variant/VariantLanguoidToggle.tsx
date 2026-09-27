@@ -2,11 +2,11 @@ import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { Suggestion } from '@features/params/Suggestion';
+import type { Suggestion } from '@features/params/Suggestion';
 import { getSuggestionsFunction } from '@features/transforms/filtering/getSuggestionsFunction';
 import EntitySearchCombobox from '@features/transforms/search/EntitySearchCombobox';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';

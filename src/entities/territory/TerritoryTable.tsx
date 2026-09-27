@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import getTerritoryColumns from './columns/TerritoryColumns';
+import getTerritoryColumns from './TerritoryColumns';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();

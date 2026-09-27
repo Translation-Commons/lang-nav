@@ -8,7 +8,7 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
-import { OrganizationData } from './OrganizationTypes';
+import type { OrganizationData } from './OrganizationTypes';
 
 export const OrganizationHierarchy: React.FC = () => {
   const { organizations } = useDataContext();

@@ -3,7 +3,7 @@ import React from 'react';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

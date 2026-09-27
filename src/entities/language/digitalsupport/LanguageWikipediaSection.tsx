@@ -10,7 +10,7 @@ import { Badge } from '@shared/ui/badge';
 import CountCompact from '@shared/ui/CountCompact';
 import ExternalLink from '@shared/ui/ExternalLink';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { WikipediaStatus } from './DigitalSupportTypes';
 

@@ -5,7 +5,7 @@ import plurals from 'cldr-core/supplemental/plurals.json';
 
 import { EntityType } from '@entities/types/EntityTypes';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 export enum PluralRuleKey {
   Zero = 'pluralRule-count-zero',

@@ -2,10 +2,9 @@
  * Enums and types related to territories, which are the main geographic unit in the app.
  */
 
-import { CensusData } from '@entities/census/CensusTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { EntityType } from '@entities/types/EntityTypes';
-import { EntityBase } from '@entities/types/EntityTypes';
+import type { CensusData } from '@entities/census/CensusTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;

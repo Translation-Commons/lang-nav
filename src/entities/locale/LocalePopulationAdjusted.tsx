@@ -8,7 +8,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 type Props = {
   locale: LocaleData;

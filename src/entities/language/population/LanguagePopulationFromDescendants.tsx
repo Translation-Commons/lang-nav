@@ -15,7 +15,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

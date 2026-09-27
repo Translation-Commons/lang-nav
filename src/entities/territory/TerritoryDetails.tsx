@@ -12,7 +12,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import TerritoryAttributes from './TerritoryAttributes';
 import TerritoryIdentification from './TerritoryIdentification';
 import TerritoryLocation from './TerritoryLocation';
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

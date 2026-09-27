@@ -1,4 +1,4 @@
-import { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';

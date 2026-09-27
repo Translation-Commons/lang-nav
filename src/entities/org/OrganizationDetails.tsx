@@ -1,10 +1,10 @@
 import React from 'react';
 
+import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
 import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
-import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
@@ -14,7 +14,7 @@ import Field from '@features/transforms/fields/Field';
 import ExternalLink from '@shared/ui/ExternalLink';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
-import { OrganizationData } from './OrganizationTypes';
+import type { OrganizationData } from './OrganizationTypes';
 
 type Props = {
   org: OrganizationData;

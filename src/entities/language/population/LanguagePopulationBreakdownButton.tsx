@@ -5,7 +5,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { LanguagePopulationBreakdownFromDescendants } from './LanguagePopulationFromDescendants';
 import { LanguagePopulationBreakdownFromLocales } from './LanguagePopulationFromLocales';

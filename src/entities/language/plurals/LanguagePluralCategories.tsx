@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import LanguagePluralCategory from './LanguagePluralCategory';
 import { findLanguagePluralRules } from './LanguagePluralComputation';

@@ -17,7 +17,7 @@ import { getLocaleSourceLabel } from '@strings/LocaleSourceStrings';
 import LocaleDetailsCensuses from './LocaleDetailsCensuses';
 import LocaleDetailsPopulation from './LocaleDetailsPopulation';
 import { getOfficialLabel } from './LocaleStrings';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 import LocaleIndigeneityDisplay, {
   getIndigeneityDescription,
 } from './localstatus/LocaleIndigeneityDisplay';

@@ -10,12 +10,11 @@ import Field from '@features/transforms/fields/Field';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import LocaleEcrmlCoverage from '@entities/locale/localstatus/LocaleEcrmlCoverage';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-
-import LocaleEcrmlCoverage from './LocaleEcrmlCoverage';
 
 type Props = {
   territory: TerritoryData;

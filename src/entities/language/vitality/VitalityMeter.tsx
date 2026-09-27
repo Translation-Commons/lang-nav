@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { getVitalityScore } from './LanguageVitalityComputation';
 import VitalityExplanation from './VitalityExplanation';

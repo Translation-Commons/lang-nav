@@ -9,11 +9,6 @@ import {
   getLanguageRootMacrolanguage,
 } from '@entities/language/relations/LanguageFamilyUtils';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
-import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
-import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
-import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import EntityWikipediaInfo from '@entities/ui/EntityWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
@@ -23,9 +18,14 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
+import LocaleNameWithFilters from './LocaleNameWithFilters';
 import { LocalePopulationColumns } from './LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './LocaleRelatedLocalesColumns';
+import { getOfficialLabel } from './LocaleStrings';
+import type { LocaleData } from './LocaleTypes';
 import LocaleWritingColumns from './LocaleWritingColumns';
+import LocaleFormedHereDisplay from './localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from './localstatus/LocaleHistoricPresenceDisplay';
 
 function getLocaleColumns(): TableColumn<LocaleData>[] {
   return [

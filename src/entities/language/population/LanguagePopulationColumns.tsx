@@ -7,15 +7,17 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
-import LanguagePopulationFromDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
-import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
-import LanguagePopulationInSelectedTerritory from '@entities/language/population/LanguagePopulationInSelectedTerritory';
-import LanguagePopulationKnownWarning from '@entities/language/population/LanguagePopulationKnownWarning';
-import LanguagePopulationSource from '@entities/language/population/LanguagePopulationSource';
 import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
+
+import type { LanguageData } from '../LanguageTypes';
+
+import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
+import LanguagePopulationFromDescendants from './LanguagePopulationFromDescendants';
+import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
+import LanguagePopulationInSelectedTerritory from './LanguagePopulationInSelectedTerritory';
+import LanguagePopulationKnownWarning from './LanguagePopulationKnownWarning';
+import LanguagePopulationSource from './LanguagePopulationSource';
 
 const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
   isShortened = false,

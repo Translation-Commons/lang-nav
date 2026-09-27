@@ -142,7 +142,13 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.SourceForPopulation:
       if (typeof fieldValue === 'string') {
         if (fieldValue.startsWith('http'))
-          return <ExternalLink href={fieldValue} className="text-nowrap truncate ellipsis" />;
+          return (
+            <ExternalLink
+              href={fieldValue}
+              className="text-nowrap truncate ellipsis"
+              showDomainOnly={true}
+            />
+          );
         return (
           <span className="truncate ellipsis" title={fieldValue}>
             {fieldValue}

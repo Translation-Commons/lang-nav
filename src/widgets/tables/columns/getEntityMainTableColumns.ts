@@ -1,17 +1,16 @@
 import TableColumn from '@features/table/TableColumn';
 
+import getCensusColumns from '@entities/census/CensusColumns';
+import getKeyboardColumns from '@entities/keyboard/KeyboardColumns';
+import getLanguageColumns from '@entities/language/LanguageColumns';
+import getLocaleColumns from '@entities/locale/LocaleColumns';
+import getOrganizationColumns from '@entities/org/OrganizationColumns';
+import getTerritoryColumns from '@entities/territory/TerritoryColumns';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import getVariantColumns from '@entities/variant/VariantColumns';
+import getWritingSystemColumns from '@entities/writingsystem/WritingSystemColumns';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-
-import getCensusColumns from './CensusColumns';
-import getKeyboardColumns from './KeyboardColumns';
-import getLanguageColumns from './LanguageColumns';
-import getLocaleColumns from './LocaleColumns';
-import getOrganizationColumns from './OrganizationColumns';
-import getTerritoryColumns from './TerritoryColumns';
-import getVariantColumns from './VariantColumns';
-import getWritingSystemColumns from './WritingSystemColumns';
 
 function getEntityMainTableColumns(entType: EntityType): TableColumn<EntityData>[] {
   switch (entType) {

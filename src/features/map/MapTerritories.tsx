@@ -8,7 +8,7 @@ import { getColorGradientFunction } from '@features/transforms/coloring/getColor
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { groupBy } from '@shared/lib/setUtils';

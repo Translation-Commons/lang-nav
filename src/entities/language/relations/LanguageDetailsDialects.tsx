@@ -4,7 +4,6 @@ import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
-import getLanguageColumns from '@widgets/tables/columns/LanguageColumns';
 
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { View } from '@features/params/PageParamTypes';
@@ -19,6 +18,7 @@ import { EntityType } from '@entities/types/EntityTypes';
 
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
+import getLanguageColumns from '../LanguageColumns';
 import { LanguageData, LanguageScope } from '../LanguageTypes';
 import LanguageDialectsMap from '../relations/LanguageDialectsMap';
 

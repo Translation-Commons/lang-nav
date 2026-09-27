@@ -2,12 +2,12 @@
  * Enums and types related to keyboards
  */
 
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase, EntityType } from '@entities/types/EntityTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
-import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
+import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export enum KeyboardPlatform {
   GBoard = 'GBoard',

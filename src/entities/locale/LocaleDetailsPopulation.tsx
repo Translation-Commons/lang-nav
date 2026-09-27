@@ -15,7 +15,7 @@ import { Toggle } from '@shared/ui/toggle';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 const LocaleDetailsPopulation: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { pop } = locale;

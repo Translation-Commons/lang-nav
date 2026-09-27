@@ -3,13 +3,6 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
-import { DigitalSupportDimension } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import LanguageDigitalSupportMetascore from '@entities/language/digitalsupport/LanguageDigitalSupportMetascore';
-import LanguageUDHRInfo, {
-  LanguageUDHRDescription,
-} from '@entities/language/digitalsupport/LanguageUDHRInfo';
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
@@ -24,6 +17,13 @@ import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 import IsSupportedIcon from '@shared/ui/IsSupportedIcon';
+
+import { LanguageData, LanguageSource } from '../LanguageTypes';
+
+import LanguageDigitalSupportMeter from './DigitalSupportMeter';
+import { DigitalSupportDimension } from './DigitalSupportTypes';
+import LanguageDigitalSupportMetascore from './LanguageDigitalSupportMetascore';
+import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 
 const columns: TableColumn<LanguageData>[] = [
   {

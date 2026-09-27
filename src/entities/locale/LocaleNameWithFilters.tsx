@@ -7,7 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import Highlightable from '@shared/ui/Highlightable';
 
 import { getLocaleName } from './LocaleStrings';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { territoryFilter, languageFilter, searchBy, searchString } = usePageParams();

@@ -5,7 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

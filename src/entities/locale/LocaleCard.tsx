@@ -7,7 +7,7 @@ import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForP
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import EntitySubtitle from '@entities/ui/EntitySubtitle';
 import EntityTitle from '@entities/ui/EntityTitle';
 

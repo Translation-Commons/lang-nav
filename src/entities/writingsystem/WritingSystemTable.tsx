@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import getWritingSystemColumns from './columns/WritingSystemColumns';
+import getWritingSystemColumns from './WritingSystemColumns';
 
 const WritingSystemTable: React.FC = () => {
   const { writingSystems } = useDataContext();

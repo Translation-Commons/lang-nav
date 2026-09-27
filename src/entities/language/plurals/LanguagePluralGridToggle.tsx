@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 
 import { Toggle } from '@shared/ui/toggle';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { findLanguagePluralRules } from './LanguagePluralComputation';
 import LanguagePluralGrid from './LanguagePluralGrid';

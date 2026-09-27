@@ -1,10 +1,10 @@
 import { CensusData } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';

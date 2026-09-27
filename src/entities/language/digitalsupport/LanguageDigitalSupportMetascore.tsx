@@ -6,7 +6,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import LanguageDigitalSupportMeter from './DigitalSupportMeter';
 import { DigitalSupportDimension } from './DigitalSupportTypes';

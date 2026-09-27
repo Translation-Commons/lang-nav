@@ -11,14 +11,6 @@ import Field from '@features/transforms/fields/Field';
 import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import LanguageRetirementReason from '@entities/language/identity/LanguageRetirementReason';
-import { LanguageData } from '@entities/language/LanguageTypes';
-import {
-  getLanguageRootLanguageFamily,
-  getLanguageRootMacrolanguage,
-} from '@entities/language/relations/LanguageFamilyUtils';
-import { LanguageModality } from '@entities/language/writing/LanguageModality';
-import LanguageWritingSystems from '@entities/language/writing/LanguageWritingSystems';
 import { getEntityLiteracy } from '@entities/lib/getEntityMiscFields';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
@@ -30,11 +22,19 @@ import LanguageModalityFullExplanation from '@strings/LanguageModalityFullExplan
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageCodeColumns } from './LanguageCodeColumns';
-import { LanguageDigitalSupportColumns } from './LanguageDigitalSupportColumns';
-import LanguageNameColumns from './LanguageNameColumns';
-import LanguagePopulationColumns from './LanguagePopulationColumns';
-import LanguageVitalityColumns from './LanguageVitalityColumns';
+import { LanguageDigitalSupportColumns } from './digitalsupport/LanguageDigitalSupportColumns';
+import { LanguageCodeColumns } from './identity/LanguageCodeColumns';
+import LanguageNameColumns from './identity/LanguageNameColumns';
+import LanguageRetirementReason from './identity/LanguageRetirementReason';
+import type { LanguageData } from './LanguageTypes';
+import LanguagePopulationColumns from './population/LanguagePopulationColumns';
+import {
+  getLanguageRootLanguageFamily,
+  getLanguageRootMacrolanguage,
+} from './relations/LanguageFamilyUtils';
+import LanguageVitalityColumns from './vitality/LanguageVitalityColumns';
+import { LanguageModality } from './writing/LanguageModality';
+import LanguageWritingSystems from './writing/LanguageWritingSystems';
 
 export const LanguageColumnPresets: Record<string, string[]> = {
   'Language Codes': [

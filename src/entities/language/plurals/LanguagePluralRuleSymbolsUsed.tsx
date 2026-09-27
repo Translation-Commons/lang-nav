@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { findLanguagePluralRules } from './LanguagePluralComputation';
 

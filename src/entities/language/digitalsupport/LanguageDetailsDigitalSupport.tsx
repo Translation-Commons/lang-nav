@@ -22,7 +22,7 @@ import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings'
 
 import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
 import EntityWikipediaInfo from '../../ui/EntityWikipediaInfo';
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import {
   DIGITAL_SUPPORT_CATEGORIES,

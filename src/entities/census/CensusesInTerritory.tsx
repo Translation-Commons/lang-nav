@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { getCensusCollectorTypeRank } from './CensusTypes';
 

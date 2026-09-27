@@ -3,10 +3,11 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
-import { LocaleData } from '@entities/locale/LocaleTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
+
+import LocaleCensusCitation from './LocaleCensusCitation';
+import LocalePopulationAdjusted from './LocalePopulationAdjusted';
+import type { LocaleData } from './LocaleTypes';
 
 const columns: TableColumn<LocaleData>[] = [
   {

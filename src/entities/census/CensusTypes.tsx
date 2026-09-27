@@ -1,6 +1,6 @@
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageCode } from '../language/LanguageTypes';
 

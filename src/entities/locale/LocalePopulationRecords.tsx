@@ -10,7 +10,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 const LocalePopulationRecords: React.FC<{
   locale: LocaleData;

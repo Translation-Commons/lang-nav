@@ -1,5 +1,5 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { sumBy } from './setUtils';

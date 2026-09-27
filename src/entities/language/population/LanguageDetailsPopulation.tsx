@@ -10,7 +10,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 

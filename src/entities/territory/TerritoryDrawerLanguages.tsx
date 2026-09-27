@@ -13,7 +13,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

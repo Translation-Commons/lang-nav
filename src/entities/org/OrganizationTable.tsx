@@ -4,9 +4,8 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-
-import getOrganizationColumns from './columns/OrganizationColumns';
+import getOrganizationColumns from './OrganizationColumns';
+import type { OrganizationData } from './OrganizationTypes';
 
 const OrganizationTable: React.FC = () => {
   const { organizations } = useDataContext();

@@ -4,13 +4,13 @@ import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import {
-  getCurrencyCompactLong,
-  numberToFixedUnlessSmall,
-  numberToSigFigs,
+    getCurrencyCompactLong,
+    numberToFixedUnlessSmall,
+    numberToSigFigs,
 } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   const { pop, landArea, gdp, literacyPercent } = territory;

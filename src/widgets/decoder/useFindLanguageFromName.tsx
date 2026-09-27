@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 import useDecoderSuggestions from './useDecoderSuggestions';
 

@@ -6,7 +6,7 @@ import DrawerDetailsSection from '@widgets/details/ui/DrawerDetailsSection';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

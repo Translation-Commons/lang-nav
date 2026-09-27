@@ -1,9 +1,9 @@
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguagesBySource } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { connectKeyboards } from '../connect/connectKeyboards';

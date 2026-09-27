@@ -7,24 +7,24 @@ import Field from '@features/transforms/fields/Field';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import LanguagePluralCategories from './LanguagePluralCategories';
 import LanguagePluralCategory from './LanguagePluralCategory';
 import {
-  convertStringRulesToRuleDeterminer,
-  findLanguagePluralRules,
-  PluralRuleKey,
+    convertStringRulesToRuleDeterminer,
+    findLanguagePluralRules,
+    PluralRuleKey,
 } from './LanguagePluralComputation';
 import LanguagePluralExample from './LanguagePluralExample';
 import LanguagePluralGrid from './LanguagePluralGrid';
 import LanguagePluralGridButton from './LanguagePluralGridToggle';
 import {
-  COMPACT_NUM_LABELS,
-  COMPACT_NUMS,
-  LARGE_NUMS,
-  PROTOTYPICAL_NUMS,
-  SMALL_NUMS,
+    COMPACT_NUM_LABELS,
+    COMPACT_NUMS,
+    LARGE_NUMS,
+    PROTOTYPICAL_NUMS,
+    SMALL_NUMS,
 } from './PluralNumberSets';
 import PluralRuleEquation from './PluralRuleEquation';
 import PluralRuleExampleSet from './PluralRuleExampleSet';
