@@ -6,7 +6,8 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+
+import { WritingSystemData } from './WritingSystemTypes';
 
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();

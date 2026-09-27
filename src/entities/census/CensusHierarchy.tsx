@@ -6,9 +6,10 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { CensusData } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
+
+import { CensusData } from './CensusTypes';
 
 export const CensusHierarchy: React.FC = () => {
   const { territories } = useDataContext();

@@ -6,8 +6,9 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
+
+import { OrganizationData } from './OrganizationTypes';
 
 export const OrganizationHierarchy: React.FC = () => {
   const { organizations } = useDataContext();
