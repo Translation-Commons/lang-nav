@@ -17,8 +17,8 @@ import ExternalLink from '@shared/ui/ExternalLink';
 
 import { getLanguagesBiggestCountryLocale } from './LocaleIndigeneityPredictions';
 import {
-    HistoricPresencePredictionToggle,
-    LocaleFormedHerePredictionToggle,
+  HistoricPresencePredictionToggle,
+  LocaleFormedHerePredictionToggle,
 } from './LocaleIndigeneityPredictionToggle';
 
 const LocaleIndigeneityTable: React.FC<{

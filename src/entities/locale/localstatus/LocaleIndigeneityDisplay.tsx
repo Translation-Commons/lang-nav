@@ -5,7 +5,7 @@ import type { LocaleData } from '../LocaleTypes';
 
 import LocaleFormedHereDisplay, { LangFormedHereFieldDescription } from './LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay, {
-    HistoricPresenceFieldDescription,
+  HistoricPresenceFieldDescription,
 } from './LocaleHistoricPresenceDisplay';
 
 const LocaleIndigeneityDisplay = ({ loc }: { loc: LocaleData }) => {

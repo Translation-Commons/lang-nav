@@ -1,6 +1,6 @@
 import {
-    WikipediaData,
-    WikipediaStatus,
+  WikipediaData,
+  WikipediaStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';

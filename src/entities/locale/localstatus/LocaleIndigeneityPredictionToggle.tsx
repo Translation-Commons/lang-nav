@@ -4,8 +4,8 @@ import type { LocaleData } from '@entities/locale/LocaleTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
 
 import {
-    getHistoricPresencePrediction,
-    getLocaleFormedHerePrediction,
+  getHistoricPresencePrediction,
+  getLocaleFormedHerePrediction,
 } from './LocaleIndigeneityPredictions';
 
 export const LocaleFormedHerePredictionToggle: React.FC<{

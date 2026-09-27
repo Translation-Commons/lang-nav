@@ -3,17 +3,17 @@ import React, { useMemo } from 'react';
 import type { LanguageData } from '../LanguageTypes';
 
 import {
-    convertStringRulesToRuleDeterminer,
-    findLanguagePluralRules,
-    PluralRuleKey,
+  convertStringRulesToRuleDeterminer,
+  findLanguagePluralRules,
+  PluralRuleKey,
 } from './LanguagePluralComputation';
 import LanguagePluralExample from './LanguagePluralExample';
 import {
-    COMPACT_NUM_LABELS,
-    COMPACT_NUMS,
-    LARGE_NUMS,
-    SMALL_NUMS,
-    ZERO_TO_99_NUMS,
+  COMPACT_NUM_LABELS,
+  COMPACT_NUMS,
+  LARGE_NUMS,
+  SMALL_NUMS,
+  ZERO_TO_99_NUMS,
 } from './PluralNumberSets';
 
 type Props = {

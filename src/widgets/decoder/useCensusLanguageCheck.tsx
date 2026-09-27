@@ -4,8 +4,8 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import {
-    isIgnoredLanguageCode,
-    parseCensusLanguageName,
+  isIgnoredLanguageCode,
+  parseCensusLanguageName,
 } from '@entities/census/parseCensusLanguageRow';
 import { parseCensusMetadata } from '@entities/census/parseCensusMetadata';
 import type { LanguageData } from '@entities/language/LanguageTypes';

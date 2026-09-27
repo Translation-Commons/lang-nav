@@ -4,9 +4,9 @@ import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import {
-    getCurrencyCompactLong,
-    numberToFixedUnlessSmall,
-    numberToSigFigs,
+  getCurrencyCompactLong,
+  numberToFixedUnlessSmall,
+  numberToSigFigs,
 } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 

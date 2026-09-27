@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 
-import TableOfLanguagesInCensus from '@entities/census/TableOfLanguagesInCensus';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
+import TableOfLanguagesInCensus from '@entities/census/TableOfLanguagesInCensus';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import CensusPopulationCharacteristics from './CensusPopulationCharacteristics';

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
 import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsField from '@widgets/details/ui/DetailsField';
@@ -10,6 +9,8 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
+
+import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
