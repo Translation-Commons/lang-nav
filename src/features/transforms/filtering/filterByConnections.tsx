@@ -123,6 +123,7 @@ export function getWritingSystemsRelevantToEntity(ent: EntityData): WritingSyste
         (ws) => ws.ID,
       );
     case EntityType.Org:
+    case EntityType.Technology:
       return []; // Not well defined
   }
 }
@@ -193,6 +194,9 @@ export function getLanguagesRelevantToEntity(ent: EntityData): LanguageData[] {
       );
     case EntityType.Keyboard:
       return ent.languages ?? [];
+    case EntityType.Technology:
+      // TODO add Technology Entity
+      return []; // Not available yet
     case EntityType.Org:
       return []; // Too computationally intensive to get
   }
@@ -222,6 +226,7 @@ export function getLanguageFamiliesRelevantToEntity(ent: EntityData): LanguageDa
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return []; // Too computationally intensive to get
   }
 }

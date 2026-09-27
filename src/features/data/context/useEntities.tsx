@@ -35,6 +35,9 @@ const useEntities = (entType?: EntityType): EntityData[] => {
         return keyboards;
       case EntityType.Org:
         return organizations;
+      case EntityType.Technology:
+        // TODO add Technology Entity
+        return [];
     }
   }, [
     entType,

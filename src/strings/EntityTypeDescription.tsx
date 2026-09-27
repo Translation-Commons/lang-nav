@@ -72,6 +72,14 @@ const EntityTypeDescription: React.FC<{ entType: EntityType }> = ({ entType }) =
           institutions, or tech companies.
         </>
       );
+    case EntityType.Technology:
+      return (
+        <>
+          <strong>Technology:</strong> A digital platform that supports language-related activities.
+          This includes software products, operating systems, machine learning models, and other
+          digital infrastructures.
+        </>
+      );
     default:
       enforceExhaustiveSwitch(entType);
   }

@@ -54,9 +54,9 @@ Entities should be visible in most of the presentation modes:
 - Details with a full inventory of metadata
   - Also visible in Drawer, which can be a separate rendering component or fallback to the regular Details view
 - Table, with columns for most if not all metadata fields
-- [maybe] Chart if there is data that can be plotted on axes
-- [maybe] Map view if it can be effectively displayed on a map of the world
-- [maybe] Hierarchy view if the entity has a clear parent-child relationships with other entities or within itself
+- *maybe* Chart if there is data that can be plotted on axes
+- *maybe* Map view if it can be effectively displayed on a map of the world
+- *maybe* Hierarchy view if the entity has a clear parent-child relationships with other entities or within itself
 
 While it is a bit overkill for some kinds of entities (like how many people need to see a card list of the organizations with data on LangNav?) -- it provides transparency about our data and makes it easier for users to easily navigate between kinds of entities in the system.
 
@@ -74,7 +74,7 @@ When you are adding a new entity, you don't need to do it all in 1 PR. Here's a 
 4. Add optional views like Chart, Map, and Hierarchy if applicable.
 5. Verify how the entity works with various filters
 6. Add a field for how other entities connect to this one (eg. the "Languages" spoken in a "Territory")
-7. You can also use this in a filter view (eg. you choose "Territory" and it shows the "Language"s present there)
+   1. You can also use this in a filter view (eg. you choose "Territory" and it shows the "Language"s present there)
 
 You can do this across multiple pull requests or in a comprehensive pull request -- whichever fits your workflow and the complexity of the new entity. Just be careful to make sure the reviewer does not need to process too much context at once, otherwise they may miss errors or they may give too much feedback and slow down the implementation more than if it was done piecewise.
 

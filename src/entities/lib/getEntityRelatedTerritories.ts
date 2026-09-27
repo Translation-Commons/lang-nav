@@ -74,6 +74,8 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
       return ent.territory ? [ent.territory] : [];
     case EntityType.Org:
       return ent.headquarters ? [ent.headquarters] : [];
+    case EntityType.Technology:
+      return []; // They usually apply to all countries
   }
 }
 
@@ -152,6 +154,8 @@ export function getCountriesInEntity(ent: EntityData): TerritoryData[] | undefin
       );
     case EntityType.Org:
       return [ent.headquarters].filter((t) => !!t);
+    case EntityType.Technology:
+      return []; // they usually apply to all countries
   }
 }
 
@@ -178,6 +182,7 @@ export function getChildTerritoriesInEntity(ent: EntityData): TerritoryData[] | 
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       // child territories are not well defined for this, you probably want getCountriesInEntity instead
       return undefined;
   }
@@ -200,6 +205,8 @@ export function getEntityLocales(ent: EntityData): LocaleData[] {
     case EntityType.Keyboard:
       return [];
     case EntityType.Org:
+      return [];
+    case EntityType.Technology:
       return [];
   }
 }

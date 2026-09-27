@@ -30,6 +30,9 @@ function getEntityMainTableColumns(entType: EntityType): TableColumn<EntityData>
       return getCensusColumns() as TableColumn<EntityData>[];
     case EntityType.Org:
       return getOrganizationColumns() as TableColumn<EntityData>[];
+    case EntityType.Technology:
+      // TODO add Technology Entity
+      return [] as TableColumn<EntityData>[];
     default:
       enforceExhaustiveSwitch(entType);
   }

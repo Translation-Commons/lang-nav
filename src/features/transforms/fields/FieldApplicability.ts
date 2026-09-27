@@ -47,6 +47,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.TerritoryList,
   ],
   [EntityType.Org]: [Field.Organization, Field.Population, Field.CountOfCountries],
+  [EntityType.Technology]: [],
 };
 
 // Specific fields available per entity type
@@ -81,6 +82,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.PercentOfTerritoryPopulation,
 
         Field.LanguagePrimary,
+        Field.LanguageList,
         Field.LanguageFamily,
         Field.WritingSystem,
         Field.TerritoryPrimary,
@@ -282,6 +284,9 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.TerritoryPrimary,
       ];
+
+    case EntityType.Technology:
+      return [Field.LanguageList, Field.Organization, Field.Platform];
     default:
       return enforceExhaustiveSwitch(entType);
   }

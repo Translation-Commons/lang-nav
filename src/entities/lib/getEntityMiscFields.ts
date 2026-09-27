@@ -101,6 +101,8 @@ export function getCountOfKeyboards(ent: EntityData): number | undefined {
       return ent.outputKeyboards?.length ?? 0;
     case EntityType.Keyboard:
       return 1; // A keyboard counts as 1 keyboard
+    case EntityType.Technology:
+      return undefined; // Some technologies will have keyboards like GBoard
     case EntityType.Territory:
     case EntityType.Locale:
     case EntityType.Variant:
@@ -198,6 +200,7 @@ export function getWritingSystemsInEntity(ent: EntityData): WritingSystemData[] 
       }
       return ent.inputWritingSystem ? [ent.inputWritingSystem] : undefined;
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined; // Not well defined
     default:
       enforceExhaustiveSwitch(type);
@@ -218,6 +221,7 @@ export function getCountOfCensuses(ent: EntityData): number | undefined {
     case EntityType.WritingSystem:
     case EntityType.Variant:
     case EntityType.Keyboard:
+    case EntityType.Technology:
       return undefined;
     case EntityType.Org:
       return ent.censuses?.length ?? 0;
@@ -241,6 +245,7 @@ export function getCountOfVariants(ent: EntityData): number | undefined {
     case EntityType.Census:
     case EntityType.WritingSystem:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);
@@ -267,6 +272,9 @@ export function getDepth(ent: EntityData): number | undefined {
       return undefined;
     case EntityType.Org:
       return ent.parent ? getDepth(ent.parent)! + 1 : 0;
+    case EntityType.Technology:
+      // TODO add Technology Entity
+      return undefined;
     default:
       enforceExhaustiveSwitch(type);
   }
