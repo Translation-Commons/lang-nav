@@ -3,10 +3,11 @@ import React from 'react';
 import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
 import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 
 import SimpleLocaleTable from '@entities/locale/SimpleLocaleTable';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { sortBy, uniqueBy } from '@shared/lib/setUtils';

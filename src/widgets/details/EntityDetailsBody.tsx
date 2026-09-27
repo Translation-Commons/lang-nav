@@ -1,18 +1,15 @@
 import React from 'react';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
+import CensusDetails from '@entities/census/CensusDetails';
+import KeyboardDetails from '@entities/keyboard/KeyboardDetails';
+import LanguageDetails from '@entities/language/LanguageDetails';
 import getEntityFromID from '@entities/lib/getEntityFromID';
-import { EntityData } from '@entities/types/DataTypes';
-
-import CensusDetails from './CensusDetails';
-import KeyboardDetails from './KeyboardDetails';
-import LanguageDetails from './LanguageDetails';
-import LocaleDetails from './LocaleDetails';
-import OrganizationDetails from './OrganizationDetails';
-import TerritoryDetails from './TerritoryDetails';
-import VariantDetails from './VariantDetails';
-import WritingSystemDetails from './WritingSystemDetails';
+import LocaleDetails from '@entities/locale/LocaleDetails';
+import OrganizationDetails from '@entities/org/OrganizationDetails';
+import TerritoryDetails from '@entities/territory/TerritoryDetails';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import VariantDetails from '@entities/variant/VariantDetails';
+import WritingSystemDetails from '@entities/writingsystem/WritingSystemDetails';
 
 // You can get the details by an entity or just its ID
 type Props = { ent?: EntityData; entID?: string };

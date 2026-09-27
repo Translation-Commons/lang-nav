@@ -1,0 +1,85 @@
+import React from 'react';
+
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+
+import ExternalLink from '@shared/ui/ExternalLink';
+
+import { CensusData } from './CensusTypes';
+
+type Props = {
+  census: CensusData;
+};
+
+const CensusSourceSection: React.FC<Props> = ({ census }) => {
+  const {
+    author,
+    citation,
+    columnName,
+    collectorType,
+    dateAccessed,
+    datePublished,
+    documentName,
+    presentedBy,
+    sectionName,
+    tableName,
+    url,
+  } = census;
+
+  return (
+    <DetailsSection title="Source">
+      <DetailsField title="Source type">{collectorType}</DetailsField>
+      <CensusCollectorNameDisplay census={census} />
+      {author && <DetailsField title="Author">{author}</DetailsField>}
+      {(census.presenter || presentedBy) && (
+        <DetailsField title="Presented by">
+          {census.presenter ? <HoverableEntityName ent={census.presenter} /> : presentedBy}
+        </DetailsField>
+      )}
+      {url && (
+        <DetailsField title="URL">
+          <ExternalLink href={url} />
+        </DetailsField>
+      )}
+      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
+      {sectionName && <DetailsField title="Section Name">{sectionName}</DetailsField>}
+      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
+      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
+      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
+      {datePublished && (
+        <DetailsField title="Date Published">
+          {new Date(datePublished).toLocaleDateString()}
+        </DetailsField>
+      )}
+      {dateAccessed && (
+        <DetailsField title="Date Accessed">
+          {new Date(dateAccessed).toLocaleDateString()}
+        </DetailsField>
+      )}
+    </DetailsSection>
+  );
+};
+
+const CensusCollectorNameDisplay: React.FC<Props> = ({ census }) => {
+  const { collectorName, collectorNameShort, collector } = census;
+  if (!collectorName && !collectorNameShort && !collector) return null;
+
+  if (collector) {
+    return (
+      <DetailsField title="Collected by">
+        <HoverableEntityName ent={collector} />
+      </DetailsField>
+    );
+  }
+
+  return (
+    <DetailsField title="Collected by">
+      {collectorName ? collectorName : collectorNameShort}
+      {collectorName && collectorNameShort && ` aka ${collectorNameShort}`}
+    </DetailsField>
+  );
+};
+
+export default CensusSourceSection;

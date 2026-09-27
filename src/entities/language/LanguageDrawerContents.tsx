@@ -13,7 +13,7 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import LanguageDrawerDigitalSupport from './digitalsupport/LanguageDrawerDigitalSupport';
 import LanguageDrawerISORows from './identity/LanguageDrawerISORows';
 import LanguageDrawerSummary from './LanguageDrawerSummary';
-import { LanguageData } from './LanguageTypes';
+import type { LanguageData } from './LanguageTypes';
 
 type Props = {
   lang: LanguageData;

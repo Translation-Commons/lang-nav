@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { PageParamKey, PageParams } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/Suggestion';
+import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';

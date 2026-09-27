@@ -1,7 +1,7 @@
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LocaleData } from '../LocaleTypes';
+import type { LocaleData } from '../LocaleTypes';
 
 import LocaleFormedHereDisplay, { LangFormedHereFieldDescription } from './LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay, {

@@ -11,7 +11,7 @@ import EntityTitle from '@entities/ui/EntityTitle';
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { OrganizationData } from './OrganizationTypes';
+import type { OrganizationData } from './OrganizationTypes';
 
 type Props = { org: OrganizationData };
 

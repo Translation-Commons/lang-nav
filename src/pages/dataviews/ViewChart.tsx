@@ -1,9 +1,9 @@
 import ScatterPlot from '@widgets/charts/ScatterPlot';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
+import { EntityType } from '@entities/types/EntityTypes';
 
 const UNSUPPORTED_ENTITY_TYPES = [EntityType.Org, EntityType.Variant, EntityType.Keyboard];
 

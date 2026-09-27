@@ -4,10 +4,9 @@ import {
   getDisconnectedMockedEntities,
   getFullyInstantiatedMockedEntities,
 } from '@features/__tests__/MockEntities';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageData } from '@entities/language/LanguageTypes';
-import { EntityDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
 
 describe('createFamilyLocales', () => {
   function getLocaleIDs(ents: EntityDictionary): string {

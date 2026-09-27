@@ -1,6 +1,4 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
@@ -25,6 +23,7 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
       return ent.languages.length > 0
         ? ent.languages.reduce((sum, lang) => sum + (lang.pop.overall || 0), 0)
         : undefined;
+    case EntityType.Keyboard:
     case EntityType.Org:
       return undefined;
   }
@@ -67,6 +66,8 @@ export function getEntityPopulationOfDescendants(ent: EntityData): number | unde
     case EntityType.Census:
     case EntityType.Locale:
     case EntityType.Variant:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
@@ -86,6 +87,8 @@ export function getEntityPopulationPercentInBiggestDescendantLanguage(
     case EntityType.Locale:
     case EntityType.Variant:
     case EntityType.WritingSystem:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
@@ -107,6 +110,8 @@ export function getEntityPopulationRelativeToOverallLanguageSpeakers(
     case EntityType.Territory:
     case EntityType.Variant:
     case EntityType.WritingSystem:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
@@ -128,6 +133,8 @@ export function getEntityPercentOfTerritoryPopulation(ent: EntityData): number |
     case EntityType.Language:
     case EntityType.WritingSystem:
     case EntityType.Variant:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
@@ -149,6 +156,7 @@ export function getEntityPopulationSpeaking(ent: EntityData): number | undefined
         : undefined;
     case EntityType.Census:
     case EntityType.WritingSystem:
+    case EntityType.Keyboard:
     case EntityType.Org:
       return undefined;
   }
@@ -172,6 +180,7 @@ export function getEntityPopulationWriting(ent: EntityData): number | undefined 
           : undefined
         : undefined;
     case EntityType.Census:
+    case EntityType.Keyboard:
     case EntityType.Org:
       return undefined;
   }

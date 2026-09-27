@@ -3,16 +3,17 @@ import React from 'react';
 import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
 import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import SimpleLocaleTable from '@entities/locale/SimpleLocaleTable';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import { TerritoryData } from './TerritoryTypes';
+import type { TerritoryData } from './TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-
 import LocalePopulationBreakdownAdjusted from './LocalePopulationBreakdownAdjusted';
 import LocalePopulationBreakdownAggregated from './LocalePopulationBreakdownAggregated';
+import { LocaleData, PopulationSourceCategory } from './LocaleTypes';
 
 type Props = {
   locale: LocaleData;

@@ -2,6 +2,7 @@ import React from 'react';
 
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+import DetailsStatContainer from '@widgets/details/ui/DetailsStatContainer';
 
 import PopulationFocus from '@entities/types/PopulationFocus';
 
@@ -9,7 +10,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 
@@ -23,7 +24,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang, speakingOrWriting })
       {pop.estimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
-        <div className="DetailsStatContainer">
+        <DetailsStatContainer>
           <DetailsStatBlock label={getLanguageModalityUserLabel(lang.modality, speakingOrWriting)}>
             <LanguagePopulationEstimate
               lang={lang}
@@ -34,7 +35,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang, speakingOrWriting })
               }
             />
           </DetailsStatBlock>
-        </div>
+        </DetailsStatContainer>
       )}
     </DetailsSection>
   );

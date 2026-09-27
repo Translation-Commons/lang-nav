@@ -1,7 +1,5 @@
 import React from 'react';
 
-import CensusDetails from '@widgets/details/CensusDetails';
-
 import PaginationControls from '@features/pagination/PaginationControls';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import usePageParams from '@features/params/usePageParams';
@@ -11,6 +9,7 @@ import EntityTitle from '@entities/ui/EntityTitle';
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import CensusDetails from './CensusDetails';
 import { CensusData } from './CensusTypes';
 
 const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {

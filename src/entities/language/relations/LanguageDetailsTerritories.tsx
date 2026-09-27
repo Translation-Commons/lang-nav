@@ -10,7 +10,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 import LanguageTerritories from '../relations/LanguageTerritories';
 
 const LanguageDetailsTerritories: React.FC<{ lang: LanguageData }> = ({ lang }) => {

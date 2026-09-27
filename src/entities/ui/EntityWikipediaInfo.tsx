@@ -1,13 +1,12 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   WikipediaData,
   WikipediaStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';

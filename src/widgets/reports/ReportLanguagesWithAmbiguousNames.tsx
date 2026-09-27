@@ -13,12 +13,11 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { getLanguageTreeNodes } from '@entities/language/relations/LanguageHierarchy';
 
 import { unique } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-
-import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 
 const ReportLanguagesWithAmbiguousNames: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();

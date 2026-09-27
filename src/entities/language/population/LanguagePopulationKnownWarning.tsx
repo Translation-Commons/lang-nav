@@ -3,7 +3,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

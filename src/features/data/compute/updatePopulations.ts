@@ -1,9 +1,9 @@
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 

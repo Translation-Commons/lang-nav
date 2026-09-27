@@ -2,17 +2,18 @@ import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import { groupBy, sumBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

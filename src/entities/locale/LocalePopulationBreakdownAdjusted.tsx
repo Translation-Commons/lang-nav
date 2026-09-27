@@ -4,8 +4,6 @@ import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-
 import CellLabel from '@shared/containers/CellLabel';
 import CellPercent from '@shared/containers/CellPercent';
 import CellPopulation from '@shared/containers/CellPopulation';
@@ -14,6 +12,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLocaleName } from './LocaleStrings';
+import { LocaleData, PopulationSourceCategory } from './LocaleTypes';
 
 const LocalePopulationBreakdownAdjusted: React.FC<{
   locale: LocaleData;

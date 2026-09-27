@@ -1,6 +1,6 @@
 import { expect, Page, test } from '@playwright/test';
 
-import { EntityType } from '../src/features/params/PageParamTypes';
+import { EntityType } from '../src/entities/types/EntityTypes';
 import TableID from '../src/features/table/TableID';
 import ReportID from '../src/widgets/reports/ReportID';
 

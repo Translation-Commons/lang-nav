@@ -3,15 +3,14 @@
  * computeLanguageDigitalSupportScore.ts -- the scores are still used for sorting, charts and the
  * overall metascore, while these statuses describe what is actually missing for a language.
  */
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import { getDigitalSupportStatusLabel } from '@strings/DigitalSupportStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import {
   DigitalSupportCategory,

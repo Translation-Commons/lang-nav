@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/Suggestion';
+import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
 import { groupBy } from '@shared/lib/setUtils';

@@ -1,8 +1,6 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
-import { EntityBase } from '@entities/types/DataTypes';
+import type { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import type { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
 

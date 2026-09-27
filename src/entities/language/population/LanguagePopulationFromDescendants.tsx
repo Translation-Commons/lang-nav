@@ -3,9 +3,11 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import ContextIcon from '@shared/ui/ContextIcon';
@@ -13,7 +15,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

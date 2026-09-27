@@ -1,0 +1,94 @@
+import React from 'react';
+
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
+
+import type { VariantData } from './VariantTypes';
+
+type Props = {
+  variant: VariantData;
+};
+
+const VariantDetails: React.FC<Props> = ({ variant }) => {
+  return (
+    <div className="Details">
+      <VariantAttributesSection variant={variant} />
+      <VariantConnectionsSection variant={variant} />
+    </div>
+  );
+};
+
+const VariantAttributesSection: React.FC<{ variant: VariantData }> = ({ variant }) => {
+  const { ID, dateAdded, nameDisplay, description, variantType } = variant;
+
+  return (
+    <DetailsSection title="Attributes">
+      <DetailsField title="IANA Code">{ID}</DetailsField>
+      {variantType && (
+        <DetailsField title="Type">
+          <Hoverable hoverContent={getVariantTypeDescription(variantType)}>
+            {getVariantTypeDisplay(variantType)}
+          </Hoverable>
+        </DetailsField>
+      )}
+      <DetailsField title="Name">{nameDisplay}</DetailsField>
+      {description && <DetailsField title="Description">{description}</DetailsField>}
+      {dateAdded && <DetailsField title="Added">{dateAdded.toLocaleDateString()}</DetailsField>}
+    </DetailsSection>
+  );
+};
+
+const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant }) => {
+  const { languages, locales, equivalentLanguage, prefixes } = variant;
+
+  if (
+    languages.length === 0 &&
+    locales.length === 0 &&
+    !equivalentLanguage &&
+    prefixes.length === 0
+  ) {
+    return null;
+  }
+
+  return (
+    <DetailsSection title="Connections">
+      {prefixes.length > 0 && (
+        <DetailsField title="Declared Prefixes">
+          <CommaSeparated>{prefixes}</CommaSeparated>
+        </DetailsField>
+      )}
+      {languages.length > 0 && (
+        <DetailsField title="Languages">
+          <CommaSeparated>
+            {Object.values(languages).map((lang) => (
+              <HoverableEntityName key={lang.ID} ent={lang} />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {locales.length > 0 && (
+        <DetailsField title="Locales">
+          <CommaSeparated>
+            {Object.values(locales).map((locale) => (
+              <HoverableEntityName key={locale.ID} ent={locale} />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {equivalentLanguage && equivalentLanguage.ID !== 'mis' && (
+        <DetailsField title="Equivalent Language">
+          <HoverableEntityName ent={equivalentLanguage} />
+        </DetailsField>
+      )}
+    </DetailsSection>
+  );
+};
+
+export default VariantDetails;

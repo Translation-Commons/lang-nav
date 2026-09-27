@@ -2,11 +2,12 @@ import { PinIcon, PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
 import ZIndex from '@features/layers/ZIndex';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
+import { EntityType } from '@entities/types/EntityTypes';
 import EntityCard from '@entities/ui/EntityCard';
 import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystemsInTerritoryCard';
 

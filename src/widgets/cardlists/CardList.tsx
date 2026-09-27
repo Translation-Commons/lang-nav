@@ -6,7 +6,7 @@ import useColors from '@features/transforms/coloring/useColors';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import EntityCard from '@entities/ui/EntityCard';
 
 import Deemphasized from '@shared/ui/Deemphasized';

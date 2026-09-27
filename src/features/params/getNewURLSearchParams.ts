@@ -2,9 +2,10 @@ import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisi
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
-import { EntityType, PageParamKey, PageParams, View } from './PageParamTypes';
+import { PageParamKey, PageParams, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
 /**

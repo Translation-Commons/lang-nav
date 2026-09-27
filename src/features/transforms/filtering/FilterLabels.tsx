@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';

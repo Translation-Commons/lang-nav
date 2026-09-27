@@ -2,7 +2,7 @@ import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { TerritoryCode } from '@entities/territory/TerritoryTypes';
 
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 
 export function getLocaleCode(
   locale: LocaleData,

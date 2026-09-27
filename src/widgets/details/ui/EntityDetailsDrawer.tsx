@@ -3,11 +3,10 @@ import React from 'react';
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import getEntityFromID from '@entities/lib/getEntityFromID';
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
 import EntityTypeLabel from '@entities/ui/EntityTypeLabel';
 import VariantDrawer from '@entities/variant/VariantDrawer';

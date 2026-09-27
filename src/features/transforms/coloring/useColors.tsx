@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
 import getField from '../fields/getField';

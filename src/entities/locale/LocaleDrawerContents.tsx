@@ -15,7 +15,7 @@ import { getLocaleSourceLabel } from '@strings/LocaleSourceStrings';
 
 import LocaleDrawerPopulation from './LocaleDrawerPopulation';
 import { getOfficialLabel } from './LocaleStrings';
-import { LocaleData } from './LocaleTypes';
+import type { LocaleData } from './LocaleTypes';
 import LocaleIndigeneityDisplay from './localstatus/LocaleIndigeneityDisplay';
 
 type Props = {

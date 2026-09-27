@@ -6,7 +6,8 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType } from '@features/params/PageParamTypes';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';

@@ -1,0 +1,151 @@
+import React from 'react';
+
+import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import usePageParams from '@features/params/usePageParams';
+import TableColumn from '@features/table/TableColumn';
+import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
+
+import { EntityType } from '@entities/types/EntityTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
+
+import type { LanguageData } from '../LanguageTypes';
+
+import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
+import LanguagePopulationFromDescendants from './LanguagePopulationFromDescendants';
+import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
+import LanguagePopulationInSelectedTerritory from './LanguagePopulationInSelectedTerritory';
+import LanguagePopulationKnownWarning from './LanguagePopulationKnownWarning';
+import LanguagePopulationSource from './LanguagePopulationSource';
+
+const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
+  isShortened = false,
+}) => {
+  const { territoryFilter } = usePageParams();
+  if (!territoryFilter)
+    return isShortened ? '... in selected Territory' : 'Population (in Territory, unselected)';
+
+  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
+  return isShortened ? <>... in {formattedTerritory}</> : <>Population (in {formattedTerritory})</>;
+};
+
+const PopulationInTerritoryDescription: React.FC = () => {
+  const { territoryFilter, updatePageParams } = usePageParams();
+  if (!territoryFilter)
+    return 'Select a territory in the filters in the side panel to see population in that territory.';
+
+  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
+  return (
+    <>
+      The population of this language in {formattedTerritory}. For more details and sorting, see the{' '}
+      <HoverableButton onClick={() => updatePageParams({ entType: EntityType.Locale })}>
+        Locale Table
+      </HoverableButton>
+    </>
+  );
+};
+
+const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
+  {
+    key: 'Population (est.)',
+    description: (
+      <>
+        The overall amount of people that speak, write, or sign this language. This is estimated
+        from one of 3 possible sources: inputted data aggregated from language databases, aggregated
+        census data and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Overall} />,
+    field: Field.Population,
+    isInitiallyVisible: false,
+  },
+  {
+    key: 'Speakers (est.)',
+    description: (
+      <>
+        The estimated number of people that speak this language. This is estimated from one of 3
+        possible sources: inputted data aggregated from language databases, aggregated census data
+        and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => (
+      <>
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="speaking" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Speaking} />
+      </>
+    ),
+    field: Field.PopulationSpeaking,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
+  },
+  {
+    key: 'Writers (est.)',
+    description: (
+      <>
+        The estimated number of people that write in this language. For many people, this may not be
+        their mothertongue (L1), rather their second language (L2). This is estimated from one of 3
+        possible sources: inputted data aggregated from language databases, aggregated census data
+        and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => (
+      <>
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="writing" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Writing} />
+      </>
+    ),
+    field: Field.PopulationWriting,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
+  },
+  {
+    key: 'Best Estimate Source',
+    description: 'The source category for the overall population estimate.',
+    render: (lang) => <LanguagePopulationSource lang={lang} />,
+  },
+  {
+    key: 'Population (Rough)',
+    labelInColumnGroup: '... rough estimate',
+    description:
+      'This is a rough estimate from variable internet databases (citations not available).',
+    render: (lang) => lang.pop.rough,
+    field: Field.PopulationDirectlySourced,
+  },
+  {
+    key: 'Population (from Dialects)',
+    labelInColumnGroup: '... from Dialects',
+    description:
+      'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
+    render: (lang) => (
+      <LanguagePopulationFromDescendants lang={lang} speakingOrWriting="speaking" />
+    ),
+    field: Field.PopulationOfDescendants,
+  },
+  {
+    key: 'Population (from Locales)',
+    labelInColumnGroup: '... from Locales',
+    description: (
+      <>
+        This data comes from adding up the populations of all locales for this language. The
+        population from locales have been adjusted to {TerritoryDataYear} estimates.
+      </>
+    ),
+    render: (lang) => <LanguagePopulationFromLocales lang={lang} speakingOrWriting="speaking" />,
+    valueType: TableValueType.Population,
+  },
+  {
+    key: 'Population (in Territory)',
+    label: <PopulationInTerritoryLabel />,
+    labelInColumnGroup: <PopulationInTerritoryLabel isShortened={true} />,
+    description: <PopulationInTerritoryDescription />,
+    render: (lang) => <LanguagePopulationInSelectedTerritory lang={lang} />,
+    isInitiallyVisible: (params) =>
+      !!params.territoryFilter.match(/(^[A-Za-z]{2}$)|(\W[A-Z]{2}\W)/),
+    valueType: TableValueType.Population,
+  },
+];
+
+export default LanguagePopulationColumns.map((col) => ({
+  ...col,
+  isInitiallyVisible: col.isInitiallyVisible ?? false,
+  columnGroup: 'Population',
+}));

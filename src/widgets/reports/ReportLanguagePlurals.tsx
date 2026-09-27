@@ -1,9 +1,8 @@
 import React from 'react';
 
-import LanguagePluralsTable from '@widgets/tables/LanguagePluralsTable';
-
 import LanguagePluralCategory from '@entities/language/plurals/LanguagePluralCategory';
 import { PluralRuleKey } from '@entities/language/plurals/LanguagePluralComputation';
+import LanguagePluralsTable from '@entities/language/plurals/LanguagePluralsTable';
 import PluralRulesLanguageExamplesTable from '@entities/language/plurals/PluralRulesLanguageExamplesTable';
 import PluralRulesSummaryTable from '@entities/language/plurals/PluralRulesSummaryTable';
 

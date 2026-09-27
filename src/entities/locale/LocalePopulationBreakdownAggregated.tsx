@@ -4,14 +4,13 @@ import React from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-
 import LabelTableCell from '@shared/containers/CellLabel';
 import CellPercent from '@shared/containers/CellPercent';
 import CellPopulation from '@shared/containers/CellPopulation';
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getLocaleName } from './LocaleStrings';
+import { LocaleData, PopulationSourceCategory } from './LocaleTypes';
 
 const MAX_CONSTITUENTS_DISPLAYED = 5;
 

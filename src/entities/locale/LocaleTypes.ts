@@ -1,12 +1,10 @@
-import { EntityType } from '@features/params/PageParamTypes';
-
-import { CensusData } from '@entities/census/CensusTypes';
-import { WikipediaData } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
-import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityBase } from '@entities/types/DataTypes';
-import { VariantData, VariantIANATag } from '@entities/variant/VariantTypes';
-import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { CensusData } from '@entities/census/CensusTypes';
+import type { WikipediaData } from '@entities/language/digitalsupport/DigitalSupportTypes';
+import type { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import type { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import type { VariantData, VariantIANATag } from '@entities/variant/VariantTypes';
+import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 /**
  * Standard locale code for the app following the BCP-47 convention with some departures:

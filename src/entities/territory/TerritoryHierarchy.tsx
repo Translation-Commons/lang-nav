@@ -1,0 +1,71 @@
+import React from 'react';
+
+import { useDataContext } from '@features/data/context/useDataContext';
+import { useScopeFilter } from '@features/transforms/filtering/filter';
+import { getSortFunction } from '@features/transforms/sorting/sort';
+import { TreeNodeData } from '@features/treelist/TreeListNode';
+import TreeListPageBody from '@features/treelist/TreeListPageBody';
+
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
+
+import { TerritoryData, TerritoryScope } from './TerritoryTypes';
+
+export const TerritoryHierarchy: React.FC = () => {
+  const { territories } = useDataContext();
+  const sortFunction = getSortFunction();
+  const filterByScope = useScopeFilter();
+
+  const rootNodes = getTerritoryTreeNodes(
+    territories.filter((t) => t.parentUNRegion == null),
+    sortFunction,
+    filterByScope,
+  );
+
+  return (
+    <TreeListPageBody
+      rootNodes={rootNodes}
+      description={
+        <>
+          <strong>Bold territories</strong> are countries. <em>Italicized countries</em> are
+          dependencies.
+        </>
+      }
+    />
+  );
+};
+
+export function getTerritoryTreeNodes(
+  territories: TerritoryData[],
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterByScope: (a: EntityData) => boolean,
+): TreeNodeData[] {
+  return territories
+    .flatMap((territory) => {
+      if (filterByScope(territory))
+        return getTerritoryTreeNode(territory, sortFunction, filterByScope);
+      return getTerritoryTreeNodes(
+        territory.containsTerritories ?? [],
+        sortFunction,
+        filterByScope,
+      );
+    })
+    .sort((a, b) => sortFunction(a.ent, b.ent));
+}
+
+function getTerritoryTreeNode(
+  territory: TerritoryData,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterByScope: (a: EntityData) => boolean,
+): TreeNodeData {
+  return {
+    type: EntityType.Territory,
+    ent: territory,
+    children: territory.containsTerritories
+      ? getTerritoryTreeNodes(territory.containsTerritories, sortFunction, filterByScope)
+      : [],
+    labelStyle: {
+      fontWeight: territory.scope === TerritoryScope.Country ? 'bold' : 'normal',
+      fontStyle: territory.scope === TerritoryScope.Dependency ? 'italic' : 'normal',
+    },
+  };
+}

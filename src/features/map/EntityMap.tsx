@@ -2,18 +2,17 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import PinnedMiniCardList from '@widgets/cardlists/PinnedMiniCardList';
 
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityLocales } from '@entities/lib/getEntityRelatedTerritories';
-import { LocaleData } from '@entities/locale/LocaleTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 

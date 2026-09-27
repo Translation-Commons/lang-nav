@@ -5,10 +5,11 @@ import {
   getDisconnectedMockedEntities,
   getMockedEntityDictionaries,
 } from '@features/__tests__/MockEntities';
-import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { updateEntitiesBasedOnDataParams } from '../updateEntitiesBasedOnDataParams';
 

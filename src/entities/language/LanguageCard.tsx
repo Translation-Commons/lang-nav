@@ -17,7 +17,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageDigitalSupportMetascore from './digitalsupport/LanguageDigitalSupportMetascore';
-import { LanguageData } from './LanguageTypes';
+import type { LanguageData } from './LanguageTypes';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
 import LanguageTerritoryList from './relations/LanguageTerritoryList';
 

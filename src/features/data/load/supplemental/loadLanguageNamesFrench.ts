@@ -1,4 +1,4 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 export async function loadLanguageNamesFrench(
   getLanguage: (id: string) => LanguageData | undefined,

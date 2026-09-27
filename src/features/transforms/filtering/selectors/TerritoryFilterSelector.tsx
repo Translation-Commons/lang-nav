@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
 import { useFilterLabels } from '../FilterLabels';

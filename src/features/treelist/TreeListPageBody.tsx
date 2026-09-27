@@ -8,7 +8,7 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import CopyButton from '@shared/ui/CopyButton';
 

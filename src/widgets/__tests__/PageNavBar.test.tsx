@@ -5,8 +5,10 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import ReportID from '@widgets/reports/ReportID';
 
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

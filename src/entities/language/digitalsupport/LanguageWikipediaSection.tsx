@@ -1,0 +1,62 @@
+import React from 'react';
+
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+import DetailsStatContainer from '@widgets/details/ui/DetailsStatContainer';
+
+import { getStatusColor } from '@entities/ui/EntityWikipediaInfo';
+
+import { Badge } from '@shared/ui/badge';
+import CountCompact from '@shared/ui/CountCompact';
+import ExternalLink from '@shared/ui/ExternalLink';
+
+import type { LanguageData } from '../LanguageTypes';
+
+import { WikipediaStatus } from './DigitalSupportTypes';
+
+const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { wikipedias } = lang;
+  const wikipedia = wikipedias && wikipedias.length > 0 ? wikipedias[0] : undefined;
+  const isActive = wikipedia && wikipedia.status === WikipediaStatus.Active;
+
+  return (
+    <DetailsSection
+      title="Wikipedia"
+      headerOptions={
+        wikipedia && (
+          <Badge variant="secondary" style={{ color: getStatusColor(wikipedia.status) }}>
+            {wikipedia.status}
+          </Badge>
+        )
+      }
+    >
+      <div>
+        {wikipedia?.url && (
+          <ExternalLink href={'http://' + wikipedia.url}>{wikipedia.url}</ExternalLink>
+        )}
+      </div>
+      <DetailsStatContainer>
+        <DetailsStatBlock label="Articles">
+          {isActive && wikipedia ? (
+            <CountCompact count={wikipedia.articles} />
+          ) : (
+            <NotApplicableDisplay />
+          )}
+        </DetailsStatBlock>
+        <DetailsStatBlock label="Active Users">
+          {isActive && wikipedia ? (
+            <CountCompact count={wikipedia.activeUsers} />
+          ) : (
+            <NotApplicableDisplay />
+          )}
+        </DetailsStatBlock>
+      </DetailsStatContainer>
+    </DetailsSection>
+  );
+};
+
+export default LanguageWikipediaSection;
+
+const NotApplicableDisplay = () => (
+  <span style={{ fontSize: '0.6em', color: 'var(--color-text-secondary)' }}>N/A</span>
+);

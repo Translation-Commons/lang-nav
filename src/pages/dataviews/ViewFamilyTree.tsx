@@ -1,13 +1,13 @@
-import { CensusHierarchy } from '@widgets/treelists/CensusHierarchy';
-import { LanguageHierarchy } from '@widgets/treelists/LanguageHierarchy';
-import { LocaleHierarchy } from '@widgets/treelists/LocaleHierarchy';
-import { OrganizationHierarchy } from '@widgets/treelists/OrganizationHierarchy';
-import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
-import { VariantHierarchy } from '@widgets/treelists/VariantHierarchy';
-import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
-
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { CensusHierarchy } from '@entities/census/CensusHierarchy';
+import { LanguageHierarchy } from '@entities/language/relations/LanguageHierarchy';
+import { LocaleHierarchy } from '@entities/locale/LocaleHierarchy';
+import { OrganizationHierarchy } from '@entities/org/OrganizationHierarchy';
+import { TerritoryHierarchy } from '@entities/territory/TerritoryHierarchy';
+import { EntityType } from '@entities/types/EntityTypes';
+import { VariantHierarchy } from '@entities/variant/VariantHierarchy';
+import { WritingSystemHierarchy } from '@entities/writingsystem/WritingSystemHierarchy';
 
 function ViewFamilyTree() {
   const { entType } = usePageParams();

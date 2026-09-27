@@ -2,7 +2,7 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Highlightable from '@shared/ui/Highlightable';

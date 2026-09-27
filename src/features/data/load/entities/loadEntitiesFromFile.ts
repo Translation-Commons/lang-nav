@@ -2,7 +2,7 @@
  * This file provides asynchronous functions to load in data
  */
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
 

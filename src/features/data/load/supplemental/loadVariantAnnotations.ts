@@ -1,5 +1,5 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
 
 import { getVariantTypeFromString } from '@strings/VariantStrings';
 

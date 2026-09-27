@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
-
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { getLocaleName } from '../LocaleStrings';

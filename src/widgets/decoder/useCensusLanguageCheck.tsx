@@ -8,8 +8,8 @@ import {
   parseCensusLanguageName,
 } from '@entities/census/parseCensusLanguageRow';
 import { parseCensusMetadata } from '@entities/census/parseCensusMetadata';
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { EntityData } from '@entities/types/DataTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

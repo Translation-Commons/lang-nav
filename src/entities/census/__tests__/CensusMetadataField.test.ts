@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { EntityType } from '@features/params/PageParamTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { CensusMetadataField } from '../CensusMetadataField';
 import { CensusCollectorType, CensusData, CensusLanguageUse } from '../CensusTypes';

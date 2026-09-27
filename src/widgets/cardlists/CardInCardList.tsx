@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import PinButton from '@shared/ui/PinButton';
 

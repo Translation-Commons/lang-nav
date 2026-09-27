@@ -1,5 +1,7 @@
-import { EntityType, PageParamKey } from '@features/params/PageParamTypes';
+import { PageParamKey } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

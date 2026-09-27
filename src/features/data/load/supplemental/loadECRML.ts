@@ -1,4 +1,4 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { parseECRMLProtectionLevel } from '@entities/locale/LocaleStrings';
 
 /**

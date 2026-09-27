@@ -1,0 +1,67 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import TableColumn from '@features/table/TableColumn';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import type { LocaleData } from './LocaleTypes';
+
+const columns: TableColumn<LocaleData>[] = [
+  {
+    key: 'More General Locales',
+    render: (ent) => (
+      <CommaSeparated limit={1} limitText="short">
+        {ent.relatedLocales?.moreGeneral?.map((locale) => (
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
+        ))}
+      </CommaSeparated>
+    ),
+  },
+  {
+    key: 'More Specific Locales',
+    render: (ent) => (
+      <CommaSeparated limit={1} limitText="short">
+        {ent.relatedLocales?.moreSpecific?.map((locale) => (
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
+        ))}
+      </CommaSeparated>
+    ),
+  },
+  {
+    key: 'Parent Language Locale',
+    render: (ent) => (
+      <HoverableEntityName ent={ent.relatedLocales?.parentLanguage} labelSource="code" />
+    ),
+  },
+  {
+    key: 'Child Language Locales',
+    render: (ent) => (
+      <CommaSeparated limit={1} limitText="short">
+        {ent.relatedLocales?.childLanguages?.map((locale) => (
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
+        ))}
+      </CommaSeparated>
+    ),
+  },
+  {
+    key: 'Encapsulating Territory Locale',
+    render: (ent) => (
+      <HoverableEntityName ent={ent.relatedLocales?.parentTerritory} labelSource="code" />
+    ),
+  },
+  {
+    key: 'Contained Territory Locales',
+    render: (ent) => (
+      <CommaSeparated limit={1} limitText="short">
+        {ent.relatedLocales?.childTerritories?.map((locale) => (
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
+        ))}
+      </CommaSeparated>
+    ),
+  },
+];
+
+export default columns.map((col) => ({
+  ...col,
+  isInitiallyVisible: false,
+  columnGroup: 'Related Locales',
+}));

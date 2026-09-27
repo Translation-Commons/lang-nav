@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
-import { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
 
 import { useFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';

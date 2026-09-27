@@ -2,9 +2,9 @@ import {
   WikipediaData,
   WikipediaStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { ScriptCode } from '@entities/writingsystem/WritingSystemTypes';
 
 import { DataContextType } from '../../context/useDataContext';

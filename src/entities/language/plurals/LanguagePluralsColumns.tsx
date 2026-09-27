@@ -7,7 +7,7 @@ import Field from '@features/transforms/fields/Field';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 import LanguagePluralCategories from './LanguagePluralCategories';
 import LanguagePluralCategory from './LanguagePluralCategory';

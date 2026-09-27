@@ -8,7 +8,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import { LanguageData } from '../LanguageTypes';
+import type { LanguageData } from '../LanguageTypes';
 
 const LanguageDetailsConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { getCLDRLanguage } = useDataContext();

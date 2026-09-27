@@ -1,14 +1,14 @@
-import KeyboardTable from '@widgets/tables/KeyboardTable';
-import LanguageTable from '@widgets/tables/LanguageTable';
-import LocaleTable from '@widgets/tables/LocaleTable';
-import OrganizationTable from '@widgets/tables/OrganizationTable';
-import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
-import TerritoryTable from '@widgets/tables/TerritoryTable';
-import VariantTable from '@widgets/tables/VariantTable';
-import WritingSystemTable from '@widgets/tables/WritingSystemTable';
-
-import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
+import KeyboardTable from '@entities/keyboard/KeyboardTable';
+import LanguageTable from '@entities/language/LanguageTable';
+import LocaleTable from '@entities/locale/LocaleTable';
+import OrganizationTable from '@entities/org/OrganizationTable';
+import TerritoryTable from '@entities/territory/TerritoryTable';
+import { EntityType } from '@entities/types/EntityTypes';
+import VariantTable from '@entities/variant/VariantTable';
+import WritingSystemTable from '@entities/writingsystem/WritingSystemTable';
 
 function ViewTable() {
   const { entType } = usePageParams();

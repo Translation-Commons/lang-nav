@@ -1,5 +1,5 @@
-import { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 export function connectOrganizations(
   organizations: Record<string, OrganizationData>,

@@ -4,7 +4,7 @@ import useEntities from '@features/data/context/useEntities';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import getFilterBySubstring from '../search/getFilterBySubstring';
 

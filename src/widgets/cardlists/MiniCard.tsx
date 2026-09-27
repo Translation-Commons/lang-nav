@@ -8,10 +8,11 @@ import FieldIcon from '@features/transforms/fields/FieldIcon';
 import getField from '@features/transforms/fields/getField';
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import EntityName, { EntityNameLabelSource } from '@entities/ui/EntityName';
 
 import CodeDisplay from '@shared/ui/CodeDisplay';
+
 const MiniCard: React.FC<{ ent: EntityData; labelSource?: EntityNameLabelSource }> = ({
   ent,
   labelSource,
@@ -24,14 +25,29 @@ const MiniCard: React.FC<{ ent: EntityData; labelSource?: EntityNameLabelSource 
     () => nav('/data?' + getNewURLSearchParams({ entID: ent.ID }, oldParams)),
     [nav, oldParams, ent.ID],
   );
+  const showCode = !labelSource?.includes('code');
 
   return (
     <div className="text-xs flex flex-col gap-1" onClick={onClick}>
-      <div className="flex flex-row items-center gap-2 justify-between">
-        <strong className="text-left">
+      <div
+        className={
+          'w-full flex items-center gap-x-1 gap-y-0 justify-between' +
+          (ent.codeDisplay.length > 5 || ent.nameDisplay.length > 20 ? ' flex-col' : ' flex-row')
+        }
+      >
+        <strong
+          className={
+            'self-start text-start' +
+            (ent.nameDisplay.split(/\W+/).length > 2 ? ' line-clamp-2' : '')
+          }
+        >
           <EntityName ent={ent} labelSource={labelSource} />
         </strong>
-        {!labelSource?.includes('code') && <CodeDisplay>{ent.codeDisplay}</CodeDisplay>}
+        {showCode && (
+          <div className="self-end text-end">
+            <CodeDisplay>{ent.codeDisplay}</CodeDisplay>
+          </div>
+        )}
       </div>
       {fields.map((field) => {
         const val = getField(ent, field);

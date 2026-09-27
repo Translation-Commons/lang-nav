@@ -1,0 +1,22 @@
+import React from 'react';
+
+import { useDataContext } from '@features/data/context/useDataContext';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
+import TableID from '@features/table/TableID';
+
+import getWritingSystemColumns from './WritingSystemColumns';
+
+const WritingSystemTable: React.FC = () => {
+  const { writingSystems } = useDataContext();
+  const columns = getWritingSystemColumns();
+
+  return (
+    <InteractiveEntityTable
+      tableID={TableID.WritingSystems}
+      ents={writingSystems}
+      columns={columns}
+    />
+  );
+};
+
+export default WritingSystemTable;

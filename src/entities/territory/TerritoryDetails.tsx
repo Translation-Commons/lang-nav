@@ -1,0 +1,99 @@
+import React from 'react';
+
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
+
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import { getSortFunction } from '@features/transforms/sorting/sort';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import TerritoryAttributes from './TerritoryAttributes';
+import TerritoryIdentification from './TerritoryIdentification';
+import TerritoryLocation from './TerritoryLocation';
+import type { TerritoryData } from './TerritoryTypes';
+
+type Props = {
+  territory: TerritoryData;
+};
+
+const TerritoryDetails: React.FC<Props> = ({ territory }) => {
+  const {
+    censuses,
+    dependentTerritories,
+    locales,
+    parentUNRegion,
+    containsTerritories,
+    sovereign,
+  } = territory;
+  const sortFunction = getSortFunction();
+
+  return (
+    <div className="Details">
+      <TerritoryIdentification territory={territory} />
+      <TerritoryAttributes territory={territory} />
+
+      <DetailsSection title="Connections">
+        {parentUNRegion != null && (
+          <DetailsField title="In UN region">
+            <HoverableEntityName ent={parentUNRegion} />
+          </DetailsField>
+        )}
+        {containsTerritories && containsTerritories.length > 0 && (
+          <DetailsField title="Contains">
+            <CommaSeparated>
+              {containsTerritories
+                .slice()
+                .sort(sortFunction)
+                .map((territory) => (
+                  <HoverableEntityName key={territory.ID} ent={territory} />
+                ))}
+            </CommaSeparated>
+          </DetailsField>
+        )}
+
+        {sovereign != null && (
+          <DetailsField title="Administered by">
+            <HoverableEntityName ent={sovereign} />
+          </DetailsField>
+        )}
+        {dependentTerritories && dependentTerritories.length > 0 && (
+          <DetailsField title="Administers">
+            <CommaSeparated>
+              {dependentTerritories
+                .slice()
+                .sort(sortFunction)
+                .map((territory) => (
+                  <HoverableEntityName key={territory.ID} ent={territory} />
+                ))}
+            </CommaSeparated>
+          </DetailsField>
+        )}
+
+        {censuses && censuses.length > 0 && (
+          <DetailsField title="Census Tables">
+            <CommaSeparated>
+              {censuses
+                .slice()
+                .sort(sortFunction)
+                .map((census) => (
+                  <HoverableEntityName key={census.ID} ent={census} />
+                ))}
+            </CommaSeparated>
+          </DetailsField>
+        )}
+      </DetailsSection>
+
+      {/* Languages table for the territory */}
+      {locales && locales.length > 0 && (
+        <DetailsSection title="Languages" score={locales.length}>
+          <TableOfLanguagesInTerritory territory={territory} />
+        </DetailsSection>
+      )}
+
+      <TerritoryLocation territory={territory} />
+    </div>
+  );
+};
+export default TerritoryDetails;

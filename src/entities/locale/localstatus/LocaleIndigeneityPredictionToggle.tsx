@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import type { LocaleData } from '@entities/locale/LocaleTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
 
 import {

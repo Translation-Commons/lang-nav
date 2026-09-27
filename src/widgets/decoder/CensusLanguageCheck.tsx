@@ -1,6 +1,6 @@
 import React, { ReactNode, useCallback } from 'react';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 import CopyButton from '@shared/ui/CopyButton';
 

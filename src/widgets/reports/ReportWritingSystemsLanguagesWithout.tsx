@@ -13,7 +13,7 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageRootLanguageFamily } from '@entities/language/relations/LanguageFamilyUtils';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';

@@ -3,7 +3,7 @@ import { SearchableField } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import PinButton from '@shared/ui/PinButton';
 

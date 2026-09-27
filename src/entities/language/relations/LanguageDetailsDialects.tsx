@@ -4,11 +4,9 @@ import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
-import getLanguageColumns from '@widgets/tables/columns/LanguageColumns';
-import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType, View } from '@features/params/PageParamTypes';
+import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -16,10 +14,15 @@ import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
+import { EntityType } from '@entities/types/EntityTypes';
+
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
+import getLanguageColumns from '../LanguageColumns';
 import { LanguageData, LanguageScope } from '../LanguageTypes';
 import LanguageDialectsMap from '../relations/LanguageDialectsMap';
+
+import { getLanguageTreeNodes } from './LanguageHierarchy';
 
 const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const [sectionView, setSectionView] = useState(View.Map);

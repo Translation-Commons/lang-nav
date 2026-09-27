@@ -9,7 +9,7 @@ import Field from '@features/transforms/fields/Field';
 import FieldIcon from '@features/transforms/fields/FieldIcon';
 import getField from '@features/transforms/fields/getField';
 
-import { EntityData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
 
 import { unique } from '@shared/lib/setUtils';

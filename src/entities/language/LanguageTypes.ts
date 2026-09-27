@@ -5,25 +5,24 @@
 
 import React from 'react';
 
-import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
-import { EntityType } from '@features/params/PageParamTypes';
+import type { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-import { VariantData } from '@entities/variant/VariantTypes';
-import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import type { VariantData } from '@entities/variant/VariantTypes';
+import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
-import { EntityBase } from '../types/DataTypes';
+import type { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 
-import {
+import type {
   DigitalSupportScore,
   PlatformSupportData,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
-import { LanguageISOStatus } from './vitality/VitalityTypes';
-import { LanguageModality } from './writing/LanguageModality';
+import type { LanguageISOStatus } from './vitality/VitalityTypes';
+import type { LanguageModality } from './writing/LanguageModality';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;

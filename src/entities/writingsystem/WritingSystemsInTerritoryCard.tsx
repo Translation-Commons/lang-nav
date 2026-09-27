@@ -4,7 +4,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

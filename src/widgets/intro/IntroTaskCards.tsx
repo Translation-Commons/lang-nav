@@ -15,8 +15,10 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { getParamsForLanguageFocus, LanguageFocus } from '@features/params/LanguageFocus';
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { PageParams, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
+
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { buttonVariants } from '@shared/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@shared/ui/card';
