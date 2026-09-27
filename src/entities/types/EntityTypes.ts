@@ -2,14 +2,14 @@
  * This file provides types for the data used in the application.
  */
 
-import { CensusData } from '@entities/census/CensusTypes';
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import type { CensusData } from '@entities/census/CensusTypes';
+import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export enum EntityType {
   Language = 'Language',
