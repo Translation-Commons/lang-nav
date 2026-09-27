@@ -54,9 +54,9 @@ Entities should be visible in most of the presentation modes:
 - Details with a full inventory of metadata
   - Also visible in Drawer, which can be a separate rendering component or fallback to the regular Details view
 - Table, with columns for most if not all metadata fields
-- *maybe* Chart if there is data that can be plotted on axes
-- *maybe* Map view if it can be effectively displayed on a map of the world
-- *maybe* Hierarchy view if the entity has a clear parent-child relationships with other entities or within itself
+- _maybe_ Chart if there is data that can be plotted on axes
+- _maybe_ Map view if it can be effectively displayed on a map of the world
+- _maybe_ Hierarchy view if the entity has a clear parent-child relationships with other entities or within itself
 
 While it is a bit overkill for some kinds of entities (like how many people need to see a card list of the organizations with data on LangNav?) -- it provides transparency about our data and makes it easier for users to easily navigate between kinds of entities in the system.
 
@@ -92,21 +92,29 @@ This section will provide a file-by-file guide on how to add a new entity to the
    3. As we load in data, some data is a key to a different entity, keep 2 different fields for those, a raw key field and an optional resolved entity reference. For instance, `parentLanguageCode` and `parentLanguage`.
    4. Add relevant enums or constants for the entity, such as `*Scope` if there are different ways to measure the scope.
 2. Update `EntityType` and `EntityData` in `src/entities/types/EntityTypes.ts` to include the new entity.
-3. Prepare TSVs -- for technologies.tsv we're keeping a master of all technology data, but others like the censuses are too varied to easily maintain a master list in a tsv and are their metadata is defined as headers in each of the files.
-   1. While sometimes you come in with a pre-defined TSV, for some of the manual lists I just keep a Google Drive spreadsheet available with the data for easier editing then I copy-paste it to the TSV.
-   2. The data will go into the repository in `public/data/...` -- if its manually curated data from Translation Commons put it in the `tc` folder, but if it comes from another source, put it in an appropriate directory
-4. Update switch statements and other files that require the new entity -- it's easy to run `npm run build` to see which areas need definition.
+3. Update switch statements and other files that require the new entity -- it's easy to run `npm run build` to see which areas need definition.
    1. In order to avoid tackling too many changes in 1 PR, feel free to leave stubs to get back to, it's often good to label them TODO comments so we can easily find and complete them later. For example, `getEntityMainTableColumns` can be tackled later.
    2. As you fill in the results for methods like `getEntityChildren` you may update your EntityData definition to include any new relationships or fields required by the entity.
+
+   this is probably a good time to save a commit before continuing forward
+
+4. Prepare TSVs -- for technologies.tsv we're keeping a master of all technology data, but others like the censuses are too varied to easily maintain a master list in a tsv and are their metadata is defined as headers in each of the files.
+   1. While sometimes you come in with a pre-defined TSV, for some of the manual lists I just keep a Google Drive spreadsheet available with the data for easier editing then I copy-paste it to the TSV.
+   2. The data will go into the repository in `public/data/...` -- if its manually curated data from Translation Commons put it in the `tc` folder, but if it comes from another source, put it in an appropriate directory
 5. Add a `load*.ts` function and add it to the routines loaded in `CoreData.tsx`.
    1. Extra tsvs should be loaded in `SupplementalData.tsx`, with CoreData focused more on getting the entity structure.
    2. `loadEntitiesFromFile` handles most of entity cases, you just need to provide a function to convert raw lines into the `*Data` objects you declared before.
+5. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array so you can select this.
+
+   at this point you can save commit #2. You cannot use most visualizations but you can look at the automatically generated data shown when opening the details view showing the first few instances as examples.
+
 6. Add to the navigation & start basic views
    1. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array.
    2. Add the `EntityCard`
    3. Text our the automated `Minicard` -- open the details page
    4. This is a good time to check the default sorting. Usually LangNav sorts by population and we assume most entities have a population, but entities like an Organization aren't well suited to be sorted by population. You can add an override in `Profiles.tsx`.
+
 7. Add to other view modes
 8. Add Tools/Reports -- these help debug issues or go into in-depth analysis about different entities.
-9. Add Tests
+9.  Add Tests
    1. `MockEntities.tsx` similuates a small LangNav by makiing mock data inspired from Lord of the Rings. This helps in testing various components and views without relying on real data. The most impactful test it does is to test our various accessors and sorting with `sortMocks.test.tsx` -- however that is a very large test at this point and we should only add to it when adding new Field definitions, not necessarily new entities.

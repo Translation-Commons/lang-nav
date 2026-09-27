@@ -3,12 +3,13 @@ import { createContext, useContext } from 'react';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData } from '@entities/types/EntityTypes';
+import type { EntityData } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { CoreDataArrays } from '../load/CoreData';
+import type { CoreDataArrays } from '../load/CoreData';
 
 import LoadingStage from './LoadingStage';
 
@@ -21,6 +22,7 @@ type DataGetters = {
   getWritingSystem: (id: string) => WritingSystemData | undefined;
   getVariant: (id: string) => VariantData | undefined;
   getOrganization: (id: string) => OrganizationData | undefined;
+  getTechnology: (id: string) => TechnologyData | undefined;
 };
 
 export type DataContextType = CoreDataArrays &
@@ -40,6 +42,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   variants: [],
   writingSystems: [],
   keyboards: [],
+  technologies: [],
   getCLDRLanguage: () => undefined,
   getEntity: () => undefined,
   getLanguage: () => undefined,
@@ -48,6 +51,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   getWritingSystem: () => undefined,
   getVariant: () => undefined,
   getOrganization: () => undefined,
+  getTechnology: () => undefined,
 });
 
 export const useDataContext = () => {

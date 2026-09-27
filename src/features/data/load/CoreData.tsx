@@ -10,6 +10,7 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
@@ -23,6 +24,7 @@ import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
 import { loadOrganizations } from './entities/loadOrganizations';
+import { loadTechnologies } from './entities/loadTechnologies';
 import { loadTerritories } from './entities/loadTerritories';
 import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
@@ -56,6 +58,7 @@ export type CoreDataArrays = {
   keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
   organizations: OrganizationData[];
+  technologies: TechnologyData[];
 };
 
 export type CoreData = CoreDataArrays & {
@@ -103,6 +106,7 @@ export function useCoreData(): {
       keyboardsGBoard,
       keyboardsKeyman,
       organizations,
+      technologies,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -120,6 +124,7 @@ export function useCoreData(): {
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
       loadOrganizations(),
+      loadTechnologies(),
     ]);
 
     if (
@@ -130,7 +135,8 @@ export function useCoreData(): {
       variants == null ||
       keyboardsGBoard == null ||
       keyboardsKeyman == null ||
-      organizations == null
+      organizations == null ||
+      technologies == null
     ) {
       alert('Error loading data. Please check the console for more details.');
       return;
@@ -156,6 +162,7 @@ export function useCoreData(): {
       variants,
       keyboards,
       organizations,
+      // technologies, // TODO add Technology Entity
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
@@ -174,6 +181,7 @@ export function useCoreData(): {
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
       ...organizations, // These should be prefixed by org.
+      ...technologies, // These should be prefixed by tech.
     });
   }
 
@@ -194,6 +202,9 @@ export function useCoreData(): {
       censuses,
       organizations: Object.values(ents).filter(
         (e): e is OrganizationData => e.type === EntityType.Org,
+      ),
+      technologies: Object.values(ents).filter(
+        (e): e is TechnologyData => e.type === EntityType.Technology,
       ),
       ents,
     }),

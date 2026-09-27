@@ -23,6 +23,8 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
       return ent.languages.length > 0
         ? ent.languages.reduce((sum, lang) => sum + (lang.pop.overall || 0), 0)
         : undefined;
+    case EntityType.Technology:
+      return ent.population;
     case EntityType.Keyboard:
     case EntityType.Org:
       return undefined;
@@ -39,6 +41,8 @@ export function getEntityPopulationDirectlySourced(ent: EntityData): number | un
     case EntityType.Territory:
       return ent.pop.fromUN;
     case EntityType.Census:
+      return ent.population;
+    case EntityType.Technology:
       return ent.population;
     case EntityType.WritingSystem:
     case EntityType.Variant:
@@ -68,6 +72,7 @@ export function getEntityPopulationOfDescendants(ent: EntityData): number | unde
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -89,6 +94,7 @@ export function getEntityPopulationPercentInBiggestDescendantLanguage(
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -112,6 +118,7 @@ export function getEntityPopulationRelativeToOverallLanguageSpeakers(
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -135,6 +142,7 @@ export function getEntityPercentOfTerritoryPopulation(ent: EntityData): number |
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -158,6 +166,7 @@ export function getEntityPopulationSpeaking(ent: EntityData): number | undefined
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -182,6 +191,7 @@ export function getEntityPopulationWriting(ent: EntityData): number | undefined 
     case EntityType.Census:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }

@@ -286,7 +286,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
       ];
 
     case EntityType.Technology:
-      return [Field.LanguageList, Field.Organization, Field.Platform];
+      return [Field.LanguageList, Field.Organization, Field.Platform, Field.SourceForPopulation];
     default:
       return enforceExhaustiveSwitch(entType);
   }
