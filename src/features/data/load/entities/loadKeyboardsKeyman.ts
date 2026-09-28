@@ -41,7 +41,7 @@ export function parseKeyboardKeymanLine(line: string): KeyboardData | undefined 
     codeDisplay: id,
     nameDisplay,
     names: [nameDisplay],
-    platform: KeyboardPlatform.Keyman,
+    inputTechCode: KeyboardPlatform.Keyman,
     languageCodes,
     inputScriptCode,
     outputScriptCode,

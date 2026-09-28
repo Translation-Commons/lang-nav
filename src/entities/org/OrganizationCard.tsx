@@ -21,7 +21,6 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
     Field.Code,
     Field.TerritoryPrimary,
     Field.CountOfCensuses,
-    Field.Population,
   ]);
 
   return (

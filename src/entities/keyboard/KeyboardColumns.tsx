@@ -12,8 +12,8 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     { ...CodeColumn, isInitiallyVisible: false },
     NameColumn,
     {
-      key: 'Platform',
-      render: (ent) => ent.platform,
+      key: 'Input Technology',
+      render: (ent) => <HoverableEntityName ent={ent.inputTech} />,
       field: Field.Platform,
     },
     {

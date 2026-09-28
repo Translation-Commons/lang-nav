@@ -30,7 +30,7 @@ function getKeyboard(ID: string): KeyboardData {
     codeDisplay: ID,
     nameDisplay: ID,
     names: [ID],
-    platform: KeyboardPlatform.Keyman,
+    inputTechCode: KeyboardPlatform.Keyman,
     languageCodes: ['tst'],
     inputScriptCode: 'Latn',
     outputScriptCode: 'Latn',

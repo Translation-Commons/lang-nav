@@ -380,6 +380,7 @@ export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictio
     variants,
     {},
     {},
+    {},
   );
 
   // Update the entity dictionary with the aggregated locales

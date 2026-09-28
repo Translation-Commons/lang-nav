@@ -134,7 +134,7 @@ At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Tab
 
 Now, you should able to test this by opening the Cards view, clicking on a card/minicard to open the Drawer view, and opening the details view. See the screenshot for the new Technology entities before we added connections: <http://localhost:5173/lang-nav/data?entType=Technology&view=Cards&entID=tech.CLDR>
 
-![Basic Entity Views](screenshots/entity-basic-views.png)
+![Basic Entity Views](screenshots/entity-basicviews.png)
 
 #### Commit 4: Add Connections
 
@@ -154,6 +154,12 @@ At this point, we'll fill out the connections step of the entity loading process
    2. Sometimes we'll want to add the singular or plural `get*ForEntity` method in `getEntityConnection.ts` that can handle different input entity types and return the relevant new entity/ies.
 5. Update the `*Cards` and `*Details` components to include the new connections.
 6. This is a good time to update the entity diagram at the top of this file
+
+Depending on the complexity or side effects, this may actually be more work than 1 commit. For instance, when adding TechnologyData, it was better to handle the tech<->tech links and tech<->org links first, then update the keyboard changes. I didn't even make the tech<->language connections because that will be worth its own PR.
+
+You can should test this by 
+
+![Entity cards and details with new connections](screenshots/entity-connected.png)
 
 #### Commit 5: Other View Modes (Table, Hierarchy, Chart)
 

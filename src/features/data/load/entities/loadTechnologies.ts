@@ -22,7 +22,7 @@ function parseTechnologyLine(line: string): TechnologyData | undefined {
 
   return {
     type: EntityType.Technology,
-    ID: 'platform.' + parts[0],
+    ID: 'tech.' + parts[0],
     codeDisplay: parts[0],
     nameDisplay: parts[1],
     names: [parts[1]],

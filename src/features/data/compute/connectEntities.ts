@@ -53,6 +53,7 @@ export function connectEntitiesAndCreateDerivedData(
     writingSystems,
     variants,
     locales,
+    technologies,
   );
   connectOrganizations(organizations, territories);
   connectTechnologies(technologies, organizations);

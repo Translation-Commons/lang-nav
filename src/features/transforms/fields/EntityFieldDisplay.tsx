@@ -40,6 +40,7 @@ import Field from './Field';
 import {
   getKeyboardForEntity,
   getOrganizationsForEntity,
+  getTechnologiesForEntity,
   getTerritoryForEntity,
   getVariantsForEntity,
 } from './getEntityConnection';
@@ -132,7 +133,17 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
         </CommaSeparated>
       );
     case Field.Platform:
-      return getKeyboardForEntity(ent)?.platform;
+      return (
+        <CommaSeparated
+          limit={2}
+          limitText="short"
+          separator={ent.type === EntityType.Territory ? ' > ' : ', '}
+        >
+          {getTechnologiesForEntity(ent)?.map((l) => (
+            <HoverableEntityName key={l.ID} ent={l} />
+          ))}
+        </CommaSeparated>
+      );
     case Field.Variant:
       return <HoverableEntityName ent={getVariantsForEntity(ent)?.[0]} />;
     case Field.Organization:

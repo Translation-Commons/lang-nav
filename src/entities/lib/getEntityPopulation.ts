@@ -1,7 +1,10 @@
+import { sortByPopulation } from '@features/transforms/sorting/sort';
+
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
-import { sumBy } from '@shared/lib/setUtils';
+import { maxBy, sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
@@ -26,9 +29,20 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
     case EntityType.Technology:
       return ent.population;
     case EntityType.Keyboard:
+      return ent.downloads;
     case EntityType.Org:
-      return undefined;
+      return getOrganizationPopulation(ent);
   }
+}
+
+function getOrganizationPopulation(ent: OrganizationData): number | undefined {
+  const biggestTechnologyPop = maxBy(ent.techs ?? [], (tech) => tech.population);
+  const censusesPerTerritory = uniqueBy(
+    (ent.censuses ?? []).sort(sortByPopulation),
+    (census) => census.isoRegionCode,
+  );
+  const censusesPop = sumBy(censusesPerTerritory, (census) => census.population ?? 0);
+  return Math.max(biggestTechnologyPop ?? 0, censusesPop ?? 0) || undefined;
 }
 
 // Field.PopulationDirectlySourced

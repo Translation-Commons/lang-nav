@@ -16,7 +16,7 @@ type Props = {
 
 const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
   const {
-    platform,
+    inputTech,
     languageCodes,
     languages,
     territoryCode,
@@ -37,8 +37,6 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
   return (
     <div className="Details">
       <DetailsSection title="Definition">
-        <DetailsField title="Platform">{platform}</DetailsField>
-
         <DetailsField title="Language">
           {languages && languages.length > 0 ? (
             <CommaSeparated>
@@ -99,6 +97,10 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         )}
 
         {variantCode && <DetailsField title="Variant">{variantCode}</DetailsField>}
+
+        <DetailsField title="Input Technology">
+          <HoverableEntityName ent={inputTech} />
+        </DetailsField>
         {platformSupport && platformSupport.length > 0 && (
           <DetailsField title="Platforms">{platformSupport.join(', ')}</DetailsField>
         )}

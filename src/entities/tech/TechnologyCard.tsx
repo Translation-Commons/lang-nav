@@ -17,7 +17,7 @@ const TechnologyCard: React.FC<Props> = ({ tech }) => {
     Field.Name,
     Field.Code,
     Field.Population,
-    // Field.Organization,
+    Field.Organization,
     // Field.LanguageList,
   ]);
 
@@ -29,6 +29,10 @@ const TechnologyCard: React.FC<Props> = ({ tech }) => {
 
       <CardField field={Field.Population}>
         <EntityFieldDisplay ent={tech} field={Field.Population} />
+      </CardField>
+
+      <CardField field={Field.Organization}>
+        <EntityFieldDisplay ent={tech} field={Field.Organization} />
       </CardField>
 
       {extraFields.map((field) => (

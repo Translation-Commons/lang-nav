@@ -1,3 +1,4 @@
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
@@ -31,4 +32,5 @@ export interface TechnologyData extends EntityBase {
   parentTech?: TechnologyData; // fb4a -> Facebook
   childTechs?: TechnologyData[]; // Facebook -> [fb4a, fbios, ...]
   relatedTechs?: TechnologyData[]; // fb4a -> Android
+  keyboards?: KeyboardData[]; // Gboard -> GBoard keyboard entities
 }

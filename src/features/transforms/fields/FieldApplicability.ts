@@ -38,7 +38,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
   [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
   [EntityType.Keyboard]: [
-    Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
+    // Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
   ],
   [EntityType.Census]: [
     Field.CountOfCensuses,
@@ -46,7 +46,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.CountOfCountries,
     Field.TerritoryList,
   ],
-  [EntityType.Org]: [Field.Organization, Field.Population, Field.CountOfCountries],
+  [EntityType.Org]: [Field.Organization, Field.CountOfCountries],
   [EntityType.Technology]: [],
 };
 
@@ -278,6 +278,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.SourceType,
         Field.Organization,
+        Field.Platform,
 
         // Field.CountOfLanguages,
         Field.CountOfCensuses,
@@ -290,6 +291,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.Organization,
         Field.Platform,
         Field.SourceForPopulation,
+        Field.CountOfKeyboards,
 
         // Field.CountOfLanguages,
         // Field.LanguageList,

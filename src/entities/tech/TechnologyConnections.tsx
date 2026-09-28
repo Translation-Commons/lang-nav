@@ -12,13 +12,14 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import type { TechnologyData } from './TechnologyTypes';
 
 const TechnologyConnections: React.FC<{ tech: TechnologyData }> = ({ tech }) => {
-  const { parentTech, childTechs, relatedTechs, organization } = tech;
+  const { parentTech, childTechs, relatedTechs, organization, keyboards } = tech;
   return (
     <DetailsSection title="Connections">
       <EntityList items={organization} title="Organization" />
       <EntityList items={parentTech} title="Parent Technology" />
       <EntityList items={childTechs} title="Child Technologies" />
       <EntityList items={relatedTechs} title="Related Technologies" />
+      <EntityList items={keyboards} title="Keyboards" />
     </DetailsSection>
   );
 };
