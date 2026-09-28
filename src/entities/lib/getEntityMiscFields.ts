@@ -291,5 +291,6 @@ export function getSourceForPopulationAsString(ent: EntityData): string | undefi
   }
   if (ent.type === EntityType.Locale) return ent.pop.speaking.source;
   if (ent.type === EntityType.Language) return ent.pop.speaking.source;
+  if (ent.type === EntityType.Technology) return ent.populationSource;
   return undefined;
 }

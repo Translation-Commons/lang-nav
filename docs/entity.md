@@ -86,6 +86,8 @@ One thing that works in LangNav's favor today is that Languages, Writing Systems
 
 This section will provide a file-by-file guide on how to add a new entity to the LangNav system, detailing which files need to be modified and what changes are typically required in each. It was written in 2026-09 when we added the Technology entity. There may be other changes required for different entities or new updates in how we handle them. Substitute the symbol `*` for the actual entity name you are adding.
 
+#### Commit 1: Add Types
+
 1. Add folder to the entities directory `src/entities/`, add a `*Types.ts` file for the entity's `*Data.ts` definition.
    1. Feel free to copy a previous entity data type like `OrganizationData` and add/remove fields -- just make sure to keep `type`
    2. Feel welcome to include comments to clarify what some of the fields mean. For instance, we have `ID` and `codeDisplay` field -- the `ID` field should be unique amongst all entity types, the `codeDisplay` is what the end-user sees in LangNav.
@@ -96,7 +98,9 @@ This section will provide a file-by-file guide on how to add a new entity to the
    1. In order to avoid tackling too many changes in 1 PR, feel free to leave stubs to get back to, it's often good to label them TODO comments so we can easily find and complete them later. For example, `getEntityMainTableColumns` can be tackled later.
    2. As you fill in the results for methods like `getEntityChildren` you may update your EntityData definition to include any new relationships or fields required by the entity.
 
-   this is probably a good time to save a commit before continuing forward
+At this point you can save the commit, using the check for build errors (and open the website, you won't see anything different yet) to make sure nothing is wrong.
+
+#### Commit 2: Load Data
 
 4. Prepare TSVs -- for technologies.tsv we're keeping a master of all technology data, but others like the censuses are too varied to easily maintain a master list in a tsv and are their metadata is defined as headers in each of the files.
    1. While sometimes you come in with a pre-defined TSV, for some of the manual lists I just keep a Google Drive spreadsheet available with the data for easier editing then I copy-paste it to the TSV.
@@ -104,17 +108,27 @@ This section will provide a file-by-file guide on how to add a new entity to the
 5. Add a `load*.ts` function and add it to the routines loaded in `CoreData.tsx`.
    1. Extra tsvs should be loaded in `SupplementalData.tsx`, with CoreData focused more on getting the entity structure.
    2. `loadEntitiesFromFile` handles most of entity cases, you just need to provide a function to convert raw lines into the `*Data` objects you declared before.
-5. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array so you can select this.
+6. Check `getField` functions that load data from entities that they can retrieve the data from the new entity.
+   1. For example, `getSourceForPopulationAsString` in `getEntityMiscFields.tsx` needed a new case to handle the new Technology entity type.
+   2. Double check the values provided for your new entity by `getSpecificFieldsForEntityType` in `FieldApplicability.ts` to make sure the field can be queried.
+   3. This is a good time to check the default sorting. Usually LangNav sorts by population and we assume most entities have a population, but entities like an Organization aren't well suited to be sorted by population. You can add an override in `Profiles.tsx`.
 
-   at this point you can save commit #2. You cannot use most visualizations but you can look at the automatically generated data shown when opening the details view showing the first few instances as examples.
+At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Table, ...) are not available yet -- but you can see that the intended data was loaded by opening the automatically generated Minicards in the Details View manually setting the URL's entType to your new name eg. <http://localhost:5173/lang-nav/data?entType=Technology&view=Details>. 
 
-6. Add to the navigation & start basic views
-   1. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array.
-   2. Add the `EntityCard`
-   3. Text our the automated `Minicard` -- open the details page
-   4. This is a good time to check the default sorting. Usually LangNav sorts by population and we assume most entities have a population, but entities like an Organization aren't well suited to be sorted by population. You can add an override in `Profiles.tsx`.
+![Entity Minicards](screenshots/entity-minicards.png)
 
-7. Add to other view modes
-8. Add Tools/Reports -- these help debug issues or go into in-depth analysis about different entities.
-9.  Add Tests
+#### Commit 3: Basic Views
+
+1. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array so you can select this in the UI.
+2. Add the `*Card` component -- like before you can copy from an existing card. Only include major fields that most users would want to see.
+3. Add the `*Details` component -- this component should include ALL fields in the entity. Although we won't do connections quite yet -- just make a basic display.
+   1. To start, we won't make a specific Drawer component -- and instead the Drawer will just display the `*Details` component for the entity.
+
+#### Commit 4: Add Connections
+
+#### Commit 5: Other View Modes (Table, Hierarchy, Chart)
+
+4. Add to other view modes
+5. Add Tools/Reports -- these help debug issues or go into in-depth analysis about different entities.
+6.  Add Tests
    1. `MockEntities.tsx` similuates a small LangNav by makiing mock data inspired from Lord of the Rings. This helps in testing various components and views without relying on real data. The most impactful test it does is to test our various accessors and sorting with `sortMocks.test.tsx` -- however that is a very large test at this point and we should only add to it when adding new Field definitions, not necessarily new entities.

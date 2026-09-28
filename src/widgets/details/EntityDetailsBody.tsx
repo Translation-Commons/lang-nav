@@ -6,6 +6,7 @@ import LanguageDetails from '@entities/language/LanguageDetails';
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import LocaleDetails from '@entities/locale/LocaleDetails';
 import OrganizationDetails from '@entities/org/OrganizationDetails';
+import TechnologyDetails from '@entities/tech/TechnologyDetails';
 import TerritoryDetails from '@entities/territory/TerritoryDetails';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import VariantDetails from '@entities/variant/VariantDetails';
@@ -39,6 +40,8 @@ const EntityDetailsBody: React.FC<Props> = ({ ent, entID }) => {
       return <KeyboardDetails keyboard={ent} />;
     case EntityType.Org:
       return <OrganizationDetails org={ent} />;
+    case EntityType.Technology:
+      return <TechnologyDetails tech={ent} />;
   }
 };
 
