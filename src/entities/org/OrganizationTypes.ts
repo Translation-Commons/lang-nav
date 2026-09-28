@@ -1,4 +1,5 @@
 import type { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { EntityBase, EntityType } from '@entities/types/EntityTypes';
 
@@ -19,4 +20,5 @@ export interface OrganizationData extends EntityBase {
   children?: OrganizationData[]; // Inverse of parent
   headquarters?: TerritoryData; // The territory that this organization is headquartered in
   censuses: CensusData[]; // The census documents that this organization has collected
+  techs?: TechnologyData[]; // The technologies that this organization maintains
 }

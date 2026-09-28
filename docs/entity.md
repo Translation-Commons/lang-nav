@@ -23,25 +23,31 @@ flowchart TD
     CEN["<b>Census</b><br/>any population source"]:::demographics
     ORG["<b>Organization</b>"]:::demographics
     POP["<b>Population Record</b>"]:::demographics
+    TECH["<b>Technology</b><br/>OS, Product,<br/>App, Database, ..."]:::method
 
-    LOC -->|"language"| LANG
-    LOC -.->|"territory"| TERR
-    LOC -.->|"writingSystem"| WS
-    LOC -.->|"variants"| VAR
-    LOC -->|"censusRecords"| POP
+    LANG -->|"language tag"| LOC
+    TERR -.->|"territory tag"| LOC
+    WS -.->|"writing system tag"| LOC
+    VAR -.->|"variant tags"| LOC
+    POP <-->|"census records"| LOC
 
     LANG -->|"primary + all scripts"| WS
-    LANG -.->|"variants, equivalentVariant"| VAR
     LANG -->|"family"| LANG
+    LANG -.->|"variants, equivalentVariant"| VAR
 
-    CEN -->|"languageEstimates"| POP
-    CEN -->|"isoRegionCode"| TERR
-    CEN -->|"collector, presenter"| ORG
-    POP -->|"language"| LANG
-    POP -->|"territory"| TERR
+    TERR -->|"regions, dependencies"| TERR
+    TERR -->|"censuses"| CEN
+
+    CEN -->|"languageEstimates"| POP 
+    CEN -.->|"database"| TECH
+    ORG -->|"collects, presents" | CEN 
+    POP -->|"language"| LANG 
 
     KB   -->|"languages"| LANG
-    KB   -->|"input + output script"| WS
+    KB   -->|"input + output script"| WS 
+    ORG  -->|"owns"| TECH 
+    TECH -.->|"language support"| LANG
+    TECH -.->|"keyboards"| KB
 
     linkStyle default stroke-width:2px
 ```
@@ -121,14 +127,38 @@ At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Tab
 
 1. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array so you can select this in the UI.
 2. Add the `*Card` component -- like before you can copy from an existing card. Only include major fields that most users would want to see.
-3. Add the `*Details` component -- this component should include ALL fields in the entity. Although we won't do connections quite yet -- just make a basic display.
+   1. You may want to make updates to `EntityFieldDisplay` and use that component as a common way to show information and avoiding custom components.
+4. Add the `*Details` component -- this component should include ALL fields in the entity. Although we won't do connections quite yet -- just make a basic display.
    1. To start, we won't make a specific Drawer component -- and instead the Drawer will just display the `*Details` component for the entity.
+   2. Initially, a good framework to structure the details is 3 sections: Definition, Attributes & Connections -- but consider bespoke information hierarchies matching the expected use-cases.
+
+Now, you should able to test this by opening the Cards view, clicking on a card/minicard to open the Drawer view, and opening the details view. See the screenshot for the new Technology entities before we added connections: <http://localhost:5173/lang-nav/data?entType=Technology&view=Cards&entID=tech.CLDR>
+
+![Basic Entity Views](screenshots/entity-basic-views.png)
 
 #### Commit 4: Add Connections
+
+At this point, we'll fill out the connections step of the entity loading processing & show the connections in the user interface. For our example new entity (TechnologyData) we'll add parent/child relationships, connections to Organizations, and connections to Keyboards.
+
+1. This is a good time to update the entity diagram at the top of this file
+2. If necessary, make modifications to existing TSVs.
+   1. In our example, Organizations will now be connected to Technologies -- but some technologies in our initial set are missing organization entries, so we'll add them.
+   2. Update the `*Type` files for the organizations to add new inbound edges to your new entity and make sure our new entity has the right outbound edges. Sometimes there may be data explosion so we won't make explicit inbound and/or outbound connections.
+3. Add connections to the loading steps
+   1. Add a new file `src/features/data/connect/connect*.ts` that takes in new associations
+   2. Update `connectEntities.tsx` with the new connections
+   3. Update other connection methods if the linking will happen from there -- eg. connectKeyboards will now also add connections of keyboards -> technologies.
+   4. Usually it is added to the end, but you may order it differently if you want earlier dependencies.
+4. Update field getters
+   1. Check `getField.ts` definitions that call related entities -- note that this function focuses on primitive values (eg. display names).
+   2. Sometimes we'll want to add the singular or plural `get*ForEntity` method in `getEntityConnection.ts` that can handle different input entity types and return the relevant new entity/ies.
+5. Update the `*Cards` and `*Details` components to include the new connections.
+6. This is a good time to update the entity diagram at the top of this file
 
 #### Commit 5: Other View Modes (Table, Hierarchy, Chart)
 
 4. Add to other view modes
 5. Add Tools/Reports -- these help debug issues or go into in-depth analysis about different entities.
-6.  Add Tests
+6. Add new fields, filters
+7.  Add Tests
    1. `MockEntities.tsx` similuates a small LangNav by makiing mock data inspired from Lord of the Rings. This helps in testing various components and views without relying on real data. The most impactful test it does is to test our various accessors and sorting with `sortMocks.test.tsx` -- however that is a very large test at this point and we should only add to it when adding new Field definitions, not necessarily new entities.

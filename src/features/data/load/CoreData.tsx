@@ -162,7 +162,7 @@ export function useCoreData(): {
       variants,
       keyboards,
       organizations,
-      // technologies, // TODO add Technology Entity
+      technologies,
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.

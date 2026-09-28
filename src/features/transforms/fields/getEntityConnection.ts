@@ -65,7 +65,7 @@ export function getOrganizationsForEntity(
   ent: EntityData | undefined,
 ): OrganizationData[] | undefined {
   if (!ent) return undefined;
-  if (ent.type === EntityType.Org) return [ent];
+  if (ent.type === EntityType.Org) return [...(getOrganizationsForEntity(ent.parent) ?? []), ent];
   if (ent.type === EntityType.Census) return [ent.collector, ent.presenter].filter((org) => !!org);
   if (ent.type === EntityType.Locale) {
     const censusOrgs = ent.censusRecords
@@ -73,5 +73,6 @@ export function getOrganizationsForEntity(
       .filter((org) => !!org);
     return censusOrgs != null ? uniqueBy(censusOrgs, (org) => org.ID) : undefined;
   }
+  if (ent.type === EntityType.Technology) return getOrganizationsForEntity(ent.organization);
   return undefined;
 }

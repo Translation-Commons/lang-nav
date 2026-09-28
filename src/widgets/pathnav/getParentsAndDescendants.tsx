@@ -25,7 +25,7 @@ export function getEntityParents(
     case EntityType.Org:
       return [ent.parent];
     case EntityType.Technology:
-      return [];
+      return [...getEntityParents(ent.parentTech, depth + 1), ent.parentTech];
   }
 }
 

@@ -273,8 +273,7 @@ export function getDepth(ent: EntityData): number | undefined {
     case EntityType.Org:
       return ent.parent ? getDepth(ent.parent)! + 1 : 0;
     case EntityType.Technology:
-      // TODO add Technology Entity
-      return undefined;
+      return ent.parentTech ? getDepth(ent.parentTech)! + 1 : 0;
     default:
       enforceExhaustiveSwitch(type);
   }

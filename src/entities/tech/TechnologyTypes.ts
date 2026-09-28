@@ -29,6 +29,6 @@ export interface TechnologyData extends EntityBase {
   // Hydrated references
   organization?: OrganizationData; // fb4a -> Meta
   parentTech?: TechnologyData; // fb4a -> Facebook
-  childTechs?: TechnologyData[];
+  childTechs?: TechnologyData[]; // Facebook -> [fb4a, fbios, ...]
   relatedTechs?: TechnologyData[]; // fb4a -> Android
 }

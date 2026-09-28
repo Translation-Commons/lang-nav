@@ -8,6 +8,7 @@ import Field from '@features/transforms/fields/Field';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
+import TechnologyConnections from './TechnologyConnections';
 import { TechnologyData } from './TechnologyTypes';
 
 type Props = {
@@ -37,6 +38,7 @@ const TechnologyDetails: React.FC<Props> = ({ tech }) => {
           </DetailsField>
         )}
       </DetailsSection>
+      <TechnologyConnections tech={tech} />
     </div>
   );
 };
