@@ -38,14 +38,14 @@ flowchart TD
     TERR -->|"regions, dependencies"| TERR
     TERR -->|"censuses"| CEN
 
-    CEN -->|"languageEstimates"| POP 
+    CEN -->|"languageEstimates"| POP
     CEN -.->|"database"| TECH
-    ORG -->|"collects, presents" | CEN 
-    POP -->|"language"| LANG 
+    ORG -->|"collects, presents" | CEN
+    POP -->|"language"| LANG
 
     KB   -->|"languages"| LANG
-    KB   -->|"input + output script"| WS 
-    ORG  -->|"owns"| TECH 
+    KB   -->|"input + output script"| WS
+    ORG  -->|"owns"| TECH
     TECH -.->|"language support"| LANG
     TECH -.->|"keyboards"| KB
 
@@ -119,7 +119,7 @@ At this point you can save the commit, using the check for build errors (and ope
    2. Double check the values provided for your new entity by `getSpecificFieldsForEntityType` in `FieldApplicability.ts` to make sure the field can be queried.
    3. This is a good time to check the default sorting. Usually LangNav sorts by population and we assume most entities have a population, but entities like an Organization aren't well suited to be sorted by population. You can add an override in `Profiles.tsx`.
 
-At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Table, ...) are not available yet -- but you can see that the intended data was loaded by opening the automatically generated Minicards in the Details View manually setting the URL's entType to your new name eg. <http://localhost:5173/lang-nav/data?entType=Technology&view=Details>. 
+At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Table, ...) are not available yet -- but you can see that the intended data was loaded by opening the automatically generated Minicards in the Details View manually setting the URL's entType to your new name eg. <http://localhost:5173/lang-nav/data?entType=Technology&view=Details>.
 
 ![Entity Minicards](screenshots/entity-minicards.png)
 
@@ -128,7 +128,7 @@ At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Tab
 1. Add to `EntityTypeTabs` by including the new entity in the `ORDERED_OBJECTS` array so you can select this in the UI.
 2. Add the `*Card` component -- like before you can copy from an existing card. Only include major fields that most users would want to see.
    1. You may want to make updates to `EntityFieldDisplay` and use that component as a common way to show information and avoiding custom components.
-4. Add the `*Details` component -- this component should include ALL fields in the entity. Although we won't do connections quite yet -- just make a basic display.
+3. Add the `*Details` component -- this component should include ALL fields in the entity. Although we won't do connections quite yet -- just make a basic display.
    1. To start, we won't make a specific Drawer component -- and instead the Drawer will just display the `*Details` component for the entity.
    2. Initially, a good framework to structure the details is 3 sections: Definition, Attributes & Connections -- but consider bespoke information hierarchies matching the expected use-cases.
 
@@ -157,7 +157,7 @@ At this point, we'll fill out the connections step of the entity loading process
 
 Depending on the complexity or side effects, this may actually be more work than 1 commit. For instance, when adding TechnologyData, it was better to handle the tech<->tech links and tech<->org links first, then update the keyboard changes. I didn't even make the tech<->language connections because that will be worth its own PR.
 
-You can should test this by 
+You can should test this by
 
 ![Entity cards and details with new connections](screenshots/entity-connected.png)
 
@@ -172,7 +172,7 @@ It's often good to do 1 commit/view
    4. Call the new table component in `ViewTable.tsx`.
 2. Charts
    1. If we expect people want to use the scatterplot to compare quantitative aspects of the entity, then set a good default X and Y axis in `getDefaultParams` in `Profiles.tsx`.
-   2. If there isn't enough quantitative data for the entity, then add it to `UNSUPPORTED_ENTITY_TYPES` in `ViewChart.tsx`. 
+   2. If there isn't enough quantitative data for the entity, then add it to `UNSUPPORTED_ENTITY_TYPES` in `ViewChart.tsx`.
 3. Hierarchy
    1. Make a new file `*Hierarchy.tsx`
    2. Define the root nodes (often parent-less nodes, but sometimes we'll use other ents like organizations for the top level of the technology hierarchy).

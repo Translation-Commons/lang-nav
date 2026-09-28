@@ -258,8 +258,6 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         // Field.VitalityMetascore,
         // Field.ISOStatus, // TODO get the highest ISO status for the languages associated with this keyboard
 
-        Field.PopulationWriting,
-
         Field.LanguagePrimary,
         Field.LanguageList,
         Field.WritingSystem,

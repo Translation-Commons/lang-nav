@@ -12,7 +12,7 @@ function getTechnologyColumns(): TableColumn<TechnologyData>[] {
   return [
     CodeColumn,
     NameColumn,
-    { ...getFieldColumn(Field.Population), columnGroup: 'Population' },
+    { ...getFieldColumn(Field.Population), columnGroup: 'Population', isInitiallyVisible: true },
     {
       key: 'Source For Population',
       render: (ent) => (
@@ -21,6 +21,7 @@ function getTechnologyColumns(): TableColumn<TechnologyData>[] {
         </div>
       ),
       field: Field.SourceForPopulation,
+      isInitiallyVisible: false,
       columnGroup: 'Population',
     },
     { ...getFieldColumn(Field.Organization), isInitiallyVisible: true, columnGroup: 'Tech' },

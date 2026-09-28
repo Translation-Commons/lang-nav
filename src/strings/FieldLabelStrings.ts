@@ -402,7 +402,7 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
 function getPopulationFieldDescription(entType: EntityType): string {
   switch (entType) {
     case EntityType.Territory:
-      return 'The number of people in this area that speak, write, or sign this language.';
+      return 'The number of people in the area in 2025.';
     case EntityType.Variant:
       return 'The upper bound number of people that could use this variant -- probably much higher than the actual number.';
     case EntityType.Language:

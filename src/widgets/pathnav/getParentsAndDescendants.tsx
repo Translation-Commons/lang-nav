@@ -54,7 +54,7 @@ export function getEntityChildren(ent?: EntityData): (EntityData | undefined)[] 
     case EntityType.Org:
       return ent.children ?? [];
     case EntityType.Technology:
-      return [];
+      return ent.childTechs ?? [];
   }
 }
 

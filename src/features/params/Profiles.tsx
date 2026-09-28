@@ -185,11 +185,7 @@ export function getDefaultParams(
   }
 
   // Set population sorting behavior
-  if (params.entType === EntityType.Keyboard) {
-    // Keyboards don't have population, so sort by name by default
-    if (params.sortBy === Field.Population) params.sortBy = Field.Name;
-    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
-  } else if (params.entType === EntityType.WritingSystem) {
+  if (params.entType === EntityType.WritingSystem) {
     // For writing sytems, the population == population (writing) but its more accurate to refer to it as the writing population
     if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
     if (params.secondarySortBy === Field.Population)

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 
 import { getCensusLanguageUse } from '@entities/census/getCensusLanguageUse';
 import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
@@ -79,8 +80,18 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       }
       return <>{fieldValue}</>;
 
-    case Field.CountOfLanguages:
     case Field.CountOfKeyboards:
+      if (ent.type === EntityType.Technology)
+        return (
+          <HoverableEnumeration
+            items={ent.keyboards?.map((keyboard) => (
+              <HoverableEntityName key={keyboard.ID} ent={keyboard} />
+            ))}
+          />
+        );
+      if (typeof fieldValue === 'number') return fieldValue.toLocaleString();
+      return <>{fieldValue}</>;
+    case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

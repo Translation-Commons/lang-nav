@@ -76,7 +76,6 @@ export function connectKeyboards(
 
     // Connect technologies
     const inputTech = technologies['tech.' + inputTechCode] ?? null;
-    console.log(keyboard, inputTechCode, inputTech, technologies);
     if (inputTech != null) {
       keyboard.inputTech = inputTech;
       if (!inputTech.keyboards) inputTech.keyboards = [];
