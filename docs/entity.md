@@ -174,6 +174,13 @@ It's often good to do 1 commit/view
    1. If we expect people want to use the scatterplot to compare quantitative aspects of the entity, then set a good default X and Y axis in `getDefaultParams` in `Profiles.tsx`.
    2. If there isn't enough quantitative data for the entity, then add it to `UNSUPPORTED_ENTITY_TYPES` in `ViewChart.tsx`. 
 3. Hierarchy
+   1. Make a new file `*Hierarchy.tsx`
+   2. Define the root nodes (often parent-less nodes, but sometimes we'll use other ents like organizations for the top level of the technology hierarchy).
+   3. Then make getters that translate ents to their `TreeNodeData` -- it's often good to do this in 2 steps, 1 converts a single to information and 1 converts a list of ents (like a list of child ents) to their `TreeNodeData[]` array.
+4. Map
+   1. The map works for entities with defined lat/long coordinates (we can use circles) or entities that have a strong country component (we can use choropleth coloring).
+   2. We need a separate document to explain how to add it.
+   3. If the entity type is not supported for mapping, add it to the `UNSUPPORTED_ENTITY_TYPES` array in `ViewMap.tsx`.
 
 #### Future commits
 

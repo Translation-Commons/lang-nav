@@ -133,10 +133,14 @@ export function getDefaultParams(
   switch (params.view) {
     case View.Hierarchy:
       // Show parents in the hierarchy that we usually do not show
-      if (params.entType === EntityType.Language) params.languageScopes.push(LanguageScope.Family);
-      if (params.entType === EntityType.Territory)
+      if (params.entType === EntityType.Language) {
+        params.languageScopes.push(LanguageScope.Family);
+        if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+      } else if (params.entType === EntityType.Territory) {
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
-      if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+        if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+      }
+
       break;
     case View.Table:
       // Show more results in table view since it's easier to scan
