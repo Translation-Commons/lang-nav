@@ -161,10 +161,28 @@ You can should test this by
 
 ![Entity cards and details with new connections](screenshots/entity-connected.png)
 
-#### Commit 5: Other View Modes (Table, Hierarchy, Chart)
+#### Commits 5+: Other View Modes (Table, Hierarchy, Chart)
 
-4. Add to other view modes
-5. Add Tools/Reports -- these help debug issues or go into in-depth analysis about different entities.
-6. Add new fields, filters
-7.  Add Tests
+It's often good to do 1 commit/view
+
+1. Table
+   1. Add a new `TableID` at the end of the list (since its an increasing key)
+   2. Add columns in `*Columns.tsx` -- tip: use `CommonColumns.tsx` and `getFieldColumn` to decrease how much bespoke code you need to write.
+   3. Make `*Table.tsx` (is this is a necessary step?)
+   4. Call the new table component in `ViewTable.tsx`.
+2. Charts
+   1. If we expect people want to use the scatterplot to compare quantitative aspects of the entity, then set a good default X and Y axis in `getDefaultParams` in `Profiles.tsx`.
+   2. If there isn't enough quantitative data for the entity, then add it to `UNSUPPORTED_ENTITY_TYPES` in `ViewChart.tsx`. 
+3. Hierarchy
+
+#### Future commits
+
+Other ideas
+
+1. Tools/Reports
+   1. These are bespoke components that help debug issues or go into in-depth analysis.
+   2. Add a `ReportID` and `Report` component similar to how we handle other reports.
+2. Add new Field definitions -- this enables us to use sorting, coloring, and filtering based on this data.
+   1. Add a filter selector for relevant connected objects
+3. Add Tests
    1. `MockEntities.tsx` similuates a small LangNav by makiing mock data inspired from Lord of the Rings. This helps in testing various components and views without relying on real data. The most impactful test it does is to test our various accessors and sorting with `sortMocks.test.tsx` -- however that is a very large test at this point and we should only add to it when adding new Field definitions, not necessarily new entities.

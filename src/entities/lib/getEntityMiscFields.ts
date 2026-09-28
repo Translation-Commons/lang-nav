@@ -102,7 +102,7 @@ export function getCountOfKeyboards(ent: EntityData): number | undefined {
     case EntityType.Keyboard:
       return 1; // A keyboard counts as 1 keyboard
     case EntityType.Technology:
-      return undefined; // Some technologies will have keyboards like GBoard
+      return ent.keyboards?.length;
     case EntityType.Territory:
     case EntityType.Locale:
     case EntityType.Variant:

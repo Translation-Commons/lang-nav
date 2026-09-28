@@ -29,7 +29,7 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
     case EntityType.Technology:
       return ent.population;
     case EntityType.Keyboard:
-      return ent.downloads;
+      return ent.totalDownloads;
     case EntityType.Org:
       return getOrganizationPopulation(ent);
   }

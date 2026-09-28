@@ -122,6 +122,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
 
     // Population
     case Field.Population:
+      if (entType === EntityType.Keyboard) return 'Downloads';
       return 'Population';
     case Field.PopulationDirectlySourced:
       return 'Population Directly Sourced';

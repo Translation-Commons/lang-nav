@@ -1,5 +1,6 @@
 import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
@@ -46,3 +47,10 @@ export const EndonymColumn: TableColumn<EntityData> = {
   isInitiallyVisible: false,
   columnGroup: 'Names',
 };
+
+export const getFieldColumn = (field: Field): TableColumn<EntityData> => ({
+  key: field,
+  render: (ent) => <EntityFieldDisplay ent={ent} field={field} />,
+  field: field,
+  isInitiallyVisible: false,
+});

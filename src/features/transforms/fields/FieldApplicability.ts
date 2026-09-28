@@ -37,9 +37,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
   ],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
   [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
-  [EntityType.Keyboard]: [
-    // Field.Population, // We'll want to estimate this with # of downloads, but that data is not available yet
-  ],
+  [EntityType.Keyboard]: [],
   [EntityType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
@@ -259,6 +257,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         // Field.Modality, // the Language's modality
         // Field.VitalityMetascore,
         // Field.ISOStatus, // TODO get the highest ISO status for the languages associated with this keyboard
+
+        Field.PopulationWriting,
 
         Field.LanguagePrimary,
         Field.LanguageList,

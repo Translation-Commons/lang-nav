@@ -1,20 +1,28 @@
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeColumn, getFieldColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { getFieldLabel } from '@strings/FieldLabelStrings';
 
 function getKeyboardColumns(): TableColumn<KeyboardData>[] {
   return [
     { ...CodeColumn, isInitiallyVisible: false },
     NameColumn,
     {
+      ...getFieldColumn(Field.Population),
+      label: getFieldLabel(Field.Population, EntityType.Keyboard),
+    },
+    {
       key: 'Input Technology',
       render: (ent) => <HoverableEntityName ent={ent.inputTech} />,
       field: Field.Platform,
+      columnGroup: 'Related Objects',
     },
     {
       key: 'Language(s)',
