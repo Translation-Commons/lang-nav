@@ -1,8 +1,8 @@
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
-import { connectEntitiesAndCreateDerivedData } from '@features/data/compute/connectEntities';
 import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
 import { updatePopulations } from '@features/data/compute/updatePopulations';
 import { addCensusData } from '@features/data/connect/connectCensuses';
+import { connectEntitiesAndCreateDerivedData } from '@features/data/connect/connectEntities';
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';

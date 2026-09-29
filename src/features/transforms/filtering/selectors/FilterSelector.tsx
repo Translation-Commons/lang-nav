@@ -95,9 +95,20 @@ export const AllApplicableFilterSelectors: React.FC = () => {
   const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entType).filter(
     (f) => f !== Field.Name, // This should not return the search bar
   );
-  const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(
+  let otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(
     (f) => !primaryFilters.includes(f) && f !== Field.Name,
   );
+
+  // If the language list is empty but there is a primary language, allow that filter
+  const entFields = getApplicableFields(undefined, entType);
+  if (!entFields.includes(Field.LanguageList) && entFields.includes(Field.LanguagePrimary)) {
+    primaryFilters.push(Field.LanguageList);
+    otherFilters = otherFilters.filter((f) => f === Field.LanguageList);
+  }
+  if (!entFields.includes(Field.TerritoryList) && entFields.includes(Field.TerritoryPrimary)) {
+    primaryFilters.push(Field.TerritoryList);
+    otherFilters = otherFilters.filter((f) => f === Field.TerritoryList);
+  }
 
   return (
     <div className="flex flex-col gap-2">

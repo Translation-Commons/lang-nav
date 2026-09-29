@@ -14,10 +14,31 @@ type Props = {
 };
 
 const OrthographyDetails: React.FC<Props> = ({ orthography }) => {
-  const { language, writingSystem, baseCharacters } = orthography;
+  const { language, writingSystem, baseCharacters, scriptCode } = orthography;
+
+  const langHasMultipleInstances =
+    language &&
+    language.orthographies &&
+    language.orthographies.some((o) => o.ID !== orthography.ID && o.scriptCode === scriptCode);
 
   return (
     <div className="Details">
+      <DetailsSection title="Definition">
+        <DetailsField title="Language">
+          {language ? <HoverableEntityName ent={language} /> : <Deemphasized>Unknown</Deemphasized>}
+        </DetailsField>
+        <DetailsField title="Writing System">
+          {writingSystem ? (
+            <HoverableEntityName ent={writingSystem} />
+          ) : (
+            <Deemphasized>Unknown</Deemphasized>
+          )}
+        </DetailsField>
+        {langHasMultipleInstances && (
+          <DetailsField title="Instance">{orthography.instance.toLocaleString()}</DetailsField>
+        )}
+      </DetailsSection>
+
       <DetailsSection title="Attributes">
         <DetailsField title="Base Characters">
           {baseCharacters ? (
@@ -33,19 +54,6 @@ const OrthographyDetails: React.FC<Props> = ({ orthography }) => {
             </div>
           ) : (
             <Deemphasized>Not available</Deemphasized>
-          )}
-        </DetailsField>
-      </DetailsSection>
-
-      <DetailsSection title="Connections">
-        <DetailsField title="Language">
-          {language ? <HoverableEntityName ent={language} /> : <Deemphasized>Unknown</Deemphasized>}
-        </DetailsField>
-        <DetailsField title="Writing System">
-          {writingSystem ? (
-            <HoverableEntityName ent={writingSystem} />
-          ) : (
-            <Deemphasized>Unknown</Deemphasized>
           )}
         </DetailsField>
       </DetailsSection>

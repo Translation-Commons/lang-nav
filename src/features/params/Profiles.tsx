@@ -190,6 +190,10 @@ export function getDefaultParams(
     if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
     if (params.secondarySortBy === Field.Population)
       params.secondarySortBy = Field.PopulationWriting;
+  } else if (params.entType === EntityType.Orthography) {
+    // We don't have any population for orthographies so just sort by name
+    if (params.sortBy === Field.Population) params.sortBy = Field.Name;
+    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
   } else if (params.sortBy === Field.Population) {
     // If there is a specified population focus, the default sort should make the population focus.
     if (populationFocus != null) {

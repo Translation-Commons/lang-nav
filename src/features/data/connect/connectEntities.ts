@@ -8,20 +8,20 @@ import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { connectKeyboards } from '../connect/connectKeyboards';
-import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
-import connectLocales from '../connect/connectLocales';
-import { connectOrganizations } from '../connect/connectOrganizations';
-import { connectOrthographies } from '../connect/connectOrthographies';
-import { connectTechnologies } from '../connect/connectTechnologies';
-import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
-import { connectWritingSystems } from '../connect/connectWritingSystems';
-import { createFamilyLocales } from '../connect/createFamilyLocales';
-import { createRegionalLocales } from '../connect/createRegionalLocales';
+import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
+import { searchLocalesForMissingLinks } from '../compute/searchLocalesForMissingLinks';
 import { connectVariants } from '../load/extra_entities/IANAData';
 
-import { computeDescendantPopulation } from './computeDescendantPopulation';
-import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
+import { connectKeyboards } from './connectKeyboards';
+import { connectLanguagesToParent } from './connectLanguagesToParent';
+import connectLocales from './connectLocales';
+import { connectOrganizations } from './connectOrganizations';
+import { connectOrthographies } from './connectOrthographies';
+import { connectTechnologies } from './connectTechnologies';
+import { connectTerritoriesToParent } from './connectTerritoriesToParent';
+import { connectWritingSystems } from './connectWritingSystems';
+import { createFamilyLocales } from './createFamilyLocales';
+import { createRegionalLocales } from './createRegionalLocales';
 
 /**
  * During the core data loading process, after all entities have been loaded, this function connects them together.

@@ -11,6 +11,8 @@ import EntityTitle from '@entities/ui/EntityTitle';
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import OrthographyCharacters from './OrthographyCharacters';
+
 interface Props {
   orthography: OrthographyData;
 }
@@ -46,7 +48,7 @@ const OrthographyCard: React.FC<Props> = ({ orthography }) => {
 
       <CardField field={Field.Example}>
         {baseCharacters ? (
-          <span className="text-wrap line-clamp-2">{Array.from(baseCharacters).join('​')}</span>
+          <OrthographyCharacters chars={baseCharacters} />
         ) : (
           <Deemphasized>Not available</Deemphasized>
         )}

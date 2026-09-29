@@ -59,6 +59,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.LanguagePrimary:
       if (entType === EntityType.Language) return 'Language';
       if (entType === EntityType.Locale) return 'Language';
+      if (entType === EntityType.Orthography) return 'Language';
       return 'Primary Language';
     case Field.LanguageList:
       if (entType === EntityType.Language) return 'Language Lineage';

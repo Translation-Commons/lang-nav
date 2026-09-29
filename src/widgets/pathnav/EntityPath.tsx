@@ -52,7 +52,7 @@ const ObjectName: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   if (!ent) return null;
   return (
     <>
-      {ent.type === EntityType.Locale ? (
+      {ent.type === EntityType.Locale || ent.type === EntityType.Orthography ? (
         <span style={{ fontWeight: 'bold' }}>:</span>
       ) : (
         <BreadcrumbSeparator />

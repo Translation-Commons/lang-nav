@@ -17,7 +17,7 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { connectEntitiesAndCreateDerivedData } from '../compute/connectEntities';
+import { connectEntitiesAndCreateDerivedData } from '../connect/connectEntities';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';

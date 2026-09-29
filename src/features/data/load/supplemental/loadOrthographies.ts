@@ -17,17 +17,27 @@ export async function loadOrthographies(): Promise<OrthographyDictionary | void>
         const parts = line.split('\t');
         const languageCode = parts[0];
         const scriptCode = parts[1];
-        const baseCharacters = parts[2]?.replace(/\p{Lu}/gu, '');
+        const baseCharacters = parts[2]?.replace(/\p{Lu}/gu, ''); // Lowercase
         if (!languageCode || !scriptCode || !baseCharacters) return;
 
-        const ID = `${languageCode}_${scriptCode}`;
-        const nameDisplay = `${scriptCode} (${languageCode})`;
+        // There could be multiple orthographies with the same writing system.
+        const baseID = `${languageCode}_${scriptCode}`;
+        let instanceCount = 1;
+        let ID = baseID;
+        while (result[ID] != null) {
+          if (result[ID].baseCharacters == baseCharacters) return;
+          ID = `${baseID}_${++instanceCount}`;
+        }
+
+        const nameDisplay = `${languageCode} (${scriptCode})`;
         result[ID] = {
           type: EntityType.Orthography,
           ID,
           codeDisplay: ID,
           nameDisplay,
           names: [nameDisplay],
+          instance: instanceCount,
+
           languageCode,
           scriptCode,
           baseCharacters,

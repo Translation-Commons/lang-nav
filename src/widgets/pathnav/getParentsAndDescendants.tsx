@@ -19,7 +19,7 @@ export function getEntityParents(
     case EntityType.WritingSystem:
       return [ent.parentWritingSystem];
     case EntityType.Orthography:
-      return [ent.language];
+      return [ent.language, ent.writingSystem];
     case EntityType.Variant:
       return [ent.languages[0]];
     case EntityType.Keyboard:

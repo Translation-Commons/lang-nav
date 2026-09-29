@@ -35,15 +35,14 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
-  [EntityType.Orthography]: [],
+  [EntityType.Orthography]: [Field.Population],
   [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
-  [EntityType.Locale]: [Field.LanguageList, Field.TerritoryList],
+  [EntityType.Locale]: [],
   [EntityType.Keyboard]: [],
   [EntityType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
-    Field.TerritoryList,
   ],
   [EntityType.Org]: [Field.Organization, Field.CountOfCountries],
   [EntityType.Technology]: [],
@@ -180,6 +179,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.PopulationOfDescendants,
         Field.PopulationPercentInBiggestDescendantLanguage,
         Field.PercentOfOverallLanguageSpeakers,
+
+        Field.Example,
       ];
     case EntityType.Census:
       return [

@@ -207,5 +207,7 @@ export function getEntityPopulationWriting(ent: EntityData): number | undefined 
     case EntityType.Org:
     case EntityType.Technology:
       return undefined;
+    case EntityType.Orthography:
+      return ent.instance;
   }
 }
