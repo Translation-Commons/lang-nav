@@ -9,12 +9,19 @@ export function connectOrthographies(
 ): void {
   orthographies.forEach((orthography) => {
     const language = languages[orthography.languageCode];
-    const writingSystem = Object.values(writingSystems).find(
-      (ws) => ws.nameDisplay === orthography.scriptName || ws.nameFull === orthography.scriptName,
+
+    const writingSystem = writingSystems[orthography.scriptCode];
+    const writingSystem2 = Object.values(writingSystems).find(
+      (ws) => ws.nameDisplay === orthography.scriptCode || ws.nameFull === orthography.scriptCode,
     );
 
     if (writingSystem != null) {
       orthography.writingSystem = writingSystem;
+    } else {
+      console.warn(
+        `Writing system not found for script code: ${orthography.scriptCode}`,
+        writingSystem2?.ID,
+      );
     }
     if (language != null) {
       orthography.language = language;

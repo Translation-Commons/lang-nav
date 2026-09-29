@@ -16,19 +16,20 @@ export async function loadOrthographies(): Promise<OrthographyDictionary | void>
       lines.forEach((line) => {
         const parts = line.split('\t');
         const languageCode = parts[0];
-        const scriptName = parts[1];
+        const scriptCode = parts[1];
         const baseCharacters = parts[2]?.replace(/\p{Lu}/gu, '');
-        if (!languageCode || !scriptName || !baseCharacters) return;
+        if (!languageCode || !scriptCode || !baseCharacters) return;
 
-        const ID = `${languageCode}_${scriptName}`;
+        const ID = `${languageCode}_${scriptCode}`;
+        const nameDisplay = `${scriptCode} (${languageCode})`;
         result[ID] = {
           type: EntityType.Orthography,
           ID,
           codeDisplay: ID,
-          nameDisplay: `${scriptName} (${languageCode})`,
-          names: [scriptName],
+          nameDisplay,
+          names: [nameDisplay],
           languageCode,
-          scriptName,
+          scriptCode,
           baseCharacters,
         };
       });

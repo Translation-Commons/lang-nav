@@ -16,7 +16,7 @@ export type OrthographyData = EntityBase & {
 
   // Connections
   languageCode: string;
-  scriptName: string;
+  scriptCode: string;
   language?: LanguageData;
   writingSystem?: WritingSystemData;
 };
