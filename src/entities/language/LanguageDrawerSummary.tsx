@@ -13,6 +13,7 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import type { LanguageData } from './LanguageTypes';
 import LanguageDrawerPopRow from './population/LanguageDrawerPopRow';
 import LanguageDrawerDialectsRow from './relations/LanguageDrawerDialectsRow';
+import LanguageDrawerOrthographyRow from './writing/LanguageDrawerOrthographyRow';
 import LanguageDrawerWritingSystemsRow from './writing/LanguageDrawerWritingSystemsRow';
 
 type Props = {
@@ -42,6 +43,7 @@ const LanguageDrawerSummary: React.FC<Props> = ({ lang }) => {
         </DrawerDetailsField>
       ) : null}
       <LanguageDrawerWritingSystemsRow lang={lang} />
+      <LanguageDrawerOrthographyRow lang={lang} />
     </DrawerDetailsSection>
   );
 };

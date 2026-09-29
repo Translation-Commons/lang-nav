@@ -21,6 +21,7 @@ enum TableID {
   LanguagePlurals, // 16
 
   Technologies, // 17
+  Orthographies, // 18
 }
 
 export default TableID;

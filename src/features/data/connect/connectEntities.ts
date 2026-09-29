@@ -1,25 +1,27 @@
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LanguagesBySource } from '@entities/language/LanguageTypes';
+import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import type { LanguagesBySource } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TechnologyData } from '@entities/tech/TechnologyTypes';
+import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
+import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { connectKeyboards } from '../connect/connectKeyboards';
-import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
-import connectLocales from '../connect/connectLocales';
-import { connectOrganizations } from '../connect/connectOrganizations';
-import { connectTechnologies } from '../connect/connectTechnologies';
-import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
-import { connectWritingSystems } from '../connect/connectWritingSystems';
-import { createFamilyLocales } from '../connect/createFamilyLocales';
-import { createRegionalLocales } from '../connect/createRegionalLocales';
+import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
+import { searchLocalesForMissingLinks } from '../compute/searchLocalesForMissingLinks';
 import { connectVariants } from '../load/extra_entities/IANAData';
 
-import { computeDescendantPopulation } from './computeDescendantPopulation';
-import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
+import { connectKeyboards } from './connectKeyboards';
+import { connectLanguagesToParent } from './connectLanguagesToParent';
+import connectLocales from './connectLocales';
+import { connectOrganizations } from './connectOrganizations';
+import { connectOrthographies } from './connectOrthographies';
+import { connectTechnologies } from './connectTechnologies';
+import { connectTerritoriesToParent } from './connectTerritoriesToParent';
+import { connectWritingSystems } from './connectWritingSystems';
+import { createFamilyLocales } from './createFamilyLocales';
+import { createRegionalLocales } from './createRegionalLocales';
 
 /**
  * During the core data loading process, after all entities have been loaded, this function connects them together.
@@ -30,6 +32,7 @@ export function connectEntitiesAndCreateDerivedData(
   languagesBySource: LanguagesBySource,
   territories: Record<string, TerritoryData>,
   writingSystems: Record<string, WritingSystemData>,
+  orthographies: Record<string, OrthographyData>,
   locales: Record<string, LocaleData>,
   variants: Record<string, VariantData>,
   keyboards: Record<string, KeyboardData>,
@@ -39,6 +42,7 @@ export function connectEntitiesAndCreateDerivedData(
   connectLanguagesToParent(languagesBySource);
   connectTerritoriesToParent(territories);
   connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
+  connectOrthographies(languagesBySource.Combined, writingSystems, Object.values(orthographies));
   connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
   connectVariants(variants, languagesBySource.BCP, locales);
   createFamilyLocales(languagesBySource.Combined, locales); // create them before regional locales

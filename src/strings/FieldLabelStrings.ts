@@ -59,6 +59,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.LanguagePrimary:
       if (entType === EntityType.Language) return 'Language';
       if (entType === EntityType.Locale) return 'Language';
+      if (entType === EntityType.Orthography) return 'Language';
       return 'Primary Language';
     case Field.LanguageList:
       if (entType === EntityType.Language) return 'Language Lineage';
@@ -419,6 +420,8 @@ function getPopulationFieldDescription(entType: EntityType): string {
       return 'The number of people that use this technology -- either users of its products and/or people that are catalogued in their databases.';
     case EntityType.Keyboard:
       return 'The number of downloads this keyboard has, approximating how many people may use it.';
+    case EntityType.Orthography:
+      return 'Population is not yet defined yet for orthographies.';
     default:
       enforceExhaustiveSwitch(entType);
   }

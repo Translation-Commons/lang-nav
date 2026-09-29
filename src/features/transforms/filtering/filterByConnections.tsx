@@ -122,6 +122,8 @@ export function getWritingSystemsRelevantToEntity(ent: EntityData): WritingSyste
         [ent.inputWritingSystem, ent.outputWritingSystem].filter((ws) => !!ws),
         (ws) => ws.ID,
       );
+    case EntityType.Orthography:
+      return [ent.writingSystem].filter((ws) => !!ws);
     case EntityType.Org:
     case EntityType.Technology:
       return []; // Not well defined
@@ -187,6 +189,8 @@ export function getLanguagesRelevantToEntity(ent: EntityData): LanguageData[] {
       return [...(getEntityParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
     case EntityType.WritingSystem:
       return Object.values(ent.languages ?? {});
+    case EntityType.Orthography:
+      return [ent.language].filter((lang) => !!lang);
     case EntityType.Variant:
       return uniqueBy(
         [ent.equivalentLanguage, ...(ent.languages ?? [])].filter((lang) => !!lang),
@@ -222,6 +226,8 @@ export function getLanguageFamiliesRelevantToEntity(ent: EntityData): LanguageDa
       return [...(getEntityParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
     case EntityType.WritingSystem:
       return Object.values(ent.languages ?? {});
+    case EntityType.Orthography:
+      return ent.language ? getLanguageFamiliesRelevantToEntity(ent.language) : [];
     case EntityType.Census:
     case EntityType.Variant:
     case EntityType.Keyboard:

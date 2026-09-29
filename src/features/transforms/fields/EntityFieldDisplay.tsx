@@ -19,6 +19,8 @@ import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritor
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
+import getEntityCharacters from '@entities/orthography/getEntityCharacters';
+import OrthographyCharacters from '@entities/orthography/OrthographyCharacters';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
@@ -181,9 +183,11 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
     case Field.SourceForLanguage:
     case Field.WritingSystemScope:
-    case Field.Example:
     case Field.UnicodeVersion:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
+
+    case Field.Example:
+      return <OrthographyCharacters chars={getEntityCharacters(ent) ?? ''} />;
 
     case Field.VitalityMetascore:
     case Field.ISOStatus:

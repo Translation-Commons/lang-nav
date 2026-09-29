@@ -24,6 +24,7 @@ flowchart TD
     ORG["<b>Organization</b>"]:::demographics
     POP["<b>Population Record</b>"]:::demographics
     TECH["<b>Technology</b><br/>OS, Product,<br/>App, Database, ..."]:::method
+    ORTH["<b>Orthography</b>"]:::method
 
     LANG -->|"language tag"| LOC
     TERR -.->|"territory tag"| LOC
@@ -48,6 +49,10 @@ flowchart TD
     ORG  -->|"owns"| TECH
     TECH -.->|"language support"| LANG
     TECH -.->|"keyboards"| KB
+
+    ORTH --> LANG
+    ORTH --> WS
+    VAR -.-> ORTH
 
     linkStyle default stroke-width:2px
 ```

@@ -28,10 +28,11 @@ function ViewFamilyTree() {
       return <VariantHierarchy />;
     case EntityType.Org:
       return <OrganizationHierarchy />;
-    case EntityType.Keyboard:
-      return 'Family trees are not defined well for this type';
     case EntityType.Technology:
       return <TechnologyHierarchy />;
+    case EntityType.Keyboard:
+    case EntityType.Orthography:
+      return 'Family trees are not defined well for this type';
   }
 }
 
