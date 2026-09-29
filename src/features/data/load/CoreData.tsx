@@ -13,7 +13,7 @@ import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
 import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
-import type { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import { OrthographyData } from '@entities/orthography/OrthographyTypes';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import DetailsField from './ui/DetailsField';
-import DetailsSection from './ui/DetailsSection';
+import { OrthographyData } from './OrthographyTypes';
 
 type Props = {
   orthography: OrthographyData;
@@ -21,19 +21,11 @@ const OrthographyDetails: React.FC<Props> = ({ orthography }) => {
       <DetailsSection title="Attributes">
         <DetailsField title="Base Characters">
           {baseCharacters ? (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4em' }}>
+            <div className="flex flex-wrap gap-2">
               {baseCharacters.split('').map((char, i) => (
                 <span
                   key={i}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '2em',
-                    height: '2em',
-                    border: '1px solid var(--color-button-secondary)',
-                    borderRadius: '0.25em',
-                  }}
+                  className="inline-flex items-center justify-center w-8 h-8 border border-button-secondary rounded"
                 >
                   {char}
                 </span>

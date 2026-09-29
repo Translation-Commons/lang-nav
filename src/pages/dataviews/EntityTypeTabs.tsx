@@ -19,6 +19,7 @@ const ORDERED_OBJECTS = [
   EntityType.Census,
   EntityType.Org,
   EntityType.Technology,
+  EntityType.Orthography,
 ];
 
 const EntityTypeTabs: React.FC = () => {

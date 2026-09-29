@@ -1,4 +1,3 @@
-import OrthographyCard from '@entities/orthography/OrthographyCard';
 import React from 'react';
 
 import CensusCard from '@entities/census/CensusCard';
@@ -6,6 +5,7 @@ import KeyboardCard from '@entities/keyboard/KeyboardCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
 import OrganizationCard from '@entities/org/OrganizationCard';
+import OrthographyCard from '@entities/orthography/OrthographyCard';
 import TechnologyCard from '@entities/tech/TechnologyCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
