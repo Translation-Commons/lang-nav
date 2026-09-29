@@ -2,6 +2,7 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguagesBySource } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -10,6 +11,7 @@ import { connectKeyboards } from '../connect/connectKeyboards';
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
 import { connectOrganizations } from '../connect/connectOrganizations';
+import { connectTechnologies } from '../connect/connectTechnologies';
 import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '../connect/connectWritingSystems';
 import { createFamilyLocales } from '../connect/createFamilyLocales';
@@ -32,6 +34,7 @@ export function connectEntitiesAndCreateDerivedData(
   variants: Record<string, VariantData>,
   keyboards: Record<string, KeyboardData>,
   organizations: Record<string, OrganizationData>,
+  technologies: Record<string, TechnologyData>,
 ): void {
   connectLanguagesToParent(languagesBySource);
   connectTerritoriesToParent(territories);
@@ -50,6 +53,8 @@ export function connectEntitiesAndCreateDerivedData(
     writingSystems,
     variants,
     locales,
+    technologies,
   );
   connectOrganizations(organizations, territories);
+  connectTechnologies(technologies, organizations);
 }

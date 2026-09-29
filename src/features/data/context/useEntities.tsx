@@ -16,6 +16,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
     censuses,
     keyboards,
     organizations,
+    technologies,
   } = useDataContext();
   const ents = useMemo(() => {
     switch (entType ?? pageEntityType) {
@@ -35,6 +36,8 @@ const useEntities = (entType?: EntityType): EntityData[] => {
         return keyboards;
       case EntityType.Org:
         return organizations;
+      case EntityType.Technology:
+        return technologies;
     }
   }, [
     entType,
@@ -47,6 +50,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
     variants,
     keyboards,
     organizations,
+    technologies,
   ]);
   return ents;
 };

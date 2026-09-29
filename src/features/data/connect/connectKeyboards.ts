@@ -2,6 +2,7 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLanguageRootMacrolanguage } from '@entities/language/relations/LanguageFamilyUtils';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { TechnologyData } from '@entities/tech/TechnologyTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -16,10 +17,17 @@ export function connectKeyboards(
   writingSystems: Record<ScriptCode, WritingSystemData>,
   variants: Record<string, VariantData>,
   locales: Record<StandardLocaleCode, LocaleData>,
+  technologies: Record<string, TechnologyData>,
 ): void {
   Object.values(keyboards).forEach((keyboard) => {
-    const { languageCodes, territoryCode, inputScriptCode, outputScriptCode, variantCode } =
-      keyboard;
+    const {
+      languageCodes,
+      territoryCode,
+      inputScriptCode,
+      outputScriptCode,
+      variantCode,
+      inputTechCode,
+    } = keyboard;
 
     // Connect territory, writing systems, variant tag (same for all platforms)
     const territory = territoryCode != null ? (territoriesByCode[territoryCode] ?? null) : null;
@@ -64,6 +72,14 @@ export function connectKeyboards(
           .map((tag: string) => locales[tag])
           .find((l: LocaleData | undefined) => l != null) ?? null;
       if (locale != null) keyboard.locales.push(locale);
+    }
+
+    // Connect technologies
+    const inputTech = technologies['tech.' + inputTechCode] ?? null;
+    if (inputTech != null) {
+      keyboard.inputTech = inputTech;
+      if (!inputTech.keyboards) inputTech.keyboards = [];
+      inputTech.keyboards.push(keyboard);
     }
   });
 }

@@ -133,10 +133,14 @@ export function getDefaultParams(
   switch (params.view) {
     case View.Hierarchy:
       // Show parents in the hierarchy that we usually do not show
-      if (params.entType === EntityType.Language) params.languageScopes.push(LanguageScope.Family);
-      if (params.entType === EntityType.Territory)
+      if (params.entType === EntityType.Language) {
+        params.languageScopes.push(LanguageScope.Family);
+        if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+      } else if (params.entType === EntityType.Territory) {
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
-      if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+        if (params.colorBy === Field.None) params.colorBy = Field.Depth;
+      }
+
       break;
     case View.Table:
       // Show more results in table view since it's easier to scan
@@ -181,15 +185,7 @@ export function getDefaultParams(
   }
 
   // Set population sorting behavior
-  if (params.entType === EntityType.Org) {
-    // Orgs don't have population, so sort by count of censuses by default
-    if (params.sortBy === Field.Population) params.sortBy = Field.CountOfCensuses;
-    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.CountOfCensuses;
-  } else if (params.entType === EntityType.Keyboard) {
-    // Keyboards don't have population, so sort by name by default
-    if (params.sortBy === Field.Population) params.sortBy = Field.Name;
-    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
-  } else if (params.entType === EntityType.WritingSystem) {
+  if (params.entType === EntityType.WritingSystem) {
     // For writing sytems, the population == population (writing) but its more accurate to refer to it as the writing population
     if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
     if (params.secondarySortBy === Field.Population)

@@ -5,7 +5,12 @@ import usePageParams from '@features/params/usePageParams';
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityType } from '@entities/types/EntityTypes';
 
-const UNSUPPORTED_ENTITY_TYPES = [EntityType.Org, EntityType.Variant, EntityType.Keyboard];
+const UNSUPPORTED_ENTITY_TYPES = [
+  EntityType.Org,
+  EntityType.Variant,
+  EntityType.Keyboard,
+  EntityType.Technology,
+];
 
 const ViewChart: React.FC = () => {
   const { entType } = usePageParams();

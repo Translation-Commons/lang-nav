@@ -13,6 +13,7 @@ export function getEntitySubtitle(entity: EntityData): string | undefined {
     case EntityType.Territory:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -35,6 +36,8 @@ export function getEntityTypeLabelPlural(entType: EntityType) {
       return 'keyboards';
     case EntityType.Org:
       return 'organizations';
+    case EntityType.Technology:
+      return 'technologies';
     default:
       enforceExhaustiveSwitch(entType);
   }

@@ -24,6 +24,8 @@ export function getEntityParents(
       return [];
     case EntityType.Org:
       return [ent.parent];
+    case EntityType.Technology:
+      return [...getEntityParents(ent.parentTech, depth + 1), ent.parentTech];
   }
 }
 
@@ -51,6 +53,8 @@ export function getEntityChildren(ent?: EntityData): (EntityData | undefined)[] 
       return [];
     case EntityType.Org:
       return ent.children ?? [];
+    case EntityType.Technology:
+      return ent.childTechs ?? [];
   }
 }
 
@@ -104,5 +108,7 @@ export function getDescendantsName(ent: EntityData, count: number): string {
       return 'keyboard' + (count > 1 ? 's' : '');
     case EntityType.Org:
       return 'organization' + (count > 1 ? 's' : '');
+    case EntityType.Technology:
+      return 'technolog' + (count > 1 ? 'ies' : 'y');
   }
 }

@@ -15,6 +15,13 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+const UNSUPPORTED_ENTITY_TYPES = [
+  EntityType.Org,
+  EntityType.Variant,
+  EntityType.Keyboard,
+  EntityType.Technology,
+];
+
 function ViewMap() {
   const { entType } = usePageParams();
   const { filteredEntities, allEntities } = useFilteredEntities({});
@@ -22,7 +29,7 @@ function ViewMap() {
 
   const isDrawingTerritories = entType !== EntityType.Language;
 
-  if ([EntityType.Variant, EntityType.Keyboard, EntityType.Org].includes(entType)) {
+  if (UNSUPPORTED_ENTITY_TYPES.includes(entType)) {
     return (
       <div>
         Map view is not well-defined for {getEntityTypeLabelPlural(entType)}. Please select a

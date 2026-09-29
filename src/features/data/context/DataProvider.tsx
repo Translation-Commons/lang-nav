@@ -5,10 +5,11 @@ import usePageParams from '@features/params/usePageParams';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';
 import { useCoreData } from '../load/CoreData';
@@ -92,6 +93,20 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
+  const getTechnology = useCallback(
+    (id: string): TechnologyData | undefined => {
+      const ent = coreData.ents[id];
+      if (ent?.type === EntityType.Technology) return ent;
+
+      // Search with tech. prefix
+      const ent2 = coreData.ents[`tech.${id}`];
+      if (ent2?.type === EntityType.Technology) return ent2;
+
+      // Not found
+      return undefined;
+    },
+    [coreData],
+  );
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
@@ -120,6 +135,7 @@ const DataProvider: React.FC<{
       getWritingSystem,
       getVariant,
       getOrganization,
+      getTechnology,
     }),
     [coreData, loadProgress],
   );

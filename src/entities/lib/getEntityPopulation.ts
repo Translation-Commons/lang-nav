@@ -1,7 +1,10 @@
+import { sortByPopulation } from '@features/transforms/sorting/sort';
+
+import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
-import { sumBy } from '@shared/lib/setUtils';
+import { maxBy, sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
@@ -23,10 +26,23 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
       return ent.languages.length > 0
         ? ent.languages.reduce((sum, lang) => sum + (lang.pop.overall || 0), 0)
         : undefined;
+    case EntityType.Technology:
+      return ent.population;
     case EntityType.Keyboard:
+      return ent.totalDownloads;
     case EntityType.Org:
-      return undefined;
+      return getOrganizationPopulation(ent);
   }
+}
+
+function getOrganizationPopulation(ent: OrganizationData): number | undefined {
+  const biggestTechnologyPop = maxBy(ent.techs ?? [], (tech) => tech.population);
+  const censusesPerTerritory = uniqueBy(
+    (ent.censuses ?? []).sort(sortByPopulation),
+    (census) => census.isoRegionCode,
+  );
+  const censusesPop = sumBy(censusesPerTerritory, (census) => census.population ?? 0);
+  return Math.max(biggestTechnologyPop ?? 0, censusesPop ?? 0) || undefined;
 }
 
 // Field.PopulationDirectlySourced
@@ -39,6 +55,8 @@ export function getEntityPopulationDirectlySourced(ent: EntityData): number | un
     case EntityType.Territory:
       return ent.pop.fromUN;
     case EntityType.Census:
+      return ent.population;
+    case EntityType.Technology:
       return ent.population;
     case EntityType.WritingSystem:
     case EntityType.Variant:
@@ -68,6 +86,7 @@ export function getEntityPopulationOfDescendants(ent: EntityData): number | unde
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -89,6 +108,7 @@ export function getEntityPopulationPercentInBiggestDescendantLanguage(
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -112,6 +132,7 @@ export function getEntityPopulationRelativeToOverallLanguageSpeakers(
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -135,6 +156,7 @@ export function getEntityPercentOfTerritoryPopulation(ent: EntityData): number |
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -158,6 +180,7 @@ export function getEntityPopulationSpeaking(ent: EntityData): number | undefined
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -182,6 +205,7 @@ export function getEntityPopulationWriting(ent: EntityData): number | undefined 
     case EntityType.Census:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }

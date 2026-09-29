@@ -12,6 +12,7 @@ import Field from '@features/transforms/fields/Field';
 
 import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
 
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import ExternalLink from '@shared/ui/ExternalLink';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
@@ -22,7 +23,7 @@ type Props = {
 };
 
 const OrganizationDetails: React.FC<Props> = ({ org }) => {
-  const { codeDisplay, nameDisplay, nameEndonym, headquarters, parent, url, children } = org;
+  const { codeDisplay, nameDisplay, nameEndonym, headquarters, parent, url, children, techs } = org;
 
   return (
     <div className="Details">
@@ -50,6 +51,15 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
         {url && (
           <DetailsField title="URL">
             <ExternalLink href={url} />
+          </DetailsField>
+        )}
+        {techs && techs.length > 0 && (
+          <DetailsField title="Technologies">
+            <CommaSeparated>
+              {techs.map((tech) => (
+                <HoverableEntityName key={tech.ID} ent={tech} />
+              ))}
+            </CommaSeparated>
           </DetailsField>
         )}
       </DetailsSection>

@@ -1,0 +1,14 @@
+code	name	scope	organization	parentTech	relatedTech	population	populationSource
+# A list of platforms with data in the LangNav system							
+iOS	iOS	OS	Apple			1,000,000,000	https://searchengineland.com/guide/iphone-vs-android-statistics
+Windows	Windows	OS	Microsoft			1,400,000,000	
+win11	Windows 11	OS	Microsoft	Windows		1,000,000,000	
+macOS	Macintosh Operating System	OS	Apple			120,000,000	
+Android	Android	OS	Google			3,000,000,000	https://searchengineland.com/guide/iphone-vs-android-statistics
+GTranslate	Google Translate	ML	Google			1,000,000,000	https://blog.google/products-and-platforms/products/translate/fun-facts-google-translate-20-years/
+FB	Facebook	Product	Meta			3,070,000,000	https://en.wikipedia.org/wiki/List_of_most_popular_social_platforms
+fb4a	Facebook for Android	App	Meta	FB	Android	1,849,000,000	computed from stat 60.2% of FB users use their main Android app
+fbios	Facebook for iOS	App	Meta	FB	iOS	527,000,000	computed from stat 17% of FB users use the iOS app
+CLDR	Common Locale Data Repository	DB	Unicode			6,000,000,000	roughly the number of people that use digital devices
+GBoard	Google Keyboard	Input	Google	Android		1,785,000,000	https://www.androidcentral.com/apps-software/favorite-android-keyboard-app-poll-responses
+Keyman	Keyman	Input	SIL			1,000,000	https://help.keyman.com/products/windows/current-version/about/welcome

@@ -5,7 +5,7 @@ import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -17,7 +17,7 @@ interface Props {
 const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   const {
     nameDisplay,
-    platform,
+    inputTech,
     languages,
     territory,
     inputWritingSystem,
@@ -40,7 +40,9 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
-      <CardField field={Field.Platform}>{platform}</CardField>
+      <CardField field={Field.Platform}>
+        <HoverableEntityName ent={inputTech} />
+      </CardField>
 
       {hasLanguages && (
         <CardField field={Field.LanguageList}>

@@ -122,6 +122,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
 
     // Population
     case Field.Population:
+      if (entType === EntityType.Keyboard) return 'Downloads';
       return 'Population';
     case Field.PopulationDirectlySourced:
       return 'Population Directly Sourced';
@@ -272,7 +273,8 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
       // TODO
       // if (entType === EntityType.Language)
       //   return 'The platforms that support this language in the user interface';
-      if (entType === EntityType.Keyboard) return 'The platform this keyboard is designed for.';
+      if (entType === EntityType.Keyboard)
+        return 'The input technology this keyboard is built for.';
       return 'The platform this entry is from.';
     case Field.Organization:
       if (entType === EntityType.Locale)
@@ -349,18 +351,7 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
 
     // Population
     case Field.Population:
-      if (entType === EntityType.Territory) return 'The number of people in the area in 2025.';
-      if (entType === EntityType.Locale)
-        return 'The number of people in this area that speak, write, or sign this language.';
-      if (entType === EntityType.Variant)
-        return 'The upper bound number of people that could use this variant -- probably much higher than the actual number.';
-      if (entType === EntityType.Language)
-        return 'The number of people that speak, write, or sign this language';
-      if (entType === EntityType.Census)
-        return 'The number of people eligible for the language question in this census. It could be every individual in the area, or it could be limited to the number of people age 15+, etc.';
-      if (entType === EntityType.WritingSystem)
-        return 'The upper bound number of people that could use this writing system, estimated by the number of people use languages that are written in this writing system. The actual number is probably lower.';
-      return '';
+      return getPopulationFieldDescription(entType);
     case Field.PopulationDirectlySourced:
       if (entType === EntityType.Census)
         return 'The number of people eligible for the language question in this census. It could be every individual in the area, or it could be limited to the number of people age 15+, etc.';
@@ -405,5 +396,30 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
 
     default:
       enforceExhaustiveSwitch(field);
+  }
+}
+
+function getPopulationFieldDescription(entType: EntityType): string {
+  switch (entType) {
+    case EntityType.Territory:
+      return 'The number of people in the area in 2025.';
+    case EntityType.Variant:
+      return 'The upper bound number of people that could use this variant -- probably much higher than the actual number.';
+    case EntityType.Language:
+      return 'The number of people that speak, write, or sign this language';
+    case EntityType.Locale:
+      return 'The number of people in this area that speak, write, or sign this language.';
+    case EntityType.Census:
+      return 'The number of people eligible for the language question in this census. It could be every individual in the area, or it could be limited to the number of people age 15+, etc.';
+    case EntityType.WritingSystem:
+      return 'The upper bound number of people that could use this writing system, estimated by the number of people use languages that are written in this writing system. The actual number is probably lower.';
+    case EntityType.Org:
+      return 'The number of people affected by this organization -- either users of its products and/or people that are catalogued in their databases.';
+    case EntityType.Technology:
+      return 'The number of people that use this technology -- either users of its products and/or people that are catalogued in their databases.';
+    case EntityType.Keyboard:
+      return 'The number of downloads this keyboard has, approximating how many people may use it.';
+    default:
+      enforceExhaustiveSwitch(entType);
   }
 }

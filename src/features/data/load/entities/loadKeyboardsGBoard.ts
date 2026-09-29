@@ -32,7 +32,7 @@ export function parseKeyboardGBoardLine(line: string): KeyboardData | undefined 
     codeDisplay: id,
     nameDisplay,
     names: [nameDisplay],
-    platform: KeyboardPlatform.GBoard,
+    inputTechCode: KeyboardPlatform.GBoard,
     languageCodes: [languageCode],
     territoryCode,
     inputScriptCode,

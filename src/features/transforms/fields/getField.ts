@@ -41,6 +41,7 @@ import {
   getKeyboardForEntity,
   getLanguageForEntity,
   getOrganizationsForEntity,
+  getTechnologiesForEntity,
   getTerritoryForEntity,
   getVariantsForEntity,
   getWritingSystemForEntity,
@@ -150,7 +151,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
           .join(', ') || undefined
       );
     case Field.Platform:
-      return getKeyboardForEntity(ent)?.platform;
+      return getTechnologiesForEntity(ent)?.[0]?.nameDisplay;
     case Field.Variant:
       return getVariantsForEntity(ent)?.[0]?.nameDisplay;
     case Field.Organization:

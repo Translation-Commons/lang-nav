@@ -32,6 +32,7 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
     case EntityType.Keyboard:
     case EntityType.Territory:
     case EntityType.Org:
+    case EntityType.Technology:
       return [];
     default:
       enforceExhaustiveSwitch(entType);

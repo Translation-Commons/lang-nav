@@ -5,6 +5,7 @@ import KeyboardCard from '@entities/keyboard/KeyboardCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
 import OrganizationCard from '@entities/org/OrganizationCard';
+import TechnologyCard from '@entities/tech/TechnologyCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import VariantCard from '@entities/variant/VariantCard';
@@ -28,6 +29,8 @@ const EntityCard: React.FC<{ ent: EntityData }> = ({ ent }) => {
       return <KeyboardCard keyboard={ent} />;
     case EntityType.Org:
       return <OrganizationCard org={ent} />;
+    case EntityType.Technology:
+      return <TechnologyCard tech={ent} />;
   }
 };
 

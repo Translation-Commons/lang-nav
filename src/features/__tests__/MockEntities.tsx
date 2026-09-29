@@ -295,6 +295,7 @@ export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays 
     censuses: { be0590: ents.be0590 as CensusData },
     keyboards: entArray.filter((ent) => ent.type === EntityType.Keyboard),
     organizations: entArray.filter((ent) => ent.type === EntityType.Org),
+    technologies: entArray.filter((ent) => ent.type === EntityType.Technology),
   };
 }
 
@@ -379,6 +380,7 @@ export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictio
     variants,
     {},
     {},
+    {},
   );
 
   // Update the entity dictionary with the aggregated locales
@@ -457,6 +459,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     territories,
     writingSystems,
     variants,
+    technologies: entArray.filter((ent) => ent.type === EntityType.Technology),
     getEntity: (id: string) => ents[id],
     getLanguage: (id: string) => (ents[id]?.type === EntityType.Language ? ents[id] : undefined),
     getCLDRLanguage: (id: string) =>
@@ -469,6 +472,8 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
       ents[id]?.type === EntityType.WritingSystem ? ents[id] : undefined,
     getVariant: (id: string) => (ents[id]?.type === EntityType.Variant ? ents[id] : undefined),
     getOrganization: (id: string) => (ents[id]?.type === EntityType.Org ? ents[id] : undefined),
+    getTechnology: (id: string) =>
+      ents[id]?.type === EntityType.Technology ? ents[id] : undefined,
   };
 
   return dataContext;

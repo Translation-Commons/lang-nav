@@ -1,7 +1,10 @@
+import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
+
 import { CensusData } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
+import { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
@@ -65,7 +68,7 @@ export function getOrganizationsForEntity(
   ent: EntityData | undefined,
 ): OrganizationData[] | undefined {
   if (!ent) return undefined;
-  if (ent.type === EntityType.Org) return [ent];
+  if (ent.type === EntityType.Org) return [...(getOrganizationsForEntity(ent.parent) ?? []), ent];
   if (ent.type === EntityType.Census) return [ent.collector, ent.presenter].filter((org) => !!org);
   if (ent.type === EntityType.Locale) {
     const censusOrgs = ent.censusRecords
@@ -73,5 +76,22 @@ export function getOrganizationsForEntity(
       .filter((org) => !!org);
     return censusOrgs != null ? uniqueBy(censusOrgs, (org) => org.ID) : undefined;
   }
+  if (ent.type === EntityType.Technology) return getOrganizationsForEntity(ent.organization);
+  return undefined;
+}
+
+export function getTechnologiesForEntity(
+  ent: EntityData | undefined,
+): TechnologyData[] | undefined {
+  if (!ent) return undefined;
+  if (ent.type === EntityType.Technology) {
+    return [
+      ...getEntityParents(ent).filter((p) => p?.type === EntityType.Technology),
+      ent,
+      ...(ent.relatedTechs ?? []),
+    ];
+  }
+  if (ent.type === EntityType.Org) return ent.techs;
+  if (ent.type === EntityType.Keyboard) return ent.inputTech ? [ent.inputTech] : undefined;
   return undefined;
 }
