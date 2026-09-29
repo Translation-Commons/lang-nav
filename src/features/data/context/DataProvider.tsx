@@ -107,7 +107,7 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
-  const languagesInSelectedSource = useMemo(() => {
+  useEffect(() => {
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
       coreData.languages,
@@ -118,14 +118,11 @@ const DataProvider: React.FC<{
     );
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
-
-    return coreData.languages.filter((lang) => lang[languageSource]?.code != null);
   }, [coreData, languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
     () => ({
       ...coreData,
-      languagesInSelectedSource,
       loadingStage: loadProgress,
       getEntity,
       getLanguage,

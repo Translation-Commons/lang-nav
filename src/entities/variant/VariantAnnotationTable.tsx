@@ -26,8 +26,8 @@ type Props = {
 };
 
 const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariants }) => {
-  const { languagesInSelectedSource } = useDataContext();
-  const languageUncoded = languagesInSelectedSource.find((l) => l.ID === 'mis')!;
+  const { languages } = useDataContext();
+  const languageUncoded = languages.find((l) => l.ID === 'mis')!;
 
   const getPredictedLanguoid = useCallback(
     async (variant: VariantData): Promise<LanguageData | undefined> => {
@@ -36,7 +36,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
       if (!matchingWord) return undefined;
       const match = getSubstringFilterOnQuery(matchingWord, SearchableField.NameAny);
       // Try matching within connected languoids first since those are more likely to be correct than a random match across the whole dataset
-      const connectedLanguoids = languagesInSelectedSource.filter(
+      const connectedLanguoids = languages.filter(
         (languoid) =>
           languoid.scope !== LanguageScope.Family &&
           getLanguagesRelevantToEntity(languoid).some((relevant) =>
@@ -46,9 +46,9 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
       const connectedMatchingLanguoids = connectedLanguoids.filter(match);
       if (connectedMatchingLanguoids.length > 0) return connectedMatchingLanguoids[0];
 
-      return languagesInSelectedSource.filter(match)[0];
+      return languages.filter(match)[0];
     },
-    [languagesInSelectedSource],
+    [languages],
   );
 
   const columns = useMemo(

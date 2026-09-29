@@ -88,6 +88,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
   computeLocalesPopulationFromCensuses(dataContext.locales);
   // Some more population computations moved to updatePopulations
-  computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
+  computeLanguageFamiliesModality(dataContext.languages);
   computeFineGrainedLanguageScope(dataContext.languages);
 }
