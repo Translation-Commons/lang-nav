@@ -47,7 +47,7 @@ const DataProvider: React.FC<{
   );
   const getCLDRLanguage = useCallback(
     (id: string): LanguageData | undefined => {
-      return coreData.allLanguoids.find((lang) => lang.CLDR?.code === id);
+      return coreData.languages.find((lang) => lang.CLDR?.code === id);
     },
     [coreData],
   );
@@ -110,7 +110,7 @@ const DataProvider: React.FC<{
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
-      coreData.allLanguoids,
+      coreData.languages,
       coreData.locales,
       coreData.ents['001'] as TerritoryData, // The world territory
       languageSource,
@@ -119,7 +119,7 @@ const DataProvider: React.FC<{
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
 
-    return coreData.allLanguoids.filter((lang) => lang[languageSource]?.code != null);
+    return coreData.languages.filter((lang) => lang[languageSource]?.code != null);
   }, [coreData, languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
