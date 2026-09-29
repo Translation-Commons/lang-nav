@@ -10,6 +10,7 @@ const UNSUPPORTED_ENTITY_TYPES = [
   EntityType.Variant,
   EntityType.Keyboard,
   EntityType.Technology,
+  EntityType.Orthography,
 ];
 
 const ViewChart: React.FC = () => {

@@ -115,8 +115,8 @@ function getLocaleCountryLocales(locale: LocaleData): LocaleData[] {
   return locale.territory && locale.territory.scope === TerritoryScope.Country
     ? [locale]
     : (locale.relatedLocales?.childTerritories?.flatMap(getLocaleCountryLocales) ?? []).sort(
-      sortByPopulation,
-    );
+        sortByPopulation,
+      );
 }
 
 function getLocaleCountries(locale: LocaleData): TerritoryData[] {

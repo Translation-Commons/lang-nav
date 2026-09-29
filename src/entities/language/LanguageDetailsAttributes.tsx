@@ -61,7 +61,6 @@ const LanguageDetailsAttributes: React.FC<Props> = ({ lang }) => {
         </DetailsField>
       )}
 
-
       <DetailsField title="Centroid Coordinates">
         {lang.latitude != null && lang.longitude != null ? (
           <>

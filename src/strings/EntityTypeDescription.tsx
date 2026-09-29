@@ -51,7 +51,9 @@ const EntityTypeDescription: React.FC<{ entType: EntityType }> = ({ entType }) =
     case EntityType.Orthography:
       return (
         <>
-          <label>Orthography:</label>A system for writing a language using a specific set of characters or symbols. Orthographies are often associated with a particular writing system and may include rules for spelling, punctuation, and other conventions.
+          <label>Orthography:</label>A system for writing a language using a specific set of
+          characters or symbols. Orthographies are often associated with a particular writing system
+          and may include rules for spelling, punctuation, and other conventions.
         </>
       );
     case EntityType.Variant:

@@ -5,6 +5,7 @@ import KeyboardTable from '@entities/keyboard/KeyboardTable';
 import LanguageTable from '@entities/language/LanguageTable';
 import LocaleTable from '@entities/locale/LocaleTable';
 import OrganizationTable from '@entities/org/OrganizationTable';
+import OrthographyTable from '@entities/orthography/OrthographyTable';
 import TechnologyTable from '@entities/tech/TechnologyTable';
 import TerritoryTable from '@entities/territory/TerritoryTable';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -33,6 +34,8 @@ function ViewTable() {
       return <OrganizationTable />;
     case EntityType.Technology:
       return <TechnologyTable />;
+    case EntityType.Orthography:
+      return <OrthographyTable />;
   }
 }
 
