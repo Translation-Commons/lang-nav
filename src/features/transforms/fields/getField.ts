@@ -28,6 +28,7 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getEntityRelatedTerritories';
+import getEntityCharacters from '@entities/orthography/getEntityCharacters';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -210,7 +211,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.Description:
       return ent.type === EntityType.Variant ? ent.description : undefined;
     case Field.Example:
-      return ent.type === EntityType.WritingSystem ? ent.sample : undefined;
+      return getEntityCharacters(ent);
 
     default:
       enforceExhaustiveSwitch(field);

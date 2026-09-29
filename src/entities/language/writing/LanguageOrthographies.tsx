@@ -6,6 +6,7 @@ import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { View } from '@features/params/PageParamTypes';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
+import Field from '@features/transforms/fields/Field';
 
 import getOrthographyColumns from '@entities/orthography/OrthographyColumns';
 import { OrthographyData } from '@entities/orthography/OrthographyTypes';
@@ -24,8 +25,10 @@ const LanguageOrthographies: React.FC<Props> = ({ lang, view }) => {
 
   return (
     <div className="text-xs">
-      {view === View.CardList && <MiniCardList ents={orthographies} />}
-      {view === View.Table && <Table orthographies={orthographies} />}
+      <LocalParamsProvider overrides={{ limit: 12, fieldFocus: Field.Example }}>
+        {view === View.CardList && <MiniCardList ents={orthographies} />}
+        {view === View.Table && <Table orthographies={orthographies} />}
+      </LocalParamsProvider>
     </div>
   );
 };
@@ -34,14 +37,12 @@ function Table({ orthographies }: { orthographies: OrthographyData[] }) {
   const columns = useMemo(() => getOrthographyColumns(), []);
 
   return (
-    <LocalParamsProvider overrides={{ limit: 12 }}>
-      <InteractiveEntityTable<OrthographyData>
-        tableID={TableID.Orthographies}
-        ents={orthographies}
-        columns={columns}
-        shouldFilterUsingSearchBar={false}
-      />
-    </LocalParamsProvider>
+    <InteractiveEntityTable<OrthographyData>
+      tableID={TableID.Orthographies}
+      ents={orthographies}
+      columns={columns}
+      shouldFilterUsingSearchBar={false}
+    />
   );
 }
 

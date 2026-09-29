@@ -9,14 +9,14 @@ import type { RetirementReason } from '@features/data/load/extra_entities/ISORet
 
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-import { OrthographyData } from '@entities/orthography/OrthographyTypes';
+import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
 import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import type { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 
-import {
+import type {
   DigitalSupportScore,
   PlatformSupportData,
   UniversalDeclarationOfHumanRightsData,

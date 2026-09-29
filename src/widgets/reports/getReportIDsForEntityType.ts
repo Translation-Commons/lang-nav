@@ -25,7 +25,6 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
       ];
     case EntityType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];
-    case EntityType.Orthography:
     case EntityType.Census:
       return [ReportID.CensusCountries, ReportID.CensusInputTool];
     case EntityType.Variant:
@@ -34,6 +33,7 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
     case EntityType.Territory:
     case EntityType.Org:
     case EntityType.Technology:
+    case EntityType.Orthography:
       return [];
     default:
       enforceExhaustiveSwitch(entType);
