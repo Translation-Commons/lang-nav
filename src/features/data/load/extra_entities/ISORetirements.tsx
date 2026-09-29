@@ -1,8 +1,8 @@
 import {
   getBaseLanguageData,
   LanguageCode,
+  LanguageDictionary,
   LanguageField,
-  LanguagesBySource,
   LanguageScope,
 } from '@entities/language/LanguageTypes';
 
@@ -59,23 +59,17 @@ export async function loadISORetirements(): Promise<ISORetirementData[] | void> 
 }
 
 export function addISORetirementsToLanguages(
-  languagesBySource: LanguagesBySource,
+  languages: LanguageDictionary,
   retirements: ISORetirementData[],
 ): void {
   retirements.forEach((retirement) => {
-    let lang = languagesBySource.ISO[retirement.id] ?? languagesBySource.Combined[retirement.id];
+    let lang = languages[retirement.id];
     const retirementExplanation = getRetirementExplanation(retirement);
 
     // Remove the language links from ISO based sources or make a new language entry
     if (lang) {
       lang.warnings[LanguageField.isoCode] = retirementExplanation;
       // lang.ISO.scope = LanguageScope.SpecialCode; // Maybe
-
-      // Remove from ISO-based language lists (we are just leaving it in the "All" source)
-      delete languagesBySource.ISO[retirement.id];
-      delete languagesBySource.BCP[retirement.id];
-      delete languagesBySource.CLDR[retirement.id];
-      delete languagesBySource.UNESCO[retirement.id];
 
       if (retirement.changeTo) {
         // If there's a changeTo, update the codeDisplay to the new code
@@ -84,7 +78,7 @@ export function addISORetirementsToLanguages(
       }
     } else {
       const childLanguages = retirement.splitLanguages
-        .map((code) => languagesBySource.Combined[code])
+        .map((code) => languages[code])
         .filter((lang) => lang != null);
 
       lang = {
@@ -101,7 +95,7 @@ export function addISORetirementsToLanguages(
       };
 
       // Add the language to the all list, but with the retirement warning
-      languagesBySource.Combined[retirement.id] = lang;
+      languages[retirement.id] = lang;
     }
 
     // Add retirement information

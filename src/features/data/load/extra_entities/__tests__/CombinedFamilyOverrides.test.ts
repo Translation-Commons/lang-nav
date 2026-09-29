@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 
-import { EMPTY_LANGUAGES_BY_SCHEMA } from '@features/data/load/CoreData';
-
 import { getBaseLanguageData, LanguageData } from '@entities/language/LanguageTypes';
 
 import { applyCombinedFamilyOverrides } from '../CombinedFamilyOverrides';
@@ -18,14 +16,9 @@ describe('applyCombinedFamilyOverrides', () => {
   it('sets Combined parent without changing ISO or Glottolog parents', () => {
     const sqi = makeLang('sqi', 'clas1257');
     const sqj = makeLang('sqj', 'ine');
-    const languagesBySource = {
-      ...EMPTY_LANGUAGES_BY_SCHEMA,
-      Combined: { sqi, sqj },
-      ISO: { sqi, sqj },
-      Glottolog: { sqi, sqj },
-    };
+    const languages = { sqi, sqj };
 
-    applyCombinedFamilyOverrides(languagesBySource, [
+    applyCombinedFamilyOverrides(languages, [
       { parentLanguageCode: 'sqj', childLanguageCode: 'sqi' },
     ]);
 
@@ -40,12 +33,9 @@ describe('applyCombinedFamilyOverrides', () => {
     const east2493 = makeLang('east2493', 'map');
     const pwn = makeLang('pwn', 'map');
     const poz = makeLang('poz', 'map');
-    const languagesBySource = {
-      ...EMPTY_LANGUAGES_BY_SCHEMA,
-      Combined: { map, fox, east2493, pwn, poz },
-    };
+    const languages = { map, fox, east2493, pwn, poz };
 
-    applyCombinedFamilyOverrides(languagesBySource, [
+    applyCombinedFamilyOverrides(languages, [
       { parentLanguageCode: 'fox', childLanguageCode: 'east2493' },
       { parentLanguageCode: 'fox', childLanguageCode: 'pwn' },
     ]);
@@ -60,12 +50,9 @@ describe('applyCombinedFamilyOverrides', () => {
     const parent = makeLang('sqj', 'ine');
     (child as LanguageData).Combined = undefined as unknown as LanguageData['Combined'];
 
-    const languagesBySource = {
-      ...EMPTY_LANGUAGES_BY_SCHEMA,
-      Combined: { sqi: child, sqj: parent },
-    };
+    const languages = { sqi: child, sqj: parent };
 
-    applyCombinedFamilyOverrides(languagesBySource, [
+    applyCombinedFamilyOverrides(languages, [
       { parentLanguageCode: 'sqj', childLanguageCode: 'sqi' },
     ]);
 
