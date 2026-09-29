@@ -14,12 +14,13 @@ import useFilters from '../useFilters';
 import EntityFilterSelector from './EntityFilterSelector';
 
 const LanguageFilterSelector: React.FC = () => {
-  const { languagesInSelectedSource: languages } = useDataContext();
+  const { languages } = useDataContext();
   const filterBy = useFilters();
   const filterByScope = filterBy[Field.LanguageScope];
   const filterByTerritory = filterBy[Field.TerritoryList];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterByLanguageFamily = filterBy[Field.LanguageFamily];
+  const filterByLanguageSource = filterBy[Field.SourceForLanguage];
   const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
@@ -29,6 +30,7 @@ const LanguageFilterSelector: React.FC = () => {
       if (!filterByWritingSystem(language)) dist += 2;
       if (!filterByTerritory(language)) dist += 4;
       if (!filterByScope(language)) dist += 8;
+      if (!filterByLanguageSource(language)) dist += 16;
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
@@ -36,12 +38,13 @@ const LanguageFilterSelector: React.FC = () => {
       if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
       if (!filterByScope(language)) return 'not ' + filterLabels.languageScope;
+      if (!filterByLanguageSource(language)) return 'not ' + filterLabels.languageSource;
       return 'matched';
     };
 
     return getSuggestionsFunction(
       languages
-        .filter((language) => language.scope !== LanguageScope.Family)
+        .filter((language) => (language.scope ?? 10) <= LanguageScope.Macrolanguage)
         .sort(sortByPopulation),
       getMatchDistance,
       getMatchGroup,

@@ -22,6 +22,7 @@ export function useFilterLabels() {
       writingSystemFilter: getWritingSystemFilterLabel(params),
       languageFilter: getLanguageFilterLabel(params),
       languageFamilyFilter: getLanguageFamilyFilterLabel(params),
+      languageSource: getLanguageSourceFilterLabel(params),
     }),
     [params],
   );
@@ -77,6 +78,11 @@ function getLanguageFamilyFilterLabel({ languageFamilyFilter }: PageParamsContex
   if (languageFamilyFilter.match(/^[a-z]{3}$/))
     return `related to language family with code "${languageFamilyFilter}"`;
   return `related to language family "${languageFamilyFilter}*"`;
+}
+
+function getLanguageSourceFilterLabel({ languageSource }: PageParamsContextState): string {
+  if (!languageSource) return 'any language list';
+  return `in ${languageSource}`;
 }
 
 export function getFilterTitle(field: Field, entType?: EntityType): string {

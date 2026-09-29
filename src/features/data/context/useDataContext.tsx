@@ -25,18 +25,13 @@ type DataGetters = {
   getTechnology: (id: string) => TechnologyData | undefined;
 };
 
-export type DataContextType = CoreDataArrays &
-  DataGetters & {
-    languagesInSelectedSource: LanguageData[];
-    loadingStage: LoadingStage;
-  };
+export type DataContextType = CoreDataArrays & DataGetters & { loadingStage: LoadingStage };
 
 export const DataContext = createContext<DataContextType | undefined>({
   loadingStage: LoadingStage.Initial,
   languages: [],
   censuses: {},
   organizations: [],
-  languagesInSelectedSource: [],
   locales: [],
   territories: [],
   variants: [],

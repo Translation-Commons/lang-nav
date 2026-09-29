@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
-import Field from '@features/transforms/fields/Field';
-import useFilters from '@features/transforms/filtering/useFilters';
+import useAllFilters from '@features/transforms/filtering/useAllFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
@@ -15,29 +14,22 @@ import EnumDropdown from '@shared/ui/EnumDropdown';
 
 export const LanguageHierarchy: React.FC = () => {
   const { languageSource, updatePageParams } = usePageParams();
-  const { languagesInSelectedSource } = useDataContext();
+  const { languages } = useDataContext();
   const sortFunction = getSortFunction();
-  const filters = useFilters();
-  const filterFunction = useCallback(
-    (lang: EntityData) =>
-      filters[Field.LanguageScope](lang) &&
-      filters[Field.TerritoryList](lang) &&
-      filters[Field.WritingSystem](lang) &&
-      filters[Field.Modality](lang) &&
-      filters[Field.ISOStatus](lang),
-    [filters],
-  );
+  const filterFunction = useAllFilters();
 
   const rootNodes = useMemo(
     () =>
       getLanguageTreeNodes(
-        languagesInSelectedSource.filter((lang) => lang[languageSource].parentLanguage == null),
+        languages.filter(
+          (lang) => lang[languageSource].code && lang[languageSource].parentLanguage == null,
+        ),
         languageSource,
         sortFunction,
         filterFunction,
         0,
       ),
-    [languagesInSelectedSource, languageSource, sortFunction, filterFunction],
+    [languages, languageSource, sortFunction, filterFunction],
   );
 
   return (

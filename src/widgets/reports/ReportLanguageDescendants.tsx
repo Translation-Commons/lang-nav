@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getEntityPopulation';
@@ -14,21 +14,21 @@ import { getEntityPopulationPercentInBiggestDescendantLanguage } from '@entities
 import EnumDropdown from '@shared/ui/EnumDropdown';
 
 const ReportLanguageDescendants: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const languages = useFilteredEntities<LanguageData>({}).filteredEntities;
 
   const [minimumPercentThreshold, setMinimumPercentThreshold] = React.useState(0);
   const [maximumPercentThreshold, setMaximumPercentThreshold] = React.useState(100);
 
   const filteredLanguages = useMemo(
     () =>
-      languagesInSelectedSource.filter((lang) => {
+      languages.filter((lang) => {
         if (lang.largestDescendant == null || lang.pop.overall == null || lang.pop.overall === 0)
           return false;
         const percent =
           ((lang.largestDescendant?.pop.overall || 0) / (lang.pop.overall || 1)) * 100;
         return percent >= minimumPercentThreshold && percent <= maximumPercentThreshold;
       }),
-    [languagesInSelectedSource, minimumPercentThreshold, maximumPercentThreshold],
+    [languages, minimumPercentThreshold, maximumPercentThreshold],
   );
 
   return (

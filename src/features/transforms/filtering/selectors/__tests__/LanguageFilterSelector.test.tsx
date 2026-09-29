@@ -26,7 +26,7 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
 vi.mock('@features/data/context/useDataContext', () => ({
   // [ine, gem, eng, spa, fra, deu, ita, rus, nav, zho]
   useDataContext: vi.fn(() => ({
-    languagesInSelectedSource: getMockLanguages(),
+    languages: getMockLanguages(),
   })),
 }));
 

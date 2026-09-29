@@ -31,12 +31,12 @@ const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSPr
 const LuckySearchPageBody: React.FC = () => {
   const navigate = useNavigate();
   const { searchString } = usePageParams();
-  const { getLanguage, languagesInSelectedSource } = useDataContext();
+  const { getLanguage, languages } = useDataContext();
   const { filteredEntities } = useFilteredEntities({});
   const [isSearching, setIsSearching] = useState(true);
 
   useEffect(() => {
-    if (languagesInSelectedSource.length === 0) {
+    if (languages.length === 0) {
       setIsSearching(true);
       return;
     }
@@ -57,7 +57,7 @@ const LuckySearchPageBody: React.FC = () => {
     }
 
     setIsSearching(false);
-  }, [searchString, getLanguage, languagesInSelectedSource, filteredEntities, navigate]);
+  }, [searchString, getLanguage, languages, filteredEntities, navigate]);
 
   if (isSearching) {
     return (

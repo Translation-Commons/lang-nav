@@ -38,6 +38,7 @@ function InteractiveEntityTable<T extends EntityData>({
     useConnections: true,
     useVitality: true,
     usePopulation: true,
+    useLanguageSource: true,
     inputEnts: ents,
   });
   const currentEntities = getCurrentEntities(filteredEntities);

@@ -455,7 +455,6 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     languages,
     censuses,
     keyboards: [],
-    languagesInSelectedSource: languages,
     loadingStage: LoadingStage.AlgorithmsFinished,
     locales,
     organizations,
