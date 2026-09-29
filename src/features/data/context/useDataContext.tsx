@@ -33,7 +33,7 @@ export type DataContextType = CoreDataArrays &
 
 export const DataContext = createContext<DataContextType | undefined>({
   loadingStage: LoadingStage.Initial,
-  allLanguoids: [],
+  languages: [],
   censuses: {},
   organizations: [],
   languagesInSelectedSource: [],

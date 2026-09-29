@@ -52,7 +52,7 @@ import { loadOrthographies } from './supplemental/loadOrthographies';
 import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
-  allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
+  languages: LanguageData[];
   locales: LocaleData[];
   territories: TerritoryData[];
   variants: VariantData[];
@@ -85,7 +85,7 @@ export function useCoreData(): {
   loadCoreData: () => Promise<void>;
   coreData: CoreData;
 } {
-  const [allLanguoids, setAllLanguoids] = useState<LanguageData[]>([]);
+  const [languages, setLanguages] = useState<LanguageData[]>([]);
   const [ents, setEnts] = useState<Record<string, EntityData>>({});
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
@@ -173,7 +173,7 @@ export function useCoreData(): {
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setAllLanguoids(Object.values(languagesBySource.Combined));
+    setLanguages(Object.values(languagesBySource.Combined));
 
     setEnts({
       // All combined into one big entity map for easy lookup but the ID formats are unique so its OK
@@ -195,7 +195,7 @@ export function useCoreData(): {
 
   const coreData = useMemo(
     () => ({
-      allLanguoids,
+      languages,
       locales: Object.values(ents).filter((e): e is LocaleData => e.type === EntityType.Locale),
       territories: Object.values(ents).filter(
         (e): e is TerritoryData => e.type === EntityType.Territory,
@@ -219,7 +219,7 @@ export function useCoreData(): {
       ),
       ents,
     }),
-    [allLanguoids, ents, censuses],
+    [languages, ents, censuses],
   );
 
   return {
