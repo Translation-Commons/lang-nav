@@ -41,41 +41,44 @@ const DataProvider: React.FC<{
   const getLanguage = useCallback(
     (id: string): LanguageData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Language ? (ent as LanguageData) : undefined;
+      return ent?.type === EntityType.Language ? ent : undefined;
     },
     [coreData],
   );
   const getCLDRLanguage = useCallback(
     (id: string): LanguageData | undefined => {
-      return coreData.languages.find((lang) => lang.CLDR?.code === id);
+      const lang = getLanguage(id);
+      const aliasedTo = lang?.CLDR.dataProvider;
+      if (aliasedTo?.type === EntityType.Language) return aliasedTo;
+      return lang;
     },
     [coreData],
   );
   const getLocale = useCallback(
     (id: string): LocaleData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Locale ? (ent as LocaleData) : undefined;
+      return ent?.type === EntityType.Locale ? ent : undefined;
     },
     [coreData],
   );
   const getTerritory = useCallback(
     (id: string): TerritoryData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Territory ? (ent as TerritoryData) : undefined;
+      return ent?.type === EntityType.Territory ? ent : undefined;
     },
     [coreData],
   );
   const getWritingSystem = useCallback(
     (id: string): WritingSystemData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.WritingSystem ? (ent as WritingSystemData) : undefined;
+      return ent?.type === EntityType.WritingSystem ? ent : undefined;
     },
     [coreData],
   );
   const getVariant = useCallback(
     (id: string): VariantData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Variant ? (ent as VariantData) : undefined;
+      return ent?.type === EntityType.Variant ? ent : undefined;
     },
     [coreData],
   );

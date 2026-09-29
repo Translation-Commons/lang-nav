@@ -26,7 +26,6 @@ import type { LanguageISOStatus } from './vitality/VitalityTypes';
 import type { LanguageModality } from './writing/LanguageModality';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
-export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
 export enum LanguageSource {
   Combined = 'Combined', // All combined, with preferred values

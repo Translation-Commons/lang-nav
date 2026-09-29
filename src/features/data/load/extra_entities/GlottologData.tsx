@@ -4,7 +4,7 @@ import {
   Glottocode,
   LanguageCode,
   LanguageData,
-  LanguagesBySource,
+  LanguageDictionary,
   LanguageScope,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
@@ -65,35 +65,33 @@ export async function loadGlottocodeToISO(): Promise<Record<Glottocode, Language
 }
 
 /**
- *
- * languagesBySource.Glottolog is updated with new entries
+ * The language dictionary is mutated by this method with new entries
  */
 export function addGlottologLanguages(
-  languagesBySource: LanguagesBySource,
+  languages: LanguageDictionary,
   glottologImport: GlottologData[],
   glottocodeToISO: Record<Glottocode, LanguageCode>,
 ): void {
-  // Add the entries from the glottocodeToISO to languagesBySource.Glottolog
+  // Add the entries from the glottocodeToISO mapping to the languages dictionary
   Object.entries(glottocodeToISO).forEach(([glottoCode, isoCode]) => {
     if (glottoCode === '' || glottoCode[0] === '<') {
       return; // Skip empty or invalid glottocodes
     }
 
-    const glottolang = languagesBySource.Glottolog[glottoCode];
-    const isoLang = languagesBySource.ISO[isoCode];
+    const glottolang = languages[glottoCode];
+    const isoLang = languages[isoCode];
     if (glottolang == null && isoLang != null) {
       isoLang.Glottolog.code = glottoCode;
-      languagesBySource.Glottolog[glottoCode] = isoLang;
+      languages[glottoCode] = isoLang;
     }
   });
 
   // Add new glottocodes from the import
   glottologImport.forEach((importedLanguage) => {
     const { glottoCode, parentGlottocode, scope, name, latitude, longitude } = importedLanguage;
-    const lang =
-      languagesBySource.Glottolog[glottoCode] ?? languagesBySource.ISO[glottocodeToISO[glottoCode]];
+    const lang = languages[glottoCode] ?? languages[glottocodeToISO[glottoCode]];
     const parentLanguageCode =
-      parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
+      parentGlottocode != null ? languages[parentGlottocode]?.ID : undefined;
 
     if (lang == null) {
       const combinedScope =
@@ -124,8 +122,7 @@ export function addGlottologLanguages(
         latitude,
         longitude,
       };
-      languagesBySource.Combined[glottoCode] = newLang;
-      languagesBySource.Glottolog[glottoCode] = newLang;
+      languages[glottoCode] = newLang;
       setLanguageNames(newLang);
     } else {
       // Fill in missing data
