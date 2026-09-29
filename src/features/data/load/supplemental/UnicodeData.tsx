@@ -6,7 +6,7 @@ import type { DataGetters } from '@features/data/context/useDataContext';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
-import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageDictionary, LanguageScope } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { CLDRCoverageImport } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -21,10 +21,7 @@ type CLDRLanguageMatchImport = {
   _oneway?: boolean;
 };
 
-export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): void {
-  // Start with the initialized
-  const cldrLanguages = languagesBySource.CLDR;
-
+export function addCLDRLanguageDetails(languages: LanguageDictionary): void {
   // Import the CLDR language aliases and format it a bit
   const languageAliases = Object.entries(aliases.supplemental.metadata.alias.languageAlias).map(
     (alias) => {
@@ -42,8 +39,13 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
   languageAliases
     .filter(({ reason }) => reason === 'overlong')
     .forEach((alias) => {
-      const lang = cldrLanguages[alias.original];
-      let replacementData: LanguageData | LocaleData = cldrLanguages[alias.replacement];
+      const lang = languages[alias.original];
+
+      // No action is needed if the replacement is just the language's own ISO 639-1 two-letter code
+      if (lang.ISO.code6391 === alias.replacement) return;
+
+      // Otherwise find the replacement
+      let replacementData: LanguageData | LocaleData = languages[alias.replacement];
       if (replacementData == null) {
         // If the replacement data is not found, it may be a locale -- but we need to convert it to underscored ISO-639-3 form
         // For example, `sw-CD` replaces `swc`, but we need to convert it to `swc_CD` to match out source
@@ -51,7 +53,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         // TODO need to add the equivalent locales swa_CD, fas_AF, srp_Latn
         // const replacementLangID = cldrLanguages[replacementIdParts[0]]?.ID ?? replacementIdParts[0];
         // replacementData = locales[replacementLangID + '_' + replacementIdParts.slice(1).join('_')];
-        replacementData = cldrLanguages[replacementIdParts[0]];
+        replacementData = languages[replacementIdParts[0]];
       }
       if (lang != null) {
         // Add a note that the language code is considered "overlong" and a different language code or locale code should be used instead for CLDR purposes
@@ -88,15 +90,22 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       const constituentLangCode = alias.original; // eg. `cmn`
       const macroLangCode = alias.replacement; // eg. `zh`
       let macroLangAltCode = macroLangCode + '*';
-      if (cldrLanguages[macroLangAltCode] != null) {
+      if (languages[macroLangAltCode] != null) {
         // If the alternative code already exists (known problem with Mandingo but potentially could happen again)
         macroLangAltCode = macroLangCode + '**';
-        if (cldrLanguages[macroLangAltCode] != null) {
+        if (languages[macroLangAltCode] != null) {
           console.warn('Too many macrolanguage alternatives for ', macroLangCode);
         }
       }
-      const constituentLang = cldrLanguages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
-      const macroLang = cldrLanguages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
+      const constituentLang = languages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
+      const macroLang = languages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
+      if (constituentLang?.ID === macroLang?.ID) {
+        console.warn(
+          'Constituent language has the same ID as its macrolanguage',
+          alias,
+          constituentLang,
+        );
+      }
       const notes = (
         <>
           The ISO language {macroLang?.nameCanonical} <code>{macroLangCode}</code> is a
@@ -111,26 +120,18 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.CLDR.dataProvider = constituentLang;
-        macroLang.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
+        macroLang.CLDR.code = undefined; // it will return false for the filter
         macroLang.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.CLDR.notes = notes;
         macroLang.CLDR.name = macroLang.nameCanonical + ' (macrolanguage)';
-        // Remove the regular symbolic reference in the CLDR list to the macrolanguage entity (since it will be replaced below)
-        delete cldrLanguages[macroLangCode];
-        cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with the alternative code to distinguish it
-
         // Note: Don't add references to child languages here -- the parent reference below is sufficient
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
       if (constituentLang != null) {
-        cldrLanguages[macroLangCode] = constituentLang;
         constituentLang.CLDR.code = macroLangCode;
         constituentLang.CLDR.notes = notes;
         constituentLang.CLDR.parentLanguageCode = macroLangAltCode;
-
-        // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
-        delete cldrLanguages[constituentLangCode];
       } else {
         // Looks like `him` and `srx` are missing -- perhaps they are discontinued codes
         if (DEBUG) console.debug(alias);
@@ -142,12 +143,12 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
   languageAliases
     .filter(({ reason }) => reason === 'bibliographic')
     .forEach((alias) => {
-      const lang = cldrLanguages[alias.original];
-      const replacementData: LanguageData = cldrLanguages[alias.replacement];
-      if (lang != null) {
+      const lang = languages[alias.original];
+      const replacement = languages[alias.replacement];
+      if (lang != null && lang.ID != replacement.ID) {
         lang.CLDR = {
-          code: alias.original,
-          dataProvider: replacementData,
+          code: undefined, // filtered out of regular results (only available in direct lookups)
+          dataProvider: replacement,
           notes: (
             <>
               This language code <code>{alias.original}</code> is an ISO 639-2
@@ -157,9 +158,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
             </>
           ),
         };
-        // Add the replacement code as a child language and delete the link to the unsupported one
-        delete cldrLanguages[alias.original];
-        if (DEBUG && replacementData == null) {
+        if (DEBUG && replacement == null) {
           console.warn(
             `CLDR language ${alias.original} has no replacement data for ${alias.replacement}. This may cause issues.`,
           );
@@ -167,11 +166,11 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       }
     });
 
-  addCLDRLanguageMatching(cldrLanguages);
-  languagesBySource.CLDR = cldrLanguages;
+  addCLDRLanguageMatching(languages);
 }
 
-function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void {
+function addCLDRLanguageMatching(languages: LanguageDictionary): void {
+  // TODO: match by original codes or aliases?
   const languageMatchEntries = languageMatching.supplemental.languageMatching['written-new']
     .languageMatch as CLDRLanguageMatchImport[];
 
@@ -181,8 +180,12 @@ function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void
     if (desiredLanguageCode == null || supportedLanguageCode == null) return;
     if (desiredLanguageCode === supportedLanguageCode) return;
 
-    const desiredLanguage = cldrLanguages[desiredLanguageCode];
-    const supportedLanguage = cldrLanguages[supportedLanguageCode];
+    let desiredLanguage = languages[desiredLanguageCode];
+    if (desiredLanguage?.CLDR.dataProvider?.type === EntityType.Language)
+      desiredLanguage = desiredLanguage.CLDR.dataProvider;
+    let supportedLanguage = languages[supportedLanguageCode];
+    if (supportedLanguage?.CLDR.dataProvider?.type === EntityType.Language)
+      supportedLanguage = supportedLanguage.CLDR.dataProvider;
     if (desiredLanguage == null || supportedLanguage == null) return;
 
     desiredLanguage.CLDR.languageMatch ??= [];
@@ -216,7 +219,7 @@ export async function loadCLDRCoverage(
       cldrCoverage.forEach((cldrCov) => {
         const lang = getCLDRLanguage(cldrCov.languageCode);
         if (lang?.type !== EntityType.Language) {
-          console.debug('During CLDR import ', cldrCov.languageCode, 'missing from languages');
+          console.debug('During CLDR import', cldrCov.languageCode, 'missing from languages');
           return;
         }
         if (cldrCov.explicitScriptCode != null) {
