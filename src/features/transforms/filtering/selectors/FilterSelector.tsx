@@ -102,11 +102,11 @@ export const AllApplicableFilterSelectors: React.FC = () => {
   // If the language list is empty but there is a primary language, allow that filter
   const entFields = getApplicableFields(undefined, entType);
   if (!entFields.includes(Field.LanguageList) && entFields.includes(Field.LanguagePrimary)) {
-    primaryFilters.push(Field.LanguageList);
+    primaryFilters.unshift(Field.LanguageList);
     otherFilters = otherFilters.filter((f) => f === Field.LanguageList);
   }
   if (!entFields.includes(Field.TerritoryList) && entFields.includes(Field.TerritoryPrimary)) {
-    primaryFilters.push(Field.TerritoryList);
+    primaryFilters.unshift(Field.TerritoryList);
     otherFilters = otherFilters.filter((f) => f === Field.TerritoryList);
   }
 
