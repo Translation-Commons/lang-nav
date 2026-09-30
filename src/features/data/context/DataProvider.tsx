@@ -25,6 +25,7 @@ const DataProvider: React.FC<{
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadProgress, setLoadProgress] = useState<LoadingStage>(LoadingStage.Initial);
+  const [dataRevision, setDataRevision] = useState<number>(0);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
@@ -126,12 +127,14 @@ const DataProvider: React.FC<{
 
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
+    setDataRevision((prev) => prev + 1);
   }, [languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
     () => ({
       ...coreData,
       loadingStage: loadProgress,
+      dataRevision,
       getEntity,
       getLanguage,
       getCLDRLanguage,
@@ -142,7 +145,7 @@ const DataProvider: React.FC<{
       getOrganization,
       getTechnology,
     }),
-    [coreData, loadProgress],
+    [coreData, loadProgress, dataRevision],
   );
 
   // After the main load, load additional data
