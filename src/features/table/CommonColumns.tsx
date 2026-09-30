@@ -10,7 +10,7 @@ import PinButton from '@shared/ui/PinButton';
 
 import TableColumn from './TableColumn';
 
-const NAME_COLUMN_MAX_WIDTH = '20em';
+export const NAME_COLUMN_MAX_WIDTH = '20em';
 
 export const PinColumn: TableColumn<EntityData> = {
   key: 'Pin',

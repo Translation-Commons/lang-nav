@@ -15,6 +15,8 @@ import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
+const getEntityId = (ent: EntityData) => ent.ID;
+
 interface Props<T> {
   ents: T[];
   columns: TableColumn<T>[];
@@ -48,7 +50,11 @@ function InteractiveEntityTable<T extends EntityData>({
     <div className="flex flex-col gap-4 items-center">
       <div className="flex items-center gap-2">
         <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
-        <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
+        <TableExport
+          visibleColumns={visibilityModule.visibleColumns}
+          getRows={() => filteredEntities}
+          getRowId={getEntityId}
+        />
         <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
       </div>
 
@@ -56,6 +62,7 @@ function InteractiveEntityTable<T extends EntityData>({
       <BaseEntityTable
         visibleColumns={visibilityModule.visibleColumns}
         ents={currentEntities}
+        getRowId={getEntityId}
         tableID={tableID}
       />
 
@@ -70,7 +77,11 @@ function InteractiveEntityTable<T extends EntityData>({
       {currentEntities.length > 10 && (
         <div className="flex items-center gap-2">
           <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
-          <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
+          <TableExport
+            visibleColumns={visibilityModule.visibleColumns}
+            getRows={() => filteredEntities}
+            getRowId={getEntityId}
+          />
         </div>
       )}
     </div>

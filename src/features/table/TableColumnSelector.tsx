@@ -3,8 +3,6 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/EntityTypes';
-
 import { groupBy } from '@shared/lib/setUtils';
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
@@ -23,7 +21,7 @@ import TableColumn from './TableColumn';
 import TableColumnPresets from './TableColumnPresets';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
-function TableColumnSelector<T extends EntityData>({
+function TableColumnSelector<T>({
   columns,
   visibilityModule,
 }: {
@@ -67,7 +65,7 @@ function TableColumnSelector<T extends EntityData>({
   );
 }
 
-function ColumnGroup<T extends EntityData>({
+function ColumnGroup<T>({
   columns,
   visibilityModule: { columnVisibility, toggleColumn },
   group,
