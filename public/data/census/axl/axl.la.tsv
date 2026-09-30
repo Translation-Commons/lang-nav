@@ -1,0 +1,96 @@
+#codeDisplay		#fr names	axl.la
+#nameDisplay			AXL Laos
+#isoRegionCode	LA		
+#yearCollected	2018		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Home		
+### Population Surveyed ###			
+#population	7097200		
+#responsesPerIndividual			1
+### Data Constraints ###			
+#geographicScope	Whole country		
+#age	0+		
+#nationality	Residents		
+#residenceBasis	de facto		
+#quantity			count
+### Creator ###			
+#collectorType	Secondary		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/asie/Laos.htm		
+#datePublished	2023-12-23		
+#dateAccessed			
+#tableName	Section 2.1 Les ethnies (Ethnie / Population / Pourcentage / Langue / Affiliation linguistique / Religion)		
+#notes			
+Language Code	Language Name (English)	Language Name	Population
+lao	Lao	laotien	3348000
+kjg	Khmu	khmou	714000
+hmn/mww	Hmong Daw	hmong daw	389000
+pht	Phu Thai	thaï phu	220000
+hmn/hnj	Hmong Njua	hmong njua	211000
+phu	Phuan	phuan	145000
+tha	Central Thai	thaï central	141000
+khb	Lü	lü	127000
+vie	Vietnamese	vietnamien	120000
+ahk	Akha	akha	114000
+twh	Tai Don / White Tai	thaï don	102000
+brv	Western Bru	bru occidental	84000
+sss	So	sô	84000
+ncq	Northern Katang	katang du Nord	67000
+zho/cmn	Mandarin Chinese	chinois mandarin	66000
+lbo	Laven (Jru)	laven (ou jru)	57000
+tto	Ta Oi	ta oi	48000
+kdt	Kuy (Kuay)	kuay	47000
+sct	Southern Katang	katang du Sud	41000
+pho	Phunoi	phunoi	40000
+nod	Northern Thai	thaï du Nord	37000
+mlf	Mal	mal	36000
+tdf	Talieng	talieng	36000
+ium	Iu Mien	Iu mien	33000
+pnx	Phong / Kniang	phong (ou kniang)	31000
+kuf	Western Katu	katou de l'Ouest	29000
+prt	Prai / Phai	prai (ou phai)	29000
+blt	Tai Dam	thaï dam	27000
+alk	Alak	alak	26000
+brb	Brao / Lavé	brao (ou lave)	26000
+tyr	Tai Daeng	thaï daeng	25000
+kyp	Kang	kang	25000
+oyb	Oy	oy	24000
+lbn	Lamet	lamet	23000
+pac	Pacoh	pacoh	23000
+bru	Eastern Bru	bru de l'Est	22000
+taoi1247	Ta Oi	ta oi	22000
+kjg	Khmu	khmou	20000
+zho/yue	Cantonese	chinois cantonais	18000
+tyj/nyw	Nyaw	nyaw	17000
+tdd	Tai Nüa	tai nua	14000
+onb	Ong-Be	ong-be	14000
+lbg	Laopang	laopang	13000
+jeh	Jeh	jeh	12000
+khf	Khuen	khuen	12000
+yoy	Yoy	yoy	12000
+tgr	Tareng	tareng	11000
+sss	Southern Bru	bru méridional	11000
+puo	Puoc	puoc	10000
+oyb	Oy	oy	10000
+lhu	Lahu	lahu	9200
+nev	Nyaheun	nyaheun	9100
+oyb	Oy	oy	8800
+ngt	Kriang	kriang	8800
+ngt	Kriang	kriang	8800
+tts	Northeastern Thai	thaï du Nord-Est	8700
+zha/pcc	Bouyei	bouyei	7200
+khm	Khmer	khmer	7200
+nos	Eastern Nisu	nisu oriental	7100
+mji	Kim Mun	kim mun	6900
+mji	Lanten	lanten	6500
+hal	Halang	halang	6200
+irr	Ir	ir	6100
+ahk	Akha	akha	5600
+spu	Sapuan	sapuan	5300
+	Subtotal (named groups)		6924500
+mul	Peoples with 100-4,900 speakers (60 languages) 		103700
+	Other unclassified		69000
+	Total (128 peoples)		7097200

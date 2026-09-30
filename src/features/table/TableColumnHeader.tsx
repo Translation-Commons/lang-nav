@@ -47,7 +47,8 @@ function HoverableContainer<T extends EntityData>({
     <HoverCard>
       <HoverCardTrigger
         data-testid="hoverable"
-        delay={10}
+        delay={100}
+        closeDelay={10}
         render={
           <th
             className={

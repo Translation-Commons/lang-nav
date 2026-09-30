@@ -16,13 +16,12 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
   const { page } = usePageParams();
   return (
     <>
-      <h3>Census Preview</h3>
       <div>
         Please check over this data to make sure it makes sense. Check that the metadata makes
         sense. Check the population numbers, percent in territory, language names, language codes.
       </div>
       <div>
-        {censuses.length} census tables found. <PaginationControls itemCount={censuses.length} />
+        <PaginationControls itemCount={censuses.length} />
       </div>
       <div
         style={{
