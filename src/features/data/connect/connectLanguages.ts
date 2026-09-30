@@ -3,7 +3,7 @@ import { LanguageDictionary } from '@entities/language/LanguageTypes';
 /**
  * This extends the core language dictionary by adding alternative keys to access them.
  */
-export function createLanguageDictionary(languages: LanguageDictionary): LanguageDictionary {
+export function addAliasesToLanguageDictionary(languages: LanguageDictionary): LanguageDictionary {
   return Object.values(languages).reduce<LanguageDictionary>((acc, lang) => {
     const { ISO, Glottolog } = lang;
 

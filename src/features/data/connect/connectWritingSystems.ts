@@ -43,7 +43,9 @@ export function connectWritingSystems(
   });
 
   // Connect languages to their primary writing system
-  Object.values(languages).forEach((language) => {
+  Object.entries(languages).forEach(([languageCode, language]) => {
+    if (languageCode !== language.ID) return; // Skip aliases
+
     const { primaryScriptCode } = language;
     if (primaryScriptCode != null) {
       const primaryWritingSystem = writingSystems[primaryScriptCode];

@@ -89,14 +89,6 @@ export function addCLDRLanguageDetails(languages: LanguageDictionary): void {
       // Get the constituent language and the macrolanguage that will be replaced by it
       const constituentLangCode = alias.original; // eg. `cmn`
       const macroLangCode = alias.replacement; // eg. `zh`
-      let macroLangAltCode = macroLangCode + '*';
-      if (languages[macroLangAltCode] != null) {
-        // If the alternative code already exists (known problem with Mandingo but potentially could happen again)
-        macroLangAltCode = macroLangCode + '**';
-        if (languages[macroLangAltCode] != null) {
-          console.warn('Too many macrolanguage alternatives for ', macroLangCode);
-        }
-      }
       const constituentLang = languages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
       const macroLang = languages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
       if (constituentLang?.ID === macroLang?.ID) {
@@ -131,7 +123,7 @@ export function addCLDRLanguageDetails(languages: LanguageDictionary): void {
       if (constituentLang != null) {
         constituentLang.CLDR.code = macroLangCode;
         constituentLang.CLDR.notes = notes;
-        constituentLang.CLDR.parentLanguageCode = macroLangAltCode;
+        constituentLang.CLDR.parentLanguageCode = macroLang?.ID;
       } else {
         // Looks like `him` and `srx` are missing -- perhaps they are discontinued codes
         if (DEBUG) console.debug(alias);

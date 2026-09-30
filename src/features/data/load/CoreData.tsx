@@ -20,7 +20,7 @@ import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTyp
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import { connectEntitiesAndCreateDerivedData } from '../connect/connectEntities';
-import { createLanguageDictionary } from '../connect/connectLanguages';
+import { addAliasesToLanguageDictionary } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
@@ -141,7 +141,7 @@ export function useCoreData(): {
     }
 
     const keyboards = { ...keyboardsGBoard, ...keyboardsKeyman };
-    const languageDictionary = createLanguageDictionary(initialLangs);
+    const languageDictionary = addAliasesToLanguageDictionary(initialLangs);
     addISODataToLanguages(languageDictionary, isoLangs || []);
     addISOLanguageFamilyData(languageDictionary, langFamilies || [], isoLangsToFamilies || {});
     addISOMacrolanguageData(languageDictionary, macroLangs || []);
