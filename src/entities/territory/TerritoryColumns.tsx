@@ -1,22 +1,18 @@
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import React from 'react';
+
+import { TerritoryRow } from '@features/data/api/territory/territoryList';
+import { useDataContext } from '@features/data/context/useDataContext';
+import HoverableEntityRef from '@features/layers/hovercard/HoverableEntityRef';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeRowColumn, EndonymRowColumn, NameRowColumn } from '@features/table/RowColumns';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
 import Field from '@features/transforms/fields/Field';
-import { getLanguageFamiliesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
-import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
-import {
-  getTerritoryBiggestLocale,
-  getTerritoryChildren,
-  getTerritoryCountries,
-} from '@entities/lib/getEntityRelatedTerritories';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
-import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -24,30 +20,28 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import type { TerritoryData } from './TerritoryTypes';
 
-function getTerritoryColumns(): TableColumn<TerritoryData>[] {
+function getTerritoryColumns(): TableColumn<TerritoryRow>[] {
   return [
-    CodeColumn,
+    CodeRowColumn,
     {
       key: 'ISO Alpha-3 Code',
-      render: (ent) => ent.codeAlpha3 || null,
+      render: (row) => row.codeAlpha3 ?? null,
       isInitiallyVisible: false,
       columnGroup: 'Codes',
     },
     {
       key: 'ISO Numeric Code',
-      render: (ent) => ent.codeNumeric || ent.ID.match(/\d{3}/)?.[0] || null,
+      render: (row) => row.codeNumeric ?? null,
       isInitiallyVisible: false,
       columnGroup: 'Codes',
     },
-    NameColumn,
-    EndonymColumn,
+    NameRowColumn,
+    EndonymRowColumn,
     {
       key: 'Other names',
-      render: (ent) => (
+      render: (row) => (
         <CommaSeparated limit={1} limitText="short">
-          {[...(ent.nameOtherEndonyms || []), ...(ent.nameOtherExonyms || [])].filter(
-            (n) => n !== ent.nameDisplay && n !== ent.nameEndonym,
-          )}
+          {row.otherNames}
         </CommaSeparated>
       ),
       isInitiallyVisible: false,
@@ -55,61 +49,54 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Population',
-      render: (ent) => ent.pop.overall,
+      render: (row) => row.population,
       field: Field.Population,
       columnGroup: 'Demographics',
     },
     {
       key: 'Population (Writing)',
-      render: (ent) => ent.pop.writing,
+      render: (row) => row.populationWriting,
       field: Field.PopulationWriting,
       columnGroup: 'Demographics',
       isInitiallyVisible: false,
     },
     {
       key: 'Literacy',
-      render: (ent) => ent.literacyPercent,
+      render: (row) => row.literacyPercent,
       field: Field.Literacy,
       columnGroup: 'Demographics',
     },
     {
       key: 'Census Tables',
-      render: (ent) => <CensusCountForTerritory territory={ent} />,
+      render: (row) => (
+        <WithTerritory id={row.id} fallback={row.censusCount || <Deemphasized>—</Deemphasized>}>
+          {(territory) => <CensusCountForTerritory territory={territory} />}
+        </WithTerritory>
+      ),
       columnGroup: 'Demographics',
       field: Field.CountOfCensuses,
       isInitiallyVisible: false,
     },
     {
       key: 'Language Count',
-      render: (ent) =>
-        ent.locales && (
-          <HoverableEnumeration
-            items={ent.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
-          />
-        ),
+      render: (row) => row.languageNames && <HoverableEnumeration items={row.languageNames} />,
       field: Field.CountOfLanguages,
       columnGroup: 'Language',
     },
     {
       key: 'Biggest Language',
-      render: (ent) =>
-        ent.locales &&
-        ent.locales.length > 0 && (
-          <HoverableEntityName labelSource="language" ent={getTerritoryBiggestLocale(ent)} />
-        ),
+      render: (row) => <HoverableEntityRef entRef={row.biggestLanguage} />,
       isInitiallyVisible: false,
       field: Field.LanguagePrimary,
       columnGroup: 'Language',
     },
     {
       key: 'Languages',
-      render: (ent) => (
+      render: (row) => (
         <CommaSeparated limit={1} limitText="short">
-          {ent.locales &&
-            ent.locales.length > 0 &&
-            uniqueBy(ent.locales, (l) => l.languageCode).map((l) => (
-              <HoverableEntityName key={l.languageCode} labelSource="language" ent={l.language} />
-            ))}
+          {row.languages.map((lang) => (
+            <HoverableEntityRef key={lang.id} entRef={lang} />
+          ))}
         </CommaSeparated>
       ),
       isInitiallyVisible: false,
@@ -118,20 +105,18 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Biggest Language %',
-      render: (ent) => getTerritoryBiggestLocale(ent)?.pop.speaking.percent,
+      render: (row) => row.biggestLanguagePercent,
       isInitiallyVisible: false,
       field: Field.PopulationPercentInBiggestDescendantLanguage,
       columnGroup: 'Language',
     },
     {
       key: 'Language Families',
-      render: (ent) => (
+      render: (row) => (
         <CommaSeparated limit={1} limitText="short">
-          {getLanguageFamiliesRelevantToEntity(ent)
-            ?.filter((lf) => lf.parentLanguage == null)
-            .map((lf) => (
-              <HoverableEntityName key={lf.ID} ent={lf} />
-            ))}
+          {row.languageFamilies.map((lf) => (
+            <HoverableEntityRef key={lf.id} entRef={lf} />
+          ))}
         </CommaSeparated>
       ),
       field: Field.LanguageFamily,
@@ -139,75 +124,56 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Language Family Count',
-      render: (ent) => (
-        <HoverableEnumeration
-          items={
-            getLanguageFamiliesRelevantToEntity(ent)
-              ?.filter((lf) => lf.parentLanguage == null)
-              .map((ws) => ws.nameDisplay) ?? []
-          }
-        />
-      ),
+      render: (row) => <HoverableEnumeration items={row.languageFamilies.map((lf) => lf.name)} />,
       isInitiallyVisible: false,
       columnGroup: 'Language',
     },
     {
       key: 'Writing Systems',
-      render: (ent) => (
-        <HoverableEnumeration
-          items={getWritingSystemsInEntity(ent)?.map((ws) => ws.nameDisplay) ?? []}
-        />
-      ),
+      render: (row) => <HoverableEnumeration items={row.writingSystemNames} />,
       field: Field.CountOfWritingSystems,
       columnGroup: 'Language',
     },
     {
       key: 'Contained UN Region',
-      render: (ent) => <HoverableEntityName ent={ent.parentUNRegion} />,
+      render: (row) => <HoverableEntityRef entRef={row.unRegion} />,
       isInitiallyVisible: false,
       field: Field.Region,
       columnGroup: 'Relations',
     },
     {
       key: 'Child Territories',
-      render: (ent) => (
-        <HoverableEnumeration items={getTerritoryChildren(ent).map((t) => t.nameDisplay)} />
-      ),
+      render: (row) => <HoverableEnumeration items={row.childTerritoryNames} />,
       isInitiallyVisible: false,
       field: Field.CountOfChildTerritories,
       columnGroup: 'Relations',
     },
     {
       key: 'Contained Countries',
-      render: (ent) => (
-        <HoverableEnumeration items={getTerritoryCountries(ent).map((t) => t.nameDisplay)} />
-      ),
+      render: (row) => <HoverableEnumeration items={row.countryNames} />,
       isInitiallyVisible: false,
       field: Field.CountOfCountries,
       columnGroup: 'Relations',
     },
     {
       key: 'Population of Dependencies',
-      render: (ent) =>
-        ent.dependentTerritories &&
-        ent.dependentTerritories.length > 0 &&
-        sumBy(ent.dependentTerritories, (t) => t.pop.overall ?? 0),
+      render: (row) => row.dependenciesPopulation,
       isInitiallyVisible: false,
       field: Field.PopulationOfDescendants,
       columnGroup: 'Relations',
     },
     {
       key: 'Latitude',
-      render: (ent) => ent.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
-      exportValue: (ent) => ent.latitude?.toFixed(4) ?? '',
+      render: (row) => row.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+      exportValue: (row) => row.latitude?.toFixed(4) ?? '',
       isInitiallyVisible: false,
       field: Field.Latitude,
       columnGroup: 'Location',
     },
     {
       key: 'Longitude',
-      render: (ent) => ent.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
-      exportValue: (ent) => ent.longitude?.toFixed(4) ?? '',
+      render: (row) => row.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+      exportValue: (row) => row.longitude?.toFixed(4) ?? '',
       isInitiallyVisible: false,
       field: Field.Longitude,
       columnGroup: 'Location',
@@ -216,7 +182,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       key: 'Land Area (km²)',
       description:
         'Surprisingly, sources report different numbers for the land area for some areas.',
-      render: (ent) => ent.landArea && numberToSigFigs(ent.landArea, 3)?.toLocaleString(),
+      render: (row) => row.landArea && numberToSigFigs(row.landArea, 3)?.toLocaleString(),
       isInitiallyVisible: false,
       field: Field.Area,
       columnGroup: 'Location',
@@ -224,24 +190,38 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     {
       key: 'Density',
       description: 'People per square kilometer',
-      render: (ent) => ent.landArea && ent.pop.overall && ent.pop.overall / ent.landArea,
+      render: (row) => row.landArea && row.population && row.population / row.landArea,
       isInitiallyVisible: false,
       valueType: TableValueType.Decimal,
       columnGroup: 'Location',
     },
     {
       key: 'Type',
-      render: (ent) => getTerritoryScopeLabel(ent?.scope),
+      render: (row) => getTerritoryScopeLabel(row.scope),
       field: Field.TerritoryScope,
     },
     {
       key: 'Export Language Data',
       description:
         "Export language data for this territory in a format for the World's Atlas of Languages",
-      render: (ent) => <ExportTerritoryLanguageDataButton territory={ent} />,
+      render: (row) => (
+        <WithTerritory id={row.id}>
+          {(territory) => <ExportTerritoryLanguageDataButton territory={territory} />}
+        </WithTerritory>
+      ),
       isInitiallyVisible: false,
     },
   ];
 }
+
+/** Graph seam: cells that still need the full territory, until they get their own endpoint. */
+const WithTerritory: React.FC<{
+  id: string;
+  fallback?: React.ReactNode;
+  children: (territory: TerritoryData) => React.ReactNode;
+}> = ({ id, fallback = null, children }) => {
+  const territory = useDataContext().getTerritory(id);
+  return territory ? children(territory) : fallback;
+};
 
 export default getTerritoryColumns;
