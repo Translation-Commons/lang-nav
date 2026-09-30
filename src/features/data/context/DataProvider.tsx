@@ -110,18 +110,23 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
+  const world = coreData.ents['001'] as TerritoryData | undefined;
+
   useEffect(() => {
+    if (world == null) return;
+
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
       coreData.languages,
       coreData.locales,
-      coreData.ents['001'] as TerritoryData, // The world territory
+      world,
       languageSource,
       localeSeparator,
     );
+
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
-  }, [coreData, languageSource, localeSeparator, loadProgress]);
+  }, [languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
     () => ({
