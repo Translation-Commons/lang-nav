@@ -2,7 +2,9 @@ import { LanguageDictionary, LanguageSource } from '@entities/language/LanguageT
 
 export function connectLanguagesToParent(languages: LanguageDictionary): void {
   // Connect general parents
-  Object.values(languages).forEach((lang) => {
+  Object.entries(languages).forEach(([langCode, lang]) => {
+    if (lang.ID !== langCode) return; // Only do this for non-aliased entries
+
     Object.values(LanguageSource).forEach((source) => {
       const parentCode = lang[source]?.parentLanguageCode;
       if (parentCode != null) {
