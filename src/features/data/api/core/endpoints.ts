@@ -7,9 +7,9 @@ export enum EndpointSource {
 /** Whether the backend serves each endpoint's contract yet. Flip to true when it does. */
 const LIVE = {
   languageList: false,
-  territoryList: true,
-  writingSystemList: true,
-  writingSystemDetail: true,
+  territoryList: false, // backend is not yet serving this endpoint,
+  writingSystemList: false, // but the frontend is ready to use it
+  writingSystemDetail: false, // when it does
 } satisfies Record<string, boolean>;
 
 export type Endpoint = keyof typeof LIVE;
