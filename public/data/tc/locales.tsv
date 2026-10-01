@@ -5299,7 +5299,6 @@ tio_PG	Teop (Papua New Guinea)		Other	1,000
 tmv_CD	Tembo (Motembo) (Congo - Kinshasa)		Other	1,000	
 tpg_ID	Kula (Indonesia)	bahasa Kula	Other	1,000	
 trp_BD	Kok Borok (Bangladesh)		Other	1,000	
-uzn_CN	Uzbek, Northern (China)		Other	1,000	
 wad_ID	Wandamen (Indonesia)		Other	1,000	
 wav_NG	Waka (Nigeria)		Other	1,000	
 weu_MM	Chin, Rawngtu (Myanmar)		Other	1,000	
@@ -8810,7 +8809,7 @@ zyg_VN	Zhuang, Yang (Vietnam)		Other	1
 aal_CM	Afade (Cameroon)	afaë			
 abe_CA	Western Abnaki (Canada)	Alnôbak			
 abh_TJ	Tajiki Arabic (Tajikistan)				
-abv_BH	Baharna Arabic (Bahrain)	لهجة بحرانية			
+abv_BH	Baharna Arabic (Bahrain)	لهجة بحرانية		671000	
 acb_NG	Áncá (Nigeria)				
 acf_LC	Saint Lucian Creole French (St. Lucia)	kwéyòl			
 acm_IQ	Mesopotamian Arabic (Iraq)	لهجة عراقية			
@@ -8868,7 +8867,6 @@ avs_PE	Aushiri (Peru)
 awg_AU	Anguthimri (Australia)				
 axb_AR	Abipon (Argentina)				
 axm_AM	Middle Armenian (Armenia)				
-axx_NC	Xârâgurè (New Caledonia)				
 ayh_YE	Hadrami Arabic (Yemen)	اللهجة الحضرمية		3200000	
 ayk_NG	Akuku (Nigeria)				
 ayn_YE	Sanaani Arabic (Yemen) (Yemen)			7750000	
@@ -8964,7 +8962,6 @@ chh_US	Chinook (United States)
 cht_PE	Cholón (Peru)	Seeptsá			
 cib_BJ	Ci Gbe (Benin)				
 cid_US	Chimariko (United States)				
-cir_NC	Tiri (New Caledonia)				
 ciy_VE	Chaima (Venezuela)				
 cjk_AO	Chokwe (Angola)		Official	1553019	
 ckm_HR	Chakavian (Croatia)				
@@ -9047,7 +9044,6 @@ dtn_ET	Daatsʼíin (Ethiopia)
 dto_ML	Tommo So Dogon (Mali)				
 dts_ML	Toro So Dogon (Mali)				
 dtt_ML	Toro Tegu Dogon (Mali)				
-duf_NC	Dumbea (New Caledonia)				
 dug_KE	Duruma (Kenya)				
 dum_NL	Middle Dutch (ca. 1050-1350) (Netherlands)				
 dux_ML	Duungooma (Mali)				
@@ -9217,7 +9213,6 @@ isr_IL	Israeli Sign Language (Israel)
 isv_001	Interslavic (World)	Medžuslovjansky			
 izm_NG	Kizamani (Nigeria)				
 jas_NC	New Caledonian Javanese (New Caledonia)				
-jaz_NC	Jawe (New Caledonia)				
 jbe_IL	Judeo-Berber (Israel)				
 jbm_NG	Bijim (Nigeria)				
 jbo_001	Lojban (World)	la .lojban.			
@@ -9430,7 +9425,6 @@ ndn_CG	Ngundi (Congo - Brazzaville)
 ndp_UG	Ndo (Uganda)				
 ndq_AO	Ndombe (Angola)				
 ned_NG	Nde-Gbite (Nigeria)				
-nee_NC	Nêlêmwa-Nixumwak (New Caledonia)				
 nei_TR	Neo-Hittite (Turkey)				
 neu_001	Neo (World)				
 ngv_CM	Nagumi (Cameroon)				
@@ -11067,3 +11061,50 @@ ktz_BW	Ju/'hoan (Botswana)			8000
 xuu_BW	Kxoe (Botswana)			1800	
 nhr_BW	Naro (Botswana)			8000	
 nmn_BW	!Xóõ (Botswana)			3000	
+zom_US	Zou (United States)		Official	9517	
+kyu_US	Western Kayah (United States)		Official	6892	
+cnh_US	Haka Chin (United States)		Official	4636	
+kun_US	Kunama (United States)		Official	3800	
+saz_US	Sourashtra (United States)		Official	3342	
+cab_US	Garifuna (United States)		Official	3080	
+csy_US	Siyin Chin (United States)		Official	100	
+duf_NC	Dumbea (New Caledonia)		Official	1022	
+nee_NC	Nêlêmwa-Nixumwak (New Caledonia)		Official	798	
+jaz_NC	Jawe (New Caledonia)		Official	746	
+axx_NC	Xârâgurè (New Caledonia)		Official	589	
+cir_NC	Tiri (New Caledonia)		Official	393	
+sag_CG	Sango (Congo - Brazzaville)			99000	
+crh_UZ	Crimean Tatar (Uzbekistan)			175000	
+jpr_UZ	Judeo-Persian (Uzbekistan)			3800	
+tgk_UZ	Tajik (Uzbekistan)			1598000	
+kaz_UZ	Kazakh (Uzbekistan)			816000	
+kir_UZ	Kyrgyz (Uzbekistan)			279000	
+tuk_UZ	Turkmen (Uzbekistan)			195000	
+hye_UZ	Armenian (Uzbekistan)			66600	
+bak_UZ	Bashkir (Uzbekistan)			46000	
+myv_UZ	Erzya (Uzbekistan)			16000	
+chv_UZ	Chuvash (Uzbekistan)			13000	
+oss_UZ	Iron Ossetic (Uzbekistan)			7700	
+chm_UZ	Mari (Uzbekistan)			4900	
+udm_UZ	Udmurt (Uzbekistan)			4100	
+lbe_UZ	Lak (Uzbekistan)			3700	
+dng_UZ	Dungan (Uzbekistan)			1700	
+fas_UZ	Persian (Uzbekistan)			1637100	
+uzn_UZ	Northern Uzbek (Uzbekistan)			27365000	
+fas_BH	Persian (Bahrain)			213000	
+pes_BH	Iranian Persian (Bahrain)			213000	
+afb_BH	Gulf Arabic (Bahrain)			158000	
+arz_BH	Egyptian Arabic (Bahrain)			95000	
+urd_BH	Urdu (Bahrain)			74000	
+msa_BH	Malayic (Bahrain)			58000	
+kur_BH	Kurdish (Bahrain)			57000	
+kmr_BH	Northern Kurdish (Bahrain)			57000	
+tam_BH	Tamil (Bahrain)			41000	
+ind_BH	Indonesian (Bahrain)			33000	
+tel_BH	Telugu (Bahrain)			33000	
+fil_BH	Filipino (Bahrain)			33000	
+guj_BH	Gujarati (Bahrain)			33000	
+eng_BH	English (Bahrain)			32100	
+kvr_BH	Kerinci (Bahrain)			25000	
+nep_BH	Nepali languages (Bahrain)			23000	
+npi_BH	Common Nepali (Bahrain)			23000	

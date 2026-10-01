@@ -1,0 +1,46 @@
+#codeDisplay		axl.bh
+#nameDisplay		AXL Bahrain
+#isoRegionCode	BH	
+#yearCollected	2025	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	1,644,700	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+#languagesIncluded	All	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/asie/Bahrein.htm	
+#datePublished	2026-04-19	
+#dateAccessed	2026-07-28	
+#documentName	Bahrain	
+#tableName	Ethnic groups	
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion	
+Language Code	Native language	Population
+ara/abv	Bahraini Arabic	671,000
+fas/pes	Western Persian	213,000
+ara/afb	Gulf Arabic	158,000
+ara/arz	Egyptian Arabic	95,000
+urd	Urdu	74,000
+mal	Malayalam	59,600
+kur/kmr	Kurdish Kurmanji	57,000
+tam	Tamil	41,000
+guj	Gujarati	33,000
+fil	Filipino	33,000
+tel	Telugu	33,000
+msa/ind	Indonesian Malay	33,000
+msa/kvr	Kerinci	25,000
+eng	English	24,000
+nep/npi	Nepalese	23,000
+ara/apd	Sudanese Arabic	14,000
+amh	Amharic	10,000
+eng	English	8,100
+mul	Others	40,000
