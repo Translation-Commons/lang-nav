@@ -10,13 +10,15 @@ export function getPotentialLocalesTabTitle(tab: PotentialLocalesTab): string {
     case PotentialLocalesTab.Largest:
       return 'Largest';
     case PotentialLocalesTab.LargestLowCertainty:
-      return 'Largest (Low Certainty)';
+      return 'Largest (Maybe)';
     case PotentialLocalesTab.Significant:
       return 'Significant';
     case PotentialLocalesTab.SignificantLowCertainty:
-      return 'Significant (Low Certainty)';
+      return 'Significant (Maybe)';
     case PotentialLocalesTab.MissingOriginalPopData:
-      return 'Data missing in locales.tsv';
+      return 'Save Pop Data';
+    case PotentialLocalesTab.Unnecessary:
+      return 'Unnecessary';
     default:
       enforceExhaustiveness(tab);
   }
@@ -71,6 +73,21 @@ export function PotentialLocalesTabDescription({ tab }: { tab: PotentialLocalesT
           having rough estimates before censuses are loaded and these locales are missing them in
           the original locale declaration.
         </div>
+      );
+    case PotentialLocalesTab.Unnecessary:
+      return (
+        <>
+          Conversely, these locales are currently in the system but they appear to be outliers. For
+          example, while it is interesting that there could be 20 Elvish speakers on Pandora --
+          Pandora is known for its Navi and English speaking populations and Elvish is known for
+          being in Middle Earth. As an extra datapoint that just takes up space, but for
+          visualizations that makes them confusing because when someone asks for Elvish for some
+          reason we pull up maps of both Middle Earth and Pandora -- when one population is unlike
+          the other.
+          <div className="h-2" />
+          That all said, there could be data gaps, data parsing errors, or historical reasons to
+          keep a locale designation.
+        </>
       );
     default:
       enforceExhaustiveness(tab);

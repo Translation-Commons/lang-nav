@@ -5,7 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 import useAllFilters from '@features/transforms/filtering/useAllFilters';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageCode, LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { isTerritoryGroup, TerritoryCode } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -130,6 +130,23 @@ function usePotentialLocales(
       ),
     [locales],
   );
+  const unnecessaryLocales = useMemo(
+    () =>
+      locales.filter((locale) => {
+        const pop = Math.max(locale.pop.speaking.adjusted ?? 0, locale.pop.writing.adjusted ?? 0);
+        const populationPercentInCountry = (pop * 100) / (locale.territory?.pop.overall ?? 1);
+        const populationPercentOfLanguageWorldwide =
+          (pop * 100) / (locale.language?.pop.overall ?? 1);
+        if (pop === 0) return false; // Skip locales with no population for now, these are often placeholders without pop data or extinct
+        if (locale.language?.scope === LanguageScope.Macrolanguage) return false; // a common source of false positives
+        return (
+          populationPercentInCountry < 0.1 &&
+          populationPercentOfLanguageWorldwide < 0.1 &&
+          pop < 1000
+        );
+      }),
+    [locales],
+  );
 
   const partitionedLocales = useMemo(() => {
     // Get the first 4 groups
@@ -140,13 +157,10 @@ function usePotentialLocales(
         [PotentialLocalesTab.LargestLowCertainty]: [],
         [PotentialLocalesTab.Significant]: [],
         [PotentialLocalesTab.SignificantLowCertainty]: [],
-        [PotentialLocalesTab.MissingOriginalPopData]: [],
+        [PotentialLocalesTab.MissingOriginalPopData]: localesMissingOriginalPopData,
+        [PotentialLocalesTab.Unnecessary]: unnecessaryLocales,
       },
     );
-
-    // Add in the extra table
-    allPartitionedLocales[PotentialLocalesTab.MissingOriginalPopData] =
-      localesMissingOriginalPopData;
 
     // Apply connections filters
     Object.entries(allPartitionedLocales).forEach(([tab, locales]) => {
@@ -154,7 +168,7 @@ function usePotentialLocales(
     });
 
     return allPartitionedLocales;
-  }, [allLocalesByLanguage, localesMissingOriginalPopData, filter]);
+  }, [allLocalesByLanguage, localesMissingOriginalPopData, unnecessaryLocales, filter]);
 
   return {
     ...partitionedLocales,

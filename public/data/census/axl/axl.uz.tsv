@@ -23,7 +23,7 @@
 #dateAccessed	2026-09-30		
 #documentName	Uzbekistan		
 #tableName	Ethnic groups		
-#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion		
 Language Code 	Language Name	Population	Langue
 uzb/uzn	Northern Uzbek	27,365,000	ouzbek du Nord
 fas/tgk	Tajik	1,573,000	tadjik

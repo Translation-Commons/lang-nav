@@ -6455,7 +6455,6 @@ ske_VU	Seke (Vanuatu) (Vanuatu)		EDL	600
 kdd_AU	Yankunytjatjara (Australia)		Official	598	
 sqi_PL	Albanian (Poland)	Shqip	Unverified Official	598	
 yid_RO	Yiddish (Romania)	ייִדיש	Official	597	
-bho_US	Bhojpuri (United States)	भोजपुरी	Official	595	
 rue_RO	Ruthenian (Romania)	русин	Unverified Official	594	
 see_US	Seneca (United States)	Onõtowáka	Unverified Official	594	
 tha_RU	Thai (Russia)	ภาษาไทย	Official	594	
@@ -6501,7 +6500,6 @@ pnh_CK	Penrhyn (Cook Islands)		EDL	500
 syo_KH	Suoy (Cambodia)		EDL	500	
 tsy_ML	Tebul Sign Language (Mali)		EDL	500	
 vnm_VU	Vinmavis (Vanuatu)		EDL	500	
-swa_RU	Swahili (Russia)	Kiswahili	Official	499	
 msa_Arab_CC	Malay (Arabic) (Cocos (Keeling) Islands, Arabic)	Bahasa Melayu	CLDR	498	
 msa_CC	Malay (Cocos (Keeling) Islands)		CLDR	498	
 eng_DG	English (Diego Garcia)	English	CLDR	495	de_facto_official
@@ -6593,8 +6591,6 @@ grc_RU	Ancient Greek (to 1453) (Russia)	Ἑλληνική ἀρχαία	Official
 srp_LI	Serbian (Liechtenstein)		Official	325	
 str_CA	Straits (Canada)	xʷsenəčqən	Official	325	
 anb_EC	Andoa (Ecuador)		Official	323	
-ind_RU	Indonesian (Russia)	Bahasa Indonesia	Official	321	
-urd_RU	Urdu (Russia)	اردو	Official	321	
 nem_NC	Nemi (New Caledonia)		EDL	320	
 pti_AU	Pintiini (Australia)		Unverified Official	320	
 smo_TK	Samoan (Tokelau)	Gagana fa'a Sāmoa	Official	320	
@@ -6609,7 +6605,6 @@ lbz_AU	Lardil (Australia)		Official	301
 bro_BT	Brokkat (Bhutan)		EDL	300	
 bwa_NC	Bwatoo (New Caledonia)		EDL	300	
 fra_CU	French (Cuba)	Français	Study	300	
-fra_PE	French (Peru)	Français	Study	300	
 hvk_NC	Haveke (New Caledonia)		EDL	300	
 lud_RU	Ludian (Russia)	lüüdi	EDL	300	
 mrk_NC	Hmwaveke (New Caledonia)		EDL	300	
@@ -6636,7 +6631,6 @@ tsz_US	Purepecha (United States)		Official	285
 aca_CO	Achagua (Colombia)		EDL	283	
 nuy_AU	Wubuy (Australia)		Official	283	
 pol_AM	Polish (Armenia)	Polski	Unverified Official	283	
-ben_RU	Bengali (Russia)	বাংলা	Official	282	
 dji_AU	Djinang (Australia)		Unverified Official	280	
 vra_VU	Vera'a (Vanuatu)		EDL	275	
 eng_TA	English (Tristan da Cunha)	English	CLDR	272	
@@ -6668,7 +6662,6 @@ coo_CA	Éy7á7juuthem (Comox) (Canada)	Saɬuɬtxʷ	EDL	238
 twa_US	Twana (United States)		Official	236	
 tht_CA	Tahltan (Canada)	Tāłtān	Official	235	
 tuw_US	Turkana (United States)		Official	235	
-jav_US	Javanese (United States)	Basa Jawa	Unverified Official	233	
 bod_RU	Tibetan (Russia)	བོད་སྐད་	Official	232	
 cay_CA	Cayuga (Canada)	Goyogo̱hó:nǫ’	Official	230	
 dax_AU	Dhay'yi (Australia)		Unverified Official	230	
@@ -6729,10 +6722,8 @@ tuu_US	Tututni (United States)		Official	165
 yuc_US	Yuchi (United States)		Official	165	
 fil_CK	Filipino (Cook Islands)		Official	163	
 sik_SR	Shikuyana (Suriname)		EDL	162	
-amh_RU	Amharic (Russia)	አማርኛ	Official	161	
 nrg_VU	Farsaf (Vanuatu)		EDL	160	
 piz_NC	Pije (New Caledonia)		EDL	160	
-mal_RU	Malayalam (Russia)	മലയാളം	Official	158	
 yih_US	Western Yiddish (United States)		Official	157	
 ari_US	Arikara (United States)	sáhniš	Official	155	
 skd_US	Southern Sierra Miwok (United States)		Official	155	
@@ -6791,7 +6782,6 @@ lus_CA	Kuki-Chin languages (Canada)	Mizo ṭawng	Unverified Official	105
 tbh_AU	Dharawal (Australia)		Official	103	
 gnn_AU	Gumatj (Australia)		Unverified Official	102	
 eng_CC	English (Cocos (Keeling) Islands)	English	CLDR	101	de_facto_official
-msa_RU	Malay (Russia)	Bahasa Melayu	Official	101	
 aek_NC	Haeke (New Caledonia)		EDL	100	
 alm_VU	Varavara (Vanuatu)		EDL	100	
 bmf_SL	Bom (Sierra Leone)		EDL	100	
@@ -6907,7 +6897,6 @@ mth_ID	Munggui (Indonesia)	bahasa Munggui	Other	100
 psn_ID	Panasuan (Indonesia)	bahasa Panasuan	Other	100	
 ret_ID	Reta (Indonesia)	bahasa Retta	Other	100	
 szv_CM	Isubu (Cameroon)		Other	100	
-tat_CN	Tatar (China)	Татарча	Other	100	
 tue_BR	Tuyuca (Brazil)	Docapúaraye	Other	100	
 twg_ID	Tereweng (Indonesia)	bahasa Tereweng	Other	100	
 urb_BR	Kaapor (Brazil)		Other	100	
@@ -7625,13 +7614,10 @@ jru_VE	Japréria (Venezuela)		EDL	95
 miq_US	Mískito (United States)		Official	95	
 paw_US	Pawnee (United States)		Official	95	
 rar_US	Rarotongan (United States)	Māori Kūki 'Āirani	Official	95	
-nnr_AU	Narungga (Australia)		Official	94	
-gle_RU	Irish (Russia)	Gaeilge	Official	91	
+nnr_AU	Narungga (Australia)		Official	94	 
 rpn_VU	Niolean (Vanuatu)		EDL	90	
-tfn_US	Tanaina (United States)	Denaʼina Qenaga	Official	90	official_regional
-mar_RU	Marathi (Russia)	मराठी	Official	89	
-oaa_RU	Orok (Russia)		Official	89	
-tgl_RU	Tagalog (Russia)	Tagálog	Official	89	
+tfn_US	Tanaina (United States)	Denaʼina Qenaga	Official	90	official_regional 
+oaa_RU	Orok (Russia)		Official	89	 
 xby_AU	Batyala (Australia)		Official	89	
 kgg_NP	Kusunda (Nepal)	Gemehaq gipan	Official	87	
 spa_AI	Spanish (Anguilla)		Official	84	
@@ -7641,20 +7627,17 @@ dyy_AU	Djabugay (Australia)		Official	81
 kau_US	Kanuri (United States)	kanuri	Unverified Official	80	
 rri_SB	Ririo (Solomon Islands)		EDL	79	
 bmr_CO	Muinane (Colombia)	Muìnánɨ	EDL	78	
-aaq_US	Eastern Abnaki (United States)		Official	75	
-isl_RU	Icelandic (Russia)	Íslenska	Official	75	
+aaq_US	Eastern Abnaki (United States)		Official	75	 
 kdr_LT	Karaim (Lithuania)	Къарай	Official	75	
 lui_US	Luiseno (United States)		Official	75	
 mhm_US	Makhuwa-Moniga (United States)		Official	75	
 ono_US	Onondaga (United States)	Onǫta’kéka’	Official	75	
 rga_VU	Toksiki (Vanuatu)		EDL	75	
-vls_RU	Vlaams (Russia)	West-Vlams	Official	73	
 hup_US	Hupa (United States)		Official	70	
 izh_RU	Ingrian (Russia)	ižoran keeli	Official	70	
 blc_CA	Nuxalk (Canada)		EDL	65	
 ctm_US	Chitimacha (United States)		Official	65	
 koy_US	Koyukon (United States)	Denaakk’e	Official	65	official_regional
-nep_RU	Nepali (Russia)	नेपाली	Official	64	
 aym_US	Aymara (United States)	Aymar aru	Official	63	
 aok_NC	Arhö (New Caledonia)		EDL	62	
 bym_AU	Bidjara (Australia)		Official	62	
@@ -7664,21 +7647,16 @@ haa_US	Hän (United States)	Hän	Official	60	official_regional
 bel_AM	Belarusian (Armenia)	Беларуская	Unverified Official	59	
 bnl_SO	Boon (Somalia)		EDL	59	
 ung_AU	Ngarinyin (Australia)		Official	59	
-gsw_RU	Swiss German (Russia)	Schwiizertüütsch	Official	57	
 abe_US	Western Abnaki (United States)	Alnôbak	Official	55	
 ats_US	Gros Ventre (United States)		Official	55	
-kan_RU	Kannada (Russia)	ಕನ್ನಡ	Official	55	
 kyl_US	Kalapuya (United States)		Official	55	
 nck_AU	Nakara (Australia)		Official	55	
 sux_RU	Sumerian (Russia)	𒅴𒂠	Official	53	
-sna_RU	Shona (Russia)	Shona	Official	52	
 yii_AU	Yidiny (Australia)		Official	52	
-lin_RU	Lingala (Russia)	Lingála	Official	51	
 rmb_AU	Rembarrnga (Australia)		Official	51	
 dix_VU	Aveteian (Vanuatu)		EDL	50	
 elh_SD	El Hugeirat (Sudan)		EDL	50	
 gbd_AU	Karajarri (Australia)		Official	50	
-hsn_US	Xiang Chinese (United States)		Official	50	
 itk_IT	Judeo-Italian (Italy)		EDL	50	
 lva_TL	Maku'a (Timor-Leste)		EDL	50	
 muu_KE	Yaaku (Kenya)		EDL	50	
@@ -7693,24 +7671,19 @@ ugo_TH	Ugong (Thailand)		EDL	50
 jao_AU	Yanyuwa (Australia)		Official	47	
 eng_PN	English (Pitcairn Islands)	English	CLDR	46	official
 nyh_AU	Nyikina (Australia)		Unverified Official	46	
-aht_US	Ahtena (United States)	Atnakenaege’	Official	45	official_regional
-bre_US	Breton (United States)	Brezhoneg	Official	45	
+aht_US	Ahtena (United States)	Atnakenaege’	Official	45	official_regional 
 chn_US	Chinook jargon (United States)	Chinuk Wawa	Official	45	
 kdr_RU	Karaim (Russia)	Къарай	Official	45	
-pan_RU	Panjabi (Russia)	ਪੰਜਾਬੀ	Official	45	
 ite_BO	Itene (Bolivia)		EDL	44	
 gyd_AU	Kayardild (Australia)		Official	43	
 oac_RU	Oroch (Russia)		Official	43	
-kin_RU	Kinyarwanda (Russia)	Ikinyarwanda	Official	42	
 nly_AU	Nyamal (Australia)		Official	42	
-cym_RU	Welsh (Russia)	Cymraeg	Official	41	
 byf_CA	Bete (Canada)		Official	40	
 dsz_TR	Mardin Sign Language (Turkey)		EDL	40	
 gge_AU	Gurr-goni (Australia)		Official	40	
 huc_BW	Juǀʼhoan (Botswana)		EDL	40	
 iks_CA	Inuit Sign Language (Canada)		EDL	40	
 jig_AU	Jingulu (Australia)		Official	40	
-som_RU	Somali (Russia)	Af-Soomaali	Official	40	
 tsi_US	Tsimshian (United States)	Sm’algyax̣	Official	40	official_regional
 uli_US	Ulithian (United States)	yal’ool Yiuldiy	Official	40	
 uwa_AU	Kuku-Uwanh (Australia)		EDL	40	
@@ -7722,7 +7695,6 @@ vot_RU	Votic (Russia)	vaďďa	Official	39
 kuy_AU	Kuuku-Ya'u (Australia)		Official	38	
 mem_AU	Mangala (Australia)		Official	38	
 ora_SB	Oroha (Solomon Islands)		EDL	38	
-tel_RU	Telugu (Russia)	తెలుగు	Official	37	
 wrl_AU	Warlmanpa (Australia)		Official	37	
 aqr_NC	Arhâ (New Caledonia)		EDL	35	
 mrc_US	Maricopa (United States)		Official	35	
@@ -7736,19 +7708,15 @@ sva_RU	Svan (Russia)	ლუშნუ	Official	32
 ard_AU	Arabana-Wangkangurru (Australia)		Official	31	
 enh_RU	Tundra Enets (Russia)		EDL	30	
 fao_US	Faroese (United States)	Føroyskt	Official	30	
-gcc_RU	Mali (Russia)		Official	30	
 hps_US	Hawai'i Sign Language (United States)	Hoailona ʻŌlelo o Hawaiʻi	EDL	30	
 liv_LV	Livonian (Latvia)	līvõ kēļ	EDL	30	
 sjt_RU	Ter Saami (Russia)	са̄мя кӣлл	EDL	30	
-wyn_US	Wyandot (United States)		Official	30	
-mya_RU	Burmese (Russia)	မြန်မာဘာသာ	Official	29	
+wyn_US	Wyandot (United States)		Official	30	 
 vka_AU	Kariyarra (Australia)		Official	29	
 gih_AU	Githabul (Australia)		Official	28	
-waq_AU	Wagiman (Australia)		Official	28	
-ssw_RU	Swati (Russia)	SiSwati	Official	26	
+waq_AU	Wagiman (Australia)		Official	28	 
 brj_VU	Bieria (Vanuatu)		EDL	25	
-eya_US	Eyak (United States)	I.ya.q	Unverified Official	25	official_regional
-hau_RU	Hausa (Russia)	Hausa	Official	25	
+eya_US	Eyak (United States)	I.ya.q	Unverified Official	25	official_regional 
 ktd_AU	Kokatha (Australia)		Unverified Official	25	
 mfz_SS	Mabaan (South Sudan)		EDL	25	
 yar_VE	Yawarana (Venezuela)		EDL	25	
@@ -7757,64 +7725,43 @@ dbl_AU	Dyirbal (Australia)		Official	24
 thd_AU	Kuuk Thaayorre (Australia)		Unverified Official	24	
 tjp_AU	Tjupany (Australia)		Official	24	
 wmb_AU	Wambaya (Australia)		Official	24	
-zmu_AU	Muruwari (Australia)		Official	24	
-bem_RU	Bemba (Zambia) (Russia)	Ichibemba	Official	23	
-hat_RU	Haitian (Russia)	Kreyòl Ayisyen	Official	23	
-mri_RU	Maori (Russia)	Te Reo Māori	Official	23	
-sme_US	Northern Sami (United States)	Davvisámegiella	Unverified Official	23	
-yor_RU	Yoruba (Russia)	Yorùbá	Official	23	
+zmu_AU	Muruwari (Australia)		Official	24	 
 neg_RU	Negidal (Russia)		Official	22	
-ngm_FM	Ngatik Men's Creole (Micronesia)		EDL	22	
-sco_RU	Scots (Russia)	Scots	Official	22	
+ngm_FM	Ngatik Men's Creole (Micronesia)		EDL	22	 
 tox_PW	Tobian (Palau)	ramari Hatohobei	EDL	22	
 unn_AU	Kurnai (Australia)		Unverified Official	21	
-ask_US	Ashkun (United States)		Unverified Official	20	
 bia_AU	Badimaya (Australia)		Official	20	
 brg_BO	Baure (Bolivia)		EDL	20	
 cup_US	Cupeño (United States)	Kuupangaxwichem	Official	20	
 eng_GS	English (South Georgia & South Sandwich Islands)	English	CLDR	20	official
-ksk_US	Kanza (United States)	Kaáⁿze	Official	20	
-mlt_RU	Maltese (Russia)	Malti	Official	20	
+ksk_US	Kanza (United States)	Kaáⁿze	Official	20	 
 nvh_VU	Nasarian (Vanuatu)		EDL	20	
 sju_SE	Ume Saami (Sweden)	ubmejesámiengiälla	EDL	20	
-zgh_RU	Standard Moroccan Tamazight (Russia)	ⵜⴰⵎⴰⵣⵉⵖⵜ	Unverified Official	20	
-zul_RU	Zulu (Russia)	isiZulu	Official	20	
+zgh_RU	Standard Moroccan Tamazight (Russia)	ⵜⴰⵎⴰⵣⵉⵖⵜ	Unverified Official	20	 
 csd_TH	Original Chiangmai Sign Language (Thailand)		EDL	19	
-nji_AU	Ngarnka (Australia)		Official	19	
-swc_RU	Congo Swahili (Russia)		Official	19	
+nji_AU	Ngarnka (Australia)		Official	19	 
 wlg_AU	Kunbarlang (Australia)		Unverified Official	19	
 gil_TK	Gilbertese (Tokelau)		Official	18	
 haw_RU	Hawaiian (Russia)	ʻōlelo Hawaiʻi	Official	18	
 hbo_RU	Ancient Hebrew (Russia)	עִבְרִית מִקְרָאִית	Official	18	
-wbl_RU	Wakhi (Russia)		Official	18	
-wol_RU	Wolof (Russia)	Wolof	Official	18	
+wbl_RU	Wakhi (Russia)		Official	18	 
 lzl_VU	Litzlitz (Vanuatu)		EDL	17	
 zml_AU	Matngele (Australia)		EDL	17	
-egy_RU	Egyptian (Ancient) (Russia)	𓂋𓏤𓈖𓆎𓅓𓏏𓊖	Official	16	
-naq_RU	Khoekhoe (Russia)	Khoekhoegowab	Official	16	
+egy_RU	Egyptian (Ancient) (Russia)	𓂋𓏤𓈖𓆎𓅓𓏏𓊖	Official	16	 
 pop_NC	Pwapwâ (New Caledonia)		EDL	16	
 weg_AU	Wergaia (Australia)		Official	16	
-wrr_AU	Wardaman (Australia)		Official	16	
-yua_RU	Yucateco (Russia)		Unverified Official	16	
+wrr_AU	Wardaman (Australia)		Official	16	 
 akr_VU	Araki (Vanuatu)		EDL	15	
-djn_AU	Jawoyn (Australia)		Official	15	
-guj_RU	Gujarati (Russia)	ગુજરાતી	Official	15	
+djn_AU	Jawoyn (Australia)		Official	15	 
 ing_US	Degexit'an (United States)		Official	15	official_regional
-min_US	Minangkabau (United States)	Baso Minangkabau	Official	15	
-mlg_RU	Malagasy (Russia)	Malagasy	Official	15	
-mpc_AU	Mangarrayi (Australia)		Unverified Official	15	
-yue_RU	Yue Chinese (Russia)	粵語	Official	15	
-sec_CA	She shashishalhem (Sechelt) (Canada)	Shashishalhem	EDL	14	
-wes_RU	Cameroon Pidgin (Russia)		Official	14	
-mfr_AU	Marrithiyel (Australia)		Unverified Official	13	
-bam_RU	Bambara (Russia)	Bamanankan	Official	12	
-kas_RU	Kashmiri (Russia)	کٲشُر	Official	12	
+mpc_AU	Mangarrayi (Australia)		Unverified Official	15	 
+sec_CA	She shashishalhem (Sechelt) (Canada)	Shashishalhem	EDL	14	 
+mfr_AU	Marrithiyel (Australia)		Unverified Official	13	 
 mrs_VU	Tape (Vanuatu)		EDL	12	
 rey_BO	Reyesano (Bolivia)		EDL	12	
 rit_AU	Ritharrngu (Australia)		Unverified Official	12	
 ywg_AU	Yinhawangka (Australia)		Official	12	
-dtd_CA	Diitiidʔaatx̣ (Nitinat) (Canada)		EDL	11	
-sag_RU	Sango (Russia)	Sängö	Official	11	
+dtd_CA	Diitiidʔaatx̣ (Nitinat) (Canada)		EDL	11	 
 alc_CL	Kawésqar (Chile)	alacalufe	Official	656	
 aua_SB	Asumboa (Solomon Islands)		EDL	10	
 bsr_NG	Bassa-Kontagora (Nigeria)		EDL	10	
@@ -8036,23 +7983,15 @@ vku_AU	Kurrama (Australia)		Other	10
 xat_BR	Katawixi (Brazil)		Other	10	
 yhs_AU	Yan-nhaŋu Sign Language (Australia)		Other	10	
 zmd_AU	Maridan (Australia)		Other	10	
-zmm_AU	Marimanindji (Australia)		Other	10	
-ful_RU	Fulah (Russia)	Fula	Official	9	
-ltz_RU	Luxembourgish (Russia)	Lëtzebuergesch	Official	9	
-nid_AU	Ngandi (Australia)		Unverified Official	9	
-nya_RU	Nyanja (Russia)	Chichewa	Official	9	
-tsn_RU	Tswana (Russia)	Setswana	Official	9	
-wbt_AU	Warnman (Australia)		Official	9	
-asm_RU	Assamese (Russia)	অসমীয়া	Official	8	
+zmm_AU	Marimanindji (Australia)		Other	10	 
+nid_AU	Ngandi (Australia)		Unverified Official	9	 
+wbt_AU	Warnman (Australia)		Official	9	 
 bju_CM	Busuu (Cameroon)		EDL	8	
-bxe_ET	Ongota (Ethiopia)		EDL	8	
-eus_RU	Basque (Russia)	Euskara	Official	8	
+bxe_ET	Ongota (Ethiopia)		EDL	8	 
 ibo_RU	Igbo (Russia)	Igbo	Official	8	
 kim_RU	Karagas (Russia)	Тоъфа	Official	93	
-kjj_RU	Khinalugh (Russia)		Official	8	
-que_RU	Quechua (Russia)	Qhichwa	Official	8	
-qwm_RU	Kuman (Russia) (Russia)		Official	8	
-sus_RU	Susu (Russia)	Sosoxui	Official	8	
+kjj_RU	Khinalugh (Russia)		Official	8	 
+qwm_RU	Kuman (Russia) (Russia)		Official	8	 
 wro_AU	Worrorra (Australia)		Official	8	
 zmt_AU	Marringarr (Australia)		Official	8	
 fon_RU	Fon (Russia)	fɔ̀ngbè	Official	7	
@@ -8065,27 +8004,21 @@ umg_AU	Umbuygamu (Australia)		EDL	7
 xmp_AU	Kuku-Mu'inh (Australia)		EDL	7	
 yug_RU	Yug (Russia)		Official	7	
 ant_AU	Antakirinya (Australia)		Unverified Official	6	
-ayd_AU	Ayapathu (Australia)		EDL	6	
-bal_RU	Baluchi (Russia)	بلۆچی	Official	6	
+ayd_AU	Ayapathu (Australia)		EDL	6	 
 dsn_ID	Dusner (Indonesia)	bahasa Dusner	EDL	6	
 gma_AU	Gamberre (Australia)		EDL	6	
-lrg_AU	Larrakiya (Australia)		Official	41	
-mos_RU	Mossi (Russia)	Mòoré	Official	6	
+lrg_AU	Larrakiya (Australia)		Official	41	 
 nor_BV	Norwegian (Bouvet Island)	norsk	Other	6	
-ota_RU	Ottoman Turkish (1500-1928) (Russia)	لسان عثمانى	Official	6	
-rop_RU	Kriol (Russia)		Unverified Official	6	
+ota_RU	Ottoman Turkish (1500-1928) (Russia)	لسان عثمانى	Official	6	 
 tok_RU	Toki Pona (Russia)	toki pona	Official	6	
 ugb_AU	Kuku-Ugbanh (Australia)		EDL	6	
 uur_VU	Ura (Vanuatu) (Vanuatu)		EDL	6	
 xnb_TW	Kanakanavu (Taiwan)		EDL	6	
-yai_RU	Yagnobi (Russia)		Official	6	
-aka_RU	Akan (Russia)	Akan	Unverified Official	5	
+yai_RU	Yagnobi (Russia)		Official	6	 
 alh_AU	Alawa (Australia)		Unverified Official	5	
-cuw_NP	Chukwa (Nepal)		EDL	5	
-div_RU	Dhivehi (Russia)	ދިވެހިބަސް	Official	5	
+cuw_NP	Chukwa (Nepal)		EDL	5	 
 ilg_AU	Ilgar (Australia)		EDL	5	
-jct_RU	Krymchak (Russia)	Кърымчах	Official	5	
-kok_RU	Konkani (Russia)	कोंकणी	Official	5	
+jct_RU	Krymchak (Russia)	Кърымчах	Official	5	 
 muj_TD	Mabire (Chad)		EDL	5	
 nae_ID	Naka'ela (Indonesia)	bahasa Naka’ela	EDL	5	
 rbp_AU	Barababaraba (Australia)		EDL	5	
@@ -8096,20 +8029,15 @@ amz_AU	Atampaya (Australia)		EDL	4
 anp_RU	Angika (Russia)	अंगिका	Official	4	
 ave_RU	Avestan (Russia)	avesta	Official	4	
 bci_RU	Baoulé (Russia)		Official	4	
-bin_RU	Bini (Russia)	Ẹ̀dó	Official	4	
-bre_RU	Breton (Russia)	Brezhoneg	Official	4	
-cjh_US	Upper Chehalis (United States)		Official	4	
-dyu_RU	Dyula (Russia)	Julakan	Official	4	
-fao_RU	Faroese (Russia)	Føroyskt	Official	4	
-fat_RU	Fanti (Russia)		Official	4	
+bin_RU	Bini (Russia)	Ẹ̀dó	Official	4	 
+cjh_US	Upper Chehalis (United States)		Official	4	 
 gudj1237_AU	Gudjala (Australia)		Official	4	
 gva_PY	Guana (Paraguay) (Paraguay)		Official	16	
 krk_RU	Kerek (Russia)		Official	4	
 kzl_ID	Kayeli (Indonesia)		EDL	4	
 lgi_ID	Lengilu (Indonesia)	bahasa Lengilu	EDL	4	
 liv_RU	Liv (Russia)	līvõ kēļ	Official	4	
-mkx_PH	Kinamiging Manobo (Philippines)		Unverified Official	4	
-mlq_RU	Western Maninkakan (Russia)		Unverified Official	4	
+mkx_PH	Kinamiging Manobo (Philippines)		Unverified Official	4	 
 mnc_RU	Manchu (Russia)	ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ	Official	4	
 oum_PG	Ouma (Papua New Guinea)		EDL	4	
 pwi_US	Patwin (United States)		Official	4	
@@ -8120,16 +8048,13 @@ wrz_AU	Warray (Australia)		EDL	4
 wub_AU	Wunambal (Australia)		Official	4	
 wyb_AU	Ngiyambaa (Australia)		Unverified Official	4	
 wkr_AU	Keerray-Woorroong (Australia)		Official	4	
-aid_AU	Alngith (Australia)		EDL	3	
-ban_RU	Balinese (Russia)	Basa Bali	Official	3	
-bca_RU	Central Bai (Russia)		Official	3	
+aid_AU	Alngith (Australia)		EDL	3	 
 bdn_CM	Baldemu (Cameroon)		EDL	3	
 bdz_PK	Badeshi (Pakistan)		Other	3	
 cop_RU	Coptic (Russia)	ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ	Official	3	
 djw_AU	Jawi (Australia)		EDL	3	
 dta_RU	Daur (Russia)		Official	3	
-fln_AU	Flinders Island (Australia)		EDL	3	
-fry_RU	Western Frisian (Russia)	Frysk	Official	3	
+fln_AU	Flinders Island (Australia)		EDL	3	 
 gyy_AU	Gunya (Australia)		EDL	3	
 ibb_RU	Ibibio (Russia)		Official	3	
 ina_RU	Interlingua (International Auxiliary Language Association) (Russia)	Interlingua	Official	3	
@@ -8142,13 +8067,8 @@ mfe_RU	Morisyen (Russia)	morisyin	Unverified Official	3
 nyt_AU	Nyawaygi (Australia)		EDL	3	
 ole_BT	Olekha (Bhutan)		EDL	3	
 olr_VU	Olrat (Vanuatu)		EDL	3	
-orm_RU	Oromo (Russia)	Afaan Oromoo	Official	3	
 psm_BO	Pauserna (Bolivia)		EDL	3	
-raj_RU	Rajasthani (Russia)	राजस्थानी	Official	3	
 rog_RU	Northern Roglai (Russia)		Unverified Official	3	
-smo_RU	Samoan (Russia)	Gagana fa'a Sāmoa	Official	3	
-sot_RU	Southern Sotho (Russia)	Sesotho	Official	3	
-tir_RU	Tigrinya (Russia)	ትግርኛ	Official	3	
 wgy_AU	Warrgamay (Australia)		EDL	3	
 wie_AU	Wik-Epa (Australia)		EDL	3	
 wif_AU	Wik-Keyangan (Australia)		EDL	3	
@@ -8159,24 +8079,15 @@ zmv_AU	Mbariman-Gudhinma (Australia)		EDL	3
 aea_AU	Ariba (Australia)		EDL	2	
 ain_JP	Ainu (Japan) (Japan)	アイヌ イタㇰ	EDL	2	
 bdk_RU	Budukh (Russia)		Official	2	
-bho_RU	Bhojpuri (Russia)	भोजपुरी	Official	2	
-bis_RU	Bislama (Russia)	Bislama	Official	2	
 bxv_TD	Berakou (Chad)		EDL	2	
-car_RU	Galibi Carib (Russia)		Official	2	
 gdc_AU	Gugu-Badhun (Australia)		EDL	2	
 giy_AU	Giyug (Australia)		EDL	2	
 gyf_AU	Gungabula (Australia)		EDL	2	
 hit_RU	Hittite (Russia)	𒌷𒉌𒅆𒇷	Official	2	
-hns_RU	Caribbean Hindustani (Russia)		Official	2	
-jbi_AU	Badjiri (Australia)		EDL	2	
-kea_RU	Kabuverdianu (Russia)	kabuverdianu	Official	2	
-kmb_RU	Kimbundu (Russia)		Official	82	
-ktu_RU	Kituba (Democratic Republic of Congo) (Russia)		Official	2	
+jbi_AU	Badjiri (Australia)		EDL	2	 
 ldd_NG	Luri (Nigeria)		EDL	2	
 lrz_VU	Lemerig (Vanuatu)		EDL	2	
-mni_RU	Manipuri (Russia)	মৈতৈলোন্	Official	2	
 nha_AU	Nhanta (Australia)		EDL	2	
-njo_RU	Ao Naga (Russia)		Unverified Official	2	
 nmp_AU	Nimanburru (Australia)		EDL	2	
 nmv_AU	Ngamini (Australia)		EDL	2	
 non_RU	Old Norse (Russia)	norrǿna	Official	2	
@@ -8193,7 +8104,6 @@ xmy_AU	Mayi-Kutuna (Australia)		EDL	2
 ynd_AU	Yandruwandha (Australia)		EDL	2	
 ysr_RU	Sirenik Yupik (Russia)		Official	2	
 aas_TZ	Aasáx (Tanzania)		EDL	1	
-ace_US	Achinese (United States)	Aceh	Official	32	
 acv_US	Achumawi (United States)	Ajúmmááwí	Official	68	
 aed_AR	Argentine Sign Language (Argentina)		EDL	1	
 ahg_ET	Hwarasa (Ethiopia)		EDL	1	
@@ -8209,7 +8119,6 @@ avk_001	Kotava (World)	Kotava	Other	1
 awk_AU	Awabakal (Australia)		EDL	1	
 axe_AU	Ayerreyenge (Australia)		EDL	1	
 axl_AU	Lower Southern Aranda (Australia)		EDL	1	
-aym_RU	Aymara (Russia)	Aymar aru	Official	1	
 aze_AM	Azerbaijani (Armenia)	Azərbaycan dili	Other	1	
 bab_SN	Bainouk-Gunyuño (Senegal)		EDL	1	
 bdk_AZ	Budukh (Azerbaijan)		EDL	1	
@@ -8227,7 +8136,6 @@ bxi_AU	Pirlatapa (Australia)		EDL	1
 bxn_AU	Purduna (Australia)		EDL	1	
 bxo_NG	Barikanchi (Nigeria)		EDL	1	
 byb_CM	Bikya (Cameroon)		EDL	1	
-byf_RU	Bete (Russia)		Official	1	
 byg_SD	Baygo (Sudan)		EDL	1	
 bzr_AU	Biri (Australia)		EDL	1	
 cah_PE	Cahuarano (Peru)		EDL	1	
@@ -8268,7 +8176,6 @@ eng_Shaw_GB	English (Shavian) (United Kingdom, Shavian (Shaw))	English	Other	1
 err_AU	Erre (Australia)		EDL	1	
 ett_RU	Etruscan (Russia)	𐌓𐌀𐌔𐌍𐌀	Official	1	
 eud_MX	Eudeve (Mexico)		EDL	1	
-ewe_RU	Ewe (Russia)	Eʋegbe	Official	1	
 fah_NG	Fali of Baissa (Nigeria)		EDL	1	
 fgr_TD	Fongoro (Chad)		EDL	1	
 fos_TW	Siraya (Taiwan)	Siraya	EDL	1	
@@ -8311,7 +8218,6 @@ guo_CO	Guayabero (Colombia)		Official	2960
 gvy_AU	Kuyani (Australia)		EDL	1	
 gwm_AU	Awngthim (Australia)		EDL	1	
 gwu_AU	Guwamu (Australia)		EDL	1	
-hni_RU	Hani (Russia)	哈尼語	Official	1	
 hoi_US	Holikachuk (United States)		Other	1	official_regional
 hrp_AU	Nhirrpi (Australia)		EDL	1	
 hsl_NG	Hausa Sign Language (Nigeria)	Maganar hannu	EDL	1	
@@ -8331,33 +8237,23 @@ jan_AU	Janday (Australia)		EDL	1
 jbw_AU	Yawijibaya (Australia)		EDL	1	
 jut_DK	Jutish (Denmark)	Jysk	Other	1	
 jya_CN	Jiarong (China)		EDL	1	
-kaa_US	Kara-Kalpak (United States)	қарақалпақша	Official	1	
-kau_RU	Kanuri (Russia)	kanuri	Official	1	
 kaw_ID	Kawi (Indonesia)	Bhāṣa Kawi	Other	1	
-kik_RU	Kikuyu (Russia)	Gĩkũyũ	Official	1	
 kof_NG	Kubi (Nigeria)		EDL	1	
 kog_CO	Cogui (Colombia)		Official	15820	
-kpe_RU	Kpelle (Russia)	Kpɛlɛɛ	Official	1	
-kri_RU	Krio (Russia)	Krio	Official	1	
 kry_RU	Kryts (Russia)		Official	1	
 ktg_AU	Kalkatungu (Australia)		EDL	1	
 lec_BO	Leco (Bolivia)		EDL	1	
 len_HN	Honduran Lenca (Honduras)		EDL	1	
 lfn_001	Lingua Franca Nova (World)	lingua franca nova	Other	1	
 lgb_SB	Laghu (Solomon Islands)		EDL	1	
-lij_RU	Ligurian (Russia)	Ligure	Official	1	
 lku_AU	Kungkari (Australia)		EDL	1	
 lmw_US	Lake Miwok (United States)		EDL	1	
 lnj_AU	Linngithigh (Australia)		EDL	1	
 lnn_VU	Lorediakarkar (Vanuatu)		EDL	1	
-loz_RU	Lozi (Russia)	siLozi	Official	1	
 lso_LA	Original Laos Sign Language (Laos)		EDL	1	
 luf_PG	Laua (Papua New Guinea)		EDL	1	
-lun_RU	Lunda (Russia)	chiLunda	Official	1	
-luo_RU	Luo (Kenya and Tanzania) (Russia)	Dholuo	Official	1	
 luw_CM	Luo (Cameroon)		EDL	1	
 lzh_CN	Literary Chinese (China)	文言文	Other	1	
-mas_RU	Masai (Russia)	ɔl Maa	Official	1	
 mcl_CO	Macaguaje (Colombia)		Official	24	
 mhg_AU	Marrgu (Australia)		EDL	1	
 mhq_US	Mandan (United States)	Rų́ʼeta:re	EDL	1	
@@ -8370,7 +8266,6 @@ mud_RU	Mednyj Aleut (Russia)		EDL	1
 mwr_PK	Marwari (Pakistan)	मारवाड़ी		100000	
 myr_PE	Munichi (Peru)		EDL	1	
 mys_ET	Mesmes (Ethiopia)		EDL	1	
-nau_US	Nauru (United States)	dorerin Naoero	Official	1	
 nig_AU	Ngalakgan (Australia)		EDL	1	
 niu_US	Niuean (United States)	Vagahau Niuē	Official	17	
 njt_SR	Ndyuka-Trio Pidgin (Suriname)		EDL	1	
@@ -8404,7 +8299,6 @@ poo_US	Central Pomo (United States)		EDL	1
 prl_PE	Peruvian Sign Language (Peru)		Official	13,326	
 pue_AR	Gününa-Küne (Argentina)		EDL	1	
 qua_US	Quapaw (United States)		Unverified Official	1	
-quc_RU	K'iche' (Russia)	K’iche’	Official	1	
 qui_US	Quileute (United States)		EDL	1	
 rnr_AU	Nari Nari (Australia)		EDL	1	
 roh_CH_JAUER	Rumantsch (Switzerland, Jauer)		Other	1	
@@ -8732,7 +8626,6 @@ sdo_ID	Bidayuh, Bukar-Sadong (Indonesia)	bahasa Bidayuh Bukar-Sadong	Other	1
 sds_TN	Sened (Tunisia)		Other	1	
 shl_IN	Shendu (India)		Other	1	
 shm_IR	Shahrudi (Iran)		Other	1	
-shn_CN	Shan (China)	တႆး	Other	1	
 siz_LY	Siwi (Libya)		Other	1	
 sja_PA	Epena (Panama)		Other	1	
 smv_IN	Samvedi (India)		Other	1	
@@ -8766,7 +8659,6 @@ tux_BR	Tuxináwa (Brazil)		Other	1
 twt_BR	Turiwára (Brazil)		Other	1	
 tyt_VN	Tày Tac (Vietnam)		Other	1	
 uam_BR	Uamué (Brazil)		Other	1	
-ukr_BR	Ukrainian (Brazil)	Українська	Other	1	
 ull_IN	Ullatan (India)		Other	1	
 umo_BR	Umutina (Brazil)		Other	1	
 url_IN	Urali (India)		Other	1	
@@ -8799,9 +8691,6 @@ xre_BR	Kreye (Brazil)		Other	1
 xtw_BR	Tawandê (Brazil)		Other	1	
 xxr_BR	Koropó (Brazil)		Other	1	
 ybn_BR	Yabaâna (Brazil)		Other	1	
-ydd_CR	Yiddish, Eastern (Costa Rica)		Other	1	
-ydd_PA	Yiddish, Eastern (Panama)		Other	1	
-ydd_ZA	Yiddish, Eastern (South Africa)		Other	1	
 yui_BR	Wajiara (Brazil)		Other	1	
 zkp_BR	Kaingáng, São Paulo (Brazil)		Other	1	
 zmj_AU	Maridjabin (Australia)		Other	1	
@@ -8826,7 +8715,6 @@ afh_GH	Afrihili (Ghana)	Ɛl-Afrihili
 aga_PE	Aguano (Peru)				
 agw_SB	Kahua (Solomon Islands)				
 aia_SB	Arosi (Solomon Islands)				
-aig_AG	Antigua and Barbuda Creole English (Antigua & Barbuda)				
 aii_IQ	Assyrian Neo-Aramaic (Iraq)	ܣܘܪܝܝܐ ܣܘܪܝܬ,ܐܬܘܪܝܐ ܣܘܪܝܝܐ			
 aij_IL	Lishanid Noshan (Israel)				
 ais_TW	Sakizaya (Taiwan)				
@@ -9845,11 +9733,9 @@ urk_TH	Urak Lawoi' (Thailand)
 utp_SB	Amba (Solomon Islands) (Solomon Islands)				
 uum_GE	Urum (Georgia)	Урум			
 uun_TW	Pazeh-Kaxabu (Taiwan)				
-uzn_UZ	Northern Uzbek (Uzbekistan)				
 vao_VU	Vao (Vanuatu)				
 vel_NL	Veluws (Netherlands)				
 veo_US	Ventureño (United States)				
-vic_VG	Virgin Islands Creole English (British Virgin Islands)				
 vig_BF	Viemo (Burkina Faso)				
 vit_NG	Viti (Nigeria)				
 vjk_IN	Bajjika (India)				
@@ -10903,7 +10789,6 @@ scq_KH	Sa'och (Cambodia)		Official	209
 kjv_HR	Kaikavian Literary Language (Croatia)		Official	185	
 gob_CO	Playero (Colombia)		Official	142	
 bal_IN	Baluchi (India)			100	
-man_RU	Mandingo (Russia)		Official	23	
 yom_CG	Yombe (Congo - Brazzaville)			517000	
 nbm_CG	Ngbaka Ma'bo (Congo - Brazzaville)			135000	
 bni_CG	Bangi (Congo - Brazzaville)			90000	
@@ -11108,3 +10993,11 @@ eng_BH	English (Bahrain)			32100
 kvr_BH	Kerinci (Bahrain)			25000	
 nep_BH	Nepali languages (Bahrain)			23000	
 npi_BH	Common Nepali (Bahrain)			23000	
+tmh_MR	Tamashek (Mauritania)			133000	
+lebu1234_MR	Lebu Wolof (Mauritania)			1500	
+dan_FO	Danish (Faroe Islands)			1501	
+nor_FO	Norwegian (Faroe Islands)			969	
+zho_UZ	Chinese languages (Uzbekistan)			1700	
+spa_VG	Spanish (British Virgin Islands)			2127	
+vic_VG	Virgin Islands Creole English (British Virgin Islands)			12762	
+aig_AG	Antigua and Barbuda Creole English (Antigua & Barbuda)			62990	

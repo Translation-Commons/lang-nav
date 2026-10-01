@@ -4,6 +4,7 @@ enum PotentialLocalesTab {
   Significant = 'significant',
   SignificantLowCertainty = 'significantLowCertainty',
   MissingOriginalPopData = 'missingOriginalPopData',
+  Unnecessary = 'unnecessary',
 }
 
 export default PotentialLocalesTab;
