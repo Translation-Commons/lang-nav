@@ -34,7 +34,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       <CensusPopulationCharacteristics census={census} />
       <CensusSourceSection census={census} />
       <DetailsSection title="Languages" score={census.languageCount}>
-        <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
+        <LocalParamsProvider overrides={{ page: 1, limit: 20, orgFilter: '' }}>
           <TableOfLanguagesInCensus census={census} />
         </LocalParamsProvider>
       </DetailsSection>

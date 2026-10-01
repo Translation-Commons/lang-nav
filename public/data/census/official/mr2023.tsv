@@ -1,0 +1,43 @@
+#codeDisplay		mr2023l1	mr2023l2	mr2023	mr2023lit
+#nameDisplay		Mauritania 2023 L1	Mauritania 2023 L2	Mauritania 2023 Combined	Mauritania 2023 Literacy
+#isoRegionCode	MR				
+#yearCollected		2023	2023	2023	2023
+### Language Criteria ###					
+#languageUse		Speaks	Speaks	Speaks	Writes
+#acquisitionOrder		L1	L2	Any	Any
+#domain		Home			
+### Population Surveyed ###					
+#population	4,781,630				3,430,000
+#populationSource					approximating the people age 10 or older
+#populationWithPositiveResponses	478,163				343000
+#age					10+
+#sampleRate	0.1				
+#responsesPerIndividual		1	0+	1+	0+
+#quantity	count				
+### Data Constraints ###					
+#geographicScope	whole country				
+#nationality	residents				
+#residenceBasis	de jure				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Agence Nationale de la Statistique et de l’Analyse Démographique et Economique				
+#collectorNameShort	ANSADE				
+### Source Document ###					
+#url	https://anadrim.rgph5.mr/index.php/catalog/26/variable/F6/V418?name=Q12A&utm_source=chatgpt.com				
+#datePublished	2025-08-21				
+#dateAccessed	2026-10-01				
+#documentName	RECENSEMENT GENERAL DE LA POPULATION ET DE L’HABITAT (2023)				
+#tableName		Q11	Q12		Q31
+#notes	microdata results, only 10% of data is given as microdata			synthesized from the other columns	
+Language Code	Language				
+ara/mey	Arabic/Hassaniyya	346,377		346,377	170153
+mey	Hassinayya		13925	13,925	
+ara	Arabic		5367	5,367	
+ful/fuc	Poular	78,216	25545	103,761	13570
+snk	Soninke	15,435	4252	19,687	2194
+wol	Wolof	6,494	13723	20,217	5082
+fra	French		41599	41,599	63833
+eng	English		6624	6624	11343
+spa	Spanish		683	683	660
+zho	Chinese		191	191	134
+mul	Others	18,586	10407	28,993	3636

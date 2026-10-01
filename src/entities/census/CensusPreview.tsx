@@ -23,14 +23,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
       <div>
         <PaginationControls itemCount={censuses.length} />
       </div>
-      <div
-        style={{
-          padding: '1em',
-          margin: '1em 3em',
-          border: '2px solid var(--color-button-primary)',
-          borderRadius: '0.5em',
-        }}
-      >
+      <div className="p-4 m-2 border rounded">
         {censuses.length > 0 && page <= censuses.length && censuses[page - 1] ? (
           <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>

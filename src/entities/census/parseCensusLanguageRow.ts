@@ -1,4 +1,4 @@
-import { CensusData } from '@entities/census/CensusTypes';
+import { CensusData, CensusQuantity } from '@entities/census/CensusTypes';
 import { LanguageCode } from '@entities/language/LanguageTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -39,7 +39,7 @@ export function parseCensusLanguageRow(
     if (part.trim() === '') return; // Skip empty parts
 
     let popEstimate = Number.parseFloat(part.replace(/[,% ]/g, ''));
-    if (popEstimate > 0 && censuses[i].quantity === 'percent') {
+    if (popEstimate > 0 && censuses[i].quantity === CensusQuantity.Percent) {
       // If the quantity is percent, convert the percentage to an estimate based on the eligible population
       popEstimate = Math.round((popEstimate / 100) * censuses[i].population);
     }
