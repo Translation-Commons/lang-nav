@@ -99,7 +99,7 @@ export function getMockLanguages() {
   zho.scope = LanguageScope.Macrolanguage;
 
   const langs = [ine, gem, eng, spa, fra, deu, ita, rus, epo, zho];
-  langs.forEach((l) => l.Combined.code == l.codeDisplay);
+  langs.forEach((l) => (l.Combined.code = l.codeDisplay));
   return langs;
 }
 

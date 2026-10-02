@@ -455,7 +455,6 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     languages,
     censuses,
     keyboards: [],
-    loadingStage: LoadingStage.AlgorithmsFinished,
     locales,
     organizations,
     territories,
@@ -463,6 +462,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     orthographies,
     variants,
     technologies: entArray.filter((ent) => ent.type === EntityType.Technology),
+
     getEntity: (id: string) => ents[id],
     getLanguage: (id: string) => (ents[id]?.type === EntityType.Language ? ents[id] : undefined),
     getCLDRLanguage: (id: string) =>
@@ -477,6 +477,9 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     getOrganization: (id: string) => (ents[id]?.type === EntityType.Org ? ents[id] : undefined),
     getTechnology: (id: string) =>
       ents[id]?.type === EntityType.Technology ? ents[id] : undefined,
+
+    loadingStage: LoadingStage.AlgorithmsFinished,
+    dataRevision: 0,
   };
 
   return dataContext;

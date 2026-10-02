@@ -40,7 +40,7 @@ const LanguageFamilyFilterSelector: React.FC = () => {
     return getSuggestionsFunction(
       languages
         // Limting to ISO language families only right now because of data limitations
-        .filter((a) => a.scope ?? 0 >= LanguageScope.Subfamily)
+        .filter((a) => (a.scope ?? 0) >= LanguageScope.Subfamily)
         .sort(sortByPopulation),
       getMatchDistance,
       getMatchGroup,
