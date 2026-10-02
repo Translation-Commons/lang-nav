@@ -1,5 +1,6 @@
 ### Metadata ###			
-#topic	Android Localization Support		
+#name	Android Localization Support
+#tech		Android
 #url	https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/res/res/values/locale_config.xml		
 #dateAccessed	2026-06-25		
 #documentName	locale_config.xml (AOSP frameworks/base)		
@@ -18,8 +19,8 @@ hye	Armenian
 asm	Assamese		
 ast	Asturian		
 asa	Asu		
-aze	Azerbaijani (Cyrillic)		Cyrillic
-aze	Azerbaijani (Latin)		Latin
+aze	Azerbaijani (Cyrillic)		Cyrl
+aze	Azerbaijani (Latin)		Latn
 ksf	Bafia		
 man/bam	Bambara		
 ben	Bangla		
@@ -30,21 +31,21 @@ bem	Bemba
 bez	Bena		
 bho	Bhojpuri		
 brx	Bodo		
-hbs/bos	Bosnian (Cyrillic)		Cyrillic
-hbs/bos	Bosnian (Latin)		Latin
+hbs/bos	Bosnian (Cyrillic)		Cyrl
+hbs/bos	Bosnian (Latin)		Latn
 bre	Breton		
 bul	Bulgarian		
 mya	Burmese		
-zho/yue	Cantonese (Simplified)		Simplified
-zho/yue	Cantonese (Traditional)		Traditional
+zho/yue	Cantonese (Simplified)		Hans
+zho/yue	Cantonese (Traditional)		Hant
 cat	Catalan		
 ceb	Cebuano		
 tzm	Central Atlas Tamazight		
 che	Chechen		
 chr	Cherokee		
 cgg	Chiga		
-zho/cmn	Chinese (Simplified)		Simplified
-zho/cmn	Chinese (Traditional)		Traditional
+zho/cmn	Chinese (Simplified)		Hans
+zho/cmn	Chinese (Traditional)		Hant
 chv	Chuvash		
 ksh	Colognian		
 cor	Cornish		
@@ -66,8 +67,8 @@ fil	Filipino
 fin	Finnish		
 fra	French		
 fur	Friulian		
-ful	Fula (Adlam)		Adlam
-ful	Fula (Latin)		Latin
+ful	Fula (Adlam)		Adlm
+ful	Fula (Latin)		Latn
 glg	Galician		
 lug	Ganda		
 kat	Georgian		
@@ -80,7 +81,7 @@ hau	Hausa
 haw	Hawaiian		
 heb	Hebrew		
 hin	Hindi		
-hin	Hindi (Latin)		Latin
+hin	Hindi (Latin)		Latn
 hun	Hungarian		
 isl	Icelandic		
 ibo	Igbo		
@@ -102,8 +103,8 @@ kln	Kalenjin
 kam	Kamba		
 doi/xnr	Kangri		
 kan	Kannada		
-kas	Kashmiri (Arabic)		Arabic
-kas	Kashmiri (Devanagari)		Devanagari
+kas	Kashmiri (Arabic)		Arab
+kas	Kashmiri (Devanagari)		Deva
 kaz	Kazakh		
 khm	Khmer		
 kik	Kikuyu		
@@ -113,10 +114,10 @@ kor	Korean
 khq	Koyra Chiini		
 ses	Koyraboro Senni		
 kur	Kurdish		
-kxv	Kuvi (Devanagari)		Devanagari
-kxv	Kuvi (Latin)		Latin
-kxv	Kuvi (Odia)		Odia
-kxv	Kuvi (Telugu)		Telugu
+kxv	Kuvi (Devanagari)		Deva
+kxv	Kuvi (Latin)		Latn
+kxv	Kuvi (Odia)		Orya
+kxv	Kuvi (Telugu)		Telu
 kir	Kyrgyz		
 lkt	Lakota		
 lag	Langi		
@@ -174,8 +175,8 @@ fas	Persian
 pol	Polish		
 por	Portuguese		
 prg	Prussian		
-pan	Punjabi (Arabic)		Arabic
-pan	Punjabi (Gurmukhi)		Gurmukhi
+pan	Punjabi (Arabic)		Arab
+pan	Punjabi (Gurmukhi)		Guru
 que	Quechua		
 raj	Rajasthani		
 ron	Romanian		
@@ -192,14 +193,14 @@ sat	Santali
 srd	Sardinian		
 gla	Scottish Gaelic		
 seh	Sena		
-hbs/srp	Serbian (Cyrillic)		Cyrillic
-hbs/srp	Serbian (Latin)		Latin
+hbs/srp	Serbian (Cyrillic)		Cyrl
+hbs/srp	Serbian (Latin)		Latn
 ksb	Shambala		
 sna	Shona		
 iii	Sichuan Yi		
 szl	Silesian		
-snd	Sindhi (Arabic)		Arabic
-snd	Sindhi (Devanagari)		Devanagari
+snd	Sindhi (Arabic)		Arab
+snd	Sindhi (Devanagari)		Deva
 sin	Sinhala		
 slk	Slovak		
 slv	Slovenian		
@@ -230,9 +231,9 @@ ukr	Ukrainian
 hsb	Upper Sorbian		
 urd	Urdu		
 uig	Uyghur		
-uzb	Uzbek (Arabic)		Arabic
-uzb	Uzbek (Cyrillic)		Cyrillic
-uzb	Uzbek (Latin)		Latin
+uzb	Uzbek (Arabic)		Arab
+uzb	Uzbek (Cyrillic)		Cyrl
+uzb	Uzbek (Latin)		Latn
 vec	Venetian		
 vie	Vietnamese		
 vun	Vunjo		

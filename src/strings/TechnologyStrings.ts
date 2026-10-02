@@ -24,3 +24,22 @@ export function parseTechScope(scope: string): TechScope {
       return TechScope.Unknown;
   }
 }
+
+export function getTechScopeLabel(scope: TechScope): string {
+  switch (scope) {
+    case TechScope.OperatingSystem:
+      return 'Operating System';
+    case TechScope.Product:
+      return 'Product';
+    case TechScope.Application:
+      return 'Application';
+    case TechScope.MachineLearningModel:
+      return 'Machine Learning Model';
+    case TechScope.InputMethod:
+      return 'Input Method';
+    case TechScope.Database:
+      return 'Database';
+    default:
+      return 'Unknown';
+  }
+}

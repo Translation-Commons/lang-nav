@@ -7,6 +7,7 @@ import {
   getCensusForEntity,
   getVariantsForEntity,
 } from '@features/transforms/fields/getEntityConnection';
+import { getLanguagesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -39,6 +40,7 @@ export function getEntityMostImportantLanguage(ent: EntityData): LanguageData | 
     case EntityType.Keyboard:
       return ent.languages?.slice().sort(sortByPopulation)[0];
     case EntityType.Org:
+    case EntityType.Technology:
       return undefined;
   }
 }
@@ -61,6 +63,8 @@ export function getEntityDate(ent: EntityData): Date | undefined {
     case EntityType.Territory:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
+    case EntityType.Orthography:
       return undefined;
   }
 }
@@ -90,6 +94,8 @@ export function getCountOfLanguages(ent: EntityData): number | undefined {
       return ent.languageCodes?.length;
     case EntityType.Org:
       return undefined; // Too computationally intensive to get
+    case EntityType.Technology:
+      return getLanguagesRelevantToEntity(ent)?.length || undefined;
   }
 }
 
@@ -131,6 +137,8 @@ export function getEntityLiteracy(ent: EntityData): number | undefined {
     case EntityType.Variant:
     case EntityType.Keyboard:
     case EntityType.Org:
+    case EntityType.Technology:
+    case EntityType.Orthography:
       // No literacy value to sort by
       return undefined;
   }

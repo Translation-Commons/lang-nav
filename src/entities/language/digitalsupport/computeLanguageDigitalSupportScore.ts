@@ -2,9 +2,11 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { sumBy } from '@shared/lib/setUtils';
 
 import type { LanguageData } from '../LanguageTypes';
 
+import { getInterfacePlatforms } from './computeLanguageDigitalSupportStatus';
 import {
   DigitalSupportDimension,
   DigitalSupportScore,
@@ -49,18 +51,14 @@ function computeDigitalSupportScore(
       return (lang.udhr?.length ? 5 : 0) + computeWikipediaScore(lang);
     case DigitalSupportDimension.Interfaces:
       return (
-        ((lang.win11LanguagePacks?.length ? 1 : 0) +
-          (lang.android?.length ? 1 : 0) +
-          (lang.ios?.length ? 1 : 0) +
-          (lang.macos?.length ? 1 : 0)) *
-        (10 / 4)
+        sumBy(getInterfacePlatforms(lang), ({ entries }) => (entries.length > 0 ? 1 : 0)) * (10 / 4)
       );
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? 10 : 0;
     case DigitalSupportDimension.I18nFrameworks:
       return computeCLDRScore(lang);
     case DigitalSupportDimension.MachineTranslation:
-      return lang.googleTranslate?.length ? 10 : 0; // Placeholder, replace with actual logic
+      return lang.techSupport?.some((support) => support.techShortName === 'GTranslate') ? 10 : 0; // Placeholder, replace with actual logic
     default:
       enforceExhaustiveSwitch(dimension);
   }

@@ -1,56 +1,57 @@
-### Metadata ###				
-#topic		MacOS System Language		
-#url		https://www.apple.com/macos/feature-availability/#system-language		
-#dateAccessed		7/3/26		
-#author		Apple		
-#notes				
-				
-Language Code	Language	 Locale	Writing System	notes
-ara/arb	Arabic			
-cat	Catalan			
-zho/cmn	Chinese, Simplified			
-zho/yue	Chinese, Traditional 	Hong Kong		
-zho/cmn	Chinese, Traditional 	Taiwan		
-hbs/hrv	Croatian			
-ces	Czech			
-dan	Danish			
-nld	Dutch			
-eng	English 	Australia		
-eng	English 	Canada		
-eng	English 	India		
-eng	English 	Ireland		
-eng	English 	New Zealand		
-eng	English 	Singapore		
-eng	English 	South Africa		
-eng	English 	United Kingdom		
-eng	English 	United States		
-fin	Finnish			
-fra	French 	Canada		
-fra	French 	France		
-deu	German 	Germany		
-ell	Greek			
-heb	Hebrew			
-hin	Hindi			
-hun	Hungarian			
-msa/ind	Indonesian			
-ita	Italian			
-jpn	Japanese			
-kor	Korean			
-msa/zsm	Malay			
-nor/nob	Norwegian			
-pol	Polish			
-por	Portuguese 	Brazil		
-por	Portuguese 	Portugal		
-ron	Romanian			
-rus	Russian			
-slk	Slovak			
-slv	Slovenian			
-spa	Spanish 	Latin America		419
-spa	Spanish 	Mexico		
-spa	Spanish 	Spain		
-spa	Spanish 	United States		
-swe	Swedish			
-tha	Thai			
-tur	Turkish			
-ukr	Ukrainian			
-vie	Vietnamese			
+### Metadata ###			
+#name		MacOS System Language	
+#tech		macOS	
+#url		https://www.apple.com/macos/feature-availability/#system-language	
+#dateAccessed		2026-07-03	
+#author		Apple	
+#notes			
+			
+Language Code	Language	Locale	Writing System
+ara/arb	Arabic		
+cat	Catalan		
+zho/cmn	Chinese, Simplified		Hans
+zho/yue	Chinese, Traditional	HK	Hant
+zho/cmn	Chinese, Traditional	TW	Hant
+hbs/hrv	Croatian		
+ces	Czech		
+dan	Danish		
+nld	Dutch		
+eng	English	AU	
+eng	English	CA	
+eng	English	IN	
+eng	English	IE	
+eng	English	NZ	
+eng	English	SG	
+eng	English	ZA	
+eng	English	GB	
+eng	English	US	
+fin	Finnish		
+fra	French	CA	
+fra	French	FR	
+deu	German	DE	
+ell	Greek		
+heb	Hebrew		
+hin	Hindi		
+hun	Hungarian		
+msa/ind	Indonesian		
+ita	Italian		
+jpn	Japanese		
+kor	Korean		
+msa/zsm	Malay		
+nor/nob	Norwegian		
+pol	Polish		
+por	Portuguese	BR	
+por	Portuguese	PT	
+ron	Romanian		
+rus	Russian		
+slk	Slovak		
+slv	Slovenian		
+spa	Spanish	419	
+spa	Spanish	MX	
+spa	Spanish	ES	
+spa	Spanish	US	
+swe	Swedish		
+tha	Thai		
+tur	Turkish		
+ukr	Ukrainian		
+vie	Vietnamese		

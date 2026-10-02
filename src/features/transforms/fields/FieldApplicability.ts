@@ -296,8 +296,8 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.SourceForPopulation,
         Field.CountOfKeyboards,
 
-        // Field.CountOfLanguages,
-        // Field.LanguageList,
+        Field.CountOfLanguages,
+        Field.LanguageList,
       ];
     default:
       return enforceExhaustiveSwitch(entType);

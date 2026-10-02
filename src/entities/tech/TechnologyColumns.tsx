@@ -55,6 +55,8 @@ function getTechnologyColumns(): TableColumn<TechnologyData>[] {
       columnGroup: 'Keyboards',
     },
     { ...getFieldColumn(Field.CountOfKeyboards), columnGroup: 'Keyboards' },
+    { ...getFieldColumn(Field.LanguageList), isInitiallyVisible: true, columnGroup: 'Languages' },
+    { ...getFieldColumn(Field.CountOfLanguages), columnGroup: 'Languages' },
   ];
 }
 

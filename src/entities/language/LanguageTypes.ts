@@ -10,6 +10,7 @@ import type { RetirementReason } from '@features/data/load/extra_entities/ISORet
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
+import type { TechSupportData } from '@entities/tech/TechnologyTypes';
 import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -18,7 +19,6 @@ import type { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes
 
 import type {
   DigitalSupportScore,
-  PlatformSupportData,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
@@ -116,11 +116,7 @@ export interface LanguageData extends EntityBase {
   digitalSupportScore?: DigitalSupportScore;
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
-  googleTranslate?: PlatformSupportData[];
-  android?: PlatformSupportData[];
-  win11LanguagePacks?: PlatformSupportData[];
-  ios?: PlatformSupportData[];
-  macos?: PlatformSupportData[];
+  techSupport?: TechSupportData[];
 
   latitude?: number;
   longitude?: number;

@@ -199,8 +199,17 @@ export function getLanguagesRelevantToEntity(ent: EntityData): LanguageData[] {
     case EntityType.Keyboard:
       return ent.languages ?? [];
     case EntityType.Technology:
-      // TODO add Technology Entity
-      return []; // Not available yet
+      if (ent.languageSupport)
+        return uniqueBy(
+          ent.languageSupport?.map((support) => support.lang).filter((lang) => !!lang) ?? [],
+          (lang) => lang.ID,
+        );
+      if (ent.keyboards)
+        return uniqueBy(
+          ent.keyboards.flatMap((kb) => kb.languages ?? []),
+          (lang) => lang.ID,
+        );
+      return [];
     case EntityType.Org:
       return []; // Too computationally intensive to get
   }

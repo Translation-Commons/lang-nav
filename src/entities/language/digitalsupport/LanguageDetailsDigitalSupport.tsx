@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
@@ -114,6 +115,8 @@ const DigitalSupportOverview: React.FC<Props> = ({ lang }) => {
 type DimProps = { lang: LanguageData; dimension: DigitalSupportCategory };
 
 const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension }) => {
+  const { getTechnology } = useDataContext();
+
   switch (dimension) {
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? (
@@ -140,7 +143,9 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
             <EntityWikipediaInfo ent={lang} />
           </DetailsField>
           <DetailsField title="UDHR" description={LanguageUDHRDescription}>
-            <LanguageUDHRInfo lang={lang} size="long" />
+            <div className="inline-block">
+              <LanguageUDHRInfo lang={lang} size="long" />
+            </div>
           </DetailsField>
         </>
       );
@@ -155,17 +160,25 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
             </div>
           </DetailsField>
           <DetailsField title="ICU Support">
-            <ICUSupportStatus ent={lang} />
+            <div className="inline-block align-middle">
+              <ICUSupportStatus ent={lang} />
+            </div>
           </DetailsField>
         </>
       );
     case DigitalSupportDimension.MachineTranslation:
       return (
-        <DetailsField title="Google Translate">
-          {lang.googleTranslate?.length ? (
-            lang.googleTranslate.length +
-            ' language pack' +
-            (lang.googleTranslate.length > 1 ? 's' : '')
+        <DetailsField
+          title={
+            getTechnology('GTranslate') ? (
+              <HoverableEntityName ent={getTechnology('GTranslate')} />
+            ) : (
+              'Google Translate'
+            )
+          }
+        >
+          {lang.techSupport?.some((support) => support.techShortName === 'GTranslate') ? (
+            'Available'
           ) : (
             <Deemphasized>Not available</Deemphasized>
           )}
@@ -174,8 +187,17 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
     case DigitalSupportDimension.Interfaces:
       return (
         <>
-          {getInterfacePlatforms(lang).map(({ label, entries }) => (
-            <DetailsField key={label} title={label}>
+          {getInterfacePlatforms(lang).map(({ techShortName, entries }) => (
+            <DetailsField
+              key={techShortName}
+              title={
+                getTechnology(techShortName) ? (
+                  <HoverableEntityName ent={getTechnology(techShortName)} />
+                ) : (
+                  techShortName
+                )
+              }
+            >
               {entries.length > 0 ? (
                 `${entries.length} language pack${entries.length > 1 ? 's' : ''}`
               ) : (
