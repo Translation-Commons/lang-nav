@@ -6,6 +6,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
+import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
 import { useFilterByVitality, useScopeFilter } from './filter';
@@ -19,6 +20,7 @@ type UseFilteredEntitiesParams<T extends EntityData> = {
   useConnections?: boolean;
   useVitality?: boolean;
   usePopulation?: boolean;
+  useLanguageSource?: boolean;
   inputEnts?: T[];
 };
 
@@ -28,6 +30,7 @@ const useFilteredEntities = <T extends EntityData>({
   useConnections = true,
   useVitality = true,
   usePopulation = true,
+  useLanguageSource = true,
   inputEnts,
 }: UseFilteredEntitiesParams<T>): { filteredEntities: T[]; allEntities: T[] } => {
   // Implementation of filtering logic goes here
@@ -40,6 +43,7 @@ const useFilteredEntities = <T extends EntityData>({
   const filterByConnections = useConnections ? getFilterByConnections() : () => true;
   const filterByVitality = useVitality ? useFilterByVitality() : () => true;
   const filterByPopulation = usePopulation ? filters.Population : () => true;
+  const filterByLanguageSource = useLanguageSource ? filters[Field.SourceForLanguage] : () => true;
   const sortFunction = getSortFunction();
   const allEntities = inputEnts ?? pageEntities;
 
@@ -53,7 +57,8 @@ const useFilteredEntities = <T extends EntityData>({
             filterBySubstring(ent) &&
             filterByConnections(ent) &&
             filterByVitality(ent) &&
-            filterByPopulation(ent)),
+            filterByPopulation(ent) &&
+            filterByLanguageSource(ent)),
       )
       .sort((a, b) => {
         const aIndex = pinned.indexOf(a.ID);
@@ -68,12 +73,13 @@ const useFilteredEntities = <T extends EntityData>({
       });
   }, [
     allEntities,
-    pinned,
+    filterByConnections,
+    filterByLanguageSource,
+    filterByPopulation,
     filterByScope,
     filterBySubstring,
-    filterByConnections,
     filterByVitality,
-    filterByPopulation,
+    pinned,
     sortFunction,
   ]);
 

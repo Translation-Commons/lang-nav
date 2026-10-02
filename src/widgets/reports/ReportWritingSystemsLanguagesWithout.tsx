@@ -8,9 +8,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
@@ -24,24 +22,19 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 
 const ReportWritingSystemsLanguagesWithout: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
-  const filterByScope = useScopeFilter();
-  const filterByVitality = useFilterByVitality();
+  const { languages } = useDataContext();
+  const languagesFiltered = useFilteredEntities<LanguageData>({
+    inputEnts: languages,
+  }).filteredEntities;
   const sortFunction = getSortFunction();
   const { getCurrentEntities } = usePagination<LanguageData>();
 
-  const languagesFiltered = useMemo(
+  const languagesWithoutWritingSystems = useMemo(
     () =>
-      languagesInSelectedSource
-        .filter(filterBySubstring)
-        .filter(filterByConnections)
-        .filter(filterByScope)
-        .filter(filterByVitality)
+      languagesFiltered
         .filter((lang) => !lang.writingSystems || Object.keys(lang.writingSystems).length === 0)
         .filter((lang) => lang.modality !== LanguageModality.Sign),
-    [languagesInSelectedSource, filterBySubstring, filterByConnections, filterByScope],
+    [languages, languagesFiltered],
   );
 
   return (
@@ -53,12 +46,12 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
         <LimitInput />
         <div>
-          <PaginationControls itemCount={languagesFiltered.length} />
+          <PaginationControls itemCount={languagesWithoutWritingSystems.length} />
         </div>
       </div>
       <div style={{ marginTop: '1em', marginBottom: '1em' }}>
         <ResponsiveGrid>
-          {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
+          {getCurrentEntities(languagesWithoutWritingSystems.sort(sortFunction)).map((lang) => {
             const family = getLanguageRootLanguageFamily(lang);
             return (
               <CardInCardList key={lang.ID} ent={lang}>

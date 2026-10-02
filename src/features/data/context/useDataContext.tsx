@@ -26,17 +26,14 @@ type DataGetters = {
 };
 
 export type DataContextType = CoreDataArrays &
-  DataGetters & {
-    languagesInSelectedSource: LanguageData[];
-    loadingStage: LoadingStage;
-  };
+  DataGetters & { loadingStage: LoadingStage; dataRevision: number };
 
 export const DataContext = createContext<DataContextType | undefined>({
   loadingStage: LoadingStage.Initial,
-  allLanguoids: [],
+  dataRevision: -1,
+  languages: [],
   censuses: {},
   organizations: [],
-  languagesInSelectedSource: [],
   locales: [],
   territories: [],
   variants: [],

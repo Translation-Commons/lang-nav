@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
@@ -13,11 +14,15 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import type { LocaleData } from './LocaleTypes';
 
 export const LocaleHierarchy: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const { languages } = useDataContext();
+  const languagesFiltered = useFilteredEntities<LanguageData>({
+    inputEnts: languages,
+  }).filteredEntities;
+  // TODO maybe add sourced languages
   const sortFunction = getSortFunction();
   const filterByScope = useScopeFilter();
 
-  const rootNodes = getLocaleTreeNodes(languagesInSelectedSource, sortFunction, filterByScope);
+  const rootNodes = getLocaleTreeNodes(languagesFiltered, sortFunction, filterByScope);
 
   return (
     <TreeListPageBody

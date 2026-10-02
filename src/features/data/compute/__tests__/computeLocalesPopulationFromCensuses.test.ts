@@ -9,8 +9,7 @@ import { CoreData } from '@features/data/load/CoreData';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
-import { EntityType } from '@entities/types/EntityTypes';
-import { EntityDictionary } from '@entities/types/EntityTypes';
+import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
 
 import { computeRegionalLocalesPopulation } from '../computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';
@@ -81,14 +80,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     });
 
     // Finally check if the sjn language was updated
-    const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
+    const langRaw = mockRaw.languages.find((l) => l.ID === 'sjn');
     expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
     expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
-    const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
+    const langUpdated = mockUpdated.languages.find((l) => l.ID === 'sjn');
     expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
     expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined); // Not updated
@@ -127,14 +126,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     });
 
     // Finally check if the sjn language was updated
-    const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
+    const langRaw = mockRaw.languages.find((l) => l.ID === 'sjn');
     expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
     expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
-    const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
+    const langUpdated = mockUpdated.languages.find((l) => l.ID === 'sjn');
     expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
     expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(11220); // <-- UPDATED VALUE
@@ -165,7 +164,7 @@ describe('computeLocalePopulationFromCensuses', () => {
 
     // Update populations from census data AND re-compute regional populations
     updatePopulations(
-      mockUpdated.allLanguoids,
+      mockUpdated.languages,
       mockUpdated.locales,
       mockUpdated.territories.find((t) => t.ID === '001')!,
     );
@@ -182,12 +181,12 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(localeUpdated?.pop.speaking.adjusted).toBe(12000); // adjusted down since the territory BE is capped at 12000
 
     // Check the Language sjn
-    const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
+    const langRaw = mockRaw.languages.find((l) => l.ID === 'sjn');
     expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
 
-    const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
+    const langUpdated = mockUpdated.languages.find((l) => l.ID === 'sjn');
     expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(13920);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
     expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(13920); // <-- UPDATED VALUE
@@ -233,9 +232,9 @@ describe('computeLocalePopulationFromCensuses', () => {
       // Update both population, noting one has a different census
       computeLocalesPopulationFromCensuses(mockedEnts.locales);
       computeRegionalLocalesPopulation(world);
-      updatePopulations(mockedEnts.allLanguoids, mockedEnts.locales, world);
+      updatePopulations(mockedEnts.languages, mockedEnts.locales, world);
 
-      return mockedEnts.allLanguoids.find((l) => l.ID === 'sjn');
+      return mockedEnts.languages.find((l) => l.ID === 'sjn');
     }
 
     // Check the Language sjn

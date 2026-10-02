@@ -25,6 +25,7 @@ const DataProvider: React.FC<{
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadProgress, setLoadProgress] = useState<LoadingStage>(LoadingStage.Initial);
+  const [dataRevision, setDataRevision] = useState<number>(0);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
@@ -41,41 +42,44 @@ const DataProvider: React.FC<{
   const getLanguage = useCallback(
     (id: string): LanguageData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Language ? (ent as LanguageData) : undefined;
+      return ent?.type === EntityType.Language ? ent : undefined;
     },
     [coreData],
   );
   const getCLDRLanguage = useCallback(
     (id: string): LanguageData | undefined => {
-      return coreData.allLanguoids.find((lang) => lang.CLDR?.code === id);
+      const lang = getLanguage(id);
+      const aliasedTo = lang?.CLDR.dataProvider;
+      if (aliasedTo?.type === EntityType.Language) return aliasedTo;
+      return lang;
     },
     [coreData],
   );
   const getLocale = useCallback(
     (id: string): LocaleData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Locale ? (ent as LocaleData) : undefined;
+      return ent?.type === EntityType.Locale ? ent : undefined;
     },
     [coreData],
   );
   const getTerritory = useCallback(
     (id: string): TerritoryData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Territory ? (ent as TerritoryData) : undefined;
+      return ent?.type === EntityType.Territory ? ent : undefined;
     },
     [coreData],
   );
   const getWritingSystem = useCallback(
     (id: string): WritingSystemData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.WritingSystem ? (ent as WritingSystemData) : undefined;
+      return ent?.type === EntityType.WritingSystem ? ent : undefined;
     },
     [coreData],
   );
   const getVariant = useCallback(
     (id: string): VariantData | undefined => {
       const ent = coreData.ents[id];
-      return ent?.type === EntityType.Variant ? (ent as VariantData) : undefined;
+      return ent?.type === EntityType.Variant ? ent : undefined;
     },
     [coreData],
   );
@@ -107,26 +111,30 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
-  const languagesInSelectedSource = useMemo(() => {
+  const world = coreData.ents['001'] as TerritoryData | undefined;
+
+  useEffect(() => {
+    if (world == null) return;
+
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
-      coreData.allLanguoids,
+      coreData.languages,
       coreData.locales,
-      coreData.ents['001'] as TerritoryData, // The world territory
+      world,
       languageSource,
       localeSeparator,
     );
+
     if (loadProgress === LoadingStage.HasSupplementalData)
       setLoadProgress(LoadingStage.AlgorithmsFinished);
-
-    return coreData.allLanguoids.filter((lang) => lang[languageSource]?.code != null);
-  }, [coreData, languageSource, localeSeparator, loadProgress]);
+    setDataRevision((prev) => prev + 1);
+  }, [languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
     () => ({
       ...coreData,
-      languagesInSelectedSource,
       loadingStage: loadProgress,
+      dataRevision,
       getEntity,
       getLanguage,
       getCLDRLanguage,
@@ -137,7 +145,7 @@ const DataProvider: React.FC<{
       getOrganization,
       getTechnology,
     }),
-    [coreData, loadProgress],
+    [coreData, loadProgress, dataRevision],
   );
 
   // After the main load, load additional data

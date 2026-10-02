@@ -9,13 +9,13 @@ import type { LanguageData } from '../LanguageTypes';
 import getLanguagePluralsColumns from './LanguagePluralsColumns';
 
 const LanguagePluralsTable: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const { languages } = useDataContext();
   const columns = useMemo(() => getLanguagePluralsColumns(), []);
 
   return (
     <InteractiveEntityTable<LanguageData>
       tableID={TableID.LanguagePlurals}
-      ents={languagesInSelectedSource}
+      ents={languages}
       columns={columns}
     />
   );

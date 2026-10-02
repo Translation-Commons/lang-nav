@@ -3,12 +3,10 @@ import React, { useMemo } from 'react';
 import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
-import { useDataContext } from '@features/data/context/useDataContext';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
@@ -20,25 +18,20 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const ReportLanguagesWithAmbiguousNames: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
+  const languages = useFilteredEntities<LanguageData>({}).filteredEntities;
   const sortFunction = getSortFunction();
   const { getCurrentEntities } = usePagination<[string, LanguageData[]]>();
   const languagesByName = useMemo(() => {
-    return languagesInSelectedSource
-      .filter(filterBySubstring)
-      .filter(filterByConnections)
-      .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
-        const name = lang.nameDisplay;
-        if (languagesByName[name] == null) {
-          languagesByName[name] = [lang];
-        } else {
-          languagesByName[name].push(lang);
-        }
-        return languagesByName;
-      }, {});
-  }, [languagesInSelectedSource, filterBySubstring, filterByConnections]);
+    return languages.reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
+      const name = lang.nameDisplay;
+      if (languagesByName[name] == null) {
+        languagesByName[name] = [lang];
+      } else {
+        languagesByName[name].push(lang);
+      }
+      return languagesByName;
+    }, {});
+  }, [languages]);
 
   const langsWithDupNames = Object.entries(languagesByName).reduce<Record<string, LanguageData[]>>(
     (duplicatedNames, [name, langs]) => {
