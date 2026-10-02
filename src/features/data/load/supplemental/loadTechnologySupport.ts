@@ -12,37 +12,38 @@ const FILES = [
 ];
 
 export async function loadTechnologySupport(dc: DataContextType): Promise<void> {
-  for (const file of FILES) {
-    try {
-      await fetch(file)
-        .then((res) => res.text())
-        .then((text) => text.split('\n'))
-        .then((lines) => {
-          // Get the metadata
-          const techShortName = getMetadata(lines, 'tech');
-          const url = getMetadata(lines, 'url');
-          const dateAccessed = getMetadata(lines, 'dateAccessed');
-          if (!techShortName) {
-            console.error(`Missing tech short name in file ${file}.`);
-            return;
-          }
-          const tech = dc.getTechnology(techShortName);
-          if (!tech) {
-            console.error(`Technology with short name ${techShortName} not found.`);
-            return;
-          }
-          // TODO: collect metadata in a Document entity of sorts
-          tech.languageSupportLastUpdated = dateAccessed ? new Date(dateAccessed) : undefined;
-          tech.languageSupportURL = url;
+  await Promise.all(FILES.map((file) => loadOneTechnologySupport(file, dc)));
+}
 
-          // Add relations to the language
-          const languageLines = lines.filter((line) => line.trim() !== '' && !line.startsWith('#'));
-          languageLines.forEach((line) => addSupportToLanguages(tech, line, dc));
-        });
-    } catch (err) {
+async function loadOneTechnologySupport(file: string, dc: DataContextType): Promise<void> {
+  await fetch(file)
+    .then((res) => res.text())
+    .then((text) => text.split('\n'))
+    .then((lines) => {
+      // Get the metadata
+      const techShortName = getMetadata(lines, 'tech');
+      const url = getMetadata(lines, 'url');
+      const dateAccessed = getMetadata(lines, 'dateAccessed');
+      if (!techShortName) {
+        console.error(`Missing tech short name in file ${file}.`);
+        return;
+      }
+      const tech = dc.getTechnology(techShortName);
+      if (!tech) {
+        console.error(`Technology with short name ${techShortName} not found.`);
+        return;
+      }
+      // TODO: collect metadata in a Document entity of sorts
+      tech.languageSupportLastUpdated = dateAccessed ? new Date(dateAccessed) : undefined;
+      tech.languageSupportURL = url;
+
+      // Add relations to the language
+      const languageLines = lines.filter((line) => line.trim() !== '' && !line.startsWith('#'));
+      languageLines.forEach((line) => addSupportToLanguages(tech, line, dc));
+    })
+    .catch((err) => {
       console.error(`Error loading data from ${file}:`, err);
-    }
-  }
+    });
 }
 
 function getMetadata(lines: string[], key: string): string | undefined {

@@ -220,7 +220,8 @@ function getTechSupportColumnRender(techShortName: string): {
       <IsSupportedIcon isSupported={getLanguageIsSupportedBy(lang, techShortName)} />
     ),
     exportValue: (lang) => {
-      const techSupport = lang.techSupport?.filter((entry) => entry.name === techShortName) || [];
+      const techSupport =
+        lang.techSupport?.filter((entry) => entry.techShortName === techShortName) || [];
       if (!techSupport || techSupport.length === 0) return 'n/a';
       return techSupport
         .map((entry) => {

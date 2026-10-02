@@ -8,6 +8,7 @@ import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeratio
 import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 
+import { uniqueBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import ExternalLink from '@shared/ui/ExternalLink';
 
@@ -29,7 +30,10 @@ const TechnologyDetails: React.FC<Props> = ({ tech }) => {
     languageSupportLastUpdated,
     languageSupportURL,
   } = tech;
-  const languages = tech.languageSupport?.map((support) => support.lang).filter((l) => !!l) ?? [];
+  const languages = uniqueBy(
+    tech.languageSupport?.map((support) => support.lang).filter((l) => !!l) ?? [],
+    (lang) => lang.ID,
+  );
 
   return (
     <div className="Details">

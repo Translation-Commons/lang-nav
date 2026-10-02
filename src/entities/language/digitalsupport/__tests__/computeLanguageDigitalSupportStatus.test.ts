@@ -265,7 +265,7 @@ describe('getDigitalSupportStatus', () => {
 
 describe('getInterfacePlatforms', () => {
   it('lists the four operating systems that the data covers', () => {
-    expect(getInterfacePlatforms(getLanguage()).map(({ label }) => label)).toEqual([
+    expect(getInterfacePlatforms(getLanguage()).map(({ techShortName }) => techShortName)).toEqual([
       'win11',
       'Android',
       'macOS',
