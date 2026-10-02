@@ -124,7 +124,7 @@ At this point you can save the commit, using the check for build errors (and ope
    2. Double check the values provided for your new entity by `getSpecificFieldsForEntityType` in `FieldApplicability.ts` to make sure the field can be queried.
    3. This is a good time to check the default sorting. Usually LangNav sorts by population and we assume most entities have a population, but entities like an Organization aren't well suited to be sorted by population. You can add an override in `Profiles.tsx`.
 
-At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Table, ...) are not available yet -- but you can see that the intended data was loaded by opening the automatically generated Minicards in the Details View manually setting the URL's entType to your new name eg. <http://localhost:5173/lang-nav/data?entType=Technology&view=Details>.
+At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Table, ...) are not available yet -- but you can see that the intended data was loaded by opening the automatically generated Minicards in the Details View manually setting the URL's entType to your new name eg. <http://localhost:5173/data?entType=Technology&view=Details>.
 
 ![Entity Minicards](screenshots/entity-minicards.png)
 
@@ -137,7 +137,7 @@ At this point you can save commit #2. Most visualizations (Cards, Hierarchy, Tab
    1. To start, we won't make a specific Drawer component -- and instead the Drawer will just display the `*Details` component for the entity.
    2. Initially, a good framework to structure the details is 3 sections: Definition, Attributes & Connections -- but consider bespoke information hierarchies matching the expected use-cases.
 
-Now, you should able to test this by opening the Cards view, clicking on a card/minicard to open the Drawer view, and opening the details view. See the screenshot for the new Technology entities before we added connections: <http://localhost:5173/lang-nav/data?entType=Technology&view=Cards&entID=tech.CLDR>
+Now, you should able to test this by opening the Cards view, clicking on a card/minicard to open the Drawer view, and opening the details view. See the screenshot for the new Technology entities before we added connections: <http://localhost:5173/data?entType=Technology&view=Cards&entID=tech.CLDR>
 
 ![Basic Entity Views](screenshots/entity-basicviews.png)
 

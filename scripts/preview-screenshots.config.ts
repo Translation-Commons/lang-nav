@@ -28,7 +28,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'VITE_BASE_PATH=/ npm run build && VITE_BASE_PATH=/ npm run preview',
+    command: 'npm run build && npm run preview',
     url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
   },

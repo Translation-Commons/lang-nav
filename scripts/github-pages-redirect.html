@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to LangNav</title>
+    <script>
+      (() => {
+        const target = new URL(window.location.href);
+        target.protocol = 'https:';
+        target.hostname = 'langnav.org';
+        target.port = '';
+        target.pathname = target.pathname.replace(/^\/lang-nav(?:\/|$)/, '/') || '/';
+        window.location.replace(target.toString());
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="https://langnav.org/">langnav.org</a>…</p>
+  </body>
+</html>
