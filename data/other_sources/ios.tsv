@@ -1,29 +1,30 @@
 ### Metadata ###			
-#topic		iOS System Language Availability	
+#name		iOS System Language Availability	
+#tech		iOS
 #url		https://www.apple.com/ios/feature-availability/#system-language-system-language	
-#dateAccessed		6/30/26	
+#dateAccessed		2026-06-30
 #author		Apple	
 #notes		Accessed from language settings on iphone	
 			
-Language Code	Language	Locale	Writing System
+Language Code	Language	Territory	Writing System
 ara/arb	Arabic		
 ben	Bangla		
 bul	Bulgarian		
 cat	Catalan		
-zho/cmn	Chinese, Simplified		
-zho/cmn	Chinese, Traditional	Taiwan	
-zho/yue	Chinese, Traditional	Hong Kong	
+zho/cmn	Chinese, Simplified		Hans
+zho/cmn	Chinese, Traditional	TW	Hant
+zho/yue	Chinese, Traditional	HK	Hant
 hbs/hrv	Croatian		
 ces	Czech		
 dan	Danish		
 nld	Dutch		
-eng	English	United Kingdom	
-eng	English	United States	
-eng	English	Australia	
-eng	English	India	
+eng	English	GB	
+eng	English	US	
+eng	English	AU	
+eng	English	IN	
 fin	Finnish		
-fra	French	France	
-fra	French	Canada	
+fra	French	FR	
+fra	French	CA	
 deu	German		
 ell	Greek		
 guj	Gujarati		
@@ -43,16 +44,16 @@ mar	Marathi
 nor/nob	Norwegian 		
 ori	Odia		
 pol	Polish		
-por	Portuguese	Brazil	
-por	Portuguese	Portugal	
+por	Portuguese	BR	
+por	Portuguese	PT	
 pan	Punjabi		
 ron	Romanian		
 rus	Russian		
 slk	Slovak		
 slv	Slovenian		
-spa	Spanish	Spain	
+spa	Spanish	ES	
 spa	Spanish	US	
-spa	Spanish	Latin America	
+spa	Spanish	419	
 swe	Swedish		
 tam	Tamil		
 tel	Telugu		

@@ -1,5 +1,6 @@
 ### Metadata ###			
 #topic		Availability of language in Google Translate	
+#tech	GTranslate		
 #url		https://translate.google.com/	
 #dateAccessed		2026-05-15	
 #author		Google LLC	
@@ -51,8 +52,8 @@ zho/cmn	Chinese (Traditional)
 chk	Chuukese		
 chv	Chuvash		
 cos	Corsican		
-crh	Crimean Tatar (Cyrillic)		Cyrillic
-crh	Crimean Tatar (Latin)		Latin
+crh	Crimean Tatar (Cyrillic)		Cyrl
+crh	Crimean Tatar (Latin)		Latn
 hbs/hrv	Croatian		
 ces	Czech		
 dan	Danish		
@@ -100,8 +101,8 @@ isl	Icelandic
 ibo	Igbo		
 ilo	Ilocano		
 msa/ind	Indonesian		
-iku	Inuktut (Latin)		Latin
-iku	Inuktut (Syllabics)		Syllabics
+iku	Inuktut (Latin)		Latn
+iku	Inuktut (Syllabics)		Cans
 gle	Irish		
 ita	Italian		
 jam	Jamaican Patois		
@@ -180,8 +181,8 @@ fas	Persian
 pol	Polish		
 por	Portuguese (Brazil)	BR	
 por	Portuguese (Portugal)	PT	
-pan	Punjabi (Gurmukhi)		Gurmukhi
-pan	Punjabi (Shahmukhi)		Shahmukhi
+pan	Punjabi (Gurmukhi)		Guru
+pan	Punjabi (Shahmukhi)		Arab
 que	Quechua		
 kek	Qʼeqchiʼ		
 rom	Romani		
@@ -192,8 +193,8 @@ sme	Sami (North)
 smo	Samoan		
 sag	Sango		
 san	Sanskrit		
-sat	Santali (Latin)		Latin
-sat	Santali (Ol Chiki)		Ol Chiki
+sat	Santali (Latin)		Latn
+sat	Santali (Ol Chiki)		Olck
 gla	Scots Gaelic		
 nso	Sepedi		
 hbs/srp	Serbian		
@@ -217,7 +218,7 @@ swe	Swedish
 tah	Tahitian		
 tgk	Tajik		
 zgh	Tamazight		
-zgh	Tamazight (Tifinagh)		Tifinagh
+zgh	Tamazight (Tifinagh)		Tfng
 tam	Tamil		
 tat	Tatar		
 tel	Telugu		
