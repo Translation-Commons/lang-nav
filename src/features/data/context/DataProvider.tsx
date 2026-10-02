@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -7,12 +7,12 @@ import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { type EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';
-import { CoreDataArrays, useCoreData } from '../load/CoreData';
+import { type CoreDataArrays, useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
 import LoadingStage from './LoadingStage';
@@ -23,13 +23,8 @@ const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
-  const computedParams = useRef<{
-    languageSource: typeof languageSource;
-    localeSeparator: typeof localeSeparator;
-  } | null>(null);
   const { coreData, loadCoreData } = useCoreData();
   const [loadingStage, setLoadingStage] = useState<LoadingStage>(LoadingStage.Initial);
-  const [dataRevision, setDataRevision] = useState<number>(0);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
@@ -155,14 +150,8 @@ const DataProvider: React.FC<{
   // Do this again if the language source or locale separator changes
   useEffect(() => {
     if (world == null) return;
-    const paramsChanged =
-      computedParams.current == null ||
-      computedParams.current.languageSource !== languageSource ||
-      computedParams.current.localeSeparator !== localeSeparator;
-    const shouldComputeAlgorithms =
-      loadingStage === LoadingStage.HasSupplementalData ||
-      (loadingStage === LoadingStage.AlgorithmsFinished && paramsChanged);
-    if (!shouldComputeAlgorithms) return;
+    if (loadingStage < LoadingStage.HasSupplementalData) return; // aren't ready yet
+    if (loadingStage === LoadingStage.AlgorithmsFinished) return; // already computed algorithms
 
     console.log('Computing algorithms...', { languageSource, localeSeparator, loadingStage });
     // Update dependent fields whenever language source or locale separator changes
@@ -174,14 +163,17 @@ const DataProvider: React.FC<{
       localeSeparator,
     );
 
-    computedParams.current = { languageSource, localeSeparator };
-    if (loadingStage === LoadingStage.HasSupplementalData)
-      setLoadingStage(LoadingStage.AlgorithmsFinished);
-    setDataRevision((prev) => prev + 1);
-  }, [coreData, languageSource, localeSeparator, loadingStage, world]);
+    setLoadingStage(LoadingStage.AlgorithmsFinished);
+  }, [coreData, loadingStage, world]);
+
+  // Trigger the recomputation of algorithms if the language source or locale separator changes
+  useEffect(() => {
+    if (loadingStage === LoadingStage.AlgorithmsFinished)
+      setLoadingStage(LoadingStage.RecomputingAlgorithms);
+  }, [languageSource, localeSeparator]);
 
   return (
-    <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision }}>
+    <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision: -1 }}>
       {children}
     </DataContext.Provider>
   );
