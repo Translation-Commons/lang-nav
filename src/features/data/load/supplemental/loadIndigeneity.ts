@@ -20,11 +20,18 @@ export async function loadIndigeneity(
         const language = getLanguage(parts[0]);
         if (!language || parts.length < 4) return;
 
+        const formedInThisRegion = parts[2] === '1' ? true : parts[2] === '0' ? false : undefined;
+        const antecedentsBefore1500 =
+          parts[3] === '1' ? true : parts[3] === '0' ? false : undefined;
+
         const locales = language.locales.filter((l) => l.territory?.ID === parts[1]);
         if (locales.length === 0) {
-          console.debug(
-            `No locales found for indigeneity data (line ${lineNumber + 2}: ${line}) in data/indigeneity.tsv.`,
-          );
+          if (formedInThisRegion || antecedentsBefore1500) {
+            // Only need to warn if the language is in some way local
+            console.debug(
+              `No locales found for indigeneity data (line ${lineNumber + 2}: ${line}) in data/indigeneity.tsv.`,
+            );
+          }
           return;
         }
         if (locales[0].langFormedHere != null || locales[0].historicPresence != null) {
@@ -33,9 +40,6 @@ export async function loadIndigeneity(
           // );
           return;
         }
-        const formedInThisRegion = parts[2] === '1' ? true : parts[2] === '0' ? false : undefined;
-        const antecedentsBefore1500 =
-          parts[3] === '1' ? true : parts[3] === '0' ? false : undefined;
 
         if (formedInThisRegion == null && antecedentsBefore1500 == null) {
           console.debug(

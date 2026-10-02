@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useAllFilters from '@features/transforms/filtering/useAllFilters';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageCode, LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { isTerritoryGroup, TerritoryCode } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -14,14 +14,11 @@ import {
   LocaleSource,
   PopulationSourceCategory,
   StandardLocaleCode,
-} from './LocaleTypes';
+} from '../LocaleTypes';
 
-type PartitionedLocales = {
-  largest: LocaleData[];
-  largestButDescendantExists: LocaleData[];
-  significant: LocaleData[];
-  significantButMaybeRedundant: LocaleData[];
-};
+import PotentialLocalesTab from './PotentialLocalesTab';
+
+type PartitionedLocales = Record<PotentialLocalesTab, LocaleData[]>;
 
 function usePotentialLocales(
   isPercentEnough: (
@@ -29,7 +26,9 @@ function usePotentialLocales(
     percOfLangWorldWide: number | undefined,
   ) => boolean,
 ): PartitionedLocales {
-  const filterByConnections = getFilterByConnections();
+  const filter = useAllFilters();
+
+  // const filterByPopulation = useFilter
   const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
 
@@ -124,26 +123,56 @@ function usePotentialLocales(
     }, {});
   }, [allMissingLocales]);
 
+  const localesMissingOriginalPopData = useMemo(
+    () =>
+      locales.filter(
+        (locale) => (locale.pop.rough ?? 0) <= 10 && (locale.pop.speaking.unadjusted ?? 0) > 10,
+      ),
+    [locales],
+  );
+  const unnecessaryLocales = useMemo(
+    () =>
+      locales.filter((locale) => {
+        const pop = Math.max(locale.pop.speaking.adjusted ?? 0, locale.pop.writing.adjusted ?? 0);
+        const populationPercentInCountry = (pop * 100) / (locale.territory?.pop.overall ?? 1);
+        const populationPercentOfLanguageWorldwide =
+          (pop * 100) / (locale.language?.pop.overall ?? 1);
+        if (pop === 0) return false; // Skip locales with no population for now, these are often placeholders without pop data or extinct
+        if (locale.language?.scope === LanguageScope.Macrolanguage) return false; // a common source of false positives
+        return (
+          populationPercentInCountry < 0.1 &&
+          populationPercentOfLanguageWorldwide < 0.1 &&
+          pop < 1000
+        );
+      }),
+    [locales],
+  );
+
   const partitionedLocales = useMemo(() => {
-    const res = Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(
+    // Get the first 4 groups
+    const allPartitionedLocales = Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(
       partitionPotentialLocales,
       {
-        largest: [],
-        largestButDescendantExists: [],
-        significant: [],
-        significantButMaybeRedundant: [],
+        [PotentialLocalesTab.Largest]: [],
+        [PotentialLocalesTab.LargestLowCertainty]: [],
+        [PotentialLocalesTab.Significant]: [],
+        [PotentialLocalesTab.SignificantLowCertainty]: [],
+        [PotentialLocalesTab.MissingOriginalPopData]: localesMissingOriginalPopData,
+        [PotentialLocalesTab.Unnecessary]: unnecessaryLocales,
       },
     );
 
-    return {
-      largest: res.largest.filter(filterByConnections),
-      largestButDescendantExists: res.largestButDescendantExists.filter(filterByConnections),
-      significant: res.significant.filter(filterByConnections),
-      significantButMaybeRedundant: res.significantButMaybeRedundant.filter(filterByConnections),
-    };
-  }, [allLocalesByLanguage, filterByConnections]);
+    // Apply connections filters
+    Object.entries(allPartitionedLocales).forEach(([tab, locales]) => {
+      allPartitionedLocales[tab as PotentialLocalesTab] = locales.filter(filter);
+    });
 
-  return partitionedLocales;
+    return allPartitionedLocales;
+  }, [allLocalesByLanguage, localesMissingOriginalPopData, unnecessaryLocales, filter]);
+
+  return {
+    ...partitionedLocales,
+  };
 }
 
 function partitionPotentialLocales(
@@ -171,10 +200,10 @@ function partitionPotentialLocales(
       : null;
     if (!descendantLocaleInTerritory) {
       largestLocale.relatedLocales = { childLanguages: [localesSorted[1]] };
-      partitionedLocales.largest.push(largestLocale);
+      partitionedLocales[PotentialLocalesTab.Largest].push(largestLocale);
     } else {
       largestLocale.relatedLocales = { childLanguages: [descendantLocaleInTerritory] };
-      partitionedLocales.largestButDescendantExists.push(largestLocale);
+      partitionedLocales[PotentialLocalesTab.LargestLowCertainty].push(largestLocale);
     }
   }
 
@@ -192,10 +221,10 @@ function partitionPotentialLocales(
         : null;
       if (!descendantLocaleInTerritory) {
         locale.relatedLocales = { childLanguages: [localesSorted[0]] };
-        partitionedLocales.significant.push(locale);
+        partitionedLocales[PotentialLocalesTab.Significant].push(locale);
       } else {
         locale.relatedLocales = { childLanguages: [descendantLocaleInTerritory] };
-        partitionedLocales.significantButMaybeRedundant.push(locale);
+        partitionedLocales[PotentialLocalesTab.SignificantLowCertainty].push(locale);
       }
     });
 

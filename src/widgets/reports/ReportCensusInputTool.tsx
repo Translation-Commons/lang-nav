@@ -11,6 +11,14 @@ import { CensusData } from '@entities/census/CensusTypes';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import { countOccurrences } from '@shared/lib/setUtils';
+import { Badge } from '@shared/ui/badge';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
+
+enum Section {
+  Input = 'Input',
+  Analysis = 'Analysis',
+  Preview = 'Preview',
+}
 
 const ReportCensusInputTool: React.FC = () => {
   const { getTerritory, getOrganization } = useDataContext();
@@ -19,6 +27,7 @@ const ReportCensusInputTool: React.FC = () => {
   const [censuses, setCensuses] = useState<CensusData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
+  const [section, setSection] = useState<Section>(Section.Input);
 
   // Synchronize the raw input with the debounced TSV input
   useEffect(() => {
@@ -67,39 +76,63 @@ const ReportCensusInputTool: React.FC = () => {
   }, [tsv, getTerritory, getOrganization]);
 
   return (
-    <div>
-      Language Navigator expects a certain format for census files to add information about
-      populations. This tool helps you validate and preview your data before importing it.
-      <h3>TSV File</h3>
-      <div>
-        Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
-        edit changes inline to test them out.
+    <div className="flex flex-col gap-2">
+      <Tabs value={section} onValueChange={setSection}>
+        <TabsList variant="line">
+          {Object.values(Section).map((sec) => (
+            <TabsTrigger key={sec} value={sec} className="text-lg">
+              {sec}
+              {sec === Section.Analysis && warnings.length > 0 && (
+                <Badge variant="destructive">{warnings.length}</Badge>
+              )}
+              {sec === Section.Preview && (
+                <Badge variant={censuses.length > 0 ? 'default' : 'secondary'}>
+                  {censuses.length}
+                </Badge>
+              )}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+      <div className={'flex flex-col gap-2' + (section !== Section.Input ? ' hidden' : '')}>
+        <div>
+          Language Navigator expects a certain format for census files to add information about
+          populations. This tool helps you validate and preview your data before importing it.
+        </div>
+        <div>
+          Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
+          edit changes inline to test them out.
+        </div>
+        <textarea
+          className="w-full min-h-[40em] border border-gray-300 rounded p-2 "
+          onChange={(e) => setInput(e.target.value)}
+        />
       </div>
-      <textarea
-        className="border border-gray-300 rounded p-2"
-        onChange={(e) => setInput(e.target.value)}
-        style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
-      />
-      <h3>Analysis</h3>
-      {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
-      {censuses.length > 0 && <h4 className="font-bold">Metadata</h4>}
-      {censuses.length > 0 &&
-        (warnings.length > 0
-          ? warnings.map((warning, index) => (
-              <div key={index} style={{ color: 'var(--color-red)' }}>
-                {warning}
-              </div>
-            ))
-          : 'No issues found.')}
-      <h4 className="font-bold">Language Codes & Language Names</h4>
-      <ContainErrorsAndSuspense>
-        <CensusLanguageCheck fileInput={tsv} />
-      </ContainErrorsAndSuspense>
-      <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
+      <div className={'flex flex-col gap-2' + (section !== Section.Analysis ? ' hidden' : '')}>
+        {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
+        {censuses.length > 0 && <h4 className="font-bold">Metadata</h4>}
+        {censuses.length > 0 &&
+          (warnings.length > 0
+            ? warnings.map((warning, index) => (
+                <div key={index} style={{ color: 'var(--color-red)' }}>
+                  {warning}
+                </div>
+              ))
+            : 'No issues found.')}
+        <h4 className="font-bold">Language Codes & Language Names</h4>
         <ContainErrorsAndSuspense>
-          <CensusPreview censuses={censuses} />
+          <CensusLanguageCheck fileInput={tsv} />
         </ContainErrorsAndSuspense>
-      </LocalParamsProvider>
+      </div>
+      {section === Section.Preview && (
+        <>
+          <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
+            <ContainErrorsAndSuspense>
+              <CensusPreview censuses={censuses} />
+            </ContainErrorsAndSuspense>
+          </LocalParamsProvider>
+        </>
+      )}
     </div>
   );
 };

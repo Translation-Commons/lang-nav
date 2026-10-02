@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { CensusMetadataField } from '../CensusMetadataField';
-import { CensusCollectorType, CensusData, CensusLanguageUse } from '../CensusTypes';
+import { CensusCollectorType, CensusData, CensusLanguageUse, CensusQuantity } from '../CensusTypes';
 import { parseCensusMetadata } from '../parseCensusMetadata';
 
 describe('CensusMetadataField', () => {
@@ -81,7 +81,7 @@ describe('CensusMetadataField', () => {
     gender: 'Any', // Any, Male, Female
     nationality: 'Citizens', // eg. Citizens, Residents, Visitors
     residenceBasis: 'de jure', // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
-    quantity: 'percent', // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
+    quantity: CensusQuantity.Percent, // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
     notes: 'Test entity', // Any additional notes about the census
 
     // Author

@@ -60,7 +60,7 @@ export interface CensusData extends EntityBase {
   gender?: string; // Any, Male, Female
   nationality?: string; // eg. Citizens, Residents, Visitors
   residenceBasis?: string; // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
-  quantity?: 'count' | 'percent'; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
+  quantity?: CensusQuantity; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
   notes?: string; // Any additional notes about the census
 
   // Author

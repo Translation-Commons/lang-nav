@@ -188,7 +188,7 @@ function parseValueByKey(
     case CensusMetadataField.populationWithPositiveResponses:
     case CensusMetadataField.populationSurveyed:
     case CensusMetadataField.yearCollected:
-      census[key] = Number.parseInt(value.replace(/,/g, ''));
+      census[key] = Number.parseInt(value.replace(/[, ]/g, ''));
       break;
     case CensusMetadataField.sampleRate:
       census[key] = Number.parseFloat(value) || value;

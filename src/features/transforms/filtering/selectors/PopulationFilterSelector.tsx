@@ -28,7 +28,11 @@ const PopulationFilterSelector: React.FC = () => {
 
   // Have slider update the page params
   useEffect(() => {
-    updatePageParams({ populationMin: exp(sliderValue[0]), populationMax: exp(sliderValue[1]) });
+    // debounce
+    const handler = setTimeout(() => {
+      updatePageParams({ populationMin: exp(sliderValue[0]), populationMax: exp(sliderValue[1]) });
+    }, 300);
+    return () => clearTimeout(handler);
   }, [sliderValue, updatePageParams]);
 
   // Have page params update the slider

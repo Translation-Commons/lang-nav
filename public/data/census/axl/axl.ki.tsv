@@ -1,0 +1,15 @@
+#codeDisplay		axl.ki	axl.ki.l2	axl.ki.l1eng	axl.ki.eng
+#nameDisplay	Kiribati	AXL Kiribati	AXL Kiribati L2	AXL Kiribati L1 English	AXL Kiribati English overall
+#isoRegionCode	KI				
+#yearCollected	2002				
+#languageUse	Speaks				
+#acquisitionOrder		L1	L2	L1	Any
+#population	94,000				
+#responsesPerIndividual	1+				
+#quantity		percent	percent	count	count
+#collectorType	Secondary				
+#presentedBy	AXL				
+#url	https://www.axl.cefan.ulaval.ca/pacifique/kiribati.htm				computed from the other 2 stats
+Language Code	Language	Percent			
+gil	Gilbertese	97.2%			
+eng	English		30.0%	400	28600
