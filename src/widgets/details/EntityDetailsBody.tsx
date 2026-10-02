@@ -34,7 +34,7 @@ const EntityDetailsBody: React.FC<Props> = ({ ent, entID }) => {
     case EntityType.Territory:
       return <TerritoryDetails territory={ent} />;
     case EntityType.WritingSystem:
-      return <WritingSystemDetails writingSystem={ent} />;
+      return <WritingSystemDetails writingSystemID={ent.ID} />;
     case EntityType.Variant:
       return <VariantDetails variant={ent} />;
     case EntityType.Keyboard:

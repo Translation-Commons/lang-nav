@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
+import { allRowsQuery } from '@features/data/api/list/tableContract';
+import {
+  toWritingSystemListQuery,
+  useWritingSystemList,
+} from '@features/data/api/writingsystem/writingSystemList';
+import usePageParams from '@features/params/usePageParams';
+import RowTable from '@features/table/RowTable';
 import TableID from '@features/table/TableID';
 
 import getWritingSystemColumns from './WritingSystemColumns';
 
 const WritingSystemTable: React.FC = () => {
-  const { writingSystems } = useDataContext();
-  const columns = getWritingSystemColumns();
+  const params = usePageParams();
+  const query = useMemo(() => toWritingSystemListQuery(params), [params]);
+  const { state, fetch } = useWritingSystemList(query);
+  const columns = useMemo(getWritingSystemColumns, []);
 
   return (
-    <InteractiveEntityTable
+    <RowTable
       tableID={TableID.WritingSystems}
-      ents={writingSystems}
       columns={columns}
+      state={state}
+      getAllRows={async () => (await fetch(allRowsQuery(query))).rows}
     />
   );
 };

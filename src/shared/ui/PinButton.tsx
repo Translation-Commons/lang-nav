@@ -9,7 +9,7 @@ import { Toggle } from './toggle';
 
 interface Props {
   className?: string;
-  ent: EntityData;
+  ent: Pick<EntityData, 'ID'>;
 }
 
 const PinButton: React.FC<Props> = ({ className, ent }) => {

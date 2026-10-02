@@ -15,22 +15,25 @@ function usePagination<T>(): { getCurrentEntities: (arr: T[]) => T[] } {
   const { page, limit } = usePageParams();
 
   const getCurrentEntities = useCallback(
-    (arr: T[]) => {
-      // If the limit is not a countable number, return all elements
-      // Commonly -1 is used as a stand-in for infinity.
-      // Also, if the limit is longer than the array, you can just return the full array.
-      if (limit < 1 || arr.length < limit) return arr;
-
-      // If we're past the last page, return the first page.
-      if (arr.length <= limit * (page - 1)) return arr.slice(0, limit);
-
-      // Otherwise cut into the data
-      return arr.slice(limit * (page - 1), limit * page);
-    },
+    (arr: T[]) => getPageSlice(arr, page, limit),
     [page, limit],
   );
 
   return { getCurrentEntities };
+}
+
+/** One page of `arr`, with the same rules the API must follow for `page` and `limit`. */
+export function getPageSlice<T>(arr: T[], page: number, limit: number): T[] {
+  // If the limit is not a countable number, return all elements
+  // Commonly -1 is used as a stand-in for infinity.
+  // Also, if the limit is longer than the array, you can just return the full array.
+  if (limit < 1 || arr.length < limit) return arr;
+
+  // If we're past the last page, return the first page.
+  if (arr.length <= limit * (page - 1)) return arr.slice(0, limit);
+
+  // Otherwise cut into the data
+  return arr.slice(limit * (page - 1), limit * page);
 }
 
 export default usePagination;

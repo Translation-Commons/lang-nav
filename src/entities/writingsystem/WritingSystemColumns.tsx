@@ -1,21 +1,17 @@
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import { WritingSystemRow } from '@features/data/api/writingsystem/writingSystemList';
+import HoverableEntityRef from '@features/layers/hovercard/HoverableEntityRef';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeRowColumn, EndonymRowColumn, NameRowColumn } from '@features/table/RowColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
-import { sortByPopulation } from '@features/transforms/sorting/sort';
-
-import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import { WritingSystemData } from './WritingSystemTypes';
-
-function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
+function getWritingSystemColumns(): TableColumn<WritingSystemRow>[] {
   return [
-    CodeColumn,
-    NameColumn,
-    { ...EndonymColumn, isInitiallyVisible: true },
+    CodeRowColumn,
+    NameRowColumn,
+    { ...EndonymRowColumn, isInitiallyVisible: true },
     {
       key: 'Potential Population',
       description: (
@@ -24,19 +20,17 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
           adding up the population for all of the languages that use the writing system.
         </>
       ),
-      render: (ent) => ent.populationUpperBound,
+      render: (row) => row.populationUpperBound,
       field: Field.Population,
     },
     {
       key: 'Languages',
-      render: (ent) =>
-        ent.languages && (
+      render: (row) =>
+        row.languages && (
           <CommaSeparated limit={1} limitText="short">
-            {Object.values(ent.languages)
-              .sort(sortByPopulation)
-              .map((l) => (
-                <HoverableEntityName ent={l} key={l.ID} />
-              ))}
+            {row.languages.map((lang) => (
+              <HoverableEntityRef entRef={lang} key={lang.id} />
+            ))}
           </CommaSeparated>
         ),
       field: Field.LanguageList,
@@ -44,10 +38,8 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     },
     {
       key: 'Language Count',
-      render: (ent) =>
-        ent.languages && (
-          <HoverableEnumeration items={Object.values(ent.languages).map((l) => l.nameDisplay)} />
-        ),
+      render: (row) =>
+        row.languages && <HoverableEnumeration items={row.languages.map((l) => l.name)} />,
       field: Field.CountOfLanguages,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
@@ -55,25 +47,21 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     {
       key: 'Keyboard Count',
       description: 'Number of keyboard layouts that output this writing system.',
-      render: (ent) => (
-        <HoverableEnumeration items={ent.outputKeyboards?.map((kb) => kb.nameDisplay)} />
-      ),
+      render: (row) => <HoverableEnumeration items={row.keyboardNames} />,
       field: Field.CountOfKeyboards,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,
     },
     {
       key: 'Area of Origin',
-      render: (ent) => <HoverableEntityName ent={ent.territoryOfOrigin} />,
+      render: (row) => <HoverableEntityRef entRef={row.territoryOfOrigin} />,
       field: Field.TerritoryPrimary,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
     },
     {
       key: 'Used in Countries',
-      render: (ent) => (
-        <HoverableEnumeration items={getCountriesInEntity(ent)?.map((t) => t.nameDisplay)} />
-      ),
+      render: (row) => <HoverableEnumeration items={row.countryNames} />,
       isInitiallyVisible: false,
       field: Field.CountOfCountries,
       columnGroup: 'Related Objects',

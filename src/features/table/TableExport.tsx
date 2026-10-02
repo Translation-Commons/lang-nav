@@ -25,7 +25,9 @@ import { prepareUNESCODataForExport } from './UNESCOExport';
 
 interface Props<T> {
   visibleColumns: TableColumn<T>[];
-  ents: T[];
+  /** Every filtered row, not just the current page; called only when exporting. */
+  getRows: () => T[] | Promise<T[]>;
+  getRowId: (ent: T) => string;
 }
 
 enum ExportType {
@@ -48,20 +50,20 @@ type CopyExportType =
   | ExportType.CopyUNESCO
   | ExportType.CopyCLDR;
 
-function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
+function TableExport<T>({ visibleColumns, getRows, getRowId }: Props<T>) {
   const pageParams = usePageParams();
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
 
   const prepareDataForExport = useCallback(
-    (exportType: ExportType) => {
+    (exportType: ExportType, ents: T[]) => {
       const separator =
         exportType === ExportType.DownloadCSV || exportType === ExportType.CopyCSV ? ',' : '\t';
       if (exportType === ExportType.DownloadUNESCO || exportType === ExportType.CopyUNESCO) {
-        return prepareUNESCODataForExport(ents, pageParams.territoryFilter);
+        return prepareUNESCODataForExport(ents as EntityData[], pageParams.territoryFilter);
       }
       if (exportType === ExportType.CopyCLDR) {
-        return prepareCLDRLocalePopulationForExport(ents);
+        return prepareCLDRLocalePopulationForExport(ents as EntityData[]);
       }
       // The pin column is always present in the table for the UI, but it carries no data on its
       // own. Omit it entirely when nothing is pinned; otherwise export which rows are pinned.
@@ -71,7 +73,8 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
               c.key === PinColumn.key
                 ? {
                     ...c,
-                    exportValue: (ent: T) => (pageParams.pinned.includes(ent.ID) ? 'Pinned' : ''),
+                    exportValue: (ent: T) =>
+                      pageParams.pinned.includes(getRowId(ent)) ? 'Pinned' : '',
                   }
                 : c,
             )
@@ -93,12 +96,12 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
       });
       return [header, ...rows].join('\n');
     },
-    [ents, pageParams, visibleColumns],
+    [getRowId, pageParams, visibleColumns],
   );
 
   const handleExportFile = useCallback(
-    async (exportType: DownloadExportType) => {
-      const data = prepareDataForExport(exportType);
+    async (exportType: DownloadExportType, ents: T[]) => {
+      const data = prepareDataForExport(exportType, ents);
       const filetype = exportType === ExportType.DownloadCSV ? 'csv' : 'tsv';
       const blob = new Blob([data], { type: `text/${filetype};charset=utf-8` });
       const ts = new Date().toISOString().replace(/[:.]/g, '-');
@@ -115,8 +118,8 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   );
 
   const handleClipboardExport = useCallback(
-    async (exportType: CopyExportType) => {
-      const data = prepareDataForExport(exportType);
+    async (exportType: CopyExportType, ents: T[]) => {
+      const data = prepareDataForExport(exportType, ents);
       navigator.clipboard.writeText(data).then(() => {
         alert('Language data copied to clipboard');
       });
@@ -125,9 +128,16 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   );
 
   const handleExport = useCallback(
-    (exportType: ExportType) => {
+    async (exportType: ExportType) => {
       setOpen(false);
 
+      let ents: T[];
+      try {
+        ents = await getRows();
+      } catch (error) {
+        alert(`Could not export: ${(error as Error).message}`);
+        return;
+      }
       if (ents.length === 0) return;
       trackEvent('data_exported', {
         export_type: exportType,
@@ -142,18 +152,18 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
           case ExportType.DownloadCSV:
           case ExportType.DownloadTSV:
           case ExportType.DownloadUNESCO:
-            handleExportFile(exportType);
+            handleExportFile(exportType, ents);
             break;
           case ExportType.CopyCSV:
           case ExportType.CopyTSV:
           case ExportType.CopyUNESCO:
           case ExportType.CopyCLDR:
-            handleClipboardExport(exportType);
+            handleClipboardExport(exportType, ents);
             break;
         }
       });
     },
-    [handleClipboardExport, handleExportFile, ents, visibleColumns.length],
+    [handleClipboardExport, handleExportFile, getRows, visibleColumns.length],
   );
   let validExportTypes = Object.values(ExportType);
   if (pageParams.entType !== EntityType.Language && pageParams.entType !== EntityType.Locale) {

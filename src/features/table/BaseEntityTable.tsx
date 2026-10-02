@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import { EntityData } from '@entities/types/EntityTypes';
-
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -16,10 +14,11 @@ import TableValueType from './TableValueType';
 type Props<T> = {
   visibleColumns: TableColumn<T>[];
   ents: T[];
+  getRowId: (ent: T) => string;
   tableID: TableID;
 };
 
-function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
+function BaseEntityTable<T>({ visibleColumns, ents, getRowId, tableID }: Props<T>) {
   return (
     <div className="w-full relative text-xs overflow-x-auto">
       <table className={'EntityTable Table' + tableID + ' text-left w-max mx-auto'}>
@@ -32,7 +31,7 @@ function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }
         </thead>
         <tbody>
           {ents.map((ent, i) => (
-            <tr key={ent.ID || i}>
+            <tr key={getRowId(ent) || i}>
               {visibleColumns.map((column, idx) => {
                 const valueType = getValueTypeForColumn(column);
                 // The pin column (idx 0) and the first data column (idx 1) stay pinned to the
@@ -84,4 +83,5 @@ const FormattedContent: React.FC<{ content: ReactNode; valueType?: TableValueTyp
   }
 };
 
-export default BaseEntityTable;
+// Memoized so a re-render with the same rows (e.g. while the next API page loads) skips the cells.
+export default React.memo(BaseEntityTable) as typeof BaseEntityTable;

@@ -31,7 +31,7 @@ describe('TableExport', () => {
   ];
 
   it('export buttons render correctly', async () => {
-    render(<TableExport visibleColumns={columns} ents={ents} />);
+    render(<TableExport visibleColumns={columns} getRows={() => ents} getRowId={(e) => e.ID} />);
 
     // The options aren't initially visible
     expect(screen.queryByText('Copy TSV')).not.toBeTruthy();
@@ -53,7 +53,7 @@ describe('TableExport', () => {
   // so we only test copying to clipboard here.
 
   it('copies tsv format data to clipboard when Copy TSV is clicked', async () => {
-    render(<TableExport visibleColumns={columns} ents={ents} />);
+    render(<TableExport visibleColumns={columns} getRows={() => ents} getRowId={(e) => e.ID} />);
 
     // Open the menu to show `Copy TSV` option
     act(() => {

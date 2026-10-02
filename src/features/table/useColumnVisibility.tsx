@@ -3,13 +3,11 @@ import { useCallback, useMemo } from 'react';
 import { PageParams, TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/EntityTypes';
-
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
 import TableID from './TableID';
 
-export type ColumnVisibilityModule<T extends EntityData> = {
+export type ColumnVisibilityModule<T> = {
   toggleColumn: (columnKey: string, isVisible?: boolean) => void;
   setColumns: (columnKeys: string[]) => void;
   visibleColumns: TableColumn<T>[];
@@ -17,9 +15,10 @@ export type ColumnVisibilityModule<T extends EntityData> = {
   resetColumnVisibility: () => void;
 };
 
-function useColumnVisibility<T extends EntityData>(
+function useColumnVisibility<T>(
   columns: TableColumn<T>[],
   tableID: TableID,
+  pinColumn: TableColumn<T> = PinColumn as TableColumn<T>,
 ): ColumnVisibilityModule<T> {
   const params = usePageParams();
   const { updatePageParams, columns: columnsVisibleForAllTables } = params;
@@ -37,11 +36,8 @@ function useColumnVisibility<T extends EntityData>(
   );
 
   const visibleColumns = useMemo(
-    () => [
-      PinColumn as TableColumn<T>,
-      ...columns.filter((column) => columnVisibility[column.key]),
-    ],
-    [columns, columnVisibility],
+    () => [pinColumn, ...columns.filter((column) => columnVisibility[column.key])],
+    [pinColumn, columns, columnVisibility],
   );
 
   const toggleColumn = useCallback(
@@ -86,7 +82,7 @@ function useColumnVisibility<T extends EntityData>(
 
 export default useColumnVisibility;
 
-function getColumnVisibilityFromBinary<T extends EntityData>(
+function getColumnVisibilityFromBinary<T>(
   columns: TableColumn<T>[],
   binary: bigint,
 ): Record<string, boolean> {
@@ -96,7 +92,7 @@ function getColumnVisibilityFromBinary<T extends EntityData>(
   }, {});
 }
 
-function getBinaryForColumnVisibility<T extends EntityData>(
+function getBinaryForColumnVisibility<T>(
   columns: TableColumn<T>[],
   columnVisibility: Record<string, boolean>,
 ): bigint {
@@ -106,10 +102,7 @@ function getBinaryForColumnVisibility<T extends EntityData>(
   );
 }
 
-function getDefaultColumnsBinary<T extends EntityData>(
-  columns: TableColumn<T>[],
-  params: PageParams,
-): bigint {
+function getDefaultColumnsBinary<T>(columns: TableColumn<T>[], params: PageParams): bigint {
   return columns.reduce((bin, col, i) => {
     if (typeof col.isInitiallyVisible === 'function') {
       return col.isInitiallyVisible(params) ? bin + (1n << BigInt(i)) : bin;
