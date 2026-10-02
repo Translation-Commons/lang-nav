@@ -1,0 +1,42 @@
+#codeDisplay		axl.mr
+#nameDisplay		AXL Mauritania
+#isoRegionCode	MR	
+#yearCollected		2023
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder		L1
+#domain		Home
+### Population Surveyed ###		
+#population	4 800 800	
+#responsesPerIndividual		1
+### Data Constraints ###		
+#quantity		count
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url		https://www.axl.cefan.ulaval.ca/afrique/mauritanie.htm
+#datePublished		2025-01-01
+#dateAccessed		2026-05-23
+#documentName	Mauritanie	
+#tableName		Les chiffres présentés dans le tableau ci-dessous proviennent de l'organisme américain Joshua Project (ou Projet Josué) de 2023.
+#columnName		État fédéré; Superficie; Population
+language code	Language maternelle	Population
+ara/mey	Hassaniya	3 954 000
+ful/fuc	Pulaar / Fula	303 000
+snk	Soninke	248 000
+tmh	Tamasheq	133 000
+ara/mey	Hassaniya	72 000
+bam	Bambara	24 000
+wol	Wolof	20 000
+fra	French	7 100
+dyo	Jola-Fonyi	5 000
+srr	Serer	4 800
+ara/mey	Hassaniya	2 800
+kor	Korean	2 600
+wol/lebu1234	Wolof	1 500
+ara/mey/zen	Zenaga	1 100
+ara/mey	Hassaniya	900
+eng	English	500
+ara/mey	Hassaniya	500
+mul	Others	20 000

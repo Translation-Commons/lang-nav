@@ -1,0 +1,25 @@
+#codeDisplay		axl.fo
+#nameDisplay		AXL Faroe Islands
+#isoRegionCode	FO	
+#yearCollected		2014
+#languageUse		Speaks
+#acquisitionOrder		L1
+#population		48,427
+#populationSource		https://fred.stlouisfed.org/data/POPTOTFOA647NWDB
+#responsesPerIndividual	1	
+#quantity	percent	
+#collectorType	Secondary	
+#presentedBy	AXL	
+#url	https://www.axl.cefan.ulaval.ca/EtatsNsouverains/feroe.htm	
+#dateAccessed	2026-10-01	
+Language Code	Language	
+fao	Faroese	90
+dan	Danish	3.1
+nor	Norwegian	2.0
+isl	Icelandic	0.4
+eng	English	0.3
+fil	Filipino	0.2
+tha	Thai	0.1
+ron	Romanian	0.1
+iku/kal	Greenlandic	0.1
+hbs/srp	Serbian	0.1

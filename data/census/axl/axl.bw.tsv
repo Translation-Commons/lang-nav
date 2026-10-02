@@ -1,0 +1,58 @@
+#codeDisplay		axl.bw
+#nameDisplay		AXL Botswana
+#isoRegionCode	BW	
+#yearCollected	2021	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	1,686,700	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+#languagesIncluded	All	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/afrique/botswana.htm	
+#datePublished	2024-04-22	
+#dateAccessed	2026-09-29	
+#documentName	Botswana	
+#tableName	Ethnic groups	
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion	
+Language Code	Language Name	Population
+tsn	Tswana	1,200,000
+kck	Kalanga	160,000
+xkv	Kgalagadi	35,000
+her	Herero	31,000
+khi	Bushmen	30,000
+khi/hgm	Haiǁom	30,000
+afr	Afrikaans	20,000
+yey	Yeyi	20,000
+khi/shg	Shua	19,000
+nde	Ndebele	17,000
+loz	Lozi	14,000
+sna	Shona	13,000
+mhw	Mbukushu	12,000
+nso	Northern Sotho 	11,000
+brl	Birwa	10,000
+sot	Southern Sotho 	9,300
+xho	Xhosa	9,300
+khi/nhr	Naro	8,000
+lyn	Luyana 	7,500
+khi/ktz	Juǀ’hoan	5,000
+zul	Zulu	4,600
+eng	English	4,000
+sbs	Subiya	3,000
+khi/ktz/aue	Auen	3,000
+khi/hio	Hietshware	3,000
+khi/nmn	!Xóõ	3,000
+khi/xuu	Kxoe	1,800
+khi/hnh	Anda	1,000
+khi/gnk	Gxana	1,000
+khi/huc	ǀHua	1,000
+khi/naq	Nama	200

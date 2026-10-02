@@ -1,0 +1,71 @@
+#codeDisplay		axl.uz	#fr
+#nameDisplay		AXL Uzbekistan	
+#isoRegionCode	UZ		
+#yearCollected	2021		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Home		
+### Population Surveyed ###			
+#population	32,654,900		
+#responsesPerIndividual	1		
+### Data Constraints ###			
+#quantity	count		
+#geographicScope	whole country		
+#nationality	residents		
+#languagesIncluded	All		
+### Creator ###			
+#collectorType	Secondary		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/asie/ouzbekistan-1general.htm		
+#datePublished	2023-12-23		
+#dateAccessed	2026-09-30		
+#documentName	Uzbekistan		
+#tableName	Ethnic groups		
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion		
+Language Code 	Language Name	Population	Langue
+uzb/uzn	Northern Uzbek	27,365,000	ouzbek du Nord
+fas/tgk	Tajik	1,573,000	tadjik
+kaz	Kazakh	816,000	kazakh
+rus	Russian	762,000	russe
+kaa	Karakalpak	720,000	karakalpak
+kir	Kirghiz	279,000	kirghiz
+tuk	Turkmen	195,000	turkmène
+kor	Korean	180,000	coréen
+crh	Crimean Tatar	175,000	tatar de Crimée
+tur	Turkish	142,000	turc
+ukr	Ukrainian	72,000	ukrainien
+hye	Armenian	65,000	arménien
+aze	Azerbaijani	59,000	azéri du Nord
+uig	Uyghur	48,000	ouïgour
+bak	Bashkir	46,000	bachkir
+fas/pes	Persian	33,000	persan (farsi)
+fas/tgk/luli1238	Lyuli	25,000	domari
+tat	Tatar	25,000	tatar
+bel	Belarusian	21,000	bélarusse
+deu	German	17,000	allemand
+myv	Erza	16,000	erza
+chv	Chuvash	13,000	tchouvache
+ron	Moldavian	7,900	moldave
+oss	Ossetian	7,700	ossète
+kat	Georgian	6,200	géorgien
+ell	Modern Greek	5,300	grec
+chm	Mari	4,900	mari
+udm	Udmurt	4,100	oudmourte (votiak)
+lez	Lezghian	4,000	lezghien
+fas/jpr	Judeo-Persian	3,800	boukharique (judéo-persan)
+lbe	Lak	3,700	lack
+pol	Polish	3,300	polonais
+kur/kmr	Northern Kurdish / Kurmanji	3,100	kurde du Nord
+pus/pbu	Northern Pashtun	2,700	pachtou
+dar	Dargine	2,600	darguine (dargwa)
+bul	Bulgarian	2,300	bulgare
+fas	Persian	2,300	farsi
+lit	Lithuanian	2,200	lituanien
+lav	Latvian	1,800	letton
+che	Chechen	1,700	tchétchène
+zho/dng	Dungan	1,700	doungane
+hye	Armenian	1,600	arménien
+kbd	Kabardian	1,500	kabarde
+mul	Other	95,400	-

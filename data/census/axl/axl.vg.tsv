@@ -1,0 +1,18 @@
+#codeDisplay		axl.vg
+#nameDisplay		AXL British Virgin Islands
+#isoRegionCode	VG	
+#yearCollected		2004
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#population	21,270	
+#populationSource	https://www.axl.cefan.ulaval.ca/amsudant/vierges-britanniques.htm	
+#responsesPerIndividual	1	
+#quantity		percent
+#collectorType	Secondary	
+#presentedBy	AXL	
+#url	https://www.axl.cefan.ulaval.ca/amsudant/vierges-britanniques.htm	
+#dateAccessed	2026-10-01	
+Language Code	Language	Percent
+vic	Virgin Islands Creole English	60%
+eng	English	10%
+spa	Spanish	10%

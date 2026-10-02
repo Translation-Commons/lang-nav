@@ -1,0 +1,69 @@
+#codeDisplay		nc1996.speaks	nc2004.speaks	nc2009.speaks	nc2014.speaks	nc2019.speaks
+#nameDisplay		New Caledonia 1996 	New Caledonia 2004 	New Caledonia 2009 	New Caledonia 2014	New Caledonia 2019
+#isoRegionCode		NC	NC	NC	NC	NC
+#yearCollected		1996	2004	2,009	2014	2019
+### Language Criteria ###						
+#languageUse	Speaks					
+#proficiency						
+#acquisitionOrder						
+#domain						
+### Population Surveyed ###						
+#population		140,572	169,056	162,748	212,139	219522
+#populationSource	https://www.isee.nc/component/phocadownload/category/269-recensement-de-la-population?download=1244%3Aimage-de-la-population-2004				https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NC	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NC
+#responsesPerIndividual	1+					
+### Data Constraints ###						
+#geographicScope	whole territory					
+#age	14+					
+#nationality	residents					
+#languagesIncluded	indigenous					
+#residenceBasis	de jure					
+#quantity	count					
+### Creator ###						
+#collectorType	Government					
+#collectorName	Institut national de la statistique et des études économiques (INSEE) and Institut de la statistique et des études économiques (ISEE)					
+#collectorNameShort	ISEE NC					
+### Source Document ###						
+#url	https://isee.nc/organisation-coutumiere-kanak					
+#dateAccessed	2026-09-29					
+#documentName	Pratique des langues vernaculaires parlées					
+#sectionName	Langues kanak - Données historiques					
+#tableName	Pratique des langues vernaculaires parlées					
+#columnName		1996	2004	2009	2014	2019
+#citation	INSEE-ISEE. Recensement de la population de la Nouvelle-Calédonie 1996. Pratique des langues vernaculaires parlées.					
+#notes	Official INSEE-ISEE census data. On the ISEE page, go to Ressources associées > Jeux de données > Données historiques > Pratique des langues vernaculaires parlées (XLS). Use the 1996 column. Individuals may report more than one vernacular language, so language counts must not be summed as unique persons.					
+Language Code	Language	Population				
+	Groupe de l'extrême Nord					
+msq	Caac	800	1005	1165	1072	847
+yly/yala1265	Yalâyu	1,522	1694	1956	2005	1871
+nee	Fwa Kumak	847	739	1090	946	798
+nua	Yûâga	1992	2124	2401	2504	1975
+	Groupe du Nord					
+jaz	Jawe	729	635	990	892	746
+nem	Nèmi	768	911	908	845	825
+pop	Pwâpwâ	16	84	39	79	27
+fwa	Fwâi	1,131	1550	1859	1690	1561
+pme	Pwaamei	219	210	292	299	223
+piz	Pije	161	184	183	160	114
+vohk1234	Voh-Koné dialects	993	980	1212	1081	952
+	Groupe du Centre					
+cam	Cèmuhî	2051	2139	2602	2400	2234
+pri	Paicï	5498	6056	7252	6866	6530
+	Groupe du Sud					
+aji	Ajië	4044	5051	5358	5019	4449
+aqr	Arhâ	35	59	166	135	19
+aok	Arhö	62	264	349	291	186
+bpk	Orowe	587	355	490	429	373
+nek	Nèku	221	320	125	86	115
+cir	Tîrî	558	481	619	472	393
+sih	Zîchë	4	3	19	20	10
+ane	Xârâcùù	3784	4816	5730	5287	5645
+axx	Xârâgùrè	566	632	758	751	589
+	Groupe de l'extrême Sud					
+duf	Drubea	946	1154	1211	1268	1022
+kdk	Dialects of the far south	1814	1582	2184	1943	1618
+cks	Tayo	609	376	904	1033	1052
+	Groupe des îles Loyauté					
+nen	Nengone	6377	7958	8721	8940	9356
+dhv	Drehu	11338	13249	15586	15949	15875
+iai	Iaai	1562	2464	4181	3821	3714
+uve	Faga uvea	1107	1614	2219	2062	2066
