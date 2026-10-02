@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -23,6 +23,10 @@ const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
+  const computedParams = useRef<{
+    languageSource: typeof languageSource;
+    localeSeparator: typeof localeSeparator;
+  } | null>(null);
   const { coreData, loadCoreData } = useCoreData();
   const [loadingStage, setLoadingStage] = useState<LoadingStage>(LoadingStage.Initial);
   const [dataRevision, setDataRevision] = useState<number>(0);
@@ -113,23 +117,6 @@ const DataProvider: React.FC<{
   );
   const world = coreData.ents['001'] as TerritoryData | undefined;
 
-  useEffect(() => {
-    if (world == null) return;
-
-    // Update dependent fields whenever language source or locale separator changes
-    updateEntitiesBasedOnDataParams(
-      coreData.languages,
-      coreData.locales,
-      world,
-      languageSource,
-      localeSeparator,
-    );
-
-    if (loadingStage === LoadingStage.HasSupplementalData)
-      setLoadingStage(LoadingStage.AlgorithmsFinished);
-    setDataRevision((prev) => prev + 1);
-  }, [languageSource, localeSeparator, loadingStage]);
-
   const dataContextBase = useMemo(
     () => ({
       ...coreData,
@@ -149,15 +136,49 @@ const DataProvider: React.FC<{
   // After the main load, load additional data
   useEffect(() => {
     if (loadingStage === LoadingStage.HasCoreData) {
+      console.log('Loading supplemental data...');
       const loadSecondaryData = async (dataContext: CoreDataArrays & DataGetters) => {
-        await loadSupplementalData(dataContext).then(() => {
-          setLoadingStage(LoadingStage.HasSupplementalData);
-        });
+        await loadSupplementalData(dataContext)
+          .then(() => {
+            setLoadingStage(LoadingStage.HasSupplementalData);
+          })
+          .catch((error) => {
+            console.error('Error loading supplemental data:', error);
+          });
       };
 
       loadSecondaryData(dataContextBase);
     }
   }, [dataContextBase, loadingStage]); // this is called once after page load
+
+  // After supplemental data has been loaded, then update the entity populations, names, and other param dependent fields.
+  // Do this again if the language source or locale separator changes
+  useEffect(() => {
+    if (world == null) return;
+    const paramsChanged =
+      computedParams.current == null ||
+      computedParams.current.languageSource !== languageSource ||
+      computedParams.current.localeSeparator !== localeSeparator;
+    const shouldComputeAlgorithms =
+      loadingStage === LoadingStage.HasSupplementalData ||
+      (loadingStage === LoadingStage.AlgorithmsFinished && paramsChanged);
+    if (!shouldComputeAlgorithms) return;
+
+    console.log('Computing algorithms...', { languageSource, localeSeparator, loadingStage });
+    // Update dependent fields whenever language source or locale separator changes
+    updateEntitiesBasedOnDataParams(
+      coreData.languages,
+      coreData.locales,
+      world,
+      languageSource,
+      localeSeparator,
+    );
+
+    computedParams.current = { languageSource, localeSeparator };
+    if (loadingStage === LoadingStage.HasSupplementalData)
+      setLoadingStage(LoadingStage.AlgorithmsFinished);
+    setDataRevision((prev) => prev + 1);
+  }, [coreData, languageSource, localeSeparator, loadingStage, world]);
 
   return (
     <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision }}>

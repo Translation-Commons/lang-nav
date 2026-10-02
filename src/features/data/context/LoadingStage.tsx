@@ -2,6 +2,7 @@ enum LoadingStage {
   Initial,
   HasCoreData,
   HasSupplementalData,
+  // RecomputingAlgorithms,
   AlgorithmsFinished,
 }
 
