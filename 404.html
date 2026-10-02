@@ -1,52 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/lang-nav/logo/LangNavCompass.png" />
-    <title>Language Navigator</title>
-    <script type="text/javascript">
-      // Set the brightness class before first paint. The theme tokens in tailwind.css key
-      // off this class, so without it a dark-device visitor sees a white flash until React
-      // mounts. usePageBrightness takes over from here -- keep the storage key in sync.
-      (function () {
-        var preference = 'follow device';
-        try {
-          preference = localStorage.getItem('page-brightness') || preference;
-        } catch (e) {
-          // Site data can be blocked for the origin. Fall through to the device setting
-          // rather than assuming light, which would be wrong on a dark device.
-        }
-        var resolved =
-          preference === 'follow device'
-            ? window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-            : preference;
-        document.documentElement.classList.add(resolved);
+    <meta charset="utf-8" />
+    <title>Redirecting to LangNav</title>
+    <script>
+      (() => {
+        const target = new URL(window.location.href);
+        target.protocol = 'https:';
+        target.hostname = 'langnav.org';
+        target.port = '';
+        target.pathname = target.pathname.replace(/^\/lang-nav(?:\/|$)/, '/') || '/';
+        window.location.replace(target.toString());
       })();
     </script>
-    <script type="module" crossorigin src="/lang-nav/assets/index-CID3UOiA.js"></script>
-    <link rel="modulepreload" crossorigin href="/lang-nav/assets/vendor-react-qLRreErP.js">
-    <link rel="modulepreload" crossorigin href="/lang-nav/assets/vendor-lucide-CuqrkGvh.js">
-    <link rel="stylesheet" crossorigin href="/lang-nav/assets/index-BNKTik0l.css">
   </head>
-
   <body>
-    <script type="text/javascript">
-      (function (l) {
-        if (l.search && l.search[1] === '/') {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      })(window.location);
-    </script>
-    <div id="root"></div>
+    <p>Redirecting to <a href="https://langnav.org/">langnav.org</a>…</p>
   </body>
 </html>
