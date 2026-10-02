@@ -1,7 +1,8 @@
 ### Metadata ###			
+#tech		win11
 #topic	Windows 11 provides an official language pack to to view menus, dialog boxes, and supported apps and websites	Translation of Windows 11 User Interface	
 #url	https://support.microsoft.com/en-US/Windows/Hardware/Input-Devices/language-packs-for-windows#windowsversion=windows_11		
-#dateAccessed	6/30/26		
+#dateAccessed	2026-06-30		
 #author	Microsoft		
 #notes			
 			
@@ -12,14 +13,14 @@ amh	Amharic
 ara/arb	Arabic		
 hye	Armenian		
 asm	Assamese		
-aze/azj	Azerbaijani 		Latin
-ben	Bangla 	India	
+aze/azj	Azerbaijani 		Latn
+ben	Bangla 	IN	
 eus	Basque		
 bel	Belarusian		
-hbs/bos	Bosnian 		Latin
+hbs/bos	Bosnian 		Latn
 bul	Bulgarian		
 cat	Catalan		
-chr	Cherokee 		Cherokee
+chr	Cherokee 		Cher
 zho/cmn	Chinese Simplified		
 zho/cmn	Chinese Traditional		
 hbs/hrv	Croatian		
@@ -53,7 +54,7 @@ lav	Latvian
 lit	Lithuanian		
 ltz	Luxembourgish		
 mkd	Macedonian		
-msa/zsm	Malay 	Malaysia, Brunei, and Singapore	
+msa/zsm	Malay 	#Malaysia, Brunei, and Singapore	
 mal	Malayalam		
 mlt	Maltese		
 mri	Maori		
@@ -64,21 +65,21 @@ nor/nno	Norwegian Nynorsk
 ori	Odia		
 fas	Persian		
 pol	Polish		
-por	Portuguese 	Brazil	
-por	Portuguese 	Portugal	
-pan	Punjabi 		Arabic
+por	Portuguese 	BR	
+por	Portuguese 	PT
+pan	Punjabi 		Arab
 que	Quechua		
 ron	Romanian		
 rus	Russian		
 gla	Scottish Gaelic		
-hbs/srp	Serbian	Bosnia and Herzegovina	Cyrillic
-hbs/srp	Serbian	Serbia	Cyrillic
-hbs/srp	Serbian 		Latin
+hbs/srp	Serbian	BA	Cyrl
+hbs/srp	Serbian	RS	Cyrl
+hbs/srp	Serbian 		Latn
 slk	Slovak		
 slv	Slovenian		
 spa	Spanish		
 swe	Swedish		
-tam	Tamil 	India and Sri Lanka	
+tam	Tamil 	#India and Sri Lanka
 tat	Tatar		
 tel	Telugu		
 tha	Thai		
@@ -86,7 +87,7 @@ tur	Turkish
 ukr	Ukrainian		
 urd	Urdu		
 uig	Uyghur		
-uzb	Uzbek 		Latin
+uzb	Uzbek 		Latn
 cat/vale1252	Valencian		
 vie	Vietnamese		
 cym	Welsh		

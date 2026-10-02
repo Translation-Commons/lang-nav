@@ -6,22 +6,18 @@ import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
 
 import { loadCensusData } from './extra_entities/loadCensusData';
-import { loadAndroid } from './supplemental/loadAndroid';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
-import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
-import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLangTags } from './supplemental/loadLangTags';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadLanguageScopeOverrides } from './supplemental/loadLanguageScopeOverrides';
-import { loadMacos } from './supplemental/loadMacos';
+import { loadTechnologySupport } from './supplemental/loadTechnologySupport';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
 import { loadUDHR } from './supplemental/loadUDHR';
 import { loadVariantAnnotations } from './supplemental/loadVariantAnnotations';
-import { loadWin11LanguagePacks } from './supplemental/loadWin11LanguagePacks';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './supplemental/UnicodeData';
 import { loadAndApplyWikipediaData } from './supplemental/WikipediaData';
 
@@ -45,13 +41,9 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLanguageNamesFrench(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
-    loadAndroid(dataContext.getLanguage),
-    loadGoogleTranslate(dataContext.getLanguage),
-    loadIos(dataContext.getLanguage),
-    loadMacos(dataContext.getLanguage),
+    loadTechnologySupport(dataContext),
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
-    loadWin11LanguagePacks(dataContext.getLanguage),
     loadLangTags(dataContext.getLanguage),
     loadLanguageScopeOverrides(dataContext.getLanguage),
   ]);

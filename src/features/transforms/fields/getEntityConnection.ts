@@ -93,5 +93,6 @@ export function getTechnologiesForEntity(
   }
   if (ent.type === EntityType.Org) return ent.techs;
   if (ent.type === EntityType.Keyboard) return ent.inputTech ? [ent.inputTech] : undefined;
+  if (ent.type === EntityType.Language) return ent.techSupport?.map((ts) => ts.tech) || undefined;
   return undefined;
 }

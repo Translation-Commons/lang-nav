@@ -3,6 +3,7 @@
  * computeLanguageDigitalSupportScore.ts -- the scores are still used for sorting, charts and the
  * overall metascore, while these statuses describe what is actually missing for a language.
  */
+import { TechSupportData } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -17,9 +18,10 @@ import {
   DigitalSupportDimension,
   DigitalSupportStatus,
   DigitalSupportStatusSummary,
-  PlatformSupportData,
   WikipediaStatus,
 } from './DigitalSupportTypes';
+
+const OPERATING_SYSTEMS = ['win11', 'Android', 'macOS', 'iOS'];
 
 export const DIGITAL_SUPPORT_CATEGORIES: DigitalSupportCategory[] = [
   DigitalSupportDimension.Documentation,
@@ -29,16 +31,19 @@ export const DIGITAL_SUPPORT_CATEGORIES: DigitalSupportCategory[] = [
   DigitalSupportDimension.MachineTranslation,
 ];
 
-export type InterfacePlatform = { label: string; entries: PlatformSupportData[] };
+export type InterfacePlatform = { techShortName: string; entries: TechSupportData[] };
 
 /** The operating systems that the interface data covers, in the order they are shown. */
 export function getInterfacePlatforms(lang: LanguageData): InterfacePlatform[] {
-  return [
-    { label: 'Windows 11', entries: lang.win11LanguagePacks ?? [] },
-    { label: 'Android', entries: lang.android ?? [] },
-    { label: 'MacOS', entries: lang.macos ?? [] },
-    { label: 'iOS', entries: lang.ios ?? [] },
-  ];
+  return OPERATING_SYSTEMS.map((techShortName) => {
+    const tss =
+      lang.techSupport?.filter((support) => support.techShortName === techShortName) ?? [];
+    return { techShortName, entries: tss };
+  });
+}
+
+export function getLanguageIsSupportedBy(lang: LanguageData, techShortName: string): boolean {
+  return lang.techSupport?.some((support) => support.techShortName === techShortName) ?? false;
 }
 
 /** CLDR data may be provided by another language, eg. a macrolanguage covering its members. */
@@ -177,6 +182,7 @@ function getI18nFrameworksStatus(lang: LanguageData): DigitalSupportStatusSummar
 }
 
 function getMachineTranslationStatus(lang: LanguageData): DigitalSupportStatusSummary {
-  if (!lang.googleTranslate?.length) return summarize(DigitalSupportStatus.NotSupported);
+  if (!getLanguageIsSupportedBy(lang, 'GTranslate'))
+    return summarize(DigitalSupportStatus.NotSupported);
   return summarize(DigitalSupportStatus.Supported, 'Google Translate');
 }

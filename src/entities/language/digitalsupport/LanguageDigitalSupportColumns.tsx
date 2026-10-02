@@ -20,6 +20,7 @@ import IsSupportedIcon from '@shared/ui/IsSupportedIcon';
 
 import { LanguageData, LanguageSource } from '../LanguageTypes';
 
+import { getLanguageIsSupportedBy } from './computeLanguageDigitalSupportStatus';
 import LanguageDigitalSupportMeter from './DigitalSupportMeter';
 import { DigitalSupportDimension } from './DigitalSupportTypes';
 import LanguageDigitalSupportMetascore from './LanguageDigitalSupportMetascore';
@@ -96,11 +97,7 @@ const columns: TableColumn<LanguageData>[] = [
   {
     key: 'Google Translate',
     description: 'Language entries available in Google Translate.',
-    render: (lang) => <IsSupportedIcon isSupported={!!lang.googleTranslate?.length} />,
-    exportValue: (lang) => {
-      if (!lang.googleTranslate || lang.googleTranslate.length === 0) return 'n/a';
-      return lang.googleTranslate.map((entry) => entry.name).join('; ');
-    },
+    ...getTechSupportColumnRender('GTranslate'),
   },
   {
     key: 'Interface Support',
@@ -113,66 +110,22 @@ const columns: TableColumn<LanguageData>[] = [
     key: 'Windows 11',
     description:
       'Language pack available in Windows 11 for viewing menus, dialog boxes, and supported apps and websites.',
-    render: (lang) => <IsSupportedIcon isSupported={!!lang.win11LanguagePacks?.length} />,
-    exportValue: (lang) => {
-      if (!lang.win11LanguagePacks || lang.win11LanguagePacks.length === 0) return 'n/a';
-      return lang.win11LanguagePacks
-        .map((entry) => {
-          const parts = [entry.name];
-          if (entry.locale) parts.push(`(${entry.locale})`);
-          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
-          return parts.join(' ');
-        })
-        .join('; ');
-    },
+    ...getTechSupportColumnRender('win11'),
   },
   {
     key: 'Android',
     description: 'Language entries supported in Android.',
-    render: (lang) => <IsSupportedIcon isSupported={!!lang.android?.length} />,
-    exportValue: (lang) => {
-      if (!lang.android || lang.android.length === 0) return 'n/a';
-      return lang.android
-        .map((entry) => {
-          const parts = [entry.name];
-          if (entry.locale) parts.push(`(${entry.locale})`);
-          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
-          return parts.join(' ');
-        })
-        .join('; ');
-    },
+    ...getTechSupportColumnRender('Android'),
   },
   {
     key: 'iOS',
     description: 'Language entries supported in iOS.',
-    render: (lang) => <IsSupportedIcon isSupported={!!lang.ios?.length} />,
-    exportValue: (lang) => {
-      if (!lang.ios || lang.ios.length === 0) return 'n/a';
-      return lang.ios
-        .map((entry) => {
-          const parts = [entry.name];
-          if (entry.locale) parts.push(`(${entry.locale})`);
-          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
-          return parts.join(' ');
-        })
-        .join('; ');
-    },
+    ...getTechSupportColumnRender('iOS'),
   },
   {
     key: 'MacOS',
     description: 'Language entries supported in macOS.',
-    render: (lang) => <IsSupportedIcon isSupported={!!lang.macos?.length} />,
-    exportValue: (lang) => {
-      if (!lang.macos || lang.macos.length === 0) return 'n/a';
-      return lang.macos
-        .map((entry) => {
-          const parts = [entry.name];
-          if (entry.locale) parts.push(`(${entry.locale})`);
-          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
-          return parts.join(' ');
-        })
-        .join('; ');
-    },
+    ...getTechSupportColumnRender('macOS'),
   },
   {
     key: 'Documentation',
@@ -257,6 +210,31 @@ const columns: TableColumn<LanguageData>[] = [
       lang.udhr ? lang.udhr.map((udhrEntry) => udhrEntry.name).join('; ') : 'None',
   },
 ];
+
+function getTechSupportColumnRender(techShortName: string): {
+  render: (lang: LanguageData) => React.ReactNode;
+  exportValue: (lang: LanguageData) => string;
+} {
+  return {
+    render: (lang) => (
+      <IsSupportedIcon isSupported={getLanguageIsSupportedBy(lang, techShortName)} />
+    ),
+    exportValue: (lang) => {
+      const techSupport = lang.techSupport?.filter((entry) => entry.name === techShortName) || [];
+      if (!techSupport || techSupport.length === 0) return 'n/a';
+      return techSupport
+        .map((entry) => {
+          const extraParts = [];
+          if (entry.territory) extraParts.push(entry.territory.nameDisplay);
+          if (entry.writingSystem) extraParts.push(entry.writingSystem.nameDisplay);
+          if (extraParts.length > 0) return entry.name + ' (' + extraParts.join(', ') + ')';
+          return entry.name;
+        })
+        .join('; ');
+    },
+  };
+}
+
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
   (col: TableColumn<LanguageData>) => ({
     isInitiallyVisible: false,

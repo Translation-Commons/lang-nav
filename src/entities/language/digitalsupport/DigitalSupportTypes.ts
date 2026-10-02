@@ -62,11 +62,3 @@ export type UniversalDeclarationOfHumanRightsData = {
   variant: string; // e.g. "Latn", "Cyrl", or "" for undifferentiated
   documentURL: string; // URL to the UDHR translation document -- maybe just the final path segment, like "af-marka" in "https://www.ohchr.org/en/human-rights/universal-declaration/translations/af-marka"
 };
-
-export type PlatformSupportData = {
-  languageCodePath: string; // e.g. "man/bam" when Google lists grouped or alternate code paths
-  name: string;
-  locale?: string;
-  writingSystem?: string;
-  notes?: string;
-};

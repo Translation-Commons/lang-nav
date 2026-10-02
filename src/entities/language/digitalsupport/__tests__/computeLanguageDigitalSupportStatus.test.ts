@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { KeyboardData, KeyboardPlatform } from '@entities/keyboard/KeyboardTypes';
 import { getBaseLanguageData, LanguageData } from '@entities/language/LanguageTypes';
+import { TechScope, TechSupportData } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -14,13 +15,25 @@ import {
 import {
   DigitalSupportDimension,
   DigitalSupportStatus,
-  PlatformSupportData,
   WikipediaData,
   WikipediaStatus,
 } from '../DigitalSupportTypes';
 
-function getPlatformSupport(name: string): PlatformSupportData {
-  return { languageCodePath: 'tst', name };
+function getPlatformSupport(name: string): TechSupportData {
+  return {
+    languageCodePath: 'tst',
+    name,
+    techShortName: name,
+    tech: {
+      type: EntityType.Technology,
+      ID: name,
+      codeDisplay: name,
+      nameDisplay: name,
+      names: [name],
+      scope: TechScope.OperatingSystem,
+      organizationCode: 'Apple',
+    },
+  };
 }
 
 function getKeyboard(ID: string): KeyboardData {
@@ -98,7 +111,7 @@ describe('getDigitalSupportStatus', () => {
     });
 
     it('names the provider when supported', () => {
-      const lang = getLanguage({ googleTranslate: [getPlatformSupport('Test')] });
+      const lang = getLanguage({ techSupport: [getPlatformSupport('GTranslate')] });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.MachineTranslation)).toEqual({
         status: DigitalSupportStatus.Supported,
         label: 'Google Translate',
@@ -115,7 +128,7 @@ describe('getDigitalSupportStatus', () => {
     });
 
     it('reports some platforms as partial', () => {
-      const lang = getLanguage({ macos: [getPlatformSupport('Test')] });
+      const lang = getLanguage({ techSupport: [getPlatformSupport('macOS')] });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.Interfaces)).toEqual({
         status: DigitalSupportStatus.Partial,
         label: '1 of 4 platforms',
@@ -124,10 +137,12 @@ describe('getDigitalSupportStatus', () => {
 
     it('reports every platform as supported', () => {
       const lang = getLanguage({
-        win11LanguagePacks: [getPlatformSupport('Test')],
-        android: [getPlatformSupport('Test')],
-        macos: [getPlatformSupport('Test')],
-        ios: [getPlatformSupport('Test')],
+        techSupport: [
+          getPlatformSupport('macOS'),
+          getPlatformSupport('win11'),
+          getPlatformSupport('Android'),
+          getPlatformSupport('iOS'),
+        ],
       });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.Interfaces)).toEqual({
         status: DigitalSupportStatus.Supported,
@@ -238,7 +253,7 @@ describe('getDigitalSupportStatus', () => {
     it('counts the fully supported categories', () => {
       const lang = getLanguage({
         keyboards: [getKeyboard('a')],
-        macos: [getPlatformSupport('Test')],
+        techSupport: [getPlatformSupport('macOS')],
       });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.Overall)).toEqual({
         status: DigitalSupportStatus.Partial,
@@ -251,9 +266,9 @@ describe('getDigitalSupportStatus', () => {
 describe('getInterfacePlatforms', () => {
   it('lists the four operating systems that the data covers', () => {
     expect(getInterfacePlatforms(getLanguage()).map(({ label }) => label)).toEqual([
-      'Windows 11',
+      'win11',
       'Android',
-      'MacOS',
+      'macOS',
       'iOS',
     ]);
   });
