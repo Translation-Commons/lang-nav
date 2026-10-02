@@ -20,7 +20,7 @@ vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 vi.mock('@features/data/context/useDataContext', () => ({
   // Languages: [ine, eng, spa, fra, deu, ita, zho]
-  useDataContext: vi.fn(() => ({ languagesInSelectedSource: getMockLanguages() })),
+  useDataContext: vi.fn(() => ({ languages: getMockLanguages() })),
 }));
 
 // Helper to get hook result

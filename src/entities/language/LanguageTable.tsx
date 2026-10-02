@@ -9,13 +9,13 @@ import type { LanguageData } from '@entities/language/LanguageTypes';
 import getLanguageColumns from './LanguageColumns';
 
 const LanguageTable: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const { languages } = useDataContext();
   const columns = useMemo(() => getLanguageColumns(), []);
 
   return (
     <InteractiveEntityTable<LanguageData>
       tableID={TableID.Languages}
-      ents={languagesInSelectedSource}
+      ents={languages}
       columns={columns}
     />
   );

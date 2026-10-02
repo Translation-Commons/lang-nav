@@ -67,19 +67,18 @@ describe('ReportLanguagePaths', () => {
 
   it('getExtremeLanguagePaths', () => {
     const ents = generateEntities();
-    const { allLanguoids, locales, getTerritory } = getMockedDataContext(ents);
+    const { languages, locales, getTerritory } = getMockedDataContext(ents);
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
       updateEntitiesBasedOnDataParams(
-        allLanguoids,
+        languages,
         locales,
         getTerritory('001')!,
         languageSource,
         LocaleSeparator.Underscore,
       );
-      const { orphans, longestPaths, cycles, multipleRoutes } =
-        getExtremeLanguagePaths(allLanguoids);
+      const { orphans, longestPaths, cycles, multipleRoutes } = getExtremeLanguagePaths(languages);
 
       switch (languageSource) {
         case LanguageSource.Combined:

@@ -3,8 +3,9 @@ import computeLanguageFamiliesModality from '../compute/computeLanguageFamiliesM
 import { computeLocalesPopulationFromCensuses } from '../compute/computeLocalesPopulationFromCensuses';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
 import { addCensusData } from '../connect/connectCensuses';
-import { DataContextType } from '../context/useDataContext';
+import { DataGetters } from '../context/useDataContext';
 
+import { CoreDataArrays } from './CoreData';
 import { loadCensusData } from './extra_entities/loadCensusData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
@@ -24,7 +25,9 @@ import { loadAndApplyWikipediaData } from './supplemental/WikipediaData';
 /**
  * Get more data that is not necessary for the initial page load
  */
-export async function loadSupplementalData(dataContext: DataContextType): Promise<void> {
+export async function loadSupplementalData(
+  dataContext: CoreDataArrays & DataGetters,
+): Promise<void> {
   if (dataContext.locales.length == 0) {
     return; // won't load anything while data is empty
   }
@@ -80,6 +83,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
   computeLocalesPopulationFromCensuses(dataContext.locales);
   // Some more population computations moved to updatePopulations
-  computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
-  computeFineGrainedLanguageScope(dataContext.allLanguoids);
+  computeLanguageFamiliesModality(dataContext.languages);
+  computeFineGrainedLanguageScope(dataContext.languages);
 }

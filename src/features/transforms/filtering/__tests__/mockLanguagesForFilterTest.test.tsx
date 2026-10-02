@@ -98,7 +98,9 @@ export function getMockLanguages() {
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
 
-  return [ine, gem, eng, spa, fra, deu, ita, rus, epo, zho];
+  const langs = [ine, gem, eng, spa, fra, deu, ita, rus, epo, zho];
+  langs.forEach((l) => (l.Combined.code = l.codeDisplay));
+  return langs;
 }
 
 describe('Mock Languages for Filter Tests', () => {

@@ -12,6 +12,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 
 import Field from '../fields/Field';
+import { sortByPopulation } from '../sorting/sort';
 
 import { FilterFunctionType } from './filter';
 import useFilters from './useFilters';
@@ -224,6 +225,7 @@ export function getLanguageFamiliesRelevantToEntity(ent: EntityData): LanguageDa
             (loc) =>
               (loc.pop.speaking.percent || 0) > 1 && loc.language?.scope === LanguageScope.Family,
           )
+          .sort(sortByPopulation)
           ?.map((loc) => loc.language)
           .filter((lang) => !!lang) ?? [],
         (lang) => lang.ID,

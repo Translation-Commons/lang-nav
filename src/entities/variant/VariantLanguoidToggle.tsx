@@ -113,7 +113,7 @@ const VariantLanguoidToggle: React.FC<{
 const LanguageSelector: React.FC<{
   submit: (suggestion: Suggestion) => void;
 }> = ({ submit }) => {
-  const { languagesInSelectedSource: languages } = useDataContext();
+  const { languages } = useDataContext();
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (lang: LanguageData): number => lang.scope ?? 0;

@@ -14,9 +14,10 @@ import useFilters from '../useFilters';
 import EntityFilterSelector from './EntityFilterSelector';
 
 const LanguageFamilyFilterSelector: React.FC = () => {
-  const { languagesInSelectedSource: languages } = useDataContext();
+  const { languages } = useDataContext();
   const filterBy = useFilters();
   const filterByTerritory = filterBy[Field.TerritoryList];
+  const filterByLanguageSource = filterBy[Field.SourceForLanguage];
   const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
@@ -25,29 +26,26 @@ const LanguageFamilyFilterSelector: React.FC = () => {
       if (language.scope === LanguageScope.Subfamily) dist += 1;
       if (language.scope === LanguageScope.BroadGrouping) dist += 2;
       if (!filterByTerritory(language)) dist += 8;
+      if (!filterByLanguageSource(language)) dist += 16;
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
       if (language.scope === LanguageScope.Subfamily) return 'subfamily';
       if (language.scope === LanguageScope.BroadGrouping) return 'broad grouping';
       if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterByLanguageSource(language)) return 'not ' + filterLabels.languageSource;
       return 'matched';
     };
 
     return getSuggestionsFunction(
       languages
         // Limting to ISO language families only right now because of data limitations
-        .filter(
-          (a) =>
-            a.scope === LanguageScope.Family ||
-            a.scope === LanguageScope.Subfamily ||
-            a.scope === LanguageScope.BroadGrouping,
-        )
+        .filter((a) => (a.scope ?? 0) >= LanguageScope.Subfamily)
         .sort(sortByPopulation),
       getMatchDistance,
       getMatchGroup,
     );
-  }, [languages, filterByTerritory, filterLabels]);
+  }, [languages, filterByTerritory, filterByLanguageSource, filterLabels]);
 
   return (
     <EntityFilterSelector

@@ -8,7 +8,7 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 const useEntities = (entType?: EntityType): EntityData[] => {
   const { entType: pageEntityType } = usePageParams();
   const {
-    languagesInSelectedSource,
+    languages,
     locales,
     territories,
     writingSystems,
@@ -24,7 +24,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
       case EntityType.Census:
         return Object.values(censuses);
       case EntityType.Language:
-        return languagesInSelectedSource;
+        return languages;
       case EntityType.Locale:
         return locales;
       case EntityType.Territory:
@@ -46,7 +46,7 @@ const useEntities = (entType?: EntityType): EntityData[] => {
     entType,
     pageEntityType,
     censuses,
-    languagesInSelectedSource,
+    languages,
     locales,
     territories,
     writingSystems,

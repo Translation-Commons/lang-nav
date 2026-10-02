@@ -6,6 +6,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
@@ -14,12 +15,10 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { filterLanguagesWithScopeIssues, getLanguagePath } from './getLanguageScopeIssues';
 
 const ReportLanguageScopeIssues: React.FC = () => {
-  const { languagesInSelectedSource, getLanguage } = useDataContext();
+  const { getLanguage } = useDataContext();
+  const languages = useFilteredEntities<LanguageData>({}).filteredEntities;
 
-  const languagesWithIssues = useMemo(
-    () => filterLanguagesWithScopeIssues(languagesInSelectedSource),
-    [languagesInSelectedSource],
-  );
+  const languagesWithIssues = useMemo(() => filterLanguagesWithScopeIssues(languages), [languages]);
 
   return (
     <>

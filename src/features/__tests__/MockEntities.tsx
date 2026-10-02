@@ -287,7 +287,7 @@ export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays 
   const ents = inputEnts ?? getDisconnectedMockedEntities();
   const entArray = Object.values(ents);
   return {
-    allLanguoids: entArray.filter((ent) => ent.type === EntityType.Language),
+    languages: entArray.filter((ent) => ent.type === EntityType.Language),
     locales: entArray.filter((ent) => ent.type === EntityType.Locale),
     territories: entArray.filter((ent) => ent.type === EntityType.Territory),
     writingSystems: entArray.filter((ent) => ent.type === EntityType.WritingSystem),
@@ -452,11 +452,9 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
   const organizations = entArray.filter((ent) => ent.type === EntityType.Org);
 
   const dataContext: DataContextType = {
-    allLanguoids: languages,
+    languages,
     censuses,
     keyboards: [],
-    languagesInSelectedSource: languages,
-    loadingStage: LoadingStage.AlgorithmsFinished,
     locales,
     organizations,
     territories,
@@ -464,6 +462,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     orthographies,
     variants,
     technologies: entArray.filter((ent) => ent.type === EntityType.Technology),
+
     getEntity: (id: string) => ents[id],
     getLanguage: (id: string) => (ents[id]?.type === EntityType.Language ? ents[id] : undefined),
     getCLDRLanguage: (id: string) =>
@@ -478,6 +477,9 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     getOrganization: (id: string) => (ents[id]?.type === EntityType.Org ? ents[id] : undefined),
     getTechnology: (id: string) =>
       ents[id]?.type === EntityType.Technology ? ents[id] : undefined,
+
+    loadingStage: LoadingStage.AlgorithmsFinished,
+    dataRevision: 0,
   };
 
   return dataContext;

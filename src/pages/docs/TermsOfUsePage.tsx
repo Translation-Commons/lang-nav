@@ -16,7 +16,7 @@ const TermsOfUsePage: React.FC = () => {
   const citation =
     'Nied, Conrad A. and Stewart, Jeannette. 2026. Language Navigator. Translation Commons. Accessed ' +
     new Date().toISOString().split('T')[0] +
-    '. https://translation-commons.github.io/lang-nav/';
+    '. https://langnav.org/';
 
   return (
     <DocsPageContainer title="Terms of Use">

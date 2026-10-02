@@ -4,6 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -17,9 +18,10 @@ import LanguagePathsReportMultipleRoutes from './LanguagePathsReportsMultipleRou
 
 const ReportLanguagesPaths: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
-  const { getLanguage, languagesInSelectedSource } = useDataContext();
+  const { getLanguage } = useDataContext();
+  const languagesFiltered = useFilteredEntities<LanguageData>({ useScope: false }).filteredEntities;
   const { orphans, longestPaths, cycles, multipleRoutes } =
-    getExtremeLanguagePaths(languagesInSelectedSource);
+    getExtremeLanguagePaths(languagesFiltered);
   const orphanedLanguages = orphans
     .map((langId) => getLanguage(langId))
     .filter((lang) => lang != null)

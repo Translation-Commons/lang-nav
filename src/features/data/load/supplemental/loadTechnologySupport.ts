@@ -1,4 +1,4 @@
-import { DataContextType } from '@features/data/context/useDataContext';
+import { DataGetters } from '@features/data/context/useDataContext';
 
 import { isIgnoredLanguageCode } from '@entities/census/parseCensusLanguageRow';
 import type { TechnologyData, TechSupportData } from '@entities/tech/TechnologyTypes';
@@ -11,11 +11,11 @@ const FILES = [
   'data/other_sources/win11_language_packs.tsv',
 ];
 
-export async function loadTechnologySupport(dc: DataContextType): Promise<void> {
+export async function loadTechnologySupport(dc: DataGetters): Promise<void> {
   await Promise.all(FILES.map((file) => loadOneTechnologySupport(file, dc)));
 }
 
-async function loadOneTechnologySupport(file: string, dc: DataContextType): Promise<void> {
+async function loadOneTechnologySupport(file: string, dc: DataGetters): Promise<void> {
   await fetch(file)
     .then((res) => res.text())
     .then((text) => text.split('\n'))
@@ -59,7 +59,7 @@ function getMetadata(lines: string[], key: string): string | undefined {
  * File format:
  * Language Code\tLanguage\tLocale\tWriting System\tNotes
  */
-function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataContextType): void {
+function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGetters): void {
   const parts = line.split('\t');
   if (parts.length < 2) return;
 

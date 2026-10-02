@@ -29,8 +29,10 @@ jobs:
         env:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
 
-      - name: Copy index.html to 404.html
-        run: cp dist/index.html dist/404.html
+      - name: Replace GitHub Pages app with redirect
+        run: |
+          cp scripts/github-pages-redirect.html dist/index.html
+          cp scripts/github-pages-redirect.html dist/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
