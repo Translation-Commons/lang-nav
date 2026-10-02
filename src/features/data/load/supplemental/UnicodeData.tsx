@@ -2,15 +2,15 @@ import aliases from 'cldr-core/supplemental/aliases.json';
 import languageMatching from 'cldr-core/supplemental/languageMatching.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
+import type { DataGetters } from '@features/data/context/useDataContext';
+
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
-import { CLDRCoverageImport } from '@entities/types/CLDRTypes';
+import type { CLDRCoverageImport } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 import { parseCoverageLevel } from '@entities/ui/CLDRCoverageLevels';
-
-import { DataContextType } from '../../context/useDataContext';
 
 const DEBUG = false;
 
@@ -275,7 +275,7 @@ type TerritoryLanguagePopulationStrings = {
   };
 };
 
-export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusData[] {
+export function getLanguageCountsFromCLDR(dataContext: DataGetters): CensusData[] {
   const territoryInfoData = territoryInfo.supplemental.territoryInfo;
   return Object.entries(territoryInfoData)
     .map(([territoryCode, territoryData]) => {

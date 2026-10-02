@@ -12,11 +12,11 @@ import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';
-import { useCoreData } from '../load/CoreData';
+import { CoreDataArrays, useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
 import LoadingStage from './LoadingStage';
-import { DataContext, DataContextType } from './useDataContext';
+import { DataContext, DataGetters } from './useDataContext';
 
 // Create a provider component
 const DataProvider: React.FC<{
@@ -24,13 +24,13 @@ const DataProvider: React.FC<{
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
-  const [loadProgress, setLoadProgress] = useState<LoadingStage>(LoadingStage.Initial);
+  const [loadingStage, setLoadingStage] = useState<LoadingStage>(LoadingStage.Initial);
   const [dataRevision, setDataRevision] = useState<number>(0);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
       await loadCoreData();
-      setLoadProgress(LoadingStage.HasCoreData);
+      setLoadingStage(LoadingStage.HasCoreData);
     };
     loadPrimaryData();
   }, []); // this is called once after page load
@@ -125,16 +125,14 @@ const DataProvider: React.FC<{
       localeSeparator,
     );
 
-    if (loadProgress === LoadingStage.HasSupplementalData)
-      setLoadProgress(LoadingStage.AlgorithmsFinished);
+    if (loadingStage === LoadingStage.HasSupplementalData)
+      setLoadingStage(LoadingStage.AlgorithmsFinished);
     setDataRevision((prev) => prev + 1);
-  }, [languageSource, localeSeparator, loadProgress]);
+  }, [languageSource, localeSeparator, loadingStage]);
 
-  const dataContext = useMemo(
+  const dataContextBase = useMemo(
     () => ({
       ...coreData,
-      loadingStage: loadProgress,
-      dataRevision,
       getEntity,
       getLanguage,
       getCLDRLanguage,
@@ -145,22 +143,27 @@ const DataProvider: React.FC<{
       getOrganization,
       getTechnology,
     }),
-    [coreData, loadProgress, dataRevision],
+    [coreData],
   );
 
   // After the main load, load additional data
   useEffect(() => {
-    if (loadProgress === LoadingStage.HasCoreData) {
-      const loadSecondaryData = async (dataContext: DataContextType) => {
-        await loadSupplementalData(dataContext);
-        setLoadProgress(LoadingStage.HasSupplementalData);
+    if (loadingStage === LoadingStage.HasCoreData) {
+      const loadSecondaryData = async (dataContext: CoreDataArrays & DataGetters) => {
+        await loadSupplementalData(dataContext).then(() => {
+          setLoadingStage(LoadingStage.HasSupplementalData);
+        });
       };
 
-      loadSecondaryData(dataContext);
+      loadSecondaryData(dataContextBase);
     }
-  }, [dataContext, loadProgress]); // this is called once after page load
+  }, [dataContextBase, loadingStage]); // this is called once after page load
 
-  return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
+  return (
+    <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision }}>
+      {children}
+    </DataContext.Provider>
+  );
 };
 
 export default DataProvider;

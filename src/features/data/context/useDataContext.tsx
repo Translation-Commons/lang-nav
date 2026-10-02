@@ -13,7 +13,7 @@ import type { CoreDataArrays } from '../load/CoreData';
 
 import LoadingStage from './LoadingStage';
 
-type DataGetters = {
+export type DataGetters = {
   getEntity(id: string): EntityData | undefined;
   getLanguage: (id: string) => LanguageData | undefined;
   getCLDRLanguage: (id: string) => LanguageData | undefined;
@@ -25,12 +25,14 @@ type DataGetters = {
   getTechnology: (id: string) => TechnologyData | undefined;
 };
 
-export type DataContextType = CoreDataArrays &
-  DataGetters & { loadingStage: LoadingStage; dataRevision: number };
+export type DataVersionInfo = {
+  loadingStage: LoadingStage;
+  dataRevision: number;
+};
+
+export type DataContextType = CoreDataArrays & DataGetters & DataVersionInfo;
 
 export const DataContext = createContext<DataContextType | undefined>({
-  loadingStage: LoadingStage.Initial,
-  dataRevision: -1,
   languages: [],
   censuses: {},
   organizations: [],
@@ -41,6 +43,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   orthographies: [],
   keyboards: [],
   technologies: [],
+
   getCLDRLanguage: () => undefined,
   getEntity: () => undefined,
   getLanguage: () => undefined,
@@ -50,6 +53,9 @@ export const DataContext = createContext<DataContextType | undefined>({
   getVariant: () => undefined,
   getOrganization: () => undefined,
   getTechnology: () => undefined,
+
+  loadingStage: LoadingStage.Initial,
+  dataRevision: -1,
 });
 
 export const useDataContext = () => {

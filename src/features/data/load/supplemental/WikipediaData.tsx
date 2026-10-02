@@ -7,9 +7,9 @@ import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleP
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import { ScriptCode } from '@entities/writingsystem/WritingSystemTypes';
 
-import { DataContextType } from '../../context/useDataContext';
+import { DataGetters } from '../../context/useDataContext';
 
-export async function loadAndApplyWikipediaData(dataContext: DataContextType): Promise<void> {
+export async function loadAndApplyWikipediaData(dataContext: DataGetters): Promise<void> {
   const wikiData = await loadWikipediaData();
   if (wikiData) {
     applyWikipediaData(dataContext.getLanguage, dataContext.getLocale, wikiData);

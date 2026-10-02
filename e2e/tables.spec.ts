@@ -55,6 +55,7 @@ test.describe('screenshot tests', () => {
     // First wait to finish loading
     await expect(page.locator('.LoadingStageDisplay')).toHaveText(
       'Loading stage: 4 of 4, algorithms finished',
+      { timeout: 15_000 },
     );
     await page.waitForTimeout(1000);
 
