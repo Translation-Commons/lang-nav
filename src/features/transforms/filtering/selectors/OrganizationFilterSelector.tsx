@@ -28,7 +28,7 @@ const OrganizationFilterSelector: React.FC<Props> = ({ showButtons = true }) => 
       return score;
     };
     const getMatchGroup = (org: OrganizationData): string => {
-      if (!filters[Field.TerritoryList](org)) return 'not ' + filterLabels.territoryFilter;
+      if (!filters[Field.TerritoryList](org)) return 'not ' + filterLabels[Field.TerritoryList];
       return '';
     };
 

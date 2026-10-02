@@ -32,8 +32,8 @@ const LanguageFamilyFilterSelector: React.FC = () => {
     const getMatchGroup = (language: LanguageData): string => {
       if (language.scope === LanguageScope.Subfamily) return 'subfamily';
       if (language.scope === LanguageScope.BroadGrouping) return 'broad grouping';
-      if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterByLanguageSource(language)) return 'not ' + filterLabels.languageSource;
+      if (!filterByTerritory(language)) return 'not ' + filterLabels[Field.TerritoryList];
+      if (!filterByLanguageSource(language)) return 'not ' + filterLabels[Field.SourceForLanguage];
       return 'matched';
     };
 

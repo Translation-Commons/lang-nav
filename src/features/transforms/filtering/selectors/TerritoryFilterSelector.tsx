@@ -30,9 +30,10 @@ const TerritoryFilterSelector: React.FC<Props> = ({ showButtons = true }) => {
       return score;
     };
     const getMatchGroup = (territory: TerritoryData): string => {
-      if (!filters[Field.TerritoryScope](territory)) return 'not ' + filterLabels.territoryScope;
+      if (!filters[Field.TerritoryScope](territory))
+        return 'not ' + filterLabels[Field.TerritoryScope];
       if (!filters[Field.LanguageFamily](territory))
-        return 'not ' + filterLabels.languageFamilyFilter;
+        return 'not ' + filterLabels[Field.LanguageFamily];
       return 'matched';
     };
 

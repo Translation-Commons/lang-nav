@@ -21,6 +21,8 @@ import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
+import Field from '../fields/Field';
+
 import { useFilterLabels } from './FilterLabels';
 
 /**
@@ -88,7 +90,7 @@ const FilterPath: React.FC = () => {
     ),
     territoryFilter !== '' && (
       <>
-        {filterLabels.territoryFilter}
+        {filterLabels[Field.TerritoryList]}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ territoryFilter: '' })}
@@ -101,7 +103,7 @@ const FilterPath: React.FC = () => {
     ),
     writingSystemFilter !== '' && (
       <>
-        {filterLabels.writingSystemFilter}
+        {filterLabels[Field.WritingSystem]}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ writingSystemFilter: '' })}
@@ -114,7 +116,7 @@ const FilterPath: React.FC = () => {
     ),
     languageFilter !== '' && (
       <>
-        {filterLabels.languageFilter}
+        {filterLabels[Field.LanguageList]}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ languageFilter: '' })}
@@ -127,7 +129,7 @@ const FilterPath: React.FC = () => {
     ),
     languageFamilyFilter !== '' && (
       <>
-        {filterLabels.languageFamilyFilter}
+        {filterLabels[Field.LanguageFamily]}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ languageFamilyFilter: '' })}

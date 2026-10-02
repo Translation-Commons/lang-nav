@@ -23,13 +23,15 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
 
   const getMatchGroup = useCallback(
     (ent: EntityData): string => {
-      if (!filterBy[Field.LanguageFamily]?.(ent)) return 'not ' + filterLabels.languageFamilyFilter;
-      if (!filterBy[Field.LanguageList]?.(ent)) return 'not ' + filterLabels.languageFilter;
-      if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterBy[Field.TerritoryList]?.(ent)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterBy[Field.TerritoryScope]?.(ent)) return 'not ' + filterLabels.territoryScope;
-      if (!filterBy[Field.Modality]?.(ent)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterBy[Field.LanguageScope]?.(ent)) return 'not ' + filterLabels.languageScope;
+      if (!filterBy[Field.LanguageFamily]?.(ent))
+        return 'not ' + filterLabels[Field.LanguageFamily];
+      if (!filterBy[Field.LanguageList]?.(ent)) return 'not ' + filterLabels[Field.LanguageList];
+      if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels[Field.WritingSystem];
+      if (!filterBy[Field.TerritoryList]?.(ent)) return 'not ' + filterLabels[Field.TerritoryList];
+      if (!filterBy[Field.TerritoryScope]?.(ent))
+        return 'not ' + filterLabels[Field.TerritoryScope];
+      if (!filterBy[Field.Modality]?.(ent)) return 'not ' + filterLabels[Field.Modality];
+      if (!filterBy[Field.LanguageScope]?.(ent)) return 'not ' + filterLabels[Field.LanguageScope];
       return 'matched';
     },
     [

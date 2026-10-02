@@ -2,87 +2,72 @@ import { XIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/EntityTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
+
+import { getFieldLabel } from '@strings/FieldLabelStrings';
 
 import Field from '../fields/Field';
-import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import { useFilterByVitality } from './filter';
 import { useFilterLabels } from './FilterLabels';
 import useFilters from './useFilters';
+import useRemoveFilter from './useRemoveFilter';
 
 type FilterExplanationProps = {
   ents: EntityData[];
   shouldFilterUsingSearchBar?: boolean;
 };
 
+const filterOrder: Field[] = [
+  Field.SourceForLanguage,
+  Field.LanguageScope,
+  Field.Modality,
+  Field.TerritoryScope,
+  Field.TerritoryList,
+  Field.WritingSystem,
+  Field.LanguageFamily,
+  Field.LanguageList,
+  Field.ISOStatus,
+  Field.Population,
+  Field.Organization,
+  Field.Name,
+];
+
+type FieldFilterCounts = {
+  field: Field;
+  nPassed: number;
+  nFiltered: number;
+};
+
 const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   ents,
   shouldFilterUsingSearchBar = true,
 }) => {
-  const { updatePageParams, searchString } = usePageParams();
   const filterBy = useFilters();
-  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByVitality = useFilterByVitality();
-  const filterLabels = useFilterLabels();
-  const filterByPopulation = filterBy.Population;
-
-  const [
-    nInLanguageScope,
-    nInModality,
-    nInTerritoryScope,
-    nInTerritory,
-    nWrittenIn,
-    nInLanguageFamily,
-    nWithLanguage,
-    nInVitality,
-    nMatchingSubstring,
-    nInPopulationRange,
-  ] = useMemo(() => {
-    const filteredByLanguageScope = ents.filter(filterBy[Field.LanguageScope]);
-    const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
-    const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
-    const filteredByTerritory = filteredByTerritoryScope.filter(filterBy[Field.TerritoryList]);
-    const filteredByWritingSystem = filteredByTerritory.filter(filterBy[Field.WritingSystem]);
-    const filteredByLanguageFamily = filteredByWritingSystem.filter(filterBy[Field.LanguageFamily]);
-    const filteredByLanguage = filteredByLanguageFamily.filter(filterBy[Field.LanguageList]);
-    const filteredByVitality = filteredByLanguage.filter(filterByVitality);
-    const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
-    const filteredByPopulation = filteredBySubstring.filter(filterByPopulation);
-    return [
-      filteredByLanguageScope.length,
-      filteredByModality.length,
-      filteredByTerritoryScope.length,
-      filteredByTerritory.length,
-      filteredByWritingSystem.length,
-      filteredByLanguageFamily.length,
-      filteredByLanguage.length,
-      filteredByVitality.length,
-      filteredBySubstring.length,
-      filteredByPopulation.length,
-    ];
-  }, [ents, filterBy, filterByVitality, filterBySubstring, filterByPopulation]);
-
   const nOverall = ents.length;
-  const nFilteredByLanguageScope = nOverall - nInLanguageScope;
-  const nFilteredByModality = nInLanguageScope - nInModality;
-  const nFilteredByTerritoryScope = nInModality - nInTerritoryScope;
-  const nFilteredByTerritory = nInTerritoryScope - nInTerritory;
-  const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
-  const nFilteredByLanguageFamily = nWrittenIn - nInLanguageFamily;
-  const nFilteredByLanguage = nInLanguageFamily - nWithLanguage;
-  const nFilteredByVitality = nWithLanguage - nInVitality;
-  const nFilteredBySubstring = nInVitality - nMatchingSubstring;
-  const nFilteredByPopulation = nMatchingSubstring - nInPopulationRange;
-  if (nOverall === 0) {
-    return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
-  }
+  const entType = ents[0]?.type ?? EntityType.Language;
+  const removeFilter = useRemoveFilter();
+  const filterLabels = useFilterLabels();
+
+  const filterCounts = useMemo(
+    () =>
+      filterOrder.reduce(
+        ({ ents, counts }, field) => {
+          const filtered = ents.filter(filterBy[field]);
+          const nPassed = filtered.length;
+          const nFiltered = ents.length - nPassed;
+          counts.push({ field, nPassed, nFiltered });
+          return { ents: filtered, counts };
+        },
+        { ents, counts: [] as FieldFilterCounts[] },
+      ).counts,
+    [ents, filterBy],
+  );
+  const nPassedAll = filterCounts[filterCounts.length - 1]?.nPassed;
 
   // Return an empty component if nothing was filtered
-  if (nOverall === nInPopulationRange) return null;
+  if (nOverall === nPassedAll) return null;
 
   return (
     <table style={{ textAlign: 'left' }}>
@@ -91,177 +76,31 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           <td>All {getEntityTypeLabelPlural(ents[0].type)}</td>
           <td className="count">{nOverall.toLocaleString()}</td>
         </tr>
-        {nFilteredByLanguageScope > 0 && (
-          <tr>
-            <td>Not {filterLabels.languageScope}:</td>
-            <td className="count">{(nFilteredByLanguageScope * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the language scope filter"
-                onClick={() => updatePageParams({ languageScopes: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByModality > 0 && (
-          <tr>
-            <td>Not {filterLabels.modalityFilter}:</td>
-            <td className="count">{(nFilteredByModality * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the modality filter"
-                onClick={() => updatePageParams({ modalityFilter: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByTerritoryScope > 0 && (
-          <tr>
-            <td>Not {filterLabels.territoryScope}:</td>
-            <td className="count">{(nFilteredByTerritoryScope * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the territory scope filter"
-                onClick={() => updatePageParams({ territoryScopes: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByTerritory > 0 && (
-          <tr>
-            <td>Not {filterLabels.territoryFilter}:</td>
-            <td className="count">{(nFilteredByTerritory * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the territory filter"
-                onClick={() => updatePageParams({ territoryFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByWritingSystem > 0 && (
-          <tr>
-            <td>Not {filterLabels.writingSystemFilter}:</td>
-            <td className="count">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the writing system filter"
-                onClick={() => updatePageParams({ writingSystemFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByLanguageFamily > 0 && (
-          <tr>
-            <td>Not {filterLabels.languageFamilyFilter}:</td>
-            <td className="count">{(nFilteredByLanguageFamily * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the language family filter"
-                onClick={() => updatePageParams({ languageFamilyFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByLanguage > 0 && (
-          <tr>
-            <td>Not {filterLabels.languageFilter}:</td>
-            <td className="count">{(nFilteredByLanguage * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the language filter"
-                onClick={() => updatePageParams({ languageFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByVitality > 0 && (
-          <tr>
-            <td>Not passing vitality filter:</td>
-            <td className="count">{(nFilteredByVitality * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the vitality filters"
-                onClick={() => updatePageParams({ isoStatus: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredBySubstring > 0 && (
-          <tr>
-            <td>Not matching substring &quot;{searchString}&quot;:</td>
-            <td className="count">{(nFilteredBySubstring * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the search string filter"
-                onClick={() => updatePageParams({ searchString: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
-        )}
-        {nFilteredByPopulation > 0 && (
-          <tr>
-            <td>Not passing population filter:</td>
-            <td className="count">{(nFilteredByPopulation * -1).toLocaleString()}</td>
-            <td>
-              <HoverableButton
-                buttonType="reset"
-                hoverContent="Clear the population filters"
-                onClick={() =>
-                  updatePageParams({
-                    populationMin: undefined,
-                    populationMax: undefined,
-                  })
-                }
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
-              >
-                <XIcon size="1em" display="block" />
-              </HoverableButton>
-            </td>
-          </tr>
+        {filterCounts.map(
+          ({ field, nFiltered }) =>
+            nFiltered > 0 && (
+              <tr key={field}>
+                <td>Not {filterLabels[field]}</td>
+                <td className="count">{(nFiltered * -1).toLocaleString()}</td>
+                <td>
+                  <HoverableButton
+                    buttonType="reset"
+                    hoverContent={`Clear the ${getFieldLabel(field, entType)} filter`}
+                    onClick={() => removeFilter(field)}
+                    style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                  >
+                    <XIcon size="1em" display="block" />
+                  </HoverableButton>
+                </td>
+              </tr>
+            ),
         )}
         <tr>
           <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
             Results
           </td>
           <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nInPopulationRange.toLocaleString()}
+            {nPassedAll.toLocaleString()}
           </td>
         </tr>
       </tbody>
