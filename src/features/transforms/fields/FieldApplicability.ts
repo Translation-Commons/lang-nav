@@ -452,7 +452,16 @@ function getFieldsForEntityType(entType: EntityType): Field[] {
 export function getApplicableFields(transform?: Transform, entType?: EntityType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
   const entFields = entType ? getFieldsForEntityType(entType) : Object.values(Field);
-  return transformFields.filter((f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f));
+  const applicableFields = transformFields.filter(
+    (f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f),
+  );
+
+  // Special case because filters use a fixed subset of fields and ents without interesting lists may still have a primary connection
+  if (transform === Transform.Filter) {
+    if (entFields.includes(Field.LanguagePrimary)) applicableFields.push(Field.LanguageList);
+    if (entFields.includes(Field.TerritoryPrimary)) applicableFields.push(Field.TerritoryList);
+  }
+  return unique(applicableFields);
 }
 
 export function isFieldApplicable(

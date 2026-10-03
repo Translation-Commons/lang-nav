@@ -22,11 +22,16 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
 
+const mockedLanguages = getMockLanguages();
+
 // mock useDataContext to return languages
 vi.mock('@features/data/context/useDataContext', () => ({
   // [ine, gem, eng, spa, fra, deu, ita, rus, nav, zho]
   useDataContext: vi.fn(() => ({
-    languages: getMockLanguages(),
+    languages: mockedLanguages,
+    getEntity: vi
+      .fn()
+      .mockImplementation((id: string) => mockedLanguages.find((lang) => lang.ID === id)),
   })),
 }));
 

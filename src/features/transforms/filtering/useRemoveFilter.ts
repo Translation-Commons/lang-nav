@@ -14,30 +14,30 @@ const useRemoveFilter = () => {
 
 function getRemoveFilterParams(field: Field): Partial<PageParams> {
   switch (field) {
-    case Field.SourceForLanguage:
-      return { languageSource: undefined };
     case Field.LanguageScope:
       return { languageScopes: [] };
     case Field.Modality:
-      return { modalityFilter: undefined };
+      return { modalityFilter: [] };
     case Field.TerritoryScope:
       return { territoryScopes: [] };
-    case Field.TerritoryList:
-      return { territoryFilter: undefined };
-    case Field.WritingSystem:
-      return { writingSystemFilter: undefined };
-    case Field.LanguageFamily:
-      return { languageFamilyFilter: undefined };
-    case Field.LanguageList:
-      return { languageFilter: undefined };
     case Field.ISOStatus:
-      return { isoStatus: undefined };
+      return { isoStatus: [] };
+    case Field.TerritoryList:
+      return { territoryFilter: '' };
+    case Field.WritingSystem:
+      return { writingSystemFilter: '' };
+    case Field.LanguageFamily:
+      return { languageFamilyFilter: '' };
+    case Field.LanguageList:
+      return { languageFilter: '' };
+    case Field.Name:
+      return { searchString: '' };
+    case Field.Organization:
+      return { orgFilter: '' };
     case Field.Population:
       return { populationMax: undefined, populationMin: undefined };
-    case Field.Name:
-      return { searchString: undefined };
-    case Field.Organization:
-      return { orgFilter: undefined };
+    case Field.SourceForLanguage:
+      return { languageSource: undefined };
     default:
       return {};
   }

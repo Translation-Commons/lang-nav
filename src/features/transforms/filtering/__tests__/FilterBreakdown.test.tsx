@@ -16,6 +16,19 @@ vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
+// Provide the display names used by the filter labels.
+vi.mock('@features/data/context/useDataContext', () => ({
+  useDataContext: () => ({
+    getEntity: (id: string) => {
+      const names: Record<string, string> = {
+        US: 'United States',
+        ine: 'Indo-European',
+        Latn: 'Latin',
+      };
+      return names[id] ? { nameDisplay: names[id] } : undefined;
+    },
+  }),
+}));
 
 describe('FilterBreakdown', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
@@ -27,18 +40,28 @@ describe('FilterBreakdown', () => {
     updatePageParams = mockUsePageParams.updatePageParams;
   };
 
+  const expectRow = (text: string, exists: boolean = true) => {
+    if (exists) {
+      expect(screen.getByRole('cell', { name: new RegExp(text) })).toBeTruthy();
+    } else {
+      expect(
+        screen.queryByText(
+          (_, element) =>
+            element?.tagName === 'TD' &&
+            RegExp('Not\\s*' + text, 'i').test(element.textContent ?? ''),
+        ),
+      ).toBeNull();
+    }
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     setupMockParams();
   });
 
-  it('shows loading message when no entities are provided', () => {
-    render(<FilterBreakdown ents={[]} />);
-    expect(
-      screen.getByText(
-        /Data is still loading\. If you are waiting awhile there could be an error in the data\./i,
-      ),
-    ).toBeTruthy();
+  it('renders nothing when no entities are provided', () => {
+    const { container } = render(<FilterBreakdown ents={[]} />);
+    expect(container.firstChild).toBeNull();
   });
 
   it('returns an empty fragment when nothing is filtered', () => {
@@ -69,12 +92,12 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown ents={ents} />);
 
     // Expected all of the filters to be shown
-    expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
-    expect(screen.getByText(/Not found in territory with code "US":/i)).toBeTruthy();
-    expect(screen.getByText(/Not written in script with code "Latn":/i)).toBeTruthy();
-    expect(screen.getByText(/Not related to language family with code "ine":/i)).toBeTruthy();
-    expect(screen.getByText(/Not passing vitality filter:/i)).toBeTruthy();
-    expect(screen.getByText(/Not matching substring "spa":/i)).toBeTruthy();
+    expectRow('Macrolanguage or Individual Language');
+    expectRow('found in United States');
+    expectRow('written in Latin');
+    expectRow('related to Indo-European');
+    expectRow('Living');
+    expectRow('Code & All Names matching "spa"');
 
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('count');
@@ -116,7 +139,7 @@ describe('FilterBreakdown', () => {
     render(<FilterBreakdown ents={ents} shouldFilterUsingSearchBar={false} />);
 
     // Since substring filtering is disabled, the "Not matching substring" line should not be present
-    expect(screen.queryByText(/Not matching substring/i)).toBeNull();
+    expectRow('Code & All Names matching "spa"', false);
 
     // Other counts should not indicate substring filtering; there should be no substring clear button
     const buttons = screen.getAllByRole('button');
@@ -133,12 +156,12 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown ents={ents} />);
 
     // No filters are applied, so no breakdown should be shown
-    expect(screen.queryByText(/Not macrolanguage or individual language:/i)).toBeTruthy(); // ine
-    expect(screen.queryByText(/Not found in territory/i)).toBeNull(); // not active
-    expect(screen.queryByText(/Not written in/i)).toBeNull(); // not active
-    expect(screen.queryByText(/Not related to/i)).toBeNull(); // not active
-    expect(screen.queryByText(/Not passing vitality filter/i)).toBeNull(); // not active
-    expect(screen.queryByText(/Not matching substring/i)).toBeNull(); // not active
+    expectRow('Macrolanguage or Individual Language');
+    expectRow('found in territory', false);
+    expectRow('written in', false);
+    expectRow('related to', false);
+    expectRow('Living', false);
+    expectRow('matching substring', false);
 
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('count');
@@ -159,10 +182,10 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown ents={ents} />);
 
     // Expected all of the filters to be shown
-    expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
-    expect(screen.getByText(/Not found in United States:/i)).toBeTruthy();
-    expect(screen.getByText(/Not written in Latin:/i)).toBeTruthy();
-    expect(screen.getByText(/Not related to Indo-European:/i)).toBeTruthy();
+    expectRow('Macrolanguage or Individual Language');
+    expectRow('found in United States');
+    expectRow('written in Latin');
+    expectRow('related to Indo-European');
 
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('count');

@@ -15,6 +15,13 @@ vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
 
+vi.mock('react-router-dom', () => ({
+  Navigate: vi.fn(),
+  Route: vi.fn(),
+  Routes: vi.fn(),
+  useLocation: vi.fn(() => ({ pathname: '/data' })),
+}));
+
 describe('ActiveFilterButtons', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
 
@@ -27,7 +34,7 @@ describe('ActiveFilterButtons', () => {
 
   // Helper function to eliminate clear button interaction duplication
   const clickClearButton = () => {
-    const clearButton = screen.getByRole('button', { name: 'reset' });
+    const clearButton = screen.getByTestId('remove-filter-button');
     fireEvent.click(clearButton);
   };
 
@@ -35,7 +42,13 @@ describe('ActiveFilterButtons', () => {
     setupMockParams();
   });
 
-  it('shows "No filters applied" when no filters are active', () => {
+  it('shows the language scope filter by default', () => {
+    render(<ActiveFilterButtons />);
+    expect(screen.getByText(/Macrolanguage or Individual Language/)).toBeInTheDocument();
+  });
+
+  it('shows "No filters applied" when all filters are off', () => {
+    setupMockParams({ languageScopes: [] });
     render(<ActiveFilterButtons />);
     expect(screen.getByText('No filters applied')).toBeInTheDocument();
   });
@@ -43,7 +56,7 @@ describe('ActiveFilterButtons', () => {
   it('displays multiple values within same vitality type', () => {
     setupMockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
     render(<ActiveFilterButtons />);
-    expect(screen.getByText(/Living, or Constructed/)).toBeInTheDocument();
+    expect(screen.getByText(/Living or Constructed/)).toBeInTheDocument();
   });
 
   it('displays and clears territory filter', () => {
@@ -60,7 +73,7 @@ describe('ActiveFilterButtons', () => {
       searchBy: SearchableField.NameAny,
     });
     render(<ActiveFilterButtons />);
-    expect(screen.getByText(/contains/)).toBeInTheDocument();
+    expect(screen.getByText(/matching/)).toBeInTheDocument();
     expect(screen.getByText(/TestSearch/)).toBeInTheDocument();
     clickClearButton();
     expect(updatePageParams).toHaveBeenCalledWith({ searchString: '' });
