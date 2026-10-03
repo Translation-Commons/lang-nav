@@ -1,5 +1,7 @@
+import { ChevronDownIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
+import { joinOxfordComma } from '@shared/lib/stringUtils';
 import { Button } from '@shared/ui/button';
 import {
   DropdownMenu,
@@ -32,17 +34,17 @@ function EnumDropdownMultiSelect<T extends React.Key>({
     },
     [value, onChange],
   );
+  let buttonLabel = joinOxfordComma(value.map(getLabel), 'or');
+  if (value.length === 0) buttonLabel = noneSelectedLabel;
+  if (value.length === options.length) buttonLabel = allSelectedLabel;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
-            <div className="max-w-30 truncate text-ellipsis">
-              {value.length === 0 && noneSelectedLabel}
-              {value.length === options.length && allSelectedLabel}
-              {value.length > 0 && value.length < options.length && value.map(getLabel).join(', ')}
-            </div>
+          <Button className="cursor-pointer" variant="outline" title={buttonLabel}>
+            <div className="max-w-30 truncate text-ellipsis">{buttonLabel}</div>
+            <ChevronDownIcon />
           </Button>
         }
       />

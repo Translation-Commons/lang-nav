@@ -2,10 +2,7 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import {
-  getApplicableFields,
-  isFieldApplicable,
-} from '@features/transforms/fields/FieldApplicability';
+import { getFilterFields, isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import TransformEnum from '@features/transforms/TransformEnum';
 
@@ -96,13 +93,9 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { entType } = usePageParams();
-  const filterFields = getApplicableFields(TransformEnum.Filter);
-  const [primaryFilters, otherFilters] = partition(
-    filterFields,
-    (f) =>
-      isFieldApplicable(f, undefined, entType) ||
-      (f === Field.LanguageList && isFieldApplicable(Field.LanguagePrimary, undefined, entType)) ||
-      (f === Field.TerritoryList && isFieldApplicable(Field.TerritoryPrimary, undefined, entType)),
+  const filterFields = getFilterFields();
+  const [primaryFilters, otherFilters] = partition(filterFields, (f) =>
+    isFieldApplicable(f, TransformEnum.Filter, entType),
   );
 
   return (

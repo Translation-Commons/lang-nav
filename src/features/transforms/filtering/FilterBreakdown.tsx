@@ -9,6 +9,7 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { getFieldLabel } from '@strings/FieldLabelStrings';
 
 import Field from '../fields/Field';
+import { FilterField } from '../fields/FieldApplicability';
 
 import { useFilterLabels } from './FilterLabels';
 import useFilters from './useFilters';
@@ -19,7 +20,7 @@ type FilterExplanationProps = {
   shouldFilterUsingSearchBar?: boolean;
 };
 
-const filterOrder: Field[] = [
+const filterOrder: FilterField[] = [
   Field.SourceForLanguage,
   Field.LanguageScope,
   Field.Modality,
@@ -35,7 +36,7 @@ const filterOrder: Field[] = [
 ];
 
 type FieldFilterCounts = {
-  field: Field;
+  field: FilterField;
   nPassed: number;
   nFiltered: number;
 };
@@ -54,6 +55,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     () =>
       filterOrder.reduce(
         ({ ents, counts }, field) => {
+          if (field === Field.Name && !shouldFilterUsingSearchBar) return { ents, counts };
+
           const filtered = ents.filter(filterBy[field]);
           const nPassed = filtered.length;
           const nFiltered = ents.length - nPassed;
@@ -62,7 +65,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         },
         { ents, counts: [] as FieldFilterCounts[] },
       ).counts,
-    [ents, filterBy],
+    [ents, filterBy, shouldFilterUsingSearchBar],
   );
   const nPassedAll = filterCounts[filterCounts.length - 1]?.nPassed;
 

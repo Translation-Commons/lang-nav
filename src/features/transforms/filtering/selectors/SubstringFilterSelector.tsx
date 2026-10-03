@@ -22,7 +22,7 @@ const SubstringFilterSelector = () => {
   }, [localString]);
 
   return (
-    <>
+    <div className="flex flex-col gap-1">
       <div className="flex text-xs items-center gap-2">
         Search by
         <EnumDropdown<SearchableField>
@@ -36,7 +36,7 @@ const SubstringFilterSelector = () => {
         value={localString}
         onChange={(e) => setLocalString(e.target.value)}
       />
-    </>
+    </div>
   );
 };
 

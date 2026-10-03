@@ -2,18 +2,23 @@ import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
+import { POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
+
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { joinOxfordComma } from '@shared/lib/stringUtils';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import Field from '../fields/Field';
+import { FilterField } from '../fields/FieldApplicability';
 
-export function useFilterLabels(): Partial<Record<Field, string>> {
+export function useFilterLabels(): Record<FilterField, string> {
   const params = usePageParams();
   const { getEntity } = useDataContext();
   const filterLabels = useMemo(
@@ -38,17 +43,20 @@ export function useFilterLabels(): Partial<Record<Field, string>> {
 
 function getModalityFilterLabel({ modalityFilter }: PageParamsContextState): string {
   if (modalityFilter.length === 0) return 'any modality';
-  return modalityFilter.map((m) => getModalityLabel(m) ?? 'modality').join(' or ');
+  return joinOxfordComma(
+    modalityFilter.map((m) => getModalityLabel(m) ?? 'modality'),
+    'or',
+  );
 }
 
 function getLanguageScopesLabel({ languageScopes }: PageParamsContextState): string {
   if (languageScopes.length === 0) return 'any languoid';
-  return languageScopes.map(getLanguageScopeLabel).join(' or ').toLowerCase();
+  return joinOxfordComma(languageScopes.map(getLanguageScopeLabel), 'or');
 }
 
 function getTerritoryScopesLabel({ territoryScopes }: PageParamsContextState): string {
   if (territoryScopes.length === 0) return 'any territory';
-  return territoryScopes.map(getTerritoryScopeLabel).join(' or ').toLowerCase();
+  return joinOxfordComma(territoryScopes.map(getTerritoryScopeLabel), 'or');
 }
 
 function getTerritoryFilterLabel(
@@ -123,10 +131,12 @@ function getPopulationFilterLabel({
   populationMin,
   populationMax,
 }: PageParamsContextState): string {
-  if (populationMin == null && populationMax == null) return 'any population';
-  if (populationMin == null) return `with population ≤ "${populationMax}*"`;
-  if (populationMax == null) return `with population ≥ "${populationMin}*"`;
-  return `with population ≥ "${populationMin}" & ≤ "${populationMax}"`;
+  const hasMin = populationMin != null && populationMin >= 0;
+  const hasMax = populationMax != null && populationMax >= 0 && populationMax < POPULATION_MAX;
+  if (!hasMin && !hasMax) return 'any population';
+  if (!hasMin) return `with population ≤ ${populationMax.toLocaleString()}`;
+  if (!hasMax) return `with population ≥ ${populationMin.toLocaleString()}`;
+  return `with population ≥ ${populationMin.toLocaleString()} & ≤ ${populationMax.toLocaleString()}`;
 }
 
 function getOrganizationFilterLabel(
@@ -142,15 +152,15 @@ function getOrganizationFilterLabel(
 function getISOStatusFilterLabel({ isoStatus }: PageParamsContextState): string {
   if (!isoStatus) return 'any ISO status';
   const statuses = isoStatus.map((s) => getLanguageISOStatusLabel(s));
-  return `${statuses.join(', ')}`;
+  return `${joinOxfordComma(statuses)}`;
 }
 
-function getNameFilterLabel({ searchString }: PageParamsContextState): string {
+function getNameFilterLabel({ searchString, searchBy }: PageParamsContextState): string {
   if (!searchString) return 'any name';
-  return `matching ${searchString}*`;
+  return `${searchBy} matching "${searchString}"`;
 }
 
-export function getFilterTitle(field: Field, entType?: EntityType): string {
+export function getFilterTitle(field: FilterField, entType?: EntityType): string {
   switch (field) {
     case Field.Modality:
       return 'Language Use';
@@ -182,6 +192,6 @@ export function getFilterTitle(field: Field, entType?: EntityType): string {
     case Field.Name:
       return 'Name';
     default:
-      return 'Unknown Filter';
+      enforceExhaustiveSwitch(field);
   }
 }

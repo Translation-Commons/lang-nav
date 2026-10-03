@@ -17,11 +17,11 @@ function getRemoveFilterParams(field: Field): Partial<PageParams> {
     case Field.SourceForLanguage:
       return { languageSource: undefined };
     case Field.LanguageScope:
-      return { languageScopes: undefined };
+      return { languageScopes: [] };
     case Field.Modality:
       return { modalityFilter: undefined };
     case Field.TerritoryScope:
-      return { territoryScopes: undefined };
+      return { territoryScopes: [] };
     case Field.TerritoryList:
       return { territoryFilter: undefined };
     case Field.WritingSystem:
