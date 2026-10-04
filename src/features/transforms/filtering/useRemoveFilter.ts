@@ -1,6 +1,8 @@
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { LanguageSource } from '@entities/language/LanguageTypes';
+
 import Field from '../fields/Field';
 
 const useRemoveFilter = () => {
@@ -37,7 +39,7 @@ function getRemoveFilterParams(field: Field): Partial<PageParams> {
     case Field.Population:
       return { populationMax: undefined, populationMin: undefined };
     case Field.SourceForLanguage:
-      return { languageSource: undefined };
+      return { languageSource: LanguageSource.Combined };
     default:
       return {};
   }

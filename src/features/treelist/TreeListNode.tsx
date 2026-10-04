@@ -45,7 +45,12 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false, 
   if (
     searchString != '' &&
     view === View.Hierarchy &&
-    [SearchableField.Code, SearchableField.CodeOrNameAny].includes(searchBy)
+    [
+      SearchableField.Code,
+      SearchableField.CodeISO,
+      SearchableField.CodeGlottolog,
+      SearchableField.CodeOrNameAny,
+    ].includes(searchBy)
   ) {
     showEntIDs = true;
   }

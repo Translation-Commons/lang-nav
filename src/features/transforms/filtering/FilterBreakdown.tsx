@@ -67,7 +67,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       ).counts,
     [ents, filterBy, shouldFilterUsingSearchBar],
   );
-  const nPassedAll = filterCounts[filterCounts.length - 1]?.nPassed;
+  const nPassedAll = filterCounts[filterCounts.length - 1]?.nPassed ?? nOverall;
 
   // Return an empty component if nothing was filtered
   if (nOverall === nPassedAll) return null;

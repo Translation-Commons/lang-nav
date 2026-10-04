@@ -16,6 +16,12 @@ export default function getSearchableField(
       return ent.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? '';
     case SearchableField.Code:
       return ent.codeDisplay;
+    case SearchableField.CodeISO:
+      if (ent.type === EntityType.Language) return ent.ISO?.code ?? '';
+      if (ent.type === EntityType.Territory) return ent.ID.length === 2 ? ent.ID : '';
+      return '';
+    case SearchableField.CodeGlottolog:
+      return ent.type === EntityType.Language ? (ent.Glottolog?.code ?? '') : '';
     case SearchableField.NameEndonym:
       return ent.nameEndonym ?? '';
     case SearchableField.NameDisplay:

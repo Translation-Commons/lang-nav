@@ -106,23 +106,25 @@ function FilterToggle({ field }: { field: FilterField }) {
   const filterLabels = useFilterLabels();
   return (
     <Popover>
-      <PopoverTrigger>
-        {/* Would be a button but buttons cannot contain buttons */}
-        <div
-          className="rounded-md py-1 pr-1 pl-2 flex flex-row gap-1 items-center font-medium border border-border hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30"
-          title={filterLabels[field]}
-        >
-          <div className="max-w-40 truncate text-ellipsis">{filterLabels[field]}</div>
-          <Button
-            data-testid="remove-filter-button"
-            onClick={() => removeFilter(field)}
-            variant="ghost"
-            className="size-5 hover:bg-gray-200"
+      <PopoverTrigger
+        render={
+          // Would be a button but buttons cannot contain buttons
+          <div
+            className="rounded-md py-1 pr-1 pl-2 flex flex-row gap-1 items-center font-medium border border-border hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30 cursor-pointer"
+            title={filterLabels[field]}
           >
-            <XIcon />
-          </Button>
-        </div>
-      </PopoverTrigger>
+            <div className="max-w-40 truncate text-ellipsis">{filterLabels[field]}</div>
+            <Button
+              data-testid="remove-filter-button"
+              onClick={() => removeFilter(field)}
+              variant="ghost"
+              className="size-5 hover:bg-gray-200"
+            >
+              <XIcon />
+            </Button>
+          </div>
+        }
+      />
       <PopoverContent>
         <FilterSelector field={field} />
       </PopoverContent>

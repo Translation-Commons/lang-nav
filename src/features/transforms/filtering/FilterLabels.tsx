@@ -36,7 +36,7 @@ export function useFilterLabels(): Record<FilterField, string> {
       [Field.ISOStatus]: getISOStatusFilterLabel(params),
       [Field.Name]: getNameFilterLabel(params),
     }),
-    [params],
+    [params, getEntity],
   );
   return filterLabels;
 }
