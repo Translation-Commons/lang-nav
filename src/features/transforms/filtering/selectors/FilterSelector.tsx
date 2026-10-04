@@ -2,9 +2,8 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
+import { getFilterFields, isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
-import SearchCombobox from '@features/transforms/search/SearchCombobox';
 import TransformEnum from '@features/transforms/TransformEnum';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
@@ -13,6 +12,7 @@ import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
+import { partition } from '@shared/lib/setUtils';
 import EnumButtonsMultiSelect from '@shared/ui/EnumButtonsMultiSelect';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
@@ -25,6 +25,7 @@ import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
 import OrganizationFilterSelector from './OrganizationFilterSelector';
 import PopulationFilterSelector from './PopulationFilterSelector';
+import SubstringFilterSelector from './SubstringFilterSelector';
 import TerritoryFilterSelector from './TerritoryFilterSelector';
 import WritingSystemFilterSelector from './WritingSystemFilterSelector';
 
@@ -73,7 +74,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
         />
       );
     case Field.Name:
-      return <SearchCombobox />; // Technically correct but not recommended usage
+      return <SubstringFilterSelector />;
     case Field.SourceForLanguage:
       return <LanguageSourceSelector />;
     case Field.Population:
@@ -92,23 +93,10 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { entType } = usePageParams();
-  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entType).filter(
-    (f) => f !== Field.Name, // This should not return the search bar
+  const filterFields = getFilterFields();
+  const [primaryFilters, otherFilters] = partition(filterFields, (f) =>
+    isFieldApplicable(f, TransformEnum.Filter, entType),
   );
-  let otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(
-    (f) => !primaryFilters.includes(f) && f !== Field.Name,
-  );
-
-  // If the language list is empty but there is a primary language, allow that filter
-  const entFields = getApplicableFields(undefined, entType);
-  if (!entFields.includes(Field.LanguageList) && entFields.includes(Field.LanguagePrimary)) {
-    primaryFilters.unshift(Field.LanguageList);
-    otherFilters = otherFilters.filter((f) => f === Field.LanguageList);
-  }
-  if (!entFields.includes(Field.TerritoryList) && entFields.includes(Field.TerritoryPrimary)) {
-    primaryFilters.unshift(Field.TerritoryList);
-    otherFilters = otherFilters.filter((f) => f === Field.TerritoryList);
-  }
 
   return (
     <div className="flex flex-col gap-2">

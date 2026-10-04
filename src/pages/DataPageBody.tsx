@@ -9,7 +9,7 @@ import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
 import ColorPopupCard from '@features/transforms/coloring/ColorPopupCard';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
-import FilterPath from '@features/transforms/filtering/FilterPath';
+import ActiveFilterButtons from '@features/transforms/filtering/ActiveFilterButtons';
 import ScalePopupCard from '@features/transforms/scales/ScalePopupCard';
 import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
 
@@ -35,7 +35,7 @@ const DataPageBody: React.FC<Props> = ({ sidebarIsOpen, openSidebar }) => {
         <div className="flex items-center justify-between w-full mb-4">
           <div className="flex items-center gap-2 text-sm">
             <ResultCount />
-            <FilterPath />
+            <ActiveFilterButtons />
             {!sidebarIsOpen && (
               <Button variant="outline" style={{ padding: '0.25em' }} onClick={openSidebar}>
                 <PlusIcon />

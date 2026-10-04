@@ -26,12 +26,12 @@ function EnumDropdown<T extends React.Key>({
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline" role="dropdown">
+          <Button className="cursor-pointer min-w-50" variant="outline" role="dropdown">
             <div className="truncate text-ellipsis">{getLabel(value)}</div>
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent className="min-w-40">
         <DropdownMenuRadioGroup value={value} onValueChange={onChange}>
           {options.map((option) => (
             <DropdownMenuRadioItem key={option} value={option} className="cursor-pointer">

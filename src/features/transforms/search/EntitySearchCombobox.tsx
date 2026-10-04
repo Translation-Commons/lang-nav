@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
@@ -41,6 +42,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
   pageParameter,
 }) => {
   const params = usePageParams();
+  const { getEntity } = useDataContext();
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [searchString, setSearchString] = useState(
     (pageParameter && (params[pageParameter] as string)) || '',
@@ -88,6 +90,8 @@ const EntitySearchCombobox: React.FC<Props> = ({
     [suggestions],
   );
 
+  const inputValue = (searchString && getEntity(searchString)?.nameDisplay) ?? searchString;
+
   return (
     <Combobox
       filter={null}
@@ -102,7 +106,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
         placeholder={placeholder}
         aria-label={ariaLabel}
         showClear
-        value={searchString}
+        value={inputValue}
         onChange={(e) => onInputChange(e.target.value)}
       />
       <ComboboxContent>

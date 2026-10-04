@@ -393,25 +393,45 @@ function getFieldsForTransform(transform: Transform): Field[] {
       // TODO integrate search better with field types and/or merge with searching
       return [Field.Name, Field.Code, Field.Endonym];
     case Transform.Filter:
-      // Ordered by preferred UI grouping: connections first, then vitality, then text fields
-      // This also affects which filters happen first
-      return [
-        Field.TerritoryList,
-        Field.WritingSystem,
-        Field.LanguageList,
-        Field.LanguageFamily,
-        Field.SourceForLanguage,
-        Field.Organization,
-        Field.Modality,
-        Field.LanguageScope,
-        Field.TerritoryScope,
-        Field.ISOStatus,
-        Field.Name, // Technically filters name and code right now, depending on SearchBy
-        Field.Population,
-      ];
+      return getFilterFields();
     default:
       return enforceExhaustiveSwitch(transform);
   }
+}
+
+export type FilterField = Extract<
+  Field,
+  | Field.Name
+  | Field.TerritoryList
+  | Field.LanguageList
+  | Field.LanguageFamily
+  | Field.SourceForLanguage
+  | Field.WritingSystem
+  | Field.Organization
+  | Field.Modality
+  | Field.LanguageScope
+  | Field.TerritoryScope
+  | Field.ISOStatus
+  | Field.Population
+>;
+
+// Ordered by preferred UI grouping: search string, then connections, then statuses, then population
+// This also affects which filters happen first
+export function getFilterFields(): FilterField[] {
+  return [
+    Field.Name,
+    Field.TerritoryList,
+    Field.LanguageList,
+    Field.LanguageFamily,
+    Field.SourceForLanguage,
+    Field.WritingSystem,
+    Field.Organization,
+    Field.Modality,
+    Field.LanguageScope,
+    Field.TerritoryScope,
+    Field.ISOStatus,
+    Field.Population,
+  ];
 }
 
 /**
@@ -432,7 +452,16 @@ function getFieldsForEntityType(entType: EntityType): Field[] {
 export function getApplicableFields(transform?: Transform, entType?: EntityType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
   const entFields = entType ? getFieldsForEntityType(entType) : Object.values(Field);
-  return transformFields.filter((f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f));
+  const applicableFields = transformFields.filter(
+    (f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f),
+  );
+
+  // Special case because filters use a fixed subset of fields and ents without interesting lists may still have a primary connection
+  if (transform === Transform.Filter) {
+    if (entFields.includes(Field.LanguagePrimary)) applicableFields.push(Field.LanguageList);
+    if (entFields.includes(Field.TerritoryPrimary)) applicableFields.push(Field.TerritoryList);
+  }
+  return unique(applicableFields);
 }
 
 export function isFieldApplicable(
@@ -440,6 +469,12 @@ export function isFieldApplicable(
   transform?: Transform,
   entType?: EntityType,
 ): boolean {
+  // Special case because filters use a fixed subset of fields and ents without interesting lists may still have a primary connection
+  if (field === Field.LanguageList && transform === Transform.Filter)
+    if (isFieldApplicable(Field.LanguagePrimary, undefined, entType)) return true;
+  if (field === Field.TerritoryList && transform === Transform.Filter)
+    if (isFieldApplicable(Field.TerritoryPrimary, undefined, entType)) return true;
+
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
     (entType ? getFieldsForEntityType(entType).includes(field) : true) &&

@@ -18,15 +18,15 @@ export function toSentenceCase(str: string): string {
     .replace(/([a-z])([A-Z])/g, (_match, p1, p2) => p1 + ' ' + p2.toLowerCase());
 }
 
-export function joinOxfordComma(strs: string[]): string {
+export function joinOxfordComma(strs: string[], union: 'and' | 'or' | '&' = 'and'): string {
   if (strs.length === 0) {
     return '';
   } else if (strs.length === 1) {
     return strs[0];
   } else if (strs.length === 2) {
-    return strs[0] + ' and ' + strs[1];
+    return strs[0] + ' ' + union + ' ' + strs[1];
   }
-  return strs.slice(0, strs.length - 1).join(', ') + ', and ' + strs[strs.length - 1];
+  return strs.slice(0, strs.length - 1).join(', ') + ', ' + union + ' ' + strs[strs.length - 1];
 }
 
 /**

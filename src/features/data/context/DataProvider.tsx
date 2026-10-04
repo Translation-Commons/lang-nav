@@ -131,7 +131,6 @@ const DataProvider: React.FC<{
   // After the main load, load additional data
   useEffect(() => {
     if (loadingStage === LoadingStage.HasCoreData) {
-      console.log('Loading supplemental data...');
       const loadSecondaryData = async (dataContext: CoreDataArrays & DataGetters) => {
         await loadSupplementalData(dataContext)
           .then(() => {
@@ -153,7 +152,6 @@ const DataProvider: React.FC<{
     if (loadingStage < LoadingStage.HasSupplementalData) return; // aren't ready yet
     if (loadingStage === LoadingStage.AlgorithmsFinished) return; // already computed algorithms
 
-    console.log('Computing algorithms...', { languageSource, localeSeparator, loadingStage });
     // Update dependent fields whenever language source or locale separator changes
     updateEntitiesBasedOnDataParams(
       coreData.languages,

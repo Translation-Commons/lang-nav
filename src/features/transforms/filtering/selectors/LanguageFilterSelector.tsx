@@ -34,11 +34,11 @@ const LanguageFilterSelector: React.FC = () => {
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
-      if (!filterByLanguageFamily(language)) return 'not ' + filterLabels.languageFamilyFilter;
-      if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterByScope(language)) return 'not ' + filterLabels.languageScope;
-      if (!filterByLanguageSource(language)) return 'not ' + filterLabels.languageSource;
+      if (!filterByLanguageFamily(language)) return 'not ' + filterLabels[Field.LanguageFamily];
+      if (!filterByWritingSystem(language)) return 'not ' + filterLabels[Field.WritingSystem];
+      if (!filterByTerritory(language)) return 'not ' + filterLabels[Field.TerritoryList];
+      if (!filterByScope(language)) return 'not ' + filterLabels[Field.LanguageScope];
+      if (!filterByLanguageSource(language)) return 'not ' + filterLabels[Field.SourceForLanguage];
       return 'matched';
     };
 
@@ -51,6 +51,7 @@ const LanguageFilterSelector: React.FC = () => {
     );
   }, [
     filterByLanguageFamily,
+    filterByLanguageSource,
     filterByScope,
     filterByTerritory,
     filterByWritingSystem,

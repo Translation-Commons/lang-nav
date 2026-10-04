@@ -79,6 +79,37 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
   }
 }
 
+export function getPageParamKeyFromFilter(field: Field): PageParamKey | undefined {
+  switch (field) {
+    case Field.LanguageList:
+      return PageParamKey.languageFilter;
+    case Field.LanguageFamily:
+      return PageParamKey.languageFamilyFilter;
+    case Field.LanguageScope:
+      return PageParamKey.languageScopes;
+    case Field.TerritoryList:
+      return PageParamKey.territoryFilter;
+    case Field.TerritoryScope:
+      return PageParamKey.territoryScopes;
+    case Field.WritingSystem:
+      return PageParamKey.writingSystemFilter;
+    case Field.Organization:
+      return PageParamKey.orgFilter;
+    case Field.Population:
+      return PageParamKey.populationMin; // Could also be populationMax
+    case Field.SourceForLanguage:
+      return PageParamKey.languageSource;
+    case Field.Modality:
+      return PageParamKey.modalityFilter;
+    case Field.ISOStatus:
+      return PageParamKey.isoStatus;
+    case Field.Name:
+      return PageParamKey.searchString;
+    default:
+      return undefined;
+  }
+}
+
 export function getFilterLabelByPageParam(
   pageParameter: PageParamKey,
   filteringEntType: EntityType,

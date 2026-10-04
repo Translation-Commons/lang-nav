@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParams, SearchableField } from '@features/params/PageParamTypes';
@@ -9,30 +8,21 @@ import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import FilterPath from '../FilterPath';
+import ActiveFilterButtons from '../ActiveFilterButtons';
 
 // Mock hooks and components
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
 
-vi.mock('@features/layers/hovercard/HoverableButton', () => ({
-  default: ({
-    children,
-    onClick,
-    buttonType,
-  }: {
-    children: React.ReactNode;
-    onClick?: () => void;
-    buttonType?: string;
-  }) => (
-    <button type="button" onClick={onClick} aria-label={buttonType}>
-      {children}
-    </button>
-  ),
+vi.mock('react-router-dom', () => ({
+  Navigate: vi.fn(),
+  Route: vi.fn(),
+  Routes: vi.fn(),
+  useLocation: vi.fn(() => ({ pathname: '/data' })),
 }));
 
-describe('FilterPath', () => {
+describe('ActiveFilterButtons', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
 
   // Helper function to eliminate mock setup duplication
@@ -44,7 +34,7 @@ describe('FilterPath', () => {
 
   // Helper function to eliminate clear button interaction duplication
   const clickClearButton = () => {
-    const clearButton = screen.getByRole('button', { name: 'reset' });
+    const clearButton = screen.getByTestId('remove-filter-button');
     fireEvent.click(clearButton);
   };
 
@@ -52,20 +42,26 @@ describe('FilterPath', () => {
     setupMockParams();
   });
 
-  it('shows "No filters applied" when no filters are active', () => {
-    render(<FilterPath />);
+  it('shows the language scope filter by default', () => {
+    render(<ActiveFilterButtons />);
+    expect(screen.getByText(/Macrolanguage or Individual Language/)).toBeInTheDocument();
+  });
+
+  it('shows "No filters applied" when all filters are off', () => {
+    setupMockParams({ languageScopes: [] });
+    render(<ActiveFilterButtons />);
     expect(screen.getByText('No filters applied')).toBeInTheDocument();
   });
 
   it('displays multiple values within same vitality type', () => {
     setupMockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
-    render(<FilterPath />);
-    expect(screen.getByText(/Living, Constructed/)).toBeInTheDocument();
+    render(<ActiveFilterButtons />);
+    expect(screen.getByText(/Living or Constructed/)).toBeInTheDocument();
   });
 
   it('displays and clears territory filter', () => {
     setupMockParams({ territoryFilter: 'TestTerritory' });
-    render(<FilterPath />);
+    render(<ActiveFilterButtons />);
     expect(screen.getByText(/TestTerritory/)).toBeInTheDocument();
     clickClearButton();
     expect(updatePageParams).toHaveBeenCalledWith({ territoryFilter: '' });
@@ -76,8 +72,8 @@ describe('FilterPath', () => {
       searchString: 'TestSearch',
       searchBy: SearchableField.NameAny,
     });
-    render(<FilterPath />);
-    expect(screen.getByText(/contains/)).toBeInTheDocument();
+    render(<ActiveFilterButtons />);
+    expect(screen.getByText(/matching/)).toBeInTheDocument();
     expect(screen.getByText(/TestSearch/)).toBeInTheDocument();
     clickClearButton();
     expect(updatePageParams).toHaveBeenCalledWith({ searchString: '' });
