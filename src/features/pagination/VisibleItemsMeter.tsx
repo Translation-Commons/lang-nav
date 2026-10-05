@@ -1,5 +1,5 @@
 import { TriangleAlertIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
@@ -24,7 +24,6 @@ interface Props {
 }
 
 const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar = true }) => {
-  const { page: pageParam, limit } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByConnections = getFilterByConnections();
   const filterByScope = useScopeFilter();
@@ -49,6 +48,25 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
     filterBySubstring,
   ]);
 
+  return (
+    <ItemsMeter
+      nOverall={nOverall}
+      nFiltered={nFiltered}
+      filteredOutDetails={
+        <FilterBreakdown ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+      }
+    />
+  );
+};
+
+/** The meter from counts alone, for views that get their counts from an endpoint. */
+export const ItemsMeter: React.FC<{
+  nOverall: number;
+  nFiltered: number;
+  filteredOutDetails?: ReactNode;
+}> = ({ nOverall, nFiltered, filteredOutDetails }) => {
+  const { page: pageParam, limit } = usePageParams();
+
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
   const currentPage = pageParam > nPages || pageParam < 1 ? 1 : pageParam; // Reset to page 1 if the current page is out of bounds
@@ -70,15 +88,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
           {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
         {nOverall > nFiltered && (
-          <Hoverable
-            className="text-sm"
-            hoverContent={
-              <FilterBreakdown
-                ents={ents}
-                shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-              />
-            }
-          >
+          <Hoverable className="text-sm" hoverContent={filteredOutDetails}>
             <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
           </Hoverable>
         )}

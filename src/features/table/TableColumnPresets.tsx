@@ -3,14 +3,14 @@ import React, { useCallback, useMemo } from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageColumnPresets } from '@entities/language/LanguageColumns';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { Button } from '@shared/ui/button';
 
 import TableColumn from './TableColumn';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
-function TableColumnPresets<T extends EntityData>({
+function TableColumnPresets<T>({
   columns,
   visibilityModule,
 }: {

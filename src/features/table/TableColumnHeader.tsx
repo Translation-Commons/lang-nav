@@ -3,19 +3,17 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { EntityData } from '@entities/types/EntityTypes';
-
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import TableColumn from './TableColumn';
 import TableColumnHovercard from './TableColumnHovercard';
 import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 
-type Props<T extends EntityData> = {
+type Props<T> = {
   column: TableColumn<T>;
 };
 
-function TableColumnHeader<T extends EntityData>({ column }: Props<T>) {
+function TableColumnHeader<T>({ column }: Props<T>) {
   const { sortBy, secondarySortBy } = usePageParams();
 
   return (
@@ -35,10 +33,7 @@ function TableColumnHeader<T extends EntityData>({ column }: Props<T>) {
   );
 }
 
-function HoverableContainer<T extends EntityData>({
-  column,
-  children,
-}: React.PropsWithChildren<Props<T>>) {
+function HoverableContainer<T>({ column, children }: React.PropsWithChildren<Props<T>>) {
   // Empty but sticky cell so keep alignment
   // potentially can change this to add pinning controls
   if (column.key === 'Pin') return <th className="alwaysVisible" />;

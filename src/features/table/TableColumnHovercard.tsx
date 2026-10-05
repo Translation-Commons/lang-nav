@@ -4,8 +4,6 @@ import FilterSelector from '@features/transforms/filtering/selectors/FilterSelec
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 import TransformEnum from '@features/transforms/TransformEnum';
 
-import { EntityData } from '@entities/types/EntityTypes';
-
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { Button } from '@shared/ui/button';
 
@@ -13,11 +11,11 @@ import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableValueType from './TableValueType';
 
-type Props<T extends EntityData> = {
+type Props<T> = {
   column: TableColumn<T>;
 };
 
-function TableColumnHovercard<T extends EntityData>({ column }: Props<T>) {
+function TableColumnHovercard<T>({ column }: Props<T>) {
   const isSortable = column.field && isFieldApplicable(column.field, TransformEnum.Sort);
   const isFilterable = column.field && isFieldApplicable(column.field, TransformEnum.Filter);
 
@@ -42,7 +40,7 @@ function TableColumnHovercard<T extends EntityData>({ column }: Props<T>) {
   );
 }
 
-function ColumnSortControls<T extends EntityData>({ column }: { column: TableColumn<T> }) {
+function ColumnSortControls<T>({ column }: { column: TableColumn<T> }) {
   const { sortBy, secondarySortBy, sortBehavior, updatePageParams } = usePageParams();
   const isActive = column.field === sortBy;
   const isSecondary = column.field === secondarySortBy;
