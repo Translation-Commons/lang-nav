@@ -61,6 +61,9 @@ export enum LanguageScope {
   // 0 is intentionally not included to avoid problems using truthy comparisons
 }
 
+export const isLanguageOrMacrolanguage = (scope?: LanguageScope): boolean =>
+  scope === LanguageScope.Language || scope === LanguageScope.Macrolanguage;
+
 // This field enumerates fields about the language that could have additional context.
 // Right now it's limited to just warnings, but it should also be used when adding
 // the capacity to flag new feedback.

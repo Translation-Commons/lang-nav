@@ -28,20 +28,19 @@ const language = (code: string, name: string, overall: number, scope = LanguageS
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(() => createMockUsePageParams()),
 }));
-vi.mock('@features/data/context/useEntities', () => ({
-  default: vi.fn((entType: EntityType) =>
-    entType === EntityType.Language
-      ? [
-          language('ind', 'Indonesian', 200),
-          language('eng', 'English', 1500),
-          language('aze', 'Turkic', 9000, LanguageScope.Family),
-        ]
-      : [
-          territory('IN', 'India', 1400),
-          territory('ID', 'Indonesia', 270),
-          territory('035', 'Indochina', 100, TerritoryScope.Region),
-        ],
-  ),
+vi.mock('@features/data/context/useDataContext', () => ({
+  useDataContext: vi.fn(() => ({
+    languages: [
+      language('ind', 'Indonesian', 200),
+      language('eng', 'English', 1500),
+      language('aze', 'Turkic', 9000, LanguageScope.Family),
+    ],
+    territories: [
+      territory('IN', 'India', 1400),
+      territory('ID', 'Indonesia', 270),
+      territory('035', 'Indochina', 100, TerritoryScope.Region),
+    ],
+  })),
 }));
 
 describe('useIntroSearchSuggestions', () => {

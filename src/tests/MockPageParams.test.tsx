@@ -10,7 +10,7 @@ import { EntityType } from '@entities/types/EntityTypes';
 const mockUpdatePageParams = vi.fn();
 
 export const createMockUsePageParams = (
-  overrides: Partial<PageParams> = {},
+  overrides: Partial<PageParamsContextState> = {},
 ): PageParamsContextState => {
   return {
     ...getDefaultParams(),

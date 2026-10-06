@@ -13,6 +13,7 @@ vi.mock('@features/transforms/search/useTrackSearch', () => ({ default: () => vi
 vi.mock('@features/transforms/search/useIntroSearchSuggestions', () => ({
   default: () => async () => [],
 }));
+vi.mock('@widgets/intro/IntroLandscapeByTerritory', () => ({ default: () => null }));
 
 describe('IntroPage', () => {
   it('points the "not sure where to start" link at the help section', async () => {
@@ -28,5 +29,17 @@ describe('IntroPage', () => {
     const target = link.getAttribute('href')?.replace('#', '');
     expect(target).toBeTruthy();
     expect(document.getElementById(target!)).toHaveTextContent('How can Language Navigator help?');
+  });
+
+  it('labels the Language Landscape section with its heading', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <IntroPage />
+        </MemoryRouter>,
+      );
+    });
+
+    expect(screen.getByRole('region', { name: 'The Language Landscape' })).toBeInTheDocument();
   });
 });
