@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react';
+import { ChevronDownIcon, XIcon } from 'lucide-react';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -52,6 +52,7 @@ function FilterButton({ field }: Props) {
           options={Object.values(LanguageModality).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any language use"
           allSelectedLabel="Any language use"
+          limitWidth={false}
         />
       );
     case Field.LanguageScope:
@@ -63,6 +64,7 @@ function FilterButton({ field }: Props) {
           options={Object.values(LanguageScope).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any language, language family, or dialect"
           allSelectedLabel="Any language, language family, or dialect"
+          limitWidth={false}
         />
       );
     case Field.ISOStatus:
@@ -74,6 +76,7 @@ function FilterButton({ field }: Props) {
           options={Object.values(LanguageISOStatus).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any status"
           allSelectedLabel="Any status"
+          limitWidth={false}
         />
       );
     case Field.TerritoryScope:
@@ -85,6 +88,7 @@ function FilterButton({ field }: Props) {
           options={Object.values(TerritoryScope).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any territory"
           allSelectedLabel="Any territory"
+          limitWidth={false}
         />
       );
     case Field.SourceForLanguage:
@@ -108,24 +112,21 @@ function FilterToggle({ field }: { field: FilterField }) {
     <Popover>
       <PopoverTrigger
         render={
-          // Would be a button but buttons cannot contain buttons
-          <div
-            className="rounded-md py-1 pr-1 pl-2 flex flex-row gap-1 items-center font-medium border border-border hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30 cursor-pointer"
-            title={filterLabels[field]}
-          >
-            <div className="max-w-40 truncate text-ellipsis">{filterLabels[field]}</div>
-            <Button
-              data-testid="remove-filter-button"
-              onClick={() => removeFilter(field)}
-              variant="ghost"
-              className="size-5 hover:bg-gray-200"
-            >
-              <XIcon />
-            </Button>
-          </div>
+          <Button variant="outline" title={filterLabels[field]}>
+            <div className=" truncate text-ellipsis">{filterLabels[field]}</div>
+            <ChevronDownIcon />
+          </Button>
         }
       />
       <PopoverContent>
+        <Button
+          data-testid="remove-filter-button"
+          onClick={() => removeFilter(field)}
+          variant="destructive"
+        >
+          <XIcon />
+          Remove filter
+        </Button>
         <FilterSelector field={field} />
       </PopoverContent>
     </Popover>

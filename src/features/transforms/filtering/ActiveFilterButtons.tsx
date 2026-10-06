@@ -10,6 +10,8 @@ import TransformEnum from '../TransformEnum';
 import FilterButton from './FilterButton';
 import isFilterActive from './isFilterActive';
 
+const ENABLED = false;
+
 /**
  * Shows the current active filters as a series of buttons.
  *
@@ -20,6 +22,8 @@ const ActiveFilterButtons: React.FC = () => {
   const filters = getFilterFields().filter(
     (f) => isFilterActive(f, params) && isFieldApplicable(f, TransformEnum.Filter, params.entType),
   );
+
+  if (!ENABLED) return null;
 
   if (filters.length === 0) {
     return (

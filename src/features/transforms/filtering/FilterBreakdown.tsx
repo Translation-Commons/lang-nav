@@ -1,19 +1,13 @@
-import { XIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
-
-import { getFieldLabel } from '@strings/FieldLabelStrings';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
 import { FilterField } from '../fields/FieldApplicability';
 
-import { useFilterLabels } from './FilterLabels';
+import FilterButton from './FilterButton';
 import useFilters from './useFilters';
-import useRemoveFilter from './useRemoveFilter';
 
 type FilterExplanationProps = {
   ents: EntityData[];
@@ -47,9 +41,6 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
 }) => {
   const filterBy = useFilters();
   const nOverall = ents.length;
-  const entType = ents[0]?.type ?? EntityType.Language;
-  const removeFilter = useRemoveFilter();
-  const filterLabels = useFilterLabels();
 
   const filterCounts = useMemo(
     () =>
@@ -73,7 +64,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   if (nOverall === nPassedAll) return null;
 
   return (
-    <table style={{ textAlign: 'left' }}>
+    <table className="text-left">
       <tbody>
         <tr>
           <td>All {getEntityTypeLabelPlural(ents[0].type)}</td>
@@ -83,28 +74,18 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           ({ field, nFiltered }) =>
             nFiltered > 0 && (
               <tr key={field}>
-                <td>Not {filterLabels[field]}</td>
-                <td className="count">{(nFiltered * -1).toLocaleString()}</td>
                 <td>
-                  <HoverableButton
-                    buttonType="reset"
-                    hoverContent={`Clear the ${getFieldLabel(field, entType)} filter`}
-                    onClick={() => removeFilter(field)}
-                    style={{ padding: '0.25em', marginLeft: '0.25em' }}
-                  >
-                    <XIcon size="1em" display="block" />
-                  </HoverableButton>
+                  <div className="flex flex-nowrap gap-1 items-center">
+                    Not <FilterButton field={field} />
+                  </div>
                 </td>
+                <td className="count">{(nFiltered * -1).toLocaleString()}</td>
               </tr>
             ),
         )}
         <tr>
-          <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
-            Results
-          </td>
-          <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nPassedAll.toLocaleString()}
-          </td>
+          <td className="font-bold border-t-2">Results</td>
+          <td className="count border-t-2">{nPassedAll.toLocaleString()}</td>
         </tr>
       </tbody>
     </table>

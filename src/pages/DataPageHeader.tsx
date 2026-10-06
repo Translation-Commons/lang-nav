@@ -9,6 +9,7 @@ import ColorPopupCard from '@features/transforms/coloring/ColorPopupCard';
 import { getFilterFields, isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import ActiveFilterButtons from '@features/transforms/filtering/ActiveFilterButtons';
+import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import isFilterActive from '@features/transforms/filtering/isFilterActive';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import ScalePopupCard from '@features/transforms/scales/ScalePopupCard';
@@ -17,6 +18,7 @@ import TransformEnum from '@features/transforms/TransformEnum';
 
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 import LanguageFocusTabs from './dataviews/LanguageFocusTabs';
@@ -28,7 +30,7 @@ type Props = {
 
 const DataPageHeader: React.FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
   const params = usePageParams();
-  const { filteredEntities } = useFilteredEntities({});
+  const { filteredEntities, allEntities } = useFilteredEntities({});
   const activeFilters = getFilterFields().filter(
     (f) => isFilterActive(f, params) && isFieldApplicable(f, TransformEnum.Filter, params.entType),
   );
@@ -44,7 +46,14 @@ const DataPageHeader: React.FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
             filters
             <Badge>{activeFilters.length.toLocaleString()}</Badge>
           </Button>
-          {filteredEntities.length.toLocaleString()} Results
+          <HoverCard>
+            <HoverCardTrigger className="underline cursor-pointer" delay={100}>
+              {filteredEntities.length.toLocaleString()} Results
+            </HoverCardTrigger>
+            <HoverCardContent className="w-fit">
+              <FilterBreakdown ents={allEntities} />
+            </HoverCardContent>
+          </HoverCard>
           <ActiveFilterButtons />
         </div>
         <div className="flex items-center justify-end gap-2">

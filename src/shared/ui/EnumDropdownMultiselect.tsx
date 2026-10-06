@@ -17,6 +17,7 @@ type Props<T extends React.Key> = {
   getLabel?: (value: T) => string;
   allSelectedLabel?: string;
   noneSelectedLabel?: string;
+  limitWidth?: boolean;
 };
 
 function EnumDropdownMultiSelect<T extends React.Key>({
@@ -26,6 +27,7 @@ function EnumDropdownMultiSelect<T extends React.Key>({
   getLabel = (v) => v.toString(),
   allSelectedLabel = 'All Selected',
   noneSelectedLabel = 'None Selected',
+  limitWidth = true,
 }: Props<T>) {
   const toggleOption = useCallback(
     (option: T) => {
@@ -43,7 +45,9 @@ function EnumDropdownMultiSelect<T extends React.Key>({
       <DropdownMenuTrigger
         render={
           <Button className="cursor-pointer" variant="outline" title={buttonLabel}>
-            <div className="max-w-30 truncate text-ellipsis">{buttonLabel}</div>
+            <div className={`truncate text-ellipsis${limitWidth ? ' max-w-30' : ''}`}>
+              {buttonLabel}
+            </div>
             <ChevronDownIcon />
           </Button>
         }
