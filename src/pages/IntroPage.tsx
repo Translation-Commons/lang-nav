@@ -4,7 +4,7 @@ import React from 'react';
 import IntroHeroSearch from '@widgets/intro/IntroHeroSearch';
 import IntroHighlights from '@widgets/intro/IntroHighlights';
 import IntroLandscapeByTerritory from '@widgets/intro/IntroLandscapeByTerritory';
-import IntroTaskCards from '@widgets/intro/IntroTaskCards';
+import IntroTaskCarousel from '@widgets/intro/IntroTaskCarousel';
 
 import { Badge } from '@shared/ui/badge';
 
@@ -56,7 +56,7 @@ const IntroPage: React.FC = () => {
           <IntroLandscapeByTerritory />
         </section>
       </div>
-      <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-10 px-4 py-10">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-10 px-4 py-10">
         <section className="w-full" aria-labelledby={HELP_HEADING_ID}>
           <div className="text-center">
             <h2 id={HELP_HEADING_ID} className="text-2xl leading-tight">
@@ -66,7 +66,7 @@ const IntroPage: React.FC = () => {
               Choose a task below to jump into the most relevant language data and tools.
             </p>
           </div>
-          <IntroTaskCards />
+          <IntroTaskCarousel />
         </section>
         <p className="max-w-[560px] text-center text-xs/relaxed text-muted-foreground">
           <Badge variant="outline" className="mr-1">
