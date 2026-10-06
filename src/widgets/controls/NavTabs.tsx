@@ -4,12 +4,12 @@ import { Link, useSearchParams } from 'react-router';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
-import NewHoverable from '@features/layers/hovercard/NewHoverable';
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { PageParams } from '@features/params/PageParamTypes';
 
 import { Button } from '@shared/ui/button';
-import './tabs.css';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 import useAreParamsCurrent from './useAreParamsCurrent';
 
@@ -28,7 +28,7 @@ type Props = {
 
 const ITEM_LIMIT = 4;
 
-const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOptionsLabel }) => {
+const NavTabs: React.FC<Props> = ({ label, options, size = 'major' }) => {
   const [oldParams] = useSearchParams({});
   const getIsActive = useAreParamsCurrent();
 
@@ -49,61 +49,40 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOpti
   );
 
   return (
-    <div className={'NavTabs ' + size}>
-      {label && <div className="NavTabsLabel">{label}</div>}
-      {visibleOptions.map((option) => (
-        <Tab
-          key={option.label}
-          isActive={getIsActive(option.urlParams)}
-          description={option.description}
-          label={option.label}
-          navTo={getNavTo(option)}
-        />
-      ))}
-      {hiddenOptions.length > 0 && (
-        <NewHoverable
-          hoverContent={
-            <div className="Extended">
-              {extendedOptionsLabel && <div className="NavTabsLabel">{extendedOptionsLabel}</div>}
-              {hiddenOptions.map((option) => (
-                <Tab
-                  key={option.label}
-                  isActive={getIsActive(option.urlParams)}
-                  label={option.label}
-                  navTo={getNavTo(option)}
-                />
-              ))}
-            </div>
-          }
-        >
+    <div className="flex flex-row gap-2">
+      {label && <div className="text-md">{label}</div>}
+      <Tabs>
+        <TabsList variant={size == 'major' ? 'line' : undefined} className="border-bottom">
+          {visibleOptions.map((option) => (
+            <TabsTrigger
+              key={option.label}
+              value={option.label}
+              render={(props) => <Link {...props} to={getNavTo(option)} />}
+              className={size == 'major' ? 'text-md' : 'text-xs'}
+            >
+              {option.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+      <HoverCard>
+        <HoverCardTrigger delay={100}>
           <Button variant="outline" size="lg">
             <EllipsisIcon display="block" />
           </Button>
-        </NewHoverable>
-      )}
+        </HoverCardTrigger>
+        <HoverCardContent className="w-fit">
+          <div className="flex flex-col gap-1">
+            {hiddenOptions.map((option) => (
+              <Link to={getNavTo(option)} key={option.label}>
+                <Button variant="outline">{option.label}</Button>
+              </Link>
+            ))}
+          </div>
+        </HoverCardContent>
+      </HoverCard>
     </div>
   );
 };
-
-type TabOptionProps = {
-  isActive: boolean;
-  description?: ReactNode;
-  label: string;
-  navTo: string;
-};
-
-function Tab({ isActive, description, label, navTo }: TabOptionProps) {
-  return (
-    <NewHoverable
-      hoverContent={description}
-      className={'text-nowrap TabHoverable' + (isActive ? ' active' : '')}
-      key={label}
-    >
-      <Link to={navTo} className="Tab">
-        {label}
-      </Link>
-    </NewHoverable>
-  );
-}
 
 export default NavTabs;

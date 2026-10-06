@@ -1,75 +1,104 @@
-import React from 'react';
+import { EllipsisIcon } from 'lucide-react';
+import React, { useCallback } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
-import NavTabs from '@widgets/controls/NavTabs';
+import { LangNavPageName } from '@app/PageRoutes';
 
+import useAreParamsCurrent from '@widgets/controls/useAreParamsCurrent';
+
+import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { getParamsForLanguageFocus, LanguageFocus } from '@features/params/LanguageFocus';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { EntityType } from '@entities/types/EntityTypes';
+
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { partition } from '@shared/lib/setUtils';
+import { cn } from '@shared/lib/utils';
+import { Button, buttonVariants } from '@shared/ui/button';
 import Deemphasized from '@shared/ui/Deemphasized';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
+const ITEM_LIMIT = 4;
+
 const LanguageFocusTabs: React.FC = () => {
-  const pageParams = usePageParams();
+  const { entType } = usePageParams();
+  const [oldParams] = useSearchParams({});
+  const getIsActive = useAreParamsCurrent();
+  const getNavTo = useCallback(
+    (focus: LanguageFocus) => {
+      const newParams = getNewURLSearchParams(getParamsForLanguageFocus(focus), oldParams);
+      return '/' + LangNavPageName.Data + '?' + newParams;
+    },
+    [oldParams],
+  );
+
+  if (![EntityType.Language, EntityType.Locale].includes(entType)) return;
+
+  const options = Object.values(LanguageFocus).map((focus) => ({
+    description: <Description focus={focus} />,
+    label: focus,
+    urlParams: getParamsForLanguageFocus(focus),
+  }));
+  const paramsByFocus = Object.values(LanguageFocus).reduce(
+    (acc, focus) => {
+      acc[focus] = getParamsForLanguageFocus(focus);
+      return acc;
+    },
+    {} as Record<LanguageFocus, Partial<PageParams>>,
+  );
+
+  const countShown = options.slice(0, ITEM_LIMIT - 1).some((o) => getIsActive(o.urlParams))
+    ? ITEM_LIMIT
+    : ITEM_LIMIT - 1;
+  const [visibleOptions, hiddenOptions] = partition(
+    Object.values(LanguageFocus),
+    (focus) =>
+      getIsActive(paramsByFocus[focus]) ||
+      (Object.values(LanguageFocus).findIndex((v) => v === focus) ?? 10) < countShown,
+  );
 
   return (
-    <NavTabs
-      label="Language Focus:"
-      size="minor"
-      options={Object.values(LanguageFocus).map((focus) => {
-        const urlParams = getParamsForLanguageFocus(focus);
-        const { modalityFilter, languageScopes, languageSource, populationFocus } = urlParams;
-        return {
-          description: (
-            <>
-              Limit the languages and language-like categories shown on the page to:
-              {modalityFilter != null && (
-                <div>
-                  <strong>Medium of Use</strong>:{' '}
-                  {modalityFilter.length ? (
-                    <>
-                      {(modalityFilter ?? pageParams.modalityFilter)
-                        .map(getModalityLabel)
-                        .join(', ')}
-                      <Deemphasized>
-                        {' '}
-                        (note: this filter is not configured for most languages with a population
-                        less than 1 million)
-                      </Deemphasized>
-                    </>
-                  ) : (
-                    'Any'
-                  )}
-                </div>
-              )}
-              {languageScopes != null && (
-                <div>
-                  <strong>Scope</strong>:{' '}
-                  {languageScopes.length
-                    ? languageScopes.map(getLanguageScopeLabel).join(', ')
-                    : 'Any'}
-                </div>
-              )}
-              {languageSource != null && (
-                <div>
-                  <strong>Language List</strong>: {languageSource}
-                </div>
-              )}
-              {populationFocus != null && (
-                <div>
-                  <strong>Compute population focusing on people</strong>: {populationFocus}
-                </div>
-              )}
-              <div>{getExtraExplanation(focus)}</div>
-            </>
-          ),
-          label: focus,
-          urlParams,
-        };
-      })}
-    />
+    <div className="flex flex-row gap-2 items-center text-xs ml-4">
+      <div className="">Language Focus:</div>
+      {visibleOptions.map((focus) => (
+        <Link
+          to={getNavTo(focus)}
+          key={focus}
+          data-slot="button"
+          className={cn(
+            buttonVariants({ variant: getIsActive(paramsByFocus[focus]) ? 'active' : 'outline' }),
+          )}
+        >
+          {focus}
+        </Link>
+      ))}
+      <HoverCard>
+        <HoverCardTrigger delay={100}>
+          <Button variant="outline">
+            <EllipsisIcon display="block" />
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-fit">
+          <div className="flex flex-col gap-1 items-start">
+            {hiddenOptions.map((focus) => (
+              <Link
+                to={getNavTo(focus)}
+                key={focus}
+                data-slot="button"
+                className={cn(buttonVariants({ variant: 'ghost' }))}
+              >
+                {focus}
+              </Link>
+            ))}
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
   );
 };
 
@@ -89,6 +118,51 @@ function getExtraExplanation(focus: LanguageFocus): string {
     default:
       enforceExhaustiveSwitch(focus);
   }
+}
+
+function Description({ focus }: { focus: LanguageFocus }) {
+  const pageParams = usePageParams();
+  const urlParams = getParamsForLanguageFocus(focus);
+  const { modalityFilter, languageScopes, languageSource, populationFocus } = urlParams;
+  return (
+    <>
+      Limit the languages and language-like categories shown on the page to:
+      {modalityFilter != null && (
+        <div>
+          <strong>Medium of Use</strong>:{' '}
+          {modalityFilter.length ? (
+            <>
+              {(modalityFilter ?? pageParams.modalityFilter).map(getModalityLabel).join(', ')}
+              <Deemphasized>
+                {' '}
+                (note: this filter is not configured for most languages with a population less than
+                1 million)
+              </Deemphasized>
+            </>
+          ) : (
+            'Any'
+          )}
+        </div>
+      )}
+      {languageScopes != null && (
+        <div>
+          <strong>Scope</strong>:{' '}
+          {languageScopes.length ? languageScopes.map(getLanguageScopeLabel).join(', ') : 'Any'}
+        </div>
+      )}
+      {languageSource != null && (
+        <div>
+          <strong>Language List</strong>: {languageSource}
+        </div>
+      )}
+      {populationFocus != null && (
+        <div>
+          <strong>Compute population focusing on people</strong>: {populationFocus}
+        </div>
+      )}
+      <div>{getExtraExplanation(focus)}</div>
+    </>
+  );
 }
 
 export default LanguageFocusTabs;
