@@ -8,9 +8,9 @@ import usePageParams from '@features/params/usePageParams';
 import ColorPopupCard from '@features/transforms/coloring/ColorPopupCard';
 import { getFilterFields, isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
-import ActiveFilterButtons from '@features/transforms/filtering/ActiveFilterButtons';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import isFilterActive from '@features/transforms/filtering/isFilterActive';
+import SubstringFilterSelector from '@features/transforms/filtering/selectors/SubstringFilterSelector';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import ScalePopupCard from '@features/transforms/scales/ScalePopupCard';
 import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
@@ -62,8 +62,8 @@ const DataPageHeader: React.FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
               <FilterBreakdown ents={allEntities} />
             </PopoverContent>
           </Popover>
-          <div>{filteredEntities.length.toLocaleString()} Results</div>
-          <ActiveFilterButtons />
+          <div className="text-nowrap">{filteredEntities.length.toLocaleString()} Results</div>
+          <SubstringFilterSelector />
         </div>
         <div className="flex items-center justify-end gap-2">
           <ReportSelector variant="Dropdown" />

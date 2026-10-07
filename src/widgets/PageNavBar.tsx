@@ -1,26 +1,17 @@
-import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';
-import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
 
-import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
-import { Button } from '@shared/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
 import { Separator } from '@shared/ui/separator';
 
 import NavBarLink from './controls/NavBarLink';
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import NavMenuDrawer from './controls/NavMenuDrawer';
 import SettingsButton from './controls/SettingsButton';
-
-const SearchCombobox = React.lazy(() => import('@features/transforms/search/SearchCombobox'));
-
-const getSearchParams = (value: Suggestion) => ({ entID: value.entID, entType: value.ent?.type });
 
 const PageNavBar: React.FC = () => {
   return (
@@ -36,26 +27,7 @@ const PageNavBar: React.FC = () => {
         <NavBarToolsMenu />
         <NavBarLink page={LangNavPageName.About}>About</NavBarLink>
       </div>
-      <ContainErrorsAndSuspense>
-        <div className="mx-auto hidden w-full min-w-0 max-w-[380px] md:block">
-          <SearchCombobox getNewParams={getSearchParams} />
-        </div>
-      </ContainErrorsAndSuspense>
       <div className="ml-auto flex items-center gap-1">
-        <Popover>
-          <PopoverTrigger
-            render={
-              <Button variant="ghost" size="icon-lg" aria-label="Search" className="md:hidden">
-                <SearchIcon />
-              </Button>
-            }
-          />
-          <PopoverContent className="w-fit">
-            <ContainErrorsAndSuspense>
-              <SearchCombobox getNewParams={getSearchParams} />
-            </ContainErrorsAndSuspense>
-          </PopoverContent>
-        </Popover>
         <FeedbackForm />
         <SettingsButton />
       </div>

@@ -2,6 +2,7 @@ import { ChevronDownIcon } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import {
   FilterField,
   getFilterFields,
@@ -27,7 +28,8 @@ import FilterSelector from './FilterSelector';
 export const SidebarFilterSelectors: React.FC = () => {
   const params = usePageParams();
   const { entType } = params;
-  const filterFields = getFilterFields();
+  // All filter fields except for the Name field, which is handled separately.
+  const filterFields = getFilterFields().filter((f) => f !== Field.Name);
 
   const [primaryFilters, otherFilters] = partition(filterFields, (f) =>
     isFieldApplicable(f, TransformEnum.Filter, entType),
