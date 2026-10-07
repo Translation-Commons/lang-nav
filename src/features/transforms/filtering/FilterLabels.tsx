@@ -180,7 +180,7 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.LanguageFamily:
       return 'Language Family';
     case Field.SourceForLanguage:
-      return 'Language List / Language Standard';
+      return 'Language List & Formatting';
     case Field.ISOStatus:
       return 'ISO Status';
     case Field.Population:

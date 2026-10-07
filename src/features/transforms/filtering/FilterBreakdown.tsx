@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
@@ -7,7 +8,7 @@ import { EntityData } from '@entities/types/EntityTypes';
 
 import { partition } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
-import { Button } from '@shared/ui/button';
+import { Toggle } from '@shared/ui/toggle';
 
 import Field from '../fields/Field';
 import { FilterField, isFieldApplicable } from '../fields/FieldApplicability';
@@ -73,6 +74,13 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, ents[0].type)),
     (field) => isFilterActive(field, params),
   );
+  const filterButtons: Record<FilterField, React.ReactNode> = filterOrder.reduce(
+    (acc, field) => {
+      acc[field] = <FilterButton field={field} />;
+      return acc;
+    },
+    {} as Record<FilterField, React.ReactNode>,
+  );
 
   return (
     <div className="flex flex-col gap-1 text-left">
@@ -82,18 +90,17 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       </div>
       {activeFilters.map((field) => (
         <div className="flex flex-row gap-1 items-center justify-between" key={field}>
-          <FilterButton field={field} />
+          {filterButtons[field]}
           <div className="count text-right">{filterCounts[field]?.nPassed.toLocaleString()}</div>
         </div>
       ))}
       <div className="text-center">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setShowPotentialFilters(!showPotentialFilters)}
+        <Toggle
+          pressed={showPotentialFilters}
+          onPressedChange={() => setShowPotentialFilters(!showPotentialFilters)}
         >
-          + Filter
-        </Button>
+          more filters <ChevronDownIcon />
+        </Toggle>
       </div>
       <div
         className={cn(
@@ -102,9 +109,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
       >
         {potentialFilters.map((field) => (
-          <div key={field}>
-            <FilterButton field={field} />
-          </div>
+          <div key={field}>{filterButtons[field]}</div>
         ))}
       </div>
     </div>

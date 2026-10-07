@@ -29,16 +29,20 @@ function EnumDropdownMultiSelect<T extends React.Key>({
   noneSelectedLabel = 'None Selected',
   limitWidth = true,
 }: Props<T>) {
-  const toggleOption = useCallback(
-    (option: T) => {
-      if (value.includes(option)) onChange(value.filter((v) => v !== option));
-      else onChange([...value, option]);
-    },
-    [value, onChange],
-  );
   let buttonLabel = joinOxfordComma(value.map(getLabel), 'or');
   if (value.length === 0) buttonLabel = noneSelectedLabel;
   if (value.length === options.length) buttonLabel = allSelectedLabel;
+  const noneSameAsAll = allSelectedLabel === noneSelectedLabel;
+  const isAllSelected = options.length === value.length || (value.length == 0 && noneSameAsAll);
+
+  const toggleOption = useCallback(
+    (option: T) => {
+      if (isAllSelected) onChange(options.filter((o) => o !== option));
+      else if (value.includes(option)) onChange(value.filter((v) => v !== option));
+      else onChange([...value, option]);
+    },
+    [value, onChange, isAllSelected, options],
+  );
 
   return (
     <DropdownMenu>
@@ -53,10 +57,28 @@ function EnumDropdownMultiSelect<T extends React.Key>({
         }
       />
       <DropdownMenuContent>
+        <DropdownMenuCheckboxItem
+          checked={isAllSelected}
+          className="cursor-pointer"
+          onCheckedChange={() => onChange(noneSameAsAll ? [] : options)}
+          disabled={isAllSelected && noneSameAsAll}
+        >
+          {allSelectedLabel}
+        </DropdownMenuCheckboxItem>
+        {!noneSameAsAll && (
+          <DropdownMenuCheckboxItem
+            checked={value.length === 0}
+            className="cursor-pointer"
+            onCheckedChange={() => onChange([])}
+          >
+            {noneSelectedLabel}
+          </DropdownMenuCheckboxItem>
+        )}
+
         {options.map((option) => (
           <DropdownMenuCheckboxItem
             key={option}
-            checked={value.includes(option)}
+            checked={value.includes(option) || isAllSelected}
             className="cursor-pointer"
             onCheckedChange={() => toggleOption(option)}
           >

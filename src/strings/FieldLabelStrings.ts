@@ -85,7 +85,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.Organization:
       return 'Organization';
     case Field.SourceForLanguage:
-      return 'Language List / Language Standard';
+      return 'Language List & Formatting';
     case Field.SourceForPopulation:
       return 'Source for Population';
 

@@ -65,7 +65,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
 
   const onInputChange = useCallback(
     (value: string) => {
-      setSearchString(value);
+      setSearchString(value ?? '');
       onQueryChange?.(value);
     },
     [onQueryChange],
@@ -90,7 +90,14 @@ const EntitySearchCombobox: React.FC<Props> = ({
     [suggestions],
   );
 
-  const inputValue = (searchString && getEntity(searchString)?.nameDisplay) ?? searchString;
+  const inputValue = useMemo(() => {
+    if (searchString.includes('[') && searchString.includes(']')) {
+      const ID = searchString.split('[')[1]?.split(']')[0] ?? '';
+      const entity = getEntity(ID);
+      if (entity) return entity.nameDisplay + ' [' + ID + ']';
+    }
+    return searchString;
+  }, [searchString, getEntity]);
 
   return (
     <Combobox
@@ -98,8 +105,8 @@ const EntitySearchCombobox: React.FC<Props> = ({
       itemToStringValue={(item: Suggestion) =>
         (item.ent?.nameDisplay ?? '') + ' [' + item.entID + ']'
       }
-      onValueChange={onSubmit}
       autoHighlight
+      onValueChange={onSubmit}
     >
       <ComboboxInput
         className={cn('w-full', className)}
