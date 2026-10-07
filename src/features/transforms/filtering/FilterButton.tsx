@@ -21,6 +21,7 @@ import Field from '../fields/Field';
 import { FilterField } from '../fields/FieldApplicability';
 
 import { useFilterLabels } from './FilterLabels';
+import isFilterActive from './isFilterActive';
 import FilterSelector from './selectors/FilterSelector';
 import useRemoveFilter from './useRemoveFilter';
 
@@ -106,6 +107,7 @@ function FilterButton({ field }: Props) {
 }
 
 function FilterToggle({ field }: { field: FilterField }) {
+  const params = usePageParams();
   const removeFilter = useRemoveFilter();
   const filterLabels = useFilterLabels();
   return (
@@ -119,14 +121,16 @@ function FilterToggle({ field }: { field: FilterField }) {
         }
       />
       <PopoverContent>
-        <Button
-          data-testid="remove-filter-button"
-          onClick={() => removeFilter(field)}
-          variant="destructive"
-        >
-          <XIcon />
-          Remove filter
-        </Button>
+        {isFilterActive(field, params) && (
+          <Button
+            data-testid="remove-filter-button"
+            onClick={() => removeFilter(field)}
+            variant="destructive"
+          >
+            <XIcon />
+            Remove filter
+          </Button>
+        )}
         <FilterSelector field={field} />
       </PopoverContent>
     </Popover>

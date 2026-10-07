@@ -1,4 +1,4 @@
-import { FilterIcon } from 'lucide-react';
+import { FilterIcon, PanelLeftIcon } from 'lucide-react';
 import React from 'react';
 
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
@@ -18,7 +18,8 @@ import TransformEnum from '@features/transforms/TransformEnum';
 
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
+import { Toggle } from '@shared/ui/toggle';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 import LanguageFocusTabs from './dataviews/LanguageFocusTabs';
@@ -41,19 +42,27 @@ const DataPageHeader: React.FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
       <LanguageFocusTabs />
       <div className="flex items-center justify-between w-full mb-4">
         <div className="flex items-center gap-2 text-sm">
-          <Button variant={sidebarIsOpen ? 'active' : 'outline'} onClick={toggleSidebar}>
-            <FilterIcon />
-            filters
-            <Badge>{activeFilters.length.toLocaleString()}</Badge>
-          </Button>
-          <HoverCard>
-            <HoverCardTrigger className="underline cursor-pointer" delay={100}>
-              {filteredEntities.length.toLocaleString()} Results
-            </HoverCardTrigger>
-            <HoverCardContent className="w-fit">
+          <Popover>
+            <PopoverTrigger
+              render={
+                <Button variant="outline">
+                  <FilterIcon />
+                  filters
+                  <Badge variant={activeFilters.length > 0 ? 'default' : 'outline'}>
+                    {activeFilters.length.toLocaleString()}
+                  </Badge>
+                </Button>
+              }
+            />
+            <PopoverContent className="w-fit">
+              <Toggle pressed={sidebarIsOpen} onPressedChange={toggleSidebar}>
+                <PanelLeftIcon />
+                show in sidebar
+              </Toggle>
               <FilterBreakdown ents={allEntities} />
-            </HoverCardContent>
-          </HoverCard>
+            </PopoverContent>
+          </Popover>
+          <div>{filteredEntities.length.toLocaleString()} Results</div>
           <ActiveFilterButtons />
         </div>
         <div className="flex items-center justify-end gap-2">

@@ -97,7 +97,7 @@ function getLanguageFilterLabel(
   { languageFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
 ): string {
-  if (!languageFilter) return 'any languoid';
+  if (!languageFilter) return 'any language';
   if (languageFilter.includes('[')) return 'related to ' + languageFilter.split('[')[0].trim();
   if (languageFilter.match(/^[a-z]{3}$/)) {
     const ent = getEntity(languageFilter);
@@ -111,7 +111,7 @@ function getLanguageFamilyFilterLabel(
   { languageFamilyFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
 ): string {
-  if (!languageFamilyFilter) return 'any languoid';
+  if (!languageFamilyFilter) return 'any language family';
   if (languageFamilyFilter.includes('['))
     return 'related to ' + languageFamilyFilter.split('[')[0].trim();
   if (languageFamilyFilter.match(/^[a-z]{3}$/)) {
