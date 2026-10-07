@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData } from '@entities/types/EntityTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { partition } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
@@ -69,28 +69,22 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       ).counts,
     [ents, filterBy, shouldFilterUsingSearchBar],
   );
+  const entType = useMemo(() => ents[0]?.type ?? EntityType.Language, [ents]);
 
   const [activeFilters, potentialFilters] = partition(
-    filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, ents[0].type)),
+    filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, entType)),
     (field) => isFilterActive(field, params),
-  );
-  const filterButtons: Record<FilterField, React.ReactNode> = filterOrder.reduce(
-    (acc, field) => {
-      acc[field] = <FilterButton field={field} />;
-      return acc;
-    },
-    {} as Record<FilterField, React.ReactNode>,
   );
 
   return (
     <div className="flex flex-col gap-1 text-left">
       <div className="flex flex-row gap-1 items-center justify-between">
-        <div>All {getEntityTypeLabelPlural(ents[0].type, true)}</div>
+        <div>All {getEntityTypeLabelPlural(entType, true)}</div>
         <div className="count">{nOverall.toLocaleString()}</div>
       </div>
       {activeFilters.map((field) => (
         <div className="flex flex-row gap-1 items-center justify-between" key={field}>
-          {filterButtons[field]}
+          <FilterButton field={field} data-testid="FilterButton" />
           <div className="count text-right">{filterCounts[field]?.nPassed.toLocaleString()}</div>
         </div>
       ))}
@@ -109,7 +103,9 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
       >
         {potentialFilters.map((field) => (
-          <div key={field}>{filterButtons[field]}</div>
+          <div key={field}>
+            <FilterButton field={field} data-testid="FilterButton" />
+          </div>
         ))}
       </div>
     </div>

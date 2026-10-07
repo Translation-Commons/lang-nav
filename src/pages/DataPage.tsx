@@ -30,7 +30,7 @@ const DataPage: React.FC = () => {
           panelRef={sidebarRef}
           onResize={({ asPercentage }) => setSidebarIsOpen(asPercentage > 0)}
         >
-          <ContainErrorsAndSuspense>
+          <ContainErrorsAndSuspense showProgressBar={false}>
             <FilterPanel closeSidebar={closeSidebar} />
           </ContainErrorsAndSuspense>
         </ResizablePanel>
@@ -41,7 +41,7 @@ const DataPage: React.FC = () => {
           </ContainErrorsAndSuspense>
         </ResizablePanel>
       </ResizablePanelGroup>
-      <ContainErrorsAndSuspense>
+      <ContainErrorsAndSuspense showProgressBar={false}>
         <EntityDetailsDrawer />
       </ContainErrorsAndSuspense>
     </>
