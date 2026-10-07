@@ -7,7 +7,7 @@ export async function loadOrthographies(): Promise<OrthographyDictionary | void>
     .then((text) =>
       text
         .split('\n')
-        .slice(1) // Remove the header row
+        .slice(1)
         .filter((line) => line.trim() !== '' && !line.startsWith('#')),
     )
     .then((lines) => {
@@ -17,15 +17,29 @@ export async function loadOrthographies(): Promise<OrthographyDictionary | void>
         const parts = line.split('\t');
         const languageCode = parts[0];
         const scriptCode = parts[1];
-        const baseCharacters = parts[2]?.replace(/\p{Lu}/gu, ''); // Lowercase
-        if (!languageCode || !scriptCode || !baseCharacters) return;
+        const rawCharacters = parts[2]?.replace(/\p{Lu}/gu, '');
+        if (!languageCode || !scriptCode || !rawCharacters) return;
 
-        // There could be multiple orthographies with the same writing system.
+        const charsArray = Array.from(rawCharacters);
+        const baseCharactersArray: string[] = [];
+
+        for (let i = 0; i < charsArray.length; i++) {
+          if (charsArray[i] === '\\' && i + 1 < charsArray.length) {
+            const multiChar = charsArray.slice(i + 1, i + 3).join('');
+            baseCharactersArray.push(multiChar);
+            i += multiChar.length;
+          } else {
+            baseCharactersArray.push(charsArray[i]);
+          }
+        }
+
+        const baseCharacters = baseCharactersArray.join(' ');
+
         const baseID = `${languageCode}_${scriptCode}`;
         let instanceCount = 1;
         let ID = baseID;
         while (result[ID] != null) {
-          if (result[ID].baseCharacters == baseCharacters) return;
+          if (result[ID].baseCharacters === baseCharacters) return;
           ID = `${baseID}_${++instanceCount}`;
         }
 

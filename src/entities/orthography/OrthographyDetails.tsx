@@ -43,7 +43,7 @@ const OrthographyDetails: React.FC<Props> = ({ orthography }) => {
         <DetailsField title="Base Characters">
           {baseCharacters ? (
             <div className="flex flex-wrap gap-2">
-              {baseCharacters.split('').map((char, i) => (
+              {baseCharacters.split(' ').map((char, i) => (
                 <span
                   key={i}
                   className="inline-flex items-center justify-center w-8 h-8 border border-button-secondary rounded"
