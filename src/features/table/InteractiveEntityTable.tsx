@@ -18,7 +18,6 @@ import './tableStyles.css';
 interface Props<T> {
   ents: T[];
   columns: TableColumn<T>[];
-  shouldFilterUsingSearchBar?: boolean;
   /** When false, page language-scope filters do not hide table rows. */
   useScope?: boolean;
   tableID: TableID;
@@ -27,14 +26,13 @@ interface Props<T> {
 function InteractiveEntityTable<T extends EntityData>({
   ents,
   columns,
-  shouldFilterUsingSearchBar = true,
   useScope = true,
   tableID,
 }: Props<T>) {
   const { getCurrentEntities } = usePagination<T>();
   const { filteredEntities } = useFilteredEntities({
     useScope,
-    useSubstring: shouldFilterUsingSearchBar,
+    useSubstring: true,
     useConnections: true,
     useVitality: true,
     usePopulation: true,
@@ -48,7 +46,7 @@ function InteractiveEntityTable<T extends EntityData>({
   return (
     <div className="flex flex-col gap-4 items-center">
       <div className="flex items-center gap-2">
-        <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+        <VisibleItemsMeter ents={ents} />
         <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
       </div>
@@ -70,7 +68,7 @@ function InteractiveEntityTable<T extends EntityData>({
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
       {currentEntities.length > 10 && (
         <div className="flex items-center gap-2">
-          <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+          <VisibleItemsMeter ents={ents} />
           <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         </div>
       )}

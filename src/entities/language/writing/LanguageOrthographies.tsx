@@ -25,7 +25,7 @@ const LanguageOrthographies: React.FC<Props> = ({ lang, view }) => {
 
   return (
     <div className="text-xs">
-      <LocalParamsProvider overrides={{ limit: 12, fieldFocus: Field.Example }}>
+      <LocalParamsProvider overrides={{ limit: 12, fieldFocus: Field.Example, searchString: '' }}>
         {view === View.CardList && <MiniCardList ents={orthographies} />}
         {view === View.Table && <Table orthographies={orthographies} />}
       </LocalParamsProvider>
@@ -41,7 +41,6 @@ function Table({ orthographies }: { orthographies: OrthographyData[] }) {
       tableID={TableID.Orthographies}
       ents={orthographies}
       columns={columns}
-      shouldFilterUsingSearchBar={false}
     />
   );
 }

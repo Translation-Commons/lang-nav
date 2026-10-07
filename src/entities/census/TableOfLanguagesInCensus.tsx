@@ -102,7 +102,6 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
       <InteractiveEntityTable
         tableID={TableID.LanguagesInCensus}
         ents={languagesInCensus}
-        shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           {

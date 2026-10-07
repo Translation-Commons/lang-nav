@@ -6,6 +6,7 @@ import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import FiltersPopover from '@features/transforms/filtering/FiltersPopover';
 import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
@@ -16,12 +17,11 @@ import PaginationControls from './PaginationControls';
 
 interface Props {
   ents: EntityData[];
-  shouldFilterUsingSearchBar?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar = true }) => {
-  const { page: pageParam, limit } = usePageParams();
-  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
+const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
+  const { page: pageParam, limit, paramsLevel } = usePageParams();
+  const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const filterByScope = useScopeFilter();
   const filterByVitality = useFilterByVitality();
@@ -65,20 +65,8 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
           Showing up to <LimitInput showTitle={false} />
           {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
-        {/* // Disabled for now, may be useful in other views */}
-        {/* {nOverall > nFiltered && (
-          <Hoverable
-            className="text-sm"
-            hoverContent={
-              <FilterBreakdown
-                ents={ents}
-                shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-              />
-            }
-          >
-            <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
-          </Hoverable>
-        )} */}
+        {/* Providing a local way to set filters if we are inside a context rather than the page view */}
+        {paramsLevel === 'local' && <FiltersPopover />}
         {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { usePanelRef } from 'react-resizable-panels';
 
+import DataVizParamsProvider from '@features/params/DataVizParamsProvider';
+
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@shared/ui/resizable';
 
@@ -20,7 +22,7 @@ const DataPage: React.FC = () => {
 
   /* Many data components have more lines of code so they are loaded lazily */
   return (
-    <>
+    <DataVizParamsProvider isFilterPanelOpen={sidebarIsOpen} toggleFilterPanel={toggleSidebar}>
       <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel
           defaultSize="20%"
@@ -37,14 +39,14 @@ const DataPage: React.FC = () => {
         <ResizableHandle withHandle />
         <ResizablePanel>
           <ContainErrorsAndSuspense>
-            <DataPageBody sidebarIsOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
+            <DataPageBody />
           </ContainErrorsAndSuspense>
         </ResizablePanel>
       </ResizablePanelGroup>
       <ContainErrorsAndSuspense showProgressBar={false}>
         <EntityDetailsDrawer />
       </ContainErrorsAndSuspense>
-    </>
+    </DataVizParamsProvider>
   );
 };
 

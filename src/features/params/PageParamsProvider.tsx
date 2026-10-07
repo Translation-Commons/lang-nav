@@ -9,6 +9,7 @@ import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
 import type { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
 
+/** Provides persistent parameters that are saved to the URL */
 const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [urlPageParams, setURLPageParams] = useSearchParams({});
   const pageBrightness = usePageBrightness();
@@ -40,6 +41,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...instantiatedParams,
       brightness: pageBrightness,
       updatePageParams,
+      paramsLevel: 'global',
     };
   }, [urlPageParams, updatePageParams, pageBrightness]);
 

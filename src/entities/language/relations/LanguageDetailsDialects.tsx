@@ -88,12 +88,11 @@ function Table({ dialects }: { dialects: LanguageData[] }) {
   const columns = useMemo(() => getLanguageColumns(), []);
 
   return (
-    <LocalParamsProvider overrides={{ limit: 12 }}>
+    <LocalParamsProvider overrides={{ limit: 12, searchString: '' }}>
       <InteractiveEntityTable<LanguageData>
         tableID={TableID.Languages}
         ents={dialects}
         columns={columns}
-        shouldFilterUsingSearchBar={false}
       />
     </LocalParamsProvider>
   );

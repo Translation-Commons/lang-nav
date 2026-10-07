@@ -56,6 +56,7 @@ const LanguageTerritories: React.FC<Props> = ({ lang, view }) => {
     colorGradient: ColorGradient.SequentialBlue,
     searchString: '',
     view,
+    limit: 12,
   };
   if (lang.scope && !languageScopes.includes(lang.scope))
     params.languageScopes = [...languageScopes, lang.scope];
@@ -91,14 +92,11 @@ function Table({ locales }: { locales: LocaleData[] }) {
   const columns = useMemo(() => getLocaleColumns(), []);
 
   return (
-    <LocalParamsProvider overrides={{ limit: 12 }}>
-      <InteractiveEntityTable<LocaleData>
-        tableID={TableID.Locales}
-        ents={locales}
-        columns={columns}
-        shouldFilterUsingSearchBar={false}
-      />
-    </LocalParamsProvider>
+    <InteractiveEntityTable<LocaleData>
+      tableID={TableID.Locales}
+      ents={locales}
+      columns={columns}
+    />
   );
 }
 

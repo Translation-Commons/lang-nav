@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { partition } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
@@ -69,7 +69,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       ).counts,
     [ents, filterBy, shouldFilterUsingSearchBar],
   );
-  const entType = useMemo(() => ents[0]?.type ?? EntityType.Language, [ents]);
+  const entType = useMemo(() => ents[0]?.type ?? params.entType, [ents, params.entType]);
 
   const [activeFilters, potentialFilters] = partition(
     filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, entType)),
