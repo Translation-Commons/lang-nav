@@ -90,7 +90,14 @@ const EntitySearchCombobox: React.FC<Props> = ({
     [suggestions],
   );
 
-  const inputValue = (searchString && getEntity(searchString)?.nameDisplay) ?? searchString;
+  const inputValue = useMemo(() => {
+    if (searchString.includes('[') && searchString.includes(']')) {
+      const ID = searchString.split('[')[1]?.split(']')[0] ?? '';
+      const entity = getEntity(ID);
+      if (entity) return entity.nameDisplay + ' [' + ID + ']';
+    }
+    return searchString;
+  }, [searchString, getEntity]);
 
   return (
     <Combobox
