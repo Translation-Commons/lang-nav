@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
 import type { Suggestion } from '@features/params/Suggestion';
@@ -21,11 +21,17 @@ const EntityFilterSelector: React.FC<Props> = ({
 }) => {
   const params = usePageParams();
 
-  const currentID = params[pageParameter] as string;
+  const currentID = useMemo(() => {
+    const searchString = params[pageParameter] as string;
+    return getIDFromSearchString(searchString);
+  }, [params[pageParameter]]);
+
   const onSubmit = useCallback(
     (s: Suggestion) => {
-      if (params[pageParameter] === s.entID) params.updatePageParams({ [pageParameter]: '' });
-      else params.updatePageParams({ [pageParameter]: s.entID });
+      const param = params[pageParameter] as string;
+      const paramID = getIDFromSearchString(param);
+      if (paramID === s.entID) params.updatePageParams({ [pageParameter]: '' });
+      else params.updatePageParams({ [pageParameter]: s.ent?.nameDisplay + ' [' + s.entID + ']' });
     },
     [params.updatePageParams, params[pageParameter], pageParameter],
   );
@@ -52,5 +58,12 @@ const EntityFilterSelector: React.FC<Props> = ({
     </div>
   );
 };
+
+function getIDFromSearchString(searchString: string) {
+  if (searchString.includes('[') && searchString.includes(']')) {
+    return searchString.split('[')[1]?.split(']')[0] ?? '';
+  }
+  return searchString;
+}
 
 export default EntityFilterSelector;

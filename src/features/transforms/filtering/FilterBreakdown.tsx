@@ -1,19 +1,22 @@
-import { XIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
-import { getFieldLabel } from '@strings/FieldLabelStrings';
+import { partition } from '@shared/lib/setUtils';
+import { cn } from '@shared/lib/utils';
+import { Toggle } from '@shared/ui/toggle';
 
 import Field from '../fields/Field';
-import { FilterField } from '../fields/FieldApplicability';
+import { FilterField, isFieldApplicable } from '../fields/FieldApplicability';
+import TransformEnum from '../TransformEnum';
 
-import { useFilterLabels } from './FilterLabels';
+import FilterButton from './FilterButton';
+import isFilterActive from './isFilterActive';
 import useFilters from './useFilters';
-import useRemoveFilter from './useRemoveFilter';
 
 type FilterExplanationProps = {
   ents: EntityData[];
@@ -45,11 +48,10 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   ents,
   shouldFilterUsingSearchBar = true,
 }) => {
+  const params = usePageParams();
   const filterBy = useFilters();
   const nOverall = ents.length;
-  const entType = ents[0]?.type ?? EntityType.Language;
-  const removeFilter = useRemoveFilter();
-  const filterLabels = useFilterLabels();
+  const [showPotentialFilters, setShowPotentialFilters] = React.useState(false);
 
   const filterCounts = useMemo(
     () =>
@@ -60,54 +62,53 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           const filtered = ents.filter(filterBy[field]);
           const nPassed = filtered.length;
           const nFiltered = ents.length - nPassed;
-          counts.push({ field, nPassed, nFiltered });
+          counts[field] = { field, nPassed, nFiltered };
           return { ents: filtered, counts };
         },
-        { ents, counts: [] as FieldFilterCounts[] },
+        { ents, counts: {} as Record<FilterField, FieldFilterCounts> },
       ).counts,
     [ents, filterBy, shouldFilterUsingSearchBar],
   );
-  const nPassedAll = filterCounts[filterCounts.length - 1]?.nPassed ?? nOverall;
+  const entType = useMemo(() => ents[0]?.type ?? EntityType.Language, [ents]);
 
-  // Return an empty component if nothing was filtered
-  if (nOverall === nPassedAll) return null;
+  const [activeFilters, potentialFilters] = partition(
+    filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, entType)),
+    (field) => isFilterActive(field, params),
+  );
 
   return (
-    <table style={{ textAlign: 'left' }}>
-      <tbody>
-        <tr>
-          <td>All {getEntityTypeLabelPlural(ents[0].type)}</td>
-          <td className="count">{nOverall.toLocaleString()}</td>
-        </tr>
-        {filterCounts.map(
-          ({ field, nFiltered }) =>
-            nFiltered > 0 && (
-              <tr key={field}>
-                <td>Not {filterLabels[field]}</td>
-                <td className="count">{(nFiltered * -1).toLocaleString()}</td>
-                <td>
-                  <HoverableButton
-                    buttonType="reset"
-                    hoverContent={`Clear the ${getFieldLabel(field, entType)} filter`}
-                    onClick={() => removeFilter(field)}
-                    style={{ padding: '0.25em', marginLeft: '0.25em' }}
-                  >
-                    <XIcon size="1em" display="block" />
-                  </HoverableButton>
-                </td>
-              </tr>
-            ),
+    <div className="flex flex-col gap-1 text-left">
+      <div className="flex flex-row gap-1 items-center justify-between">
+        <div>All {getEntityTypeLabelPlural(entType, true)}</div>
+        <div className="count">{nOverall.toLocaleString()}</div>
+      </div>
+      {activeFilters.map((field) => (
+        <div className="flex flex-row gap-1 items-center justify-between" key={field}>
+          <FilterButton field={field} data-testid="FilterButton" />
+          <div className="count text-right">{filterCounts[field]?.nPassed.toLocaleString()}</div>
+        </div>
+      ))}
+      <div className="text-center">
+        <Toggle
+          pressed={showPotentialFilters}
+          onPressedChange={() => setShowPotentialFilters(!showPotentialFilters)}
+        >
+          more filters <ChevronDownIcon />
+        </Toggle>
+      </div>
+      <div
+        className={cn(
+          'transition-all duration-300',
+          showPotentialFilters ? 'flex flex-col gap-1 text-left' : 'hidden',
         )}
-        <tr>
-          <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
-            Results
-          </td>
-          <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nPassedAll.toLocaleString()}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      >
+        {potentialFilters.map((field) => (
+          <div key={field}>
+            <FilterButton field={field} data-testid="FilterButton" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

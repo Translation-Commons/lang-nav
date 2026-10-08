@@ -1,7 +1,7 @@
 import { XIcon } from 'lucide-react';
 import React from 'react';
 
-import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
+import { SidebarFilterSelectors } from '@features/transforms/filtering/selectors/SidebarFilterSelectors';
 
 import { Button } from '@shared/ui/button';
 
@@ -13,7 +13,7 @@ const FilterPanel: React.FC<Props> = ({ closeSidebar }) => {
   // usePageArrowKeys();
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <div className="w-full flex justify-center text-center relative px-2 text-2xl">
         <Button
           variant="ghost"
@@ -25,7 +25,7 @@ const FilterPanel: React.FC<Props> = ({ closeSidebar }) => {
         </Button>
         Filters
       </div>
-      <AllApplicableFilterSelectors />
+      <SidebarFilterSelectors />
     </div>
   );
 };

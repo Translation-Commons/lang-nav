@@ -94,7 +94,7 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
     territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.PolicyMaker]: {
-    languageSource: LanguageSource.UNESCO,
+    languageSource: LanguageSource.ISO, // UNESCO in future
     territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.ShowMeEverything]: {

@@ -1,19 +1,15 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
-import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { EntityData } from '@entities/types/EntityTypes';
-
-import Deemphasized from '@shared/ui/Deemphasized';
 
 import LimitInput from './LimitInput';
 import PaginationControls from './PaginationControls';
@@ -69,7 +65,8 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
           Showing up to <LimitInput showTitle={false} />
           {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
-        {nOverall > nFiltered && (
+        {/* // Disabled for now, may be useful in other views */}
+        {/* {nOverall > nFiltered && (
           <Hoverable
             className="text-sm"
             hoverContent={
@@ -81,7 +78,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
           >
             <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
           </Hoverable>
-        )}
+        )} */}
         {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>
