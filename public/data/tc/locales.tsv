@@ -8772,7 +8772,6 @@ bbo_BF	Northern Bobo Madaré (Burkina Faso)
 bda_SN	Bayot (Senegal)				
 bdc_CO	Emberá-Baudó (Colombia)	Êbêrâ 'Βe'dea			
 bdi_SD	Burun (Sudan)				
-beg_BN	Belait (Brunei)				
 bej_ER	Beja (Eritrea)	بداوية			
 bfi_GB	British Sign Language (United Kingdom)	British Sign Language			
 bfo_BF	Malba Birifor (Burkina Faso)				
@@ -8811,7 +8810,6 @@ bqn_BG	Bulgarian Sign Language (Bulgaria)	Български жестомими�
 bqu_CD	Boguru (Congo - Kinshasa)				
 brk_SD	Birked (Sudan)				
 brr_SB	Birao (Solomon Islands)				
-bsb_BN	Brunei Bisaya (Brunei)				
 bsl_NG	Basa-Gumna (Nigeria)				
 bsv_GN	Baga Sobané (Guinea)				
 bte_NG	Gamo-Ningi (Nigeria)				
@@ -9682,7 +9680,6 @@ tsq_TH	Thai Sign Language (Thailand)
 tsr_VU	Akei (Vanuatu)				
 tss_TW	Taiwan Sign Language (Taiwan)	台灣手語			
 tta_US	Tutelo (United States)				
-ttg_BN	Tutong (Brunei)				
 tth_LA	Upper Ta'oih (Laos)				
 ttq_ML	Tawallammat Tamajaq (Mali)	Tamajǝx			
 ttq_NE	Tawallammat Tamajaq (Niger)	Tamajǝx			
@@ -11001,3 +10998,20 @@ zho_UZ	Chinese languages (Uzbekistan)			1700
 spa_VG	Spanish (British Virgin Islands)			2127	
 vic_VG	Virgin Islands Creole English (British Virgin Islands)			12762	
 aig_AG	Antigua and Barbuda Creole English (Antigua & Barbuda)			62990	
+coa_CC	Cocos Islands Malay (Cocos Islands)			430	
+lnd_BN	Lundayeh (Brunei)			22000	
+kyi_BN	Kiput (Brunei)			2700	
+bfg_BN	Busang Kayan (Brunei)			1700	
+kor_BN	Korean (Brunei)			37000	
+dtp_BN	Central Dusun (Brunei)			23000	
+iba_BN	Iban (Brunei)			17255	
+cmn_BN	Mandarin Chinese (Brunei)			13200	
+bdr_BN	West Coast Bajau (Brunei)			11745	
+yue_BN	Yue Chinese (Brunei)			6300	
+cdo_BN	Min Dong Chinese (Brunei)			6000	
+pez_BN	Eastern Penan (Brunei)			280	
+pne_BN	Western Penan (Brunei)			50	
+ttg_BN	Tutong (Brunei)			33700	
+beg_BN	Belait (Brunei)			1240	
+bsb_BN	Brunei Bisaya (Brunei)			600	
+niu_CK	Niuean (Cook Islands)			200	
