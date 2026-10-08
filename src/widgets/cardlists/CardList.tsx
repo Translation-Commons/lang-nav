@@ -43,7 +43,7 @@ const CardList: React.FC = () => {
       {currentEntities.length > 3 && <VisibleItemsMeter ents={allEntities} />}
       {currentEntities.length === 0 && (
         <div className="w-fit mx-auto">
-          <FilterBreakdown ents={allEntities} shouldFilterUsingSearchBar={true} />
+          <FilterBreakdown ents={allEntities} />
         </div>
       )}
     </div>

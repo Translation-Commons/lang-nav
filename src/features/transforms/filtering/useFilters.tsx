@@ -2,8 +2,6 @@ import { useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { useWhyDidYouUpdate } from '@shared/hooks/useWhyDidYouUpdate';
-
 import Field from '../fields/Field';
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 
@@ -90,21 +88,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
   );
 
   const alwaysTrue = () => true;
-  useWhyDidYouUpdate('useFilters', {
-    filterByName,
-    filterByLanguageScope,
-    filterByTerritoryScope,
-    filterByModality,
-    filterByTerritory,
-    filterByLanguage,
-    filterByLanguageFamily,
-    filterByWritingSystem,
-    filterByLanguageSource,
-    filterByOrganization,
-    filterByISOStatus,
-    filterByPopulation,
-    languageScopes,
-  });
 
   const filters: Record<Field, FilterFunctionType> = useMemo(
     () => ({

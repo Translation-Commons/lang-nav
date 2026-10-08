@@ -130,7 +130,7 @@ export function buildFilterByLanguage(languageFilter: string): FilterFunctionTyp
     if (!languageFilter) return true;
     if (!isFieldApplicable(Field.LanguageList, TransformEnum.Filter, ent.type)) return true;
     const langs = getLanguagesRelevantToEntity(ent);
-    if (code) return langs.some((lang) => lang.codeDisplay === code);
+    if (code) return langs.some((lang) => lang.codeDisplay === code || lang.ID === code);
     if (!name) return true;
     return langs.some((lang) => anyWordStartsWith(lang.nameDisplay, name));
   };
@@ -144,16 +144,7 @@ export function buildFilterByLanguageFamily(languageFamilyFilter: string): Filte
     if (!languageFamilyFilter) return true;
     if (!isFieldApplicable(Field.LanguageFamily, TransformEnum.Filter, ent.type)) return true;
     const langs = getLanguageFamiliesRelevantToEntity(ent);
-    if (ent.ID === 'cmn') {
-      console.trace();
-      console.log(
-        languageFamilyFilter,
-        code,
-        name,
-        langs.map((e) => e.ID),
-      );
-    }
-    if (code) return langs.some((lang) => lang.codeDisplay === code);
+    if (code) return langs.some((lang) => lang.codeDisplay === code || lang.ID === code);
     if (!name) return true;
     return langs.some((lang) => anyWordStartsWith(lang.nameDisplay, name));
   };

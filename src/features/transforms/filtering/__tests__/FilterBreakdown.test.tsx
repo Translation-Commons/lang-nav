@@ -85,9 +85,9 @@ describe('FilterBreakdown', () => {
   it('renders breakdown counts', () => {
     const ents = getMockLanguages();
     setupMockParams({
-      territoryFilter: 'US',
-      writingSystemFilter: 'Latn',
-      languageFamilyFilter: 'ine', // Indo-European family
+      territoryFilter: '[US]',
+      writingSystemFilter: '[Latn]',
+      languageFamilyFilter: '[ine]', // Indo-European family
       isoStatus: [LanguageISOStatus.Living], // filters out fra
       searchString: 'spa',
     });
@@ -116,26 +116,12 @@ describe('FilterBreakdown', () => {
     // No more clear buttons
   });
 
-  it('does not apply substring filter when shouldFilterUsingSearchBar is false', () => {
-    const ents = getMockLanguages();
-    setupMockParams({
-      territoryFilter: 'US',
-      isoStatus: [LanguageISOStatus.Living],
-      searchString: 'spa',
-    });
-
-    render(<FilterBreakdown ents={ents} shouldFilterUsingSearchBar={false} />);
-
-    // Since substring filtering is disabled, the "Not matching substring" line should not be present
-    expectRow('Code & All Names matching "spa"', false);
-  });
-
   it('shows a subset of the possible filters when only some affect the entities shown', () => {
     const ents = getMockLanguages();
     setupMockParams({});
     const { container } = render(<FilterBreakdown ents={ents} />);
 
-    // No filters are applied, so no breakdown should be shown
+    // No filters are applied, so only the default filter is shown, no others
     expectRow('Macrolanguage or Individual Language');
     expectRow('found in territory', false);
     expectRow('written in', false);

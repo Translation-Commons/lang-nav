@@ -9,6 +9,7 @@ import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID
 import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 
 import OrthographyTable from '@entities/orthography/OrthographyTable';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -31,6 +32,7 @@ const LanguageOrthographies: React.FC<Props> = ({ lang, view }) => {
           sortBy: Field.Example,
 
           ...BLANK_FILTER_PARAMS,
+          entType: EntityType.Orthography,
           languageFilter: getFilterEntityID(lang),
         }}
       >

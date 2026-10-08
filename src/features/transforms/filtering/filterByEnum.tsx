@@ -4,10 +4,7 @@ import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/EntityTypes';
 
-import {
-  getLanguageForEntity,
-  getTerritoryForEntity
-} from '../fields/getEntityConnection';
+import { getLanguageForEntity, getTerritoryForEntity } from '../fields/getEntityConnection';
 
 import { FilterFunctionType } from './filter';
 

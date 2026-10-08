@@ -37,11 +37,11 @@ export function parseFilterEntityID(
   if (entType != null) {
     switch (entType) {
       case EntityType.Language:
-        // if (name.match(/^[a-z]{2,3}$/)) code = name; // ISO 639 code
+        // if (name.match(/^[a-z]{2,3}$/)) code = name; // ISO 639 code -- require []
         if (name.match(/^[a-z]{4}[0-9]{4}$/)) code = name; // Glottocode
         break;
       case EntityType.Territory:
-        if (name.match(/^[A-Za-z]{2}$/)) code = name.toUpperCase(); // ISO 3166 code
+        if (name.match(/^[A-Z]{2}$/)) code = name.toUpperCase(); // ISO 3166 code
         if (name.match(/^[0-9]{3}$/)) code = name; // UN M.39 code
         break;
       case EntityType.WritingSystem:

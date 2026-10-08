@@ -19,26 +19,13 @@ import './tableStyles.css';
 interface Props<T> {
   ents: T[];
   columns: TableColumn<T>[];
-  /** When false, page language-scope filters do not hide table rows. */
-  useScope?: boolean;
   tableID: TableID;
 }
 
-function InteractiveEntityTable<T extends EntityData>({
-  ents,
-  columns,
-  useScope = true,
-  tableID,
-}: Props<T>) {
+function InteractiveEntityTable<T extends EntityData>({ ents, columns, tableID }: Props<T>) {
   const { paramsLevel } = usePageParams();
   const { getCurrentEntities } = usePagination<T>();
   const { filteredEntities } = useFilteredEntities({
-    useScope,
-    useSubstring: true,
-    useConnections: true,
-    useVitality: true,
-    usePopulation: true,
-    useLanguageSource: true,
     inputEnts: ents,
   });
   const currentEntities = getCurrentEntities(filteredEntities);

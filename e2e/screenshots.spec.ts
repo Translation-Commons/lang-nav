@@ -141,7 +141,7 @@ test.describe('screenshot tests', () => {
   test('data page: Filters', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto(
-      './data?view=Cards&searchBy=ISO+Code&languageFamilyFilter=Sino-Tibetan+%5Bsit%5D&modalityFilter=-2%2C-1%2C0%2C1%2C2%2C3&writingSystemFilter=Hans&territoryFilter=China+%5BCN%5D&languageFilter=Chinese+languages+%5Bzho%5D&isoStatus=9%2C3%2C1%2C0&populationMin=1&populationMax=6300000000&languageSource=Glottolog&languageScopes=3%2C4%2C5%2C6%2C7%2C2&searchString=C',
+      './data?view=Cards&searchBy=ISO+Code&modalityFilter=-2%2C-1%2C0%2C1%2C2%2C3&writingSystemFilter=Simplified+Han+%5BHans%5D&territoryFilter=China+%5BCN%5D&isoStatus=9%2C3%2C1%2C0&populationMin=1&populationMax=6300000000&languageSource=Glottolog&languageScopes=3%2C4%2C5%2C6%2C7%2C2&languageFilter=Mandarin+Chinese+%5Bcmn%5D&languageFamilyFilter=Sino-Tibetan+%5Bsit%5D&searchString=m',
     );
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page-filters.png');
