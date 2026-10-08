@@ -8,11 +8,13 @@ import { getParamsFromURL } from './getParamsFromURL';
 import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
 import type { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
+import { useStableParamArrays } from './StableParamArrays';
 
 /** Provides persistent parameters that are saved to the URL */
 const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [urlPageParams, setURLPageParams] = useSearchParams({});
   const pageBrightness = usePageBrightness();
+  const getNextParamArrays = useStableParamArrays();
 
   const updatePageParams = useCallback(
     (newParams: Partial<PageParams>) => {
@@ -36,9 +38,12 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const typedKey = key as keyof PageParams;
       if (instantiatedParams[typedKey] == null) delete instantiatedParams[typedKey];
     });
+    const paramArrays = getNextParamArrays(instantiatedParams, defaults);
+
     return {
       ...defaults,
       ...instantiatedParams,
+      ...paramArrays,
       brightness: pageBrightness,
       updatePageParams,
       paramsLevel: 'global',

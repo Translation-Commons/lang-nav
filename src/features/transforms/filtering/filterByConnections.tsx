@@ -145,6 +145,7 @@ export function buildFilterByLanguageFamily(languageFamilyFilter: string): Filte
     if (!isFieldApplicable(Field.LanguageFamily, TransformEnum.Filter, ent.type)) return true;
     const langs = getLanguageFamiliesRelevantToEntity(ent);
     if (ent.ID === 'cmn') {
+      console.trace();
       console.log(
         languageFamilyFilter,
         code,

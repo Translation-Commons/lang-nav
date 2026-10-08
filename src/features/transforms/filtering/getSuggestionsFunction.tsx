@@ -19,9 +19,10 @@ export function getSuggestionsFunction<T extends EntityData>(
     const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
     return ents
       .filter(filterFunction)
-      .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
+      .map((ent) => ({ ent, distance: getMatchDistance(ent) }))
+      .sort((a, b) => a.distance - b.distance)
       .slice(0, SUGGESTION_LIMIT)
-      .map((ent) => {
+      .map(({ ent }) => {
         const label = (
           <HighlightedEntityField
             ent={ent}

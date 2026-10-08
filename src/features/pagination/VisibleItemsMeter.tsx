@@ -4,11 +4,8 @@ import React, { useMemo } from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import FiltersPopover from '@features/transforms/filtering/FiltersPopover';
-import useFilters from '@features/transforms/filtering/useFilters';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useAllFilters from '@features/transforms/filtering/useAllFilters';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
@@ -21,29 +18,13 @@ interface Props {
 
 const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
   const { page: pageParam, limit, paramsLevel } = usePageParams();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
-  const filterByScope = useScopeFilter();
-  const filterByVitality = useFilterByVitality();
-  const filterByPopulation = useFilters().Population;
+  const filterFunction = useAllFilters();
 
   // Compute the number of filtered items
   const nOverall = ents.length;
   const nFiltered = useMemo(() => {
-    return ents
-      .filter(filterByScope)
-      .filter(filterByConnections)
-      .filter(filterByVitality)
-      .filter(filterByPopulation)
-      .filter(filterBySubstring).length;
-  }, [
-    ents,
-    filterByScope,
-    filterByConnections,
-    filterByVitality,
-    filterByPopulation,
-    filterBySubstring,
-  ]);
+    return ents.filter(filterFunction).length;
+  }, [ents, filterFunction]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
