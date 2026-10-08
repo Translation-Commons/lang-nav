@@ -12,7 +12,10 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
 
 import Field from '../fields/Field';
+import { isFieldApplicable } from '../fields/FieldApplicability';
+import { getOrganizationsForEntity } from '../fields/getEntityConnection';
 import { sortByPopulation } from '../sorting/sort';
+import TransformEnum from '../TransformEnum';
 
 import { FilterFunctionType } from './filter';
 import { parseFilterEntityID } from './FilterEntityID';
@@ -61,6 +64,7 @@ export function buildFilterByTerritory(territoryFilter: string): FilterFunctionT
 
   return (ent: EntityData) => {
     if (!territoryFilter) return true;
+    if (!isFieldApplicable(Field.TerritoryList, TransformEnum.Filter, ent.type)) return true;
     const territories = getContainingTerritories(ent);
     if (code) return territories.some((t) => t.codeDisplay === code);
     if (!name) return true;
@@ -74,6 +78,7 @@ export function buildFilterByWritingSystem(writingSystemFilter: string): FilterF
 
   return (ent: EntityData) => {
     if (!writingSystemFilter) return true;
+    if (!isFieldApplicable(Field.WritingSystem, TransformEnum.Filter, ent.type)) return true;
     const scripts = getWritingSystemsRelevantToEntity(ent);
     if (code) return scripts.some((ws) => ws.codeDisplay === code);
     if (!name) return true;
@@ -123,6 +128,7 @@ export function buildFilterByLanguage(languageFilter: string): FilterFunctionTyp
 
   return (ent: EntityData) => {
     if (!languageFilter) return true;
+    if (!isFieldApplicable(Field.LanguageList, TransformEnum.Filter, ent.type)) return true;
     const langs = getLanguagesRelevantToEntity(ent);
     if (code) return langs.some((lang) => lang.codeDisplay === code);
     if (!name) return true;
@@ -136,7 +142,16 @@ export function buildFilterByLanguageFamily(languageFamilyFilter: string): Filte
 
   return (ent: EntityData) => {
     if (!languageFamilyFilter) return true;
+    if (!isFieldApplicable(Field.LanguageFamily, TransformEnum.Filter, ent.type)) return true;
     const langs = getLanguageFamiliesRelevantToEntity(ent);
+    if (ent.ID === 'cmn') {
+      console.log(
+        languageFamilyFilter,
+        code,
+        name,
+        langs.map((e) => e.ID),
+      );
+    }
     if (code) return langs.some((lang) => lang.codeDisplay === code);
     if (!name) return true;
     return langs.some((lang) => anyWordStartsWith(lang.nameDisplay, name));
@@ -218,4 +233,21 @@ export function getLanguageFamiliesRelevantToEntity(ent: EntityData): LanguageDa
     case EntityType.Technology:
       return []; // Too computationally intensive to get
   }
+}
+
+export function buildFilterByOrganization(
+  orgFilter: string /* Organization ID */,
+): FilterFunctionType {
+  if (!orgFilter) return () => true;
+
+  const { code, name } = parseFilterEntityID(orgFilter);
+
+  return (ent: EntityData): boolean => {
+    if (!isFieldApplicable(Field.Organization, TransformEnum.Filter, ent.type)) return true;
+    const orgs = getOrganizationsForEntity(ent);
+    if (!orgs) return false;
+    if (code) return orgs.some((org) => org.ID === code || org.codeDisplay === code);
+    if (!name) return true;
+    return orgs.some((org) => anyWordStartsWith(org.nameDisplay, name)) ?? false;
+  };
 }
