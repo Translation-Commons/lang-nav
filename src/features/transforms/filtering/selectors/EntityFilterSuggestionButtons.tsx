@@ -8,7 +8,7 @@ import { Button } from '@shared/ui/button';
 type Props = {
   getSuggestions: (query: string) => Promise<Suggestion[]>;
   onSubmit: (value: Suggestion) => void;
-  currentID: string;
+  currentID?: string;
 };
 
 const EntityFilterSuggestionButtons: React.FC<Props> = ({

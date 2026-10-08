@@ -1,5 +1,14 @@
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
+import { toTitleCase } from '@shared/lib/stringUtils';
+
+export function getFilterIDFromSearchString(searchString: string) {
+  if (searchString.includes('[') && searchString.includes(']')) {
+    return searchString.split('[')[1]?.split(']')[0] ?? '';
+  }
+  return searchString;
+}
+
 export function getFilterEntityID(ent: EntityData): string {
   // if (ent.type === EntityType.Language) return ent.nameCanonical + ' [' + ent.ID + ']';
   return ent.nameDisplay + ' [' + ent.ID + ']';
@@ -10,10 +19,15 @@ export function parseFilterEntityID(
   entType?: EntityType,
 ): { name?: string; code?: string } {
   if (filterEntID.includes('[')) {
-    const [name, id] = filterEntID.split('[');
+    const [name, codeRaw] = filterEntID.split('[');
+    let code = codeRaw?.split(']')[0]?.trim();
+    if (code && entType === EntityType.Language) code = code.toLowerCase();
+    if (code && entType === EntityType.Territory) code = code.toUpperCase();
+    if (code && entType === EntityType.WritingSystem) code = toTitleCase(code);
+
     return {
       name: name.trim() || undefined,
-      code: id.split(']')[0]?.trim() || undefined,
+      code: code || undefined,
     };
   }
 

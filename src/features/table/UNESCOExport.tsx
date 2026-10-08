@@ -1,6 +1,7 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
+import { parseFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
@@ -12,9 +13,7 @@ import { trackEvent } from '@shared/lib/amplitude';
 
 // Customized for UNESCO use
 export function prepareUNESCODataForExport(ents: EntityData[], territoryFilter: string): string {
-  const territoryCode = (
-    territoryFilter.split('[')[1]?.slice(0, 2) || territoryFilter
-  ).toUpperCase();
+  const territoryCode = parseFilterEntityID(territoryFilter, EntityType.Territory).code;
 
   return ents
     .map((ent) => {
