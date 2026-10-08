@@ -469,11 +469,13 @@ export function isFieldApplicable(
   transform?: Transform,
   entType?: EntityType,
 ): boolean {
+  // TEMP
+  if (transform === Transform.Filter) return getFieldsForTransform(transform).includes(field);
   // Special case because filters use a fixed subset of fields and ents without interesting lists may still have a primary connection
-  if (field === Field.LanguageList && transform === Transform.Filter)
-    if (isFieldApplicable(Field.LanguagePrimary, undefined, entType)) return true;
-  if (field === Field.TerritoryList && transform === Transform.Filter)
-    if (isFieldApplicable(Field.TerritoryPrimary, undefined, entType)) return true;
+  // if (field === Field.LanguageList && transform === Transform.Filter)
+  //   if (isFieldApplicable(Field.LanguagePrimary, undefined, entType)) return true;
+  // if (field === Field.TerritoryList && transform === Transform.Filter)
+  //   if (isFieldApplicable(Field.TerritoryPrimary, undefined, entType)) return true;
 
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&

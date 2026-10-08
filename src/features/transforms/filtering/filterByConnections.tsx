@@ -9,12 +9,13 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
-import { toTitleCase } from '@shared/lib/stringUtils';
+import { anyWordStartsWith } from '@shared/lib/stringUtils';
 
 import Field from '../fields/Field';
 import { sortByPopulation } from '../sorting/sort';
 
 import { FilterFunctionType } from './filter';
+import { parseFilterEntityID } from './FilterEntityID';
 import useFilters from './useFilters';
 
 /**
@@ -56,42 +57,27 @@ export function getFilterByConnections({
  */
 export function buildFilterByTerritory(territoryFilter: string): FilterFunctionType {
   // Split up strings like "United States [US]" into "US" and "United States"
-  const splitFilter = territoryFilter.split('[');
-  const nameMatch = splitFilter[0]?.toLowerCase().trim();
-  let codeMatch = '';
-  if (territoryFilter.length === 2 && territoryFilter.match(/^[A-Za-z]{2}$/)) {
-    codeMatch = territoryFilter.toUpperCase(); // ISO 3166 alpha-2 code
-  } else if (territoryFilter.length === 3 && territoryFilter.match(/^[0-9]{3}$/)) {
-    codeMatch = territoryFilter; // UN M.49 code (eg. 419 = Latin America and the Caribbean)
-  } else if (splitFilter.length > 1) {
-    codeMatch = splitFilter[1].split(']')[0]?.toUpperCase();
-  }
+  const { name, code } = parseFilterEntityID(territoryFilter, EntityType.Territory);
 
   return (ent: EntityData) => {
     if (!territoryFilter) return true;
     const territories = getContainingTerritories(ent);
-    if (codeMatch !== '') return territories.some((t) => t.codeDisplay === codeMatch);
-    return territories.some((t) => t.nameDisplay.toLowerCase().startsWith(nameMatch));
+    if (code) return territories.some((t) => t.codeDisplay === code);
+    if (!name) return true;
+    return territories.some((t) => anyWordStartsWith(t.nameDisplay, name));
   };
 }
 
 export function buildFilterByWritingSystem(writingSystemFilter: string): FilterFunctionType {
   // Split up strings like "Traditional Han [Hant]" into "Hant" and "Traditional Han"
-  const splitFilter = writingSystemFilter.split('[');
-  const nameMatch = splitFilter[0]?.toLowerCase().trim();
-  let codeMatch = '';
-  if (writingSystemFilter.length === 4 && writingSystemFilter.match(/[A-Z][a-z]{3}/)) {
-    codeMatch = toTitleCase(writingSystemFilter); // ISO 15924 code
-  } else if (splitFilter.length > 1) {
-    const codeSection = splitFilter[1].split(']')[0];
-    if (codeSection) codeMatch = toTitleCase(codeSection);
-  }
+  const { name, code } = parseFilterEntityID(writingSystemFilter, EntityType.WritingSystem);
 
   return (ent: EntityData) => {
     if (!writingSystemFilter) return true;
     const scripts = getWritingSystemsRelevantToEntity(ent);
-    if (codeMatch !== '') return scripts.some((ws) => ws.codeDisplay === codeMatch);
-    return scripts.some((ws) => ws.nameDisplay.toLowerCase().startsWith(nameMatch));
+    if (code) return scripts.some((ws) => ws.codeDisplay === code);
+    if (!name) return true;
+    return scripts.some((ws) => anyWordStartsWith(ws.nameDisplay, name));
   };
 }
 
@@ -133,41 +119,27 @@ export function getWritingSystemsRelevantToEntity(ent: EntityData): WritingSyste
 
 export function buildFilterByLanguage(languageFilter: string): FilterFunctionType {
   // Split up strings like "German [deu]" into "deu" and "German"
-  const splitFilter = languageFilter.split('[');
-  const nameMatch = splitFilter[0]?.toLowerCase().trim();
-  let codeMatch = '';
-  if (languageFilter.length === 3 && languageFilter.match(/[a-z]{3}/)) {
-    codeMatch = languageFilter; // ISO 639 code
-  } else if (splitFilter.length > 1) {
-    const codeSection = splitFilter[1].split(']')[0];
-    if (codeSection) codeMatch = codeSection.toLowerCase();
-  }
+  const { code, name } = parseFilterEntityID(languageFilter, EntityType.Language);
 
   return (ent: EntityData) => {
     if (!languageFilter) return true;
     const langs = getLanguagesRelevantToEntity(ent);
-    if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
-    return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
+    if (code) return langs.some((lang) => lang.codeDisplay === code);
+    if (!name) return true;
+    return langs.some((lang) => anyWordStartsWith(lang.nameDisplay, name));
   };
 }
 
 export function buildFilterByLanguageFamily(languageFamilyFilter: string): FilterFunctionType {
-  // Split up strings like "German [deu]" into "deu" and "German"
-  const splitFilter = languageFamilyFilter.split('[');
-  const nameMatch = splitFilter[0]?.toLowerCase().trim();
-  let codeMatch = '';
-  if (languageFamilyFilter.length === 3 && languageFamilyFilter.match(/[a-z]{3}/)) {
-    codeMatch = languageFamilyFilter; // ISO 639 code
-  } else if (splitFilter.length > 1) {
-    const codeSection = splitFilter[1].split(']')[0];
-    if (codeSection) codeMatch = codeSection.toLowerCase();
-  }
+  // Split up strings like "Germanic [gem]" into "gem" and "Germanic"
+  const { code, name } = parseFilterEntityID(languageFamilyFilter, EntityType.Language);
 
   return (ent: EntityData) => {
     if (!languageFamilyFilter) return true;
     const langs = getLanguageFamiliesRelevantToEntity(ent);
-    if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
-    return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
+    if (code) return langs.some((lang) => lang.codeDisplay === code);
+    if (!name) return true;
+    return langs.some((lang) => anyWordStartsWith(lang.nameDisplay, name));
   };
 }
 

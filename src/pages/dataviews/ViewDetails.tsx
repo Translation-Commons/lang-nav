@@ -1,11 +1,10 @@
 import React from 'react';
 
-import MiniCardList from '@widgets/cardlists/MiniCardList';
+import CurrentEntityMiniCardList from '@widgets/cardlists/CurrentEntityMiniCardList';
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import usePageParams from '@features/params/usePageParams';
-import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import SearchCombobox from '@features/transforms/search/SearchCombobox';
 
 import getEntityFromID from '@entities/lib/getEntityFromID';
@@ -49,7 +48,6 @@ const ViewDetails: React.FC = () => {
 
 const EmptyDetails: React.FC = () => {
   const { entType } = usePageParams();
-  const { filteredEntities } = useFilteredEntities({});
 
   return (
     <div className="flex flex-col gap-8 max-w-[900px] mx-auto">
@@ -61,7 +59,7 @@ const EmptyDetails: React.FC = () => {
       <div className="flex justify-center">
         <SearchCombobox />
       </div>
-      <MiniCardList ents={filteredEntities.slice(0, 12)} />
+      <CurrentEntityMiniCardList />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import usePagination from '@features/pagination/usePagination';
+import usePageParams from '@features/params/usePageParams';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
@@ -29,6 +30,7 @@ function InteractiveEntityTable<T extends EntityData>({
   useScope = true,
   tableID,
 }: Props<T>) {
+  const { paramsLevel } = usePageParams();
   const { getCurrentEntities } = usePagination<T>();
   const { filteredEntities } = useFilteredEntities({
     useScope,
@@ -66,7 +68,7 @@ function InteractiveEntityTable<T extends EntityData>({
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
-      {currentEntities.length > 10 && (
+      {currentEntities.length > 10 && paramsLevel === 'global' && (
         <div className="flex items-center gap-2">
           <VisibleItemsMeter ents={ents} />
           <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />

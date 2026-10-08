@@ -6,21 +6,19 @@ import EntityMap from '@features/map/EntityMap';
 import InternalLink from '@features/params/InternalLink';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { PageParams, View } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
-import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
-import TableID from '@features/table/TableID';
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
+import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
+import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import getLocaleColumns from '@entities/locale/LocaleColumns';
-import type { LocaleData } from '@entities/locale/LocaleTypes';
+import LocaleTable from '@entities/locale/LocaleTable';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import type { LanguageData } from '../LanguageTypes';
+import { type LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
@@ -44,22 +42,21 @@ const LanguageTerritories: React.FC<Props> = ({ lang, view }) => {
     [lang.locales],
   );
 
-  const { languageScopes } = usePageParams();
-
   if (locales.length === 0) return null;
 
   const params: Partial<PageParams> = {
     entType: EntityType.Locale,
-    languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
     sortBy: Field.Population,
     colorBy: Field.PercentOfTerritoryPopulation,
     colorGradient: ColorGradient.SequentialBlue,
-    searchString: '',
     view,
     limit: 12,
+
+    ...BLANK_FILTER_PARAMS,
+
+    languageFilter: getFilterEntityID(lang),
+    territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   };
-  if (lang.scope && !languageScopes.includes(lang.scope))
-    params.languageScopes = [...languageScopes, lang.scope];
 
   return (
     <LocalParamsProvider overrides={params}>
@@ -82,22 +79,10 @@ const LanguageTerritories: React.FC<Props> = ({ lang, view }) => {
             <EntityMap entities={locales} maxWidth={1000} />
           </>
         )}
-        {view === View.Table && <Table locales={locales} />}
+        {view === View.Table && <LocaleTable />}
       </div>
     </LocalParamsProvider>
   );
 };
-
-function Table({ locales }: { locales: LocaleData[] }) {
-  const columns = useMemo(() => getLocaleColumns(), []);
-
-  return (
-    <InteractiveEntityTable<LocaleData>
-      tableID={TableID.Locales}
-      ents={locales}
-      columns={columns}
-    />
-  );
-}
 
 export default LanguageTerritories;
