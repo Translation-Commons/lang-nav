@@ -77,7 +77,14 @@ const SidebarFilterSelector: React.FC<{ filterBy: FilterField }> = ({ filterBy }
               <HoverCardTrigger
                 delay={100}
                 render={
-                  <Button onClick={remove} size="sm" variant="active">
+                  <Button
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      remove();
+                    }}
+                    size="sm"
+                    variant="active"
+                  >
                     active
                   </Button>
                 }

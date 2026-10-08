@@ -40,7 +40,7 @@ const SubstringFilterSelector = () => {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <InputGroupButton>
+            <InputGroupButton aria-label="Choose search field">
               <FilterIcon />
             </InputGroupButton>
           }
@@ -61,7 +61,7 @@ const SubstringFilterSelector = () => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <InputGroupButton onClick={() => setLocalString('')}>
+      <InputGroupButton aria-label="Clear search" onClick={() => setLocalString('')}>
         <XIcon />
       </InputGroupButton>
     </InputGroup>
