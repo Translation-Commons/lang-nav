@@ -1,0 +1,61 @@
+#codeDisplay		axl.ar.immi	axl.ar.l1	axl.ar.overall
+#nameDisplay		AXL Argentina Immigrant Communities	AXL Argentina L1	AXL Argentina Overall
+#isoRegionCode	AR			
+#yearCollected	2018			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder		L1	L1	Any
+#domain		Home	Home	
+### Population Surveyed ###				
+#population	44,600,000			
+### Data Constraints ###				
+#quantity		count	percent	percent
+#geographicScope	whole country			
+#nationality		immigrants		
+#languagesIncluded		immigrant languages	Spanish	Spanish
+### Creator ###				
+#collectorType	Secondary			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/amsudant/argentine-1demo.htm			
+#datePublished	2024-05-02			
+#dateAccessed	2026-10-01			
+#documentName	Argentine 1) Données démolinguistiques			
+#sectionName		2.2 La population immigrante	2.1 L'espagnol	
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion			
+#notes		Plautdietsch number from earlier section		
+Language Code	Language	Nombre (2018)		
+spa	Spanish		91	97
+ara/apc	Syrian Arabic	1 465 000		
+ita	Italian	1 116 000		
+glg	Galician	752 000		
+grn	Guarani	593 000		
+spa/cast1244	Spanish (Spain)	586 000		
+spa/chil1286	Chilean Spanish	206 000		
+cat	Catalan	198 000		
+pol	Polish	198 000		
+spa/mis	Peruvian Spanish	169 000		
+hye	Armenian	149 000		
+spa/mis	Uruguayan Spanish	124 000		
+zho	Chinese	76 000		
+rom	Romani	59 000		
+por/braz1246	Brazilian Portuguese	43 000		
+deu	German	42 000		
+ell	Greek	41 000		
+jpn	Japanese	38 000		
+kor	Korean	32 000		
+rus	Russian	31 000		
+ukr	Ukrainian	31 000		
+fra	French	16 000		
+ron	Romanian	16 000		
+kea	Caboverdiano	15 000		
+por	Portuguese	15 000		
+slv	Slovene	12 000		
+eng	English	9 400		
+slk	Slovak	9 100		
+ces	Czech	8 000		
+hbs/srp	Serbian	6 400		
+hbs/hrv	Croatian	4 200		
+bel	Belarusian	3 900		
+lao	Lao	2 000		
+pdt	Plautdietsch	2000		
