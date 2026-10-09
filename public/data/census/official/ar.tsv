@@ -1,0 +1,85 @@
+#codeDisplay		ar2022indig	ar2022indig.speak	ar2004indig	ar2004indig.speak	ar2004indig.use
+#nameDisplay		Argentina 2022 Indigenous Ethnicity	Argentina 2022 Indigenous Speakers	Argentina 2004 Indigenous Ethnicity	Argentina 2004 Indigenous Speaking	Argentina 2004 Indigenous Using
+#isoRegionCode	AR					
+#yearCollected	2022			2004	2004	2004
+#languageUse		Ethnicity	Speaks	Ethnicity	Speaks	Uses
+#acquisitionOrder			L1			
+#domain			Home			
+#population	45,892,285			35318316	35318316	35318316
+#populationSource	Cuadro resumen. Total de población, población en viviendas particulares, población en viviendas colectivas y población en situación de calle, por jurisdicción y sexo registrado al nacer. Año 2022			https://statbase.org/data/arg-population-by-age-groups/	https://statbase.org/data/arg-population-by-age-groups/	https://statbase.org/data/arg-population-by-age-groups/
+#age				5+	5+	5+
+#nationality	Indigenous					
+#collectorType	Government					
+#collectorName	Instituto Nacional de Estadístíca y Censos					
+#collectorNameShort	INDEC					
+#url	https://censo.gob.ar/index.php/datos_definitivos_total_pais/			https://www.indec.gob.ar/micro_sitios/webcenso/ECPI/indicadores_comparados.asp	https://www.indec.gob.ar/micro_sitios/webcenso/ECPI/indicadores_comparados.asp	https://www.indec.gob.ar/micro_sitios/webcenso/ECPI/indicadores_comparados.asp
+#dateAccessed						
+#documentName	Resultados del Censo 2022			Encuesta Complementaria de Pueblos Indígenas	Encuesta Complementaria de Pueblos Indígenas	Encuesta Complementaria de Pueblos Indígenas
+#sectionName	Población indígena					
+#tableName	Cuadro 9. Total del país. Población que se reconoce indígena o descendiente de pueblos indígenas u originarios en viviendas particulares que habla o entiende la lengua del pueblo indígena u originario del que se reconoce o desciende, según pueblo indígena u originario. Año 2022			Cuadro 7 / Población de 5 años o más y población que habla y/o entiende lengua/s indígena/s por pueblo indígena y región muestral. Años 2004-2005                        	Cuadro 7 / Población de 5 años o más y población que habla y/o entiende lengua/s indígena/s por pueblo indígena y región muestral. Años 2004-2005                        	Cuadro 8 / Población de 5 años o más y población que habla habitualmente en su casa lengua/s indígena/s por pueblo indígena y región muestral. Años 2004-2005
+#columnName		Población que se reconoce indígena o descendiente de pueblos indígenas u originarios	Habla o entiende la lengua del pueblo indígena u originario del que se reconoce o desciende / Sí	Población de 5 años o más	Población que habla y/o entiende lengua/s indígena/s 	Población que habla habitualmente en su casa lenguas indígenas (2)
+#notes	Some languages listed may actually be extinct				Adapted from percent within ethnicity	Adapted from percent within ethnicity
+mul	Total	1,306,730	382,697			
+mis	Sin Información	431,703	82,156			
+arn	Mapuche	145,783	26,163	103,420	17892	2275
+grn	Guaraní	135,232	54,897	20,355	8183	1404
+grn/gui/avaa1240	Ava guaraní			18,975	8937	1954
+grn	Tupí guaraní			14,578	5510	1983
+calc1235	Diaguita	86,022	13,903	28,821	1672	0
+guai1249/tob	Qom/Toba	80,124	39,388	60,267	34955	26698
+que/quh	Kolla	69,121	28,242	62,782	8978	1193
+wich1261	Wichi	69,080	50,701	34,240	29070	27837
+que	Quechua	52,154	26,749	6,073	1804	0
+mis	Comechingón	27,509	1,369	10,121	0	0
+huar1251	Huarpe	25,615	2,034	13,595	557	0
+teh	#original	23,416	2,452			
+aym	Aymara	19,247	9,775	3716	1546	0
+guai1249/moc	Moqoit/Mocoví	18,231	4,404	13,946	3751	2273
+teh	Tehuelche	17,420	1,457	9,792	960	0
+arn	Ranquel/Rankulche	14,133	980	9,363	449	0
+grn/gun	Mbya Guaraní/Mbyá guaraní	11,014	9,203	7,045	3910	2818
+tono1235	Tonokoté/Tonocote	10,608	4,834	4,384	1626	0
+quh/1nm	#Omaguaca	10,605	4,954	1,478	0	0
+char1240	Charrúa	9,065	775	4,309	0	0
+kuz	Atacama	6,818	1,828	2,627	0	0
+guai1249/plg	Pilagá	6,169	5,491	3,978	3513	3461
+calc1235	Diaguita Cacano	4,772	1,637			
+ter/caj	Chané	3,296	1,490	3,867	1330	394
+chor1274	Chorote	3,238	2,431	2,217	1712	1669
+sana1301	Sanavirón	3,088	354	546	0	0
+ule	Lule	2,851	578	848	0	0
+vil	Lule Vilela	2,303	293			
+pue	Günün A Küna	2,260	236			
+pue	Pampa			1,393	0	0
+1nm	#Ocloya	1,818	557			
+chan1296	Chana	1,590	141			
+que/quh	#Tastil	1,391	480			
+ona	Selk'Nam/Ona	1,206	107	604	0	0
+aym/ayc	Chicha	1,024	348			
+guai1249	Guaycurú	1,006	159			
+quer1237	Querandí	964	52	694	0	0
+teh	Aoniken	919	141			
+cag	Chulupí/Nivaclé	878	659	487	266	176
+vil	Vilela	863	180			
+guai1249/axb	Avipón	817	103			
+grn/tpj	Tapiete	654	253	427	178	105
+que/quh/nort2975	#Kolla Atacameño	522	157			
+que/quh	#Tilián	446	143			
+mis	Corundí	387	31			
+que/quh	#Toara	299	125			
+que/quh	#Fiscara	255	71			
+yag	Yagán	189	19			
+wich1261/mtp	Weenhayek	179	113			
+gyr	Guarayo	155	35			
+guen1235	Minuán	69	3			
+wich1261	#Iogys	49	27			
+que/quh/1nm	Churumata	47	3			
+que/quh/1nm	Jujuí	41	9			
+mis	Michilingüe	28	0			
+chon1248	Wayteca/Chono	16	1			
+mca	Mak'A	13	5			
+alc	Alakaluf	10	0			
+grn/gnw	Isoceño	10	0			
+haus1240	Haush/Maneken	6	1			
+mis	Ansilta	2	0			
+aym/ayc	Maimará			158	0	0
