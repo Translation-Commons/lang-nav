@@ -10,6 +10,7 @@ import Field from '@features/transforms/fields/Field';
 import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import LocaleEcrmlCoverage from '@entities/locale/localstatus/LocaleEcrmlCoverage';
@@ -43,6 +44,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
 
         ...BLANK_FILTER_PARAMS,
         territoryScopes: [territory.scope],
+        languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
         territoryFilter: getFilterEntityID(territory),
       }}
     >
