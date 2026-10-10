@@ -4,6 +4,7 @@ import React, { useCallback } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
@@ -11,6 +12,7 @@ import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
@@ -92,7 +94,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   );
 
   return (
-    <div>
+    <LocalParamsProvider overrides={{ ...BLANK_FILTER_PARAMS }}>
       {langsNotFound.length > 0 && (
         <div>
           <label>Languages not found in the database:</label>
@@ -102,7 +104,6 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
       <InteractiveEntityTable
         tableID={TableID.LanguagesInCensus}
         ents={languagesInCensus}
-        shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           {
@@ -191,7 +192,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
         ]}
       />
-    </div>
+    </LocalParamsProvider>
   );
 };
 

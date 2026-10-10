@@ -75,9 +75,10 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
       return (pageEntities || [])
         .filter(substringFilter)
-        .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
+        .map((ent) => ({ ent, distance: getMatchDistance(ent) }))
+        .sort((a, b) => a.distance - b.distance)
         .slice(0, SUGGESTION_LIMIT)
-        .map((ent) => {
+        .map(({ ent }) => {
           const label = (
             <HighlightedEntityField
               ent={ent}

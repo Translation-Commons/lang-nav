@@ -8,6 +8,8 @@ import usePageParams from './usePageParams';
 
 /**
  * Creates a provider of params that inherits from the global params but can differ
+ *
+ * They do not persist after a page refresh or in the URL
  */
 const LocalParamsProvider: React.FC<{
   children: React.ReactNode;
@@ -42,6 +44,7 @@ const LocalParamsProvider: React.FC<{
       ...overrides,
       ...localParams,
       updatePageParams: updateLocalParams,
+      paramsLevel: 'local',
     };
   }, [globalParams, updateLocalParams, localParams, overrides]);
 

@@ -9,6 +9,7 @@ import { FilterFunctionType } from './filter';
 import {
   buildFilterByLanguage,
   buildFilterByLanguageFamily,
+  buildFilterByOrganization,
   buildFilterByTerritory,
   buildFilterByWritingSystem,
 } from './filterByConnections';
@@ -17,7 +18,6 @@ import {
   buildFilterByLanguageScope,
   buildFilterByLanguageSource,
   buildFilterByModality,
-  buildFilterByOrganization,
   buildFilterByTerritoryScope,
 } from './filterByEnum';
 import { buildFilterByPopulation } from './filterByRange';

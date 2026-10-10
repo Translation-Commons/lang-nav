@@ -1,4 +1,5 @@
 import usePagination from '@features/pagination/usePagination';
+import usePageParams from '@features/params/usePageParams';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
@@ -18,27 +19,13 @@ import './tableStyles.css';
 interface Props<T> {
   ents: T[];
   columns: TableColumn<T>[];
-  shouldFilterUsingSearchBar?: boolean;
-  /** When false, page language-scope filters do not hide table rows. */
-  useScope?: boolean;
   tableID: TableID;
 }
 
-function InteractiveEntityTable<T extends EntityData>({
-  ents,
-  columns,
-  shouldFilterUsingSearchBar = true,
-  useScope = true,
-  tableID,
-}: Props<T>) {
+function InteractiveEntityTable<T extends EntityData>({ ents, columns, tableID }: Props<T>) {
+  const { paramsLevel } = usePageParams();
   const { getCurrentEntities } = usePagination<T>();
   const { filteredEntities } = useFilteredEntities({
-    useScope,
-    useSubstring: shouldFilterUsingSearchBar,
-    useConnections: true,
-    useVitality: true,
-    usePopulation: true,
-    useLanguageSource: true,
     inputEnts: ents,
   });
   const currentEntities = getCurrentEntities(filteredEntities);
@@ -48,7 +35,7 @@ function InteractiveEntityTable<T extends EntityData>({
   return (
     <div className="flex flex-col gap-4 items-center">
       <div className="flex items-center gap-2">
-        <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+        <VisibleItemsMeter ents={ents} />
         <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
       </div>
@@ -68,9 +55,9 @@ function InteractiveEntityTable<T extends EntityData>({
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
-      {currentEntities.length > 10 && (
+      {currentEntities.length > 10 && paramsLevel === 'global' && (
         <div className="flex items-center gap-2">
-          <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+          <VisibleItemsMeter ents={ents} />
           <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         </div>
       )}

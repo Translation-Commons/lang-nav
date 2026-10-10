@@ -114,8 +114,9 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         )}
       </DetailsSection>
 
-      <DetailsSection title="Connections">
-        {locales && locales.length > 0 && (
+      {/* TODO This section needs a rework */}
+      {locales && locales.length > 0 && (
+        <DetailsSection title="Connections">
           <DetailsField title="Locale">
             <CommaSeparated>
               {locales.map((locale) => (
@@ -123,8 +124,8 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
               ))}
             </CommaSeparated>
           </DetailsField>
-        )}
-      </DetailsSection>
+        </DetailsSection>
+      )}
     </div>
   );
 };

@@ -32,7 +32,6 @@ const ReportLanguageScopeIssues: React.FC = () => {
       <strong>I</strong>ntermediate.
       <InteractiveEntityTable<LanguageData>
         tableID={TableID.LanguageScopeIssues}
-        shouldFilterUsingSearchBar={false}
         columns={[
           {
             key: 'Parent Code',

@@ -28,6 +28,7 @@ vi.mock('@features/transforms/filtering/filterByConnections', () => ({
   buildFilterByLanguageFamily: vi.fn().mockReturnValue(() => true),
   buildFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
   buildFilterByTerritory: vi.fn().mockReturnValue(() => true),
+  buildFilterByOrganization: vi.fn().mockReturnValue(() => true),
 }));
 
 vi.mock('@features/transforms/sorting/sort', () => ({
@@ -187,17 +188,5 @@ describe('InteractiveEntityTable', () => {
     renderEntityTable({ ents: [numericEnt] });
 
     expect(screen.getByRole('cell', { name: (1234567).toLocaleString() })).toBeInTheDocument();
-  });
-
-  it('disables search bar filter when shouldFilterUsingSearchBar is false', () => {
-    const mockSubstringFilter = vi.fn();
-    vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
-
-    renderEntityTable({ shouldFilterUsingSearchBar: false });
-
-    expect(mockSubstringFilter).not.toHaveBeenCalled();
-    mockEnts.forEach((ent) => {
-      expect(screen.getByText(ent.nameDisplay)).toBeInTheDocument();
-    });
   });
 });

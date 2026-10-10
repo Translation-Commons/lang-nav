@@ -16,6 +16,7 @@ export const createMockUsePageParams = (
     ...getDefaultParams(),
     updatePageParams: mockUpdatePageParams,
     brightness: { preference: 'light', setPreference: () => {}, pageBrightness: 'light' },
+    paramsLevel: 'global',
     ...overrides,
   };
 };

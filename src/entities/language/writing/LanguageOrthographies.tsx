@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import MiniCardList from '@widgets/cardlists/MiniCardList';
+import CurrentEntityMiniCardList from '@widgets/cardlists/CurrentEntityMiniCardList';
 
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { View } from '@features/params/PageParamTypes';
-import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
-import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
+import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
+import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 
-import getOrthographyColumns from '@entities/orthography/OrthographyColumns';
-import { OrthographyData } from '@entities/orthography/OrthographyTypes';
+import OrthographyTable from '@entities/orthography/OrthographyTable';
+import { EntityType } from '@entities/types/EntityTypes';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -25,25 +25,22 @@ const LanguageOrthographies: React.FC<Props> = ({ lang, view }) => {
 
   return (
     <div className="text-xs">
-      <LocalParamsProvider overrides={{ limit: 12, fieldFocus: Field.Example }}>
-        {view === View.CardList && <MiniCardList ents={orthographies} />}
-        {view === View.Table && <Table orthographies={orthographies} />}
+      <LocalParamsProvider
+        overrides={{
+          limit: 12,
+          fieldFocus: Field.Example,
+          sortBy: Field.Example,
+
+          ...BLANK_FILTER_PARAMS,
+          entType: EntityType.Orthography,
+          languageFilter: getFilterEntityID(lang),
+        }}
+      >
+        {view === View.CardList && <CurrentEntityMiniCardList />}
+        {view === View.Table && <OrthographyTable />}
       </LocalParamsProvider>
     </div>
   );
 };
-
-function Table({ orthographies }: { orthographies: OrthographyData[] }) {
-  const columns = useMemo(() => getOrthographyColumns(), []);
-
-  return (
-    <InteractiveEntityTable<OrthographyData>
-      tableID={TableID.Orthographies}
-      ents={orthographies}
-      columns={columns}
-      shouldFilterUsingSearchBar={false}
-    />
-  );
-}
 
 export default LanguageOrthographies;
