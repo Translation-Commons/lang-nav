@@ -76,14 +76,17 @@ const ReportLanguageDescendants: React.FC = () => {
             columnGroup: 'Population',
           },
           {
-            key: 'Largest Descendant',
-            render: (lang: LanguageData) =>
-              lang.largestDescendant && (
-                <>
-                  <HoverableEntityName ent={lang.largestDescendant} /> [
-                  {lang.largestDescendant.codeDisplay}]
-                </>
-              ),
+            key: 'Largest Descendant (Code)',
+            render: (lang: LanguageData) => (
+              <HoverableEntityName ent={lang.largestDescendant} labelSource="code" />
+            ),
+            exportValue: (lang: LanguageData) => lang.codeDisplay,
+            columnGroup: 'Largest Descendent',
+          },
+          {
+            key: 'Largest Descendant (Name)',
+            render: (lang: LanguageData) => <HoverableEntityName ent={lang.largestDescendant} />,
+            exportValue: (lang: LanguageData) => lang.nameDisplay,
             columnGroup: 'Largest Descendent',
           },
           {

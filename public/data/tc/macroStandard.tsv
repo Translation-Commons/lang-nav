@@ -1,0 +1,81 @@
+#lastUpdated	2026-10-29
+#orderedBy	Population
+#url	http://localhost:5173/data?languageScopes=5&view=Reports&columns=1-3l_9-9v&reportID=5
+#notes	Many macrolanguages commented out when their largest constituent are not considered the singular standard for the community			Mostly percentages about how much the language is of the standard
+#Macro Code	Macro Name	Standard Code	Standard Name	Supporting Data 
+zho	Chinese languages	cmn	Mandarin Chinese	87.8
+ara	Arabic	arb	Modern Standard Arabic	#manual
+msa	Malayic	zlm	Malay (Individual Language)	#override
+swa	Swahili	swh	Coastal Swahili	48.5
+lah	Lahnda	pnb	Western Panjabi	72.8
+fas	Persian	pes	Iranian Persian	80.2
+#pus	Pashto	pbu	Northern Pashto	17.4
+ori	Oriya languages	ory	Oriya	79.9
+nan	Min Nan Chinese	hokk1242	Southern Min	Xiamen and Hokkien are core to the definition of Min-nan
+uzb	Uzbek	uzn	Northern Uzbek	81.8
+orm	Oromo	gaz	West Central Oromo	31.0
+nep	Nepali languages	npi	Common Nepali	86.8
+raj	Rajasthani	mwr	Marwari	Largest regional language
+mlg	Malagasy	plt	Plateau Malagasy	24.4, dialect of the capital city
+#ful	Fulah	fuv	Nigerian Fulfulde	36.7
+aze	Azerbaijani	azj	North Azerbaijani	46.0
+#kur	Kurdish	ckb	Central Kurdish	57.5
+#hbs	Serbo-Croatian	srp	Serbian	46.8
+hbs-Latn	Serbo-Croatian	hrv	Croatian	46.1
+hbs-Cyrl	Serbo-Croatian	srp	Serbian	46.8
+aka	Akan	twi	Twi	39.4
+#man	Mandingo	bam	Bambara	92.7, distributed community without a specific definite language
+#kon	Kongo	kng	Koongo	14.7
+#bal	Baluchi	bgn	Western Balochi	20.0
+#que	Quechua	quz	Cusco Quechua	9.4
+mon	Mongolian	khk	Halh Mongolian	34.1
+sqi	Albanian	als	Tosk Albanian	50.0
+nor	Norwegian	nob	Norwegian Bokmål	81.3
+#hmn	Hmong languages	mww	Hmong Daw	28.5
+#din	Dinka	dik	Southwestern Dinka	32.3
+#zha	Zhuang	zzj	Zuojiang Zhuang	24.5
+grn	Guarani	gug	Paraguayan Guaraní	96.3
+#kln	Kalenjin	sgc	Kipsigis	45.6
+tmh	Tamashek	taq	Tamasheq	96.1
+#luy	Luyia	myx	Masaaba	42.3
+#gon	Gondi	gno	Northern Gondi	26.5
+#bik	Bikol	fbl	West Albay Bikol	76.5
+doi	Dogri languages	dgo	Common Dogri	Individual language code
+#aym	Aymara	ayc	Southern Aymara	3.4
+#kru	Kurukh	xis	Kisan	9.6
+lav	Latvian	lvs	Standard Latvian	70.8
+est	Estonian	ekk	Standard Estonian	70.0
+#zza	Zazaki	diq	Common Dimli	83.3
+#srd	Sardinian	src	Logudorese Sardinian	42.3
+#rom	Romany	rmc	Carpathian Romani	41.7
+#gba	Gbaya	nga	Ngbaka	99.0
+#syr	Syriac	aii	Assyrian Neo-Aramaic	56.5
+#zap	Zapotec	zaw	Mitla Zapotec	1.7
+#bua	Buriat	bxr	Russia Buriat	14.6
+#chm	Mari	mrj	Western Mari	5.8
+#grb	Grebo	gbo	Northern Grebo	52.9
+kom	Komi	kpv	Komi-Zyrian	99.9
+#cre	Cree	crk	Plains Cree	13.5
+#iku	Inuktitut	kal	Greenlandic	57.6, distributed community
+#oji	Ojibwa	ojb	Northwestern Ojibwa	41.6
+#brb	Lave	krr	Kru'ng 2	62.5
+#bnc	Bontok	lbk	Central Bontok	38.7
+#ipk	Inupiaq	esk	Northwest Alaska Inupiatun	18.9
+#qer	Dalecarlian	ovd	Elfdalian	0.3
+#den	Slavey	xsl	South Slavey	33.2
+#hai	Haida	hdn	Northern Haida	6.1
+#del	Delaware	umu	Munsee	35.7
+#west2443	Western Victoria	weg	Wergaia	40
+#	Not yet defined as macrolanguages		Data from before adding language standards	http://langnav.org/data?languageScopes=%5B%5D&view=Reports&columns=1-3l_9-9v&reportID=5&searchString=Macro-
+macr1271	Macro-English	eng	English	97.5
+macr1273	Macro-French	fra	French	97.7
+macr1272	Macro-Portuguese	por	Portuguese	99.0
+macr1270	Macro-Dutch	nld	Dutch	73.5
+#nupe1252	Macro-Nupoid	gbr	Gbagyi	49.4
+#macr1268	Macro-Tani	mrg	Mising	45.4
+masa1301	Macro-Masalit	mls	Masalit	99.8
+#macr1275	Macro-Bai	bca	Central Bai	47.6
+nucl1441	Macro-Maba	mde	Maba	89.2
+#macr1274	Macro-Carolinian	tpv	Tanapag	40.0
+macr1267	Macro-Yaeyama	rys	Yaeyama	71.4
+mand1468	Macro-Mandaic	mid	Mandaic	100
