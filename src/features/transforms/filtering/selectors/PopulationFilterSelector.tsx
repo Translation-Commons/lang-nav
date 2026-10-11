@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import { POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
@@ -9,36 +9,23 @@ import { Slider } from '@shared/ui/slider';
 const PopulationFilterSelector: React.FC = () => {
   const { populationMin, populationMax, updatePageParams } = usePageParams();
 
-  // Use logarithmic scales for the slider
-  const [sliderValue, setSliderValue] = React.useState<[number, number]>([
-    log(populationMin),
-    log(populationMax),
-  ]);
+  // The page params are the source of truth; convert them for the logarithmic slider.
+  const sliderValue: [number, number] = [log(populationMin), log(populationMax)];
 
   const updateSlider = useCallback(
     (value: number | readonly number[]) => {
-      if (typeof value === 'number') {
-        setSliderValue([sliderValue[0], value]);
-      } else {
-        setSliderValue([value[0], value[1]]);
+      const nextSliderValue: [number, number] = Array.isArray(value)
+        ? [value[0], value[1]]
+        : [sliderValue[0], value];
+      const nextMin = exp(nextSliderValue[0]);
+      const nextMax = exp(nextSliderValue[1]);
+
+      if (nextMin !== populationMin || nextMax !== populationMax) {
+        updatePageParams({ populationMin: nextMin, populationMax: nextMax });
       }
     },
-    [sliderValue],
+    [populationMin, populationMax, sliderValue, updatePageParams],
   );
-
-  // Have slider update the page params
-  useEffect(() => {
-    // debounce
-    const handler = setTimeout(() => {
-      updatePageParams({ populationMin: exp(sliderValue[0]), populationMax: exp(sliderValue[1]) });
-    }, 300);
-    return () => clearTimeout(handler);
-  }, [sliderValue, updatePageParams]);
-
-  // Have page params update the slider
-  useEffect(() => {
-    setSliderValue([log(populationMin), log(populationMax)]);
-  }, [populationMin, populationMax]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -57,16 +44,18 @@ const PopulationFilterSelector: React.FC = () => {
   );
 };
 
-// Converts a number to the base-10 log version, but uses negative space for -1 and 0 (since they cannot be logged to)
+// Converts to base-10 log space, reserving negative values for the no-minimum and zero states.
 function log(value: number): number {
-  if (value === -1) return -0.2;
-  if (value <= 0) return -0.1;
-  return Math.log10(value);
+  const rounded = numberToSigFigs(value, 2);
+  if (rounded === -1) return -0.2;
+  if (rounded <= 0) return -0.1;
+  return Math.log10(rounded);
 }
-// Also rounds the values to something more readable (eg. 8675 -> 8700)
+
+// Rounds values to something more readable (for example, 8675 becomes 8700).
 function exp(value: number): number {
   if (value === -0.2) return -1;
-  if (value < 0) return 0; // 10^0 = 1, so we need to use negative space for actual 0
+  if (value < 0) return 0;
   return numberToSigFigs(Math.pow(10, value), 2);
 }
 
