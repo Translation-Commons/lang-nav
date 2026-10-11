@@ -8283,7 +8283,6 @@ nyx_AU	Nganyaywana (Australia)		EDL	1
 obl_CM	Oblo (Cameroon)		EDL	1	
 ogo_RU	Khana (Russia)		Official	1	
 okg_AU	Koko Babangk (Australia)		EDL	1	
-ona_AR	Ona (Argentina)		EDL	1	
 onu_VU	Unua (Vanuatu)		EDL	1	
 pbg_VE	Paraujano (Venezuela)		EDL	1	
 pcb_KH	Pear (Cambodia)		Official	944	
@@ -8297,7 +8296,6 @@ pnk_BO	Paunaka (Bolivia)		EDL	1
 pnv_AU	Pinikura (Australia)		EDL	1	
 poo_US	Central Pomo (United States)		EDL	1	
 prl_PE	Peruvian Sign Language (Peru)		Official	13,326	
-pue_AR	Gününa-Küne (Argentina)		EDL	1	
 qua_US	Quapaw (United States)		Unverified Official	1	
 qui_US	Quileute (United States)		EDL	1	
 rnr_AU	Nari Nari (Australia)		EDL	1	
@@ -8323,7 +8321,6 @@ sww_VU	Sowa (Vanuatu)		EDL	1
 taa_US	Lower Tanana (United States)		Unverified Official	1	official_regional
 tau_US	Upper Tanana (United States)		Unverified Official	1	official_regional
 teb_EC	Teteté (Ecuador)		EDL	1	
-teh_AR	Tehuelche (Argentina)		EDL	1	
 tgx_CA	Tagish (Canada)	Tāgizi	EDL	1	
 tgz_AU	Tagalaka (Australia)		EDL	1	
 tig_RU	Tigre (Russia)	ትግሬ	Official	1	
@@ -8350,7 +8347,6 @@ ure_BO	Uru (Bolivia)	chhiw lüsñchi chhun	EDL	1
 urv_PG	Uruava (Papua New Guinea)		EDL	1	
 vai_Latn_LR	Vai (Latin) (Liberia, Latin)	ꕙꔤ	Other	1	
 ved_LK	Veddah (Sri Lanka)		EDL	1	
-vil_AR	Vilela (Argentina)		EDL	1	
 vmb_AU	Mbabaram (Australia)		EDL	1	
 vml_AU	Malkana (Australia)		EDL	1	
 vmu_AU	Muluridyi (Australia)		EDL	1	
@@ -8753,7 +8749,6 @@ avl_JO	Eastern Egyptian Bedawi Arabic (Jordan)
 avm_AU	Angkamuthi (Australia)				
 avs_PE	Aushiri (Peru)				
 awg_AU	Anguthimri (Australia)				
-axb_AR	Abipon (Argentina)				
 axm_AM	Middle Armenian (Armenia)				
 ayh_YE	Hadrami Arabic (Yemen)	اللهجة الحضرمية		3200000	
 ayk_NG	Akuku (Nigeria)				
@@ -9719,7 +9714,6 @@ uge_SB	Ughele (Solomon Islands)
 ugh_RU	Kubachi (Russia)				
 ugn_UG	Ugandan Sign Language (Uganda)				
 ukv_SS	Kuku (South Sudan)				
-ule_AR	Lule (Argentina)				
 umc_IT	Marrucinian (Italy)				
 umu_CA	Munsee (Canada)	hulŭniixsuwáakan			
 und_001	Undetermined (World)	undetermined language			
@@ -11015,3 +11009,41 @@ ttg_BN	Tutong (Brunei)			33700
 beg_BN	Belait (Brunei)			1240	
 bsb_BN	Brunei Bisaya (Brunei)			600	
 niu_CK	Niuean (Cook Islands)			200	
+gui_AR	Eastern Bolivian Guaraní (Argentina)		Official	18975	
+gun_AR	Mbyá Guaraní (Argentina)		Official	11014	
+char1240_AR	Charrúa (Argentina)		Official	9065	
+kuz_AR	Kunza (Argentina)		Official	6818	
+caj_AR	Chané (Argentina)		Official	3867	
+chan1296_AR	Chaná (Argentina)		Official	1590	
+quer1237_AR	Querandi (Argentina)		Official	964	
+tpj_AR	Tapieté (Argentina)		Official	654	
+mtp_AR	Wichí Lhamtés Nocten (Argentina)		Official	179	
+guen1235_AR	Güenoa (Argentina)		Official	69	
+chon1248_AR	Chono (Argentina)		Official	16	
+haus1240_AR	Haush (Argentina)		Official	6	
+ter_AR	Tereno (Argentina)		Official	3867	
+ayc_AR	Southern Aymara (Argentina)		Official	1024	
+cag_AR	Nivaclé (Argentina)		Official	878	
+yag_AR	Yámana (Argentina)		Official	189	
+gyr_AR	Guarayu (Argentina)		Official	155	
+alc_AR	Qawasqar (Argentina)		Official	10	
+gnw_AR	Western Bolivian Guaraní (Argentina)		Official	10	
+ara_AR	Arabic (Argentina)			1465000	
+apc_AR	Levantine Arabic (Argentina)			1465000	
+ita_AR	Italian (Argentina)			1116000	
+glg_AR	Galician (Argentina)			752000	
+cat_AR	Catalan (Argentina)			198000	
+hye_AR	Armenian (Argentina)			149000	
+rom_AR	Romany (Argentina)			59000	
+kea_AR	Kabuverdianu (Argentina)			15000	
+pdt_AR	Plautdietsch (Argentina)			2000	
+aym_AR	Aymara (Argentina)		Official	10123	
+teh_AR	Tehuelche (Argentina)		Official	4050	
+ule_AR	Lule (Argentina)		Official	578	
+vil_AR	Vilela (Argentina)		Official	473	
+pue_AR	Gününa-Küne (Argentina)		Official	236	
+ona_AR	Ona (Argentina)		Official	107	
+axb_AR	Abipon (Argentina)		Official	103	
+taib1242_SG	Taiwanese (Singapore)			1202000	
+sarn1238_SR	Sarnami Hindustani (Suriname)		Official	30588	
+chao1238_SG	Teochew (Singapore)			603000	
