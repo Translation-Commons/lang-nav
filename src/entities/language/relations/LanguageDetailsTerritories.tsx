@@ -14,7 +14,7 @@ import type { LanguageData } from '../LanguageTypes';
 import LanguageTerritories from '../relations/LanguageTerritories';
 
 const LanguageDetailsTerritories: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const [sectionView, setSectionView] = React.useState(View.CardList);
+  const [sectionView, setSectionView] = React.useState(View.Map);
 
   const locales = useMemo(
     () =>

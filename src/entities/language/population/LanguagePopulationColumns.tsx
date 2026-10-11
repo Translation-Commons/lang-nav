@@ -6,6 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import { parseFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
 import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
@@ -26,8 +27,12 @@ const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
   if (!territoryFilter)
     return isShortened ? '... in selected Territory' : 'Population (in Territory, unselected)';
 
-  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
-  return isShortened ? <>... in {formattedTerritory}</> : <>Population (in {formattedTerritory})</>;
+  const { code, name } = parseFilterEntityID(territoryFilter, EntityType.Territory);
+  return isShortened ? (
+    <>... in {name ?? code ?? 'the selected territory'}</>
+  ) : (
+    <>Population (in {name ?? code ?? 'the selected territory'})</>
+  );
 };
 
 const PopulationInTerritoryDescription: React.FC = () => {
@@ -35,10 +40,11 @@ const PopulationInTerritoryDescription: React.FC = () => {
   if (!territoryFilter)
     return 'Select a territory in the filters in the side panel to see population in that territory.';
 
-  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
+  const { code, name } = parseFilterEntityID(territoryFilter, EntityType.Territory); // cuts out the territory code if its included
   return (
     <>
-      The population of this language in {formattedTerritory}. For more details and sorting, see the{' '}
+      The population of this language in {name ?? code ?? 'the selected territory'}. For more
+      details and sorting, see the{' '}
       <HoverableButton onClick={() => updatePageParams({ entType: EntityType.Locale })}>
         Locale Table
       </HoverableButton>

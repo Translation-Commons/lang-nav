@@ -4,10 +4,8 @@ import React, { useMemo } from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import useFilters from '@features/transforms/filtering/useFilters';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import FiltersPopover from '@features/transforms/filtering/FiltersPopover';
+import useAllFilters from '@features/transforms/filtering/useAllFilters';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
@@ -16,34 +14,17 @@ import PaginationControls from './PaginationControls';
 
 interface Props {
   ents: EntityData[];
-  shouldFilterUsingSearchBar?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar = true }) => {
-  const { page: pageParam, limit } = usePageParams();
-  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByConnections = getFilterByConnections();
-  const filterByScope = useScopeFilter();
-  const filterByVitality = useFilterByVitality();
-  const filterByPopulation = useFilters().Population;
+const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
+  const { page: pageParam, limit, paramsLevel } = usePageParams();
+  const filterFunction = useAllFilters();
 
   // Compute the number of filtered items
   const nOverall = ents.length;
   const nFiltered = useMemo(() => {
-    return ents
-      .filter(filterByScope)
-      .filter(filterByConnections)
-      .filter(filterByVitality)
-      .filter(filterByPopulation)
-      .filter(filterBySubstring).length;
-  }, [
-    ents,
-    filterByScope,
-    filterByConnections,
-    filterByVitality,
-    filterByPopulation,
-    filterBySubstring,
-  ]);
+    return ents.filter(filterFunction).length;
+  }, [ents, filterFunction]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
@@ -65,20 +46,8 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
           Showing up to <LimitInput showTitle={false} />
           {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
-        {/* // Disabled for now, may be useful in other views */}
-        {/* {nOverall > nFiltered && (
-          <Hoverable
-            className="text-sm"
-            hoverContent={
-              <FilterBreakdown
-                ents={ents}
-                shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-              />
-            }
-          >
-            <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
-          </Hoverable>
-        )} */}
+        {/* Providing a local way to set filters if we are inside a context rather than the page view */}
+        {paramsLevel === 'local' && <FiltersPopover />}
         {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>

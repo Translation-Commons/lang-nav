@@ -7,6 +7,8 @@ import { EntityData } from '@entities/types/EntityTypes';
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 import HighlightedEntityField from '../search/HighlightedEntityField';
 
+import { getFilterEntityID } from './FilterEntityID';
+
 export function getSuggestionsFunction<T extends EntityData>(
   ents: T[],
   getMatchDistance: (ent: T) => number,
@@ -17,9 +19,10 @@ export function getSuggestionsFunction<T extends EntityData>(
     const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
     return ents
       .filter(filterFunction)
-      .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
+      .map((ent) => ({ ent, distance: getMatchDistance(ent) }))
+      .sort((a, b) => a.distance - b.distance)
       .slice(0, SUGGESTION_LIMIT)
-      .map((ent) => {
+      .map(({ ent }) => {
         const label = (
           <HighlightedEntityField
             ent={ent}
@@ -28,11 +31,10 @@ export function getSuggestionsFunction<T extends EntityData>(
             showOriginalName={true}
           />
         );
-        const searchString = ent.nameDisplay + ' [' + ent.ID + ']';
         return {
           ent,
           entID: ent.ID,
-          searchString,
+          searchString: getFilterEntityID(ent),
           label,
           group: getMatchGroup(ent),
         };

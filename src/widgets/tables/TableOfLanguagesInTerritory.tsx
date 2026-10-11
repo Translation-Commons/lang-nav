@@ -7,11 +7,15 @@ import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
+import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import LocaleEcrmlCoverage from '@entities/locale/localstatus/LocaleEcrmlCoverage';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -27,18 +31,26 @@ type Props = {
 const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
   const { locales } = territory;
 
-  if (!locales || locales.length === 0) {
-    return null;
-  }
+  if (!locales || locales.length === 0) return null;
 
   const hasECRMLData = locales.some((locale) => locale.ecrmlProtection != null);
 
   return (
-    <LocalParamsProvider overrides={{ territoryScopes: [territory.scope], page: 1, limit: 10 }}>
+    <LocalParamsProvider
+      overrides={{
+        page: 1,
+        limit: 10,
+        entType: EntityType.Locale,
+
+        ...BLANK_FILTER_PARAMS,
+        territoryScopes: [territory.scope],
+        languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+        territoryFilter: getFilterEntityID(territory),
+      }}
+    >
       <InteractiveEntityTable
         tableID={TableID.LanguagesInTerritory}
         ents={locales}
-        shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           EndonymColumn,

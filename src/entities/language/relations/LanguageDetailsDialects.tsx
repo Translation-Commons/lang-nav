@@ -11,6 +11,7 @@ import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
+import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
@@ -68,10 +69,11 @@ const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => 
             limit: -1,
             entType: EntityType.Language,
             sortBy: Field.Population,
-            searchString: '',
             view: sectionView,
-            languageFilter: '',
-            languageScopes: [],
+
+            ...BLANK_FILTER_PARAMS,
+            // languageFilter: getFilterEntityID(lang),
+            languageScopes: [LanguageScope.Dialect],
           }}
         >
           {sectionView === View.Map && <LanguageDialectsMap lang={lang} />}
@@ -93,7 +95,6 @@ function Table({ dialects }: { dialects: LanguageData[] }) {
         tableID={TableID.Languages}
         ents={dialects}
         columns={columns}
-        shouldFilterUsingSearchBar={false}
       />
     </LocalParamsProvider>
   );

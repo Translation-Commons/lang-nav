@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { EntityData } from '@entities/types/EntityTypes';
 
 import { partition } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
@@ -20,7 +20,6 @@ import useFilters from './useFilters';
 
 type FilterExplanationProps = {
   ents: EntityData[];
-  shouldFilterUsingSearchBar?: boolean;
 };
 
 const filterOrder: FilterField[] = [
@@ -44,10 +43,7 @@ type FieldFilterCounts = {
   nFiltered: number;
 };
 
-const FilterBreakdown: React.FC<FilterExplanationProps> = ({
-  ents,
-  shouldFilterUsingSearchBar = true,
-}) => {
+const FilterBreakdown: React.FC<FilterExplanationProps> = ({ ents }) => {
   const params = usePageParams();
   const filterBy = useFilters();
   const nOverall = ents.length;
@@ -57,8 +53,6 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     () =>
       filterOrder.reduce(
         ({ ents, counts }, field) => {
-          if (field === Field.Name && !shouldFilterUsingSearchBar) return { ents, counts };
-
           const filtered = ents.filter(filterBy[field]);
           const nPassed = filtered.length;
           const nFiltered = ents.length - nPassed;
@@ -67,9 +61,9 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         },
         { ents, counts: {} as Record<FilterField, FieldFilterCounts> },
       ).counts,
-    [ents, filterBy, shouldFilterUsingSearchBar],
+    [ents, filterBy],
   );
-  const entType = useMemo(() => ents[0]?.type ?? EntityType.Language, [ents]);
+  const entType = useMemo(() => ents[0]?.type ?? params.entType, [ents, params.entType]);
 
   const [activeFilters, potentialFilters] = partition(
     filterOrder.filter((field) => isFieldApplicable(field, TransformEnum.Filter, entType)),
