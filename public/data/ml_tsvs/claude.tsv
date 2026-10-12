@@ -1,0 +1,69 @@
+### Core Metadata
+#tech	Claude
+#nameDisplay	Claude Sonnet
+#organization	Anthropic
+#presentedBy	https://machinetranslate.org/
+#url	https://platform.claude.com/docs/en/build-with-claude/multilingual-support
+#dateAccessed	2026-08-25
+### Extra Metadata
+#topic	Languages supported by Anthropic
+#name	Anthropic
+#urls	https://docs.anthropic.com;https://www.anthropic.com;https://docs.anthropic.com/en/docs/build-with-claude/multilingual-support
+#inputs	text;file
+#self-serve	TRUE
+#prompt_required	TRUE
+#models	Claude Sonnet
+	
+Language Code	Name
+am	Amharic
+ar	Arabic
+bn	Bengali
+bg	Bulgarian
+ca	Catalan
+cs	Czech
+da	Danish
+de	German
+el	Greek
+en	English
+es	Spanish
+et	Estonian
+fa	Persian
+fi	Finnish
+fr	French
+gu	Gujarati
+he	Hebrew
+hi	Hindi
+hr	Croatian
+hu	Hungarian
+id	Indonesian
+it	Italian
+ja	Japanese
+ka	Georgian
+kn	Kannada
+ko	Korean
+lt	Lithuanian
+lv	Latvian
+ml	Malayalam
+mr	Marathi
+ms	Malay
+nb	Norwegian
+nl	Dutch
+pl	Polish
+pt	Portuguese
+ro	Romanian
+ru	Russian
+sk	Slovak
+sl	Slovenian
+sr	Serbian
+sv	Swedish
+sw	Swahili
+ta	Tamil
+te	Telugu
+th	Thai
+tl	Tagalog
+tr	Turkish
+ur	Urdu
+vi	Vietnamese
+yo	Yoruba
+zh	Chinese
+zu	Zulu

@@ -12,6 +12,7 @@ export enum DigitalSupportDimension {
   I18nFrameworks = 'i18nFrameworks',
   MachineTranslation = 'machineTranslation',
   Interfaces = 'interfaces',
+  AI = 'ai',
 }
 
 /** The dimensions that describe one capability -- everything except the aggregate. */

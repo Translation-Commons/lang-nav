@@ -1,11 +1,14 @@
 import { DataGetters } from '@features/data/context/useDataContext';
 
 import { isIgnoredLanguageCode } from '@entities/census/parseCensusLanguageRow';
+import { parseLocaleCode } from '@entities/locale/LocaleParsing';
 import type { TechnologyData, TechSupportData } from '@entities/tech/TechnologyTypes';
 
 const FILES = [
   'data/google/android.tsv',
   'data/google/gtranslate.tsv',
+  'data/ml_tsvs/claude.tsv',
+  'data/ml_tsvs/mstranslator.tsv',
   'data/other_sources/ios.tsv',
   'data/other_sources/macos.tsv',
   'data/other_sources/win11_language_packs.tsv',
@@ -65,6 +68,12 @@ function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGette
 
   const languageCodePath = (parts[0] ?? '').trim();
   if (languageCodePath === '' || languageCodePath === 'Language Code') return;
+  let locale = undefined;
+  if (languageCodePath.match('_-')) {
+    // It contains writing system and/or regions in the ID
+    // Currently not compatible with slashes
+    locale = parseLocaleCode(languageCodePath);
+  }
 
   // Extract fields
   const languageCodes = languageCodePath.split('/');
@@ -73,8 +82,8 @@ function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGette
     techShortName: tech.codeDisplay,
     languageCodePath,
     name: (parts[1] ?? '').trim(),
-    territoryCode: (parts[2] ?? '').trim() || undefined,
-    writingSystemCode: (parts[3] ?? '').trim() || undefined,
+    territoryCode: locale?.territoryCode ?? ((parts[2] ?? '').trim() || undefined),
+    writingSystemCode: locale?.scriptCode ?? ((parts[3] ?? '').trim() || undefined),
     notes: (parts[4] ?? '').trim() || undefined,
 
     tech,

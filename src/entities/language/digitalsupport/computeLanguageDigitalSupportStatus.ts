@@ -3,7 +3,7 @@
  * computeLanguageDigitalSupportScore.ts -- the scores are still used for sorting, charts and the
  * overall metascore, while these statuses describe what is actually missing for a language.
  */
-import { TechSupportData } from '@entities/tech/TechnologyTypes';
+import { TechScope, TechSupportData } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -31,13 +31,12 @@ export const DIGITAL_SUPPORT_CATEGORIES: DigitalSupportCategory[] = [
   DigitalSupportDimension.MachineTranslation,
 ];
 
-export type InterfacePlatform = { techShortName: string; entries: TechSupportData[] };
+export type LangPlatform = { techShortName: string; entries: TechSupportData[] };
 
 /** The operating systems that the interface data covers, in the order they are shown. */
-export function getInterfacePlatforms(lang: LanguageData): InterfacePlatform[] {
+export function getLangTechsByType(lang: LanguageData, scope?: TechScope): LangPlatform[] {
   return OPERATING_SYSTEMS.map((techShortName) => {
-    const tss =
-      lang.techSupport?.filter((support) => support.techShortName === techShortName) ?? [];
+    const tss = lang.techSupport?.filter(({ tech }) => !scope || tech.scope == scope) ?? [];
     return { techShortName, entries: tss };
   });
 }

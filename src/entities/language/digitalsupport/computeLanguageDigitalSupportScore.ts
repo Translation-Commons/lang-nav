@@ -1,3 +1,4 @@
+import { TechScope } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -6,7 +7,7 @@ import { sumBy } from '@shared/lib/setUtils';
 
 import type { LanguageData } from '../LanguageTypes';
 
-import { getInterfacePlatforms } from './computeLanguageDigitalSupportStatus';
+import { getLangTechsByType } from './computeLanguageDigitalSupportStatus';
 import {
   DigitalSupportDimension,
   DigitalSupportScore,
@@ -51,14 +52,29 @@ function computeDigitalSupportScore(
       return (lang.udhr?.length ? 5 : 0) + computeWikipediaScore(lang);
     case DigitalSupportDimension.Interfaces:
       return (
-        sumBy(getInterfacePlatforms(lang), ({ entries }) => (entries.length > 0 ? 1 : 0)) * (10 / 4)
+        sumBy(getLangTechsByType(lang, TechScope.OperatingSystem), ({ entries }) =>
+          entries.length > 0 ? 1 : 0,
+        ) *
+        (10 / 4) // win11, macos, ios, android
       );
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? 10 : 0;
     case DigitalSupportDimension.I18nFrameworks:
       return computeCLDRScore(lang);
     case DigitalSupportDimension.MachineTranslation:
-      return lang.techSupport?.some((support) => support.techShortName === 'GTranslate') ? 10 : 0; // Placeholder, replace with actual logic
+      return (
+        sumBy(getLangTechsByType(lang, TechScope.MachineTranslation), ({ entries }) =>
+          entries.length > 0 ? 1 : 0,
+        ) *
+        (10 / 3) // ms translator, gtranslate
+      );
+    case DigitalSupportDimension.AI:
+      return (
+        sumBy(getLangTechsByType(lang, TechScope.AI), ({ entries }) =>
+          entries.length > 0 ? 1 : 0,
+        ) *
+        (10 / 1) // claude
+      );
     default:
       enforceExhaustiveSwitch(dimension);
   }
