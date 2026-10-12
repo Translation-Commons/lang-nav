@@ -4,16 +4,31 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import type { LanguageData } from '../LanguageTypes';
 
-import { getLanguageISOStatusLabel } from './VitalityStrings';
+import { getEndangermentLabel, getLanguageISOStatusLabel } from './VitalityStrings';
 import { VitalitySource } from './VitalityTypes';
 
 const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData }> = ({
   source,
   lang,
 }) => {
-  const { iso, meta } = lang.vitality ?? {};
+  const { iso, meta, glottolog } = lang.vitality ?? {};
 
   switch (source) {
+    case VitalitySource.Glottolog:
+      if (glottolog == null) return <Deemphasized>No Glottolog assessment</Deemphasized>;
+      return (
+        <div>
+          <div>Glottolog Endangerment: {getEndangermentLabel(glottolog)}</div>
+          <div>Normalized to a score of {glottolog} out of 9.</div>
+          {lang.Glottolog.endangerment == null && (
+            <div>
+              The endangerment is derived from languages contained by this one, not directly
+              assigned.
+            </div>
+          )}
+        </div>
+      );
+
     case VitalitySource.ISO:
       if (iso == null) return <Deemphasized>No ISO status available</Deemphasized>;
       return (

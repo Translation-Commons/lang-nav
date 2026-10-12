@@ -9,17 +9,18 @@ import { VitalitySource } from './VitalityTypes';
  * of lack of other usable data sources.
  */
 export function getVitalityMetascore(lang: LanguageData): number | undefined {
-  const { iso } = lang.vitality || {};
+  const { iso, glottolog } = lang.vitality || {};
 
-  if (iso != null) {
-    // Use ISO as fallback
-    return iso;
-  }
+  if (glottolog != null && iso != null) return glottolog + iso / 2;
+  if (glottolog != null) return glottolog;
+  if (iso != null) return iso;
   return undefined;
 }
 
 export function getVitalityScore(source: VitalitySource, lang: LanguageData): number | undefined {
   switch (source) {
+    case VitalitySource.Glottolog:
+      return lang.vitality?.glottolog;
     case VitalitySource.ISO:
       return lang.vitality?.iso;
     case VitalitySource.Metascore:

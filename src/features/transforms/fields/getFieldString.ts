@@ -2,8 +2,14 @@ import { getFieldValueType } from '@features/table/getValueType';
 import TableValueType from '@features/table/TableValueType';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  getEndangermentLabel,
+  getLanguageISOStatusLabel,
+} from '@entities/language/vitality/VitalityStrings';
+import {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/EntityTypes';
@@ -45,6 +51,8 @@ function getFieldEnumLabel(value: string | number | undefined, field: Field): st
   switch (field) {
     case Field.ISOStatus:
       return getLanguageISOStatusLabel(value as LanguageISOStatus);
+    case Field.Endangerment:
+      return getEndangermentLabel(value as GlottologEndangerment);
     case Field.LanguageScope:
       return getLanguageScopeLabel(value as LanguageScope);
     case Field.Modality:

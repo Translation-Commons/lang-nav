@@ -45,6 +45,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   columns: {},
   digitalSupportMax: DIGITAL_SUPPORT_MAX,
   digitalSupportMin: -1,
+  endangermentFilter: [],
   entID: undefined,
   entType: EntityType.Language,
   fieldFocus: Field.None,

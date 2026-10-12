@@ -39,6 +39,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.UnicodeVersion:
       return FieldGroup.Status; // Status - Digital Support
     case Field.VitalityMetascore:
+    case Field.Endangerment:
     case Field.ISOStatus:
       return FieldGroup.Status; // Vitality
 
