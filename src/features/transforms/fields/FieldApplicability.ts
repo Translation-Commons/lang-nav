@@ -11,11 +11,7 @@ import Field from './Field';
 const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Population];
 
 // Fields that are in development and not yet available for use in transforms but there may be placeholder values
-export const FIELDS_IN_DEVELOPMENT: Field[] = [
-  Field.SourceType,
-  Field.Indigeneity,
-  Field.VitalityMetascore, // identical to the ISO status right now
-];
+export const FIELDS_IN_DEVELOPMENT: Field[] = [Field.SourceType, Field.Indigeneity];
 
 /**
  * These fields are technically available for entities but are redundant with others so
@@ -71,6 +67,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.GovernmentStatus,
 
         Field.VitalityMetascore, // not particularly useful
+        Field.Endangerment,
         Field.ISOStatus,
 
         Field.PopulationDirectlySourced,
@@ -148,6 +145,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.CLDRCoverage,
 
         Field.VitalityMetascore,
+        Field.Endangerment,
         Field.ISOStatus,
 
         Field.LanguagePrimary, // Equivalent to DisplayName for languages
@@ -335,6 +333,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.UnicodeVersion,
 
         Field.VitalityMetascore,
+        Field.Endangerment,
         Field.ISOStatus,
 
         Field.Indigeneity,
@@ -411,6 +410,7 @@ export type FilterField = Extract<
   | Field.Modality
   | Field.LanguageScope
   | Field.TerritoryScope
+  | Field.Endangerment
   | Field.ISOStatus
   | Field.Population
 >;
@@ -429,6 +429,7 @@ export function getFilterFields(): FilterField[] {
     Field.Modality,
     Field.LanguageScope,
     Field.TerritoryScope,
+    Field.Endangerment,
     Field.ISOStatus,
     Field.Population,
   ];

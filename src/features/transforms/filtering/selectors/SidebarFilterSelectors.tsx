@@ -67,7 +67,7 @@ const SidebarFilterSelector: React.FC<{ filterBy: FilterField }> = ({ filterBy }
   return (
     <div>
       <div
-        className="flex items-center justify-between py-1 px-2 gap-1 w-full hover:bg-gray-100 cursor-pointer rounded-md"
+        className="flex items-center justify-between py-1 px-2 gap-1 w-full hover:bg-secondary cursor-pointer rounded-md"
         onClick={toggleExpanded}
       >
         {getFilterTitle(filterBy, entType)}

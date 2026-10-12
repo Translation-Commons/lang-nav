@@ -22,6 +22,8 @@ function getRemoveFilterParams(field: Field): Partial<PageParams> {
       return { modalityFilter: [] };
     case Field.TerritoryScope:
       return { territoryScopes: [] };
+    case Field.Endangerment:
+      return { endangermentFilter: [] };
     case Field.ISOStatus:
       return { isoStatus: [] };
     case Field.TerritoryList:

@@ -4,8 +4,14 @@ import Field from '@features/transforms/fields/Field';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  getEndangermentLabel,
+  getLanguageISOStatusLabel,
+} from '@entities/language/vitality/VitalityStrings';
+import {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -57,6 +63,14 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
           paramKey="territoryScopes"
           options={Object.values(TerritoryScope).filter((v) => typeof v === 'number')}
           getLabel={(o) => getTerritoryScopeLabel(o) ?? ''}
+        />
+      );
+    case Field.Endangerment:
+      return (
+        <EnumButtonsMultiSelect
+          paramKey="endangermentFilter"
+          options={Object.values(GlottologEndangerment).filter((v) => typeof v === 'number')}
+          getLabel={(o) => getEndangermentLabel(o) ?? ''}
         />
       );
     case Field.ISOStatus:

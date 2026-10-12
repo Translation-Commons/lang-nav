@@ -8,6 +8,7 @@ import {
   LanguageScope,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
+import { parseEndangerment } from '@entities/language/vitality/VitalityStrings';
 
 const DEBUG = false;
 
@@ -148,4 +149,29 @@ export function addGlottologLanguages(
       }
     }
   });
+}
+
+// name	status	Glottocode
+// Abaga	critically endangered	abag1245
+
+export async function loadEndangerment(getLanguage: (id: string) => LanguageData | undefined) {
+  return await fetch('data/glottolog/endangerment.tsv')
+    .then((res) => res.text())
+    .then((text) => text.split('\n').slice(1))
+    .then((lines) =>
+      lines.forEach((line) => {
+        const [name, status, glottocode] = line.split('\t');
+        if (!glottocode) {
+          console.debug('loadEndangerment needs language code for: ', name);
+          return;
+        }
+        const lang = getLanguage(glottocode);
+        if (!lang) {
+          console.debug('loadEndangerment needs language code for: ', name);
+          return;
+        }
+        lang.Glottolog.endangerment = parseEndangerment(status);
+      }),
+    )
+    .catch((err) => console.error('Error loading TSV:', err));
 }

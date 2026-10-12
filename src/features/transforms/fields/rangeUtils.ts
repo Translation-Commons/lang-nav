@@ -1,5 +1,8 @@
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
@@ -26,6 +29,7 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
     case Field.ISOStatus:
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
+    case Field.Endangerment:
       return -1; // -1 is undefined
     case Field.Population:
       return populationMin ?? -1;
@@ -107,6 +111,8 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.VitalityMetascore:
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
+    case Field.Endangerment:
+      return GlottologEndangerment.Safe; // 9
     case Field.LanguageScope:
       return LanguageScope.BroadGrouping; // Larger value = broader scope
     case Field.Latitude:

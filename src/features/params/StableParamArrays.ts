@@ -1,7 +1,10 @@
 import { useRef } from 'react';
 
 import type { LanguageScope } from '@entities/language/LanguageTypes';
-import type { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import type {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import type { LanguageModality } from '@entities/language/writing/LanguageModality';
 import type { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -11,6 +14,7 @@ type GetNextParamArrays = (
   instantiatedParams: Partial<PageParams>,
   defaults: PageParams,
 ) => {
+  endangermentFilter: GlottologEndangerment[];
   isoStatus: LanguageISOStatus[];
   modalityFilter: LanguageModality[];
   languageScopes: LanguageScope[];
@@ -19,19 +23,24 @@ type GetNextParamArrays = (
 
 export function useStableParamArrays(): GetNextParamArrays {
   const stableFilterArrays = useRef<
-    | Pick<PageParams, 'isoStatus' | 'modalityFilter' | 'languageScopes' | 'territoryScopes'>
+    | Pick<
+        PageParams,
+        'isoStatus' | 'modalityFilter' | 'languageScopes' | 'territoryScopes' | 'endangermentFilter'
+      >
     | undefined
   >(undefined);
 
   function getNextParamArrays(instantiatedParams: Partial<PageParams>, defaults: PageParams) {
     const prev = stableFilterArrays.current;
     const next = {
+      endangermentFilter: instantiatedParams.endangermentFilter ?? defaults.endangermentFilter,
       isoStatus: instantiatedParams.isoStatus ?? defaults.isoStatus,
       modalityFilter: instantiatedParams.modalityFilter ?? defaults.modalityFilter,
       languageScopes: instantiatedParams.languageScopes ?? defaults.languageScopes,
       territoryScopes: instantiatedParams.territoryScopes ?? defaults.territoryScopes,
     };
     const filterArrays = {
+      endangermentFilter: retainIfEqual(next.endangermentFilter, prev?.endangermentFilter),
       isoStatus: retainIfEqual(next.isoStatus, prev?.isoStatus),
       modalityFilter: retainIfEqual(next.modalityFilter, prev?.modalityFilter),
       languageScopes: retainIfEqual(next.languageScopes, prev?.languageScopes),
