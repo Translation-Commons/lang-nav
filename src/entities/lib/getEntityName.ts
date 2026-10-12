@@ -18,16 +18,16 @@ export function getEntitySubtitle(entity: EntityData): string | undefined {
   }
 }
 
-export function getEntityTypeLabelPlural(entType: EntityType) {
+export function getEntityTypeLabelPlural(entType: EntityType, fullName: boolean = false) {
   switch (entType) {
     case EntityType.Census:
-      return 'censuses';
+      return fullName ? 'census tables and other population records' : 'censuses';
     case EntityType.Language:
-      return 'languages';
+      return fullName ? 'languages, language families, and dialects' : 'languages';
     case EntityType.Locale:
       return 'languages in territories';
     case EntityType.Territory:
-      return 'territories';
+      return fullName ? 'countries, regions, and dependencies' : 'territories';
     case EntityType.WritingSystem:
       return 'writing systems';
     case EntityType.Orthography:

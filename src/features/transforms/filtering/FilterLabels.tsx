@@ -18,6 +18,8 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 import Field from '../fields/Field';
 import { FilterField } from '../fields/FieldApplicability';
 
+import { parseFilterEntityID } from './FilterEntityID';
+
 export function useFilterLabels(): Record<FilterField, string> {
   const params = usePageParams();
   const { getEntity } = useDataContext();
@@ -64,16 +66,12 @@ function getTerritoryFilterLabel(
   getEntity: (id: string) => EntityData | undefined,
 ): string {
   if (!territoryFilter) return 'found in any territory';
-  if (territoryFilter.includes('[')) return 'found in ' + territoryFilter.split('[')[0].trim();
-  if (territoryFilter.match(/^[A-Za-z]{2}$/)) {
-    const ent = getEntity(territoryFilter);
+  const { code, name } = parseFilterEntityID(territoryFilter, EntityType.Territory);
+  if (name) return 'found in ' + name;
+  if (code) {
+    const ent = getEntity(code);
     if (ent) return `found in ${ent.nameDisplay}`;
-    return `found in territory with code "${territoryFilter}"`;
-  }
-  if (territoryFilter.match(/^[0-9]{3}$/)) {
-    const ent = getEntity(territoryFilter);
-    if (ent) return `found in ${ent.nameDisplay}`;
-    return `found in region with code "${territoryFilter}"`;
+    return `found in territory with code "${code}"`;
   }
   return `found in "${territoryFilter}*"`;
 }
@@ -83,12 +81,12 @@ function getWritingSystemFilterLabel(
   getEntity: (id: string) => EntityData | undefined,
 ): string {
   if (!writingSystemFilter) return 'written in any script';
-  if (writingSystemFilter.includes('['))
-    return 'written in ' + writingSystemFilter.split('[')[0].trim();
-  if (writingSystemFilter.match(/^[A-Z][a-z]{3}$/)) {
-    const ent = getEntity(writingSystemFilter);
+  const { code, name } = parseFilterEntityID(writingSystemFilter, EntityType.WritingSystem);
+  if (name) return 'written in ' + name;
+  if (code) {
+    const ent = getEntity(code);
     if (ent) return `written in ${ent.nameDisplay}`;
-    return `written in script with code "${writingSystemFilter}"`;
+    return `written in script with code "${code}"`;
   }
   return `written in "${writingSystemFilter}*"`;
 }
@@ -97,12 +95,13 @@ function getLanguageFilterLabel(
   { languageFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
 ): string {
-  if (!languageFilter) return 'any languoid';
-  if (languageFilter.includes('[')) return 'related to ' + languageFilter.split('[')[0].trim();
-  if (languageFilter.match(/^[a-z]{3}$/)) {
-    const ent = getEntity(languageFilter);
+  if (!languageFilter) return 'any language';
+  const { code, name } = parseFilterEntityID(languageFilter, EntityType.Language);
+  if (name) return 'related to ' + name;
+  if (code) {
+    const ent = getEntity(code);
     if (ent) return `related to ${ent.nameDisplay}`;
-    return `related to language with code "${languageFilter}"`;
+    return `related to language with code "${code}"`;
   }
   return `related to language "${languageFilter}*"`;
 }
@@ -111,13 +110,13 @@ function getLanguageFamilyFilterLabel(
   { languageFamilyFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
 ): string {
-  if (!languageFamilyFilter) return 'any languoid';
-  if (languageFamilyFilter.includes('['))
-    return 'related to ' + languageFamilyFilter.split('[')[0].trim();
-  if (languageFamilyFilter.match(/^[a-z]{3}$/)) {
-    const ent = getEntity(languageFamilyFilter);
+  if (!languageFamilyFilter) return 'any language family';
+  const { code, name } = parseFilterEntityID(languageFamilyFilter, EntityType.Language);
+  if (name) return 'related to ' + name;
+  if (code) {
+    const ent = getEntity(code);
     if (ent) return `related to ${ent.nameDisplay}`;
-    return `related to language family with code "${languageFamilyFilter}"`;
+    return `related to language family with code "${code}"`;
   }
   return `related to language family "${languageFamilyFilter}*"`;
 }
@@ -180,7 +179,7 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.LanguageFamily:
       return 'Language Family';
     case Field.SourceForLanguage:
-      return 'Language List / Language Standard';
+      return 'Language List & Formatting';
     case Field.ISOStatus:
       return 'ISO Status';
     case Field.Population:

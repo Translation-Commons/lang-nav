@@ -91,7 +91,7 @@ describe('LanguageFilterSelector', () => {
 
     // User clicks on German, the button text should update and updatePageParams called
     await waitFor(async () => await user.click(newItems[0]));
-    expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'deu' });
+    expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German [deu]' });
   });
 
   it('without scope filter, language families appear in original order', async () => {
@@ -126,7 +126,7 @@ describe('LanguageFilterSelector', () => {
   });
 
   it('when a language family is selected, results will partition languages in that family from ones not in that family', async () => {
-    setupMockParams({ languageFamilyFilter: 'gem' });
+    setupMockParams({ languageFamilyFilter: 'Germanic [gem]' });
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 

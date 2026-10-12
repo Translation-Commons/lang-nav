@@ -17,6 +17,7 @@ type Props<T extends React.Key> = {
   getLabel?: (value: T) => string;
   allSelectedLabel?: string;
   noneSelectedLabel?: string;
+  limitWidth?: boolean;
 };
 
 function EnumDropdownMultiSelect<T extends React.Key>({
@@ -26,33 +27,58 @@ function EnumDropdownMultiSelect<T extends React.Key>({
   getLabel = (v) => v.toString(),
   allSelectedLabel = 'All Selected',
   noneSelectedLabel = 'None Selected',
+  limitWidth = true,
 }: Props<T>) {
-  const toggleOption = useCallback(
-    (option: T) => {
-      if (value.includes(option)) onChange(value.filter((v) => v !== option));
-      else onChange([...value, option]);
-    },
-    [value, onChange],
-  );
   let buttonLabel = joinOxfordComma(value.map(getLabel), 'or');
   if (value.length === 0) buttonLabel = noneSelectedLabel;
   if (value.length === options.length) buttonLabel = allSelectedLabel;
+  const noneSameAsAll = allSelectedLabel === noneSelectedLabel;
+  const isAllSelected = options.length === value.length || (value.length == 0 && noneSameAsAll);
+
+  const toggleOption = useCallback(
+    (option: T) => {
+      if (isAllSelected) onChange(options.filter((o) => o !== option));
+      else if (value.includes(option)) onChange(value.filter((v) => v !== option));
+      else onChange([...value, option]);
+    },
+    [value, onChange, isAllSelected, options],
+  );
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
           <Button className="cursor-pointer" variant="outline" title={buttonLabel}>
-            <div className="max-w-30 truncate text-ellipsis">{buttonLabel}</div>
+            <div className={`truncate text-ellipsis${limitWidth ? ' max-w-30' : ''}`}>
+              {buttonLabel}
+            </div>
             <ChevronDownIcon />
           </Button>
         }
       />
       <DropdownMenuContent>
+        <DropdownMenuCheckboxItem
+          checked={isAllSelected}
+          className="cursor-pointer"
+          onCheckedChange={() => onChange(noneSameAsAll ? [] : options)}
+          disabled={isAllSelected && noneSameAsAll}
+        >
+          {allSelectedLabel}
+        </DropdownMenuCheckboxItem>
+        {!noneSameAsAll && (
+          <DropdownMenuCheckboxItem
+            checked={value.length === 0}
+            className="cursor-pointer"
+            onCheckedChange={() => onChange([])}
+          >
+            {noneSelectedLabel}
+          </DropdownMenuCheckboxItem>
+        )}
+
         {options.map((option) => (
           <DropdownMenuCheckboxItem
             key={option}
-            checked={value.includes(option)}
+            checked={value.includes(option) || isAllSelected}
             className="cursor-pointer"
             onCheckedChange={() => toggleOption(option)}
           >

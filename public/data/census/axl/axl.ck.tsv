@@ -1,0 +1,35 @@
+#codeDisplay		axl.ck
+#nameDisplay		AXL Cook Islands
+#isoRegionCode	CK	
+#yearCollected	2012	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	21,000	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#nationality	residents	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/pacifique/cook.htm	
+#datePublished	2024-01-07	
+#dateAccessed	2026-09-30	
+#documentName	Cook Islands	
+#tableName	Ethnic groups	
+#sectionName	2 Données démolinguistiques	
+		
+Language Code	Language Name	Population
+rar	Rarotongan	12,000
+rkh	Rakahanga-Manihiki	2,300
+pkp	Pukapukan	1,200
+eng	English	1,000
+eng	English	800
+pnh	Penrhyn	400
+niu	Niuean	200
+mul	Others	3,000
+	Total	21,000

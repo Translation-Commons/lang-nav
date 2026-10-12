@@ -1,10 +1,19 @@
+import { FilterIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import EnumDropdown from '@shared/ui/EnumDropdown';
-import { Input } from '@shared/ui/input';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@shared/ui/dropdown-menu';
+import { InputGroup, InputGroupButton, InputGroupInput } from '@shared/ui/input-group';
 
 const SubstringFilterSelector = () => {
   const { updatePageParams, searchBy, searchString } = usePageParams();
@@ -22,21 +31,40 @@ const SubstringFilterSelector = () => {
   }, [localString]);
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex text-xs items-center gap-2">
-        Search by
-        <EnumDropdown<SearchableField>
-          options={Object.values(SearchableField)}
-          value={searchBy}
-          onChange={(searchBy) => updatePageParams({ searchBy })}
-        />
-      </div>
-      <Input
-        placeholder="Name or code"
+    <InputGroup>
+      <InputGroupInput
+        placeholder="Search..."
         value={localString}
         onChange={(e) => setLocalString(e.target.value)}
       />
-    </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
+            <InputGroupButton aria-label="Choose search field">
+              <FilterIcon />
+            </InputGroupButton>
+          }
+        />
+        <DropdownMenuContent className="min-w-40">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Search by</DropdownMenuLabel>
+            <DropdownMenuRadioGroup
+              value={searchBy}
+              onValueChange={(searchBy) => updatePageParams({ searchBy })}
+            >
+              {Object.values(SearchableField).map((option) => (
+                <DropdownMenuRadioItem key={option} value={option} className="cursor-pointer">
+                  {option}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <InputGroupButton aria-label="Clear search" onClick={() => setLocalString('')}>
+        <XIcon />
+      </InputGroupButton>
+    </InputGroup>
   );
 };
 

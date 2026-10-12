@@ -1,10 +1,7 @@
 import React from 'react';
 
-import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import { getFilterFields, isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
-import TransformEnum from '@features/transforms/TransformEnum';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
@@ -12,14 +9,11 @@ import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import { partition } from '@shared/lib/setUtils';
 import EnumButtonsMultiSelect from '@shared/ui/EnumButtonsMultiSelect';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
-
-import { getFilterTitle } from '../FilterLabels';
 
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
@@ -84,42 +78,6 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
     default:
       return null;
   }
-};
-
-/**
- * Limits filters by the ones applicable to the current entity type. For example, if we're
- * looking at censuses, we don't need to show filter for writing system because that does not
- * apply. Censuses would not show the filter for languages because that has not been set up yet.
- */
-export const AllApplicableFilterSelectors: React.FC = () => {
-  const { entType } = usePageParams();
-  const filterFields = getFilterFields();
-  const [primaryFilters, otherFilters] = partition(filterFields, (f) =>
-    isFieldApplicable(f, TransformEnum.Filter, entType),
-  );
-
-  return (
-    <div className="flex flex-col gap-2">
-      {primaryFilters.map((filterBy) => (
-        <div key={filterBy} className="mb-4">
-          <div>{getFilterTitle(filterBy, entType)}</div>
-          <FilterSelector field={filterBy} />
-        </div>
-      ))}
-      {otherFilters.length > 0 && (
-        <details style={{ marginTop: '0.5em', fontSize: '0.8em' }}>
-          <summary>Extra filters</summary>
-          Entities shown on the page may be filtered by additional criteria.
-          {otherFilters.map((filterBy) => (
-            <div key={filterBy} className="mb-4">
-              <div className="font-bold">{getFilterTitle(filterBy, entType)}</div>
-              <FilterSelector field={filterBy} />
-            </div>
-          ))}
-        </details>
-      )}
-    </div>
-  );
 };
 
 export default FilterSelector;

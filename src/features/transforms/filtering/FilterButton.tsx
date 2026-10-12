@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react';
+import { ChevronDownIcon, XIcon } from 'lucide-react';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -21,7 +21,9 @@ import Field from '../fields/Field';
 import { FilterField } from '../fields/FieldApplicability';
 
 import { useFilterLabels } from './FilterLabels';
+import isFilterActive from './isFilterActive';
 import FilterSelector from './selectors/FilterSelector';
+import LanguageStandardSelector from './selectors/LanguageStandardSelector';
 import useRemoveFilter from './useRemoveFilter';
 
 type Props = {
@@ -50,8 +52,9 @@ function FilterButton({ field }: Props) {
           }
           getLabel={(v) => getModalityLabel(v) ?? ''}
           options={Object.values(LanguageModality).filter((s) => typeof s === 'number')}
-          noneSelectedLabel="Any language use"
-          allSelectedLabel="Any language use"
+          noneSelectedLabel="Any language use or unknown"
+          allSelectedLabel="Any defined language use"
+          limitWidth={false}
         />
       );
     case Field.LanguageScope:
@@ -63,6 +66,7 @@ function FilterButton({ field }: Props) {
           options={Object.values(LanguageScope).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any language, language family, or dialect"
           allSelectedLabel="Any language, language family, or dialect"
+          limitWidth={false}
         />
       );
     case Field.ISOStatus:
@@ -72,8 +76,9 @@ function FilterButton({ field }: Props) {
           onChange={(newValue: LanguageISOStatus[]) => updatePageParams({ isoStatus: newValue })}
           getLabel={getLanguageISOStatusLabel}
           options={Object.values(LanguageISOStatus).filter((s) => typeof s === 'number')}
-          noneSelectedLabel="Any status"
-          allSelectedLabel="Any status"
+          noneSelectedLabel="Any ISO status"
+          allSelectedLabel="Any ISO status"
+          limitWidth={false}
         />
       );
     case Field.TerritoryScope:
@@ -85,9 +90,11 @@ function FilterButton({ field }: Props) {
           options={Object.values(TerritoryScope).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any territory"
           allSelectedLabel="Any territory"
+          limitWidth={false}
         />
       );
     case Field.SourceForLanguage:
+      return <LanguageStandardSelector />;
     case Field.Population:
     case Field.Name:
     case Field.WritingSystem:
@@ -102,30 +109,30 @@ function FilterButton({ field }: Props) {
 }
 
 function FilterToggle({ field }: { field: FilterField }) {
+  const params = usePageParams();
   const removeFilter = useRemoveFilter();
   const filterLabels = useFilterLabels();
   return (
     <Popover>
       <PopoverTrigger
         render={
-          // Would be a button but buttons cannot contain buttons
-          <div
-            className="rounded-md py-1 pr-1 pl-2 flex flex-row gap-1 items-center font-medium border border-border hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30 cursor-pointer"
-            title={filterLabels[field]}
-          >
-            <div className="max-w-40 truncate text-ellipsis">{filterLabels[field]}</div>
-            <Button
-              data-testid="remove-filter-button"
-              onClick={() => removeFilter(field)}
-              variant="ghost"
-              className="size-5 hover:bg-gray-200"
-            >
-              <XIcon />
-            </Button>
-          </div>
+          <Button variant="outline" title={filterLabels[field]}>
+            <div className=" truncate text-ellipsis">{filterLabels[field]}</div>
+            <ChevronDownIcon />
+          </Button>
         }
       />
       <PopoverContent>
+        {isFilterActive(field, params) && (
+          <Button
+            data-testid="remove-filter-button"
+            onClick={() => removeFilter(field)}
+            variant="destructive"
+          >
+            <XIcon />
+            Remove filter
+          </Button>
+        )}
         <FilterSelector field={field} />
       </PopoverContent>
     </Popover>

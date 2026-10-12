@@ -1,0 +1,53 @@
+#codeDisplay		axl.bn
+#nameDisplay		AXL Brunei
+#isoRegionCode	BN	
+#yearCollected	2004	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	502,717	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+#languagesIncluded	All	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/asie/brunei.htm	
+#datePublished	2023-12-23	
+#dateAccessed	2026-09-24	
+#documentName	Brunei	
+#sectionName	2 Données démolinguistiques	
+Language Code	Language Name	Population
+msa/kxd	Brunei Malay	174,400
+msa/kxd	Brunei Malay	120,490
+kor	Korean	37,000
+dtp	Dusun	23,000
+lnd	Lundayeh	22,000
+ttg	Tutong	18,700
+msa/iba	Iban	17,255
+ttg	Tutong	15,000
+zho/cmn	Mandarin Chinese	13,200
+bdr	West Coast Bajau	11,745
+nan	Min Nan Chinese	10,000
+zho/yue	Cantonese	6,300
+eng	English	6,000
+cdo	Min Dong	6,000
+hin	Hindi	4,265
+nan	Min Nan Chinese	3,300
+zho/hak	Hakka Chinese	3,000
+kyi	Kiput	2,700
+nep/npi	Nepali	2,312
+bfg	Busang Kayan	1,700
+beg	Belait	1,240
+sin	Sinhala	1,000
+msa	Malay	980
+bsb	Brunei Bisaya	600
+pez	Eastern Penan	280
+mel	Melanau	200
+pne	Western Penan	50

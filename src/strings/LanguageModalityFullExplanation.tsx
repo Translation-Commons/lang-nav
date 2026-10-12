@@ -3,8 +3,8 @@ function LanguageModalityFullExplanation() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
       <div>
         What medium is language used in? Most common languages have both spoken and written
-        traditions. Most languages are divided into a spoken ↔ written axis, which is divided into
-        5 levels, from &quot;Written only&quot;, &quot;Mostly Written&quot;, &quot;Spoken &
+        traditions. Most languages are divided into a spoken ↔ written axis, which is divided into 5
+        levels, from &quot;Written only&quot;, &quot;Mostly Written&quot;, &quot;Spoken &
         Written&quot;, &quot;Mostly Spoken&quot;, and &quot;Spoken only&quot;. Usually this is
         distinguished if there are L1 communities with strong oral and/or written traditions. Sign
         languages are separately recognized.

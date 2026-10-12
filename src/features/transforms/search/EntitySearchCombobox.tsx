@@ -18,6 +18,8 @@ import {
   ComboboxList,
 } from '@shared/ui/combobox';
 
+import { getFilterEntityID, parseFilterEntityID } from '../filtering/FilterEntityID';
+
 import useTrackSearch from './useTrackSearch';
 
 type Props = {
@@ -65,7 +67,7 @@ const EntitySearchCombobox: React.FC<Props> = ({
 
   const onInputChange = useCallback(
     (value: string) => {
-      setSearchString(value);
+      setSearchString(value ?? '');
       onQueryChange?.(value);
     },
     [onQueryChange],
@@ -90,16 +92,23 @@ const EntitySearchCombobox: React.FC<Props> = ({
     [suggestions],
   );
 
-  const inputValue = (searchString && getEntity(searchString)?.nameDisplay) ?? searchString;
+  const inputValue = useMemo(() => {
+    if (searchString.includes(']')) {
+      const { code } = parseFilterEntityID(searchString);
+      const entity = code ? getEntity(code) : undefined;
+      if (entity) return entity.nameDisplay + ' [' + code + ']';
+    }
+    return searchString;
+  }, [searchString, getEntity]);
 
   return (
     <Combobox
       filter={null}
       itemToStringValue={(item: Suggestion) =>
-        (item.ent?.nameDisplay ?? '') + ' [' + item.entID + ']'
+        item.ent ? getFilterEntityID(item.ent) : '[' + item.entID + ']'
       }
-      onValueChange={onSubmit}
       autoHighlight
+      onValueChange={onSubmit}
     >
       <ComboboxInput
         className={cn('w-full', className)}

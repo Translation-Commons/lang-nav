@@ -179,6 +179,7 @@ const Text: React.FC<TextProps> = ({ ent, scale, showCircle }) => {
       fontSize={scale / 3 + 'em'}
       textAnchor="middle"
       alignmentBaseline={showCircle ? 'hanging' : 'middle'}
+      fill="var(--color-foreground)"
     >
       {getFieldString(ent, fieldFocus)}
     </text>

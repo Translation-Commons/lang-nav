@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { usePanelRef } from 'react-resizable-panels';
+
+import DataVizParamsProvider from '@features/params/DataVizParamsProvider';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@shared/ui/resizable';
@@ -13,10 +15,14 @@ const DataPage: React.FC = () => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
   const openSidebar = () => sidebarRef.current?.expand();
   const closeSidebar = () => sidebarRef.current?.collapse();
+  const toggleSidebar = useCallback(
+    () => (sidebarIsOpen ? closeSidebar() : openSidebar()),
+    [sidebarIsOpen, closeSidebar, openSidebar],
+  );
 
   /* Many data components have more lines of code so they are loaded lazily */
   return (
-    <ContainErrorsAndSuspense>
+    <DataVizParamsProvider isFilterPanelOpen={sidebarIsOpen} toggleFilterPanel={toggleSidebar}>
       <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel
           defaultSize="20%"
@@ -26,15 +32,21 @@ const DataPage: React.FC = () => {
           panelRef={sidebarRef}
           onResize={({ asPercentage }) => setSidebarIsOpen(asPercentage > 0)}
         >
-          <FilterPanel closeSidebar={closeSidebar} />
+          <ContainErrorsAndSuspense showProgressBar={false}>
+            <FilterPanel closeSidebar={closeSidebar} />
+          </ContainErrorsAndSuspense>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel>
-          <DataPageBody sidebarIsOpen={sidebarIsOpen} openSidebar={openSidebar} />
+          <ContainErrorsAndSuspense>
+            <DataPageBody />
+          </ContainErrorsAndSuspense>
         </ResizablePanel>
       </ResizablePanelGroup>
-      <EntityDetailsDrawer />
-    </ContainErrorsAndSuspense>
+      <ContainErrorsAndSuspense showProgressBar={false}>
+        <EntityDetailsDrawer />
+      </ContainErrorsAndSuspense>
+    </DataVizParamsProvider>
   );
 };
 

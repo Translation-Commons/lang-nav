@@ -39,14 +39,9 @@ enum ExportType {
 }
 
 type DownloadExportType =
-  | ExportType.DownloadCSV
-  | ExportType.DownloadTSV
-  | ExportType.DownloadUNESCO;
+  ExportType.DownloadCSV | ExportType.DownloadTSV | ExportType.DownloadUNESCO;
 type CopyExportType =
-  | ExportType.CopyCSV
-  | ExportType.CopyTSV
-  | ExportType.CopyUNESCO
-  | ExportType.CopyCLDR;
+  ExportType.CopyCSV | ExportType.CopyTSV | ExportType.CopyUNESCO | ExportType.CopyCLDR;
 
 function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   const pageParams = usePageParams();

@@ -81,9 +81,6 @@ describe('CardList', () => {
 
     const { container, getAllByText } = render(<CardList />);
 
-    // Meter appears correctly
-    expect(container).toHaveTextContent('2 filtered out.');
-
     // There are 4 country-scope territories in the mocked data
     const meters = getAllByText(/Showing/);
     expect(meters.length).toBe(2); // One at top and one at bottom

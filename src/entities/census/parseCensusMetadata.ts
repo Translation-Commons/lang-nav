@@ -174,7 +174,7 @@ function parseValueByKey(
   value: string,
   addWarning: (message: string) => void,
 ): void {
-  if (value == '') return; // Skip empty values it may be okay since some of the fields are optional
+  if (value == '' || value == null) return; // Skip empty values it may be okay since some of the fields are optional
 
   switch (key) {
     // Dates

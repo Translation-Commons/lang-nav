@@ -1,0 +1,28 @@
+#codeDisplay		axl.cc
+#nameDisplay		AXL Cocos (Keeling) Islands
+#isoRegionCode	CC	
+#yearCollected	2004	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	625	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/pacifique/cocos-ile.htm	
+#datePublished	2024-01-06	
+#dateAccessed	2026-09-30	
+#documentName	Îles des Cocos (Keeling)	
+#sectionName	2 Données démolinguistiques 	
+Language Code 	Language Name	Population
+eng	English	110
+eng	English	85
+msa/coa	Cocos Islands Malay	430
