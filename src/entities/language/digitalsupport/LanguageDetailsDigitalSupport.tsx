@@ -9,6 +9,7 @@ import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
+import { TechScope } from '@entities/tech/TechnologyTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
@@ -28,13 +29,16 @@ import type { LanguageData } from '../LanguageTypes';
 import {
   DIGITAL_SUPPORT_CATEGORIES,
   getDigitalSupportStatus,
-  getDigitalSupportStatusSeverity,
-  getInterfacePlatforms,
+  getTechsForLanguage,
 } from './computeLanguageDigitalSupportStatus';
 import DigitalSupportCategoryRow from './DigitalSupportCategoryRow';
 import LanguageDigitalSupportMeter from './DigitalSupportMeter';
 import DigitalSupportStatusIcon from './DigitalSupportStatusIcon';
-import { DigitalSupportCategory, DigitalSupportDimension } from './DigitalSupportTypes';
+import {
+  DigitalSupportCategory,
+  DigitalSupportDimension,
+  getTechScopeForSupportDim,
+} from './DigitalSupportTypes';
 import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 
 type Props = { lang: LanguageData };
@@ -44,19 +48,6 @@ type SectionView = 'support' | 'locales';
 const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
   const { digitalSupportScore } = lang;
   const [sectionView, setSectionView] = React.useState<SectionView>('support');
-  // Show the missing capabilities first, keeping the usual dimension order within a status
-  const categories = useMemo(
-    () =>
-      DIGITAL_SUPPORT_CATEGORIES.map((dimension) => ({
-        dimension,
-        summary: getDigitalSupportStatus(lang, dimension),
-      })).sort(
-        (a, b) =>
-          getDigitalSupportStatusSeverity(a.summary.status) -
-          getDigitalSupportStatusSeverity(b.summary.status),
-      ),
-    [lang],
-  );
 
   if (!digitalSupportScore) return null; // Withhold the section
 
@@ -82,10 +73,10 @@ const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
         <>
           <DigitalSupportOverview lang={lang} />
           <ul className="flex flex-col">
-            {categories.map(({ dimension, summary }) => (
+            {DIGITAL_SUPPORT_CATEGORIES.map((dimension) => (
               <DigitalSupportCategoryRow
                 key={dimension}
-                summary={summary}
+                summary={getDigitalSupportStatus(lang, dimension)}
                 title={getDigitalSupportDimensionLabel(dimension)}
               >
                 <DigitalSupportDimensionBreakdown lang={lang} dimension={dimension} />
@@ -116,6 +107,11 @@ type DimProps = { lang: LanguageData; dimension: DigitalSupportCategory };
 
 const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension }) => {
   const { getTechnology } = useDataContext();
+  const TechName = ({ shortName }: { shortName: string }) => {
+    const tech = getTechnology(shortName);
+    if (!tech) return shortName;
+    return <HoverableEntityName ent={getTechnology(shortName)} />;
+  };
 
   switch (dimension) {
     case DigitalSupportDimension.Keyboards:
@@ -167,45 +163,25 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
         </>
       );
     case DigitalSupportDimension.MachineTranslation:
-      return (
-        <DetailsField
-          title={
-            getTechnology('GTranslate') ? (
-              <HoverableEntityName ent={getTechnology('GTranslate')} />
-            ) : (
-              'Google Translate'
-            )
-          }
-        >
-          {lang.techSupport?.some((support) => support.techShortName === 'GTranslate') ? (
-            'Available'
-          ) : (
-            <Deemphasized>Not available</Deemphasized>
-          )}
-        </DetailsField>
+    case DigitalSupportDimension.AI:
+      return getTechsForLanguage(lang, getTechScopeForSupportDim(dimension)).map(
+        ({ techShortName, entries }) => (
+          <DetailsField key={techShortName} title={<TechName shortName={techShortName} />}>
+            {entries.length > 0 ? 'Available' : <Deemphasized>Not available</Deemphasized>}
+          </DetailsField>
+        ),
       );
     case DigitalSupportDimension.Interfaces:
-      return (
-        <>
-          {getInterfacePlatforms(lang).map(({ techShortName, entries }) => (
-            <DetailsField
-              key={techShortName}
-              title={
-                getTechnology(techShortName) ? (
-                  <HoverableEntityName ent={getTechnology(techShortName)} />
-                ) : (
-                  techShortName
-                )
-              }
-            >
-              {entries.length > 0 ? (
-                `${entries.length} language pack${entries.length > 1 ? 's' : ''}`
-              ) : (
-                <Deemphasized>Not available</Deemphasized>
-              )}
-            </DetailsField>
-          ))}
-        </>
+      return getTechsForLanguage(lang, TechScope.OperatingSystem).map(
+        ({ techShortName, entries }) => (
+          <DetailsField key={techShortName} title={<TechName shortName={techShortName} />}>
+            {entries.length > 0 ? (
+              `${entries.length} language pack${entries.length > 1 ? 's' : ''}`
+            ) : (
+              <Deemphasized>Not available</Deemphasized>
+            )}
+          </DetailsField>
+        ),
       );
     default:
       enforceExhaustiveSwitch(dimension);

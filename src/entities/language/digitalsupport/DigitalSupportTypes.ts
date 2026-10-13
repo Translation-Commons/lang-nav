@@ -1,3 +1,5 @@
+import { TechScope } from '@entities/tech/TechnologyTypes';
+
 /**
  * This file provides the DigitalSupportScore type and a function to compute it.
  * The DigitalSupportScore type represents various aspects of digital support for a language,
@@ -13,6 +15,19 @@ export enum DigitalSupportDimension {
   MachineTranslation = 'machineTranslation',
   Interfaces = 'interfaces',
   AI = 'ai',
+}
+
+export function getTechScopeForSupportDim(dim: DigitalSupportDimension): TechScope {
+  switch (dim) {
+    case DigitalSupportDimension.AI:
+      return TechScope.AI;
+    case DigitalSupportDimension.Interfaces:
+      return TechScope.OperatingSystem;
+    case DigitalSupportDimension.MachineTranslation:
+      return TechScope.MachineTranslation;
+    default:
+      return TechScope.Unknown;
+  }
 }
 
 /** The dimensions that describe one capability -- everything except the aggregate. */

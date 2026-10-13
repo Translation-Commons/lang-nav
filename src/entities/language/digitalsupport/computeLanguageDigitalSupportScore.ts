@@ -1,4 +1,3 @@
-import { TechScope } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -7,28 +6,30 @@ import { sumBy } from '@shared/lib/setUtils';
 
 import type { LanguageData } from '../LanguageTypes';
 
-import { getLangTechsByType } from './computeLanguageDigitalSupportStatus';
+import {
+  getExpectedCountOfPlatforms,
+  getTechsForLanguage,
+} from './computeLanguageDigitalSupportStatus';
 import {
   DigitalSupportDimension,
   DigitalSupportScore,
+  getTechScopeForSupportDim,
   WikipediaStatus,
 } from './DigitalSupportTypes';
 
-const CONSTITUENT_SCORES = [
-  DigitalSupportDimension.Documentation,
-  DigitalSupportDimension.Interfaces,
-  DigitalSupportDimension.Keyboards,
-  DigitalSupportDimension.I18nFrameworks,
-  DigitalSupportDimension.MachineTranslation,
-];
-
 export function computeDigitalSupportScores(lang: LanguageData): DigitalSupportScore | undefined {
+  const constituentDimensions = Object.values(DigitalSupportDimension).filter(
+    (dim) => dim !== DigitalSupportDimension.Overall,
+  );
   const scores = Object.fromEntries(
-    CONSTITUENT_SCORES.map((dimension) => [dimension, computeDigitalSupportScore(lang, dimension)]),
+    constituentDimensions.map((dimension) => [
+      dimension,
+      computeDigitalSupportScore(lang, dimension),
+    ]),
   );
   scores.overall =
-    CONSTITUENT_SCORES.map((dimension) => scores[dimension] ?? 0).reduce((a, b) => a + b, 0) /
-    CONSTITUENT_SCORES.length;
+    constituentDimensions.map((dimension) => scores[dimension] ?? 0).reduce((a, b) => a + b, 0) /
+    constituentDimensions.length;
 
   if (scores.overall === 0) return undefined;
   return scores as Record<DigitalSupportDimension, number>;
@@ -45,35 +46,24 @@ function computeDigitalSupportScore(
           computeDigitalSupportScore(lang, DigitalSupportDimension.Interfaces) +
           computeDigitalSupportScore(lang, DigitalSupportDimension.Keyboards) +
           computeDigitalSupportScore(lang, DigitalSupportDimension.I18nFrameworks) +
-          computeDigitalSupportScore(lang, DigitalSupportDimension.MachineTranslation)) /
-        5
+          computeDigitalSupportScore(lang, DigitalSupportDimension.MachineTranslation) +
+          computeDigitalSupportScore(lang, DigitalSupportDimension.AI)) /
+        6
       );
     case DigitalSupportDimension.Documentation:
       return (lang.udhr?.length ? 5 : 0) + computeWikipediaScore(lang);
-    case DigitalSupportDimension.Interfaces:
-      return (
-        sumBy(getLangTechsByType(lang, TechScope.OperatingSystem), ({ entries }) =>
-          entries.length > 0 ? 1 : 0,
-        ) *
-        (10 / 4) // win11, macos, ios, android
-      );
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? 10 : 0;
     case DigitalSupportDimension.I18nFrameworks:
       return computeCLDRScore(lang);
+    case DigitalSupportDimension.Interfaces:
+    case DigitalSupportDimension.AI:
     case DigitalSupportDimension.MachineTranslation:
       return (
-        sumBy(getLangTechsByType(lang, TechScope.MachineTranslation), ({ entries }) =>
+        sumBy(getTechsForLanguage(lang, getTechScopeForSupportDim(dimension)), ({ entries }) =>
           entries.length > 0 ? 1 : 0,
         ) *
-        (10 / 3) // ms translator, gtranslate
-      );
-    case DigitalSupportDimension.AI:
-      return (
-        sumBy(getLangTechsByType(lang, TechScope.AI), ({ entries }) =>
-          entries.length > 0 ? 1 : 0,
-        ) *
-        (10 / 1) // claude
+        (10 / getExpectedCountOfPlatforms(dimension))
       );
     default:
       enforceExhaustiveSwitch(dimension);
