@@ -2,7 +2,7 @@ import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
 import { useCallback, useState, useTransition } from 'react';
 
 import EmptyHoverCardProvider from '@features/layers/hovercard/EmptyHoverCardProvider';
-import { PageParamsContext } from '@features/params/PageParamsContext';
+import { PageParamsStoreProvider } from '@features/params/PageParamsStore';
 import usePageParams from '@features/params/usePageParams';
 
 import { prepareCLDRLocalePopulationForExport } from '@entities/locale/localstatus/LocaleCLDRExport';
@@ -78,9 +78,9 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
             if (exportValue) return exportValue(ent);
             return reactNodeToString(
               // Optimistically convert React nodes to text
-              <PageParamsContext.Provider value={pageParams}>
+              <PageParamsStoreProvider value={pageParams}>
                 <EmptyHoverCardProvider>{render(ent)}</EmptyHoverCardProvider>
-              </PageParamsContext.Provider>,
+              </PageParamsStoreProvider>,
             );
           })
           .map(csvEscape)

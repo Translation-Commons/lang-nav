@@ -3,7 +3,27 @@ import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+
+// `npm run dev:scan` highlights component re-renders. It loads before React and never ships.
+const reactScan = (): Plugin => ({
+  name: 'react-scan',
+  apply: 'serve',
+  transformIndexHtml: {
+    order: 'pre',
+    handler: () =>
+      process.env.REACT_SCAN === 'true'
+        ? [
+            {
+              tag: 'script',
+              attrs: { type: 'module' },
+              children: "import { scan } from 'react-scan'; scan({ enabled: true });",
+              injectTo: 'head-prepend',
+            },
+          ]
+        : [],
+  },
+});
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,7 +38,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), tailwindcss(), visualizer()],
+  plugins: [reactScan(), react(), tailwindcss(), visualizer()],
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'src/app'),

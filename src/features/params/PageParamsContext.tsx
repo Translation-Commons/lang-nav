@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import type { StoreApi } from 'zustand/vanilla';
 
 import { PageBrightnessParams } from '@shared/hooks/usePageBrightness';
 
@@ -10,4 +11,6 @@ export type PageParamsContextState = PageParams & {
   paramsLevel: 'local' | 'global';
 };
 
-export const PageParamsContext = createContext<PageParamsContextState | undefined>(undefined);
+export const PageParamsContext = createContext<StoreApi<PageParamsContextState> | undefined>(
+  undefined,
+);

@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { PageParamsContext } from '@features/params/PageParamsContext';
+import { PageParamsStoreProvider } from '@features/params/PageParamsStore';
 import usePageParams from '@features/params/usePageParams';
 
 import { reactNodeToString } from '@shared/lib/stringExportUtils';
@@ -35,7 +35,7 @@ const DrawerDetailsField: React.FC<FieldProps> = ({
   const getText = useCallback(
     () =>
       reactNodeToString(
-        <PageParamsContext.Provider value={pageParams}>{children}</PageParamsContext.Provider>,
+        <PageParamsStoreProvider value={pageParams}>{children}</PageParamsStoreProvider>,
       ),
     [children, pageParams],
   );

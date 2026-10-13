@@ -5,7 +5,8 @@ import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { getParamsFromURL } from './getParamsFromURL';
-import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
+import { PageParamsContextState } from './PageParamsContext';
+import { PageParamsStoreProvider } from './PageParamsStore';
 import type { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
 import { useStableParamArrays } from './StableParamArrays';
@@ -50,7 +51,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   }, [urlPageParams, updatePageParams, pageBrightness]);
 
-  return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
+  return <PageParamsStoreProvider value={providerValue}>{children}</PageParamsStoreProvider>;
 };
 
 export default PageParamsProvider;

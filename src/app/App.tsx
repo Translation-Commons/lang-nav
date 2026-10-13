@@ -18,31 +18,41 @@ const VIEWPORT_FITTED_PAGES = [LangNavPageName.Intro, LangNavPageName.Data];
 const AmplitudeTracker = React.lazy(() => import('./AmplitudeTracker'));
 
 function App() {
-  const location = useLocation();
-  const fitsViewport = VIEWPORT_FITTED_PAGES.some((page) => location.pathname === `/${page}`);
-
   return (
     <PageParamsProvider>
       <DeferredDataProvider>
         <HoverCardProvider>
           <AmplitudeTracker />
           <PageNavBar />
-          <div
-            className={
-              'flex-1 min-w-0' + (fitsViewport ? ' flex flex-col min-h-0 overflow-auto' : '')
-            }
-          >
+          <PageContainer>
             <PageRoutes />
-          </div>
-
-          {/* Footer is in the data content on the data page (rather than being globally set here) */}
-          {!location.pathname.includes(LangNavPageName.Data) && <PageFooter />}
+          </PageContainer>
+          <FooterOutsideDataPage />
           <ConsentBanner />
         </HoverCardProvider>
       </DeferredDataProvider>
     </PageParamsProvider>
   );
 }
+
+// Reads the location here, not in App, so search param changes don't re-render the whole tree.
+const PageContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { pathname } = useLocation();
+  const fitsViewport = VIEWPORT_FITTED_PAGES.some((page) => pathname === `/${page}`);
+  return (
+    <div
+      className={'flex-1 min-w-0' + (fitsViewport ? ' flex flex-col min-h-0 overflow-auto' : '')}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Footer is in the data content on the data page (rather than being globally set here)
+const FooterOutsideDataPage: React.FC = () => {
+  const { pathname } = useLocation();
+  return pathname.includes(LangNavPageName.Data) ? null : <PageFooter />;
+};
 
 const DeferredDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [DataProvider, setDataProvider] = React.useState<
