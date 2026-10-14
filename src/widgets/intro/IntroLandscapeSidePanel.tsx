@@ -130,8 +130,8 @@ const GlobalSnapshotCard: React.FC<StatsCardProps> = ({ stats }) => (
 );
 
 const LENS_CARDS: Partial<Record<Field, React.FC<StatsCardProps>>> = {
-  [Field.Population]: MostSpokenLensCard,
-  [Field.CountOfWritingSystems]: WritingSystemsLensCard,
+  [Field.LanguagePrimary]: MostSpokenLensCard,
+  [Field.WritingSystem]: WritingSystemsLensCard,
   [Field.LanguageFamily]: LanguageFamiliesLensCard,
 };
 

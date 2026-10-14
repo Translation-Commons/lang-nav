@@ -59,7 +59,7 @@ describe('IntroLandscapeByTerritory', () => {
     expect(updatePageParams).toHaveBeenCalledWith({ entID: 'BR' });
   });
 
-  it('sets colorBy when a lens chip is clicked, and clears it on a second click', async () => {
+  it('sets colorBy and fieldFocus when a lens chip is clicked, and clears them on a second click', async () => {
     const updatePageParams = vi.fn();
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
@@ -71,18 +71,21 @@ describe('IntroLandscapeByTerritory', () => {
     const { rerender } = render(<IntroLandscapeByTerritory />);
 
     await userEvent.click(lensButton('Most spoken'));
-    expect(updatePageParams).toHaveBeenCalledWith({ colorBy: Field.Population });
+    expect(updatePageParams).toHaveBeenCalledWith({
+      colorBy: Field.LanguagePrimary,
+      fieldFocus: Field.LanguagePrimary,
+    });
 
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
         entType: EntityType.Territory,
-        colorBy: Field.Population,
+        colorBy: Field.LanguagePrimary,
         updatePageParams,
       }),
     );
     rerender(<IntroLandscapeByTerritory />);
 
     await userEvent.click(lensButton('Most spoken'));
-    expect(updatePageParams).toHaveBeenCalledWith({ colorBy: Field.None });
+    expect(updatePageParams).toHaveBeenCalledWith({ colorBy: Field.None, fieldFocus: Field.None });
   });
 });

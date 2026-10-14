@@ -14,8 +14,8 @@ import { Toggle } from '@shared/ui/toggle';
 import IntroLandscapeSidePanel from './IntroLandscapeSidePanel';
 
 const LENSES: { field: Field; label: string }[] = [
-  { field: Field.Population, label: 'Most spoken' },
-  { field: Field.CountOfWritingSystems, label: 'Writing systems' },
+  { field: Field.LanguagePrimary, label: 'Most spoken' },
+  { field: Field.WritingSystem, label: 'Writing systems' },
   { field: Field.LanguageFamily, label: 'Language families' },
 ];
 
@@ -31,7 +31,8 @@ const IntroLandscapeByTerritory: React.FC = () => {
   }, [entType, updatePageParams]);
 
   const onToggleLens = (field: Field) => {
-    updatePageParams({ colorBy: colorBy === field ? Field.None : field });
+    const next = colorBy === field ? Field.None : field;
+    updatePageParams({ colorBy: next, fieldFocus: next });
   };
 
   return (

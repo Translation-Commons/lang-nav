@@ -66,8 +66,10 @@ describe('IntroLandscapeSidePanel', () => {
     expect(screen.getByText('Global snapshot')).toBeInTheDocument();
   });
 
-  it('shows the Most spoken lens card when colorBy is Population', () => {
-    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ colorBy: Field.Population }));
+  it('shows the Most spoken lens card when colorBy is Primary Language', () => {
+    (usePageParams as Mock).mockReturnValue(
+      createMockUsePageParams({ colorBy: Field.LanguagePrimary }),
+    );
     render(<IntroLandscapeSidePanel />);
 
     expect(screen.getByText('Lens: Most spoken')).toBeInTheDocument();
@@ -76,7 +78,7 @@ describe('IntroLandscapeSidePanel', () => {
 
   it('shows the territory dossier when entID is set, taking priority over a lens', () => {
     (usePageParams as Mock).mockReturnValue(
-      createMockUsePageParams({ colorBy: Field.Population, entID: 'BR' }),
+      createMockUsePageParams({ colorBy: Field.LanguagePrimary, entID: 'BR' }),
     );
     render(
       <MemoryRouter>
