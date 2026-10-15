@@ -2,8 +2,8 @@ import { useRef } from 'react';
 
 import type { LanguageScope } from '@entities/language/LanguageTypes';
 import type {
-  GlottologEndangerment,
   LanguageISOStatus,
+  UNESCOEndangerment,
 } from '@entities/language/vitality/VitalityTypes';
 import type { LanguageModality } from '@entities/language/writing/LanguageModality';
 import type { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -14,7 +14,7 @@ type GetNextParamArrays = (
   instantiatedParams: Partial<PageParams>,
   defaults: PageParams,
 ) => {
-  endangermentFilter: GlottologEndangerment[];
+  endangermentFilter: UNESCOEndangerment[];
   isoStatus: LanguageISOStatus[];
   modalityFilter: LanguageModality[];
   languageScopes: LanguageScope[];

@@ -8,10 +8,7 @@ import {
   getEndangermentLabel,
   getLanguageISOStatusLabel,
 } from '@entities/language/vitality/VitalityStrings';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -70,7 +67,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return (
         <EnumButtonsMultiSelect
           paramKey="endangermentFilter"
-          options={Object.values(GlottologEndangerment).filter((v) => typeof v === 'number')}
+          options={Object.values(UNESCOEndangerment).filter((v) => typeof v === 'number')}
           getLabel={(o) => getEndangermentLabel(o) ?? ''}
         />
       );

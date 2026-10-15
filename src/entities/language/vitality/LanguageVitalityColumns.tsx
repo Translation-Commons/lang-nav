@@ -17,15 +17,17 @@ const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     isInitiallyVisible: false,
   },
   {
-    key: 'Endangerment (Glottolog)',
+    key: 'Endangerment (UNESCO 2010)',
     description: (
       <>
-        This data available from Glottolog, based on the data from the no-longer-available UNESCO
-        Atlas of the World&apos;s Language in Danger. See more information on the app for this:{' '}
+        This data is available from UNESCO, based on the data from UNESCO&apos;s Atlas of the
+        World&apos;s Language in Danger published in 2010. See the publication:
+        <ExternalLink href="https://unesdoc.unesco.org/ark:/48223/pf0000187026" />, and an
+        interactive tool from Glottolog:{' '}
         <ExternalLink href="https://cainesap.shinyapps.io/langmap/" />
       </>
     ),
-    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Glottolog} />,
+    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.UNESCO} />,
     field: Field.Endangerment,
   },
   {

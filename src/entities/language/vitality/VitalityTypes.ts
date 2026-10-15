@@ -9,7 +9,7 @@ export enum VitalityBucket {
 export enum VitalitySource {
   Metascore = 'Metascore',
   ISO = 'ISO',
-  Glottolog = 'Glottolog',
+  UNESCO = 'UNESCO',
 }
 
 export enum LanguageISOStatus {
@@ -20,7 +20,7 @@ export enum LanguageISOStatus {
   SpecialCode = -1, // S
 }
 
-export enum GlottologEndangerment {
+export enum UNESCOEndangerment {
   Safe = 9,
   Vulnerable = 7,
   DefinitelyEndangered = 5,

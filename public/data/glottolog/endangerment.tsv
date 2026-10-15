@@ -104,7 +104,7 @@ Gureng Gureng	critically endangered	gure1255
 Guwamu	critically endangered	guwa1243
 Haisla	critically endangered	hais1244
 Han	critically endangered	hann1241
-Hassaniyya	critically endangered	hass1238
+Hassaniyya	safe	hass1238
 Hawai'i Pidgin Sign Language	critically endangered	hawa1235
 Heiltsuk-Oowekyala	critically endangered	heil1246
 Hermit	critically endangered	herm1237
@@ -247,7 +247,7 @@ Northern Haida	critically endangered	nort2938
 Northwest Maidu	critically endangered	nort2951
 Northern Paiute	critically endangered	nort2954
 Northern Sierra Miwok	critically endangered	nort2968
-Kannada	critically endangered	nucl1305
+Kannada	safe	nucl1305
 Limilngan	critically endangered	nucl1327
 Wyandot	critically endangered	nucl1648
 Southern-Coastal Tsimshian	critically endangered	nucl1649
@@ -296,7 +296,7 @@ Resígaro	critically endangered	resi1247
 Reyesano	critically endangered	reye1240
 Romano-Greek	critically endangered	roma1240
 Ruga	critically endangered	ruga1238
-Russian	critically endangered	russ1263
+Russian	safe	russ1263
 Saaroa	critically endangered	saar1237
 Sabanê	critically endangered	saba1268
 Mekens	critically endangered	saki1248
@@ -354,7 +354,6 @@ Turumsa	critically endangered	turu1250
 Tuscarora	critically endangered	tusc1257
 Udihe	critically endangered	udih1248
 Ugong	critically endangered	ugon1239
-Uighur	critically endangered	uigh1240
 Ulch	critically endangered	ulch1241
 Umatilla	critically endangered	umat1237
 Umbindhamu	critically endangered	umbi1243
@@ -649,7 +648,7 @@ Bugawac	definitely endangered	buga1250
 Buglere	definitely endangered	bugl1243
 Bugun	definitely endangered	bugu1246
 Bukiyip	definitely endangered	buki1249
-Bulgarian	definitely endangered	bulg1262
+Bulgarian	safe	bulg1262
 Bulo Stieng	definitely endangered	bulo1242
 Bulu (Papua New Guinea)	definitely endangered	bulu1253
 Bumbita Arapesh	definitely endangered	bumb1241
@@ -755,7 +754,8 @@ Cogui	definitely endangered	cogu1240
 Colonia Tovar German	definitely endangered	colo1254
 Tsafiki	definitely endangered	colo1256
 Copainalá Zoque	definitely endangered	copa1239
-Croatian	definitely endangered	croa1245
+Croatian	safe	croa1245
+Burgenland Croatian	definitely endangered	burg1244
 Crow	definitely endangered	crow1244
 Cubeo	definitely endangered	cube1242
 Cuiba	definitely endangered	cuib1242
@@ -930,7 +930,7 @@ Habu	definitely endangered	habu1241
 Hadza	definitely endangered	hadz1240
 Haiphong Sign Language	definitely endangered	haip1238
 Haka Chin	definitely endangered	haka1240
-Halh Mongolian	definitely endangered	halh1238
+Halh Mongolian	safe	halh1238
 Halkomelem	definitely endangered	halk1245
 Hanga	definitely endangered	hang1258
 Hanoi Sign Language	definitely endangered	hano1243
@@ -1528,10 +1528,10 @@ Norwegian Sign Language	definitely endangered	norw1255
 Nubaca	definitely endangered	nuba1241
 Nubi	definitely endangered	nubi1253
 Gyalsumdo-Nubri	definitely endangered	nubr1241
-Eastern Armenian	definitely endangered	nucl1235
+Armenian	safe	nucl1235
 Nayini	definitely endangered	nucl1272
 Grangali	definitely endangered	nucl1285
-Burmese	definitely endangered	nucl1310
+Burmese	safe	nucl1310
 Yulu	definitely endangered	nucl1427
 Mombum	definitely endangered	nucl1452
 Walio	definitely endangered	nucl1453
@@ -1823,7 +1823,7 @@ Suruí	definitely endangered	suru1262
 Suruahá	definitely endangered	suru1263
 Suwawa	definitely endangered	suwa1241
 Suyá	definitely endangered	suya1243
-Swahili	definitely endangered	swah1253
+Swahili	safe	swah1253
 Swedish Sign Language	definitely endangered	swed1236
 Swiss-Italian Sign Language	definitely endangered	swis1235
 Swiss-German Sign Language	definitely endangered	swis1240
@@ -1954,7 +1954,7 @@ Tunzu	definitely endangered	tunz1235
 Tuotomb	definitely endangered	tuot1238
 Tuparí	definitely endangered	tupa1250
 Turi	definitely endangered	turi1246
-Turkmen	definitely endangered	turk1304
+Turkmen	safe	turk1304
 Tutuba	definitely endangered	tutu1241
 Tuyuca	definitely endangered	tuyu1244
 Uda	definitely endangered	udaa1238
@@ -5720,7 +5720,7 @@ Hertevin	severely endangered	hert1241
 Amkoe	severely endangered	hoaa1235
 Hõne	severely endangered	hone1235
 Huilliche	severely endangered	huil1244
-Hungarian	severely endangered	hung1274
+Hungarian	safe	hung1274
 Hya	severely endangered	hyaa1239
 Ibu	severely endangered	ibuu1240
 Indri	severely endangered	indr1247
@@ -5805,7 +5805,7 @@ Mer	severely endangered	merr1239
 Meskwaki	severely endangered	mesk1242
 Mintil	severely endangered	mint1239
 Miyako	severely endangered	miya1259
-Modern Greek	severely endangered	mode1248
+Modern Greek	safe	mode1248
 Moere	severely endangered	moer1240
 Moloko	severely endangered	molo1266
 Mono (Cameroon)	severely endangered	mono1269
@@ -6038,7 +6038,7 @@ Ansus	vulnerable	ansu1237
 Anu	vulnerable	anuu1243
 Ao Naga	vulnerable	aona1235
 Apatani	vulnerable	apat1240
-Arbëreshë Albanian	vulnerable	arbe1236
+Arbëreshë Albanian	definitely endangered	arbe1236
 Argobba	vulnerable	argo1244
 Arhuaco	vulnerable	arhu1242
 Arvanitika Albanian	vulnerable	arva1236
@@ -6768,7 +6768,7 @@ Phuza	vulnerable	phuz1235
 Piaroa	vulnerable	piar1243
 Picard	vulnerable	pica1241
 Pichis Ashéninka	vulnerable	pich1237
-Piemontese	vulnerable	piem1238
+Piemontese	definitely endangered	piem1238
 Vaeakau-Taumako	vulnerable	pile1238
 Pimbwe	vulnerable	pimb1238
 Pinai-Hagahai	vulnerable	pina1252
@@ -6877,7 +6877,7 @@ Semnani-Biyabuneki	vulnerable	semn1249
 Semnam	vulnerable	semn1250
 Senhaja De Srair	vulnerable	senh1238
 Sentinel	vulnerable	sent1241
-Serbian	vulnerable	serb1264
+Serbian	safe	serb1264
 Serui-Laut	vulnerable	seru1244
 Serudung Murut	vulnerable	seru1246
 Severn Ojibwa	vulnerable	seve1240
@@ -6896,7 +6896,7 @@ Silacayoapan Mixtec	vulnerable	sila1250
 Sindihui Mixtec	vulnerable	sind1277
 Sinicahua Mixtec	vulnerable	sini1243
 Siwi	vulnerable	siwi1239
-Slovak	vulnerable	slov1269
+Slovak	safe	slov1269
 So (Cameroon)	vulnerable	soca1235
 Sorkhei	vulnerable	sork1240
 Southwest Pashayi	vulnerable	sout2671
@@ -6925,7 +6925,8 @@ South Ucayali Ashéninka	vulnerable	sout3127
 Soyaltepec Mazatec	vulnerable	soya1237
 Spanish Sign Language	vulnerable	span1263
 Sri Lankan Sign Language	vulnerable	sril1237
-Catalan	vulnerable	stan1289
+Catalan	safe	stan1289
+Algherese Catalan	definitely endangered	algh1238
 Stellingwerfs	vulnerable	stel1238
 Suba-Simbiti	vulnerable	suba1252
 Subiya	vulnerable	subi1246
@@ -7025,7 +7026,7 @@ Twents	vulnerable	twen1241
 Tz'utujil	vulnerable	tzut1248
 Ubi	vulnerable	ubii1238
 Ucayali-Yurúa Ashéninka	vulnerable	ucay1237
-Ukrainian	vulnerable	ukra1253
+Ukrainian	safe	ukra1253
 Uma' Lasan	vulnerable	umal1239
 Uneme	vulnerable	unem1238
 Unua	vulnerable	unua1237

@@ -1,8 +1,5 @@
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
@@ -112,7 +109,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
     case Field.Endangerment:
-      return GlottologEndangerment.Safe; // 9
+      return UNESCOEndangerment.Safe; // 9
     case Field.LanguageScope:
       return LanguageScope.BroadGrouping; // Larger value = broader scope
     case Field.Latitude:

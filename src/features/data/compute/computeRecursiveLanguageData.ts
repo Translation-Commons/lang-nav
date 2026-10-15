@@ -40,10 +40,10 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
     lang.vitality.iso = maxBy(descendants, (child) => child.vitality?.iso);
   }
 
-  if (lang.Glottolog.endangerment != null) {
-    lang.vitality.glottolog = lang.Glottolog.endangerment;
+  if (lang.UNESCO.endangerment != null) {
+    lang.vitality.unesco = lang.UNESCO.endangerment;
   } else {
-    lang.vitality.glottolog = maxBy(descendants, (child) => child.vitality?.glottolog);
+    lang.vitality.unesco = maxBy(descendants, (child) => child.vitality?.unesco);
   }
 
   // Compute the meta score and store the results in the language entity

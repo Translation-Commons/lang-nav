@@ -200,7 +200,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.VitalityMetascore:
       return getLanguageForEntity(ent)?.vitality?.meta;
     case Field.Endangerment:
-      return getLanguageForEntity(ent)?.vitality?.glottolog;
+      return getLanguageForEntity(ent)?.vitality?.unesco;
     case Field.ISOStatus:
       return getLanguageForEntity(ent)?.vitality?.iso;
     case Field.Modality:

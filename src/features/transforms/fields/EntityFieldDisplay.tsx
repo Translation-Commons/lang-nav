@@ -277,7 +277,7 @@ function VitalityField({ ent, field }: VitalityFieldProps) {
   if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
   if (field === Field.ISOStatus) src = VitalitySource.ISO;
-  if (field === Field.Endangerment) src = VitalitySource.Glottolog;
+  if (field === Field.Endangerment) src = VitalitySource.UNESCO;
   return <LanguageVitalityMeter lang={ent} src={src} />;
 }
 

@@ -6,8 +6,8 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
-  GlottologEndangerment,
   LanguageISOStatus,
+  UNESCOEndangerment,
 } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -107,7 +107,7 @@ export type PageParams = {
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   modalityFilter: LanguageModality[];
-  endangermentFilter: GlottologEndangerment[];
+  endangermentFilter: UNESCOEndangerment[];
   orgFilter: string;
   populationMax: number;
   populationMin: number;

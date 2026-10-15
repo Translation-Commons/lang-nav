@@ -11,15 +11,15 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
   source,
   lang,
 }) => {
-  const { iso, meta, glottolog } = lang.vitality ?? {};
+  const { iso, meta, unesco } = lang.vitality ?? {};
 
   switch (source) {
-    case VitalitySource.Glottolog:
-      if (glottolog == null) return <Deemphasized>No Glottolog assessment</Deemphasized>;
+    case VitalitySource.UNESCO:
+      if (unesco == null) return <Deemphasized>No UNESCO assessment</Deemphasized>;
       return (
         <div>
-          <div>Glottolog Endangerment: {getEndangermentLabel(glottolog)}</div>
-          <div>Normalized to a score of {glottolog} out of 9.</div>
+          <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>
+          <div>Normalized to a score of {unesco} out of 9.</div>
           {lang.Glottolog.endangerment == null && (
             <div>
               The endangerment is derived from languages contained by this one, not directly
@@ -45,17 +45,19 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
       );
 
     case VitalitySource.Metascore: {
-      if (meta == null) {
-        return <Deemphasized>No vitality data available</Deemphasized>;
-      }
-      // alternative vitality measures could go here
-      if (iso != null) {
+      if (meta == null) return <Deemphasized>No vitality data available</Deemphasized>;
+      if (iso != null && unesco != null)
         return (
           <div>
-            <VitalityExplanation source={VitalitySource.ISO} lang={lang} />
+            This is a score that averages the ISO Status and the Glottolog Endangerment level.
+            <div>ISO Status: {getLanguageISOStatusLabel(iso)}</div>
+            <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>
+            <div>Normalized to a score of {meta} out of 9.</div>
           </div>
         );
-      }
+
+      if (unesco != null) return <VitalityExplanation source={VitalitySource.ISO} lang={lang} />;
+      if (iso != null) return <VitalityExplanation source={VitalitySource.ISO} lang={lang} />;
     }
   }
   return (

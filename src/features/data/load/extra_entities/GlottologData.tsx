@@ -167,7 +167,7 @@ export async function loadEndangerment(getLanguage: (id: string) => LanguageData
           console.debug('loadEndangerment needs language code for: ', name);
           return;
         }
-        lang.Glottolog.endangerment = parseEndangerment(status);
+        lang.UNESCO.endangerment = parseEndangerment(status);
       }),
     )
     .catch((err) => console.error('Error loading TSV:', err));

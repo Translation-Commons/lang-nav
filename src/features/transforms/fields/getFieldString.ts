@@ -6,10 +6,7 @@ import {
   getEndangermentLabel,
   getLanguageISOStatusLabel,
 } from '@entities/language/vitality/VitalityStrings';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/EntityTypes';
@@ -52,7 +49,7 @@ function getFieldEnumLabel(value: string | number | undefined, field: Field): st
     case Field.ISOStatus:
       return getLanguageISOStatusLabel(value as LanguageISOStatus);
     case Field.Endangerment:
-      return getEndangermentLabel(value as GlottologEndangerment);
+      return getEndangermentLabel(value as UNESCOEndangerment);
     case Field.LanguageScope:
       return getLanguageScopeLabel(value as LanguageScope);
     case Field.Modality:

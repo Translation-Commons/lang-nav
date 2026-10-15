@@ -1,8 +1,5 @@
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/EntityTypes';
@@ -50,7 +47,7 @@ export function buildFilterByISOStatus(isoStatuses: LanguageISOStatus[]): Filter
 }
 
 export function buildFilterByEndangerment(
-  endangermentFilter: GlottologEndangerment[],
+  endangermentFilter: UNESCOEndangerment[],
 ): FilterFunctionType {
   if (endangermentFilter.length === 0) return () => true;
 
@@ -58,8 +55,7 @@ export function buildFilterByEndangerment(
     const language = getLanguageForEntity(ent);
     if (!language) return true;
     return (
-      language.vitality?.glottolog != null &&
-      endangermentFilter.includes(language.vitality.glottolog)
+      language.vitality?.unesco != null && endangermentFilter.includes(language.vitality.unesco)
     );
   };
 }

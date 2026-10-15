@@ -6,10 +6,7 @@ import {
   getEndangermentLabel,
   getLanguageISOStatusLabel,
 } from '@entities/language/vitality/VitalityStrings';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { getCoverageLevelName } from '@entities/ui/CLDRCoverageLevels';
@@ -78,12 +75,12 @@ function getTickMarks(
     case Field.Endangerment:
       return pickDistributedTicksFromRange(
         [
-          GlottologEndangerment.Safe,
-          GlottologEndangerment.Vulnerable,
-          GlottologEndangerment.DefinitelyEndangered,
-          GlottologEndangerment.SeverelyEndangered,
-          GlottologEndangerment.CriticallyEndangered,
-          GlottologEndangerment.Extinct,
+          UNESCOEndangerment.Safe,
+          UNESCOEndangerment.Vulnerable,
+          UNESCOEndangerment.DefinitelyEndangered,
+          UNESCOEndangerment.SeverelyEndangered,
+          UNESCOEndangerment.CriticallyEndangered,
+          UNESCOEndangerment.Extinct,
         ],
         numberOfTicks,
       ).map((value) => ({

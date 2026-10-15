@@ -7,10 +7,7 @@ import {
   getEndangermentLabel,
   getLanguageISOStatusLabel,
 } from '@entities/language/vitality/VitalityStrings';
-import {
-  GlottologEndangerment,
-  LanguageISOStatus,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -95,13 +92,13 @@ function FilterButton({ field }: Props) {
       );
     case Field.Endangerment:
       return (
-        <EnumDropdownMultiSelect<GlottologEndangerment>
+        <EnumDropdownMultiSelect<UNESCOEndangerment>
           value={endangermentFilter}
-          onChange={(newValue: GlottologEndangerment[]) =>
+          onChange={(newValue: UNESCOEndangerment[]) =>
             updatePageParams({ endangermentFilter: newValue })
           }
           getLabel={getEndangermentLabel}
-          options={Object.values(GlottologEndangerment).filter((s) => typeof s === 'number')}
+          options={Object.values(UNESCOEndangerment).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any endangerment level"
           allSelectedLabel="Any defined endangerment level"
           limitWidth={false}

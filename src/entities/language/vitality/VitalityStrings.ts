@@ -1,11 +1,11 @@
 import type { LanguageData } from '../LanguageTypes';
 
-import { GlottologEndangerment, LanguageISOStatus, VitalitySource } from './VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment, VitalitySource } from './VitalityTypes';
 
 export function getVitalityLabel(lang: LanguageData, source: VitalitySource): string | undefined {
   switch (source) {
-    case VitalitySource.Glottolog:
-      return getEndangermentLabel(lang.vitality?.glottolog);
+    case VitalitySource.UNESCO:
+      return getEndangermentLabel(lang.vitality?.unesco);
     case VitalitySource.ISO:
       return getLanguageISOStatusLabel(lang.vitality?.iso);
     case VitalitySource.Metascore:
@@ -32,38 +32,38 @@ export function getLanguageISOStatusLabel(vitality: LanguageISOStatus | undefine
   }
 }
 
-export function parseEndangerment(input: string): GlottologEndangerment | undefined {
+export function parseEndangerment(input: string): UNESCOEndangerment | undefined {
   switch (input.toLowerCase().replace(' ', '')) {
     case 'safe':
-      return GlottologEndangerment.Safe;
+      return UNESCOEndangerment.Safe;
     case 'vulnerable':
-      return GlottologEndangerment.Vulnerable;
+      return UNESCOEndangerment.Vulnerable;
     case 'definitelyendangered':
-      return GlottologEndangerment.DefinitelyEndangered;
+      return UNESCOEndangerment.DefinitelyEndangered;
     case 'severelyendangered':
-      return GlottologEndangerment.SeverelyEndangered;
+      return UNESCOEndangerment.SeverelyEndangered;
     case 'criticallyendangered':
-      return GlottologEndangerment.CriticallyEndangered;
+      return UNESCOEndangerment.CriticallyEndangered;
     case 'extinct':
-      return GlottologEndangerment.Extinct;
+      return UNESCOEndangerment.Extinct;
     default:
       return undefined;
   }
 }
 
-export function getEndangermentLabel(endangerment: GlottologEndangerment | undefined): string {
+export function getEndangermentLabel(endangerment: UNESCOEndangerment | undefined): string {
   switch (endangerment) {
-    case GlottologEndangerment.Safe:
+    case UNESCOEndangerment.Safe:
       return 'Safe';
-    case GlottologEndangerment.Vulnerable:
+    case UNESCOEndangerment.Vulnerable:
       return 'Vulnerable';
-    case GlottologEndangerment.DefinitelyEndangered:
+    case UNESCOEndangerment.DefinitelyEndangered:
       return 'Definitely Endangered';
-    case GlottologEndangerment.SeverelyEndangered:
+    case UNESCOEndangerment.SeverelyEndangered:
       return 'Severely Endangered';
-    case GlottologEndangerment.CriticallyEndangered:
+    case UNESCOEndangerment.CriticallyEndangered:
       return 'Critically Endangered';
-    case GlottologEndangerment.Extinct:
+    case UNESCOEndangerment.Extinct:
       return 'Extinct';
     default:
       return 'Unknown';
