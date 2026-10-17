@@ -52,6 +52,8 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
 
     case Field.VitalityMetascore:
       return 'Vitality Metascore';
+    case Field.Endangerment:
+      return 'Endangerment (Glottolog)';
     case Field.ISOStatus:
       return 'ISO Status';
 
@@ -221,6 +223,8 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
 
     case Field.VitalityMetascore:
       return 'An aggregated score representing the vitality of the language, based on multiple factors.';
+    case Field.Endangerment:
+      return "Glottolog's language endangerment level.";
     case Field.ISOStatus:
       return 'The ISO 639-3 status of the language, indicating its recognition and classification within the ISO standard. Language families take the maximum of their constituents.';
 

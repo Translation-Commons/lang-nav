@@ -32,6 +32,7 @@ const filterOrder: FilterField[] = [
   Field.LanguageFamily,
   Field.LanguageList,
   Field.ISOStatus,
+  Field.Endangerment,
   Field.Population,
   Field.Organization,
   Field.Name,

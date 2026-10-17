@@ -5,7 +5,10 @@ import { PageParamsContextState } from '@features/params/PageParamsContext';
 import { POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
+import {
+  getEndangermentLabel,
+  getLanguageISOStatusLabel,
+} from '@entities/language/vitality/VitalityStrings';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -36,6 +39,7 @@ export function useFilterLabels(): Record<FilterField, string> {
       [Field.Population]: getPopulationFilterLabel(params),
       [Field.Organization]: getOrganizationFilterLabel(params, getEntity),
       [Field.ISOStatus]: getISOStatusFilterLabel(params),
+      [Field.Endangerment]: getEndangermentFilterLabel(params),
       [Field.Name]: getNameFilterLabel(params),
     }),
     [params, getEntity],
@@ -159,6 +163,11 @@ function getNameFilterLabel({ searchString, searchBy }: PageParamsContextState):
   return `${searchBy} matching "${searchString}"`;
 }
 
+function getEndangermentFilterLabel({ endangermentFilter }: PageParamsContextState): string {
+  if (!endangermentFilter?.length) return 'safe or endangered';
+  return joinOxfordComma(endangermentFilter.map(getEndangermentLabel));
+}
+
 export function getFilterTitle(field: FilterField, entType?: EntityType): string {
   switch (field) {
     case Field.Modality:
@@ -190,6 +199,8 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
       return 'Organization';
     case Field.Name:
       return 'Name';
+    case Field.Endangerment:
+      return 'Endangerment (Glottolog)';
     default:
       enforceExhaustiveSwitch(field);
   }

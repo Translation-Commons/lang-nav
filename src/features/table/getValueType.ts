@@ -62,6 +62,7 @@ export function getFieldValueType(field?: Field): TableValueType {
       return TableValueType.String;
 
     case Field.VitalityMetascore:
+    case Field.Endangerment:
     case Field.ISOStatus:
     case Field.Modality:
     case Field.LanguageScope:

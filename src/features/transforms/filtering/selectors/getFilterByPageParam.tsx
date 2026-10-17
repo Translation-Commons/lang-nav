@@ -35,6 +35,8 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
       return Field.SourceForLanguage;
     case PageParamKey.modalityFilter:
       return Field.Modality;
+    case PageParamKey.endangermentFilter:
+      return Field.Endangerment;
     case PageParamKey.isoStatus:
       return Field.ISOStatus;
 
@@ -101,6 +103,8 @@ export function getPageParamKeyFromFilter(field: Field): PageParamKey | undefine
       return PageParamKey.languageSource;
     case Field.Modality:
       return PageParamKey.modalityFilter;
+    case Field.Endangerment:
+      return PageParamKey.endangermentFilter;
     case Field.ISOStatus:
       return PageParamKey.isoStatus;
     case Field.Name:

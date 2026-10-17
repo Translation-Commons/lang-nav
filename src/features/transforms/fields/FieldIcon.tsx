@@ -33,6 +33,7 @@ import {
   ScrollTextIcon,
   SpeechIcon,
   TextIcon,
+  TriangleAlertIcon,
   UserCheckIcon,
   UserPenIcon,
   UsersIcon,
@@ -89,6 +90,8 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.VitalityMetascore:
     case Field.ISOStatus:
       return ActivityIcon;
+    case Field.Endangerment:
+      return TriangleAlertIcon;
 
     // Relation
     case Field.LanguagePrimary:
