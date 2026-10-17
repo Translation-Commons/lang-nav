@@ -17,7 +17,7 @@ import {
 
 describe('searchLocalesForMissingLinks', () => {
   it('should connect locales that are missing links based on language and territory codes', () => {
-    const { languagesBySource, territories, writingSystems, locales, variants } =
+    const { languages, territories, writingSystems, locales, variants } =
       getMockedEntityDictionaries();
     expect(
       Object.values(locales).length,
@@ -25,11 +25,11 @@ describe('searchLocalesForMissingLinks', () => {
     ).toBe(4);
 
     // Run the other connection functions in connectEntities
-    connectLanguagesToParent(languagesBySource);
+    connectLanguagesToParent(languages);
     connectTerritoriesToParent(territories);
-    connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
-    connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-    connectVariants(variants, languagesBySource.BCP, locales);
+    connectWritingSystems(languages, territories, writingSystems);
+    connectLocales(languages, territories, writingSystems, locales);
+    connectVariants(variants, languages, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     expect(
       Object.values(locales).length,

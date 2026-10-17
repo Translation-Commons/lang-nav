@@ -25,6 +25,7 @@ const DataProvider: React.FC<{
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadingStage, setLoadingStage] = useState<LoadingStage>(LoadingStage.Initial);
+  const [dataRevision, setDataRevision] = useState<number>(0);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
@@ -162,6 +163,7 @@ const DataProvider: React.FC<{
     );
 
     setLoadingStage(LoadingStage.AlgorithmsFinished);
+    setDataRevision((prev) => prev + 1);
   }, [coreData, loadingStage, world]);
 
   // Trigger the recomputation of algorithms if the language source or locale separator changes
@@ -171,7 +173,7 @@ const DataProvider: React.FC<{
   }, [languageSource, localeSeparator]);
 
   return (
-    <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision: -1 }}>
+    <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision }}>
       {children}
     </DataContext.Provider>
   );
