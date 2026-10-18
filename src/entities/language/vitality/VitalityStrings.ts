@@ -6,6 +6,8 @@ export function getVitalityLabel(lang: LanguageData, source: VitalitySource): st
   switch (source) {
     case VitalitySource.UNESCO:
       return getEndangermentLabel(lang.vitality?.unesco);
+    case VitalitySource.Glottolog:
+      return getEndangermentLabel(lang.vitality?.glottolog);
     case VitalitySource.ISO:
       return getLanguageISOStatusLabel(lang.vitality?.iso);
     case VitalitySource.Metascore:

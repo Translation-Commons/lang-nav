@@ -11,7 +11,7 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
   source,
   lang,
 }) => {
-  const { iso, meta, unesco } = lang.vitality ?? {};
+  const { iso, meta, unesco, glottolog } = lang.vitality ?? {};
 
   switch (source) {
     case VitalitySource.UNESCO:
@@ -20,6 +20,20 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
         <div>
           <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>
           <div>Normalized to a score of {unesco} out of 9.</div>
+          {lang.Glottolog.endangerment == null && (
+            <div>
+              The endangerment is derived from languages contained by this one, not directly
+              assigned.
+            </div>
+          )}
+        </div>
+      );
+    case VitalitySource.Glottolog:
+      if (glottolog == null) return <Deemphasized>No Glottolog assessment</Deemphasized>;
+      return (
+        <div>
+          <div>Glottolog Endangerment: {getEndangermentLabel(glottolog)}</div>
+          <div>Normalized to a score of {glottolog} out of 9.</div>
           {lang.Glottolog.endangerment == null && (
             <div>
               The endangerment is derived from languages contained by this one, not directly
@@ -46,17 +60,22 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
 
     case VitalitySource.Metascore: {
       if (meta == null) return <Deemphasized>No vitality data available</Deemphasized>;
-      if (iso != null && unesco != null)
+      if ([iso, glottolog, unesco].filter((v) => v != null).length > 1)
         return (
           <div>
-            This is a score that averages the ISO Status and the Glottolog Endangerment level.
-            <div>ISO Status: {getLanguageISOStatusLabel(iso)}</div>
-            <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>
+            This is a score that averages available data into a single continuum.
+            {iso != null && <div>ISO Status: {getLanguageISOStatusLabel(iso)}</div>}
+            {unesco != null && <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>}
+            {glottolog != null && (
+              <div>Glottolog Endangerment: {getEndangermentLabel(glottolog)}</div>
+            )}
             <div>Normalized to a score of {meta} out of 9.</div>
           </div>
         );
 
-      if (unesco != null) return <VitalityExplanation source={VitalitySource.ISO} lang={lang} />;
+      if (unesco != null) return <VitalityExplanation source={VitalitySource.UNESCO} lang={lang} />;
+      if (glottolog != null)
+        return <VitalityExplanation source={VitalitySource.Glottolog} lang={lang} />;
       if (iso != null) return <VitalityExplanation source={VitalitySource.ISO} lang={lang} />;
     }
   }

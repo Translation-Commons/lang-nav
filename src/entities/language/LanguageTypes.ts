@@ -79,6 +79,7 @@ export enum LanguageField {
 export type LanguageVitality = {
   meta?: number; // 0-9 based on other vitality scores
   iso?: LanguageISOStatus; // Derived
+  glottolog?: UNESCOEndangerment; // Derived
   unesco?: UNESCOEndangerment; // Derived
   // potential other vitality estimates go here
 };
@@ -158,7 +159,9 @@ export interface LanguageData extends EntityBase {
   UNESCO: LanguageDataInSource & {
     endangerment?: UNESCOEndangerment;
   };
-  Glottolog: LanguageDataInSource;
+  Glottolog: LanguageDataInSource & {
+    endangerment?: UNESCOEndangerment;
+  };
   CLDR: LanguageDataInSource & {
     coverage?: CLDRCoverageData;
     dataProvider?: LanguageData | LocaleData;

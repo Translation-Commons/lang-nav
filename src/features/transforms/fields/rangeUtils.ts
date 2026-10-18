@@ -6,7 +6,7 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityData } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import { maxBy, minBy } from '@shared/lib/setUtils';
+import { maxOf, minOf } from '@shared/lib/setUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './Field';
@@ -16,7 +16,7 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
   if (field == null) return 0; // default min for when no field is selected
   switch (field) {
     case Field.Date:
-      return minBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return minOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Longitude:
       return -180;
     case Field.Latitude:
@@ -124,7 +124,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
       return new Date().getTime(); // Today
     case Field.TerritoryScope:
       // return Not doing "World" as max since its not always shown and can throw off the color scaling
-      return maxBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return maxOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.CountOfLanguages:
     case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
@@ -141,7 +141,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.Area:
     case Field.Depth:
     case Field.UnicodeVersion:
-      return maxBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return maxOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Name:
     case Field.Endonym:
     case Field.Code:

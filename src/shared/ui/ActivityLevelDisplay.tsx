@@ -19,7 +19,15 @@ type Props = {
 
 const ActivityLevelDisplay: React.FC<Props> = ({ level, label, description }) => {
   return (
-    <HoverableButton hoverContent={description} variant="ghost" style={{ color: getColor(level) }}>
+    <HoverableButton
+      hoverContent={description}
+      variant="ghost"
+      style={{
+        color: getColor(level),
+        fontStyle: level === ActivityLevel.Unknown ? 'italic' : undefined,
+        fontWeight: level === ActivityLevel.Unknown ? 'lighter' : undefined,
+      }}
+    >
       <ActivityIcon bucket={level} />
       {label}
     </HoverableButton>

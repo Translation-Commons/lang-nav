@@ -3,7 +3,7 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
 import averageCoordinates from '@shared/lib/averageCoordinates';
-import { maxBy } from '@shared/lib/setUtils';
+import { maxBy, maxOf } from '@shared/lib/setUtils';
 
 /**
  * Compute derived vitality data for all languages, filling in gaps when it doesn't come
@@ -37,13 +37,23 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
   if (lang.ISO.status != null) {
     lang.vitality.iso = lang.ISO.status;
   } else {
-    lang.vitality.iso = maxBy(descendants, (child) => child.vitality?.iso);
+    lang.vitality.iso = maxOf(descendants, (child) => child.vitality?.iso);
   }
 
+  // Propagate the endangerment of the largest child
+  // If the largest child doesn't have it, then ignore it, usually the largest child should be the least endangered.
+  // Endangerment data sometimes is available only for certain dialects so it may seem that the
+  // language group may be endangered when the primary dialects are just fine.
+  const biggestDescendant = maxBy(descendants, (child) => child.pop.overall);
+  if (lang.Glottolog.endangerment != null) {
+    lang.vitality.glottolog = lang.Glottolog.endangerment;
+  } else {
+    lang.vitality.glottolog = biggestDescendant?.vitality?.glottolog;
+  }
   if (lang.UNESCO.endangerment != null) {
     lang.vitality.unesco = lang.UNESCO.endangerment;
   } else {
-    lang.vitality.unesco = maxBy(descendants, (child) => child.vitality?.unesco);
+    lang.vitality.unesco = biggestDescendant?.vitality?.unesco;
   }
 
   // Compute the meta score and store the results in the language entity

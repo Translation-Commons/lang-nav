@@ -65,7 +65,7 @@ export function areArraysIdentical<T>(a: T[], b: T[]): boolean {
   return a.every((item) => setB.has(item));
 }
 
-export function minBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
+export function minOf<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
   return items.reduce<K | undefined>((min, child) => {
     const current = valueFn(child);
     if (current == null) return min;
@@ -74,12 +74,30 @@ export function minBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K 
   }, undefined);
 }
 
-export function maxBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
+export function minBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): T | undefined {
+  return items.reduce<T | undefined>((min, child) => {
+    const current = valueFn(child);
+    if (current == null) return min;
+    if (min == null) return child;
+    return valueFn(min)! < current ? min : child;
+  }, undefined);
+}
+
+export function maxOf<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
   return items.reduce<K | undefined>((max, child) => {
     const current = valueFn(child);
     if (current == null) return max;
     if (max == null) return current;
     return max > current ? max : current;
+  }, undefined);
+}
+
+export function maxBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): T | undefined {
+  return items.reduce<T | undefined>((max, child) => {
+    const current = valueFn(child);
+    if (current == null) return max;
+    if (max == null) return child;
+    return valueFn(max)! > current ? max : child;
   }, undefined);
 }
 

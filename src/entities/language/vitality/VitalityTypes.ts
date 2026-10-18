@@ -10,6 +10,7 @@ export enum VitalitySource {
   Metascore = 'Metascore',
   ISO = 'ISO',
   UNESCO = 'UNESCO',
+  Glottolog = 'Glottolog',
 }
 
 export enum LanguageISOStatus {
