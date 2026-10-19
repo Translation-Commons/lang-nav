@@ -63,7 +63,7 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
       );
     case EntityType.WritingSystem:
       return uniqueBy(
-        getWritingSystemLocales(ent)
+        getWritingSystemLocales(ent, true)
           .map((l) => l.territory)
           .filter((t): t is TerritoryData => t != null),
         (t) => t.ID,
@@ -201,7 +201,7 @@ export function getEntityLocales(ent: EntityData): LocaleData[] {
     case EntityType.Language:
       return ent.locales;
     case EntityType.WritingSystem:
-      return getWritingSystemLocales(ent);
+      return getWritingSystemLocales(ent, false);
     case EntityType.Orthography:
       return ent.language?.locales ?? [];
     case EntityType.Variant:
@@ -227,11 +227,14 @@ export function getUniqueCountriesForLanguage(lang: LanguageData): TerritoryData
 }
 
 // Requires a lot of lookups, not great to run in time-sensitive contexts
-function getWritingSystemLocales(ent: WritingSystemData): LocaleData[] {
+function getWritingSystemLocales(ent: WritingSystemData, includeGroups: boolean): LocaleData[] {
   const locales = ent.localesWhereExplicit ?? [];
   const localesWithThisWSInferred = Object.values(ent.languages ?? {})
     .filter((lang) => lang.primaryWritingSystem?.ID === ent.ID)
     .flatMap((lang) => lang.locales)
-    .filter((loc) => loc.writingSystem == null && !isTerritoryGroup(loc.territory?.scope));
+    .filter(
+      (loc) =>
+        loc.writingSystem == null && (includeGroups || !isTerritoryGroup(loc.territory?.scope)),
+    );
   return [...locales, ...localesWithThisWSInferred].sort(sortByPopulation);
 }

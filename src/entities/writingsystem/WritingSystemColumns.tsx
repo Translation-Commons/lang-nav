@@ -1,3 +1,6 @@
+import { PilcrowLeftIcon } from 'lucide-react';
+
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
@@ -8,6 +11,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { WritingSystemData } from './WritingSystemTypes';
 
@@ -26,6 +30,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
       ),
       render: (ent) => ent.populationUpperBound,
       field: Field.Population,
+      columnGroup: 'Demographics',
     },
     {
       key: 'Languages',
@@ -40,7 +45,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
           </CommaSeparated>
         ),
       field: Field.LanguageList,
-      columnGroup: 'Related Objects',
+      columnGroup: 'Demographics',
     },
     {
       key: 'Language Count',
@@ -50,24 +55,14 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
         ),
       field: Field.CountOfLanguages,
       isInitiallyVisible: false,
-      columnGroup: 'Related Objects',
-    },
-    {
-      key: 'Keyboard Count',
-      description: 'Number of keyboard layouts that output this writing system.',
-      render: (ent) => (
-        <HoverableEnumeration items={ent.outputKeyboards?.map((kb) => kb.nameDisplay)} />
-      ),
-      field: Field.CountOfKeyboards,
-      columnGroup: 'Related Objects',
-      isInitiallyVisible: false,
+      columnGroup: 'Demographics',
     },
     {
       key: 'Area of Origin',
       render: (ent) => <HoverableEntityName ent={ent.territoryOfOrigin} />,
       field: Field.TerritoryPrimary,
       isInitiallyVisible: false,
-      columnGroup: 'Related Objects',
+      columnGroup: 'Demographics',
     },
     {
       key: 'Used in Countries',
@@ -76,7 +71,41 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
       ),
       isInitiallyVisible: false,
       field: Field.CountOfCountries,
-      columnGroup: 'Related Objects',
+      columnGroup: 'Demographics',
+    },
+    {
+      key: 'Keyboard Count',
+      description: 'Number of keyboard layouts that output this writing system.',
+      render: (ent) => (
+        <HoverableEnumeration items={ent.outputKeyboards?.map((kb) => kb.nameDisplay)} />
+      ),
+      field: Field.CountOfKeyboards,
+      columnGroup: 'Technical Support',
+      isInitiallyVisible: false,
+    },
+    {
+      key: 'Unicode Version',
+      description: 'The Unicode version this writing system was first supported in.',
+      render: ({ unicodeVersion }) =>
+        unicodeVersion === null ? (
+          <Deemphasized>Not supported</Deemphasized>
+        ) : unicodeVersion != null ? (
+          unicodeVersion
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        ),
+      field: Field.UnicodeVersion,
+      columnGroup: 'Technical Support',
+    },
+    {
+      key: 'Right-to-left',
+      render: (ent) =>
+        ent.rightToLeft && (
+          <Hoverable hoverContent="This writing system is written right to left; interfaces must handle this or risk disruptive display bugs for text in this writing system.">
+            <PilcrowLeftIcon color="var(--color-yellow)" size="1em" />
+          </Hoverable>
+        ),
+      columnGroup: 'Technical Support',
     },
   ];
 }

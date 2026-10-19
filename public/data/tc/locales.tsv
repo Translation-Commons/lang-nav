@@ -8179,18 +8179,18 @@ eud_MX	Eudeve (Mexico)		EDL	1
 fah_NG	Fali of Baissa (Nigeria)		EDL	1	
 fgr_TD	Fongoro (Chad)		EDL	1	
 fos_TW	Siraya (Taiwan)	Siraya	EDL	1	
-ful_Adlm_BF	Fulah (Adlam) (Burkina Faso, Adlam)	Fula	Other	1	
-ful_Adlm_CM	Fulah (Adlam) (Cameroon, Adlam)	Fula	Other	1	
-ful_Adlm_GH	Fulah (Adlam) (Ghana, Adlam)	Fula	Other	1	
-ful_Adlm_GM	Fulah (Adlam) (Gambia, Adlam)	Fula	Other	1	
-ful_Adlm_GN	Fulah (Adlam) (Guinea, Adlam)	Fula	Other	1	
-ful_Adlm_GW	Fulah (Adlam) (Guinea-Bissau, Adlam)	Fula	Other	1	
-ful_Adlm_LR	Fulah (Adlam) (Liberia, Adlam)	Fula	Other	1	
-ful_Adlm_MR	Fulah (Adlam) (Mauritania, Adlam)	Fula	Other	1	
-ful_Adlm_NE	Fulah (Adlam) (Niger, Adlam)	Fula	Other	1	
-ful_Adlm_NG	Fulah (Adlam) (Nigeria, Adlam)	Fula	Other	1	
-ful_Adlm_SL	Fulah (Adlam) (Sierra Leone, Adlam)	Fula	Other	1	
-ful_Adlm_SN	Fulah (Adlam) (Senegal, Adlam)	Fula	Other	1	
+ful_Adlm_BF	Fulah (Adlam) (Burkina Faso, Adlam)	Fula	Other	100	
+ful_Adlm_CM	Fulah (Adlam) (Cameroon, Adlam)	Fula	Other	100	
+ful_Adlm_GH	Fulah (Adlam) (Ghana, Adlam)	Fula	Other	1000	
+ful_Adlm_GM	Fulah (Adlam) (Gambia, Adlam)	Fula	Other	100	
+ful_Adlm_GN	Fulah (Adlam) (Guinea, Adlam)	Fula	Other	100	
+ful_Adlm_GW	Fulah (Adlam) (Guinea-Bissau, Adlam)	Fula	Other	100	
+ful_Adlm_LR	Fulah (Adlam) (Liberia, Adlam)	Fula	Other	100	
+ful_Adlm_MR	Fulah (Adlam) (Mauritania, Adlam)	Fula	Other	100	
+ful_Adlm_NE	Fulah (Adlam) (Niger, Adlam)	Fula	Other	100	
+ful_Adlm_NG	Fulah (Adlam) (Nigeria, Adlam)	Fula	Other	100	
+ful_Adlm_SL	Fulah (Adlam) (Sierra Leone, Adlam)	Fula	Other	100	
+ful_Adlm_SN	Fulah (Adlam) (Senegal, Adlam)	Fula	Other	100	
 ful_BF	Fulah (Burkina Faso)	Fula		574000	
 ful_GM	Fulah (Gambia)	Fula		609712	
 ful_GW	Fulah (Guinea-Bissau)	Fula	Other	1	
