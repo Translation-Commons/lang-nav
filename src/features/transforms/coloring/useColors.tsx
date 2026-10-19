@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { useDataVizParams } from '@features/params/DataVizParamsProvider';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/EntityTypes';
@@ -19,8 +20,9 @@ export type ColoringFunctions = NormalizingFunctions & {
 
 const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions => {
   const { colorBy: colorByParam, colorGradient } = usePageParams();
+  const { colorScale } = useDataVizParams();
   const colorBy = colorByInput ?? colorByParam ?? Field.None;
-  const normalizingFunctions = useNormalizedValues({ ents, field: colorBy });
+  const normalizingFunctions = useNormalizedValues({ ents, field: colorBy, scale: colorScale });
 
   const applyColorGradient = getColorGradientFunction(colorGradient);
   const { getNormalizedValue } = normalizingFunctions;

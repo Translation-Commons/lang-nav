@@ -1,8 +1,17 @@
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { PropsWithChildren, useMemo, useState } from 'react';
+
+import { ScaleAdjustment } from '@features/transforms/scales/ScaleAdjustment';
 
 type DataVizParams = {
   isFilterPanelOpen: boolean;
   toggleFilterPanel: () => void;
+  scale: {};
+  colorScale?: ScaleAdjustment;
+  xScale?: ScaleAdjustment;
+  yScale?: ScaleAdjustment;
+  setColorScale?: (s: ScaleAdjustment) => void;
+  setXScale?: (s: ScaleAdjustment) => void;
+  setYScale?: (s: ScaleAdjustment) => void;
 };
 
 const DataVizParamsContext = React.createContext<DataVizParams | undefined>(undefined);
@@ -21,15 +30,34 @@ type ProviderProps = PropsWithChildren<{
  */
 const DataVizParamsProvider: React.FC<ProviderProps> = ({
   children,
-  isFilterPanelOpen: isFilterPanelOpen,
-  toggleFilterPanel: toggleFilterPanel,
+  isFilterPanelOpen,
+  toggleFilterPanel,
 }) => {
+  const [colorScale, setColorScale] = useState<ScaleAdjustment | undefined>(undefined);
+  const [xScale, setXScale] = useState<ScaleAdjustment | undefined>(undefined);
+  const [yScale, setYScale] = useState<ScaleAdjustment | undefined>(undefined);
+
   const providerValue: DataVizParams = useMemo(
     () => ({
       isFilterPanelOpen,
       toggleFilterPanel,
+      colorScale,
+      xScale,
+      yScale,
+      setColorScale,
+      setXScale,
+      setYScale,
     }),
-    [isFilterPanelOpen, toggleFilterPanel],
+    [
+      isFilterPanelOpen,
+      toggleFilterPanel,
+      colorScale,
+      setColorScale,
+      xScale,
+      yScale,
+      setXScale,
+      setYScale,
+    ],
   );
 
   return (

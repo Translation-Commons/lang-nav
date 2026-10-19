@@ -9,8 +9,10 @@ import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './fields/Field';
 import { getMaximumValue, getMinimumValue } from './fields/rangeUtils';
+import getDefaultScaleAdjustment from './scales/getDefaultScaleAdjustment';
+import { ScaleAdjustment } from './scales/ScaleAdjustment';
 
-type Props = { ents: EntityData[]; field: Field };
+type Props = { ents: EntityData[]; field: Field; scale?: ScaleAdjustment };
 
 export type NormalizingFunctions = {
   field: Field;
@@ -20,7 +22,7 @@ export type NormalizingFunctions = {
   minValue: number;
 };
 
-const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
+const useNormalizedValues = ({ ents, field, scale }: Props): NormalizingFunctions => {
   const { populationMin } = usePageParams();
 
   const minValue = useMemo(
@@ -28,8 +30,12 @@ const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
     [ents, field, populationMin],
   );
   const maxValue = useMemo(() => getMaximumValue(ents, field), [ents, field]);
-  const shouldUseLogScale = shouldUseLogarithmicScale(field) && maxValue - minValue > 10;
-  const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;
+  if ((scale == null || scale === ScaleAdjustment.Default) && maxValue - minValue > 10)
+    scale = getDefaultScaleAdjustment(field);
+
+  let range = maxValue - minValue;
+  if (scale === ScaleAdjustment.Logarthmic) range = Math.log10(range);
+  if (scale === ScaleAdjustment.SquareRooted) range = Math.sqrt(range);
 
   const getNormalizedValue = useCallback(
     (value: number | string): number => {
@@ -46,17 +52,20 @@ const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
       // eg. shift to 0-based, eg. -180..+180  =>  0..360
       numericValue -= minValue;
       if (numericValue <= 0) return 0;
-      if (shouldUseLogScale) return Math.log10(numericValue) / range;
+      if (scale === ScaleAdjustment.Logarthmic) return Math.log10(numericValue) / range;
+      if (scale === ScaleAdjustment.SquareRooted) return Math.sqrt(numericValue) / range;
       return numericValue / range;
     },
-    [field, minValue, maxValue, range, shouldUseLogScale],
+    [field, minValue, maxValue, range, scale],
   );
 
   const getDenormalizedValue = useCallback(
     (normalized: number): number => {
       let denormalized: number;
-      if (shouldUseLogScale) {
+      if (scale === ScaleAdjustment.Logarthmic) {
         denormalized = Math.pow(10, normalized * range);
+      } else if (scale === ScaleAdjustment.SquareRooted) {
+        denormalized = Math.pow(normalized * range, 2);
       } else {
         denormalized = normalized * range;
       }
@@ -65,7 +74,7 @@ const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
       // Rounding because JS precision may lead to insignificant trailing decimals
       return denormalized > 1000 ? Math.round(denormalized) : denormalized;
     },
-    [minValue, range, shouldUseLogScale],
+    [minValue, range, scale],
   );
 
   return {
@@ -78,25 +87,3 @@ const useNormalizedValues = ({ ents, field }: Props): NormalizingFunctions => {
 };
 
 export default useNormalizedValues;
-
-function shouldUseLogarithmicScale(field: Field): boolean {
-  switch (field) {
-    case Field.Population:
-    case Field.PopulationDirectlySourced:
-    case Field.PopulationSpeaking:
-    case Field.PopulationWriting:
-    case Field.PopulationOfDescendants:
-    case Field.PopulationPercentInBiggestDescendantLanguage:
-    case Field.CountOfLanguages:
-    case Field.CountOfKeyboards:
-    case Field.CountOfWritingSystems:
-    case Field.CountOfCountries:
-    case Field.CountOfChildTerritories:
-    case Field.CountOfCensuses:
-    case Field.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
-    case Field.Area:
-      return true;
-    default:
-      return false;
-  }
-}
