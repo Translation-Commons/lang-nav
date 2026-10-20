@@ -158,6 +158,7 @@ const DataProvider: React.FC<{
       coreData.languages,
       coreData.locales,
       world,
+      coreData.writingSystems,
       languageSource,
       localeSeparator,
     );

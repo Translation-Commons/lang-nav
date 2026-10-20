@@ -365,6 +365,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguagePrimary,
         Field.LanguageFamily,
         Field.TerritoryPrimary,
+        Field.WritingSystem,
       ];
     case Transform.Scale:
       return [

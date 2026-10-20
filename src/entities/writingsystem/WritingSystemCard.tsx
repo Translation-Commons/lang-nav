@@ -24,14 +24,13 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     containsWritingSystems,
     languages,
     parentWritingSystem,
-    populationUpperBound,
+    population: populationRaw,
     rightToLeft,
     sample,
     scope,
     unicodeVersion,
   } = writingSystem;
-  const population =
-    populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
+  const population = populationRaw != null && populationRaw >= 100 ? populationRaw : null;
 
   const extraFields = useActiveTransforms([
     Field.Name,
@@ -105,7 +104,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField field={Field.UnicodeVersion}>
         {unicodeVersion === null ? (
-          <span>Not supported by Unicode</span>
+          <Deemphasized>Not supported by Unicode</Deemphasized>
         ) : unicodeVersion != null ? (
           <>Unicode {unicodeVersion}</>
         ) : (

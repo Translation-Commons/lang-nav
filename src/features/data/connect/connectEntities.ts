@@ -8,7 +8,6 @@ import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
 import { searchLocalesForMissingLinks } from '../compute/searchLocalesForMissingLinks';
 import { connectVariants } from '../load/extra_entities/IANAData';
 
@@ -48,7 +47,6 @@ export function connectEntitiesAndCreateDerivedData(
   createFamilyLocales(languages, locales); // create them before regional locales
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
-  computeDescendantPopulation(writingSystems);
   connectKeyboards(
     keyboards,
     languages,

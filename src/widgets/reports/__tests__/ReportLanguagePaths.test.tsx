@@ -67,7 +67,7 @@ describe('ReportLanguagePaths', () => {
 
   it('getExtremeLanguagePaths', () => {
     const ents = generateEntities();
-    const { languages, locales, getTerritory } = getMockedDataContext(ents);
+    const { languages, locales, writingSystems, getTerritory } = getMockedDataContext(ents);
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
@@ -75,6 +75,7 @@ describe('ReportLanguagePaths', () => {
         languages,
         locales,
         getTerritory('001')!,
+        writingSystems,
         languageSource,
         LocaleSeparator.Underscore,
       );

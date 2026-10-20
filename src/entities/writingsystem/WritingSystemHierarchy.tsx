@@ -61,7 +61,7 @@ function getWritingSystemTreeNode(
       : [],
     labelStyle: {
       fontWeight: (writingSystem?.populationOfDescendants ?? 0) > 100 ? 'bold' : 'normal',
-      fontStyle: (writingSystem?.populationUpperBound ?? 0) <= 100 ? 'italic' : 'normal',
+      fontStyle: (writingSystem?.population ?? 0) <= 100 ? 'italic' : 'normal',
     },
   };
 }

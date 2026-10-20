@@ -40,6 +40,7 @@ describe('updateEntitiesBasedOnDataParams', () => {
       [sjn, dori0123],
       Object.values(mockedDictionaries.locales),
       mockedDictionaries.territories['001'],
+      Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
       LocaleSeparator.Hyphen,
     );
@@ -76,6 +77,7 @@ describe('updateEntitiesBasedOnDataParams', () => {
       [sjn, dori0123],
       [...Object.values(mockedDictionaries.locales), newLocale], // Include the new locale
       mockedDictionaries.territories['001'],
+      Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
       LocaleSeparator.Hyphen,
     );

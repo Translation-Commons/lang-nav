@@ -5,8 +5,6 @@ import IntroHeroSearch from '@widgets/intro/IntroHeroSearch';
 import IntroHighlights from '@widgets/intro/IntroHighlights';
 import IntroTaskCards from '@widgets/intro/IntroTaskCards';
 
-import { Badge } from '@shared/ui/badge';
-
 const HELP_HEADING_ID = 'how-can-we-help';
 
 const IntroPage: React.FC = () => {
@@ -50,12 +48,6 @@ const IntroPage: React.FC = () => {
           </div>
           <IntroTaskCards />
         </section>
-        <p className="max-w-[560px] text-center text-xs/relaxed text-muted-foreground">
-          <Badge variant="outline" className="mr-1">
-            Beta β
-          </Badge>
-          Most functionality is present, but there still may be errors, particularly with data.
-        </p>
       </div>
     </div>
   );
