@@ -63,7 +63,7 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
       );
     case EntityType.WritingSystem:
       return uniqueBy(
-        getWritingSystemLocales(ent, true)
+        getWritingSystemCountryLocales(ent, true)
           .map((l) => l.territory)
           .filter((t): t is TerritoryData => t != null),
         (t) => t.ID,

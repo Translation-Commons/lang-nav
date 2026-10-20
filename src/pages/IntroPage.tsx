@@ -5,7 +5,6 @@ import IntroHeroSearch from '@widgets/intro/IntroHeroSearch';
 import IntroHighlights from '@widgets/intro/IntroHighlights';
 import IntroTaskCards from '@widgets/intro/IntroTaskCards';
 
-
 const HELP_HEADING_ID = 'how-can-we-help';
 
 const IntroPage: React.FC = () => {
