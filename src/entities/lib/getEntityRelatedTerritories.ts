@@ -201,7 +201,7 @@ export function getEntityLocales(ent: EntityData): LocaleData[] {
     case EntityType.Language:
       return ent.locales;
     case EntityType.WritingSystem:
-      return getWritingSystemLocales(ent, false);
+      return getWritingSystemCountryLocales(ent, false);
     case EntityType.Orthography:
       return ent.language?.locales ?? [];
     case EntityType.Variant:
@@ -227,7 +227,10 @@ export function getUniqueCountriesForLanguage(lang: LanguageData): TerritoryData
 }
 
 // Requires a lot of lookups, not great to run in time-sensitive contexts
-function getWritingSystemLocales(ent: WritingSystemData, includeGroups: boolean): LocaleData[] {
+function getWritingSystemCountryLocales(
+  ent: WritingSystemData,
+  includeGroups: boolean,
+): LocaleData[] {
   const locales = ent.localesWhereExplicit ?? [];
   const localesWithThisWSInferred = Object.values(ent.languages ?? {})
     .filter((lang) => lang.primaryWritingSystem?.ID === ent.ID)

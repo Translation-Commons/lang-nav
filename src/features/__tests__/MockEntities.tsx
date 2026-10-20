@@ -401,7 +401,7 @@ export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary)
 
   // Initial connections and algorithms
   connectMockedEntities(ents);
-  const { languages, locales } = getMockedEntityDictionaries(ents);
+  const { languages, locales, writingSystems } = getMockedEntityDictionaries(ents);
 
   // From DataContext
   const world = ents['001'] as TerritoryData;
@@ -409,13 +409,19 @@ export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary)
     Object.values(languages) as LanguageData[],
     Object.values(locales),
     world,
+    Object.values(writingSystems),
     LanguageSource.Combined,
     LocaleSeparator.Hyphen,
   );
 
   // From SupplementalData
   computeContainedTerritoryStats(world);
-  updatePopulations(Object.values(languages) as LanguageData[], Object.values(locales), world);
+  updatePopulations(
+    Object.values(languages) as LanguageData[],
+    Object.values(locales),
+    world,
+    Object.values(writingSystems),
+  );
   return ents;
 }
 

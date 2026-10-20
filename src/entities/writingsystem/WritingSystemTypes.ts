@@ -39,7 +39,7 @@ export interface WritingSystemData extends EntityBase {
   containsWritingSystemsCodes?: ScriptCode[];
 
   // Derived when combining data
-  populationUpperBound?: number;
+  population?: number;
   populationOfDescendants?: number;
 
   // References to other entities, filled in after loading the TSV
@@ -47,8 +47,11 @@ export interface WritingSystemData extends EntityBase {
   territoryOfOrigin?: TerritoryData;
   languages?: Record<LanguageCode, LanguageData>;
   localesWhereExplicit?: LocaleData[];
-  parentWritingSystem?: WritingSystemData;
-  childWritingSystems?: WritingSystemData[];
-  containsWritingSystems?: WritingSystemData[];
   outputKeyboards?: KeyboardData[];
+
+  parentWritingSystem?: WritingSystemData; // For genetic relationships
+  childWritingSystems?: WritingSystemData[];
+
+  groupedByWritingSystems?: WritingSystemData[]; // For groups
+  containsWritingSystems?: WritingSystemData[];
 }

@@ -21,14 +21,14 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     NameColumn,
     { ...EndonymColumn, isInitiallyVisible: true },
     {
-      key: 'Potential Population',
+      key: 'Population',
       description: (
         <>
-          An imprecise estimate of how many people use this writing system worldwide, calculated by
-          adding up the population for all of the languages that use the writing system.
+          The number of people that write in the language, based on the available locale data.
+          Smaller scripts are probably undercounted.
         </>
       ),
-      render: (ent) => ent.populationUpperBound,
+      render: (ent) => ent.population,
       field: Field.Population,
       columnGroup: 'Demographics',
     },
