@@ -34,7 +34,7 @@ const EntityFilterSelector: React.FC<Props> = ({
     (s: Suggestion) => {
       const param = params[pageParameter] as string;
       const paramID = parseFilterEntityID(param);
-      if (paramID === s.entID || (s.ent && param === getFilterEntityID(s.ent)))
+      if (paramID.code === s.entID || (s.ent && param === getFilterEntityID(s.ent)))
         params.updatePageParams({ [pageParameter]: '' });
       else
         params.updatePageParams({

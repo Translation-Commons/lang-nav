@@ -59,7 +59,7 @@ export function computeWritingSystemsPopulation(writingSystems: WritingSystemDat
 
       // Only count 1 language per territory, the biggest in each
       locs = uniqueBy(locs.sort(sortByPopulation), (l) => l.territoryCode ?? '');
-      ws.population = sumBy(locs, (l) => l.pop.writing.adjusted);
+      ws.population = sumBy(locs, (l) => l.pop.writing.adjusted) || undefined;
     });
 
   // finally compute the descendent population (used for sorting the hierarchy)

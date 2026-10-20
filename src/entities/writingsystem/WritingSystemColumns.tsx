@@ -102,9 +102,10 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
       render: (ent) =>
         ent.rightToLeft && (
           <Hoverable hoverContent="This writing system is written right to left; interfaces must handle this or risk disruptive display bugs for text in this writing system.">
-            <PilcrowLeftIcon color="var(--color-yellow)" size="1em" />
+            <PilcrowLeftIcon aria-label="Right-to-left" color="var(--color-yellow)" size="1em" />
           </Hoverable>
         ),
+      exportValue: (ent) => (ent.rightToLeft != null ? (ent.rightToLeft ? 'Yes' : 'No') : ''),
       columnGroup: 'Technical Support',
     },
   ];
