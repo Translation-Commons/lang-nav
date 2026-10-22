@@ -14,22 +14,23 @@ import PaginationControls from './PaginationControls';
 
 interface Props {
   ents: EntityData[];
+  totalCount?: number; // Filtered count from the API; skips the client-side count.
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
+const VisibleItemsMeter: React.FC<Props> = ({ ents, totalCount }) => {
   const { page: pageParam, limit, paramsLevel } = usePageParams();
   const filterFunction = useAllFilters();
 
   // Compute the number of filtered items
   const nOverall = ents.length;
   const nFiltered = useMemo(() => {
-    return ents.filter(filterFunction).length;
-  }, [ents, filterFunction]);
+    return totalCount ?? ents.filter(filterFunction).length;
+  }, [ents, filterFunction, totalCount]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
   const currentPage = pageParam > nPages || pageParam < 1 ? 1 : pageParam; // Reset to page 1 if the current page is out of bounds
-  if (nOverall === 0) {
+  if (totalCount == null && nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
 

@@ -12,7 +12,7 @@ import { getDefaultParams, ProfileType } from './Profiles';
  * This is used to make the next version of the page parameters in the URL.
  */
 
-function buildNextURLSearchParams(
+export function buildNextURLSearchParams(
   newParams: Partial<PageParams>,
   next: URLSearchParams,
 ): URLSearchParams {
