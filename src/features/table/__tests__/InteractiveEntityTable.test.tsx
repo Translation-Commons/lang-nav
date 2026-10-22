@@ -179,6 +179,30 @@ describe('InteractiveEntityTable', () => {
     expect(screen.getByRole('cell', { name: 'Test Territory 2' })).toBeInTheDocument();
   });
 
+  it('in API mode renders the API page, its total, and hides export', async () => {
+    localStorage.setItem('data-source', 'api');
+    const apiEnt = { ...mockEnts[0], ID: '9', nameDisplay: 'From the API' };
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValue({ ok: true, json: async () => ({ total: 500, results: [apiEnt] }) }),
+    );
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ limit: 1 }));
+
+    try {
+      renderEntityTable({ apiPath: 'territories' });
+
+      expect(await screen.findByRole('cell', { name: 'From the API' })).toBeInTheDocument();
+      expect(screen.queryByRole('cell', { name: 'Test Territory 1' })).not.toBeInTheDocument();
+      expect(screen.getByText(/of 500/)).toBeInTheDocument();
+      expect(screen.queryByText('Export')).not.toBeInTheDocument();
+    } finally {
+      localStorage.clear();
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('formats numeric values correctly', () => {
     const numericEnt = {
       ...mockEnts[0],
