@@ -85,7 +85,9 @@ describe('updateEntitiesBasedOnDataParams', () => {
     expect(sjn.pop.speaking.estimate).toBe(24000); // changed? is that right?
     expect(sjn.pop.speaking.descendants).toBe(100000); // this should be computed from dori0123
     expect(dori0123.pop.speaking.estimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
-    expect(sjn_001.pop.speaking.adjusted).toBe(11220); // unchanged
+    // Re-connecting replaced sjn_001 in the world, so this old object is no longer aggregated:
+    // a recompute resets it to its loaded value instead of keeping the previous run's sum.
+    expect(sjn_001.pop.speaking.unadjusted).toBe(10920);
+    expect(sjn_001.pop.speaking.adjusted).toBe(10920);
   });
 });
