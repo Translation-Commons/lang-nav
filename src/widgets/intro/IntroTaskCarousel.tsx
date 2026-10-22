@@ -1,3 +1,4 @@
+import Autoplay from 'embla-carousel-autoplay';
 import {
   ArrowRightIcon,
   LanguagesIcon,
@@ -8,13 +9,12 @@ import {
   PenLineIcon,
   UsersIcon,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getDataPageURL } from '@features/params/getDataPageURL';
 import { getParamsForLanguageFocus, LanguageFocus } from '@features/params/LanguageFocus';
 import { PageParams, View } from '@features/params/PageParamTypes';
-import Field from '@features/transforms/fields/Field';
 
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -30,6 +30,13 @@ import {
   CarouselPrevious,
 } from '@shared/ui/carousel';
 
+import DigitalSupportPreview from './previews/DigitalSupportPreview';
+import LanguagesPreview from './previews/LanguagesPreview';
+import LanguageTreePreview from './previews/LanguageTreePreview';
+import LocalesPreview from './previews/LocalesPreview';
+import LocaleTablePreview from './previews/LocaleTablePreview';
+import WritingSystemsPreview from './previews/WritingSystemsPreview';
+
 type Task = {
   icon: LucideIcon;
   title: string;
@@ -37,7 +44,7 @@ type Task = {
   cta: string;
   focus: LanguageFocus;
   params: Partial<PageParams>;
-  preview: string;
+  Preview: React.FC<{ className?: string }>;
 };
 
 const TASKS: Task[] = [
@@ -48,7 +55,7 @@ const TASKS: Task[] = [
     cta: 'Browse Languages',
     focus: LanguageFocus.AllLanguages,
     params: { entType: EntityType.Language },
-    preview: 'intro/language.png',
+    Preview: LanguagesPreview,
   },
   {
     icon: MapPinIcon,
@@ -56,8 +63,8 @@ const TASKS: Task[] = [
     text: 'Discover which languages are spoken, written, or used within a specific country or territory.',
     cta: 'Explore Regions',
     focus: LanguageFocus.SpokenLanguages,
-    params: { entType: EntityType.Territory },
-    preview: 'intro/region.png',
+    params: { entType: EntityType.Locale, territoryFilter: 'India [IN]' },
+    Preview: LocalesPreview,
   },
   {
     icon: LaptopIcon,
@@ -65,13 +72,8 @@ const TASKS: Task[] = [
     text: 'Check whether a language is supported by keyboards, fonts, translation tools, speech technologies, and other digital resources.',
     cta: 'View Digital Support',
     focus: LanguageFocus.DigitizedLanguages,
-    params: {
-      entType: EntityType.Language,
-      view: View.Map,
-      limit: -1,
-      colorBy: Field.DigitalSupport,
-    },
-    preview: 'intro/digital-support.png',
+    params: { entType: EntityType.Language, view: View.Chart },
+    Preview: DigitalSupportPreview,
   },
   {
     icon: PenLineIcon,
@@ -80,7 +82,7 @@ const TASKS: Task[] = [
     cta: 'Browse Writing Systems',
     focus: LanguageFocus.WrittenLanguages,
     params: { entType: EntityType.WritingSystem },
-    preview: 'intro/writing-systems.png',
+    Preview: WritingSystemsPreview,
   },
   {
     icon: LanguagesIcon,
@@ -89,30 +91,25 @@ const TASKS: Task[] = [
     cta: 'Find Supported Languages',
     focus: LanguageFocus.DigitizedLanguages,
     params: { entType: EntityType.Locale, view: View.Table },
-    preview: 'intro/localization.png',
+    Preview: LocaleTablePreview,
   },
   {
     icon: UsersIcon,
-    title: 'Understand Language Communities',
-    text: 'Explore the linguistic diversity of a region and identify languages used by local communities.',
-    cta: 'Explore Communities',
+    title: 'Understand Language Relationships',
+    text: 'Explore the family tree of languages and see how they relate to each other.',
+    cta: 'Explore Language Families',
     focus: LanguageFocus.AllLanguoids,
     params: { entType: EntityType.Language, view: View.Hierarchy },
-    preview: 'intro/communities.png',
+    Preview: LanguageTreePreview,
   },
 ];
 
 const TaskSlide: React.FC<{ task: Task }> = ({ task }) => {
-  const { icon: Icon, title, text, cta, focus, params, preview } = task;
+  const { icon: Icon, title, text, cta, focus, params, Preview } = task;
   return (
-    <Card className="h-full gap-0 py-0 ring-foreground/30">
-      <div className="relative aspect-4/3 border-b sm:aspect-video">
-        <img
-          src={`${import.meta.env.BASE_URL}${preview}`}
-          alt=""
-          loading="lazy"
-          className="absolute inset-0 size-full bg-muted object-cover object-top"
-        />
+    <Card className="relative h-full gap-0 py-0 ring-foreground/30 transition-colors has-[a:hover]:bg-muted/50">
+      <div className="aspect-4/3 max-h-[35vh] overflow-hidden border-b bg-card pt-3 pl-3 sm:aspect-video sm:pt-4 sm:pl-4">
+        <Preview className="size-full" />
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6 sm:flex-row sm:items-end">
         <div className="flex flex-col gap-2 sm:basis-4/5">
@@ -126,7 +123,10 @@ const TaskSlide: React.FC<{ task: Task }> = ({ task }) => {
           <Link
             to={getDataPageURL({ ...getParamsForLanguageFocus(focus), ...params })}
             data-slot="button"
-            className={buttonVariants({ variant: 'outline' })}
+            className={cn(
+              buttonVariants({ variant: 'outline' }),
+              'after:absolute after:inset-0 active:not-aria-[haspopup]:translate-none',
+            )}
           >
             {cta}
             <ArrowRightIcon />
@@ -140,6 +140,9 @@ const TaskSlide: React.FC<{ task: Task }> = ({ task }) => {
 const IntroTaskCarousel: React.FC = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const autoplay = useRef(
+    Autoplay({ delay: 6000, stopOnInteraction: true, stopOnMouseEnter: true }),
+  );
 
   useEffect(() => {
     if (!api) return;
@@ -152,10 +155,19 @@ const IntroTaskCarousel: React.FC = () => {
   }, [api]);
 
   return (
-    <Carousel setApi={setApi} opts={{ align: 'start', loop: true }} className="w-full">
+    <Carousel
+      setApi={setApi}
+      opts={{ align: 'start', loop: true }}
+      plugins={[autoplay.current]}
+      className="w-full"
+    >
       <CarouselContent className="py-1">
         {TASKS.map((task, index) => (
-          <CarouselItem key={task.title} className="basis-[90%]" inert={index !== selectedIndex}>
+          <CarouselItem
+            key={task.title}
+            className="basis-[90%] pl-[calc(1rem+1px)]"
+            inert={index !== selectedIndex}
+          >
             <TaskSlide task={task} />
           </CarouselItem>
         ))}

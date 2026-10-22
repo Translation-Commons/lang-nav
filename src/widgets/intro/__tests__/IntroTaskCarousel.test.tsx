@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
@@ -24,12 +24,9 @@ describe('IntroTaskCarousel', () => {
       ['Browse Languages', '/data'],
       [
         'Explore Regions',
-        '/data?languageScopes=3&modalityFilter=2,1,0,3&populationFocus=speaking&entType=Territory',
+        '/data?languageScopes=3&modalityFilter=2,1,0,3&populationFocus=speaking&entType=Locale&territoryFilter=India+[IN]',
       ],
-      [
-        'View Digital Support',
-        '/data?languageSource=CLDR&populationFocus=writing&view=Map&limit=-1&colorBy=Digital+Support',
-      ],
+      ['View Digital Support', '/data?languageSource=CLDR&populationFocus=writing&view=Chart'],
       [
         'Browse Writing Systems',
         '/data?languageSource=ISO&modalityFilter=-2,-1,0&populationFocus=writing&entType=Writing+System',
@@ -38,16 +35,18 @@ describe('IntroTaskCarousel', () => {
         'Find Supported Languages',
         '/data?languageSource=CLDR&populationFocus=writing&entType=Locale&view=Table',
       ],
-      ['Explore Communities', '/data?languageScopes=[]&view=Hierarchy'],
+      ['Explore Language Families', '/data?languageScopes=[]&view=Hierarchy'],
     ]);
   });
 
-  it('renders a preview image on every slide', () => {
+  it('renders a described preview illustration on every slide', () => {
     renderCarousel();
 
     const slides = screen.getAllByRole('group', { hidden: true });
     expect(slides).toHaveLength(6);
-    slides.forEach((slide) => expect(slide.querySelector('img')).toHaveAttribute('src'));
+    slides.forEach((slide) =>
+      expect(within(slide).getByRole('img', { hidden: true })).toHaveAccessibleName(),
+    );
   });
 
   it('keeps only the current slide reachable by keyboard', () => {
