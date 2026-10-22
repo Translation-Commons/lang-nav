@@ -11,7 +11,12 @@ const TerritoryTable: React.FC = () => {
   const columns = getTerritoryColumns();
 
   return (
-    <InteractiveEntityTable tableID={TableID.Territories} ents={territories} columns={columns} />
+    <InteractiveEntityTable
+      tableID={TableID.Territories}
+      ents={territories}
+      columns={columns}
+      apiPath="territories/"
+    />
   );
 };
 
