@@ -2,8 +2,14 @@ import { getFieldValueType } from '@features/table/getValueType';
 import TableValueType from '@features/table/TableValueType';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  getEndangermentLabel,
+  getLanguageISOStatusLabel,
+} from '@entities/language/vitality/VitalityStrings';
+import {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { getCoverageLevelName } from '@entities/ui/CLDRCoverageLevels';
@@ -68,6 +74,21 @@ function getTickMarks(
       ).map((label) => ({
         position: getNormalizedValue(getModalityFromLabel(label) ?? 0),
         label,
+      }));
+    case Field.Endangerment:
+      return pickDistributedTicksFromRange(
+        [
+          GlottologEndangerment.Safe,
+          GlottologEndangerment.Vulnerable,
+          GlottologEndangerment.DefinitelyEndangered,
+          GlottologEndangerment.SeverelyEndangered,
+          GlottologEndangerment.CriticallyEndangered,
+          GlottologEndangerment.Extinct,
+        ],
+        numberOfTicks,
+      ).map((value) => ({
+        position: getNormalizedValue(value),
+        label: getEndangermentLabel(value),
       }));
     case Field.ISOStatus:
       return pickDistributedTicksFromRange(

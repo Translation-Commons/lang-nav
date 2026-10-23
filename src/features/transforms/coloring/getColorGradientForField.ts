@@ -27,6 +27,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
     case Field.VitalityMetascore:
+    case Field.Endangerment:
     case Field.ISOStatus:
       // "Bad" values are red, "Good" values are green
       return ColorGradient.StopLightRedToGreen;

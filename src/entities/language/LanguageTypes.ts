@@ -22,7 +22,7 @@ import type {
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
-import type { LanguageISOStatus } from './vitality/VitalityTypes';
+import type { GlottologEndangerment, LanguageISOStatus } from './vitality/VitalityTypes';
 import type { LanguageModality } from './writing/LanguageModality';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -70,6 +70,7 @@ export enum LanguageField {
 export type LanguageVitality = {
   meta?: number; // 0-9 based on other vitality scores
   iso?: LanguageISOStatus; // Derived
+  glottolog?: GlottologEndangerment; // Derived
   // potential other vitality estimates go here
 };
 
@@ -144,7 +145,9 @@ export interface LanguageData extends EntityBase {
   };
   BCP: LanguageDataInSource;
   UNESCO: LanguageDataInSource;
-  Glottolog: LanguageDataInSource;
+  Glottolog: LanguageDataInSource & {
+    endangerment?: GlottologEndangerment;
+  };
   CLDR: LanguageDataInSource & {
     coverage?: CLDRCoverageData;
     dataProvider?: LanguageData | LocaleData;

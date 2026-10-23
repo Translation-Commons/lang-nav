@@ -190,6 +190,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return <OrthographyCharacters chars={getEntityCharacters(ent) ?? ''} />;
 
     case Field.VitalityMetascore:
+    case Field.Endangerment:
     case Field.ISOStatus:
       return <VitalityField ent={ent} field={field} />;
 
@@ -256,7 +257,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
 type VitalityFieldProps = {
   ent: EntityData;
-  field: Field.VitalityMetascore | Field.ISOStatus;
+  field: Field.VitalityMetascore | Field.ISOStatus | Field.Endangerment;
 };
 
 function VitalityField({ ent, field }: VitalityFieldProps) {
@@ -265,6 +266,7 @@ function VitalityField({ ent, field }: VitalityFieldProps) {
   if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
   if (field === Field.ISOStatus) src = VitalitySource.ISO;
+  if (field === Field.Endangerment) src = VitalitySource.Glottolog;
   return <LanguageVitalityMeter lang={ent} src={src} />;
 }
 

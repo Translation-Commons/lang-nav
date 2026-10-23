@@ -37,6 +37,8 @@ function isFilterActive(field: FilterField, params: PageParams) {
       return params.territoryFilter !== '';
     case Field.ISOStatus:
       return params.isoStatus.length > 0;
+    case Field.Endangerment:
+      return params.endangermentFilter.length > 0;
     default:
       enforceExhaustiveSwitch(field);
   }

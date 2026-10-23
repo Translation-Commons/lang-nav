@@ -6,7 +6,10 @@ import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  GlottologEndangerment,
+  LanguageISOStatus,
+} from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
@@ -82,6 +85,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
+        break;
+      case PageParamKey.endangermentFilter:
+        params.endangermentFilter = parseNumericEnumArray(value, GlottologEndangerment);
         break;
 
       // Object mapping (columns)

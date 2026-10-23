@@ -20,5 +20,5 @@ export function useScopeFilter(): FilterFunctionType {
 // The other vitality filters have been removed until we resolve the data source (if we do)
 export function useFilterByVitality(): FilterFunctionType {
   const filterBy = useFilters();
-  return (ent: EntityData) => filterBy[Field.ISOStatus](ent);
+  return (ent: EntityData) => filterBy[Field.ISOStatus](ent) && filterBy[Field.Endangerment](ent);
 }

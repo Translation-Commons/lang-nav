@@ -42,6 +42,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  endangermentFilter: [],
   entID: undefined,
   entType: EntityType.Language,
   fieldFocus: Field.None,

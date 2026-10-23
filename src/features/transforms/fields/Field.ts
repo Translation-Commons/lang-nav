@@ -27,6 +27,7 @@ enum Field {
 
   // Status - Vitality
   VitalityMetascore = 'Vitality: Metascore',
+  Endangerment = 'Endangerment',
   ISOStatus = 'ISO Status',
 
   // Relation - Objects
