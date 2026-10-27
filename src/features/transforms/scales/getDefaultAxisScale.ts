@@ -1,8 +1,8 @@
 import Field from '../fields/Field';
 
-import { ScaleAdjustment } from './ScaleAdjustment';
+import { AxisScale } from './AxisScale';
 
-function getDefaultScaleAdjustment(field: Field): ScaleAdjustment {
+function getDefaultAxisScale(field: Field): AxisScale {
   switch (field) {
     case Field.Population:
     case Field.PopulationDirectlySourced:
@@ -18,10 +18,10 @@ function getDefaultScaleAdjustment(field: Field): ScaleAdjustment {
     case Field.CountOfCensuses:
     case Field.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
     case Field.Area:
-      return ScaleAdjustment.Logarthmic;
+      return AxisScale.Logarthmic;
     default:
-      return ScaleAdjustment.Linear;
+      return AxisScale.Linear;
   }
 }
 
-export default getDefaultScaleAdjustment;
+export default getDefaultAxisScale;

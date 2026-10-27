@@ -1,4 +1,4 @@
-export enum ScaleAdjustment {
+export enum AxisScale {
   Default,
   Logarthmic,
   SquareRooted,

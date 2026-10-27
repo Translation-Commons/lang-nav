@@ -11,9 +11,9 @@ import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getTickMarks from '@features/transforms/getTickMarks';
-import getDefaultScaleAdjustment from '@features/transforms/scales/getDefaultScaleAdjustment';
-import getScaleAdjustmentLabel from '@features/transforms/scales/getScaleAdjustmentLabel';
-import { ScaleAdjustment } from '@features/transforms/scales/ScaleAdjustment';
+import { AxisScale } from '@features/transforms/scales/AxisScale';
+import getAxisScaleLabel from '@features/transforms/scales/getAxisScaleLabel';
+import getDefaultAxisScale from '@features/transforms/scales/getDefaultAxisScale';
 import useScale from '@features/transforms/scales/useScale';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
 import useNormalizedValues from '@features/transforms/useNormalizedValues';
@@ -140,17 +140,17 @@ function ScaleDropdown({ field, scaleType }: ScaleDropdownProps) {
       : scaleType === 'yScale'
         ? dataViz.setYScale
         : dataViz.setColorScale;
-  const defaultScale = getDefaultScaleAdjustment(field);
+  const defaultScale = getDefaultAxisScale(field);
   let currentScale = dataViz[scaleType];
-  if (currentScale == null || currentScale === ScaleAdjustment.Default) currentScale = defaultScale;
+  if (currentScale == null || currentScale === AxisScale.Default) currentScale = defaultScale;
 
   return (
     <EnumDropdown
       value={currentScale}
-      options={Object.values(ScaleAdjustment).filter((v) => typeof v === 'number')}
+      options={Object.values(AxisScale).filter((v) => typeof v === 'number')}
       onChange={set ?? (() => {})}
-      getLabel={(s) => getScaleAdjustmentLabel(s, 'short')}
-      buttonClassname="min-w-10 w-10"
+      getLabel={(s) => getAxisScaleLabel(s, 'short')}
+      buttonClassname="min-w-10 w-12"
       popupClassname="min-w-20"
     />
   );

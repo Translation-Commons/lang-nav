@@ -8,9 +8,9 @@ import usePageParams from '@features/params/usePageParams';
 import EnumDropdown from '@shared/ui/EnumDropdown';
 
 import Field from '../fields/Field';
-import getDefaultScaleAdjustment from '../scales/getDefaultScaleAdjustment';
-import getScaleAdjustmentLabel from '../scales/getScaleAdjustmentLabel';
-import { ScaleAdjustment } from '../scales/ScaleAdjustment';
+import { AxisScale } from '../scales/AxisScale';
+import getAxisScaleLabel from '../scales/getAxisScaleLabel';
+import getDefaultAxisScale from '../scales/getDefaultAxisScale';
 import FieldDropdown from '../sorting/FieldDropdown';
 import TransformOptionsPopup from '../TransformOptionsPopup';
 
@@ -23,9 +23,9 @@ const ColorPopupCard: React.FC = () => {
   if (view !== View.Map && view !== View.CardList && view !== View.Hierarchy && view !== View.Chart)
     return null;
 
-  const defaultScale = getDefaultScaleAdjustment(colorBy);
+  const defaultScale = getDefaultAxisScale(colorBy);
   let currentScale = colorScale;
-  if (currentScale == null || currentScale === ScaleAdjustment.Default) currentScale = defaultScale;
+  if (currentScale == null || currentScale === AxisScale.Default) currentScale = defaultScale;
 
   return (
     <TransformOptionsPopup
@@ -41,12 +41,12 @@ const ColorPopupCard: React.FC = () => {
       options={{
         'Color By': <FieldDropdown pageParam="colorBy" />,
         'Color Gradient': <ColorGradientSelector />,
-        'Scale Adjustment': (
+        'Axis Scale': (
           <EnumDropdown
             value={currentScale}
-            options={Object.values(ScaleAdjustment).filter((v) => typeof v === 'number')}
+            options={Object.values(AxisScale).filter((v) => typeof v === 'number')}
             onChange={setColorScale ?? (() => {})}
-            getLabel={(s) => getScaleAdjustmentLabel(s)}
+            getLabel={(s) => getAxisScaleLabel(s)}
           />
         ),
       }}
