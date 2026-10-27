@@ -7,6 +7,7 @@ import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
 import getField from '../fields/getField';
+import { Axis } from '../scales/AxisScale';
 import useNormalizedValues, { NormalizingFunctions } from '../useNormalizedValues';
 
 import { getColorGradientFunction } from './getColorGradientFunction';
@@ -20,9 +21,13 @@ export type ColoringFunctions = NormalizingFunctions & {
 
 const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions => {
   const { colorBy: colorByParam, colorGradient } = usePageParams();
-  const { colorScale } = useDataVizParams();
+  const { scale } = useDataVizParams();
   const colorBy = colorByInput ?? colorByParam ?? Field.None;
-  const normalizingFunctions = useNormalizedValues({ ents, field: colorBy, scale: colorScale });
+  const normalizingFunctions = useNormalizedValues({
+    ents,
+    field: colorBy,
+    scale: scale?.[Axis.Color],
+  });
 
   const applyColorGradient = getColorGradientFunction(colorGradient);
   const { getNormalizedValue } = normalizingFunctions;

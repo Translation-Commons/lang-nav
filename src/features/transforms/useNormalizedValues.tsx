@@ -34,7 +34,7 @@ const useNormalizedValues = ({ ents, field, scale }: Props): NormalizingFunction
     scale = getDefaultAxisScale(field);
 
   let range = maxValue - minValue;
-  if (scale === AxisScale.Logarthmic) range = Math.log10(range);
+  if (scale === AxisScale.Logarithmic) range = Math.log10(range);
   if (scale === AxisScale.SquareRooted) range = Math.sqrt(range);
 
   const getNormalizedValue = useCallback(
@@ -52,7 +52,7 @@ const useNormalizedValues = ({ ents, field, scale }: Props): NormalizingFunction
       // eg. shift to 0-based, eg. -180..+180  =>  0..360
       numericValue -= minValue;
       if (numericValue <= 0) return 0;
-      if (scale === AxisScale.Logarthmic) return Math.log10(numericValue) / range;
+      if (scale === AxisScale.Logarithmic) return Math.log10(numericValue) / range;
       if (scale === AxisScale.SquareRooted) return Math.sqrt(numericValue) / range;
       return numericValue / range;
     },
@@ -62,7 +62,7 @@ const useNormalizedValues = ({ ents, field, scale }: Props): NormalizingFunction
   const getDenormalizedValue = useCallback(
     (normalized: number): number => {
       let denormalized: number;
-      if (scale === AxisScale.Logarthmic) {
+      if (scale === AxisScale.Logarithmic) {
         denormalized = Math.pow(10, normalized * range);
       } else if (scale === AxisScale.SquareRooted) {
         denormalized = Math.pow(normalized * range, 2);

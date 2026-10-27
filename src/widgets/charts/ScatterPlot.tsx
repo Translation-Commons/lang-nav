@@ -11,7 +11,7 @@ import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getTickMarks from '@features/transforms/getTickMarks';
-import { AxisScale } from '@features/transforms/scales/AxisScale';
+import { Axis, AxisScale } from '@features/transforms/scales/AxisScale';
 import getAxisScaleLabel from '@features/transforms/scales/getAxisScaleLabel';
 import getDefaultAxisScale from '@features/transforms/scales/getDefaultAxisScale';
 import useScale from '@features/transforms/scales/useScale';
@@ -24,11 +24,11 @@ import EnumDropdown from '@shared/ui/EnumDropdown';
 
 const ScatterPlot: React.FC = () => {
   const { chartX, chartY, scaleBy, colorBy, fieldFocus, updatePageParams } = usePageParams();
-  const { xScale, yScale } = useDataVizParams();
+  const { scale } = useDataVizParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
-  const xValue = useNormalizedValues({ ents, field: chartX, scale: xScale });
-  const yValue = useNormalizedValues({ ents, field: chartY, scale: yScale });
+  const xValue = useNormalizedValues({ ents, field: chartX, scale: scale?.[Axis.X] });
+  const yValue = useNormalizedValues({ ents, field: chartY, scale: scale?.[Axis.Y] });
   const coloring = useColors({ ents, colorBy });
   const scaling = useScale({ ents, scaleBy });
   const xTicks = getTickMarks(xValue, 200);
@@ -48,11 +48,11 @@ const ScatterPlot: React.FC = () => {
       <div data-testid="scatter-plot" className="w-[600px] mx-auto relative">
         <div className="absolute top-1/2 left-[-20px] transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
           Y axis: <FieldDropdown pageParam="chartY" />{' '}
-          <ScaleDropdown scaleType="yScale" field={chartY} />
+          <ScaleDropdown axis={Axis.Y} field={chartY} />
         </div>
         <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
           X axis: <FieldDropdown pageParam="chartX" />{' '}
-          <ScaleDropdown scaleType="xScale" field={chartX} />
+          <ScaleDropdown axis={Axis.X} field={chartX} />
         </div>
         <svg viewBox="-12 -10 230 230">
           <g transform="translate(0, 0)">
@@ -120,7 +120,7 @@ const ScatterPlot: React.FC = () => {
         {colorBy !== Field.None && <ColorBar coloringFunctions={coloring} />}
         <div className="flex items-center justify-center gap-2">
           Colored by <FieldDropdown pageParam="colorBy" /> <ColorGradientSelector />{' '}
-          <ScaleDropdown scaleType="colorScale" field={colorBy} />
+          <ScaleDropdown axis={Axis.Color} field={colorBy} />
         </div>
       </div>
     </div>
@@ -129,26 +129,21 @@ const ScatterPlot: React.FC = () => {
 
 type ScaleDropdownProps = {
   field: Field;
-  scaleType: 'colorScale' | 'xScale' | 'yScale';
+  axis: Axis;
 };
 
-function ScaleDropdown({ field, scaleType }: ScaleDropdownProps) {
-  const dataViz = useDataVizParams();
-  const set =
-    scaleType === 'xScale'
-      ? dataViz.setXScale
-      : scaleType === 'yScale'
-        ? dataViz.setYScale
-        : dataViz.setColorScale;
+function ScaleDropdown({ field, axis }: ScaleDropdownProps) {
+  const { scale, setScale } = useDataVizParams();
   const defaultScale = getDefaultAxisScale(field);
-  let currentScale = dataViz[scaleType];
+  let currentScale = scale?.[axis];
   if (currentScale == null || currentScale === AxisScale.Default) currentScale = defaultScale;
+  const onChange = setScale != null ? (scale: AxisScale) => setScale(axis, scale) : () => {};
 
   return (
     <EnumDropdown
       value={currentScale}
       options={Object.values(AxisScale).filter((v) => typeof v === 'number')}
-      onChange={set ?? (() => {})}
+      onChange={onChange}
       getLabel={(s) => getAxisScaleLabel(s, 'short')}
       buttonClassname="min-w-10 w-12"
       popupClassname="min-w-20"

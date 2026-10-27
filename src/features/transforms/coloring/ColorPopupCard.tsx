@@ -8,7 +8,7 @@ import usePageParams from '@features/params/usePageParams';
 import EnumDropdown from '@shared/ui/EnumDropdown';
 
 import Field from '../fields/Field';
-import { AxisScale } from '../scales/AxisScale';
+import { Axis, AxisScale } from '../scales/AxisScale';
 import getAxisScaleLabel from '../scales/getAxisScaleLabel';
 import getDefaultAxisScale from '../scales/getDefaultAxisScale';
 import FieldDropdown from '../sorting/FieldDropdown';
@@ -18,13 +18,13 @@ import ColorGradientSelector from './ColorGradientSelector';
 
 const ColorPopupCard: React.FC = () => {
   const { colorBy, view } = usePageParams();
-  const { colorScale, setColorScale } = useDataVizParams();
+  const { scale, setScale } = useDataVizParams();
 
   if (view !== View.Map && view !== View.CardList && view !== View.Hierarchy && view !== View.Chart)
     return null;
 
   const defaultScale = getDefaultAxisScale(colorBy);
-  let currentScale = colorScale;
+  let currentScale = scale?.color;
   if (currentScale == null || currentScale === AxisScale.Default) currentScale = defaultScale;
 
   return (
@@ -45,7 +45,7 @@ const ColorPopupCard: React.FC = () => {
           <EnumDropdown
             value={currentScale}
             options={Object.values(AxisScale).filter((v) => typeof v === 'number')}
-            onChange={setColorScale ?? (() => {})}
+            onChange={setScale ? (scale: AxisScale) => setScale(Axis.Color, scale) : () => {}}
             getLabel={(s) => getAxisScaleLabel(s)}
           />
         ),

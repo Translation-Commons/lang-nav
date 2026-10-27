@@ -18,7 +18,7 @@ function getDefaultAxisScale(field: Field): AxisScale {
     case Field.CountOfCensuses:
     case Field.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
     case Field.Area:
-      return AxisScale.Logarthmic;
+      return AxisScale.Logarithmic;
     default:
       return AxisScale.Linear;
   }

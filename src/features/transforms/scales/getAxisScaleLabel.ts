@@ -4,7 +4,7 @@ function getAxisScaleLabel(scale: AxisScale, length: 'short' | 'long' = 'long') 
   switch (scale) {
     case AxisScale.Default:
       return 'Default';
-    case AxisScale.Logarthmic:
+    case AxisScale.Logarithmic:
       return length === 'long' ? 'Logarithmic' : 'Log';
     case AxisScale.SquareRooted:
       return length === 'long' ? 'Square Rooted' : 'Sqrt';
