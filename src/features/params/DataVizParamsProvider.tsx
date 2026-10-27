@@ -1,8 +1,12 @@
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { PropsWithChildren, useCallback, useMemo, useState } from 'react';
+
+import { Axis, AxisScale } from '@features/transforms/scales/AxisScale';
 
 type DataVizParams = {
   isFilterPanelOpen: boolean;
   toggleFilterPanel: () => void;
+  scale?: Partial<Record<Axis, AxisScale>>;
+  setScale?: (axis: Axis, scale: AxisScale) => void;
 };
 
 const DataVizParamsContext = React.createContext<DataVizParams | undefined>(undefined);
@@ -21,15 +25,25 @@ type ProviderProps = PropsWithChildren<{
  */
 const DataVizParamsProvider: React.FC<ProviderProps> = ({
   children,
-  isFilterPanelOpen: isFilterPanelOpen,
-  toggleFilterPanel: toggleFilterPanel,
+  isFilterPanelOpen,
+  toggleFilterPanel,
 }) => {
+  const [scaleByAxis, setScaleByAxis] = useState<Partial<Record<Axis, AxisScale>>>({});
+  const setScale = useCallback(
+    (axis: Axis, scale: AxisScale) => {
+      setScaleByAxis((prev) => ({ ...prev, [axis]: scale }));
+    },
+    [setScaleByAxis],
+  );
+
   const providerValue: DataVizParams = useMemo(
     () => ({
       isFilterPanelOpen,
       toggleFilterPanel,
+      scale: scaleByAxis,
+      setScale,
     }),
-    [isFilterPanelOpen, toggleFilterPanel],
+    [isFilterPanelOpen, toggleFilterPanel, scaleByAxis, setScale],
   );
 
   return (
