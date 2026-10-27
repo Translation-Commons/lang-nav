@@ -1,1 +1,0 @@
-import{T as t,aP as e,bt as a}from"./index-Dz_wFTwI.js";import{g as i}from"./CellPopulation-qWy778BV.js";import{L as p}from"./LocalePopulationBreakdown-DtO1aaC3.js";const l=({locale:o,focus:s})=>{const n=i(o,s),r=o.pop[n];return r.adjusted==null?null:t.jsx(e,{hoverContent:t.jsx(p,{locale:o,speakingOrWriting:n}),children:t.jsx(a,{count:r.adjusted})})};export{l as L};
