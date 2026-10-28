@@ -20,7 +20,7 @@ import {
   buildFilterByModality,
   buildFilterByTerritoryScope,
 } from './filterByEnum';
-import { buildFilterByPopulation } from './filterByRange';
+import { buildFilterByDigitalSupport, buildFilterByPopulation } from './filterByRange';
 
 /**
  * Common hook to get filter functions based on page params.
@@ -38,6 +38,8 @@ function useFilters(): Record<Field, FilterFunctionType> {
     modalityFilter,
     populationMax,
     populationMin,
+    digitalSupportMax,
+    digitalSupportMin,
     orgFilter,
     searchBy,
     searchString,
@@ -81,10 +83,14 @@ function useFilters(): Record<Field, FilterFunctionType> {
   // Vitality
   const filterByISOStatus = useMemo(() => buildFilterByISOStatus(isoStatus), [isoStatus]);
 
-  // Population
+  // Ranges
   const filterByPopulation = useMemo(
     () => buildFilterByPopulation(populationMin, populationMax),
     [populationMin, populationMax],
+  );
+  const filterByDigitalSupport = useMemo(
+    () => buildFilterByDigitalSupport(digitalSupportMin, digitalSupportMax),
+    [digitalSupportMin, digitalSupportMax],
   );
 
   const alwaysTrue = () => true;
@@ -110,6 +116,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
 
       // Ranges
       [Field.Population]: filterByPopulation,
+      [Field.DigitalSupport]: filterByDigitalSupport,
 
       // Filters not yet constructed
       [Field.LanguagePrimary]: alwaysTrue,
@@ -127,7 +134,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Example]: alwaysTrue,
       [Field.UnicodeVersion]: alwaysTrue,
       [Field.CLDRCoverage]: alwaysTrue,
-      [Field.DigitalSupport]: alwaysTrue,
       [Field.SourceType]: alwaysTrue,
       [Field.WritingSystemScope]: alwaysTrue,
       [Field.VariantType]: alwaysTrue,
