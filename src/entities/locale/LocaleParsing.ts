@@ -54,7 +54,7 @@ export function parseLocaleCode(localeCode: string): LocaleTags {
   // slv_Latn_SI_bohoric_nedis
   // taib1242_Hant_TW_tailo
   const parts = localeCode.match(
-    /^([a-z]{2,3}|[a-z]{4}[0-9]{4})(?:[-_]([A-Z][a-z]{3}))?(?:[-_]([A-Z]{2}|[0-9]{3}))?(?:[-_]([-_A-Za-z0-9]{4,}))*$/,
+    /^([a-z]{2,3}|[a-z]{4}[0-9]{4})(?:[-_]([A-Z][a-z]{3}))?(?:[-_]([A-Z]{2}|[a-z]{2}|[0-9]{3}))?(?:[-_]([-_A-Za-z0-9]{4,}))*$/,
   );
   if (!parts) {
     throw new Error(`Invalid locale code: ${localeCode}`);
