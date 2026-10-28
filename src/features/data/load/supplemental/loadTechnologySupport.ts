@@ -98,7 +98,6 @@ function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGette
     if (isIgnoredLanguageCode(code)) return;
 
     const lang = dc.getLanguage(code);
-    console.log(languageCodes, code, lang);
     if (!lang) return;
     const support = { ...techSupportBase, lang };
 

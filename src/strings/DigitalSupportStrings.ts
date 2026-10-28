@@ -18,7 +18,7 @@ export function getDigitalSupportDimensionLabel(dimension: DigitalSupportDimensi
     case DigitalSupportDimension.MachineTranslation:
       return 'Machine Translation';
     case DigitalSupportDimension.AI:
-      return 'Artifical Intelligence';
+      return 'Artificial Intelligence';
     case DigitalSupportDimension.Interfaces:
       return 'Interfaces';
     default:

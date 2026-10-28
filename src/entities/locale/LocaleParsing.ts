@@ -62,7 +62,7 @@ export function parseLocaleCode(localeCode: string): LocaleTags {
   return {
     languageCode: parts[1],
     scriptCode: parts[2],
-    territoryCode: parts[3],
+    territoryCode: parts[3]?.toUpperCase(),
     variantCodes: parts[4] ? parts[4].toLowerCase().split(/[-_]/) : [],
   };
 }

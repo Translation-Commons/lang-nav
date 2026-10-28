@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { POPULATION_MAX } from '@features/params/Profiles';
+import { DIGITAL_SUPPORT_MAX, POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
@@ -145,7 +145,7 @@ function getDigitalSupportFilterLabel({
 }: PageParamsContextState): string {
   const hasMin = digitalSupportMin != null && digitalSupportMin >= 0;
   const hasMax =
-    digitalSupportMax != null && digitalSupportMax >= 0 && digitalSupportMax < POPULATION_MAX;
+    digitalSupportMax != null && digitalSupportMax >= 0 && digitalSupportMax < DIGITAL_SUPPORT_MAX;
   if (!hasMin && !hasMax) return 'any population';
   if (!hasMin) return `with digital support score ≤ ${digitalSupportMax.toLocaleString()}`;
   if (!hasMax) return `with digital support score ≥ ${digitalSupportMin.toLocaleString()}`;
