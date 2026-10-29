@@ -26,6 +26,7 @@ import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
+import { addMacrolanguageStandards, loadMacroStandards } from './entities/loadMacroStandards';
 import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTechnologies } from './entities/loadTechnologies';
 import { loadTerritories } from './entities/loadTerritories';
@@ -94,6 +95,7 @@ export function useCoreData(): {
       glottologImport,
       glottocodeToISO,
       combinedFamilyOverrides,
+      macroStandards,
       territories,
       locales,
       writingSystems,
@@ -113,6 +115,7 @@ export function useCoreData(): {
       loadGlottologLanguages(),
       loadGlottocodeToISO(),
       loadCombinedFamilyOverrides(),
+      loadMacroStandards(),
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
@@ -149,6 +152,7 @@ export function useCoreData(): {
     addGlottologLanguages(languageDictionary, glottologImport || [], glottocodeToISO || {});
     applyCombinedFamilyOverrides(languageDictionary, combinedFamilyOverrides || []);
     addCLDRLanguageDetails(languageDictionary);
+    addMacrolanguageStandards(languageDictionary, macroStandards);
     addIANAVariantLocales(languageDictionary, locales, variants);
 
     connectEntitiesAndCreateDerivedData(

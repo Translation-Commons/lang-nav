@@ -25,20 +25,6 @@ const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams>
       {getViewIcon(view)} {view}
     </Link>
   );
-  // return (
-  //   <Button
-  //     nativeButton={false}
-  //     role="link"
-  //     variant="outline"
-  //     size="sm"
-  //     render={
-  //       <a href={href} title={view}>
-  //         <ArrowUpLeftIcon />
-  //         {getViewIcon(view)} {view}
-  //       </a>
-  //     }
-  //   />
-  // );
 };
 
 export default DrawerActionButton;

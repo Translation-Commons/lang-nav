@@ -17,6 +17,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
 import { LanguageData, LanguageScope } from '../LanguageTypes';
+import LanguageStandardRegisterNote from '../relations/LanguageStandardRegisterNote';
 
 type LanguageDrawerPopRowProps = {
   lang: LanguageData;
@@ -65,6 +66,21 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
     (l) => l.territoryCode ?? '',
   );
 
+  const expandedContent = [];
+  if (showableLocales.length > 0) {
+    expandedContent.push(
+      <SimpleLocaleTable
+        key="territories"
+        locales={showableLocales}
+        populationFocus={populationFocus}
+        labelSource="territory"
+      />,
+    );
+  }
+  if (lang.standardLanguage && populationFocus === PopulationFocus.Writing) {
+    expandedContent.push(<LanguageStandardRegisterNote lang={lang} />);
+  }
+
   return (
     <DrawerDetailsField
       label={toTitleCase(getLanguageModalityUserLabel(lang.modality, speakingOrWriting))}
@@ -74,15 +90,7 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
           <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
         ]
       }
-      expandedContent={
-        showableLocales.length > 0 && (
-          <SimpleLocaleTable
-            locales={showableLocales}
-            populationFocus={populationFocus}
-            labelSource="territory"
-          />
-        )
-      }
+      expandedContent={expandedContent}
     >
       <CountOfPeople count={popEstimate} />
     </DrawerDetailsField>

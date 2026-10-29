@@ -4,8 +4,8 @@
 #notes	Many macrolanguages commented out when their largest constituent are not considered the singular standard for the community			Mostly percentages about how much the language is of the standard
 #Macro Code	Macro Name	Standard Code	Standard Name	Supporting Data 
 zho	Chinese languages	cmn	Mandarin Chinese	87.8
-ara	Arabic	arb	Modern Standard Arabic	#manual
-msa	Malayic	zlm	Malay (Individual Language)	#override
+ara	Arabic	arb	Modern Standard Arabic	common written version of Arabic
+msa	Malayic	zsm	Standard Malay	usual reference for Malay
 swa	Swahili	swh	Coastal Swahili	48.5
 lah	Lahnda	pnb	Western Panjabi	72.8
 fas	Persian	pes	Iranian Persian	80.2
@@ -79,3 +79,6 @@ nucl1441	Macro-Maba	mde	Maba	89.2
 #macr1274	Macro-Carolinian	tpv	Tanapag	40.0
 macr1267	Macro-Yaeyama	rys	Yaeyama	71.4
 mand1468	Macro-Mandaic	mid	Mandaic	100
+hind1270-Deva	Hindustani	hin	Hindi	Hindustani in Devanagari writing is usually Hindi
+hind1270-Arab	Hindustani	urd	Urdu	Hindustani in Arabic writing is usually Urdu
+ind	Indonesian	ind	Indonesian	Does not follow the macrolanguage (msa) and instead is its own standard
