@@ -14,6 +14,31 @@ class ResizeObserver {
 
 window.ResizeObserver = ResizeObserver;
 
+// Embla carousel reads media queries and observes slide visibility
+window.matchMedia ??= (query: string) =>
+  ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }) as MediaQueryList;
+
+class IntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+}
+
+window.IntersectionObserver ??=
+  IntersectionObserver as unknown as typeof window.IntersectionObserver;
+
 // Only if you want request mocking; otherwise remove this whole block + MSW deps
 beforeAll(async () => {
   const server = await getServer();

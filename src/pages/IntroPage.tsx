@@ -3,8 +3,10 @@ import React from 'react';
 
 import IntroHeroSearch from '@widgets/intro/IntroHeroSearch';
 import IntroHighlights from '@widgets/intro/IntroHighlights';
-import IntroTaskCards from '@widgets/intro/IntroTaskCards';
+import IntroLandscapeByTerritory from '@widgets/intro/IntroLandscapeByTerritory';
+import IntroTaskCarousel from '@widgets/intro/IntroTaskCarousel';
 
+const LANDSCAPE_HEADING_ID = 'language-landscape';
 const HELP_HEADING_ID = 'how-can-we-help';
 
 const IntroPage: React.FC = () => {
@@ -36,7 +38,23 @@ const IntroPage: React.FC = () => {
           <IntroHighlights />
         </div>
       </div>
-      <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-10 px-4 py-10">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-4 py-10">
+        <section
+          className="flex w-full flex-col items-center gap-4"
+          aria-labelledby={LANDSCAPE_HEADING_ID}
+        >
+          <div className="text-center">
+            <h2 id={LANDSCAPE_HEADING_ID} className="text-2xl leading-tight">
+              The Language Landscape
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Search a territory or switch on a lens.
+            </p>
+          </div>
+          <IntroLandscapeByTerritory />
+        </section>
+      </div>
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-10 px-4 py-10">
         <section className="w-full" aria-labelledby={HELP_HEADING_ID}>
           <div className="text-center">
             <h2 id={HELP_HEADING_ID} className="text-2xl leading-tight">
@@ -46,7 +64,7 @@ const IntroPage: React.FC = () => {
               Choose a task below to jump into the most relevant language data and tools.
             </p>
           </div>
-          <IntroTaskCards />
+          <IntroTaskCarousel />
         </section>
       </div>
     </div>
