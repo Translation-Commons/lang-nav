@@ -60,17 +60,20 @@ const ReportLanguageDescendants: React.FC = () => {
             key: 'Population',
             render: (lang: LanguageData) => lang.pop.overall,
             field: Field.Population,
+            columnGroup: 'Population',
           },
           {
             key: 'Estimated Population of Descendants',
             render: (lang: LanguageData) => lang.pop.speaking.descendants,
             field: Field.PopulationOfDescendants,
+            columnGroup: 'Population',
           },
           {
             key: 'Estimated Population of Descendants (Writing)',
             render: (lang: LanguageData) => lang.pop.writing.descendants,
             valueType: TableValueType.Population,
             isInitiallyVisible: false,
+            columnGroup: 'Population',
           },
           {
             key: 'Largest Descendant',
@@ -81,11 +84,13 @@ const ReportLanguageDescendants: React.FC = () => {
                   {lang.largestDescendant.codeDisplay}]
                 </>
               ),
+            columnGroup: 'Largest Descendent',
           },
           {
             key: 'Descendant Population',
             render: (lang: LanguageData) => lang.largestDescendant?.pop.overall || null,
             valueType: TableValueType.Population,
+            columnGroup: 'Largest Descendent',
           },
 
           {
@@ -93,6 +98,7 @@ const ReportLanguageDescendants: React.FC = () => {
             render: (lang: LanguageData) =>
               getEntityPopulationPercentInBiggestDescendantLanguage(lang),
             field: Field.PopulationPercentInBiggestDescendantLanguage,
+            columnGroup: 'Largest Descendent',
           },
         ]}
         ents={filteredLanguages}
