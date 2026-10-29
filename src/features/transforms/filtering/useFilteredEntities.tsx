@@ -44,6 +44,7 @@ const useFilteredEntities = <T extends EntityData>({
   const filterByVitality = useVitality ? useFilterByVitality() : () => true;
   const filterByPopulation = usePopulation ? filters.Population : () => true;
   const filterByLanguageSource = useLanguageSource ? filters[Field.SourceForLanguage] : () => true;
+  const filterByDigitalSupport = filters[Field.DigitalSupport];
   const sortFunction = getSortFunction();
   const allEntities = inputEnts ?? pageEntities;
 
@@ -58,7 +59,8 @@ const useFilteredEntities = <T extends EntityData>({
             filterByConnections(ent) &&
             filterByVitality(ent) &&
             filterByPopulation(ent) &&
-            filterByLanguageSource(ent)),
+            filterByLanguageSource(ent) &&
+            filterByDigitalSupport(ent)),
       )
       .sort((a, b) => {
         const aIndex = pinned.indexOf(a.ID);
@@ -74,6 +76,7 @@ const useFilteredEntities = <T extends EntityData>({
   }, [
     allEntities,
     filterByConnections,
+    filterByDigitalSupport,
     filterByLanguageSource,
     filterByPopulation,
     filterByScope,

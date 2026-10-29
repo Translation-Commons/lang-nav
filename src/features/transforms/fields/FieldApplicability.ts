@@ -414,6 +414,7 @@ export type FilterField = Extract<
   | Field.TerritoryScope
   | Field.ISOStatus
   | Field.Population
+  | Field.DigitalSupport
 >;
 
 // Ordered by preferred UI grouping: search string, then connections, then statuses, then population
@@ -432,6 +433,7 @@ export function getFilterFields(): FilterField[] {
     Field.TerritoryScope,
     Field.ISOStatus,
     Field.Population,
+    Field.DigitalSupport,
   ];
 }
 

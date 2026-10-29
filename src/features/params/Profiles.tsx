@@ -34,6 +34,7 @@ export enum ProfileType {
 }
 
 export const POPULATION_MAX = 10_000_000_000;
+export const DIGITAL_SUPPORT_MAX = 10;
 
 const GLOBAL_DEFAULTS: PageParams = {
   chartX: Field.None,
@@ -42,6 +43,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  digitalSupportMax: DIGITAL_SUPPORT_MAX,
+  digitalSupportMin: -1,
   entID: undefined,
   entType: EntityType.Language,
   fieldFocus: Field.None,

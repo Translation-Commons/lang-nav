@@ -52,6 +52,8 @@ export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
+  digitalSupportMax = 'digitalSupportMax',
+  digitalSupportMin = 'digitalSupportMin',
   entID = 'entID',
   entType = 'entType',
   fieldFocus = 'fieldFocus',
@@ -111,6 +113,8 @@ export type PageParams = {
   orgFilter: string;
   populationMax: number;
   populationMin: number;
+  digitalSupportMin: number;
+  digitalSupportMax: number;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   writingSystemFilter: string;

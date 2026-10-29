@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { POPULATION_MAX } from '@features/params/Profiles';
+import { DIGITAL_SUPPORT_MAX, POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
@@ -37,6 +37,7 @@ export function useFilterLabels(): Record<FilterField, string> {
       [Field.Organization]: getOrganizationFilterLabel(params, getEntity),
       [Field.ISOStatus]: getISOStatusFilterLabel(params),
       [Field.Name]: getNameFilterLabel(params),
+      [Field.DigitalSupport]: getDigitalSupportFilterLabel(params),
     }),
     [params, getEntity],
   );
@@ -138,6 +139,19 @@ function getPopulationFilterLabel({
   return `with population ≥ ${populationMin.toLocaleString()} & ≤ ${populationMax.toLocaleString()}`;
 }
 
+function getDigitalSupportFilterLabel({
+  digitalSupportMin,
+  digitalSupportMax,
+}: PageParamsContextState): string {
+  const hasMin = digitalSupportMin != null && digitalSupportMin >= 0;
+  const hasMax =
+    digitalSupportMax != null && digitalSupportMax >= 0 && digitalSupportMax < DIGITAL_SUPPORT_MAX;
+  if (!hasMin && !hasMax) return 'any population';
+  if (!hasMin) return `with digital support score ≤ ${digitalSupportMax.toLocaleString()}`;
+  if (!hasMax) return `with digital support score ≥ ${digitalSupportMin.toLocaleString()}`;
+  return `with digital support score ≥ ${digitalSupportMin.toLocaleString()} & ≤ ${digitalSupportMax.toLocaleString()}`;
+}
+
 function getOrganizationFilterLabel(
   { orgFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
@@ -189,6 +203,8 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
       return 'Organization';
     case Field.Name:
       return 'Name';
+    case Field.DigitalSupport:
+      return 'Digital Support';
     default:
       enforceExhaustiveSwitch(field);
   }

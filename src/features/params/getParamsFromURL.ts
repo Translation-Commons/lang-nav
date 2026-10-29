@@ -59,6 +59,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.populationMax:
         params.populationMax = parseInt(value) >= 0 ? parseInt(value) : undefined;
         break;
+      case PageParamKey.digitalSupportMin:
+        params.digitalSupportMin = parseFloat(value) >= -1 ? parseFloat(value) : undefined;
+        break;
+      case PageParamKey.digitalSupportMax:
+        params.digitalSupportMax = parseFloat(value) >= 0 ? parseFloat(value) : undefined;
+        break;
 
       // Arrays
       case PageParamKey.languageScopes:

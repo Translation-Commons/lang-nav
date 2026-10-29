@@ -33,6 +33,7 @@ const filterOrder: FilterField[] = [
   Field.LanguageList,
   Field.ISOStatus,
   Field.Population,
+  Field.DigitalSupport,
   Field.Organization,
   Field.Name,
 ];

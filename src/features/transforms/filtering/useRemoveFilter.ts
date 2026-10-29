@@ -40,6 +40,8 @@ function getRemoveFilterParams(field: Field): Partial<PageParams> {
       return { populationMax: undefined, populationMin: undefined };
     case Field.SourceForLanguage:
       return { languageSource: LanguageSource.Combined };
+    case Field.DigitalSupport:
+      return { digitalSupportMax: undefined, digitalSupportMin: undefined };
     default:
       return {};
   }

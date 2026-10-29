@@ -95,6 +95,7 @@ function FilterButton({ field }: Props) {
       );
     case Field.SourceForLanguage:
       return <LanguageStandardSelector />;
+    case Field.DigitalSupport:
     case Field.Population:
     case Field.Name:
     case Field.WritingSystem:

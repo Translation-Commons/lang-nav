@@ -3,11 +3,13 @@
  * computeLanguageDigitalSupportScore.ts -- the scores are still used for sorting, charts and the
  * overall metascore, while these statuses describe what is actually missing for a language.
  */
-import { TechSupportData } from '@entities/tech/TechnologyTypes';
+import { TechScope, TechSupportData } from '@entities/tech/TechnologyTypes';
 import { CLDRCoverageData, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { groupBy } from '@shared/lib/setUtils';
+import { joinOxfordComma } from '@shared/lib/stringUtils';
 
 import { getDigitalSupportStatusLabel } from '@strings/DigitalSupportStrings';
 
@@ -18,28 +20,30 @@ import {
   DigitalSupportDimension,
   DigitalSupportStatus,
   DigitalSupportStatusSummary,
+  getTechScopeForSupportDim,
   WikipediaStatus,
 } from './DigitalSupportTypes';
 
-const OPERATING_SYSTEMS = ['win11', 'Android', 'macOS', 'iOS'];
-
 export const DIGITAL_SUPPORT_CATEGORIES: DigitalSupportCategory[] = [
   DigitalSupportDimension.Documentation,
-  DigitalSupportDimension.Interfaces,
   DigitalSupportDimension.Keyboards,
   DigitalSupportDimension.I18nFrameworks,
   DigitalSupportDimension.MachineTranslation,
+  DigitalSupportDimension.Interfaces,
+  DigitalSupportDimension.AI,
 ];
 
-export type InterfacePlatform = { techShortName: string; entries: TechSupportData[] };
+export type LangPlatform = { techShortName: string; entries: TechSupportData[] };
 
 /** The operating systems that the interface data covers, in the order they are shown. */
-export function getInterfacePlatforms(lang: LanguageData): InterfacePlatform[] {
-  return OPERATING_SYSTEMS.map((techShortName) => {
-    const tss =
-      lang.techSupport?.filter((support) => support.techShortName === techShortName) ?? [];
-    return { techShortName, entries: tss };
-  });
+export function getTechsForLanguage(lang: LanguageData, scope?: TechScope): LangPlatform[] {
+  const tss = lang.techSupport?.filter(({ tech }) => !scope || tech.scope == scope) ?? [];
+  const tssGrouped = groupBy(tss, (ts) => ts.techShortName);
+
+  return Object.keys(tssGrouped).map((techShortName) => ({
+    techShortName,
+    entries: tssGrouped[techShortName],
+  }));
 }
 
 export function getLanguageIsSupportedBy(lang: LanguageData, techShortName: string): boolean {
@@ -70,7 +74,29 @@ export function getDigitalSupportStatus(
     case DigitalSupportDimension.I18nFrameworks:
       return getI18nFrameworksStatus(lang);
     case DigitalSupportDimension.MachineTranslation:
-      return getMachineTranslationStatus(lang);
+    case DigitalSupportDimension.AI:
+      return getGeneralTechSupportStatus(lang, dimension);
+    default:
+      enforceExhaustiveSwitch(dimension);
+  }
+}
+
+export function getExpectedCountOfPlatforms(dimension: DigitalSupportDimension): number {
+  switch (dimension) {
+    case DigitalSupportDimension.Overall:
+      return 0;
+    case DigitalSupportDimension.Documentation:
+      return 2; // udhr, wikipedia
+    case DigitalSupportDimension.Interfaces:
+      return 4; // win11, macos, ios, android
+    case DigitalSupportDimension.Keyboards:
+      return 2; // gboard, keyman
+    case DigitalSupportDimension.I18nFrameworks:
+      return 2; // cldr, icu
+    case DigitalSupportDimension.MachineTranslation:
+      return 2; // gtranslate, ms translator
+    case DigitalSupportDimension.AI:
+      return 1; // claude
     default:
       enforceExhaustiveSwitch(dimension);
   }
@@ -97,9 +123,9 @@ function summarize(status: DigitalSupportStatus, label?: string): DigitalSupport
 }
 
 function getOverallStatus(lang: LanguageData): DigitalSupportStatusSummary {
-  const statuses = DIGITAL_SUPPORT_CATEGORIES.map(
-    (dimension) => getDigitalSupportStatus(lang, dimension).status,
-  );
+  const statuses = Object.values(DigitalSupportDimension)
+    .filter((dim) => dim !== DigitalSupportDimension.Overall)
+    .map((dimension) => getDigitalSupportStatus(lang, dimension).status);
   const supported = statuses.filter((status) => status === DigitalSupportStatus.Supported).length;
   const label = `${supported} of ${statuses.length} categories supported`;
 
@@ -146,11 +172,12 @@ function getBestWikipediaStatus(lang: LanguageData): WikipediaStatus | undefined
 }
 
 function getInterfacesStatus(lang: LanguageData): DigitalSupportStatusSummary {
-  const platforms = getInterfacePlatforms(lang);
+  const platforms = getTechsForLanguage(lang, TechScope.OperatingSystem);
   const supported = platforms.filter((platform) => platform.entries.length > 0).length;
-  const label = `${supported} of ${platforms.length} platforms`;
+  const denom = getExpectedCountOfPlatforms(DigitalSupportDimension.Interfaces);
+  const label = `${supported} of ${denom} platforms`;
 
-  if (supported === platforms.length) return { status: DigitalSupportStatus.Supported, label };
+  if (supported === denom) return { status: DigitalSupportStatus.Supported, label };
   if (supported === 0) return { status: DigitalSupportStatus.NotSupported, label };
   return { status: DigitalSupportStatus.Partial, label };
 }
@@ -181,8 +208,23 @@ function getI18nFrameworksStatus(lang: LanguageData): DigitalSupportStatusSummar
   }
 }
 
-function getMachineTranslationStatus(lang: LanguageData): DigitalSupportStatusSummary {
-  if (!getLanguageIsSupportedBy(lang, 'GTranslate'))
-    return summarize(DigitalSupportStatus.NotSupported);
-  return summarize(DigitalSupportStatus.Supported, 'Google Translate');
+function getGeneralTechSupportStatus(
+  lang: LanguageData,
+  dim: DigitalSupportDimension,
+): DigitalSupportStatusSummary {
+  const techs = getTechsForLanguage(lang, getTechScopeForSupportDim(dim));
+
+  return summarize(
+    getSupportStatusByNumbers(techs.length, dim),
+    joinOxfordComma(techs.map((t) => t.techShortName)) || 'Not supported',
+  );
+}
+
+function getSupportStatusByNumbers(
+  count: number,
+  dim: DigitalSupportDimension,
+): DigitalSupportStatus {
+  if (count === 0) return DigitalSupportStatus.NotSupported;
+  if (count === getExpectedCountOfPlatforms(dim)) return DigitalSupportStatus.Supported;
+  return DigitalSupportStatus.Partial;
 }

@@ -43,7 +43,7 @@ const MiniCard: React.FC<{ ent: EntityData; labelSource?: EntityNameLabelSource 
         >
           <EntityName ent={ent} labelSource={labelSource} />
         </strong>
-        {showCode && (
+        {showCode && ent.codeDisplay != ent.nameDisplay && (
           <div className="self-end text-end">
             <CodeDisplay>{ent.codeDisplay}</CodeDisplay>
           </div>
