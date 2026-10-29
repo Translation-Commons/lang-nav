@@ -7,7 +7,7 @@ import {
 
 import type { CensusData, CensusID } from '@entities/census/CensusTypes';
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import type { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
@@ -17,8 +17,10 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
+import { uniqueBy } from '@shared/lib/setUtils';
+
 import { connectEntitiesAndCreateDerivedData } from '../connect/connectEntities';
-import { groupLanguagesBySource } from '../connect/connectLanguages';
+import { addAliasesToLanguageDictionary } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
@@ -41,7 +43,6 @@ import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
   addISOMacrolanguageData,
-  getUniqueISO6392bLanguages,
   loadISOFamiliesToLanguages,
   loadISOLanguageFamilies,
   loadISOLanguages,
@@ -66,15 +67,6 @@ export type CoreDataArrays = {
 
 export type CoreData = CoreDataArrays & {
   ents: Record<string, EntityData>;
-};
-
-export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
-  Combined: {},
-  ISO: {},
-  BCP: {},
-  Glottolog: {},
-  UNESCO: {},
-  CLDR: {},
 };
 
 /**
@@ -149,19 +141,18 @@ export function useCoreData(): {
     }
 
     const keyboards = { ...keyboardsGBoard, ...keyboardsKeyman };
-
-    addISODataToLanguages(initialLangs, isoLangs || []);
-    const languagesBySource = groupLanguagesBySource(initialLangs);
-    addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
-    addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
-    addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
-    addGlottologLanguages(languagesBySource, glottologImport || [], glottocodeToISO || {});
-    applyCombinedFamilyOverrides(languagesBySource, combinedFamilyOverrides || []);
-    addCLDRLanguageDetails(languagesBySource);
-    addIANAVariantLocales(languagesBySource.BCP, locales, variants);
+    const languageDictionary = addAliasesToLanguageDictionary(initialLangs);
+    addISODataToLanguages(languageDictionary, isoLangs || []);
+    addISOLanguageFamilyData(languageDictionary, langFamilies || [], isoLangsToFamilies || {});
+    addISOMacrolanguageData(languageDictionary, macroLangs || []);
+    addISORetirementsToLanguages(languageDictionary, isoRetirements || []);
+    addGlottologLanguages(languageDictionary, glottologImport || [], glottocodeToISO || {});
+    applyCombinedFamilyOverrides(languageDictionary, combinedFamilyOverrides || []);
+    addCLDRLanguageDetails(languageDictionary);
+    addIANAVariantLocales(languageDictionary, locales, variants);
 
     connectEntitiesAndCreateDerivedData(
-      languagesBySource,
+      languageDictionary,
       territories,
       writingSystems,
       orthographies,
@@ -173,15 +164,12 @@ export function useCoreData(): {
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setLanguages(Object.values(languagesBySource.Combined));
+    const languageArray = uniqueBy(Object.values(languageDictionary), (lang) => lang.ID);
+    setLanguages(languageArray);
 
     setEnts({
       // All combined into one big entity map for easy lookup but the ID formats are unique so its OK
-      ...languagesBySource.Glottolog, // aaaa0000
-      ...languagesBySource.ISO, // aaa
-      ...getUniqueISO6392bLanguages(languagesBySource), // ISO 639-2b codes
-      ...languagesBySource.BCP, // aa | aaa
-      ...languagesBySource.Combined, // A few languages like `mol` aren't in those sets but should still be indexed
+      ...languageDictionary, // aa | aaa | aaaa0000
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa

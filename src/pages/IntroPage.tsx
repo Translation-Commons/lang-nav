@@ -6,8 +6,6 @@ import IntroHighlights from '@widgets/intro/IntroHighlights';
 import IntroLandscapeByTerritory from '@widgets/intro/IntroLandscapeByTerritory';
 import IntroTaskCarousel from '@widgets/intro/IntroTaskCarousel';
 
-import { Badge } from '@shared/ui/badge';
-
 const LANDSCAPE_HEADING_ID = 'language-landscape';
 const HELP_HEADING_ID = 'how-can-we-help';
 
@@ -68,12 +66,6 @@ const IntroPage: React.FC = () => {
           </div>
           <IntroTaskCarousel />
         </section>
-        <p className="max-w-[560px] text-center text-xs/relaxed text-muted-foreground">
-          <Badge variant="outline" className="mr-1">
-            Beta β
-          </Badge>
-          Most functionality is present, but there still may be errors, particularly with data.
-        </p>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { type LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { computeLargestDescendant } from './computeLargestDescendant';
 import computeRecursiveLanguageData from './computeRecursiveLanguageData';
@@ -31,11 +32,12 @@ export function updateEntitiesBasedOnDataParams(
   languages: LanguageData[],
   locales: LocaleData[],
   world: TerritoryData,
+  writingSystems: WritingSystemData[],
   languageSource: LanguageSource,
   localeSeparator: LocaleSeparator,
 ): void {
   updateParentsAndDescendants(languages, languageSource);
-  updatePopulations(languages, locales, world);
+  updatePopulations(languages, locales, world, writingSystems);
   updateEntityNamesAndCodes(languages, locales, languageSource, localeSeparator);
   computeRecursiveLanguageData(languages);
   computeLargestDescendant(languages, languageSource);

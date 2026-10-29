@@ -1,8 +1,4 @@
-import {
-  LanguageCode,
-  LanguageDictionary,
-  LanguagesBySource,
-} from '@entities/language/LanguageTypes';
+import { LanguageCode, LanguageDictionary } from '@entities/language/LanguageTypes';
 
 export type CombinedFamilyOverride = {
   parentLanguageCode: LanguageCode;
@@ -38,23 +34,21 @@ function parseCombinedFamilyOverrideLine(line: string): CombinedFamilyOverride |
  * Only Combined.parentLanguageCode is modified; ISO and Glottolog sources are unchanged.
  */
 export function applyCombinedFamilyOverrides(
-  languagesBySource: LanguagesBySource,
+  languages: LanguageDictionary,
   overrides: CombinedFamilyOverride[],
 ): void {
-  const combined = languagesBySource.Combined;
-
   overrides.forEach((override) => {
-    setCombinedParent(combined, override.childLanguageCode, override.parentLanguageCode);
+    setCombinedParent(languages, override.childLanguageCode, override.parentLanguageCode);
   });
 }
 
 function setCombinedParent(
-  combined: LanguageDictionary,
+  languages: LanguageDictionary,
   childLanguageCode: LanguageCode,
   parentLanguageCode: LanguageCode,
 ): void {
-  const child = combined[childLanguageCode];
-  const parent = combined[parentLanguageCode];
+  const child = languages[childLanguageCode];
+  const parent = languages[parentLanguageCode];
   if (child == null || parent == null) {
     console.debug(
       `Combined family override: child ${childLanguageCode} or parent ${parentLanguageCode} not found`,

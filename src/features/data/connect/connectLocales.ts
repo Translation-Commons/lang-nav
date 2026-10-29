@@ -44,13 +44,6 @@ export default function connectLocales(
       if (language != null) {
         if (!writingSystem.languages) writingSystem.languages = {};
         writingSystem.languages[language.ID] = language;
-        if (
-          language.primaryScriptCode != locale.scriptCode &&
-          locale.pop.speaking.unadjusted != null
-        ) {
-          if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
-          writingSystem.populationUpperBound += locale.pop.speaking.unadjusted;
-        }
 
         // Connect the writing system to the language if not already connected
         if (language.writingSystems[writingSystem.ID] == null)

@@ -23,7 +23,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
     languages,
     localesWhereExplicit,
     parentWritingSystem,
-    populationUpperBound,
+    population,
     primaryLanguage,
     primaryLanguageCode,
     rightToLeft,
@@ -51,16 +51,15 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             <em>Not supported by Unicode</em>
           )}
         </DetailsField>
-        {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspicious and probably spurious
+        {(population ?? 0) > 100 && ( // Values less than 100 are suspicious and probably spurious
           <DetailsField
             title={
               <>
-                Population (Upper Bound
-                <PopulationWarning />)
+                Population (<PopulationWarning />)
               </>
             }
           >
-            <CountOfPeople count={populationUpperBound} />
+            <CountOfPeople count={population} />
           </DetailsField>
         )}
       </DetailsSection>

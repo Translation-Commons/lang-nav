@@ -167,6 +167,7 @@ describe('computeLocalePopulationFromCensuses', () => {
       mockUpdated.languages,
       mockUpdated.locales,
       mockUpdated.territories.find((t) => t.ID === '001')!,
+      mockUpdated.writingSystems,
     );
 
     // Check the Locale sjn_BE
@@ -232,7 +233,7 @@ describe('computeLocalePopulationFromCensuses', () => {
       // Update both population, noting one has a different census
       computeLocalesPopulationFromCensuses(mockedEnts.locales);
       computeRegionalLocalesPopulation(world);
-      updatePopulations(mockedEnts.languages, mockedEnts.locales, world);
+      updatePopulations(mockedEnts.languages, mockedEnts.locales, world, mockedEnts.writingSystems);
 
       return mockedEnts.languages.find((l) => l.ID === 'sjn');
     }

@@ -168,10 +168,9 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.TerritoryScope:
       return 'Territory Type';
     case Field.TerritoryList:
-      if (entType === EntityType.WritingSystem) return 'Originated in...';
       return 'Found in...';
     case Field.WritingSystem:
-      if (entType === EntityType.WritingSystem) return 'Originated in...';
+      if (entType === EntityType.WritingSystem) return 'Originated from...';
       return 'Written in...';
     case Field.LanguageList:
       if (entType === EntityType.WritingSystem) return 'Is written for...';

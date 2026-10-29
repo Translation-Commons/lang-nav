@@ -38,7 +38,7 @@ describe('getEntityPopulation', () => {
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
-      Teng: 26500, // some from sjn_Teng_BE, but also from the primary script for sjn & dori0123
+      Teng: 10194, // some from sjn_Teng_BE only since we're using locale estimates now
       tolkorth: 11220, // Estimated from sjn
     });
   });
