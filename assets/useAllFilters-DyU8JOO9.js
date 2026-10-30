@@ -1,1 +1,0 @@
-import{r}from"./vendor-react-DOmD1k13.js";import{bM as i,aP as l}from"./index-RVya5IqU.js";const F=()=>{const e=i(),t=r.useMemo(()=>l(),[]);return r.useMemo(()=>s=>t.every(o=>e[o](s)),[e,t])};export{F as u};
