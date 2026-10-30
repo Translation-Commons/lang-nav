@@ -6,8 +6,8 @@ const DetailsStatBlock: React.FC<{ label: React.ReactNode; children: React.React
   label,
   children,
 }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>{children}</div>
+  <div className="flex flex-col items-center">
+    <div className="text-3xl font-bold">{children}</div>
     <Deemphasized>{label}</Deemphasized>
   </div>
 );
