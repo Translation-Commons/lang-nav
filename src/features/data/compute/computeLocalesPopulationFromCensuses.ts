@@ -34,7 +34,34 @@ export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): voi
   });
 }
 
+// Fields the family and regional steps later overwrite with sums of other locales.
+const AGGREGATED_FIELDS = [
+  'unadjusted',
+  'percent',
+  'adjusted',
+  'percentAdjusted',
+  'source',
+] as const;
+type PopulationInput = Record<(typeof AGGREGATED_FIELDS)[number], unknown>;
+
+// Each locale's values before the first compute: a recompute (eg. switching language source)
+// must start from these, not from the previous run's sums, or populations ratchet upwards.
+const inputPopulations = new WeakMap<LocaleData, Record<'speaking' | 'writing', PopulationInput>>();
+
+function restoreInputPopulation(locale: LocaleData): void {
+  const input = inputPopulations.get(locale);
+  if (input != null) {
+    Object.assign(locale.pop.speaking, input.speaking);
+    Object.assign(locale.pop.writing, input.writing);
+    return;
+  }
+  const pick = (use: 'speaking' | 'writing') =>
+    Object.fromEntries(AGGREGATED_FIELDS.map((f) => [f, locale.pop[use][f]])) as PopulationInput;
+  inputPopulations.set(locale, { speaking: pick('speaking'), writing: pick('writing') });
+}
+
 function computePopulationWithoutCensusRecords(locale: LocaleData): void {
+  restoreInputPopulation(locale);
   const { speaking, writing } = locale.pop;
   if (speaking.unadjusted == null) return; // Nothing to go from
 

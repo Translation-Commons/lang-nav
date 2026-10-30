@@ -289,4 +289,37 @@ describe('computeLocalePopulationFromCensuses', () => {
       'langBothNewEntities?.pop.speaking, updated value from locales',
     ).toBe(29220);
   });
+
+  it('gives the same populations when recomputed, as after switching language source', () => {
+    // Surveys more people than ER has, so dori0123_ER's adjusted is below its unadjusted;
+    // its parent sjn_ER used to take that unadjusted sum on a second run.
+    const census: CensusData = {
+      type: EntityType.Census,
+      ID: 'er9999',
+      codeDisplay: 'er9999',
+      isoRegionCode: 'ER',
+      population: 100_000,
+      nameDisplay: 'Census ER 9999',
+      names: [],
+      yearCollected: 9999,
+      collectorType: CensusCollectorType.Government,
+      languageCount: 1,
+      languageEstimates: { dori0123: 50_000 },
+      url: 'pretend this is a real URL',
+    };
+    const data = getMockedData({ er9999: census });
+    // Like a family locale: no population of its own, only what its child languages add up to.
+    const sjnER = data.locales.find((l) => l.ID === 'sjn_ER')!;
+    sjnER.pop = { speaking: {}, writing: {} };
+    const world = data.territories.find((t) => t.ID === '001')!;
+    const run = () => {
+      updatePopulations(data.languages, data.locales, world, data.writingSystems);
+      return data.locales.map(({ ID, pop: { speaking: s, writing: w } }) =>
+        [ID, s.unadjusted, s.adjusted, s.percent, w.unadjusted, w.adjusted, w.percent].join(),
+      );
+    };
+
+    const first = run();
+    expect(run()).toEqual(first);
+  });
 });
