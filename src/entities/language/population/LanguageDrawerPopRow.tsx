@@ -90,7 +90,7 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
           <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
         ]
       }
-      expandedContent={expandedContent}
+      expandedContent={expandedContent || undefined}
     >
       <CountOfPeople count={popEstimate} />
     </DrawerDetailsField>

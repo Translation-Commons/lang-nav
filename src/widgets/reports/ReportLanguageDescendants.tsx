@@ -80,13 +80,13 @@ const ReportLanguageDescendants: React.FC = () => {
             render: (lang: LanguageData) => (
               <HoverableEntityName ent={lang.largestDescendant} labelSource="code" />
             ),
-            exportValue: (lang: LanguageData) => lang.codeDisplay,
+            exportValue: (lang: LanguageData) => lang.largestDescendant?.codeDisplay,
             columnGroup: 'Largest Descendent',
           },
           {
             key: 'Largest Descendant (Name)',
             render: (lang: LanguageData) => <HoverableEntityName ent={lang.largestDescendant} />,
-            exportValue: (lang: LanguageData) => lang.nameDisplay,
+            exportValue: (lang: LanguageData) => lang.largestDescendant?.nameDisplay,
             columnGroup: 'Largest Descendent',
           },
           {
