@@ -173,7 +173,7 @@ export function useCoreData(): {
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
-      ...orthographies, // Aaaa.
+      ...orthographies, // Prefixed by orth. since their codes match locale IDs (srp_Latn)
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
       ...organizations, // These should be prefixed by org.
