@@ -2,8 +2,12 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
+import { DataContext } from '@features/data/context/useDataContext';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
+
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -80,5 +84,25 @@ describe('HoverableEntityName', () => {
   it('locales can show just the territory name if specified', () => {
     render(<HoverableEntityName ent={mockedEnts.sjn_BE} labelSource="territory" />);
     expect(screen.getByText(/Beleriand/)).toBeInTheDocument();
+  });
+
+  it('a partial entity (API stub) missing what the sort field needs still renders', () => {
+    // getLanguageLiteracy walks every locale of the language, which a stub does not have.
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: Field.Literacy }));
+    const stub = { type: EntityType.Language, ID: 'sjn', nameDisplay: 'Sindarin' } as EntityData;
+    render(<HoverableEntity ent={stub}>Sindarin stub</HoverableEntity>);
+    expect(screen.getByText('Sindarin stub')).toBeInTheDocument();
+  });
+
+  it('prefers the fully loaded entity with the same ID and type over a stub', () => {
+    const getEntity = vi.fn().mockReturnValue(mockedEnts.sjn);
+    const context = { getEntity } as unknown as React.ContextType<typeof DataContext>;
+    const stub = { type: EntityType.Language, ID: 'sjn', nameDisplay: 'Stub' } as EntityData;
+    render(
+      <DataContext.Provider value={context}>
+        <HoverableEntity ent={stub}>link</HoverableEntity>
+      </DataContext.Provider>,
+    );
+    expect(getEntity).toHaveBeenCalledWith('sjn');
   });
 });
