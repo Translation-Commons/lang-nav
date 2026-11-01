@@ -9,7 +9,7 @@ import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageRootLanguageFamily } from '@entities/language/relations/LanguageFamilyUtils';
@@ -26,7 +26,7 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const languagesFiltered = useFilteredEntities<LanguageData>({
     inputEnts: languages,
   }).filteredEntities;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const { getCurrentEntities } = usePagination<LanguageData>();
 
   const languagesWithoutWritingSystems = useMemo(

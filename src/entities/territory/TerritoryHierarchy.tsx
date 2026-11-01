@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -12,7 +12,7 @@ import { TerritoryData, TerritoryScope } from './TerritoryTypes';
 
 export const TerritoryHierarchy: React.FC = () => {
   const { territories } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const filterByScope = useScopeFilter();
 
   const rootNodes = getTerritoryTreeNodes(

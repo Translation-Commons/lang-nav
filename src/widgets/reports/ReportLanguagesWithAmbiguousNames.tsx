@@ -7,7 +7,7 @@ import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
@@ -19,7 +19,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 const ReportLanguagesWithAmbiguousNames: React.FC = () => {
   const languages = useFilteredEntities<LanguageData>({}).filteredEntities;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const { getCurrentEntities } = usePagination<[string, LanguageData[]]>();
   const languagesByName = useMemo(() => {
     return languages.reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {

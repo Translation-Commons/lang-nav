@@ -5,7 +5,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
@@ -27,7 +27,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
     containsTerritories,
     sovereign,
   } = territory;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   return (
     <div className="Details">

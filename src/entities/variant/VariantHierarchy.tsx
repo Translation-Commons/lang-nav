@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -12,7 +12,7 @@ import type { VariantData } from './VariantTypes';
 
 export const VariantHierarchy: React.FC = () => {
   const { variants } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const nodeHierarchy = getNodeHierarchy(variants);
   const rootNodes: TreeNodeData[] = getTreeNodes(nodeHierarchy, sortFunction);
@@ -80,7 +80,7 @@ export function getVariantTreeNode(VariantBranch: VariantBranch): TreeNodeData |
   return {
     type: ent?.type ?? EntityType.Variant,
     ent: VariantBranch.variant ?? ent,
-    children: getTreeNodes(VariantBranch.branches, getSortFunction()),
+    children: getTreeNodes(VariantBranch.branches, useSortFunction()),
     labelStyle: { fontWeight: ent?.type === EntityType.Variant ? 'normal' : 'bold' },
   };
 }

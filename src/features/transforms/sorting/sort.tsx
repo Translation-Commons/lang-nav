@@ -1,3 +1,5 @@
+import { useCallback, useMemo } from 'react';
+
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
@@ -12,10 +14,37 @@ import { SortBehavior, SortDirection } from './SortTypes';
 
 export type SortByFunctionType = (a: EntityData, b: EntityData) => number;
 
-export function getSortFunction(): SortByFunctionType {
-  const { sortBy, secondarySortBy, sortBehavior, secondarySortBehavior } = usePageParams();
+export function useSortFunction(): SortByFunctionType {
+  const { sortBy, secondarySortBy, sortBehavior, secondarySortBehavior, pinned } = usePageParams();
+  const pinnedOrder = useMemo(() => {
+    const map = new Map<string, number>();
+    pinned.forEach((id, index) => map.set(id, index));
+    return map;
+  }, [pinned]);
+  const sortFunction = useMemo(
+    () =>
+      getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy, secondarySortBehavior),
+    [sortBy, sortBehavior, secondarySortBy, secondarySortBehavior],
+  );
 
-  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy, secondarySortBehavior);
+  // Array.sort is synchronous and cannot be interrupted. Use a stable merge
+  // sort that yields between merge chunks instead.
+  const compare = useCallback(
+    (a: EntityData, b: EntityData) => {
+      const aIndex = pinnedOrder.get(a.ID);
+      const bIndex = pinnedOrder.get(b.ID);
+      const aPinned = aIndex != null;
+      const bPinned = bIndex != null;
+      // Pinned entities always come first, in the order they were pinned, so they
+      // reliably stay at the top (and on the first page) across refreshes.
+      if (aPinned && bPinned) return aIndex - bIndex;
+      if (aPinned !== bPinned) return aPinned ? -1 : 1;
+      return sortFunction(a, b);
+    },
+    [pinnedOrder, sortFunction],
+  );
+
+  return compare;
 }
 
 export function getSortFunctionParameterized(

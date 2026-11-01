@@ -4,7 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const LanguageCard: React.FC<Props> = ({ lang }) => {
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const countryLocales = uniqueBy(
     lang.locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',

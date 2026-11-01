@@ -32,7 +32,7 @@ vi.mock('@features/transforms/filtering/filterByConnections', () => ({
 }));
 
 vi.mock('@features/transforms/sorting/sort', () => ({
-  getSortFunction: vi.fn(),
+  useSortFunction: vi.fn(),
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));
 
@@ -89,7 +89,7 @@ describe('InteractiveEntityTable', () => {
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.useFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.useScopeFilter).mockReturnValue(() => true);
-    vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
+    vi.mocked(SortModule.useSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });
 
@@ -153,7 +153,7 @@ describe('InteractiveEntityTable', () => {
 
   it('applies sorting function', () => {
     const mockSort = vi.fn(() => 0);
-    vi.mocked(SortModule.getSortFunction).mockReturnValue(mockSort);
+    vi.mocked(SortModule.useSortFunction).mockReturnValue(mockSort);
 
     renderEntityTable();
 

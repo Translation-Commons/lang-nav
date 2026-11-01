@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
 import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
@@ -45,7 +45,7 @@ const useFilteredEntities = <T extends EntityData>({
   const filterByPopulation = usePopulation ? filters.Population : () => true;
   const filterByLanguageSource = useLanguageSource ? filters[Field.SourceForLanguage] : () => true;
   const filterByDigitalSupport = filters[Field.DigitalSupport];
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const allEntities = inputEnts ?? pageEntities;
 
   const filteredEntities = useMemo(() => {

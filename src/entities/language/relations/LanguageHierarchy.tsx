@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
 import useAllFilters from '@features/transforms/filtering/useAllFilters';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -15,7 +15,7 @@ import EnumDropdown from '@shared/ui/EnumDropdown';
 export const LanguageHierarchy: React.FC = () => {
   const { languageSource, updatePageParams } = usePageParams();
   const { languages } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const filterFunction = useAllFilters();
 
   const rootNodes = useMemo(
