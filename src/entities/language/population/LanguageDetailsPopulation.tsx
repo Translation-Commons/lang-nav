@@ -11,6 +11,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
 import type { LanguageData } from '../LanguageTypes';
+import LanguageStandardRegisterNote from '../relations/LanguageStandardRegisterNote';
 
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 
@@ -35,6 +36,9 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang, speakingOrWriting })
               }
             />
           </DetailsStatBlock>
+          {speakingOrWriting === 'writing' && (
+            <LanguageStandardRegisterNote className="text-sm" lang={lang} />
+          )}
         </DetailsStatContainer>
       )}
     </DetailsSection>

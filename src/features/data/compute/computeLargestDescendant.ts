@@ -37,9 +37,8 @@ function getLargestDescendant(
     const childsLargest = getLargestDescendant(child, languageSource, depth + 1);
 
     // Skip language families and only consider languages with population
-    const isChildValid = child.scope !== LanguageScope.Family && (child.pop.overall || 0) > 0;
-    const isChildsLargestValid =
-      childsLargest?.scope !== LanguageScope.Family && (childsLargest?.pop.overall || 0) > 0;
+    const isChildValid = isDescendantValid(child);
+    const isChildsLargestValid = isDescendantValid(childsLargest);
 
     // Pick the better candidate: prefer the one with larger population
     let candidateLargest: LanguageData | undefined;
@@ -63,4 +62,12 @@ function getLargestDescendant(
   }, undefined);
 
   return result;
+}
+
+function isDescendantValid(lang?: LanguageData): boolean {
+  if (lang == null) return false;
+  return (
+    (lang.scope === LanguageScope.Language || lang.scope === LanguageScope.Dialect) &&
+    (lang.pop.overall || 0) > 0
+  );
 }

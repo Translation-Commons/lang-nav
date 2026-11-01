@@ -47,4 +47,10 @@ export type EntityData =
   | TechnologyData
   | OrthographyData;
 
+export type EntityRef = {
+  type: EntityType;
+  ID: string;
+  name: string;
+};
+
 export type EntityDictionary = Record<string, EntityData>;

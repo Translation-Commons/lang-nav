@@ -124,7 +124,7 @@ function getLanguageCodes(languageCodePath: string): string[] {
       return ['lah', 'pnb'];
     case 'ms':
     case 'msa':
-      return ['msa', 'zlm'];
+      return ['msa', 'zsm'];
     case 'tl':
     case 'tgl':
     case 'fil':

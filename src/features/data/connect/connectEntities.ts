@@ -9,6 +9,7 @@ import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { searchLocalesForMissingLinks } from '../compute/searchLocalesForMissingLinks';
+import { connectStandardLanguages } from '../load/entities/loadMacroStandards';
 import { connectVariants } from '../load/extra_entities/IANAData';
 
 import { connectKeyboards } from './connectKeyboards';
@@ -39,6 +40,7 @@ export function connectEntitiesAndCreateDerivedData(
   technologies: Record<string, TechnologyData>,
 ): void {
   connectLanguagesToParent(languages);
+  connectStandardLanguages(languages);
   connectTerritoriesToParent(territories);
   connectWritingSystems(languages, territories, writingSystems);
   connectOrthographies(languages, writingSystems, Object.values(orthographies));

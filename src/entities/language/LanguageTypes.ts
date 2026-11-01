@@ -11,7 +11,7 @@ import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
 import type { TechSupportData } from '@entities/tech/TechnologyTypes';
-import { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import { EntityBase, EntityRef, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -112,6 +112,7 @@ export interface LanguageData extends EntityBase {
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
+  standardReason?: string; // For macrolanguages, the reason why the standard language is the one indicated
 
   warnings: Partial<Record<LanguageField, string>>;
 
@@ -126,13 +127,15 @@ export interface LanguageData extends EntityBase {
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other entities, filled in after loading the TSV
+  parentLanguage?: LanguageData;
+  childLanguages: LanguageData[];
+  largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
+  standardLanguage?: EntityRef;
+
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
   orthographies?: OrthographyData[];
-  parentLanguage?: LanguageData;
-  childLanguages: LanguageData[];
-  largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
   variants?: VariantData[]; // links to IANA variants
   equivalentVariant?: VariantData; // eg. variant "newfound" === languoid "newf1239"
   keyboards?: KeyboardData[];

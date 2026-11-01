@@ -4,6 +4,7 @@ import {
 } from '@features/data/load/extra_entities/ISORetirements';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import HoverableEntityRef from '@features/layers/hovercard/HoverableEntityRef';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
@@ -104,6 +105,12 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     {
       key: 'Parent Language',
       render: (lang) => lang.parentLanguage && <HoverableEntityName ent={lang.parentLanguage} />,
+      isInitiallyVisible: false,
+      columnGroup: 'Relations',
+    },
+    {
+      key: 'Standard Register',
+      render: (lang) => <HoverableEntityRef entRef={lang.standardLanguage} />,
       isInitiallyVisible: false,
       columnGroup: 'Relations',
     },
