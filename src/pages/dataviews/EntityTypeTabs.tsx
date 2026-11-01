@@ -8,6 +8,7 @@ import useAreParamsCurrent from '@widgets/controls/useAreParamsCurrent';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { PageParams } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -42,6 +43,7 @@ export type TabOption = {
 };
 
 const EntityTypeTabs: React.FC = () => {
+  const { entType } = usePageParams();
   const [oldParams] = useSearchParams({});
   const getIsActive = useAreParamsCurrent();
 
@@ -73,12 +75,13 @@ const EntityTypeTabs: React.FC = () => {
 
   return (
     <div className="flex flex-row gap-2">
-      <Tabs>
+      <Tabs value={entType}>
         <TabsList variant="line">
           {visibleOptions.map((option) => (
             <TabsTrigger
+              nativeButton={false}
               key={option.label}
-              value={option.label}
+              value={option.urlParams.entType}
               render={(props) => <Link {...props} to={getNavTo(option)} />}
               className="text-md"
             >
@@ -95,6 +98,7 @@ const EntityTypeTabs: React.FC = () => {
         </HoverCardTrigger>
         <HoverCardContent className="w-fit">
           <div className="flex flex-col gap-1 items-start">
+            more types of data...
             {hiddenOptions.map((option) => (
               <Link
                 to={getNavTo(option)}

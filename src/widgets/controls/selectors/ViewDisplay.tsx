@@ -5,7 +5,7 @@ import {
   PlayingCardsFanIcon,
   ScatterChartIcon,
   SheetIcon,
-  ToolCaseIcon
+  ToolCaseIcon,
 } from 'lucide-react';
 import React from 'react';
 

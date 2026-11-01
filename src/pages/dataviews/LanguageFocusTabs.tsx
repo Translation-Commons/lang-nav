@@ -79,12 +79,13 @@ const LanguageFocusTabs: React.FC = () => {
       ))}
       <HoverCard>
         <HoverCardTrigger delay={100}>
-          <Button variant="outline">
+          <Button variant="ghost">
             <EllipsisIcon display="block" />
           </Button>
         </HoverCardTrigger>
         <HoverCardContent className="w-fit">
           <div className="flex flex-col gap-1 items-start">
+            <div>other presets...</div>
             {hiddenOptions.map((focus) => (
               <Link
                 to={getNavTo(focus)}
