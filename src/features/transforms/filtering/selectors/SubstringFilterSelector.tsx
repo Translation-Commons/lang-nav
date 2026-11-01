@@ -33,7 +33,7 @@ const SubstringFilterSelector = () => {
   return (
     <InputGroup>
       <InputGroupInput
-        placeholder="Search..."
+        placeholder={'Filter by ' + searchBy.toLowerCase()}
         value={localString}
         onChange={(e) => setLocalString(e.target.value)}
       />

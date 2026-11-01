@@ -14,7 +14,7 @@ type Props<T extends React.Key> = {
   value: T;
   onChange: (value: T) => void;
   options: T[];
-  getLabel?: (value: T) => string;
+  getLabel?: (value: T) => React.ReactNode;
   buttonClassname?: string;
   popupClassname?: string;
 };

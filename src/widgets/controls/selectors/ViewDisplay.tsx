@@ -1,11 +1,11 @@
 import {
   FileIcon,
-  Grid2x2Icon,
   ListTreeIcon,
   MapIcon,
+  PlayingCardsFanIcon,
   ScatterChartIcon,
-  Table2Icon,
-  ToolCaseIcon,
+  SheetIcon,
+  ToolCaseIcon
 } from 'lucide-react';
 import React from 'react';
 
@@ -14,7 +14,7 @@ import { View } from '@features/params/PageParamTypes';
 export function getViewIcon(view: View): React.ReactNode {
   switch (view) {
     case View.CardList:
-      return <Grid2x2Icon />;
+      return <PlayingCardsFanIcon />;
     case View.Hierarchy:
       return <ListTreeIcon />;
     case View.Map:
@@ -22,7 +22,7 @@ export function getViewIcon(view: View): React.ReactNode {
     case View.Details:
       return <FileIcon />;
     case View.Table:
-      return <Table2Icon />;
+      return <SheetIcon />;
     case View.Reports:
       return <ToolCaseIcon />;
     case View.Chart:

@@ -36,7 +36,7 @@
     "d3-zoom": "^3.0.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "lucide-react": "^0.525.0",
+    "lucide-react": "^1.65.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-inlinesvg": "^4.2.0",
