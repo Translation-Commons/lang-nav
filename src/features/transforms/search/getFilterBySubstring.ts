@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import usePageParams from '@features/params/usePageParams';
 
 import { FilterFunctionType } from '../filtering/filter';
@@ -9,6 +11,8 @@ import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
  */
 export default function getFilterBySubstring(): FilterFunctionType {
   const { searchBy, searchString } = usePageParams();
-  if (searchString == '') return () => true;
-  return getSubstringFilterOnQuery(searchString, searchBy);
+  return useMemo(
+    () => (searchString === '' ? () => true : getSubstringFilterOnQuery(searchString, searchBy)),
+    [searchBy, searchString],
+  );
 }
