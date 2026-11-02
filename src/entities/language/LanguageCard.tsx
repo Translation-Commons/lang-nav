@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import CardEntityField from '@widgets/cardlists/CardEntityField';
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
 
 import usePageParams from '@features/params/usePageParams';
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
 import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 import { useSortFunction } from '@features/transforms/sorting/sort';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import EntitySubtitle from '@entities/ui/EntitySubtitle';
-import EntityTitle from '@entities/ui/EntityTitle';
 
-import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
-
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageDigitalSupportMetascore from './digitalsupport/LanguageDigitalSupportMetascore';
 import type { LanguageData } from './LanguageTypes';
@@ -22,35 +19,27 @@ import { LanguagePopulationEstimate } from './population/LanguagePopulationEstim
 import LanguageTerritoryList from './relations/LanguageTerritoryList';
 
 interface Props {
-  lang: LanguageData;
+  lang?: LanguageData;
 }
 
 const LanguageCard: React.FC<Props> = ({ lang }) => {
   const sortFunction = useSortFunction();
-  const countryLocales = uniqueBy(
-    lang.locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
-    (l) => l.territoryCode ?? '',
+  const countryLocales = useMemo(
+    () =>
+      uniqueBy(
+        lang?.locales
+          .filter((l) => l.territory?.scope === TerritoryScope.Country)
+          .sort(sortFunction) ?? [],
+        (l) => l.territoryCode ?? '',
+      ),
+    [lang?.locales, sortFunction],
   );
   const { populationFocus } = usePageParams();
   const popField = getFieldForPopulationFocus(populationFocus);
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Endonym,
-    Field.Code,
-    Field.Population,
-    popField,
-    Field.TerritoryList,
-    Field.DigitalSupport,
-  ]);
 
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <EntityTitle ent={lang} />
-        <EntitySubtitle ent={lang} />
-      </div>
-
-      <CardField field={Field.LanguageScope}>{getLanguageScopeLabel(lang.scope)}</CardField>
+    <>
+      <CardEntityField field={Field.LanguageScope} ent={lang} />
 
       <CardField field={popField}>
         <LanguagePopulationEstimate lang={lang} focus={populationFocus} />
@@ -60,18 +49,26 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <LanguageDigitalSupportMetascore lang={lang} />
       </CardField>
 
+      {!lang && <CardEntityField field={Field.TerritoryList} />}
       {countryLocales.length > 0 && (
         <CardField field={Field.TerritoryList}>
           <LanguageTerritoryList lang={lang} />
         </CardField>
       )}
 
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={lang} field={field} />
-        </CardField>
-      ))}
-    </div>
+      <CardExtraFields
+        ent={lang}
+        excludeFields={[
+          Field.Name,
+          Field.Endonym,
+          Field.Code,
+          Field.Population,
+          popField,
+          Field.TerritoryList,
+          Field.DigitalSupport,
+        ]}
+      />
+    </>
   );
 };
 

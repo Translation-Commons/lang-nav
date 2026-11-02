@@ -10,14 +10,15 @@ import { EntityData } from '@entities/types/EntityTypes';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 type Props = {
-  ent: EntityData;
+  ent?: EntityData;
   highlightSearchMatches?: boolean;
 };
 
 const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
   const { searchBy, searchString } = usePageParams();
-  const entSubtitle = getEntitySubtitle(ent);
+  if (!ent) return null;
 
+  const entSubtitle = getEntitySubtitle(ent);
   if (!highlightSearchMatches) {
     return <SubtitleContainer>{entSubtitle}</SubtitleContainer>;
   }

@@ -17,7 +17,7 @@ const DigitalSupportCategoryRow: React.FC<Props> = ({ children, summary, title }
   const contentId = useId();
 
   return (
-    <li className="border-b border-[--color-button-secondary] last:border-b-0">
+    <li className="border-b border-(--color-button-secondary) last:border-b-0">
       <Button
         aria-controls={contentId}
         aria-expanded={isExpanded}

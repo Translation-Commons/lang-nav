@@ -6,8 +6,6 @@ import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
-import { useWhyDidYouUpdate } from '@shared/hooks/useWhyDidYouUpdate';
-
 import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
@@ -84,16 +82,6 @@ const useFilteredEntities = <T extends EntityData>({
     items: allEntities,
     predicate: filterFunction,
     compare: sortFunction,
-  });
-  useWhyDidYouUpdate('useFilteredEntities', {
-    useScope,
-    useSubstring,
-    useConnections,
-    useVitality,
-    usePopulation,
-    useLanguageSource,
-    inputEnts,
-    pinned,
   });
 
   return { filteredEntities, allEntities, isPending };

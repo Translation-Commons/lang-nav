@@ -1,65 +1,63 @@
 import React from 'react';
 
+import CardEntityField from '@widgets/cardlists/CardEntityField';
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
+
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import { OrthographyData } from '@entities/orthography/OrthographyTypes';
-import EntityTitle from '@entities/ui/EntityTitle';
 
-import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import OrthographyCharacters from './OrthographyCharacters';
 
 interface Props {
-  orthography: OrthographyData;
+  orthography?: OrthographyData;
 }
 
 const OrthographyCard: React.FC<Props> = ({ orthography }) => {
-  const { language, writingSystem, baseCharacters } = orthography;
-
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Code,
-    Field.LanguagePrimary,
-    Field.WritingSystem,
-    Field.Example,
-  ]);
-
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <EntityTitle ent={orthography} />
-      </div>
-
-      <CardField field={Field.LanguagePrimary}>
-        {language ? <HoverableEntityName ent={language} /> : <Deemphasized>Unknown</Deemphasized>}
-      </CardField>
+    <>
+      <CardEntityField field={Field.LanguagePrimary} ent={orthography} />
 
       <CardField field={Field.WritingSystem}>
-        {writingSystem ? (
-          <HoverableEntityName ent={writingSystem} />
+        {orthography ? (
+          orthography?.writingSystem ? (
+            <HoverableEntityName ent={orthography.writingSystem} />
+          ) : (
+            <Deemphasized>Unknown</Deemphasized>
+          )
         ) : (
-          <Deemphasized>Unknown</Deemphasized>
+          <Skeleton className="h-4 w-full" />
         )}
       </CardField>
 
       <CardField field={Field.Example}>
-        {baseCharacters ? (
-          <OrthographyCharacters chars={baseCharacters} />
+        {orthography ? (
+          orthography?.baseCharacters ? (
+            <OrthographyCharacters chars={orthography.baseCharacters} />
+          ) : (
+            <Deemphasized>Not available</Deemphasized>
+          )
         ) : (
-          <Deemphasized>Not available</Deemphasized>
+          <Skeleton className="h-4 w-full" />
         )}
       </CardField>
 
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={orthography} field={field} />
-        </CardField>
-      ))}
-    </div>
+      <CardExtraFields
+        ent={orthography}
+        excludeFields={[
+          Field.Name,
+          Field.Code,
+          Field.LanguagePrimary,
+          Field.WritingSystem,
+          Field.Example,
+        ]}
+      />
+    </>
   );
 };
 

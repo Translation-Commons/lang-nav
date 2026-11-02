@@ -76,58 +76,54 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
       ).map(([name, langs]) => (
         <div key={name} style={{ marginBottom: '1em' }}>
           <h3 style={{ marginBottom: 0 }}>{name}</h3>
-          <div className="CardList">
-            <ResponsiveGrid>
-              {langs.map((lang) => {
-                const { ISO, Glottolog } = lang;
-                const otherNames = lang.names.filter(
-                  (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
-                );
-                return (
-                  <CardInCardList key={lang.ID} ent={lang}>
+          <ResponsiveGrid>
+            {langs.map((lang) => {
+              const { ISO, Glottolog } = lang;
+              const otherNames = lang.names.filter(
+                (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
+              );
+              return (
+                <CardInCardList key={lang.ID} ent={lang}>
+                  <div>
+                    <label>ID(s):</label>{' '}
+                    {unique(
+                      [lang.ID, ISO.code, ISO.code6391, Glottolog.code].filter((id) => id != null),
+                    ).join(', ')}
+                  </div>
+                  <div>
+                    <label>Other Names:</label>
+                    <CommaSeparated>
+                      {otherNames.length > 0 ? otherNames : <Deemphasized>none</Deemphasized>}
+                    </CommaSeparated>
+                  </div>
+                  <div>
+                    <label>Scope:</label>
+                    {lang.scope ?? <Deemphasized>Unknown</Deemphasized>}
+                  </div>
+                  {ISO.code != null && (
                     <div>
-                      <label>ID(s):</label>{' '}
-                      {unique(
-                        [lang.ID, ISO.code, ISO.code6391, Glottolog.code].filter(
-                          (id) => id != null,
-                        ),
-                      ).join(', ')}
+                      ISO Hierarchy:{' '}
+                      <TreeListRoot
+                        rootNodes={getLanguageTreeNodes([lang], LanguageSource.ISO, sortFunction)}
+                      />
                     </div>
+                  )}
+                  {Glottolog.code != null && (
                     <div>
-                      <label>Other Names:</label>
-                      <CommaSeparated>
-                        {otherNames.length > 0 ? otherNames : <Deemphasized>none</Deemphasized>}
-                      </CommaSeparated>
+                      Glottolog Hierarchy:{' '}
+                      <TreeListRoot
+                        rootNodes={getLanguageTreeNodes(
+                          [lang],
+                          LanguageSource.Glottolog,
+                          sortFunction,
+                        )}
+                      />
                     </div>
-                    <div>
-                      <label>Scope:</label>
-                      {lang.scope ?? <Deemphasized>Unknown</Deemphasized>}
-                    </div>
-                    {ISO.code != null && (
-                      <div>
-                        ISO Hierarchy:{' '}
-                        <TreeListRoot
-                          rootNodes={getLanguageTreeNodes([lang], LanguageSource.ISO, sortFunction)}
-                        />
-                      </div>
-                    )}
-                    {Glottolog.code != null && (
-                      <div>
-                        Glottolog Hierarchy:{' '}
-                        <TreeListRoot
-                          rootNodes={getLanguageTreeNodes(
-                            [lang],
-                            LanguageSource.Glottolog,
-                            sortFunction,
-                          )}
-                        />
-                      </div>
-                    )}
-                  </CardInCardList>
-                );
-              })}
-            </ResponsiveGrid>
-          </div>
+                  )}
+                </CardInCardList>
+              );
+            })}
+          </ResponsiveGrid>
         </div>
       ))}
     </>

@@ -83,7 +83,7 @@ test('capture preview.png — full data page with navbar (cards view)', async ({
 
 test('capture cardlist.png — card grid without navbar', async ({ page }) => {
   await loadPage(page, 'view=Cards');
-  const firstCard = page.locator('.CardInCardList').first();
+  const firstCard = page.locator('[data-testid="large-card"]').first();
   await firstCard.waitFor({ state: 'visible' });
   const grid = firstCard.locator('xpath=..');
   const box = await getBox(grid);

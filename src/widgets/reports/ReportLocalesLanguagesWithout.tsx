@@ -2,6 +2,7 @@ import { FilterIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import CardInCardList from '@widgets/cardlists/CardInCardList';
+import CardTitle from '@widgets/cardlists/CardTitle';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import useEntities from '@features/data/context/useEntities';
@@ -10,7 +11,7 @@ import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import { type LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 import EntityCard from '@entities/ui/EntityCard';
 
@@ -20,7 +21,7 @@ const ReportLocalesLanguagesWithout: React.FC = () => {
   const ents = useEntities(EntityType.Language) as LanguageData[];
   const { getCurrentEntities } = usePagination<LanguageData>();
   const [shouldFilterDeprecatedISO, setShouldFilterDeprecatedISO] = React.useState(true);
-  const filteredLangs = useFilteredEntities({ useScope: false, inputEnts: ents }).filteredEntities;
+  const filteredLangs = useFilteredEntities({ inputEnts: ents }).filteredEntities;
 
   const langs = useMemo(
     () =>
@@ -33,10 +34,10 @@ const ReportLocalesLanguagesWithout: React.FC = () => {
   );
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       The report shows all languages that do not have any associated locales (language + territory
       combinations). We should research and add new locales for these, particularly ISO locales.
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
+      <div className="flex items-center gap-4">
         <LimitInput />
         <div>
           <PaginationControls itemCount={langs.length} />
@@ -50,16 +51,17 @@ const ReportLocalesLanguagesWithout: React.FC = () => {
           Filter deprecated ISO
         </Toggle>
       </div>
-      <div style={{ marginTop: '1em', marginBottom: '1em' }}>
-        <ResponsiveGrid>
-          {getCurrentEntities(langs).map((lang) => (
-            <CardInCardList key={lang.ID} ent={lang}>
+      <ResponsiveGrid>
+        {getCurrentEntities(langs).map((lang) => (
+          <CardInCardList key={lang.ID} ent={lang}>
+            <div className="flex flex-col gap-2">
+              <CardTitle ent={lang} />
               <EntityCard ent={lang} />
-            </CardInCardList>
-          ))}
-        </ResponsiveGrid>
-      </div>
-    </>
+            </div>
+          </CardInCardList>
+        ))}
+      </ResponsiveGrid>
+    </div>
   );
 };
 
