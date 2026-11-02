@@ -24,13 +24,13 @@ export enum View {
 }
 
 export enum SearchableField {
-  CodeOrNameAny = 'Code & All Names',
+  CodeOrNameAny = 'Code or Any Name',
 
   Code = 'Code',
   CodeISO = 'ISO Code',
   CodeGlottolog = 'Glottolog Code',
 
-  NameAny = 'All Names',
+  NameAny = 'Any Name',
   NameEndonym = 'Endonym',
   NameDisplay = 'English Name', // Current name
   NameISO = 'ISO Name',

@@ -18,11 +18,11 @@ const DataPageHeader: React.FC = () => {
   const { filteredEntities } = useFilteredEntities({});
 
   return (
-    <div>
+    <div className="flex flex-col gap-1">
       <EntityTypeTabs />
       <LanguageFocusTabs />
-      <div className="flex items-center justify-between w-full mb-4">
-        <div className="flex items-center gap-2 text-sm">
+      <div className="flex items-center justify-between w-full mb-4 flex-wrap gap-1">
+        <div className="flex items-center gap-2 text-sm min-w-100">
           <FiltersPopover />
           <div className="text-nowrap">{filteredEntities.length.toLocaleString()} Results</div>
           <SubstringFilterSelector />
