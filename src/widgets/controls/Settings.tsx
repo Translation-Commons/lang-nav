@@ -6,6 +6,7 @@ import { LangNavPageName } from '@app/PageRoutes.tsx';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
+import DataSourceSelector from './selectors/DataSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import PopulationFocusSelector from './selectors/PopulationFocusSelector';
@@ -27,6 +28,7 @@ const Settings = (): React.ReactNode => {
       )}
       <SearchBySelector />
       <PageBrightnessSelector />
+      <DataSourceSelector />
     </div>
   );
 };

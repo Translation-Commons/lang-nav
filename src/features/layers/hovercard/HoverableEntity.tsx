@@ -1,6 +1,7 @@
 import { ArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import InternalLink from '@features/params/InternalLink';
 import { PageParams, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -21,15 +22,28 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const HoverableEntity: React.FC<Props> = ({ ent, children, style }) => {
+/** A field missing from a partial entity (an API stub) hides that line instead of the table. */
+function getFieldSafely(ent: EntityData, field: Field) {
+  try {
+    return getField(ent, field);
+  } catch {
+    return undefined;
+  }
+}
+
+const HoverableEntity: React.FC<Props> = ({ ent: entProp, children, style }) => {
   const { colorBy, sortBy, scaleBy, fieldFocus, updatePageParams } = usePageParams();
+  const { getEntity } = useDataContext();
   const fields = unique([sortBy, colorBy, scaleBy, fieldFocus]).filter(
     (f) => f != Field.None && f != Field.Name && f != Field.Code,
   );
 
-  if (ent == null) {
+  if (entProp == null) {
     return <>{children}</>;
   }
+  // API rows link to partial entities; prefer the full one when the browser has it loaded.
+  const loaded = getEntity(entProp.ID);
+  const ent = loaded?.type === entProp.type ? loaded : entProp;
 
   const openDrawer = () => {
     const params: Partial<PageParams> = { entID: ent.ID };
@@ -68,7 +82,7 @@ const HoverableEntity: React.FC<Props> = ({ ent, children, style }) => {
             <EntityTitle ent={ent} highlightSearchMatches={false} />
           </div>
           {fields.map((field) => {
-            const res = getField(ent, field);
+            const res = getFieldSafely(ent, field);
             if (res == null) return null;
             return (
               <div key={field} className="flex items-center gap-1">
