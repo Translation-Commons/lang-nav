@@ -21,7 +21,7 @@ const CardList: React.FC = () => {
   const { filteredEntities, allEntities, isPending } = useFilteredEntities({});
   const { getCurrentEntities } = usePagination<EntityData>();
   const currentEntities = useMemo(() => {
-    if (isPending) return Array(limit).fill(undefined);
+    if (isPending) return Array(limit > 0 ? limit : 12).fill(undefined);
     return getCurrentEntities(filteredEntities);
   }, [filteredEntities, getCurrentEntities, isPending]);
   const { getColor } = useColors({ ents: filteredEntities });

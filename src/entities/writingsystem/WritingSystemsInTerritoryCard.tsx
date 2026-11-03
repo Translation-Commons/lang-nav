@@ -1,7 +1,7 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import { useFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -12,7 +12,7 @@ type Props = {
 
 const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
   const [showAll, setShowAll] = React.useState(false);
-  const filterByConnections = getFilterByConnections();
+  const filterByConnections = useFilterByConnections();
 
   const writingSystems = getWritingSystemsInEntity(territory)?.filter(filterByConnections) ?? [];
   // Make an array to show the top 5 and ones originating to show in the card by default if it is not expanded

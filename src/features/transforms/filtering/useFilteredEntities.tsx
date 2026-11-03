@@ -7,10 +7,10 @@ import { useSortFunction } from '@features/transforms/sorting/sort';
 import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
-import getFilterBySubstring from '../search/getFilterBySubstring';
+import useFilterBySubstring from '../search/useFilterBySubstring';
 
 import { useFilterByVitality, useScopeFilter } from './filter';
-import { getFilterByConnections } from './filterByConnections';
+import { useFilterByConnections } from './filterByConnections';
 import useAsyncFilterSort from './useAsyncFilterSort';
 import useFilters from './useFilters';
 
@@ -45,10 +45,10 @@ const useFilteredEntities = <T extends EntityData>({
   const { pinned } = usePageParams();
   // TODO use useFilters for all of these
   const filters = useFilters();
-  const filterByScope = useScope ? useScopeFilter() : alwaysTrueFilter;
-  const filterBySubstring = useSubstring ? getFilterBySubstring() : alwaysTrueFilter;
-  const filterByConnections = useConnections ? getFilterByConnections() : alwaysTrueFilter;
-  const filterByVitality = useVitality ? useFilterByVitality() : alwaysTrueFilter;
+  const filterByScope = useScopeFilter();
+  const filterBySubstring = useFilterBySubstring();
+  const filterByConnections = useFilterByConnections();
+  const filterByVitality = useFilterByVitality();
   const filterByPopulation = usePopulation ? filters.Population : alwaysTrueFilter;
   const filterByLanguageSource = useLanguageSource
     ? filters[Field.SourceForLanguage]
@@ -60,10 +60,10 @@ const useFilteredEntities = <T extends EntityData>({
     (ent: T) =>
       // Pinned entities always remain visible regardless of the active filters.
       pinned.includes(ent.ID) ||
-      (filterByScope(ent) &&
-        filterBySubstring(ent) &&
-        filterByConnections(ent) &&
-        filterByVitality(ent) &&
+      ((!useScope || filterByScope(ent)) &&
+        (!useSubstring || filterBySubstring(ent)) &&
+        (!useConnections || filterByConnections(ent)) &&
+        (!useVitality || filterByVitality(ent)) &&
         filterByPopulation(ent) &&
         filterByLanguageSource(ent) &&
         filterByDigitalSupport(ent)),
@@ -76,6 +76,10 @@ const useFilteredEntities = <T extends EntityData>({
       filterByPopulation,
       filterByLanguageSource,
       filterByDigitalSupport,
+      useScope,
+      useSubstring,
+      useConnections,
+      useVitality,
     ],
   );
   const { items: filteredEntities, isPending } = useAsyncFilterSort({

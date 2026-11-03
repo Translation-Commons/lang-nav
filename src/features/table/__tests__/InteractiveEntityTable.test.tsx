@@ -5,7 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useFilterBySubstring from '@features/transforms/search/useFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -23,7 +23,7 @@ vi.mock('@features/transforms/filtering/filter', () => ({
 }));
 
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
-  getFilterByConnections: vi.fn(),
+  useFilterByConnections: vi.fn(),
   buildFilterByLanguage: vi.fn().mockReturnValue(() => true),
   buildFilterByLanguageFamily: vi.fn().mockReturnValue(() => true),
   buildFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
@@ -43,7 +43,7 @@ vi.mock('@shared/hooks/useClickOutside', () => ({
   useClickOutside: vi.fn().mockReturnValue({ current: null }),
 }));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
+vi.mock('@features/transforms/search/useFilterBySubstring', () => ({ default: vi.fn() }));
 
 describe('InteractiveEntityTable', () => {
   const mockEnts: EntityData[] = [
@@ -85,8 +85,8 @@ describe('InteractiveEntityTable', () => {
 
   beforeEach(() => {
     // Set up default mock implementations
-    vi.mocked(getFilterBySubstring).mockReturnValue(() => true);
-    vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
+    vi.mocked(useFilterBySubstring).mockReturnValue(() => true);
+    vi.mocked(ConnectionFilters.useFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.useFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.useScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.useSortFunction).mockReturnValue(() => 0);
@@ -138,8 +138,8 @@ describe('InteractiveEntityTable', () => {
     const mockVitalityFilter = vi.fn(() => true);
     const mockScopeFilter = vi.fn(() => true);
 
-    vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
-    vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(mockConnectionsFilter);
+    vi.mocked(useFilterBySubstring).mockReturnValue(mockSubstringFilter);
+    vi.mocked(ConnectionFilters.useFilterByConnections).mockReturnValue(mockConnectionsFilter);
     vi.mocked(FilterModule.useFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.useScopeFilter).mockReturnValue(mockScopeFilter);
 
@@ -161,7 +161,7 @@ describe('InteractiveEntityTable', () => {
   });
 
   it('handles filtering that excludes all entities', () => {
-    vi.mocked(getFilterBySubstring).mockReturnValue(() => false);
+    vi.mocked(useFilterBySubstring).mockReturnValue(() => false);
 
     renderEntityTable();
 

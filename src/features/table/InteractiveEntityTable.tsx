@@ -43,11 +43,11 @@ function InteractiveEntityTable<T extends EntityData>({ ents, columns, tableID }
       {/* The actual <table> component */}
       <BaseEntityTable
         visibleColumns={visibilityModule.visibleColumns}
-        ents={isPending ? Array(limit).fill(undefined) : currentEntities}
+        ents={isPending ? Array(limit > 0 ? limit : 10).fill(undefined) : currentEntities}
         tableID={tableID}
       />
 
-      {currentEntities.length === 0 && (
+      {!isPending && currentEntities.length === 0 && (
         <div>
           All results are filtered out.
           <FilterBreakdown ents={ents} />
