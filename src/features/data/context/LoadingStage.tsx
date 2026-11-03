@@ -4,6 +4,7 @@ enum LoadingStage {
   HasSupplementalData,
   RecomputingAlgorithms,
   AlgorithmsFinished,
+  FilterComplete,
 }
 
 export default LoadingStage;

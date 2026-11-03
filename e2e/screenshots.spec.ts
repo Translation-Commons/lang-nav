@@ -46,7 +46,7 @@ test.describe('screenshot tests', () => {
 
   async function waitToFinishLoadingData(page: Page) {
     await expect(page.locator('.LoadingStageDisplay')).toHaveText(
-      'Loading stage: 5 of 5, algorithms finished',
+      'Loading stage: 6 of 6, filtering complete',
       { timeout: 15_000 },
     );
   }
