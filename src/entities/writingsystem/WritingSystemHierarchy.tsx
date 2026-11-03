@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -11,7 +11,7 @@ import { WritingSystemData } from './WritingSystemTypes';
 
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const rootNodes = useMemo(
     () =>

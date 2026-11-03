@@ -93,11 +93,6 @@ button:hover .highlighted,
   color: var(--color-text);
 }
 
-.CardInCardList h3 {
-  /* It's at the top of the card already */
-  margin-top: 0px;
-}
-
 .subtitle {
   font-size: 0.6em;
   color: var(--color-text-secondary);

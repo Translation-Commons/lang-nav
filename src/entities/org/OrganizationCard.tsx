@@ -1,55 +1,37 @@
 import React from 'react';
 
+import CardEntityField from '@widgets/cardlists/CardEntityField';
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
+
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
-
-import EntityTitle from '@entities/ui/EntityTitle';
-
-import CardField from '@shared/containers/CardField';
-import Deemphasized from '@shared/ui/Deemphasized';
 
 import type { OrganizationData } from './OrganizationTypes';
 
-type Props = { org: OrganizationData };
+type Props = { org?: OrganizationData };
 
 const OrganizationCard: React.FC<Props> = ({ org }) => {
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Code,
-    Field.TerritoryPrimary,
-    Field.CountOfCensuses,
-  ]);
-
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <EntityTitle ent={org} />
-      </div>
-      <CardField field={Field.TerritoryPrimary}>
-        <HoverableEntityName ent={org.headquarters} />
-      </CardField>
+    <>
+      <CardEntityField field={Field.TerritoryPrimary} ent={org} />
 
-      <CardField field={Field.CountOfCensuses}>
-        {org.censuses && org.censuses.length > 0 ? (
+      {!!org?.censuses?.length && (
+        <CardField field={Field.CountOfCensuses}>
           <HoverableEnumeration
             items={org.censuses.map((doc) => (
               <HoverableEntityName key={doc.ID} ent={doc} />
             ))}
           />
-        ) : (
-          <Deemphasized>No census tables</Deemphasized>
-        )}
-      </CardField>
-
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={org} field={field} />
         </CardField>
-      ))}
-    </div>
+      )}
+
+      <CardExtraFields
+        ent={org}
+        excludeFields={[Field.Name, Field.Code, Field.TerritoryPrimary, Field.CountOfCensuses]}
+      />
+    </>
   );
 };
 

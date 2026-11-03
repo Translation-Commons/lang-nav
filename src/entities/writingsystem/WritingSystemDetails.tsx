@@ -5,7 +5,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -32,7 +32,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
     territoryOfOrigin,
     unicodeVersion,
   } = writingSystem;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   return (
     <div className="Details">

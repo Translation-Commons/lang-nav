@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -14,7 +14,7 @@ import { TechnologyData } from './TechnologyTypes';
 
 export const TechnologyHierarchy: React.FC = () => {
   const { technologies } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const roots = useMemo(
     () =>

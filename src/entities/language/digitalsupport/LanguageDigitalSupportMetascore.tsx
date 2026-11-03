@@ -3,6 +3,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import Deemphasized from '@shared/ui/Deemphasized';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
@@ -12,10 +13,12 @@ import LanguageDigitalSupportMeter from './DigitalSupportMeter';
 import { DigitalSupportDimension } from './DigitalSupportTypes';
 
 type Props = {
-  lang: LanguageData;
+  lang?: LanguageData;
 };
 
 const LanguageDigitalSupportMetascore: React.FC<Props> = ({ lang }) => {
+  if (!lang) return <Skeleton className="h-4 w-full" />;
+
   const { digitalSupportScore } = lang;
   if (digitalSupportScore == null) return <Deemphasized>Not available</Deemphasized>;
 

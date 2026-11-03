@@ -1,48 +1,28 @@
 import React from 'react';
 
+import CardEntityField from '@widgets/cardlists/CardEntityField';
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
+
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
-import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 interface Props {
-  keyboard: KeyboardData;
+  keyboard?: KeyboardData;
 }
 
 const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
-  const {
-    nameDisplay,
-    inputTech,
-    languages,
-    territory,
-    inputWritingSystem,
-    outputWritingSystem,
-    variant,
-  } = keyboard;
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Platform,
-    Field.LanguageList,
-    Field.TerritoryPrimary,
-    Field.WritingSystem,
-    Field.OutputScript,
-    Field.Variant,
-  ]);
-
-  const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
+  const { languages, inputWritingSystem, outputWritingSystem } = keyboard ?? {};
+  const sameScript = keyboard?.inputScriptCode === keyboard?.outputScriptCode;
   const hasLanguages = languages != null && languages.length > 0;
 
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
-      <CardField field={Field.Platform}>
-        <HoverableEntityName ent={inputTech} />
-      </CardField>
+    <>
+      <CardEntityField field={Field.Platform} ent={keyboard} />
 
       {hasLanguages && (
         <CardField field={Field.LanguageList}>
@@ -54,6 +34,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         </CardField>
       )}
 
+      {keyboard == null && <CardEntityField field={Field.WritingSystem} />}
       {inputWritingSystem != null && (
         <CardField field={Field.WritingSystem}>
           {sameScript ? (
@@ -68,24 +49,31 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         </CardField>
       )}
 
-      {territory != null && (
+      {keyboard?.territory != null && (
         <CardField field={Field.TerritoryPrimary}>
-          {territory != null && <HoverableEntityName ent={territory} />}
+          <HoverableEntityName ent={keyboard.territory} />
         </CardField>
       )}
 
-      {variant != null && (
+      {keyboard?.variant != null && (
         <CardField field={Field.Variant}>
-          {variant != null && <HoverableEntityName ent={variant} />}
+          <HoverableEntityName ent={keyboard.variant} />
         </CardField>
       )}
 
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={keyboard} field={field} />
-        </CardField>
-      ))}
-    </div>
+      <CardExtraFields
+        ent={keyboard}
+        excludeFields={[
+          Field.Name,
+          Field.Platform,
+          Field.LanguageList,
+          Field.TerritoryPrimary,
+          Field.WritingSystem,
+          Field.OutputScript,
+          Field.Variant,
+        ]}
+      />
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityLocales } from '@entities/lib/getEntityRelatedTerritories';
@@ -40,7 +40,7 @@ const EntityMap: React.FC<Props> = ({
 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const [zoomFactor, setZoomFactor] = useState(1);
 

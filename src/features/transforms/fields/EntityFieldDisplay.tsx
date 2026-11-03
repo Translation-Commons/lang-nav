@@ -16,6 +16,7 @@ import {
   getWritingSystemsInEntity,
 } from '@entities/lib/getEntityMiscFields';
 import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritories';
+import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
@@ -32,6 +33,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
@@ -50,11 +52,12 @@ import {
 import getField from './getField';
 
 type Props = {
-  ent: EntityData;
+  ent?: EntityData;
   field: Field;
 };
 
 const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
+  if (!ent) return <Skeleton className="h-4 w-full" />;
   const fieldValue = getField(ent, field);
   switch (field) {
     case Field.Population:
@@ -194,7 +197,8 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return <VitalityField ent={ent} field={field} />;
 
     case Field.Modality:
-      if (ent.type === EntityType.Census) return getCensusLanguageUse(ent);
+      if (ent.type === EntityType.Census)
+        return getCensusLanguageUse(ent) ?? <Deemphasized>Unspecified</Deemphasized>;
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
 
     case Field.Date:
@@ -241,8 +245,15 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.CLDRCoverage:
       return <EntityCLDRCoverageLevel ent={ent} />;
 
-    case Field.SourceType:
     case Field.GovernmentStatus:
+      if (ent.type !== EntityType.Locale) return null;
+      return ent.officialStatus != null ? (
+        getOfficialLabel(ent.officialStatus)
+      ) : (
+        <Deemphasized>Unknown</Deemphasized>
+      );
+
+    case Field.SourceType:
     case Field.ECRMLProtection:
       return fieldValue;
 

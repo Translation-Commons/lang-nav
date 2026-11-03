@@ -6,14 +6,14 @@ import EntityFieldHighlightedByPageSearch from '@features/transforms/search/Enti
 import { EntityData } from '@entities/types/EntityTypes';
 
 type Props = {
-  ent: EntityData;
+  ent?: EntityData;
   highlightSearchMatches?: boolean;
 };
 
 const EntityTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
-  const { codeDisplay, nameDisplay } = ent;
+  const { codeDisplay, nameDisplay } = ent ?? { nameDisplay: 'Loading', codeDisplay: '...' };
 
-  if (!highlightSearchMatches) {
+  if (!highlightSearchMatches || !ent) {
     return (
       <>
         <strong>{nameDisplay}</strong> <Code>{codeDisplay}</Code>

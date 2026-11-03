@@ -15,11 +15,15 @@ type GetNextParamArrays = (
   modalityFilter: LanguageModality[];
   languageScopes: LanguageScope[];
   territoryScopes: TerritoryScope[];
+  pinned: string[];
 };
 
 export function useStableParamArrays(): GetNextParamArrays {
   const stableFilterArrays = useRef<
-    | Pick<PageParams, 'isoStatus' | 'modalityFilter' | 'languageScopes' | 'territoryScopes'>
+    | Pick<
+        PageParams,
+        'isoStatus' | 'modalityFilter' | 'languageScopes' | 'territoryScopes' | 'pinned'
+      >
     | undefined
   >(undefined);
 
@@ -30,12 +34,14 @@ export function useStableParamArrays(): GetNextParamArrays {
       modalityFilter: instantiatedParams.modalityFilter ?? defaults.modalityFilter,
       languageScopes: instantiatedParams.languageScopes ?? defaults.languageScopes,
       territoryScopes: instantiatedParams.territoryScopes ?? defaults.territoryScopes,
+      pinned: instantiatedParams.pinned ?? defaults.pinned,
     };
     const filterArrays = {
       isoStatus: retainIfEqual(next.isoStatus, prev?.isoStatus),
       modalityFilter: retainIfEqual(next.modalityFilter, prev?.modalityFilter),
       languageScopes: retainIfEqual(next.languageScopes, prev?.languageScopes),
       territoryScopes: retainIfEqual(next.territoryScopes, prev?.territoryScopes),
+      pinned: retainIfEqual(next.pinned, prev?.pinned),
     };
     stableFilterArrays.current = filterArrays;
     return filterArrays;

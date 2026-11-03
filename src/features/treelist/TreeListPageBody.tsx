@@ -4,9 +4,9 @@ import LimitInput from '@features/pagination/LimitInput';
 import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
 import { useFilterByVitality } from '@features/transforms/filtering/filter';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import { useFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useFilterBySubstring from '@features/transforms/search/useFilterBySubstring';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
@@ -27,8 +27,8 @@ type Props = {
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   const { limit, searchString, territoryFilter, writingSystemFilter, languageFilter, isoStatus } =
     usePageParams();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
+  const filterBySubstring = useFilterBySubstring();
+  const filterByConnections = useFilterByConnections();
   const filterByVitality = useFilterByVitality();
   const filterActive = useMemo(
     () => searchString || territoryFilter || writingSystemFilter || languageFilter || isoStatus,

@@ -7,7 +7,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { TechScope } from '@entities/tech/TechnologyTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
@@ -189,7 +189,7 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
 };
 
 function Locales({ lang }: { lang: LanguageData }) {
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const filterByScope = useFilters()[Field.TerritoryScope];
   const locales = useMemo(
     () => (lang.locales ?? []).filter(filterByScope).sort(sortFunction),

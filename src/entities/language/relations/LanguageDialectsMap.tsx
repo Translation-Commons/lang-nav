@@ -7,7 +7,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import EntityMap from '@features/map/EntityMap';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -22,7 +22,7 @@ type Props = {
 };
 function LanguageDialectsMap({ lang }: Props) {
   const { updatePageParams } = usePageParams();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const dialects = useMemo(
     () =>

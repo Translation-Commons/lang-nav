@@ -23,9 +23,9 @@ interface Props<T> {
 }
 
 function InteractiveEntityTable<T extends EntityData>({ ents, columns, tableID }: Props<T>) {
-  const { paramsLevel } = usePageParams();
+  const { paramsLevel, limit } = usePageParams();
   const { getCurrentEntities } = usePagination<T>();
-  const { filteredEntities } = useFilteredEntities({
+  const { filteredEntities, isPending } = useFilteredEntities({
     inputEnts: ents,
   });
   const currentEntities = getCurrentEntities(filteredEntities);
@@ -43,11 +43,11 @@ function InteractiveEntityTable<T extends EntityData>({ ents, columns, tableID }
       {/* The actual <table> component */}
       <BaseEntityTable
         visibleColumns={visibilityModule.visibleColumns}
-        ents={currentEntities}
+        ents={isPending ? Array(limit > 0 ? limit : 10).fill(undefined) : currentEntities}
         tableID={tableID}
       />
 
-      {currentEntities.length === 0 && (
+      {!isPending && currentEntities.length === 0 && (
         <div>
           All results are filtered out.
           <FilterBreakdown ents={ents} />

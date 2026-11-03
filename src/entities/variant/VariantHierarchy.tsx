@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -12,7 +12,7 @@ import type { VariantData } from './VariantTypes';
 
 export const VariantHierarchy: React.FC = () => {
   const { variants } = useDataContext();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const nodeHierarchy = getNodeHierarchy(variants);
   const rootNodes: TreeNodeData[] = getTreeNodes(nodeHierarchy, sortFunction);
@@ -69,18 +69,21 @@ export function getTreeNodes(
   sortFunction: (a: EntityData, b: EntityData) => number,
 ): TreeNodeData[] {
   return Object.values(nodeHierarchy)
-    .map(getVariantTreeNode)
+    .map((branch) => getVariantTreeNode(branch, sortFunction))
     .filter((node) => node != null)
     .sort((a, b) => sortFunction(a.ent, b.ent));
 }
 
-export function getVariantTreeNode(VariantBranch: VariantBranch): TreeNodeData | null {
-  const ent = getEntityFromID(VariantBranch.key);
+export function getVariantTreeNode(
+  branch: VariantBranch,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+): TreeNodeData | null {
+  const ent = getEntityFromID(branch.key);
   if (ent == null) return null;
   return {
     type: ent?.type ?? EntityType.Variant,
-    ent: VariantBranch.variant ?? ent,
-    children: getTreeNodes(VariantBranch.branches, getSortFunction()),
+    ent: branch.variant ?? ent,
+    children: getTreeNodes(branch.branches, sortFunction),
     labelStyle: { fontWeight: ent?.type === EntityType.Variant ? 'normal' : 'bold' },
   };
 }

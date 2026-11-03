@@ -4,7 +4,7 @@ import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -53,7 +53,7 @@ const LanguageDetailsAttributes: React.FC<Props> = ({ lang }) => {
         <DetailsField title="Writing Systems">
           <CommaSeparated>
             {Object.values(writingSystems)
-              .sort(getSortFunction())
+              .sort(useSortFunction())
               .map((writingSystem) => (
                 <HoverableEntityName key={writingSystem.ID} ent={writingSystem} />
               ))}

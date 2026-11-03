@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { EntityData } from '@entities/types/EntityTypes';
 
 import Field from '../fields/Field';
@@ -11,14 +13,17 @@ export type FilterFunctionType = (a: EntityData) => boolean;
  */
 export function useScopeFilter(): FilterFunctionType {
   const filterBy = useFilters();
-  return (ent: EntityData) =>
-    filterBy[Field.TerritoryScope](ent) &&
-    filterBy[Field.LanguageScope](ent) &&
-    filterBy[Field.Modality](ent);
+  return useCallback(
+    (ent: EntityData) =>
+      filterBy[Field.TerritoryScope](ent) &&
+      filterBy[Field.LanguageScope](ent) &&
+      filterBy[Field.Modality](ent),
+    [filterBy],
+  );
 }
 
 // The other vitality filters have been removed until we resolve the data source (if we do)
 export function useFilterByVitality(): FilterFunctionType {
   const filterBy = useFilters();
-  return (ent: EntityData) => filterBy[Field.ISOStatus](ent);
+  return useCallback((ent: EntityData) => filterBy[Field.ISOStatus](ent), [filterBy]);
 }

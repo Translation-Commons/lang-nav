@@ -1,32 +1,26 @@
 import React, { useMemo } from 'react';
 
 import CardInCardList from '@widgets/cardlists/CardInCardList';
+import CardTitle from '@widgets/cardlists/CardTitle';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
-import { getLanguageRootLanguageFamily } from '@entities/language/relations/LanguageFamilyUtils';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
-
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
-
-import { getModalityLabel } from '@strings/LanguageModalityStrings';
+import EntityCard from '@entities/ui/EntityCard';
 
 const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const { languages } = useDataContext();
   const languagesFiltered = useFilteredEntities<LanguageData>({
     inputEnts: languages,
   }).filteredEntities;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const { getCurrentEntities } = usePagination<LanguageData>();
 
   const languagesWithoutWritingSystems = useMemo(
@@ -38,59 +32,30 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   );
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       This report identifies languages without associated writing systems. Languages may be missing
       writing system data due to data gaps, incomplete ingestion from upstream sources, or because
       they are primarily oral. Extinct and historical languages often have harder-to-find writing
       system information. Sign languages are excluded from this report.
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
+      <div className="flex items-center gap-4">
         <LimitInput />
         <div>
           <PaginationControls itemCount={languagesWithoutWritingSystems.length} />
         </div>
       </div>
-      <div style={{ marginTop: '1em', marginBottom: '1em' }}>
-        <ResponsiveGrid>
-          {getCurrentEntities(languagesWithoutWritingSystems.sort(sortFunction)).map((lang) => {
-            const family = getLanguageRootLanguageFamily(lang);
-            return (
-              <CardInCardList key={lang.ID} ent={lang}>
-                <div>
-                  <label>Language ID:</label>
-                  {lang.ID}
-                </div>
-                <div>
-                  <label>Language Name:</label>
-                  <HoverableEntityName ent={lang} />
-                </div>
-                <div>
-                  <label>Language Family:</label>
-                  {family ? (
-                    <HoverableEntityName ent={family} />
-                  ) : (
-                    <Deemphasized>None</Deemphasized>
-                  )}
-                </div>
-                <div>
-                  <label>ISO Status:</label>
-                  {getLanguageISOStatusLabel(lang.ISO.status) || (
-                    <Deemphasized>Unknown</Deemphasized>
-                  )}
-                </div>
-                <div>
-                  <label>Modality:</label>
-                  {getModalityLabel(lang.modality) || <Deemphasized>Unknown</Deemphasized>}
-                </div>
-                <div>
-                  <label>Population:</label>
-                  <CountOfPeople count={lang.pop.overall} />
-                </div>
-              </CardInCardList>
-            );
-          })}
-        </ResponsiveGrid>
-      </div>
-    </>
+      <ResponsiveGrid>
+        {getCurrentEntities(languagesWithoutWritingSystems.sort(sortFunction)).map((lang) => {
+          return (
+            <CardInCardList key={lang.ID} ent={lang}>
+              <div className="flex flex-col gap-2">
+                <CardTitle ent={lang} />
+                <EntityCard ent={lang} />
+              </div>
+            </CardInCardList>
+          );
+        })}
+      </ResponsiveGrid>
+    </div>
   );
 };
 
