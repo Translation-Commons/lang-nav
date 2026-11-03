@@ -1,8 +1,8 @@
-import { cn } from 'cn';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import * as React from 'react';
 
+import { cn } from '@shared/lib/utils';
 import { Button } from '@shared/ui/button';
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -219,11 +219,12 @@ function CarouselNext({
 }
 
 export {
-  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
   useCarousel,
+  type CarouselApi
 };
+
