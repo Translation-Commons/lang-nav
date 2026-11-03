@@ -7,7 +7,6 @@ import CardField from '@widgets/cardlists/CardField';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
-
 import { Skeleton } from '@shared/ui/skeleton';
 
 import type { CensusData } from './CensusTypes';
