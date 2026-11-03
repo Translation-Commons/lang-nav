@@ -14,7 +14,10 @@ import { useDataContext } from './useDataContext';
 const LoadingStageDisplay: React.FC = () => {
   const { loadingStage } = useDataContext();
   const { isPending } = useFilteredEntities({});
-  const loadingAndFilteringStage = loadingStage + (isPending ? 0 : 1);
+  let loadingAndFilteringStage = loadingStage;
+  if (loadingStage === LoadingStage.AlgorithmsFinished && !isPending) {
+    loadingAndFilteringStage = LoadingStage.FilterComplete;
+  }
   const isFinished = loadingAndFilteringStage === LoadingStage.FilterComplete;
 
   return (
