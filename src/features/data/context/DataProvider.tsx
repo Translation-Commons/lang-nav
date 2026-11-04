@@ -22,7 +22,7 @@ import { DataContext, DataGetters } from './useDataContext';
 const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const { languageSource, localeSeparator } = usePageParams();
+  const { languageSource, languageCodeFormat, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadingStage, setLoadingStage] = useState<LoadingStage>(LoadingStage.Initial);
   const [dataRevision, setDataRevision] = useState<number>(0);
@@ -160,6 +160,7 @@ const DataProvider: React.FC<{
       world,
       coreData.writingSystems,
       languageSource,
+      languageCodeFormat,
       localeSeparator,
     );
 
@@ -171,7 +172,7 @@ const DataProvider: React.FC<{
   useEffect(() => {
     if (loadingStage === LoadingStage.AlgorithmsFinished)
       setLoadingStage(LoadingStage.RecomputingAlgorithms);
-  }, [languageSource, localeSeparator]);
+  }, [languageSource, languageCodeFormat, localeSeparator]);
 
   return (
     <DataContext.Provider value={{ ...dataContextBase, loadingStage, dataRevision }}>

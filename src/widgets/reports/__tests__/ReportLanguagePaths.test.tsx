@@ -6,9 +6,11 @@ import {
   getMockedDataContext,
 } from '@features/__tests__/MockEntities';
 import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import {
   getBaseLanguageData,
+  LanguageCodeFormat,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
@@ -76,6 +78,7 @@ describe('ReportLanguagePaths', () => {
         getTerritory('001')!,
         writingSystems,
         languageSource,
+        LanguageCodeFormat.Prefer3LetterISO,
         LocaleSeparator.Underscore,
       );
       const { orphans, longestPaths, cycles, multipleRoutes } = getExtremeLanguagePaths(languages);
@@ -109,8 +112,7 @@ describe('ReportLanguagePaths', () => {
           expect(cycles).toEqual([['sjn', 'dori0123', 'elv', 'sjn']]);
           expect(multipleRoutes).toEqual({});
           break;
-        case LanguageSource.UNESCO: // No connections from these sources, all languages are orphans
-        case LanguageSource.BCP:
+        case LanguageSource.UNESCO:
           expect(orphans.join(' ')).toEqual('sjn dori0123 qya elv');
           expect(longestPaths).toEqual([]);
           expect(cycles).toEqual([]); // there are no cycles

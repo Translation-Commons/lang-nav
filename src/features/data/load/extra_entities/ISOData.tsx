@@ -141,10 +141,7 @@ export function addISODataToLanguages(
     lang.ISO.scope = isoLang.scope;
     lang.ISO.name = isoLang.name;
 
-    // BCP, CLDR and UNESCO inherit from ISO
-    lang.BCP.scope = isoLang.scope;
-    lang.BCP.name = isoLang.name;
-    lang.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    // CLDR and UNESCO inherit from ISO
     lang.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.UNESCO.code = isoLang.codeISO6393;
 
@@ -238,13 +235,6 @@ export function addISOLanguageFamilyData(
           scope: LanguageScope.Family,
           childLanguages: [],
         },
-        BCP: {
-          code: family.code,
-          name,
-          parentLanguageCode: family.parent,
-          scope: LanguageScope.Family,
-          childLanguages: [],
-        },
       };
 
       const familyEntry: LanguageData = {
@@ -267,10 +257,6 @@ export function addISOLanguageFamilyData(
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
       familyEntry.ISO.name = name;
-      familyEntry.BCP.code ??= family.code;
-      familyEntry.BCP.parentLanguageCode = family.parent;
-      familyEntry.BCP.scope = LanguageScope.Family;
-      familyEntry.BCP.name = name;
       familyEntry.scope ??= family.parent ? LanguageScope.Subfamily : LanguageScope.Family;
     }
   });
@@ -288,7 +274,6 @@ export function addISOLanguageFamilyData(
       // languages may already have macrolanguage parents but if its unset, set the parent
       lang.Combined.parentLanguageCode ??= familyCode;
       lang.ISO.parentLanguageCode ??= familyCode;
-      lang.BCP.parentLanguageCode ??= familyCode;
     });
   });
 }

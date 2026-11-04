@@ -34,15 +34,6 @@ function LanguageCodeDescriptionBySource({ languageSource }: { languageSource: L
           </LinkButton>
         </>
       );
-    case LanguageSource.BCP:
-      return (
-        <>
-          The Best Current Practices (BCP) BCP-47 language tag as used in IETF standards. Usually
-          this is the same as the ISO 639-3 code (eg. <code>cmn</code> for Mandarin) but if there is
-          a 2-letter code defined in ISO 639-1, that is used instead (eg. <code>zh</code> for
-          Chinese instead of <code>zho</code>).
-        </>
-      );
     case LanguageSource.CLDR:
       return (
         <>

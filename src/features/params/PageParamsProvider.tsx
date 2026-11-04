@@ -1,6 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { LanguageCodeFormat } from '@entities/language/LanguageTypes';
+
+import { getCodeFormatFromLanguageSource } from '@strings/LanguageCodeFormatStrings';
+
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { getParamsFromURL } from './getParamsFromURL';
 import useLocalStorageParams from './LocalStorageParams';
@@ -39,12 +43,20 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
     const paramArrays = getNextParamArrays(instantiatedParams, defaults);
 
+    const languageCodeFormat =
+      localStorageParams.languageCodeFormat == LanguageCodeFormat.Unset
+        ? getCodeFormatFromLanguageSource(
+            instantiatedParams.languageSource ?? defaults.languageSource,
+          )
+        : localStorageParams.languageCodeFormat;
+
     return {
       ...defaults,
       ...instantiatedParams,
       ...paramArrays,
       ...localStorageParams,
       updatePageParams,
+      languageCodeFormat,
       paramsLevel: 'global',
     };
   }, [urlPageParams, updatePageParams, localStorageParams]);

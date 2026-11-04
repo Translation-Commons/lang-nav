@@ -11,6 +11,7 @@ import { LocaleSeparator } from '@features/params/LocalStorageParams';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
   getBaseLanguageData,
+  LanguageCodeFormat,
   LanguageData,
   LanguageScope,
   LanguageSource,
@@ -411,6 +412,7 @@ export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary)
     world,
     Object.values(writingSystems),
     LanguageSource.Combined,
+    LanguageCodeFormat.Prefer3LetterISO,
     LocaleSeparator.Hyphen,
   );
 

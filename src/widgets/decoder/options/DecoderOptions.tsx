@@ -1,13 +1,14 @@
 import { SquareCheckIcon, SquareIcon } from 'lucide-react';
 import React from 'react';
 
+import LanguageCodeFormatSelector from '@features/transforms/filtering/selectors/LanguageCodeFormatSelector';
+import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import TerritoryFilterSelector from '@features/transforms/filtering/selectors/TerritoryFilterSelector';
 
 import { Button } from '@shared/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 import { Toggle } from '@shared/ui/toggle';
 
-import DecoderLanguageSourceSelector from './DecoderLanguageSourceSelector';
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
 
 const DecoderOptions: React.FC = () => {
@@ -41,10 +42,23 @@ const DecoderOptions: React.FC = () => {
                 </Tabs>
               </td>
             </tr>
-            <DecoderLanguageSourceSelector />
+            <tr>
+              <td>Language List</td>
+              <td>
+                <LanguageSourceSelector />
+              </td>
+            </tr>
+            <tr>
+              <td>Language Codes</td>
+              <td className="flex flex-row gap-4 items-center">
+                <LanguageCodeFormatSelector dataSettings={false} />
+              </td>
+            </tr>
             <tr>
               <td>Relevant to territory</td>
-              <TerritoryFilterSelector showButtons={false} />
+              <td>
+                <TerritoryFilterSelector showButtons={false} />
+              </td>
             </tr>
             {direction === DecoderDirection.NamesToCodes && (
               <tr>
