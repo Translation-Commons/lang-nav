@@ -67,7 +67,6 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
     case PageParamKey.columns:
     case PageParamKey.entType:
     case PageParamKey.limit:
-    case PageParamKey.localeSeparator:
     case PageParamKey.page:
     case PageParamKey.profile:
     case PageParamKey.reportID:

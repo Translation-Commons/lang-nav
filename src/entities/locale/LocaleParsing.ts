@@ -1,4 +1,4 @@
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { TerritoryCode } from '@entities/territory/TerritoryTypes';
 

@@ -5,7 +5,7 @@ import {
   getDisconnectedMockedEntities,
   getMockedEntityDictionaries,
 } from '@features/__tests__/MockEntities';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';

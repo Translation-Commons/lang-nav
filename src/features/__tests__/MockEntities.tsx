@@ -6,7 +6,7 @@ import { connectEntitiesAndCreateDerivedData } from '@features/data/connect/conn
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {

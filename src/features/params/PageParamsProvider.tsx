@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
-
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { getParamsFromURL } from './getParamsFromURL';
-import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
+import useLocalStorageParams from './LocalStorageParams';
+import { PageParamsContext, type PageParamsContextState } from './PageParamsContext';
 import type { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
 import { useStableParamArrays } from './StableParamArrays';
@@ -13,7 +12,7 @@ import { useStableParamArrays } from './StableParamArrays';
 /** Provides persistent parameters that are saved to the URL */
 const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [urlPageParams, setURLPageParams] = useSearchParams({});
-  const pageBrightness = usePageBrightness();
+  const localStorageParams = useLocalStorageParams();
   const getNextParamArrays = useStableParamArrays();
 
   const updatePageParams = useCallback(
@@ -44,11 +43,11 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...defaults,
       ...instantiatedParams,
       ...paramArrays,
-      brightness: pageBrightness,
+      ...localStorageParams,
       updatePageParams,
       paramsLevel: 'global',
     };
-  }, [urlPageParams, updatePageParams, pageBrightness]);
+  }, [urlPageParams, updatePageParams, localStorageParams]);
 
   return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
 };

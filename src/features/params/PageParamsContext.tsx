@@ -1,13 +1,12 @@
 import { createContext } from 'react';
 
-import { PageBrightnessParams } from '@shared/hooks/usePageBrightness';
+import type { LocalStorageParams } from './LocalStorageParams';
+import type { PageParams } from './PageParamTypes';
 
-import { PageParams } from './PageParamTypes';
-
-export type PageParamsContextState = PageParams & {
-  brightness: PageBrightnessParams;
-  updatePageParams: (newParams: Partial<PageParams>) => void;
-  paramsLevel: 'local' | 'global';
-};
+export type PageParamsContextState = PageParams &
+  LocalStorageParams & {
+    updatePageParams: (newParams: Partial<PageParams>) => void;
+    paramsLevel: 'local' | 'global';
+  };
 
 export const PageParamsContext = createContext<PageParamsContextState | undefined>(undefined);
