@@ -1,11 +1,17 @@
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import type { LocaleSeparator } from '@features/params/LocalStorageParams';
 
-import { type LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import {
+  LanguageCodeFormat,
+  type LanguageData,
+  LanguageSource,
+} from '@entities/language/LanguageTypes';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import { computeLargestDescendant } from './computeLargestDescendant';
 import computeRecursiveLanguageData from './computeRecursiveLanguageData';
@@ -34,11 +40,18 @@ export function updateEntitiesBasedOnDataParams(
   world: TerritoryData,
   writingSystems: WritingSystemData[],
   languageSource: LanguageSource,
+  languageCodeFormat: LanguageCodeFormat,
   localeSeparator: LocaleSeparator,
 ): void {
   updateParentsAndDescendants(languages, languageSource);
   updatePopulations(languages, locales, world, writingSystems);
-  updateEntityNamesAndCodes(languages, locales, languageSource, localeSeparator);
+  updateEntityNamesAndCodes(
+    languages,
+    locales,
+    languageSource,
+    languageCodeFormat,
+    localeSeparator,
+  );
   computeRecursiveLanguageData(languages);
   computeLargestDescendant(languages, languageSource);
 }
@@ -61,12 +74,28 @@ function updateEntityNamesAndCodes(
   languages: LanguageData[],
   locales: LocaleData[],
   languageSource: LanguageSource,
+  languageCodeFormat: LanguageCodeFormat,
   localeSeparator: LocaleSeparator,
 ): void {
   // Update language codes and other values used for filtering
   languages.forEach((lang) => {
     const specific = lang[languageSource];
-    lang.codeDisplay = specific?.code ?? lang.ID;
+    switch (languageCodeFormat) {
+      case LanguageCodeFormat.Unset:
+        lang.codeDisplay = specific?.code ?? lang.ID;
+        break;
+      case LanguageCodeFormat.Prefer2LetterISO:
+        lang.codeDisplay = lang.ISO.code6391 ?? lang.ISO.code ?? lang.ID;
+        break;
+      case LanguageCodeFormat.Prefer3LetterISO:
+        lang.codeDisplay = lang.ISO.code ?? lang.ID;
+        break;
+      case LanguageCodeFormat.PreferGlottocode:
+        lang.codeDisplay = lang.Glottolog.code ?? lang.ID;
+        break;
+      default:
+        enforceExhaustiveSwitch(languageCodeFormat);
+    }
     lang.nameDisplay = specific?.name ?? lang.nameCanonical;
     // Out-of-source languages fall back to Combined, not to the previous source's leftover scope.
     lang.scope = specific?.scope ?? lang[LanguageSource.Combined]?.scope ?? lang.scope;

@@ -28,7 +28,6 @@ function usePotentialLocales(
 ): PartitionedLocales {
   const filter = useAllFilters();
 
-  // const filterByPopulation = useFilter
   const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
 

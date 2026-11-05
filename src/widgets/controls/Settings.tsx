@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes.tsx';
 
+import LanguageCodeFormatSelector from '@features/transforms/filtering/selectors/LanguageCodeFormatSelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
@@ -20,6 +21,7 @@ const Settings = (): React.ReactNode => {
       {isDataPage && (
         <>
           <PopulationFocusSelector />
+          <LanguageCodeFormatSelector />
           <LocaleSeparatorSelector />
           <ProfileSelector />
           <ClearAllPinsButton />

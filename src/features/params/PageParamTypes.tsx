@@ -38,11 +38,6 @@ export enum SearchableField {
   NameGlottolog = 'Glottolog Name',
 }
 
-export enum LocaleSeparator {
-  Underscore = '_',
-  Hyphen = '-',
-}
-
 export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 
 export enum PageParamKey {
@@ -63,7 +58,6 @@ export enum PageParamKey {
   languageScopes = 'languageScopes',
   languageSource = 'languageSource',
   limit = 'limit',
-  localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
   orgFilter = 'orgFilter',
   page = 'page',
@@ -91,7 +85,6 @@ export type PageParams = {
   cmpID: string;
   columns: TableIDToBinarizedColumnVisibility;
   limit: number; // < 1 means show all
-  localeSeparator: LocaleSeparator;
   entID?: string;
   entType: EntityType;
   page: number; // 1 indexed

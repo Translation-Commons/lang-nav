@@ -74,7 +74,6 @@ export function addISORetirementsToLanguages(
       if (retirement.changeTo) {
         // If there's a changeTo, update the codeDisplay to the new code
         lang.ISO.parentLanguageCode = retirement.changeTo;
-        lang.BCP.parentLanguageCode = retirement.changeTo;
       }
     } else {
       const childLanguages = retirement.splitLanguages

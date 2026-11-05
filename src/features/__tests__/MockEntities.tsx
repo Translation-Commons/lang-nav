@@ -6,11 +6,12 @@ import { connectEntitiesAndCreateDerivedData } from '@features/data/connect/conn
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
   getBaseLanguageData,
+  LanguageCodeFormat,
   LanguageData,
   LanguageScope,
   LanguageSource,
@@ -411,6 +412,7 @@ export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary)
     world,
     Object.values(writingSystems),
     LanguageSource.Combined,
+    LanguageCodeFormat.Prefer3LetterISO,
     LocaleSeparator.Hyphen,
   );
 

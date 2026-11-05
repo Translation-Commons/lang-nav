@@ -136,7 +136,6 @@ const SourceWarning: React.FC<{ languageSource: LanguageSource }> = ({ languageS
       );
     case LanguageSource.Glottolog:
     case LanguageSource.ISO:
-    case LanguageSource.BCP:
       return null; // These all have comprehensive parent/child data, continue
   }
 };

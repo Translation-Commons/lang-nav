@@ -5,9 +5,9 @@ import {
   getDisconnectedMockedEntities,
   getMockedEntityDictionaries,
 } from '@features/__tests__/MockEntities';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageCodeFormat, LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -42,6 +42,7 @@ describe('updateEntitiesBasedOnDataParams', () => {
       mockedDictionaries.territories['001'],
       Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
+      LanguageCodeFormat.Prefer3LetterISO,
       LocaleSeparator.Hyphen,
     );
 
@@ -79,6 +80,7 @@ describe('updateEntitiesBasedOnDataParams', () => {
       mockedDictionaries.territories['001'],
       Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
+      LanguageCodeFormat.Prefer3LetterISO,
       LocaleSeparator.Hyphen,
     );
 

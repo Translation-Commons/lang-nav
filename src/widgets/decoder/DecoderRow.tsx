@@ -5,7 +5,7 @@ import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import { Spinner } from '@shared/ui/spinner';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import { useDecoderDataContext } from './DecoderDataContext';
 import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOptionsContext';
@@ -29,10 +29,9 @@ const DecoderRow: React.FC<{ input: string }> = ({ input }) => {
   if (!result) {
     return (
       <tr>
-        <td>
-          <Spinner aria-hidden="true" className="inline size-[1em]" />
+        <td colSpan={2}>
+          <Skeleton className="my-1 h-4 w-full" />
         </td>
-        <td></td>
       </tr>
     );
   }

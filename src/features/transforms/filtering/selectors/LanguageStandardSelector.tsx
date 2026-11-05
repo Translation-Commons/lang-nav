@@ -13,10 +13,11 @@ import {
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
+import { getSourceLabel } from '@strings/LanguageSourceStrings';
+
 const OPTIONS = [
   LanguageSource.Combined,
   LanguageSource.ISO,
-  LanguageSource.BCP,
   LanguageSource.CLDR,
   LanguageSource.Glottolog,
 ];
@@ -31,14 +32,14 @@ const DecoderLanguageSourceSelector: React.FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
+          <Button className="cursor-pointer truncate max-w-70 justify-start" variant="outline">
             {getSourceLabel(languageSource)}
           </Button>
         }
       />
-      <DropdownMenuContent className="min-w-40">
+      <DropdownMenuContent className="min-w-60">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Language List & Formatting</DropdownMenuLabel>
+          <DropdownMenuLabel>Language List</DropdownMenuLabel>
           <DropdownMenuRadioGroup
             value={languageSource}
             onValueChange={(value) => updatePageParams({ languageSource: value })}
@@ -54,22 +55,5 @@ const DecoderLanguageSourceSelector: React.FC = () => {
     </DropdownMenu>
   );
 };
-
-function getSourceLabel(languageSource: LanguageSource): string {
-  switch (languageSource) {
-    case LanguageSource.Combined:
-      return 'Combined by LangNav (prefer ISO, include Glottolog)';
-    case LanguageSource.ISO:
-      return 'ISO-639-3 and ISO-639-5';
-    case LanguageSource.BCP:
-      return 'BCP-47 (ISO-639-1, otherwise ISO-639-3/5)';
-    case LanguageSource.CLDR:
-      return 'CLDR (BCP-47 with macrolanguage adjustments)';
-    case LanguageSource.Glottolog:
-      return 'Glottolog';
-    default:
-      return '';
-  }
-}
 
 export default DecoderLanguageSourceSelector;

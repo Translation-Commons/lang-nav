@@ -68,9 +68,5 @@ export function getLanguageSourcesForEntity(ent: EntityData): LanguageSource[] {
   if (language.CLDR.code != null && language.CLDR.dataProvider == null)
     sources.push(LanguageSource.CLDR);
   if (language.Glottolog.code != null) sources.push(LanguageSource.Glottolog);
-  if (language.ISO.code != null && language.ISO.retirementReason == null) {
-    // Yes, we're repeating a check but we're doing this in order
-    sources.push(LanguageSource.BCP);
-  }
   return sources;
 }

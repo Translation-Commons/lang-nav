@@ -45,7 +45,7 @@ tgl	taga1270	Tagalog	Tagálog	Spoken & Written	Latn	43,331,201		taga1269	Yes, wi
 ori	macr1269	Oriya languages	ଓଡ଼ିଆ	Spoken & Written	Orya	42,597,953		oriy1254	Yes	There is a language code for the individual language, but most usages will just use this
 mya	nucl1310	Burmese	မြန်မာဘာသာ	Spoken & Written	Mymr	42,442,391		nucl1811	Yes	
 pol	poli1260	Polish	polski	Spoken & Written	Latn	41,661,928		poli1262	Yes	
-nan	minn1241	Min Nan Chinese	閩南語	Mostly Spoken	Hans	41,517,875	zho	coas1318	Yes	Established variant of a macrolanguage
+nan	minn1241	Min Nan Chinese	閩南語	Spoken & Written	Hans	41,517,875	zho	coas1318	Yes	Established variant of a macrolanguage
 yor	yoru1245	Yoruba	Yorùbá	Spoken & Written	Latn	40,517,824		lucu1239	Yes	
 apc	nort3139	Levantine Arabic	‫العامية‬	Mostly Spoken	Arab	38,918,210	ara	leva1239	Yes, with caveat	To distinguish spoken dialect
 snd	sind1272	Sindhi	سِنڌِي	Spoken & Written	Arab	37,521,450		sind1282	Yes	
@@ -7648,7 +7648,7 @@ hlu	hier1240	Hieroglyphic Luwian			Hluw			luvi1235	Probably not	Historical langa
 hmk		Maek							Probably not	Historical langauge
 hnm	hain1238	Hainanese		Mostly Spoken		5,000,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 hod	holm1250	Holma			Latn			nzan1241	No	Extinct language
-hokk1242	hokk1242	Quanzhang						minn1241	No	Group of multiple languages
+hokk1242	hokk1242	Hokkien		Spoken & Written	Hant	40,000,000		minn1241	Maybe	Contested by different sources as an independent language or a part of general Min-nan
 hom	homa1239	Homa			Latn			ngen1255	No	Extinct language
 hor	horo1247	Horo			Latn			sara1344	No	Extinct language
 htx		Middle Hittite			Xsux				Probably not	Historical langauge
