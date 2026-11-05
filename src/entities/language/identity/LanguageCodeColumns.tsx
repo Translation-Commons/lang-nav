@@ -52,9 +52,11 @@ const columns: TableColumn<LanguageData>[] = [
     ),
   },
   {
-    key: 'BCP Code (ISO 639-1 otherwise ISO 639-3/5)',
+    key: 'BCP Code',
+    description:
+      'BCP-47 recommends labeling languages using ISO 639-1 code, if available, otherwise the ISO 639-3/5 code',
     render: (lang) =>
-      lang.ISO.code6391 !== lang.ISO.code ? (
+      lang.ISO.code6391 && lang.ISO.code6391 !== lang.ISO.code ? (
         lang.ISO.code6391
       ) : (
         <Deemphasized>{lang.ISO.code}</Deemphasized>

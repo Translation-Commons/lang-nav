@@ -12,7 +12,13 @@ const DecoderInput = () => {
     <div className="flex flex-col min-w-40 flex-shrink-0">
       <div className="flex items-center gap-2 font-bold">
         Enter languages {isInputPending && <Spinner />}{' '}
-        <Button variant="ghost" size="icon" onClick={() => setInputBlob('')} disabled={!inputBlob}>
+        <Button
+          aria-label="Clear entered languages"
+          variant="ghost"
+          size="icon"
+          onClick={() => setInputBlob('')}
+          disabled={!inputBlob}
+        >
           <XIcon className="icon-sm" />
         </Button>
       </div>

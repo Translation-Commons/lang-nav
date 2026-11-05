@@ -1,6 +1,6 @@
 import { LanguageCodeFormat } from '@entities/language/LanguageTypes';
 
-import { PageBrightness, usePageBrightness } from '@shared/hooks/usePageBrightness';
+import { PageBrightnessParams, usePageBrightness } from '@shared/hooks/usePageBrightness';
 
 import useStoredParams from './useStoredParams';
 
@@ -11,7 +11,7 @@ export enum LocaleSeparator {
 
 export type LocalStorageParams = {
   localeSeparator: LocaleSeparator;
-  brightness: PageBrightness;
+  brightness: PageBrightnessParams;
   languageCodeFormat: LanguageCodeFormat;
 
   setLocaleSeparator: (value: LocaleSeparator) => void;
@@ -20,7 +20,7 @@ export type LocalStorageParams = {
 
 /** These parameters are saved in local storage and persist between sessions */
 const useLocalStorageParams = (): LocalStorageParams => {
-  const pageBrightness = usePageBrightness();
+  const brightness = usePageBrightness();
   const { value: localeSeparator, setValue: setLocaleSeparator } = useStoredParams<LocaleSeparator>(
     'localeSeparator',
     LocaleSeparator.Underscore,
@@ -32,7 +32,7 @@ const useLocalStorageParams = (): LocalStorageParams => {
   return {
     localeSeparator,
     setLocaleSeparator,
-    brightness: pageBrightness.pageBrightness,
+    brightness,
     languageCodeFormat,
     setLanguageCodeFormat,
   };
