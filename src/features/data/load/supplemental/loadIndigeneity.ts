@@ -29,21 +29,21 @@ export async function loadIndigeneity(
           if (formedInThisRegion || antecedentsBefore1500) {
             // Only need to warn if the language is in some way local
             console.debug(
-              `No locales found for indigeneity data (line ${lineNumber + 2}: ${line}) in data/indigeneity.tsv.`,
+              `No locales found for indigeneity data (line ${lineNumber + 2}: ${line}) in data/tc/indigeneity.tsv.`,
             );
           }
           return;
         }
         if (locales[0].langFormedHere != null || locales[0].historicPresence != null) {
           // console.debug(
-          //   `Multiple values for indigeneity data for locale ${locales[0].ID} (line ${lineNumber + 2}) in data/indigeneity.tsv. Please delete the duplicate entry.`,
+          //   `Multiple values for indigeneity data for locale ${locales[0].ID} (line ${lineNumber + 2}) in data/tc/indigeneity.tsv. Please delete the duplicate entry.`,
           // );
           return;
         }
 
         if (formedInThisRegion == null && antecedentsBefore1500 == null) {
           console.debug(
-            `No valid indigeneity values for ${locales[0].ID} (line ${lineNumber + 2}) in data/indigeneity.tsv. Expected 1, 0, or empty for columns 3 and 4.`,
+            `No valid indigeneity values for ${locales[0].ID} (line ${lineNumber + 2}) in data/tc/indigeneity.tsv. Expected 1, 0, or empty for columns 3 and 4.`,
           );
           return;
         }

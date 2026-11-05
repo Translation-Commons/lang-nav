@@ -8315,7 +8315,6 @@ sqh_NG	Shau (Nigeria)		EDL	1
 sqn_US	Susquehannock (United States)		EDL	1	
 sta_ZM	Settla (Zambia)		EDL	1	
 suz_IN	Sunwar (India)		Unverified Official	1	recognized_regional
-swl_SE	Swedish Sign Language (Sweden)	svenskt teckenspråk	EDL	1	
 sww_VU	Sowa (Vanuatu)		EDL	1	
 taa_US	Lower Tanana (United States)		Unverified Official	1	official_regional
 tau_US	Upper Tanana (United States)		Unverified Official	1	official_regional
@@ -11089,3 +11088,15 @@ rmq_DZ	Caló (Algeria)			3360
 dsq_DZ	Tadaksahak (Algeria)			1800	
 eng_BQ	English (Caribbean Netherlands)		Official	21524	
 spa_BQ	Spanish (Caribbean Netherlands)		Official	18120	
+ita_SE	Italian (Sweden)			315647	
+ara_SE	Arabic (Sweden)			210431	
+por_SE	Portuguese (Sweden)			105216	
+rus_SE	Russian (Sweden)			105216	
+jpn_SE	Japanese (Sweden)			105216	
+pol_SE	Polish (Sweden)			105216	
+ukr_SE	Ukrainian (Sweden)			105216	
+nld_SE	Dutch (Sweden)			105216	
+acm_SE	Mesopotamian Arabic (Sweden)			94000	
+syr_SE	Syriac (Sweden)			92000	
+swl_SE	Swedish Sign Language (Sweden)	svenskt teckenspråk		20000	
+tru_SE	Turoyo (Sweden)			17000	

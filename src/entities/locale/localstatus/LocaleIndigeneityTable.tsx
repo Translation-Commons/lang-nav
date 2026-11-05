@@ -51,7 +51,11 @@ const LocaleIndigeneityTable: React.FC<{
         },
         {
           key: 'Population',
-          render: (locale) => <CountOfPeople count={locale.pop.speaking.adjusted} />,
+          render: (locale) => (
+            <CountOfPeople
+              count={Math.max(locale.pop.speaking.adjusted ?? 0, locale.pop.writing.adjusted ?? 0)}
+            />
+          ),
           field: Field.Population,
           isInitiallyVisible: false,
         },

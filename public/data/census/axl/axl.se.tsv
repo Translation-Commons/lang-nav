@@ -1,0 +1,71 @@
+#codeDisplay		axl.se	#ethnic Group
+#nameDisplay		AXL Sweden	
+#isoRegionCode	SE		
+#yearCollected	2021		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Any		
+### Population Surveyed ###			
+#population	10,159,700		
+#responsesPerIndividual	1		
+### Data Constraints ###			
+#geographicScope	Whole country		
+#age	0+		
+#nationality	Residents		
+#languagesIncluded	All		
+#residenceBasis	de facto		
+#quantity		count	
+### Creator ###			
+#collectorType	Secondary		
+#author	Jacques Leclerc		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/europe/suede.htm		
+#tableName	2 Données démolinguistiques (Groupe ethnique / Population / Pourcentage / Langue principale / Filiation linguistique / Religion principale)		
+#notes			
+Language Code	Language Name	Population	Ethnic Group
+swe	Swedish	8708000	Swedes
+swe	Swedish	111000	Finland Swedes
+ara/acm	Mesopotamian Arabic	94000	Iraqi Arabs
+fin	Finnish	94000	Finnish-speaking Finns
+syr/aii	Assyrian Neo-Aramaic	92000	Assyrians
+hin	Hindi	62000	Indo-Pakistanis
+pol	Polish	58000	Poles
+dan	Danish	47000	Danes
+som	Somali	46000	Somalis
+fas/pes	Western Farsi	44000	Iranians
+deu	German	38000	Germans
+nor	Norwegian	37000	Norwegians
+tur	Turkish	34000	Turks
+fit	Tornedalen Finnish (Meänkieli)	33000	Tornedalians
+hbs/bos	Bosnian	32000	Bosnians
+tha	Thai	31000	Thais
+ara/apc	North Levantine Arabic	29000	Syrian Arabs
+eng	English	29000	British
+swe	Swedish	28000	Swedish-speaking Tatars
+tgk	Tajik	26000	Tajiks
+ara/apc	North Levantine Arabic	23000	Lebanese Arabs
+zho/yue	Cantonese	21000	Cantonese Chinese
+swl	Swedish Sign Language	20000	Deaf/hard of hearing
+spa	Spanish	19000	Chileans
+zho/cmn	Mandarin Chinese	19000	Mandarin-speaking Chinese
+ron	Romanian	18000	Romanians
+tru	Turoyo (Aramaic)	17000	Aramaic-speaking Syrians
+eng	English	16000	Americans
+swe	Swedish	15000	Swedish-speaking Jews
+tir	Tigrinya	13000	Eritreans
+ell	Greek	12000	Greeks
+rom	Romani	12000	Roma/Gypsies
+nld	Dutch	11000	Dutch
+hun	Hungarian	11000	Hungarians
+ita	Italian	11000	Italians
+kur/kmr	Kurmanji Kurdish	11000	Kurmanji Kurds
+hbs/srp	Serbian	11000	Serbs
+amh	Amharic	10000	Ethiopians
+lit	Lithuanian	9500	Lithuanians
+fra	French	9200	French
+rus	Russian	9200	Russians
+vie	Vietnamese	9100	Vietnamese
+spa	Spanish	8500	Spaniards
+mul	#Other languages	171200	Others

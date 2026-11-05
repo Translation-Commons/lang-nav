@@ -21,6 +21,7 @@ axl.ki
 axl.km
 axl.la
 axl.ma
+axl.mh
 axl.mm
 axl.mr
 axl.mv
@@ -32,6 +33,7 @@ axl.no
 axl.pf
 axl.pn
 axl.qa
+axl.se
 axl.sg
 axl.sl
 axl.ss
