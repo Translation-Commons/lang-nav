@@ -146,7 +146,7 @@ function getDigitalSupportFilterLabel({
   const hasMin = digitalSupportMin != null && digitalSupportMin >= 0;
   const hasMax =
     digitalSupportMax != null && digitalSupportMax >= 0 && digitalSupportMax < DIGITAL_SUPPORT_MAX;
-  if (!hasMin && !hasMax) return 'any population';
+  if (!hasMin && !hasMax) return 'any digital support level';
   if (!hasMin) return `with digital support score ≤ ${digitalSupportMax.toLocaleString()}`;
   if (!hasMax) return `with digital support score ≥ ${digitalSupportMin.toLocaleString()}`;
   return `with digital support score ≥ ${digitalSupportMin.toLocaleString()} & ≤ ${digitalSupportMax.toLocaleString()}`;
@@ -192,7 +192,7 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.LanguageFamily:
       return 'Language Family';
     case Field.SourceForLanguage:
-      return 'Language List & Formatting';
+      return 'Language List';
     case Field.ISOStatus:
       return 'ISO Status';
     case Field.Population:

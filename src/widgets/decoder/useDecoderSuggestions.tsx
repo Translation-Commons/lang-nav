@@ -60,12 +60,13 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
       const substringFilter = getSubstringFilterOnQuery(queryLower, searchBy);
       return (pageEntities || [])
         .filter(substringFilter) // Require at least any name to match
+        .filter(filterBy[Field.SourceForLanguage])
         .map((ent) => ({ ent, distance: getMatchDistance(queryLower, ent) }))
         .sort((a, b) => a.distance - b.distance)
         .slice(0, SUGGESTION_LIMIT)
         .map(({ ent }) => ent);
     },
-    [pageEntities, searchBy, getMatchDistance],
+    [pageEntities, searchBy, getMatchDistance, filterBy[Field.SourceForLanguage]],
   );
 
   return getSuggestions;

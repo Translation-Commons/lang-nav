@@ -32,14 +32,14 @@ const DecoderLanguageSourceSelector: React.FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="cursor-pointer" variant="outline">
+          <Button className="cursor-pointer truncate max-w-70 justify-start" variant="outline">
             {getSourceLabel(languageSource)}
           </Button>
         }
       />
-      <DropdownMenuContent className="min-w-40">
+      <DropdownMenuContent className="min-w-60">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Language List & Formatting</DropdownMenuLabel>
+          <DropdownMenuLabel>Language List</DropdownMenuLabel>
           <DropdownMenuRadioGroup
             value={languageSource}
             onValueChange={(value) => updatePageParams({ languageSource: value })}
