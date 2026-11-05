@@ -8124,7 +8124,6 @@ bab_SN	Bainouk-Gunyuño (Senegal)		EDL	1
 bdk_AZ	Budukh (Azerbaijan)		EDL	1	
 bjb_AU	Barngarla (Australia)		EDL	1	
 bjf_IL	Barzani Jewish Neo-Aramaic (Israel)		EDL	1	
-blv_DZ	Kibala (Algeria)		EDL	1	
 bog_ML	Malian Sign Language (Mali)		EDL	1	
 boi_US	Barbareño (United States)		EDL	1	
 bpt_AU	Barrow Point (Australia)		EDL	1	
@@ -8784,7 +8783,7 @@ bjy_AU	Bayali (Australia)
 blb_SB	Bilua (Solomon Islands)				
 ble_GW	Balanta-Kentohe (Guinea-Bissau)				
 bll_US	Biloxi (United States)				
-blv_AO	Kibala (Angola)				
+blv_AO	Kibala (Angola)		EDL	1	
 bme_CF	Limassa (Central African Republic)				
 bmm_MG	Northern Betsimisaraka Malagasy (Madagascar)				
 bmn_PG	Bina (Papua New Guinea) (Papua New Guinea)				
@@ -8917,7 +8916,7 @@ dos_BF	Dogosé (Burkina Faso)
 drt_NL	Drents (Netherlands)				
 dru_TW	Rukai (Taiwan)				
 dsh_KE	Daasanach (Kenya)				
-dsq_ML	Tadaksahak (Mali)				
+dsq_ML	Tadaksahak (Mali)			170,000	
 dti_ML	Ana Tinga Dogon (Mali)				
 dtk_ML	Tene Kan Dogon (Mali)				
 dtn_ET	Daatsʼíin (Ethiopia)				
@@ -11085,3 +11084,8 @@ huav1256_MX	Huavean (Mexico)		Official	7442
 pame1260_MX	Pamean (Mexico)		Official	11627	
 tepe1243_MX	Tepehua (Mexico)		Official	8321	
 kjb_MX	Q'anjob'al (Mexico)		Official	10851	
+tzm_DZ	Central Atlas Tamazight (Algeria)			1645820	
+rmq_DZ	Caló (Algeria)			3360	
+dsq_DZ	Tadaksahak (Algeria)			1800	
+eng_BQ	English (Caribbean Netherlands)		Official	21524	
+spa_BQ	Spanish (Caribbean Netherlands)		Official	18120	
