@@ -4860,7 +4860,6 @@ gdi_CF	Gundi (Central African Republic)		Other	1,000
 gmx_TZ	Magoma (Tanzania)		Other	1,000	
 iti_PH	Inlaod Itneg (Philippines)		Other	1,000	
 lbc_CN	Lakkia (China)		Other	1,000	
-nmg_CM	Kwasio (Cameroon)	Kwasio	Other	1,000	
 nqq_MM	Naga, Chen-Kayu (Myanmar)		Other	1,000	
 pce_CN	Palaung, Ruching (China)		Other	1,000	
 pnc_ID	Pannei (Indonesia)		Other	1,000	
@@ -8092,7 +8091,7 @@ nmp_AU	Nimanburru (Australia)		EDL	2
 nmv_AU	Ngamini (Australia)		EDL	2	
 non_RU	Old Norse (Russia)	norrǿna	Official	2	
 nug_AU	Nungali (Australia)		EDL	2	
-por_GQ	Portuguese (Equatorial Guinea)	Português	CLDR	2	official
+por_GQ	Portuguese (Equatorial Guinea)	Português		20,000	official
 smu_KH	Somray (Cambodia)		EDL	2	
 tni_ID	Tandia (Indonesia)		EDL	2	
 umd_AU	Umpithamu (Australia)		EDL	2	
@@ -8787,8 +8786,6 @@ bme_CF	Limassa (Central African Republic)
 bmm_MG	Northern Betsimisaraka Malagasy (Madagascar)				
 bmn_PG	Bina (Papua New Guinea) (Papua New Guinea)				
 bms_NE	Bilma Kanuri (Niger)				
-bng_GQ	Benga (Equatorial Guinea)				
-bnm_GQ	Batanga (Equatorial Guinea)				
 bnn_TW	Bunun (Taiwan)	Bunun			
 bob_KE	Aweer (Kenya)				
 bof_BF	Bolon (Burkina Faso)				
@@ -8963,12 +8960,10 @@ etc_US	Etchemin (United States)
 eth_ET	Ethiopian Sign Language (Ethiopia)				
 ett_IT	Etruscan (Italy)	𐌓𐌀𐌔𐌍𐌀			
 eyo_KE	Keiyo (Kenya)				
-fab_GQ	Fa d'Ambu (Equatorial Guinea)				
 far_SB	Fataleka (Solomon Islands)				
 fax_ES	Fala (Spain)	Fala			
 fif_SA	Faifi (Saudi Arabia)				
 fnb_VU	Fanbak (Vanuatu)				
-fpe_GQ	Fernando Po Creole English (Equatorial Guinea)				
 frk_DE	Frankish (Germany)	Fränkisch			
 frm_FR	Middle French (ca. 1400-1600) (France)				
 fro_FR	Old French (842-ca. 1400) (France)				
@@ -9347,7 +9342,6 @@ nte_MZ	Nathembo (Mozambique)
 ntg_AU	Ngantangarra (Australia)				
 ntu_SB	Natügu (Solomon Islands)				
 ntw_US	Nottoway (United States)				
-nui_GQ	Ngumbi (Equatorial Guinea)				
 num_TO	Niuafo'ou (Tonga)				
 nuv_BF	Northern Nuni (Burkina Faso)				
 nuw_FM	Nguluwan (Micronesia)				
@@ -9617,7 +9611,6 @@ sxm_KH	Samre (Cambodia)
 sxo_ES	Sorothaptic (Spain)				
 sxu_DE	Upper Saxon (Germany)	Sächsisch			
 syc_TR	Classical Syriac (Turkey)	ܠܫܢܐ ܣܘܪܝܝܐ			
-syi_GA	Seki (Gabon)				
 sym_BF	Maya Samo (Burkina Faso)				
 syx_GA	Samay (Gabon)				
 szd_MY	Seru (Malaysia)				
@@ -11100,3 +11093,12 @@ acm_SE	Mesopotamian Arabic (Sweden)			94000
 syr_SE	Syriac (Sweden)			92000	
 swl_SE	Swedish Sign Language (Sweden)	svenskt teckenspråk		20000	
 tru_SE	Turoyo (Sweden)			17000	
+nmg_CM	Kwasio (Cameroon)			26000	
+syi_GA	Seki (Gabon)			5000	
+syi_GQ	Seki (Equatorial Guinea)			10000	
+nmg_GQ	Kwasio (Equatorial Guinea)			5000	
+fab_GQ	Fa D'ambu (Equatorial Guinea)			9000	
+bnm_GQ	Batanga (Equatorial Guinea)			5000	
+fpe_GQ	Fernando Po Creole English (Equatorial Guinea)			4000	
+nui_GQ	Ngumbi (Equatorial Guinea)			4000	
+bng_GQ	Benga (Equatorial Guinea)			3000	
