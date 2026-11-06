@@ -2143,7 +2143,7 @@ dgk	dagb1248	Dagba			Latn	34,000		sido1234	Yes
 djc	dard1243	Dar Daju Daju			Latn	34,000		west2501	Yes	
 mnf	mund1327	Mundani			Latn	34,000		mund1338	Yes	
 rmn	balk1252	Balkan Romani			Latn	34,000	rom	roma1329	Possibly	But probably want to use macrolanguage
-pbm	pueb1234	Mazatec, Puebla and Northeastern			Latn	33,800		teco1234	Yes	
+pbm	pueb1234	Puebla and Northeastern Mazatec			Latn	33,800		teco1234	Yes	
 gui	east2555	Eastern Bolivian Guaraní			Latn	33,700	grn	chir1295	Possibly	But probably want to use macrolanguage
 pha	pahn1237	Pa-Hng				33,610		pahe1240	Yes	
 ktz	juho1239	Ju/'hoan			Latn	33,600		juku1256	Yes	
@@ -5034,7 +5034,7 @@ kqc	doro1266	Doromu-Koki			Latn	1,500		manu1261	Yes
 kvm	kend1252	Kendem			Latn	1,500		kend1255	Yes	
 lgu	long1395	Longgu			Latn	1,500		mala1485	Yes	
 lmh	lamb1277	Lambichhong			Deva	1,500		book1242	Yes	
-maq	chiq1250	Mazatec			Latn	1,500		maza1295	Yes	
+maq	chiq1250	Chiquihuitlán Mazatec			Latn	1,500		maza1295	Yes	
 mkm	mokl1243	Moklen			Thai	1,500		moke1241	Yes	
 mmo	mang1404	Mangga Buang			Latn	1,500		mapo1247	Yes	
 mqp	mani1297	Manipa			Latn	1,500		west2853	Yes	

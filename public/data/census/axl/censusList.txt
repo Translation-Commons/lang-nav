@@ -11,6 +11,7 @@ axl.cd
 axl.cg
 axl.ck
 axl.cx
+axl.dz
 axl.fj
 axl.fo
 axl.gl
@@ -20,6 +21,7 @@ axl.ki
 axl.km
 axl.la
 axl.ma
+axl.mh
 axl.mm
 axl.mr
 axl.mv
@@ -28,8 +30,10 @@ axl.ne
 axl.nf
 axl.ng
 axl.no
+axl.pf
 axl.pn
 axl.qa
+axl.se
 axl.sg
 axl.sl
 axl.ss

@@ -1,0 +1,88 @@
+#nameDisplay		#name-spa	Mexico Indigenous 2020	#names for the following source	Mexico Indigenous 1970	Mexico Indigenous 1990	Mexico Indigenous 2000	Mexico Indigenous 2005	#notes
+#isoRegionCode	MX								
+#yearCollected			2020		1970	1990	2000	2005	
+#fullCountryPopulation					48,225,238	81,249,645	97,483,412	103,263,388	
+#population			119,976,584		40,057,728	71,054,467	86,848,255	93,077,145	
+#populationSource					https://web.archive.org/web/20070825063503/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mpob03&c=3180	https://web.archive.org/web/20070825063503/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mpob03&c=3180	https://web.archive.org/web/20070825063503/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mpob03&c=3180	https://web.archive.org/web/20070825063503/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mpob03&c=3180	
+#age			3+		5+	5+	5+	5+	
+#url			https://www.inegi.org.mx/sistemas/olap/consulta/general_ver4/MDXQueryDatos.asp?#Regreso&c=		https://web.archive.org/web/20070825062559/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mlen10&c=3337	https://web.archive.org/web/20070825062559/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mlen10&c=3337	https://web.archive.org/web/20070825062559/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mlen10&c=3337	https://web.archive.org/web/20070825062559/http://www.inegi.gob.mx/est/contenidos/espanol/rutinas/ept.asp?t=mlen10&c=3337	
+#collectorType			Government		Government	Government	Government	Government	
+#collectorName		INEGI							
+#languagesIncluded		Indigenous							
+Language Code	Language Name	Language Name (Spanish)							
+mul	Total	Total	119,976,584						
+mul	Does not speak indigenous language	No habla lengua indígena	112,497,368						
+mul	Speaks indigenous language	Habla lengua indígena	7,364,645	Total	3,111,415	5,282,347	6,044,547	6,011,202	
+nah	Nahuatl	Náhuatl	1,651,958	Náhuatl	799,394	1,197,328	1,448,936	1,376,026	
+myn/yua	#Maya	Maya	774,755	Maya	454,675	713,520	800,291	759,000	There are many Mayan languages in Mexico but this row probably refers to the largest spoken one, Yucatec Mayan
+myn/tzh	Tzeltal	Tseltal	589,144	Tzeltal	99,412	261,084	284,826	371,730	
+myn/tzo	Tzotzil	Tsotsil	550,274	Tzotzil	95,383	229,203	297,561	329,937	
+mixt1427	Mixtec	Mixteco	526,593	Lenguas mixtecas	233,235	386,874	446,236	423,216	
+zap	Zapotec	Zapoteco	490,845	Lenguas zapotecas	283,345	403,457	452,887	410,901	
+oto	Otomi	Otomí	298,861	Otomí	221,062	280,238	291,722	239,850	
+toto1252	Totonac	Totonaco	256,344	Totonaca	124,840	207,876	240,034	230,930	
+myn/ctu	Ch'ol	Ch'ol	254,715	Chol	73,253	128,240	161,766	185,299	
+maza1295	Mazatec	Mazateco	237,212	Mazateco	101,541	168,374	214,477	206,559	
+myn/hus	Huastec	Huasteco	168,729	Huasteco	66,091	120,739	150,257	149,532	
+maza1293	Mazahua	Mazahua	153,797	Mazahua	104,729	127,826	133,430	111,840	
+meph1234	Tlapanec	Tlapaneco	147,432	Tlapaneco	30,804	68,483	99,389	98,573	
+chin1484	Chinantec	Chinanteco	144,394	Lenguas chinantecas	54,145	109,100	133,374	125,706	
+tara1323/tsz	Tarascan	Tarasco	142,459	Purépecha	60,411	94,835	121,409	105,556	2 different codes in ISO, tsz and pua, also called Purépecha
+mixe1286	Mixe	Mixe	139,760	Mixe	54,403	95,264	118,924	115,824	
+mis	not specified	No especificado	114,571						
+tara1321	Tarahumara	Tarahumara	91,554	Tarahumara	25,479	54,431	75,545	75,371	
+zoqu1261	Zoque	Zoque	74,018	Zoque	27,140	43,160	51,464	54,004	
+myn/toj	Tojolabal	Tojolabal	66,953	Tojolabal	13,303	36,011	37,986	43,169	
+myn/chf	Chontal of Tabasco	Chontal de Tabasco	60,563	Chontal		36,267	38,561	36,578	
+hch	Huichol	Huichol	60,263	Huichol	6,874	19,363	30,686	35,724	
+amuz1254	Amuzgo	Amuzgo	59,884	Amuzgo	13,883	28,228	41,455	43,761	
+chat1268	Chatino	Chatino	52,076	Chatino	11,773	29,006	40,722	42,791	
+sout2975/tla	Southern Tepehuan	Tepehuano del sur	44,386	Tepehuano	5,617	18,469	25,544	31,681	
+mfy	Mayo	Mayo	38,507	Mayo	27,848	37,410	31,513	32,702	
+gulf1238/poi	Highland Popoluca	Popoluca de la Sierra	36,113						
+cora1260	Cora	Cora	33,226	Cora	6,242	11,923	16,410	17,086	
+triq1251	Trique	Triqui	29,545						
+yaq	Yaqui	Yaqui	19,376	Yaqui	7,084	10,984	13,317	14,162	
+huav1256	Huave	Huave	18,827	Huave	7,442	11,955	14,224	15,993	
+popo1293	Popolocan languages	Popoloca	17,274						
+cuic1234	Cuicatec	Cuicateco	12,961	Cuicateco	10,192	12,677	13,425	12,610	
+pame1260	Pame	Pame	11,924						
+myn/mam	Mam	Mam	11,369						
+myn/kjb	Q'anjob'al	Qíanjobíal	10,851						
+ntp	Northern Tepehuan	Tepehuano del norte	9,855						
+tepe1243	Tepehua	Tepehua	8,884						
+gulf1238	#Popoluca insufficiently specified	Popoluca insuficientemente especificado	8,427	Popoluca	27,818	31,254	38,477	36,406	
+tequ1244	Chontal of Oaxaca	Chontal de Oaxaca	5,613						
+pos	Sayultec	Sayulteco	4,765						
+cac	Chuj	Chuj	3,516						
+myn/knj	Akatek	Akateko	2,894						
+mul	Other indigenous languages ​​of America	Otras lenguas indígenas de América	2,453						
+pei	Chichimec Jonaz	Chichimeco Jonaz	2,364						
+ocu	Tlahuica	Tlahuica	2,238						
+var	Guarijío	Guarijío	2,139						
+	Chontal insufficiently specified	Chontal insuficientemente especificado	1,704						
+myn/kek	Q'eqchi'	Q'eqchi'	1,599						
+matl1258/mat	Matlatzinca	Matlatzinca	1,245						
+pia	Pima	Pima	1,037						
+coz	Chocho	Chocholteco	847						
+myn/lac	Lacandon	Lacandón	771						
+sei	Seri	Seri	723						
+myn/quc	K'iche'	Kíicheí	589						
+dih	Kumiai	Kumiai	495						
+myn/jac	Jakaltek	Jakalteko	481						
+poq	Texistepequeño	Texistepequeño	368						
+mul	Tepehuan insufficiently specified	Tepehuano insuficientemente especificado	317						
+ppi	Paipai	Paipai	231						
+ood	Papago	Pápago	203						
+ixc	Ixcatec	Ixcateco	195						
+coc	Cucapá	Cucapá	176						
+myn/cak	Kaqchikel	Kaqchikel	169						
+myn/mhc	Qato'k	Qato'k	126						
+myn/ixl	Ixil	Ixil	117						
+myn/ttc	Teko	Teko	78						
+plo	Oluteco	Oluteco	77						
+klb	Kiliwa	Kiliwa	76						
+zoqu1261	Ayapaneco	Ayapaneco	71						
+kic	Kickapoo	Kickapoo	63						
+myn/agu	Aguacatec	Awakateko	20						
+mul	Other languages	Otras lenguas		Otras lenguas	63,997	308,768	179,699	278,685	

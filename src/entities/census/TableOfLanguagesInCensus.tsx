@@ -107,6 +107,12 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         columns={[
           CodeColumn,
           {
+            key: 'Language ISO Code',
+            render: (object) => object.language?.ISO.code,
+            isInitiallyVisible: false,
+            columnGroup: 'Codes',
+          },
+          {
             key: 'Languages',
             render: (ent) => (
               <HoverableEntity ent={ent.language}>
