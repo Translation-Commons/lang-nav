@@ -1,0 +1,43 @@
+#codeDisplay		axl.pf
+#nameDisplay		AXL French Polynesia
+#isoRegionCode	PF	
+#yearCollected	2012	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	275,000	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+#languagesIncluded	All	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/pacifique/polfr.htm	
+#datePublished	2025-02-09	
+#dateAccessed	2026-10-01	
+#documentName	French Polynesia	
+#tableName	Ethnic composition	
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion	
+		
+Language Code	Language Name	Population
+tah	Tahitian	150,000
+fra	French	29,000
+fra	#French (Euronesians)	26,000
+pmt	Tuamotuan	22,000
+zho	#Mandarin Chinese / Hakka	13,000
+aut/tubu1240	Tubuaï	12,000
+mrq	North Marquesan	3,900
+mqm	South Marquesan	3,700
+mrv	Mangareva	2,400
+rar	Rarotongan	1,700
+rap	Rapanui	600
+rap	Rapanui	500
+tah	Tahitian	300
+pih	Pitcairn-Norfolk	300
+mul	Others	10,000

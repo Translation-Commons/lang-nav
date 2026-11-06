@@ -1,0 +1,74 @@
+#codeDisplay		axl.dz	axl.dz.home	axl.dz.friends	axl.dz.school	#ethnicity
+#nameDisplay		AXL Algeria	AXL Algeria, Home Languages	AXL Algeria, Languages with Friends	AXL Algeria, Languages at School	
+#isoRegionCode	DZ					
+#yearCollected		2004	1999	1999	1999	
+### Language Criteria ###						
+#languageUse	Speaks					
+#acquisitionOrder		L1				
+#domain		Home	Home	Friends	School	
+### Population Surveyed ###						
+#population		32,329,322	30,400,000	30,400,000	30,400,000	
+#responsesPerIndividual		1	1+	1+	1+	
+### Data Constraints ###						
+#quantity		count	percent	percent	percent	
+#geographicScope	whole country					
+#nationality	residents					
+#languagesIncluded	All					
+### Creator ###						
+#collectorType	Secondary					
+#presentedBy	AXL					
+### Source Document ###						
+#url	https://www.axl.cefan.ulaval.ca/afrique/algerie-1demo.htm					
+#datePublished	2024-04-20					
+#dateAccessed	2026-10-01					
+#documentName	Algeria					
+#tableName	Arabic speakers					
+#columnName	Ethnic group,Population,Language,Percentage,Linguistic lineage,Religion					
+						
+Language Code	Language Name	Population	at Home	with Friends	at School	Ethnic group (Algeria)
+ara/arq	Algerian Arabic	19,321,000	84.66%	87.50%	64.20%	Algerian Arabs
+kab	Kabyle	3,050,800	5.11%	2.84%	1.13%	Kabyles
+ara/arb	Classic Arabic		3.40%	6.81%	8.52%	
+ara/mey	hassaniyya	1,932,200				Bedouins of Hamyan
+shy	chaouia	1,728,800				Chaouias (Shawiya)
+ara/mey	hassaniyya	1,311,900				Bedouins of Tajakant
+tzm	tamazight	1,220,300				Berbers of the Middle Atlas
+ara/arq	Algerian Arabic	1,003,800				Arabized Berbers
+shi	Tashelhit	630,500				Ishilhayn Berbers (Northern Shilha)
+shi	Tashelhit	233,900				Berber shilha
+mzb	tumzabt	233,900				Berbers of Mzab (Mozabite)
+ara/mey	hassaniyya	203,390				Bedouins of the Ziban
+ara/mey	hassaniyya	163,710				Saharawi
+tzm	tamazight	138,810				Berbers of Ghardaia
+ara/ary	Moroccan Arabic	133,830				Moroccan Arabs
+ara/aao	Algerian Arab of the Sahara	101,690				Bedouins of Chaamba
+ara/mey	hassaniyya	101,690				Bedouins of Sidi
+ara/aao	Saharan Arab	101,690				Tamanrasset s
+grr	taznatit	66,910				Bedouins of Tuat
+ara/aao	Saharan Arab	61,020				Bedouins of Dui-Menia
+ara/mey	hassaniyya	61,000				Bedouins of Laghouat
+tzm	tamazight	61,000				Bedouins of Ruarha
+tzm	tamazight	61,000				Bedouins of Suafa
+tzm	tamazight	61,000				Berbers of Figig
+tzm	tamazight	61,000				Berbers of Menasser
+grr	taznatit	57,970				Berbers of Gourara
+ara/arq	Algerian Arabic	57,970				Berbers of Tougourt
+tmh/thv	tamahaq	31,350				Tamacheks hoggar (Tuaregs)
+tzm	tamazight	28,470				Bedouins of Nail
+tmh/thv	tamahaq	22,370				Tuaregs of Ajjer
+cnu	Chenoua	15,250				Chenouas
+tzm	Tamazight Tidikelt	14,240				Berbers of Tidikelt (Ibidites)
+ara/arz	Egyptian Arabic	13,220				Egyptian Arabs
+fra	French	10,170	46.59%	60.22%	85.22%	French
+hau	Hausa	8,750				Hausa (Tuareg)
+tjo	Temacine Tamazight -	6,100				Touggours
+oua	Tagargrent	5,000				Ouargla
+ara/acm	Iraqi Arabic	3,360				Iraqi Arabs
+rmq	Gypsy	3,360				Gypsies
+rus	Russian	2030				Russians
+dsq	Tadaksahak	1,800				Idaksahaks (Tuaregs)
+spa	Spanish	1,630				Spaniards
+bel	Belarusian	1020				Belarusians
+eng	English	610	2.27%	1.70%	2.84%	British
+fra	French	592				Jews
+deu	German				0.56%	

@@ -8124,7 +8124,6 @@ bab_SN	Bainouk-Gunyuño (Senegal)		EDL	1
 bdk_AZ	Budukh (Azerbaijan)		EDL	1	
 bjb_AU	Barngarla (Australia)		EDL	1	
 bjf_IL	Barzani Jewish Neo-Aramaic (Israel)		EDL	1	
-blv_DZ	Kibala (Algeria)		EDL	1	
 bog_ML	Malian Sign Language (Mali)		EDL	1	
 boi_US	Barbareño (United States)		EDL	1	
 bpt_AU	Barrow Point (Australia)		EDL	1	
@@ -8316,7 +8315,6 @@ sqh_NG	Shau (Nigeria)		EDL	1
 sqn_US	Susquehannock (United States)		EDL	1	
 sta_ZM	Settla (Zambia)		EDL	1	
 suz_IN	Sunwar (India)		Unverified Official	1	recognized_regional
-swl_SE	Swedish Sign Language (Sweden)	svenskt teckenspråk	EDL	1	
 sww_VU	Sowa (Vanuatu)		EDL	1	
 taa_US	Lower Tanana (United States)		Unverified Official	1	official_regional
 tau_US	Upper Tanana (United States)		Unverified Official	1	official_regional
@@ -8493,7 +8491,6 @@ aky_IN	Aka-Kol (India)		Other	1
 ama_BR	Amanayé (Brazil)		Other	1	
 amg_AU	Amurdak (Australia)		Other	1	
 aox_BR	Atorada (Brazil)		Other	1	
-apc_MX	Arabic, North Levantine Spoken (Mexico)	‫العامية‬	Other	1	
 api_BR	Apiaká (Brazil)		Other	1	
 apq_IN	A-Pucikwar (India)		Other	1	
 arb_EH	Arabic, Standard (Western Sahara)	العربية الفصحى	Other	1	
@@ -8785,7 +8782,7 @@ bjy_AU	Bayali (Australia)
 blb_SB	Bilua (Solomon Islands)				
 ble_GW	Balanta-Kentohe (Guinea-Bissau)				
 bll_US	Biloxi (United States)				
-blv_AO	Kibala (Angola)				
+blv_AO	Kibala (Angola)		EDL	1	
 bme_CF	Limassa (Central African Republic)				
 bmm_MG	Northern Betsimisaraka Malagasy (Madagascar)				
 bmn_PG	Bina (Papua New Guinea) (Papua New Guinea)				
@@ -8918,7 +8915,7 @@ dos_BF	Dogosé (Burkina Faso)
 drt_NL	Drents (Netherlands)				
 dru_TW	Rukai (Taiwan)				
 dsh_KE	Daasanach (Kenya)				
-dsq_ML	Tadaksahak (Mali)				
+dsq_ML	Tadaksahak (Mali)			170,000	
 dti_ML	Ana Tinga Dogon (Mali)				
 dtk_ML	Tene Kan Dogon (Mali)				
 dtn_ET	Daatsʼíin (Ethiopia)				
@@ -9265,7 +9262,6 @@ mpr_SB	Vangunu (Solomon Islands)
 mra_TH	Mlabri (Thailand)				
 mrm_VU	Merlav (Vanuatu)				
 mrn_SB	Cheke Holo (Solomon Islands)				
-mrq_PF	North Marquesan (French Polynesia)				
 mrt_NG	Marghi Central (Nigeria)				
 msc_GN	Sankaran Maninka (Guinea)				
 msh_MG	Masikoro Malagasy (Madagascar)				
@@ -11062,3 +11058,45 @@ hokk1242_TH	Hokkien (Thailand)			17600
 nan_TH	Min-nan (Thailand)			17600	
 hokk1242_BN	Hokkien (Brunei)			13300	
 nan_BN	Min-nan (Brunei)			13300	
+myn_MX	Mayan (Mexico)			2494197	
+oto_MX	Otomi (Mexico)			298861	
+mixt1427_MX	Mixtec (Mexico)			526593	
+toto1252_MX	Totonac (Mexico)			256344	
+maza1295_MX	Macatecan (Mexico)			237212	
+maza1293_MX	Mazahua (Mexico)			153797	
+meph1234_MX	Mephaa (Mexico)			147432	
+chin1484_MX	Chinantecan (Mexico)			144394	
+tara1323_MX	Tarascan (Mexico)			142459	
+mixe1286_MX	Mixe (Mexico)			139760	
+tara1321_MX	Tarahumaran (Mexico)			91554	
+zoqu1261_MX	Zoque (Mexico)			74089	
+rar_PF	Rarotongan (French Polynesia)			1700	
+rap_PF	Rapanui (French Polynesia)			1100	
+pih_PF	Pitcairn-Norfolk (French Polynesia)			300	
+mrq_PF	North Marquesan (French Polynesia)			3900	
+amuz1254_MX	Amuzgoan (Mexico)		Official	59884	
+chat1268_MX	Chatino (Mexico)		Official	40722	
+cora1260_MX	Coran (Mexico)		Official	33226	
+triq1251_MX	Trique (Mexico)		Official	23846	
+cuic1234_MX	Cuicatec (Mexico)		Official	10192	
+huav1256_MX	Huavean (Mexico)		Official	7442	
+pame1260_MX	Pamean (Mexico)		Official	11627	
+tepe1243_MX	Tepehua (Mexico)		Official	8321	
+kjb_MX	Q'anjob'al (Mexico)		Official	10851	
+tzm_DZ	Central Atlas Tamazight (Algeria)			1645820	
+rmq_DZ	Caló (Algeria)			3360	
+dsq_DZ	Tadaksahak (Algeria)			1800	
+eng_BQ	English (Caribbean Netherlands)		Official	21524	
+spa_BQ	Spanish (Caribbean Netherlands)		Official	18120	
+ita_SE	Italian (Sweden)			315647	
+ara_SE	Arabic (Sweden)			210431	
+por_SE	Portuguese (Sweden)			105216	
+rus_SE	Russian (Sweden)			105216	
+jpn_SE	Japanese (Sweden)			105216	
+pol_SE	Polish (Sweden)			105216	
+ukr_SE	Ukrainian (Sweden)			105216	
+nld_SE	Dutch (Sweden)			105216	
+acm_SE	Mesopotamian Arabic (Sweden)			94000	
+syr_SE	Syriac (Sweden)			92000	
+swl_SE	Swedish Sign Language (Sweden)	svenskt teckenspråk		20000	
+tru_SE	Turoyo (Sweden)			17000	
