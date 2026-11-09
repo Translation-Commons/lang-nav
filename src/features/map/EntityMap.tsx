@@ -17,11 +17,13 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
+import MapCountryLabels from './labels/MapCountryLabels';
+import useCountryNamesToggle from './labels/useCountryNamesToggle';
 import './map.css';
 import MapCentroids from './MapCentroids';
 import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
 import MapTerritories from './MapTerritories';
-import useMapZoom from './UseMapZoom';
+import useMapZoom, { MapTransform } from './UseMapZoom';
 import computeEntityBounds from './zoom/computeEntityBounds';
 import ZoomControls from './ZoomControls';
 
@@ -30,6 +32,8 @@ type Props = {
   maxWidth?: number;
   allowSidebar?: boolean;
   allowColorBar?: boolean;
+  /** Offer country names on this map, with a button to show or hide them. */
+  canShowCountryNames?: boolean;
 };
 
 const EntityMap: React.FC<Props> = ({
@@ -37,12 +41,18 @@ const EntityMap: React.FC<Props> = ({
   maxWidth = 2000,
   allowSidebar = false,
   allowColorBar = true,
+  canShowCountryNames = false,
 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
   const sortFunction = useSortFunction();
 
   const [zoomFactor, setZoomFactor] = useState(1);
+  const [mapTransform, setMapTransform] = useState<MapTransform | null>(null);
+  const onZoom = useCallback((factor: number, transform: MapTransform) => {
+    setZoomFactor(factor);
+    setMapTransform(transform);
+  }, []);
 
   const {
     containerRef: zoomContainerRef,
@@ -54,10 +64,11 @@ const EntityMap: React.FC<Props> = ({
   } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight,
-    onZoom: setZoomFactor,
+    onZoom,
   });
 
   const { colorBy, entType, pinned, updatePageParams } = usePageParams();
+  const countryNames = useCountryNamesToggle(canShowCountryNames);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapContainerWidth, setMapContainerWidth] = useState(800);
 
@@ -153,6 +164,7 @@ const EntityMap: React.FC<Props> = ({
         zoomOut={zoomOut}
         resetTransform={resetTransform}
         containerWidth={mapContainerWidth}
+        countryNames={countryNames.isAvailable ? countryNames : undefined}
       />
 
       <div className="MapColorBarAndZoomContainer">
@@ -188,6 +200,16 @@ const EntityMap: React.FC<Props> = ({
               allowSidebar={allowSidebar}
             />
           </div>
+
+          {/* Outside the zoomed content, so names are drawn at their real size and stay crisp. */}
+          {countryNames.isShown && mapTransform && (
+            <MapCountryLabels
+              transform={mapTransform}
+              zoomFactor={zoomFactor}
+              mapWidthPx={mapContainerWidth}
+              mapHeight={mapHeight}
+            />
+          )}
         </div>
 
         {colorBy !== Field.None && allowColorBar && (

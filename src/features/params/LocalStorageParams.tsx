@@ -13,9 +13,11 @@ export type LocalStorageParams = {
   localeSeparator: LocaleSeparator;
   brightness: PageBrightnessParams;
   languageCodeFormat: LanguageCodeFormat;
+  showMapCountryNames: boolean;
 
   setLocaleSeparator: (value: LocaleSeparator) => void;
   setLanguageCodeFormat: (value: LanguageCodeFormat) => void;
+  setShowMapCountryNames: (value: boolean) => void;
 };
 
 /** These parameters are saved in local storage and persist between sessions */
@@ -28,6 +30,11 @@ const useLocalStorageParams = (): LocalStorageParams => {
   );
   const { value: languageCodeFormat, setValue: setLanguageCodeFormat } =
     useStoredParams<LanguageCodeFormat>('languageCodeFormat', LanguageCodeFormat.Unset, 'local');
+  const { value: showMapCountryNames, setValue: setShowMapCountryNames } = useStoredParams<boolean>(
+    'showMapCountryNames',
+    true,
+    'local',
+  );
 
   return {
     localeSeparator,
@@ -35,6 +42,8 @@ const useLocalStorageParams = (): LocalStorageParams => {
     brightness,
     languageCodeFormat,
     setLanguageCodeFormat,
+    showMapCountryNames,
+    setShowMapCountryNames,
   };
 };
 
