@@ -7,16 +7,37 @@ export function connectOrthographies(
   writingSystems: Record<ScriptCode, WritingSystemData>,
   orthographies: OrthographyData[],
 ): void {
+  const missingLocales: string[] = [];
   orthographies.forEach((orthography) => {
     const language = languages[orthography.languageCode];
+    const writingSystem = writingSystems[orthography.scriptCode];
+
     if (language != null) {
       orthography.language = language;
       if (!language.orthographies) language.orthographies = [];
       language.orthographies.push(orthography);
+      if (
+        !language.writingSystems[orthography.scriptCode] &&
+        !!language.primaryWritingSystem &&
+        language.primaryWritingSystem?.ID !== orthography.scriptCode
+      ) {
+        // iku_Latn_CA	Inuktitut (Latin) (Canada, Latin)	Inuktitut	CLDR	42,674	official_regional
+        missingLocales.push(
+          [
+            `${language.ID}_${orthography.scriptCode}_${language.locales[0]?.territoryCode}`,
+            `${language.nameDisplay} (${writingSystem.nameDisplay ?? orthography.scriptCode}, ${language.locales[0]?.territory?.nameDisplay})`,
+            '\t\t\t', // No census or official support data available
+          ].join('\t'),
+        );
+        language.writingSystems[orthography.scriptCode] = writingSystem;
+      }
     }
 
-    const writingSystem = writingSystems[orthography.scriptCode];
-    if (writingSystem != null) orthography.writingSystem = writingSystem;
+    if (writingSystem != null) {
+      orthography.writingSystem = writingSystem;
+      if (!writingSystem.characters) writingSystem.characters = new Set();
+      orthography.baseCharacters?.split('').forEach((char) => writingSystem.characters!.add(char));
+    }
 
     // Update the name (we should do this in the compute step instead...)
     orthography.nameDisplay =
@@ -26,4 +47,6 @@ export function connectOrthographies(
       ')';
     orthography.names.push(orthography.nameDisplay);
   });
+
+  console.table('Please add these locales', missingLocales.join('\n'));
 }

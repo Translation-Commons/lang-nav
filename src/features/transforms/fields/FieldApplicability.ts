@@ -181,7 +181,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.PopulationPercentInBiggestDescendantLanguage,
         Field.PercentOfOverallLanguageSpeakers,
 
-        Field.Example,
+        Field.Characters,
       ];
     case EntityType.Census:
       return [
@@ -225,11 +225,11 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.Depth,
         Field.UnicodeVersion,
-        Field.Example,
+        Field.Characters,
         // Field.Literacy, Data not available yet
       ];
     case EntityType.Orthography:
-      return [Field.LanguagePrimary, Field.WritingSystem, Field.Example];
+      return [Field.LanguagePrimary, Field.WritingSystem, Field.Characters];
     case EntityType.Variant:
       return [
         Field.VariantType,

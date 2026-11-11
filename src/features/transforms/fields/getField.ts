@@ -210,7 +210,7 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
 
     case Field.Description:
       return ent.type === EntityType.Variant ? ent.description : undefined;
-    case Field.Example:
+    case Field.Characters:
       return getEntityCharacters(ent);
 
     default:

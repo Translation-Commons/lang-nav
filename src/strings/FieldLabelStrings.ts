@@ -147,8 +147,8 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
       return 'Date';
     case Field.Description:
       return 'Description';
-    case Field.Example:
-      return 'Example';
+    case Field.Characters:
+      return 'Characters';
 
     case Field.None:
       return 'None';
@@ -388,10 +388,11 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
       return 'The date associated with this territory.';
     case Field.Description:
       return 'A description of this entry.';
-    case Field.Example:
+    case Field.Characters:
+      if (entType === EntityType.Orthography) return 'The characters used in this orthography.';
       if (entType === EntityType.WritingSystem)
-        return 'A single character from this writing system.';
-      return 'An example of this entry, such as a character from a writing system.';
+        return 'The characters used in this writing system -- not all characters may be shown.';
+      return 'The characters this is written with.';
     case Field.None:
       return 'Not used.';
 

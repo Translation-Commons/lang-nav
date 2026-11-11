@@ -41,6 +41,7 @@ export interface WritingSystemData extends EntityBase {
   // Derived when combining data
   population?: number;
   populationOfDescendants?: number;
+  characters?: Set<string>;
 
   // References to other entities, filled in after loading the TSV
   primaryLanguage?: LanguageData;

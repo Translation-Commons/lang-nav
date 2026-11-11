@@ -88,7 +88,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.Date:
     case Field.None:
     case Field.Description:
-    case Field.Example:
+    case Field.Characters:
       return FieldGroup.Other;
     default:
       enforceExhaustiveSwitch(field);
