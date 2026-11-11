@@ -43,9 +43,11 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
         )}
         {children && children.length > 0 && (
           <DetailsField title="Child Organizations">
-            {children.map((child) => (
-              <HoverableEntityName key={child.ID} ent={child} />
-            ))}
+            <CommaSeparated limit={null}>
+              {children.map((child) => (
+                <HoverableEntityName key={child.ID} ent={child} />
+              ))}
+            </CommaSeparated>
           </DetailsField>
         )}
         {url && (
