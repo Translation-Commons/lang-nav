@@ -96,7 +96,7 @@ export function getExpectedCountOfPlatforms(dimension: DigitalSupportDimension):
     case DigitalSupportDimension.MachineTranslation:
       return 2; // gtranslate, ms translator
     case DigitalSupportDimension.AI:
-      return 1; // claude
+      return 4; // claude, grammarly, languagetool, quillbot
     default:
       enforceExhaustiveSwitch(dimension);
   }
