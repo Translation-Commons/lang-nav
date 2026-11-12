@@ -8,6 +8,7 @@ export function connectOrthographies(
   orthographies: OrthographyData[],
 ): void {
   const missingLocales: string[] = [];
+
   orthographies.forEach((orthography) => {
     const language = languages[orthography.languageCode];
     const writingSystem = writingSystems[orthography.scriptCode];
@@ -18,8 +19,8 @@ export function connectOrthographies(
       language.orthographies.push(orthography);
       if (
         !language.writingSystems[orthography.scriptCode] &&
-        !!language.primaryWritingSystem &&
-        language.primaryWritingSystem?.ID !== orthography.scriptCode
+        !!language.primaryWritingSystem && // Comment out for locales missing primary writing systems
+        language.primaryWritingSystem.ID !== orthography.scriptCode
       ) {
         // iku_Latn_CA	Inuktitut (Latin) (Canada, Latin)	Inuktitut	CLDR	42,674	official_regional
         missingLocales.push(
@@ -36,7 +37,9 @@ export function connectOrthographies(
     if (writingSystem != null) {
       orthography.writingSystem = writingSystem;
       if (!writingSystem.characters) writingSystem.characters = new Set();
-      orthography.baseCharacters?.split('').forEach((char) => writingSystem.characters!.add(char));
+      Array.from(orthography.baseCharacters ?? '').forEach((char) =>
+        writingSystem.characters!.add(char),
+      );
     }
 
     // Update the name (we should do this in the compute step instead...)
@@ -48,5 +51,10 @@ export function connectOrthographies(
     orthography.names.push(orthography.nameDisplay);
   });
 
-  console.table('Please add these locales', missingLocales.join('\n'));
+  if (missingLocales.length > 0) {
+    console.info(
+      'These language/writing system/territory combinations have orthographic data but do not have locale entries\n',
+      missingLocales.join('\n'),
+    );
+  }
 }
