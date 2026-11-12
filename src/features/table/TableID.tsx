@@ -22,6 +22,7 @@ enum TableID {
 
   Technologies, // 17
   Orthographies, // 18
+  Characters, // 19
 }
 
 export default TableID;
