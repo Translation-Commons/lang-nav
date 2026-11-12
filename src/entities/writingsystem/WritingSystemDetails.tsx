@@ -44,6 +44,11 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           </DetailsField>
         )}
         {sample && <DetailsField title="Sample">{sample}</DetailsField>}
+        {writingSystem.characters && (
+          <DetailsField title="Characters">
+            {Array.from(writingSystem.characters ?? []).join('\u200B')}
+          </DetailsField>
+        )}
         <DetailsField title="Unicode Support">
           {unicodeVersion != null ? (
             `since version ${unicodeVersion}`

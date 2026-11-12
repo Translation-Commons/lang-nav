@@ -43,12 +43,12 @@ export function connectEntitiesAndCreateDerivedData(
   connectStandardLanguages(languages);
   connectTerritoriesToParent(territories);
   connectWritingSystems(languages, territories, writingSystems);
-  connectOrthographies(languages, writingSystems, Object.values(orthographies));
   connectLocales(languages, territories, writingSystems, locales);
   connectVariants(variants, languages, locales);
   createFamilyLocales(languages, locales); // create them before regional locales
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
+  connectOrthographies(languages, writingSystems, Object.values(orthographies));
   connectKeyboards(
     keyboards,
     languages,

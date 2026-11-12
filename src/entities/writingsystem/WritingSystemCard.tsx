@@ -21,22 +21,12 @@ interface Props {
 }
 
 const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
-  const { population: populationRaw, sample } = writingSystem ?? {};
+  const { population: populationRaw } = writingSystem ?? {};
   const population = populationRaw != null && populationRaw >= 100 ? populationRaw : null;
 
   return (
     <>
-      <CardField field={Field.Example}>
-        {writingSystem ? (
-          sample?.trim() ? (
-            <span>{sample}</span>
-          ) : (
-            <Deemphasized>Not available</Deemphasized>
-          )
-        ) : (
-          <Skeleton className="h-4 w-full" />
-        )}
-      </CardField>
+      <CardEntityField field={Field.Characters} ent={writingSystem} />
 
       <CardField field={Field.WritingSystemScope}>
         {writingSystem ? (
@@ -70,7 +60,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           Field.WritingSystemScope,
           Field.LanguageList,
           Field.UnicodeVersion,
-          Field.Example,
+          Field.Characters,
         ]}
       />
     </>

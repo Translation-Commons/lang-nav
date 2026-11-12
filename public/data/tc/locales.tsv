@@ -8008,7 +8008,6 @@ dsn_ID	Dusner (Indonesia)	bahasa Dusner	EDL	6
 gma_AU	Gamberre (Australia)		EDL	6	
 lrg_AU	Larrakiya (Australia)		Official	41	 
 nor_BV	Norwegian (Bouvet Island)	norsk	Other	6	
-ota_RU	Ottoman Turkish (1500-1928) (Russia)	لسان عثمانى	Official	6	 
 tok_RU	Toki Pona (Russia)	toki pona	Official	6	
 ugb_AU	Kuku-Ugbanh (Australia)		EDL	6	
 uur_VU	Ura (Vanuatu) (Vanuatu)		EDL	6	
@@ -8089,7 +8088,6 @@ lrz_VU	Lemerig (Vanuatu)		EDL	2
 nha_AU	Nhanta (Australia)		EDL	2	
 nmp_AU	Nimanburru (Australia)		EDL	2	
 nmv_AU	Ngamini (Australia)		EDL	2	
-non_RU	Old Norse (Russia)	norrǿna	Official	2	
 nug_AU	Nungali (Australia)		EDL	2	
 por_GQ	Portuguese (Equatorial Guinea)	Português		20,000	official
 smu_KH	Somray (Cambodia)		EDL	2	
@@ -11102,3 +11100,76 @@ bnm_GQ	Batanga (Equatorial Guinea)			5000
 fpe_GQ	Fernando Po Creole English (Equatorial Guinea)			4000	
 nui_GQ	Ngumbi (Equatorial Guinea)			4000	
 bng_GQ	Benga (Equatorial Guinea)			3000	
+aat_Latn_GR	Arvanitic (Latin, Greece)				
+aii_Cyrl_IQ	Assyrian Neo-Aramaic (Cyrillic, Iraq)				
+aii_Latn_IQ	Assyrian Neo-Aramaic (Latin, Iraq)				
+ain_Latn_JP	Ainu (Latin, Japan)				
+azb_Latn_AZ	South Azerbaijani (Latin, Azerbaijan)				
+azj_Cyrl_RU	North Azerbaijani (Cyrillic, Russia)				
+bak_Latn_RU	Bashkir (Latin, Russia)				
+bdk_Cyrl_RU	Budukh (Cyrillic, Russia)				
+bel_Latn_BY	Belarusian (Latin, Belarus)				
+bhh_Hebr_IL	Bukharic (Hebrew, Israel)				
+btd_Latn_ID	Batak Dairi (Latin, Indonesia)				
+btm_Latn_ID	Batak Mandailing (Latin, Indonesia)				
+bts_Batk_ID	Batak Simalungun (Batak, Indonesia)				
+btx_Batk_ID	Batak Karo (Batak, Indonesia)				
+bxm_Latn_MN	Mongolia Buriat (Latin, Mongolia)				
+bxr_Latn_RU	Russia Buriat (Latin, Russia)				
+bxu_Cyrl_CN	China Buriat (Cyrillic, China)				
+bxu_Latn_CN	China Buriat (Latin, China)				
+byn_Latn_ER	Blin (Latin, Eritrea)				
+ckb_Latn_IQ	Central Kurdish (Latin, Iraq)				
+cmn_Latn_CN	Mandarin Chinese (Pinyin, China)				
+cnh_Mymr_MM	Haka Chin (Mon-Burmese, Myanmar)				
+cnr_Cyrl_ME	Montenegrin (Cyrillic, Montenegro)				
+crh_Latn_UA	Crimean Tatar (Latin, Ukraine)				
+ctd_Latn_MM	Tedim Chin (Latin, Myanmar)				
+dgl_Copt_SD	Dongolawi (Coptic, Sudan)				
+dgl_Latn_SD	Dongolawi (Latin, Sudan)				
+dgo_Arab_IN	Common Dogri (Arabic, India)				
+dyu_Nkoo_BF	Dyula (N’Ko, Burkina Faso)				
+emk_Nkoo_GN	Eastern Maninkakan (N’Ko, Guinea)				
+ess_Cyrl_US	Yupik (Cyrillic, United States)				
+fia_Copt_SD	Nobiin (Coptic, Sudan)				
+fia_Latn_SD	Nobiin (Latin, Sudan)				
+fub_Latn_NG	Adamawa Fulfulde (Latin, Nigeria)				
+gag_Cyrl_MD	Gagauz (Cyrillic, Moldova)				
+gan_Latn_CN	Gan Chinese (Latin, China)				
+gom_Latn_IN	Goan Konkani (Latin, India)				
+haj_Beng_IN	Hajong (Bengali, India)				
+hak_Latn_CN	Hakka Chinese (Latin, China)				
+jdt_Hebr_IL	Juhuri (Hebrew, Israel)				
+jdt_Latn_IL	Juhuri (Latin, Israel)				
+kaa_Latn_UZ	Kara-Kalpak (Latin, Uzbekistan)				
+kdr_Cyrl_UA	Karaim (Cyrillic, Ukraine)				
+kfr_Gujr_IN	Kachchi (Gujarati, India)				
+kjj_Cyrl_AZ	Khinalugh (Cyrillic, Azerbaijan)				
+lad_Latn_IL	Ladino (Latin, Israel)				
+mad_Java_ID	Madurese (Javanese, Indonesia)				
+mey_Latn_DZ	Hassaniyya (Latin, Algeria)				
+non_Latn_SE	Old Norse (Latin, Sweden)				
+omn_Linb_GR	Minoan (Linear B, Greece)				
+oss_Latn_RU	Iron Ossetic (Latin, Russia)				
+ota_Latn_TR	Ottoman Turkish (Latin, Turkey)				
+pga_Arab_SS	Sudanese Creole Arabic (Arabic, South Sudan)				
+pnb_Guru_PK	Western Panjabi (Gurmukhi, Pakistan)				
+rmn_Cyrl_IR	Balkan Romani (Cyrillic, Iran)				
+ron_Cyrl_RO	Romanian (Cyrillic, Romania)				
+ryu_Hira_JP	Okinawan (Hiragana, Japan)				
+swb_Latn_YT	Maore Comorian (Latin, Mayotte)				
+taj_Tibt_NP	Eastern Tamang (Tibetan, Nepal)				
+tgl_Tglg_PH	Tagalog (Baybayin, Philippines)				
+tkr_Cyrl_AZ	Tsakhur (Cyrillic, Azerbaijan)				
+tly_Arab_AZ	Talysh (Arabic, Azerbaijan)				
+tly_Cyrl_AZ	Talysh (Cyrillic, Azerbaijan)				
+ttt_Cyrl_AZ	Tat (Cyrillic, Azerbaijan)				
+tuk_Cyrl_TM	Turkmen (Cyrillic, Turkmenistan)				
+tzm_Latn_MA	Central Atlas Tamazight (Latin, Morocco)				
+uig_Latn_CN	Uyghur (Latin, China)				
+uum_Cyrl_UA	Urum (Cyrillic, Ukraine)				
+uzn_Cyrl_UZ	Northern Uzbek (Cyrillic, Uzbekistan)				
+xnz_Copt_EG	Mattoki (Coptic, Egypt)				
+zdj_Latn_KM	Ngazidja Comorian (Latin, Comoros)				
+zgh_Latn_MA	Standard Moroccan Tamazight (Latin, Morocco)				
+zsm_Arab_MY	Standard Malay (Arabic, Malaysia)				

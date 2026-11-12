@@ -131,7 +131,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Code]: alwaysTrue,
       [Field.Endonym]: alwaysTrue,
       [Field.Description]: alwaysTrue,
-      [Field.Example]: alwaysTrue,
+      [Field.Characters]: alwaysTrue,
       [Field.UnicodeVersion]: alwaysTrue,
       [Field.CLDRCoverage]: alwaysTrue,
       [Field.SourceType]: alwaysTrue,

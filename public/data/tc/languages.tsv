@@ -1838,7 +1838,7 @@ aat	arva1236	Arvanitic			Grek	50,000	sqi	sout3378	Possibly	But probably want to 
 atu	reel1238	Reel			Latn	50,000		nuer1245	Yes	
 bkh	bako1249	Bakoko			Latn	50,000		basa1289	Yes	
 bux	bogh1241	Boghom			Latn	50,000		bogh1240	Yes	
-bxr	russ1264	Russia Buriat		Spoken & Written		50,000	bua	buri1258	Probably not	It's just a country variant of the macrolanguage
+bxr	russ1264	Russia Buriat		Spoken & Written	Cyrl	50,000	bua	buri1258	Probably not	It's just a country variant of the macrolanguage
 cen	cenn1238	Cen			Latn	50,000		izer1242	Yes	
 csn	colo1249	Colombian Sign Language		Sign	Zxxx	50,000		west2886	Yes	
 cuu	taiy1242	Tai Ya			Lana	50,000		wudi1241	Yes	
@@ -2209,7 +2209,7 @@ eee	eeee1240	E	E			30,000		unun9894	Yes
 ekp	ekpe1253	Ekpeye			Latn	30,000		igbo1258	Yes	
 enu	enuu1235	Enu				30,000		bika1252	Yes	
 ifu	mayo1262	Mayoyao Ifugao			Latn	30,000		bata1319	Yes	
-ike	east2534	Eastern Canadian Inuktitut				30,000	iku	inui1246	Possibly	But probably want to use macrolanguage
+ike	east2534	Eastern Canadian Inuktitut			Cans	30,000	iku	inui1246	Possibly	But probably want to use macrolanguage
 iko	olul1245	Olulumo-Ikom			Latn	30,000		east2400	Yes	
 jib	jibu1239	Jibu			Latn	30,000		jibu1241	Yes	
 kgj	gama1251	Gamale Kham			Deva	30,000		gama1260	Yes	
@@ -4641,7 +4641,7 @@ tcn	tich1238	Tichurong			Tibt	2,420		dolp1238	Yes
 dor	dori1246	Dori'o			Latn	2,410		sout3198	Yes	
 pkh	pank1249	Pankhu			Latn	2,401		cent2005	Yes	
 bnb	book1241	Bookan			Latn	2,400		lowl1273	Yes	
-con	cofa1242	Cofán				2,400			Yes	
+con	cofa1242	Cofán			Latn	2,400			Yes	
 dmv	dump1242	Dumpas			Latn	2,400		dump1244	Yes	
 gdn	uman1240	Umanakaina			Latn	2,400		daga1274	Yes	
 klw	lind1248	Lindu			Latn	2,400		kula1284	Yes	
@@ -5201,7 +5201,7 @@ nmx	nama1266	Nama (Papua New Guinea)			Latn	1,200		nama1270	Yes
 nqm	ndom1245	Ndom	bahasa Ndom		Latn	1,200		kolo1268	Yes	
 nvm	nami1258	Namiae			Latn	1,200		bara1377	Yes	
 nwm	nyam1279	Nyamusa-Molo			Latn	1,200		lori1239	Yes	
-orh	oroq1238	Oroqen				1,200		nort3147	Yes	
+orh	oroq1238	Oroqen			Latn	1,200		nort3147	Yes	
 pkt	male1282	Maleng				1,200		chut1246	Yes	
 psw	port1285	Port Sandwich			Latn	1,200		port1295	Yes	
 sbg	sege1235	Seget			Latn	1,200		sege1236	Yes	
@@ -6515,7 +6515,7 @@ tra	tira1253	Tirahi			Arab	100		uncl1535	Yes, with caveat	Some sources report th
 tti	toba1266	Tobati	bahasa Enggros		Latn	100		east2911	Yes	
 twr	sout2971	Southwestern Tarahumara			Latn	100		uncl1537	Yes	
 ukq	ukwa1238	Ukwa			Latn	100		efik1244	Yes	
-umu	muns1251	Munsee	hulŭniixsuwáakan			100	del	comm1246	Possibly	But probably want to use macrolanguage
+umu	muns1251	Munsee	hulŭniixsuwáakan		Latn	100	del	comm1246	Possibly	But probably want to use macrolanguage
 vum	vumb1238	Vumbu			Latn	100		punu1240	Yes	
 wig	wikn1245	Wik-Ngathana			Latn	100		ngat1246	Yes	
 wii	mini1253	Minidien			Latn	100		wape1250	Yes	
@@ -6621,7 +6621,7 @@ ats	gros1243	Gros Ventre			Latn	55		arap1280	Yes
 kgg	kusu1250	Kusunda	Gemehaq gipan		Latn	55			Yes	
 mrx	mare1261	Maremgi	bahasa Maremgi		Latn	55		tora1268	Yes	
 lbz	lard1243	Lardil			Latn	54		tang1340	Yes	
-sux	sume1241	Sumerian	𒅴𒂠			53			Probably not	Historical langauge
+sux	sume1241	Sumerian	𒅴𒂠		Xsux	53			Probably not	Historical langauge
 zpk	tlac1240	Tlacolulita Zapotec			Latn	53	zap	amat1239	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 zmg	mart1254	Marti Ke			Latn	52		mari1418	Yes	
 byf	bete1261	Bete			Latn	51		bete1266	Yes	
@@ -7793,13 +7793,13 @@ olt	oldl1240	Old Lithuanian			Latn			lith1251	Probably not	Historical langauge
 omc	moch1259	Mochica			Latn				No	Extinct language
 ome	omej1234	Omejes						book1242	No	Declared non-existent by ISO
 omk	yuka1240	Omok			Cyrl			yuka1259	No	Extinct language
-omn	mino1236	Minoan						uncl1493	Probably not	Historical langauge
+omn	mino1236	Minoan			Lina			uncl1493	Probably not	Historical langauge
 omp		Old Manipuri			Mtei				Probably not	Historical langauge
 omr	oldm1244	Old Marathi			Modi			oldm1248	Probably not	Historical langauge
 omu	omur1241	Omurano			Latn				No	Extinct language
 omx	oldm1242	Old Mon			Mymr			moni1258	Probably not	Historical langauge
 omy		Old Malay					msa		Possibly	But probably want to use macrolanguage
-onw	oldn1245	Old Nubian						nobi1239	Probably not	Historical langauge
+onw	oldn1245	Old Nubian			Copt			nobi1239	Probably not	Historical langauge
 oos	oldo1234	Old Ossetic						osse1245	Probably not	Historical langauge
 osc	osca1245	Oscan			Ital			sabe1249	Probably not	Historical langauge
 osn	sund1255	Old Sundanese						sund1252	Probably not	Historical langauge
@@ -8004,9 +8004,9 @@ xgf	tong1329	Gabrielino-Fernandeño						serr1254	Yes, with caveat	Some sources 
 xgi		Garingbal		Spoken	Latn				No	Extinct language
 xgl		Galindan							Probably not	Historical langauge
 xgr	garz1234	Garza		Spoken				come1251	No	Extinct language
-xha		Harami							Probably not	Historical langauge
+xha		Harami			Sarb				Probably not	Historical langauge
 xhc		Hunnic							Probably not	Historical langauge
-xhd	hadr1235	Hadrami						sayh1236	Probably not	Historical langauge
+xhd	hadr1235	Hadrami			Sarb			sayh1236	Probably not	Historical langauge
 xhm	midd1376	Middle Khmer			Khmr			cent1989	Probably not	Historical langauge
 xhr	hemi1234	Hernican						osca1245	Probably not	Historical langauge
 xht	hatt1246	Hattic							Probably not	Historical langauge
@@ -8061,7 +8061,7 @@ xpx	sout3391	Southwestern Tasmanian		Spoken	Latn			west2205	No	Extinct language
 xpy		Puyo							Probably not	Historical langauge
 xpz	brun1235	Bruny Island Tasmanian		Spoken	Latn			sout1293	No	Extinct language
 xqa		Karakhanid							Probably not	Historical langauge
-xqt	qata1238	Qatabanian						sayh1236	Probably not	Historical langauge
+xqt	qata1238	Qatabanian			Sarb			sayh1236	Probably not	Historical langauge
 xrg		Minang			Latn				No	Extinct language
 xrm		Armazic			Cyrl				Probably not	Historical langauge
 xrn	arin1243	Arin			Cyrl			yeni1252	No	Extinct language

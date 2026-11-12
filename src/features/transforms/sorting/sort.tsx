@@ -122,7 +122,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Longitude:
     case Field.Latitude:
     case Field.Depth:
-    case Field.Example:
+    case Field.Characters:
     case Field.UnicodeVersion:
       return SortDirection.Ascending; // A to Z, min to max
     case Field.Date:

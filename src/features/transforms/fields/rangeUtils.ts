@@ -72,7 +72,7 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:
-    case Field.Example:
+    case Field.Characters:
       return convertAlphaToNumber(''); // 0
 
     // Not yet defined on a continuous scale
@@ -156,7 +156,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:
-    case Field.Example:
+    case Field.Characters:
       return convertAlphaToNumber('ZZZZZZZZZZ');
 
     // Not yet defined on a continuous scale

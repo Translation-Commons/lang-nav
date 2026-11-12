@@ -189,7 +189,7 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
     case Field.UnicodeVersion:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
-    case Field.Example:
+    case Field.Characters:
       return <OrthographyCharacters chars={getEntityCharacters(ent) ?? ''} />;
 
     case Field.VitalityMetascore:

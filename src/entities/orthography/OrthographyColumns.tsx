@@ -24,7 +24,7 @@ function getOrthographyColumns(): TableColumn<OrthographyData>[] {
     {
       key: 'Base Characters',
       render: (ent) => <span className="text-nowrap">{ent.baseCharacters}</span>,
-      field: Field.Example,
+      field: Field.Characters,
     },
   ];
 }

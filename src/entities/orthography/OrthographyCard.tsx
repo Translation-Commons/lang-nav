@@ -35,7 +35,7 @@ const OrthographyCard: React.FC<Props> = ({ orthography }) => {
         )}
       </CardField>
 
-      <CardField field={Field.Example}>
+      <CardField field={Field.Characters}>
         {orthography ? (
           orthography?.baseCharacters ? (
             <OrthographyCharacters chars={orthography.baseCharacters} />
@@ -54,7 +54,7 @@ const OrthographyCard: React.FC<Props> = ({ orthography }) => {
           Field.Code,
           Field.LanguagePrimary,
           Field.WritingSystem,
-          Field.Example,
+          Field.Characters,
         ]}
       />
     </>
