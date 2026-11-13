@@ -53,6 +53,7 @@ function ViewMap() {
       {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
       <EntityMap
         entities={filteredEntities}
+        canShowCountryNames
         allowSidebar={false /* turned off until we have a better UX plan for the sidebar */}
       />
       {entsWithoutCoordinates.length > 0 && (

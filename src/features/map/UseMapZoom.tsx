@@ -25,8 +25,11 @@ type UseMapZoomOptions = {
   mapHeight: number;
   /** Maximum zoom multiplier (default: 8) */
   maxZoomMultiplier?: number;
-  onZoom?: (zoomFactor: number) => void;
+  onZoom?: (zoomFactor: number, transform: MapTransform) => void;
 };
+
+/** Maps map coordinates to pixels in the container: pixelX = translateX + x * scale. */
+export type MapTransform = { translateX: number; translateY: number; scale: number };
 
 /** Zoom control handlers - shared with ZoomControls component */
 export type ZoomControlHandlers = {
@@ -159,7 +162,11 @@ export const useMapZoom = ({
         content.style.transformOrigin = '0 0';
 
         const baseScale = container.clientWidth / mapWidth;
-        onZoom?.(transform.k / baseScale);
+        onZoom?.(transform.k / baseScale, {
+          translateX: transform.x,
+          translateY: transform.y,
+          scale: transform.k,
+        });
 
         // Update visibleRange based on current transform
         const containerWidth = container.clientWidth;

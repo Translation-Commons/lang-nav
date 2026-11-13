@@ -152,6 +152,45 @@
   stroke: var(--color-button-primary);
 }
 
+.MapCountryLabels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* A solid pill keeps names readable over dots, coloured countries and dark mode. Size and
+   font are set inline by MapCountryLabels, which also uses them to space names apart. */
+.MapCountryLabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  color: var(--foreground);
+  line-height: 1;
+  white-space: nowrap;
+  animation: mapCountryLabelFadeIn 0.2s ease-out;
+}
+
+@keyframes mapCountryLabelFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .MapCountryLabel {
+    animation: none;
+  }
+}
+
 .MapTerritory {
   cursor: pointer;
 }
