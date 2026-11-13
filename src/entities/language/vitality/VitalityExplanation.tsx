@@ -20,7 +20,7 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
         <div>
           <div>UNESCO Endangerment: {getEndangermentLabel(unesco)}</div>
           <div>Normalized to a score of {unesco} out of 9.</div>
-          {lang.Glottolog.endangerment == null && (
+          {lang.UNESCO.endangerment == null && (
             <div>
               The endangerment is derived from languages contained by this one, not directly
               assigned.

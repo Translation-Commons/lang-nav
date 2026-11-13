@@ -22,10 +22,10 @@ const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     description: (
       <>
         This data was collected by Andrew Caines et al. as part of the Glottolog Data Explorer. It
-        contains data from the UNESCO Atlas of the World&apos;s Language in Danger published in 2010
-        with some additions and some potential coding errors (many have been withheld from this
-        display). See the host website from Glottolog at:{' '}
-        <ExternalLink href="https://cainesap.shinyapps.io/langmap/" />
+        contains data from the UNESCO <em>Atlas of the World&apos;s Language in Danger</em>{' '}
+        published in 2010 with additions for &quot;safe&quot; locales, some alterations, but also
+        some potential coding errors (many have been withheld from this display). See the host
+        website from Glottolog at: <ExternalLink href="https://cainesap.shinyapps.io/langmap/" />
       </>
     ),
     render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Glottolog} />,
@@ -38,8 +38,8 @@ const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     key: 'Endangerment (UNESCO 2010)',
     description: (
       <>
-        This data is from the 2010 edition of UNESCO&apos;s Atlas of the World&apos;s Language in
-        Danger. See the publication:
+        This data is from the 2010 edition of UNESCO&apos;s{' '}
+        <em>Atlas of the World&apos;s Language in Danger</em>. See the publication:{' '}
         <ExternalLink href="https://unesdoc.unesco.org/ark:/48223/pf0000187026" />.
       </>
     ),

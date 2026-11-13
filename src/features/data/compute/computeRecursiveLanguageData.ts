@@ -1,5 +1,5 @@
 import { computeDigitalSupportScores } from '@entities/language/digitalsupport/computeLanguageDigitalSupportScore';
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
 import averageCoordinates from '@shared/lib/averageCoordinates';
@@ -40,19 +40,23 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
     lang.vitality.iso = maxOf(descendants, (child) => child.vitality?.iso);
   }
 
-  // Propagate the endangerment of the largest child
-  // If the largest child doesn't have it, then ignore it, usually the largest child should be the least endangered.
-  // Endangerment data sometimes is available only for certain dialects so it may seem that the
-  // language group may be endangered when the primary dialects are just fine.
+  // Copy the endangerment score from the Glottolog & UNESCO sources
+  //
+  // If there is no direct endangerment assessment, infer it from the largest constituent language or dialect.
+  // Since both datasets are sparse we run the risk that a constituent dialect may make the broader
+  // language grouping appear endangered, when only the particular dialect is the one at risk -- for example,
+  // Jerrais is endangered and it is grouped until French in Glottolog, but French is not endangered.
+  // Thereby we only check the largest constituent dialect + we don't propagate this for languages -- but
+  // will propagate for intermediate groupings & language families.
   const biggestDescendant = maxBy(descendants, (child) => child.pop.overall);
   if (lang.Glottolog.endangerment != null) {
     lang.vitality.glottolog = lang.Glottolog.endangerment;
-  } else {
+  } else if (lang.scope !== LanguageScope.Language) {
     lang.vitality.glottolog = biggestDescendant?.vitality?.glottolog;
   }
   if (lang.UNESCO.endangerment != null) {
     lang.vitality.unesco = lang.UNESCO.endangerment;
-  } else {
+  } else if (lang.scope !== LanguageScope.Language) {
     lang.vitality.unesco = biggestDescendant?.vitality?.unesco;
   }
 

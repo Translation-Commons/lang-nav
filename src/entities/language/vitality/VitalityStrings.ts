@@ -39,14 +39,24 @@ export function parseEndangerment(input: string): UNESCOEndangerment | undefined
     case 'safe':
       return UNESCOEndangerment.Safe;
     case 'vulnerable':
+    case 'w':
+    case 'white':
       return UNESCOEndangerment.Vulnerable;
     case 'definitelyendangered':
+    case 'y':
+    case 'yellow':
       return UNESCOEndangerment.DefinitelyEndangered;
     case 'severelyendangered':
+    case 'o':
+    case 'orange':
       return UNESCOEndangerment.SeverelyEndangered;
     case 'criticallyendangered':
+    case 'r':
+    case 'red':
       return UNESCOEndangerment.CriticallyEndangered;
     case 'extinct':
+    case 'b':
+    case 'black':
       return UNESCOEndangerment.Extinct;
     default:
       return undefined;

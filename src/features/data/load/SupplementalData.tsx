@@ -6,7 +6,10 @@ import { addCensusData } from '../connect/connectCensuses';
 import { DataGetters } from '../context/useDataContext';
 
 import { CoreDataArrays } from './CoreData';
-import { loadEndangerment } from './extra_entities/GlottologData';
+import {
+  loadGlottologEndangerment,
+  loadUnescoEndangerment,
+} from './extra_entities/EndangermentData';
 import { loadCensusData } from './extra_entities/loadCensusData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
@@ -50,7 +53,8 @@ export async function loadSupplementalData(
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadLangTags(dataContext.getLanguage),
     loadLanguageScopeOverrides(dataContext.getLanguage),
-    loadEndangerment(dataContext.getLanguage),
+    loadGlottologEndangerment(dataContext.getLanguage),
+    loadUnescoEndangerment(dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();
