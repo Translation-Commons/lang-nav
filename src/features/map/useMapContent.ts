@@ -1,7 +1,6 @@
 import type { MapGeoJSONFeature } from 'maplibre-gl';
 import { useCallback, useMemo } from 'react';
 
-import usePagination from '@features/pagination/usePagination';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
@@ -31,17 +30,13 @@ function useMapContent({
   sizeScalar,
 }: Options) {
   const { entType, scaleBy, fieldFocus } = usePageParams();
-  const { getCurrentEntities } = usePagination<DrawableData>();
   const { getScale } = useScale({ ents: drawableEntities, scaleBy });
   const colorFunction = colorBy === Field.None ? null : getColor;
   const territories = useTerritoryContent({ drawableEntities, getColor: colorFunction, colors });
 
-  // Languages are many, so only the current page of them is placed.
-  const dotEntities = useMemo(
-    () =>
-      entType === EntityType.Language ? getCurrentEntities(drawableEntities) : drawableEntities,
-    [drawableEntities, getCurrentEntities, entType],
-  );
+  // Every entity gets a dot; for languages, which ones show depends on the view (see
+  // useRevealInView).
+  const dotEntities = drawableEntities;
   const dotEntitiesById = useMemo(
     () => new Map(dotEntities.map((ent) => [ent.ID, ent])),
     [dotEntities],
@@ -74,6 +69,7 @@ function useMapContent({
   return {
     dots,
     showTerritories: entType !== EntityType.Language,
+    showLabels: fieldFocus !== Field.None,
     territoryIds: territories.territoryIds,
     territoryFill: territories.territoryFill,
     getFeatureEntity,

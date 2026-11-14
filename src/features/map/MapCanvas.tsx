@@ -19,6 +19,7 @@ type Props = {
   content: ReturnType<typeof useMapContent>;
   colors: MapThemeColors;
   pinnedIds: string[];
+  minOrder: number;
   interactiveLayerIds: string[];
   cursor: string;
   onLoad: (map: MapLibreMapInstance) => void;
@@ -27,7 +28,14 @@ type Props = {
   onClick: (event: MapMouseEvent) => void;
 };
 
-const MapCanvas: React.FC<Props> = ({ content, colors, pinnedIds, onLoad, ...pointer }) => {
+const MapCanvas: React.FC<Props> = ({
+  content,
+  colors,
+  pinnedIds,
+  minOrder,
+  onLoad,
+  ...pointer
+}) => {
   // A new style only on theme change; react-map-gl re-adds the child layers on top of it.
   const mapStyle = useMemo(() => getBaseMapStyle(colors), [colors]);
 
@@ -54,7 +62,13 @@ const MapCanvas: React.FC<Props> = ({ content, colors, pinnedIds, onLoad, ...poi
           outlineColor={colors.text}
         />
       )}
-      <MapDotLayers dots={content.dots} pinnedIds={pinnedIds} colors={colors} />
+      <MapDotLayers
+        dots={content.dots}
+        pinnedIds={pinnedIds}
+        colors={colors}
+        minOrder={minOrder}
+        showLabels={content.showLabels}
+      />
     </MapLibreMap>
   );
 };

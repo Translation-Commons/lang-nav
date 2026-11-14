@@ -9,7 +9,7 @@ import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 import { useSortFunction } from '@features/transforms/sorting/sort';
 
-import { EntityData } from '@entities/types/EntityTypes';
+import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
 import DrawableData from './DrawableData';
 import getDrawableEntities from './getDrawableEntities';
@@ -20,6 +20,7 @@ import useMapContent from './useMapContent';
 import getEntityBounds from './view/getEntityBounds';
 import useMapCamera from './view/useMapCamera';
 import useMapPointer from './view/useMapPointer';
+import useRevealInView from './view/useRevealInView';
 import ZoomControls from './ZoomControls';
 
 const MapCanvas = lazy(() => import('./MapCanvas'));
@@ -41,7 +42,7 @@ const EntityMap: React.FC<Props> = ({
   allowSidebar = false,
   allowColorBar = true,
 }) => {
-  const { colorBy, entType, pinned, updatePageParams } = usePageParams();
+  const { colorBy, entType, limit, pinned, updatePageParams } = usePageParams();
   const sortFunction = useSortFunction();
   const colors = useMapThemeColors();
   const container = useContainerWidth();
@@ -54,6 +55,8 @@ const EntityMap: React.FC<Props> = ({
     [entities, sortFunction, entType, loadingStage],
   );
   const coloringFunctions = useColors({ ents: drawableEntities });
+  const entityBounds = useMemo(() => getEntityBounds(drawableEntities), [drawableEntities]);
+  const camera = useMapCamera(entityBounds);
   const content = useMapContent({
     drawableEntities,
     coloringFunctions,
@@ -61,9 +64,6 @@ const EntityMap: React.FC<Props> = ({
     mapWidthPx: container.width,
     sizeScalar: 1200 / maxWidth,
   });
-
-  const entityBounds = useMemo(() => getEntityBounds(drawableEntities), [drawableEntities]);
-  const camera = useMapCamera(entityBounds);
 
   const onClick = useCallback(
     (entity: DrawableData) => {
@@ -85,6 +85,13 @@ const EntityMap: React.FC<Props> = ({
   });
 
   const pinnedIds = allowSidebar ? pinned : NO_PINS;
+  // Languages are many, so the limit counts the ones in view rather than the whole list.
+  const minOrder = useRevealInView(
+    camera.map,
+    content.dots,
+    limit,
+    entType === EntityType.Language,
+  );
 
   return (
     <div ref={container.ref} className="EntityMap" style={{ maxWidth: maxWidth }}>
@@ -102,6 +109,7 @@ const EntityMap: React.FC<Props> = ({
               content={content}
               colors={colors}
               pinnedIds={pinnedIds}
+              minOrder={minOrder}
               interactiveLayerIds={interactiveLayerIds}
               onLoad={camera.onLoad}
               {...pointer}

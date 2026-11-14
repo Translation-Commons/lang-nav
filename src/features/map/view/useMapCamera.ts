@@ -57,7 +57,7 @@ function useMapCamera(entityBounds: LngLatBounds | null) {
     [map],
   );
 
-  return { onLoad, zoomIn, zoomOut, resetView };
+  return { map, onLoad, zoomIn, zoomOut, resetView };
 }
 
 export default useMapCamera;

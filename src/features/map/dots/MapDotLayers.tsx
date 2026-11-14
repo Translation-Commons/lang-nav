@@ -7,6 +7,7 @@ import { DOTS_LAYER_ID, DOTS_SOURCE_ID } from '../mapLayerIds';
 import type { MapThemeColors } from '../style/useMapThemeColors';
 
 import type { DotProperties } from './buildDotFeatures';
+import { getRevealedDotPaint, getRevealedLabelFilter } from './revealDots';
 
 // The page's own font stack, drawn by the browser so every script renders.
 const LABEL_FONTS = ['Avenir', 'Helvetica', 'Arial', 'sans-serif'];
@@ -15,9 +16,13 @@ type Props = {
   dots: FeatureCollection<Point, DotProperties>;
   pinnedIds: string[];
   colors: MapThemeColors;
+  /** Dots with a lower `order` are hidden; see useRevealInView. */
+  minOrder: number;
+  // Changing the label filter makes MapLibre reprocess every dot, so skip the layer when unused.
+  showLabels: boolean;
 };
 
-const MapDotLayers: React.FC<Props> = ({ dots, pinnedIds, colors }) => {
+const MapDotLayers: React.FC<Props> = ({ dots, pinnedIds, colors, minOrder, showLabels }) => {
   const isHovered: ExpressionSpecification = ['boolean', ['feature-state', 'hover'], false];
   const isPinned: ExpressionSpecification = ['in', ['get', 'id'], ['literal', pinnedIds]];
 
@@ -29,7 +34,7 @@ const MapDotLayers: React.FC<Props> = ({ dots, pinnedIds, colors }) => {
         filter={['get', 'hasDot']}
         layout={{ 'circle-sort-key': ['get', 'order'] }}
         paint={{
-          'circle-radius': ['*', ['get', 'radius'], ['case', isHovered, 1.5, 1]],
+          ...getRevealedDotPaint(minOrder),
           'circle-color': ['get', 'fillColor'],
           'circle-stroke-color': [
             'case',
@@ -37,29 +42,29 @@ const MapDotLayers: React.FC<Props> = ({ dots, pinnedIds, colors }) => {
             colors.primary,
             ['get', 'strokeColor'],
           ],
-          'circle-stroke-width': ['get', 'strokeWidth'],
-          'circle-radius-transition': { duration: 250 },
         }}
       />
-      <Layer
-        id="dot-labels"
-        type="symbol"
-        filter={['!=', ['get', 'label'], '']}
-        layout={{
-          'text-field': ['get', 'label'],
-          'text-font': LABEL_FONTS,
-          'text-size': ['get', 'labelSize'],
-          'text-anchor': ['case', ['get', 'hasDot'], 'top', 'center'],
-          'text-offset': ['array', 'number', 2, ['get', 'labelOffset']],
-          // Most important first, so when labels collide the bigger ones stay.
-          'symbol-sort-key': ['-', ['get', 'order']],
-        }}
-        paint={{
-          'text-color': colors.text,
-          'text-halo-color': colors.ocean,
-          'text-halo-width': 1,
-        }}
-      />
+      {showLabels && (
+        <Layer
+          id="dot-labels"
+          type="symbol"
+          filter={getRevealedLabelFilter(minOrder)}
+          layout={{
+            'text-field': ['get', 'label'],
+            'text-font': LABEL_FONTS,
+            'text-size': ['get', 'labelSize'],
+            'text-anchor': ['case', ['get', 'hasDot'], 'top', 'center'],
+            'text-offset': ['array', 'number', 2, ['get', 'labelOffset']],
+            // Most important first, so when labels collide the bigger ones stay.
+            'symbol-sort-key': ['-', ['get', 'order']],
+          }}
+          paint={{
+            'text-color': colors.text,
+            'text-halo-color': colors.ocean,
+            'text-halo-width': 1,
+          }}
+        />
+      )}
     </Source>
   );
 };
