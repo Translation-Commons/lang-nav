@@ -14,6 +14,8 @@ import {
 } from '@entities/orthography/character_inventory/CharacterInventoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 const useCharacterInventoryData: () => {
   sortedCounts: [string, number][];
   getCharColVisibility: (char: string, count: number) => boolean;
@@ -26,7 +28,10 @@ const useCharacterInventoryData: () => {
   const pageSort = useSortFunction();
   const { sortCharsBy, charVisibility, sortEntriesBy } = useCharacterInventoryParams();
 
-  const writingSystemFilterCode = parseFilterEntityID(writingSystemFilter).code;
+  const writingSystemFilterCode = parseFilterEntityID(
+    writingSystemFilter,
+    EntityType.WritingSystem,
+  ).code;
   const sortCharsFunction = useCallback(
     (a: [string, number], b: [string, number]) => {
       switch (sortCharsBy) {
@@ -37,7 +42,7 @@ const useCharacterInventoryData: () => {
         case SortCharsBy.Alphabetical:
           return a[0].localeCompare(b[0]);
         default:
-          return 0;
+          enforceExhaustiveSwitch(sortCharsBy);
       }
     },
     [sortCharsBy],
@@ -63,6 +68,8 @@ const useCharacterInventoryData: () => {
           return (currentCharsByEnt[b.ID]?.size ?? 0) - (currentCharsByEnt[a.ID]?.size ?? 0);
         case SortEntriesBy.CharacterCountInverse:
           return (currentCharsByEnt[a.ID]?.size ?? 0) - (currentCharsByEnt[b.ID]?.size ?? 0);
+        default:
+          enforceExhaustiveSwitch(sortEntriesBy);
       }
     },
     [pageSort, sortEntriesBy, currentCharsByEnt],
@@ -118,7 +125,7 @@ const useCharacterInventoryData: () => {
         case CharVisibility.ShowAll:
           return true;
         default:
-          return false;
+          enforceExhaustiveSwitch(charVisibility);
       }
     },
     [charVisibility, tenthHighestCount, currentConflicts, currentCommon],

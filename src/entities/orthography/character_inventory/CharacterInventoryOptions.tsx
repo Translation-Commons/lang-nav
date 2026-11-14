@@ -87,8 +87,9 @@ function getSortEntriesByLabel(option: SortEntriesBy, sortBy: string) {
     case SortEntriesBy.PageSort:
       return `Page Sort (${sortBy})`;
     case SortEntriesBy.CharacterCount:
+      return 'Character Count (descending)';
     case SortEntriesBy.CharacterCountInverse:
-      return 'Character Count';
+      return 'Character Count (ascending)';
   }
 }
 
