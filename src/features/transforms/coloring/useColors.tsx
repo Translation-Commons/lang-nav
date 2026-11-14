@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useDataVizParams } from '@features/params/DataVizParamsProvider';
 import usePageParams from '@features/params/usePageParams';
@@ -29,7 +29,10 @@ const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions =>
     scale: scale?.[Axis.Color],
   });
 
-  const applyColorGradient = getColorGradientFunction(colorGradient);
+  const applyColorGradient = useMemo(
+    () => getColorGradientFunction(colorGradient),
+    [colorGradient],
+  );
   const { getNormalizedValue } = normalizingFunctions;
 
   const getColor = useCallback(
