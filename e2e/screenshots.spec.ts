@@ -51,9 +51,19 @@ test.describe('screenshot tests', () => {
     );
   }
 
+  // The map draws with WebGL after the data loads, so wait for it to settle as well.
+  async function waitForMapsToDraw(page: Page) {
+    await page
+      .locator('.maplibregl-map[data-map-idle="true"]')
+      .first()
+      .waitFor({ timeout: 15_000 });
+    await expect(page.locator('.maplibregl-map:not([data-map-idle="true"])')).toHaveCount(0);
+  }
+
   test('intro page', async ({ page }) => {
     await page.goto('./intro');
     await page.getByText('Explore the world').waitFor();
+    await waitForMapsToDraw(page);
     await expect(page).toHaveScreenshot('intro-page.png');
   });
 
@@ -117,6 +127,7 @@ test.describe('screenshot tests', () => {
     await seedDeclinedConsent(page);
     await page.goto('./data?view=Map');
     await waitToFinishLoadingData(page);
+    await waitForMapsToDraw(page);
     await expect(page).toHaveScreenshot('data-page-map.png');
   });
 
@@ -128,6 +139,7 @@ test.describe('screenshot tests', () => {
     await waitToFinishLoadingData(page);
     const mapComponent = page.locator('.EntityMap');
     await mapComponent.waitFor({ state: 'visible' });
+    await waitForMapsToDraw(page);
     await expect(mapComponent).toHaveScreenshot('data-page-map-selection.png');
   });
 
@@ -172,6 +184,7 @@ test.describe('screenshot tests', () => {
     await page.goto('./intro');
     await page.getByText('Explore the world').waitFor();
     await page.getByRole('dialog', { name: 'Cookie consent' }).waitFor();
+    await waitForMapsToDraw(page);
     await expect(page).toHaveScreenshot('consent-banner.png');
   });
 });
