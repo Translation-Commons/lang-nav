@@ -8,16 +8,11 @@ import { Button } from '@shared/ui/button';
 type Props = {
   zoomIn: () => void;
   zoomOut: () => void;
-  resetTransform: () => void;
+  resetView: () => void;
   containerWidth?: number;
 };
 
-const ZoomControls: React.FC<Props> = ({
-  zoomIn,
-  zoomOut,
-  resetTransform,
-  containerWidth = 800,
-}) => {
+const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWidth = 800 }) => {
   const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
   return (
     <div
@@ -43,7 +38,7 @@ const ZoomControls: React.FC<Props> = ({
       <Button
         aria-label="Reset"
         className="cursor-pointer h-8 w-8"
-        onClick={resetTransform}
+        onClick={resetView}
         variant="secondary"
       >
         <Maximize2Icon />
