@@ -116,4 +116,10 @@ test.describe('screenshot tests', () => {
   test('Languages in Census Table', async ({ page }) => {
     await snapshotTable(page, `view=Details&cmpID=cldr.IN`, TableID.LanguagesInCensus);
   });
+  test('Character Inventory', async ({ page }) => {
+    await snapshotTable(
+      page,
+      `view=Reports&writingSystemFilter=Latin+%5BLatn%5D&reportID=` + ReportID.CharacterInventory,
+    );
+  });
 });
