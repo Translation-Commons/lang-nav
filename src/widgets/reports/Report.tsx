@@ -17,6 +17,7 @@ const ReportLanguagePaths = React.lazy(() => import('./ReportLanguagePaths'));
 const ReportLanguagePlurals = React.lazy(() => import('./ReportLanguagePlurals'));
 const ReportLanguageScopeIssues = React.lazy(() => import('./ReportLanguageScopeIssues'));
 const ReportLanguagesDubious = React.lazy(() => import('./ReportLanguagesDubious'));
+const ReportCharacterInventory = React.lazy(() => import('./ReportCharacterInventory'));
 const ReportLanguagesWithAmbiguousNames = React.lazy(
   () => import('./ReportLanguagesWithAmbiguousNames'),
 );
@@ -75,6 +76,8 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.VariantsAnnotationTool:
       return <ReportVariantsAnnotationTool />;
+    case ReportID.CharacterInventory:
+      return <ReportCharacterInventory />;
     default:
       enforceExhaustiveSwitch(reportID);
   }

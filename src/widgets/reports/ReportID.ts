@@ -17,6 +17,7 @@ enum ReportID {
   WritingSystemsLanguagesWithout,
   LanguagePlurals,
   EntitiesMissingFields, // Useful for all entities
+  CharacterInventory,
 }
 
 export default ReportID;

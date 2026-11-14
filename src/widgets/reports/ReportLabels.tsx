@@ -17,6 +17,7 @@ const ReportLabels: Record<ReportID, string> = {
   [ReportID.None]: 'Select a report or tool',
   [ReportID.VariantsAnnotationTool]: 'Annotation Tool',
   [ReportID.WritingSystemsLanguagesWithout]: 'Languages without Writing Systems',
+  [ReportID.CharacterInventory]: 'Character Inventory',
 };
 
 export default ReportLabels;
