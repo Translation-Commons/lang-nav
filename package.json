@@ -17,6 +17,8 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "engine:compile": "node --max-old-space-size=8192 scripts/compile-engine-snapshot.mjs",
+    "engine:compare": "vitest run --config vitest.engine.config.ts",
     "test:screenshots": "npx playwright test",
     "test:screenshots:update": "npx playwright test --update-snapshots",
     "update-previews": "npx playwright test --config scripts/preview-screenshots.config.ts"

@@ -49,3 +49,7 @@ public/diff/
 
 # Rollup visualizer output
 stats.html
+
+# Data engine snapshots (npm run engine:compile / engine:compare)
+.cache/engine/
+.cache/engine-compare/
