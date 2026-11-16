@@ -60,7 +60,6 @@ function parseLanguageLine(line: string): LanguageData {
   // No longer assuming all 3-letter language codes are valid ISO
   if (parentISOCode) {
     language.ISO.parentLanguageCode = parentISOCode;
-    language.BCP.parentLanguageCode = parentISOCode;
     language.UNESCO.parentLanguageCode = parentISOCode;
   }
   // if (code.length <= 3) {

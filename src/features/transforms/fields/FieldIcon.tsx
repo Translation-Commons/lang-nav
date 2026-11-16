@@ -155,7 +155,7 @@ export function getFieldIcon(field: Field): LucideIcon {
     // Other
     case Field.Date:
       return CalendarIcon;
-    case Field.Example:
+    case Field.Characters:
       return PencilLineIcon;
     case Field.None:
       return CircleDashedIcon;

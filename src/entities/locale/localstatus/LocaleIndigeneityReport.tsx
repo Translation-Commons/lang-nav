@@ -66,7 +66,7 @@ const LocaleIndigeneityReport: React.FC = () => {
         click the cycle button to accept a prediction, switch to the other state, or switch back to
         unknown. To save these changes to langnav, use the button at the bottom to copy the changed
         data and submit a PR to update{' '}
-        <ExternalLink href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
+        <ExternalLink href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/tc/indigeneity.tsv">
           indigeneity.tsv
         </ExternalLink>
         .

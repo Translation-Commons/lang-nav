@@ -1,6 +1,8 @@
 import { PinIcon, PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
+import CardTitle from '@widgets/cardlists/CardTitle';
+
 import ZIndex from '@features/layers/ZIndex';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -29,7 +31,12 @@ const MapCard: React.FC<{
         : { entID: drawnEntity.ID },
     );
 
-  let content: React.ReactNode = <EntityCard ent={drawnEntity} />;
+  let content: React.ReactNode = (
+    <div className="flex flex-col gap-2">
+      <CardTitle ent={drawnEntity} />
+      <EntityCard ent={drawnEntity} />
+    </div>
+  );
   if (drawnEntity.type === EntityType.Territory) {
     switch (entType) {
       case EntityType.Census:

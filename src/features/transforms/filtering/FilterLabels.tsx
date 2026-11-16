@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { POPULATION_MAX } from '@features/params/Profiles';
+import { DIGITAL_SUPPORT_MAX, POPULATION_MAX } from '@features/params/Profiles';
 import usePageParams from '@features/params/usePageParams';
 
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
@@ -37,6 +37,7 @@ export function useFilterLabels(): Record<FilterField, string> {
       [Field.Organization]: getOrganizationFilterLabel(params, getEntity),
       [Field.ISOStatus]: getISOStatusFilterLabel(params),
       [Field.Name]: getNameFilterLabel(params),
+      [Field.DigitalSupport]: getDigitalSupportFilterLabel(params),
     }),
     [params, getEntity],
   );
@@ -138,6 +139,19 @@ function getPopulationFilterLabel({
   return `with population ≥ ${populationMin.toLocaleString()} & ≤ ${populationMax.toLocaleString()}`;
 }
 
+function getDigitalSupportFilterLabel({
+  digitalSupportMin,
+  digitalSupportMax,
+}: PageParamsContextState): string {
+  const hasMin = digitalSupportMin != null && digitalSupportMin >= 0;
+  const hasMax =
+    digitalSupportMax != null && digitalSupportMax >= 0 && digitalSupportMax < DIGITAL_SUPPORT_MAX;
+  if (!hasMin && !hasMax) return 'any digital support level';
+  if (!hasMin) return `with digital support score ≤ ${digitalSupportMax.toLocaleString()}`;
+  if (!hasMax) return `with digital support score ≥ ${digitalSupportMin.toLocaleString()}`;
+  return `with digital support score ≥ ${digitalSupportMin.toLocaleString()} & ≤ ${digitalSupportMax.toLocaleString()}`;
+}
+
 function getOrganizationFilterLabel(
   { orgFilter }: PageParamsContextState,
   getEntity: (id: string) => EntityData | undefined,
@@ -168,10 +182,9 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.TerritoryScope:
       return 'Territory Type';
     case Field.TerritoryList:
-      if (entType === EntityType.WritingSystem) return 'Originated in...';
       return 'Found in...';
     case Field.WritingSystem:
-      if (entType === EntityType.WritingSystem) return 'Originated in...';
+      if (entType === EntityType.WritingSystem) return 'Originated from...';
       return 'Written in...';
     case Field.LanguageList:
       if (entType === EntityType.WritingSystem) return 'Is written for...';
@@ -179,7 +192,7 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
     case Field.LanguageFamily:
       return 'Language Family';
     case Field.SourceForLanguage:
-      return 'Language List & Formatting';
+      return 'Language List';
     case Field.ISOStatus:
       return 'ISO Status';
     case Field.Population:
@@ -190,6 +203,8 @@ export function getFilterTitle(field: FilterField, entType?: EntityType): string
       return 'Organization';
     case Field.Name:
       return 'Name';
+    case Field.DigitalSupport:
+      return 'Digital Support';
     default:
       enforceExhaustiveSwitch(field);
   }

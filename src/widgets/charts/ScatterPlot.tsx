@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import MapHoverCard from '@features/map/MapHoverCard';
+import { useDataVizParams } from '@features/params/DataVizParamsProvider';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
@@ -10,18 +11,24 @@ import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getTickMarks from '@features/transforms/getTickMarks';
+import { Axis, AxisScale } from '@features/transforms/scales/AxisScale';
+import getAxisScaleLabel from '@features/transforms/scales/getAxisScaleLabel';
+import getDefaultAxisScale from '@features/transforms/scales/getDefaultAxisScale';
 import useScale from '@features/transforms/scales/useScale';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
 import useNormalizedValues from '@features/transforms/useNormalizedValues';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
+import EnumDropdown from '@shared/ui/EnumDropdown';
+
 const ScatterPlot: React.FC = () => {
   const { chartX, chartY, scaleBy, colorBy, fieldFocus, updatePageParams } = usePageParams();
+  const { scale } = useDataVizParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
-  const xValue = useNormalizedValues({ ents, field: chartX });
-  const yValue = useNormalizedValues({ ents, field: chartY });
+  const xValue = useNormalizedValues({ ents, field: chartX, scale: scale?.[Axis.X] });
+  const yValue = useNormalizedValues({ ents, field: chartY, scale: scale?.[Axis.Y] });
   const coloring = useColors({ ents, colorBy });
   const scaling = useScale({ ents, scaleBy });
   const xTicks = getTickMarks(xValue, 200);
@@ -40,10 +47,12 @@ const ScatterPlot: React.FC = () => {
     <div>
       <div data-testid="scatter-plot" className="w-[600px] mx-auto relative">
         <div className="absolute top-1/2 left-[-20px] transform -rotate-90 -translate-y-1/2  -translate-x-1/2">
-          Y axis: <FieldDropdown pageParam="chartY" />
+          Y axis: <FieldDropdown pageParam="chartY" />{' '}
+          <ScaleDropdown axis={Axis.Y} field={chartY} />
         </div>
         <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
-          X axis: <FieldDropdown pageParam="chartX" />
+          X axis: <FieldDropdown pageParam="chartX" />{' '}
+          <ScaleDropdown axis={Axis.X} field={chartX} />
         </div>
         <svg viewBox="-12 -10 230 230">
           <g transform="translate(0, 0)">
@@ -110,11 +119,36 @@ const ScatterPlot: React.FC = () => {
       <div>
         {colorBy !== Field.None && <ColorBar coloringFunctions={coloring} />}
         <div className="flex items-center justify-center gap-2">
-          Colored by <FieldDropdown pageParam="colorBy" /> <ColorGradientSelector />
+          Colored by <FieldDropdown pageParam="colorBy" /> <ColorGradientSelector />{' '}
+          <ScaleDropdown axis={Axis.Color} field={colorBy} />
         </div>
       </div>
     </div>
   );
 };
+
+type ScaleDropdownProps = {
+  field: Field;
+  axis: Axis;
+};
+
+function ScaleDropdown({ field, axis }: ScaleDropdownProps) {
+  const { scale, setScale } = useDataVizParams();
+  const defaultScale = getDefaultAxisScale(field);
+  let currentScale = scale?.[axis];
+  if (currentScale == null || currentScale === AxisScale.Default) currentScale = defaultScale;
+  const onChange = setScale != null ? (scale: AxisScale) => setScale(axis, scale) : () => {};
+
+  return (
+    <EnumDropdown
+      value={currentScale}
+      options={Object.values(AxisScale).filter((v) => typeof v === 'number')}
+      onChange={onChange}
+      getLabel={(s) => getAxisScaleLabel(s, 'short')}
+      buttonClassname="min-w-10 w-12"
+      popupClassname="min-w-20"
+    />
+  );
+}
 
 export default ScatterPlot;

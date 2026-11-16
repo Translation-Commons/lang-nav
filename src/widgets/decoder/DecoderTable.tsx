@@ -31,9 +31,9 @@ const DecoderTable: React.FC = () => {
   return (
     <table className="h-fit">
       <thead>
-        <tr className="leading-[30px]">
+        <tr className="leading-[30px] text-left">
           <th className="min-w-30">Best Match</th>
-          <th>Alternatives</th>
+          <th className="min-w-100">Alternatives</th>
         </tr>
       </thead>
       <tbody>

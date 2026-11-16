@@ -21,7 +21,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
-import { LocaleSeparator, PageParams, SearchableField, View } from './PageParamTypes';
+import { PageParams, SearchableField, View } from './PageParamTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default
@@ -34,6 +34,7 @@ export enum ProfileType {
 }
 
 export const POPULATION_MAX = 10_000_000_000;
+export const DIGITAL_SUPPORT_MAX = 10;
 
 const GLOBAL_DEFAULTS: PageParams = {
   chartX: Field.None,
@@ -42,6 +43,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  digitalSupportMax: DIGITAL_SUPPORT_MAX,
+  digitalSupportMin: -1,
   entID: undefined,
   entType: EntityType.Language,
   fieldFocus: Field.None,
@@ -51,7 +54,6 @@ const GLOBAL_DEFAULTS: PageParams = {
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   languageSource: LanguageSource.Combined,
   limit: 20,
-  localeSeparator: LocaleSeparator.Underscore,
   modalityFilter: [],
   orgFilter: '',
   page: 1,

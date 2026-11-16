@@ -11,7 +11,7 @@ import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
 import type { TechSupportData } from '@entities/tech/TechnologyTypes';
-import { EntityBase, EntityType } from '@entities/types/EntityTypes';
+import { EntityBase, EntityRef, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -26,15 +26,20 @@ import type { LanguageISOStatus } from './vitality/VitalityTypes';
 import type { LanguageModality } from './writing/LanguageModality';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
-export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
 export enum LanguageSource {
   Combined = 'Combined', // All combined, with preferred values
   ISO = 'ISO', // ISO 639-3, 639-5
-  BCP = 'BCP', // ISO but preferring 639-1 codes
   UNESCO = 'UNESCO', //  limiting to languages in the UNESCO World Atlas of Languages
   Glottolog = 'Glottolog',
   CLDR = 'CLDR', // ISO but with some CLDR-specific aliasing
+}
+
+export enum LanguageCodeFormat {
+  Unset = 'Unset',
+  Prefer3LetterISO = 'Prefer3LetterISO',
+  Prefer2LetterISO = 'Prefer2LetterISO',
+  PreferGlottocode = 'PreferGlottocode',
 }
 
 // LanguageCode is ideally an ISO-639 code, or a BCP047 formatted complex language tag
@@ -60,6 +65,9 @@ export enum LanguageScope {
   SpecialCode = 1,
   // 0 is intentionally not included to avoid problems using truthy comparisons
 }
+
+export const isLanguageOrMacrolanguage = (scope?: LanguageScope): boolean =>
+  scope === LanguageScope.Language || scope === LanguageScope.Macrolanguage;
 
 // This field enumerates fields about the language that could have additional context.
 // Right now it's limited to just warnings, but it should also be used when adding
@@ -110,6 +118,7 @@ export interface LanguageData extends EntityBase {
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
+  standardReason?: string; // For macrolanguages, the reason why the standard language is the one indicated
 
   warnings: Partial<Record<LanguageField, string>>;
 
@@ -124,13 +133,15 @@ export interface LanguageData extends EntityBase {
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other entities, filled in after loading the TSV
+  parentLanguage?: LanguageData;
+  childLanguages: LanguageData[];
+  largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
+  standardLanguage?: EntityRef;
+
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
   orthographies?: OrthographyData[];
-  parentLanguage?: LanguageData;
-  childLanguages: LanguageData[];
-  largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
   variants?: VariantData[]; // links to IANA variants
   equivalentVariant?: VariantData; // eg. variant "newfound" === languoid "newf1239"
   keyboards?: KeyboardData[];
@@ -143,7 +154,6 @@ export interface LanguageData extends EntityBase {
     status?: LanguageISOStatus;
     retirementReason?: RetirementReason;
   };
-  BCP: LanguageDataInSource;
   UNESCO: LanguageDataInSource;
   Glottolog: LanguageDataInSource;
   CLDR: LanguageDataInSource & {
@@ -176,7 +186,6 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     // Source-specific data
     Combined: {},
     ISO: {},
-    BCP: {},
     UNESCO: {},
     Glottolog: {},
     CLDR: {},

@@ -1,14 +1,14 @@
 import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { CensusData } from '@entities/census/CensusTypes';
-import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import type { CensusData } from '@entities/census/CensusTypes';
+import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
-import { TechnologyData } from '@entities/tech/TechnologyTypes';
+import type { TechnologyData } from '@entities/tech/TechnologyTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { type EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 

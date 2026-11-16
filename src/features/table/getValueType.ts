@@ -57,7 +57,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:
-    case Field.Example:
+    case Field.Characters:
     case Field.None:
       return TableValueType.String;
 

@@ -1,63 +1,36 @@
 import { useCallback } from 'react';
 
-import useEntities from '@features/data/context/useEntities';
+import useCountries from '@features/data/context/useCountries';
+import { useDataContext } from '@features/data/context/useDataContext';
 import type { Suggestion } from '@features/params/Suggestion';
 import usePageParams from '@features/params/usePageParams';
-import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageScope } from '@entities/language/LanguageTypes';
-import { isTerritoryGroup } from '@entities/territory/TerritoryTypes';
-import { EntityData, EntityType } from '@entities/types/EntityTypes';
+import { isLanguageOrMacrolanguage } from '@entities/language/LanguageTypes';
 
-import getSearchableField from './getSearchableField';
-import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
-import HighlightedEntityField from './HighlightedEntityField';
+import { getTopMatches, toIntroSuggestion } from './introSuggestions';
 
 const GROUP_LIMIT = 5;
 
 export default function useIntroSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy } = usePageParams();
-  const languages = useEntities(EntityType.Language);
-  const territories = useEntities(EntityType.Territory);
+  const { languages } = useDataContext();
+  const countries = useCountries();
 
   return useCallback(
     async (query: string) => {
-      const toSuggestion = (group: string) => (ent: EntityData) => ({
-        entID: ent.ID,
-        searchString: getSearchableField(ent, searchBy),
-        label: <HighlightedEntityField ent={ent} field={searchBy} query={query} showOriginalName />,
-        group,
-        ent,
-      });
-      const countries = territories.filter(
-        (ent) => ent.type === EntityType.Territory && !isTerritoryGroup(ent.scope),
-      );
-
-      // No query yet: show the biggest languages and countries instead of an empty list.
-      if (!query) {
-        const topLanguages = languages.filter(
-          (ent) =>
-            ent.type === EntityType.Language &&
-            (ent.scope === LanguageScope.Language || ent.scope === LanguageScope.Macrolanguage),
-        );
-        return [
-          ...[...topLanguages]
-            .sort(sortByPopulation)
-            .slice(0, GROUP_LIMIT)
-            .map(toSuggestion('Languages')),
-          ...[...countries]
-            .sort(sortByPopulation)
-            .slice(0, GROUP_LIMIT)
-            .map(toSuggestion('Countries')),
-        ];
-      }
-
-      const matches = getSubstringFilterOnQuery(query, searchBy);
+      // Without a query, leave families and dialects out of the top languages.
+      const languageCandidates = query
+        ? languages
+        : languages.filter((lang) => isLanguageOrMacrolanguage(lang.scope));
       return [
-        ...languages.filter(matches).slice(0, GROUP_LIMIT).map(toSuggestion('Languages')),
-        ...countries.filter(matches).slice(0, GROUP_LIMIT).map(toSuggestion('Countries')),
+        ...getTopMatches(languageCandidates, query, searchBy, GROUP_LIMIT).map((ent) =>
+          toIntroSuggestion(ent, query, searchBy, 'Languages'),
+        ),
+        ...getTopMatches(countries, query, searchBy, GROUP_LIMIT).map((ent) =>
+          toIntroSuggestion(ent, query, searchBy, 'Countries'),
+        ),
       ];
     },
-    [languages, territories, searchBy],
+    [languages, countries, searchBy],
   );
 }

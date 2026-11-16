@@ -5,9 +5,9 @@ import {
   getDisconnectedMockedEntities,
   getMockedEntityDictionaries,
 } from '@features/__tests__/MockEntities';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageCodeFormat, LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
@@ -40,7 +40,9 @@ describe('updateEntitiesBasedOnDataParams', () => {
       [sjn, dori0123],
       Object.values(mockedDictionaries.locales),
       mockedDictionaries.territories['001'],
+      Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
+      LanguageCodeFormat.Prefer3LetterISO,
       LocaleSeparator.Hyphen,
     );
 
@@ -76,14 +78,18 @@ describe('updateEntitiesBasedOnDataParams', () => {
       [sjn, dori0123],
       [...Object.values(mockedDictionaries.locales), newLocale], // Include the new locale
       mockedDictionaries.territories['001'],
+      Object.values(mockedDictionaries.writingSystems),
       LanguageSource.Combined,
+      LanguageCodeFormat.Prefer3LetterISO,
       LocaleSeparator.Hyphen,
     );
 
     expect(sjn.pop.speaking.estimate).toBe(24000); // changed? is that right?
     expect(sjn.pop.speaking.descendants).toBe(100000); // this should be computed from dori0123
     expect(dori0123.pop.speaking.estimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
-    expect(sjn_001.pop.speaking.adjusted).toBe(11220); // unchanged
+    // Re-connecting replaced sjn_001 in the world, so this old object is no longer aggregated:
+    // a recompute resets it to its loaded value instead of keeping the previous run's sum.
+    expect(sjn_001.pop.speaking.unadjusted).toBe(10920);
+    expect(sjn_001.pop.speaking.adjusted).toBe(10920);
   });
 });

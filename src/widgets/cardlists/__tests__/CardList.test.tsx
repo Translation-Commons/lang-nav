@@ -54,7 +54,7 @@ describe('CardList', () => {
 
   it('renders a list of cards', () => {
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
 
     // These are the territories from the mocked data, sorted by population descending
     expect(cards[0]).toHaveTextContent('Arda');
@@ -69,7 +69,7 @@ describe('CardList', () => {
     setupMockParams({ limit: 2, page: 2 });
 
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
     expect(cards.length).toBe(2);
 
     expect(cards[0]).toHaveTextContent('Aman');
@@ -86,7 +86,7 @@ describe('CardList', () => {
     expect(meters.length).toBe(2); // One at top and one at bottom
 
     // Only the countries are shown
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
     expect(cards.length).toBe(4);
     expect(cards[0]).toHaveTextContent('Aman');
     expect(cards[1]).toHaveTextContent('Harad');
@@ -96,7 +96,7 @@ describe('CardList', () => {
 
   it('Cards can be opened by clicking on them', () => {
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
 
     // Click the first card (Arda)
     if (cards[0] instanceof HTMLElement) cards[0].click();
@@ -107,7 +107,7 @@ describe('CardList', () => {
 
   it('Clicking on interactive elements inside the card does not open the card', () => {
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
 
     // Add a button inside the first card for testing
     if (cards[0] instanceof HTMLElement) {
@@ -125,7 +125,7 @@ describe('CardList', () => {
 
   it('Cards can be accessed using keyboard navigation', () => {
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('CardInCardList');
+    const cards = container.querySelectorAll('[data-testid="large-card"]');
 
     // Focus the first card (Arda)
     if (cards[0] instanceof HTMLElement) {

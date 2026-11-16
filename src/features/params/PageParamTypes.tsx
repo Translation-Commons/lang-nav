@@ -24,23 +24,18 @@ export enum View {
 }
 
 export enum SearchableField {
-  CodeOrNameAny = 'Code & All Names',
+  CodeOrNameAny = 'Code or Any Name',
 
   Code = 'Code',
   CodeISO = 'ISO Code',
   CodeGlottolog = 'Glottolog Code',
 
-  NameAny = 'All Names',
+  NameAny = 'Any Name',
   NameEndonym = 'Endonym',
   NameDisplay = 'English Name', // Current name
   NameISO = 'ISO Name',
   NameCLDR = 'CLDR Name',
   NameGlottolog = 'Glottolog Name',
-}
-
-export enum LocaleSeparator {
-  Underscore = '_',
-  Hyphen = '-',
 }
 
 export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
@@ -52,6 +47,8 @@ export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
+  digitalSupportMax = 'digitalSupportMax',
+  digitalSupportMin = 'digitalSupportMin',
   entID = 'entID',
   entType = 'entType',
   fieldFocus = 'fieldFocus',
@@ -61,7 +58,6 @@ export enum PageParamKey {
   languageScopes = 'languageScopes',
   languageSource = 'languageSource',
   limit = 'limit',
-  localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
   orgFilter = 'orgFilter',
   page = 'page',
@@ -89,7 +85,6 @@ export type PageParams = {
   cmpID: string;
   columns: TableIDToBinarizedColumnVisibility;
   limit: number; // < 1 means show all
-  localeSeparator: LocaleSeparator;
   entID?: string;
   entType: EntityType;
   page: number; // 1 indexed
@@ -111,6 +106,8 @@ export type PageParams = {
   orgFilter: string;
   populationMax: number;
   populationMin: number;
+  digitalSupportMin: number;
+  digitalSupportMax: number;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   writingSystemFilter: string;

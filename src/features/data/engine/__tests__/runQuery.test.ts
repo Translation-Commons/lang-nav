@@ -77,7 +77,7 @@ describe('query engine filters', () => {
       filters: { territory: 'Germany', populationMin: 50 },
     });
     expect(plan.map((step) => step.name)).toEqual([
-      'search:Code & All Names',
+      'search:Code or Any Name',
       'connection:territory',
       'range:population',
     ]);

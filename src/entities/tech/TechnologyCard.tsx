@@ -1,46 +1,47 @@
 import React from 'react';
 
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
+import CardEntityField from '@widgets/cardlists/CardEntityField';
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
+
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import Field from '@features/transforms/fields/Field';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
-
-import EntityTitle from '@entities/ui/EntityTitle';
-
-import CardField from '@shared/containers/CardField';
+import { getLanguagesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 
 import { TechnologyData } from './TechnologyTypes';
 
-type Props = { tech: TechnologyData };
+type Props = { tech?: TechnologyData };
 
 const TechnologyCard: React.FC<Props> = ({ tech }) => {
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Code,
-    Field.Population,
-    Field.Organization,
-    // Field.LanguageList,
-  ]);
-
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <EntityTitle ent={tech} />
-      </div>
+    <>
+      <CardEntityField field={Field.Population} ent={tech} />
 
-      <CardField field={Field.Population}>
-        <EntityFieldDisplay ent={tech} field={Field.Population} />
-      </CardField>
+      <CardEntityField ent={tech} field={Field.Organization} />
 
-      <CardField field={Field.Organization}>
-        <EntityFieldDisplay ent={tech} field={Field.Organization} />
-      </CardField>
-
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={tech} field={field} />
+      {!tech && <CardEntityField field={Field.CountOfLanguages} />}
+      {(!!tech?.languageSupport || !!tech?.keyboards) && (
+        <CardField field={Field.CountOfLanguages}>
+          <HoverableEnumeration
+            items={getLanguagesRelevantToEntity(tech).map((lang) => (
+              <HoverableEntityName ent={lang} key={lang.ID} />
+            ))}
+          />
         </CardField>
-      ))}
-    </div>
+      )}
+
+      <CardExtraFields
+        ent={tech}
+        excludeFields={[
+          Field.Name,
+          Field.Code,
+          Field.Population,
+          Field.Organization,
+          Field.CountOfLanguages,
+        ]}
+      />
+    </>
   );
 };
 

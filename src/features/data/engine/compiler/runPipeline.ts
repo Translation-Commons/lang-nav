@@ -4,9 +4,9 @@ import {
   getCoreDataArrays,
   loadCoreDataArrays,
 } from '@features/data/load/loadCoreDataArrays';
-import type { LocaleSeparator } from '@features/params/PageParamTypes';
+import type { LocaleSeparator } from '@features/params/LocalStorageParams';
 
-import type { LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageCodeFormat, type LanguageSource } from '@entities/language/LanguageTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { type EntityData, EntityType } from '@entities/types/EntityTypes';
 
@@ -34,7 +34,15 @@ export async function runCorePipeline(
   const world = loaded.ents['001'] as TerritoryData | undefined;
   if (world == null) throw new Error('World territory 001 is missing');
   const updateStart = performance.now();
-  updateEntitiesBasedOnDataParams(core.languages, core.locales, world, source, localeSeparator);
+  updateEntitiesBasedOnDataParams(
+    core.languages,
+    core.locales,
+    world,
+    core.writingSystems,
+    source,
+    LanguageCodeFormat.Unset,
+    localeSeparator,
+  );
   return { source, core, loadMs, updateMs: performance.now() - updateStart };
 }
 

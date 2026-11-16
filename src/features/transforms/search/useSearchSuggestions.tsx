@@ -75,6 +75,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
       return (pageEntities || [])
         .filter(substringFilter)
+        .filter(filterBy[Field.SourceForLanguage])
         .map((ent) => ({ ent, distance: getMatchDistance(ent) }))
         .sort((a, b) => a.distance - b.distance)
         .slice(0, SUGGESTION_LIMIT)
@@ -97,7 +98,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
           };
         });
     },
-    [pageEntities, searchBy, getMatchDistance, getMatchGroup],
+    [pageEntities, searchBy, getMatchDistance, getMatchGroup, filterBy[Field.SourceForLanguage]],
   );
 
   return getSuggestions;

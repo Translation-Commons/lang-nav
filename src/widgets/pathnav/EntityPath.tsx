@@ -31,7 +31,6 @@ const EntityPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean
         break; // These all have parent/child data, continue
       case LanguageSource.CLDR:
       case LanguageSource.UNESCO:
-      case LanguageSource.BCP:
         // These sources do not support language families
         return null;
     }

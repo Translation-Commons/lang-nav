@@ -8,6 +8,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import type { LanguageData } from '../LanguageTypes';
 
@@ -15,9 +16,11 @@ import LanguagePopulationOfDescendants from './LanguagePopulationFromDescendants
 import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
 
 export const LanguagePopulationEstimate: React.FC<{
-  lang: LanguageData;
+  lang?: LanguageData;
   focus: PopulationFocus;
 }> = ({ lang, focus }) => {
+  if (!lang) return <Skeleton className="h-4 w-full" />;
+
   const speakingOrWriting = getSpeakingOrWritingFocus(lang, focus);
   const pop = lang.pop[speakingOrWriting];
 

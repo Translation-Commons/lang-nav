@@ -19,7 +19,7 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
     case EntityType.Census:
       return ent.population;
     case EntityType.WritingSystem:
-      return ent.populationUpperBound;
+      return ent.population;
     case EntityType.Territory:
       return ent.pop.overall;
     case EntityType.Variant:
@@ -193,7 +193,7 @@ export function getEntityPopulationWriting(ent: EntityData): number | undefined 
     case EntityType.Language:
       return ent.pop.writing.estimate;
     case EntityType.WritingSystem:
-      return ent.populationUpperBound;
+      return ent.population;
     case EntityType.Territory:
       return ent.pop.writing;
     case EntityType.Variant:

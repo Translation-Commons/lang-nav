@@ -6,11 +6,12 @@ import { connectEntitiesAndCreateDerivedData } from '@features/data/connect/conn
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
   getBaseLanguageData,
+  LanguageCodeFormat,
   LanguageData,
   LanguageScope,
   LanguageSource,
@@ -21,8 +22,6 @@ import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryType
 import { EntityDictionary, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
-
-import { toDictionary } from '@shared/lib/setUtils';
 
 export function getDisconnectedMockedEntities(): EntityDictionary {
   // Languages
@@ -303,7 +302,6 @@ export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays 
 export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
   ents: EntityDictionary;
   censuses: Record<string, CensusData>;
-  languagesBySource: Record<LanguageSource, Record<string, LanguageData>>;
   languages: Record<string, LanguageData>;
   locales: Record<string, LocaleData>;
   territories: Record<string, TerritoryData>;
@@ -312,19 +310,12 @@ export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
 } {
   const ents = inputEnts ?? getDisconnectedMockedEntities();
   const entsArray = Object.values(ents);
-  const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
-    Combined: toDictionary(
-      entsArray.filter((ent) => ent.type === EntityType.Language),
-      (ent) => ent.ID,
-    ),
-    BCP: {
-      sjn: ents.sjn as LanguageData,
-    },
-    ISO: {},
-    UNESCO: {},
-    Glottolog: {},
-    CLDR: {},
-  };
+  const languages: Record<string, LanguageData> = entsArray
+    .filter((ent) => ent.type === EntityType.Language)
+    .reduce<Record<string, LanguageData>>((acc, language) => {
+      acc[language.ID] = language;
+      return acc;
+    }, {});
   const territories: Record<string, TerritoryData> = entsArray
     .filter((ent) => ent.type === EntityType.Territory)
     .reduce<Record<string, TerritoryData>>((acc, territory) => {
@@ -358,8 +349,7 @@ export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
   return {
     ents,
     censuses,
-    languagesBySource,
-    languages: languagesBySource.Combined,
+    languages,
     locales,
     territories,
     writingSystems,
@@ -370,11 +360,11 @@ export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
 // Makes all of the symbolic connections between the various entities
 // Also creates the aggregated locales, eg. sjn_BE -> sjn_123 & -> sjn_001
 export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictionary {
-  const { ents, languagesBySource, territories, writingSystems, locales, variants, censuses } =
+  const { ents, languages, territories, writingSystems, locales, variants, censuses } =
     getMockedEntityDictionaries(inputEnts);
 
   connectEntitiesAndCreateDerivedData(
-    languagesBySource,
+    languages,
     territories,
     writingSystems,
     {}, // orthographies
@@ -390,7 +380,7 @@ export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictio
 
   // Usually does in the supplemental data load step, we will add censuses connections here
   addCensusData(
-    (id) => languagesBySource.Combined[id],
+    (id) => languages[id],
     (id) => locales[id],
     (id) => territories[id],
     {},
@@ -412,24 +402,27 @@ export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary)
 
   // Initial connections and algorithms
   connectMockedEntities(ents);
-  const { languagesBySource, locales } = getMockedEntityDictionaries(ents);
+  const { languages, locales, writingSystems } = getMockedEntityDictionaries(ents);
 
   // From DataContext
   const world = ents['001'] as TerritoryData;
   updateEntitiesBasedOnDataParams(
-    Object.values(languagesBySource.Combined) as LanguageData[],
+    Object.values(languages) as LanguageData[],
     Object.values(locales),
     world,
+    Object.values(writingSystems),
     LanguageSource.Combined,
+    LanguageCodeFormat.Prefer3LetterISO,
     LocaleSeparator.Hyphen,
   );
 
   // From SupplementalData
   computeContainedTerritoryStats(world);
   updatePopulations(
-    Object.values(languagesBySource.Combined) as LanguageData[],
+    Object.values(languages) as LanguageData[],
     Object.values(locales),
     world,
+    Object.values(writingSystems),
   );
   return ents;
 }

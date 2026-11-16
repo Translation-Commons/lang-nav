@@ -1,5 +1,5 @@
 import { PageParams } from '@features/params/PageParamTypes';
-import { POPULATION_MAX } from '@features/params/Profiles';
+import { DIGITAL_SUPPORT_MAX, POPULATION_MAX } from '@features/params/Profiles';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
@@ -37,6 +37,8 @@ function isFilterActive(field: FilterField, params: PageParams) {
       return params.territoryFilter !== '';
     case Field.ISOStatus:
       return params.isoStatus.length > 0;
+    case Field.DigitalSupport:
+      return params.digitalSupportMin >= 0 || params.digitalSupportMax < DIGITAL_SUPPORT_MAX;
     default:
       enforceExhaustiveSwitch(field);
   }

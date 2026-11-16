@@ -10,11 +10,11 @@ import type { SearchMode } from './QueryTypes';
 
 // Kept as literals so the engine does not import PageParamTypes at runtime; `satisfies` keeps them in sync
 export const SEARCH_MODE = {
-  CodeOrNameAny: 'Code & All Names',
+  CodeOrNameAny: 'Code or Any Name',
   Code: 'Code',
   CodeISO: 'ISO Code',
   CodeGlottolog: 'Glottolog Code',
-  NameAny: 'All Names',
+  NameAny: 'Any Name',
   NameEndonym: 'Endonym',
   NameDisplay: 'English Name',
   NameISO: 'ISO Name',

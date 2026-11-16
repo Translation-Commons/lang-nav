@@ -1,7 +1,7 @@
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
@@ -23,7 +23,7 @@ import { getDescendantsName, getEntityChildren } from './getParentsAndDescendant
  */
 const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   const { updatePageParams } = usePageParams();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   if (!ent) return null;
 
   // Get child nodes

@@ -1,7 +1,7 @@
 ISO 15924 (sortkey)	Display Name	Full Name	Endonym	First Unicode Version	Sample	RTL?	Language of Origin	Territory of Origin	Writing System Orig	Group of other writing systems	Scope
 Chis	Chisoi	Chisoi		17	𖶓	no	kyw	IN			Individual script
 Egyp	Egyptian hieroglyphs	Egyptian hieroglyphs		5.2	𓅓	no	egy	EG			Individual script
-Hani	Han characters	Han (Hanzi, Kanji, Hanja)		1.1	字	no	zho	CN			Group
+Hani	Han characters	Han (Hanzi, Kanji, Hanja)		1.1	字	no	zho	CN	Hanb	Hant, Hans	Group
 Invented	Invented	Recently invented in modern times									Group
 Maya	Mayan hieroglyphs	Mayan hieroglyphs					myn	GT			Individual script
 Pcun	Proto-Cuneiform	Proto-Cuneiform					sux	IQ			Individual script
@@ -141,14 +141,14 @@ Tfng	Tifinagh	Tifinagh (Berber)	ⵜⵉⴼⵉⵏⴰⵖ	4.1	ⵞ	no	zgh	MA	Phnx		In
 Sarb	Old South Arabian	Old South Arabian	𐩣𐩯𐩬𐩵	5.2	𐩠	Yes	xsa	YE	Psin		Individual script
 Ethi	Geʻez	Ethiopic (Geʻez)	ግዕዝ	3	አ	no	amh	ET	Sarb		Individual script
 Ugar	Ugaritic	Ugaritic		4	𐎀	no	uga	SY	Psin		Individual script
-Bopo	Bopomofo	Bopomofo	ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ	1.1	ㄅ	no	zho	CN	Hani		Individual script
-Hanb	Han with Bopomofo	Han with Bopomofo (alias for Han + Bopomofo)		1.1				CN	Hani	Hani, Bopo	Group
+Bopo	Bopomofo	Bopomofo	ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ	1.1	ㄅ	no	zho	CN	Hanb		Individual script
+Hanb	Han with Bopomofo	Han with Bopomofo (alias for Han + Bopomofo)		1.1				CN		Hani, Bopo	Group
 Hans	Simplified Han	Han (Simplified variant)	简化字	1.1	汉	no	zho	CN	Hani		Individual script
 Hant	Traditional Han	Han (Traditional variant)	正體字	1.1	漢	no	zho	CN	Hani		Individual script
-Hira	Hiragana	Hiragana	ひらがな	1.1	か	no	jpn	JP	Hani		Individual script
-Hrkt	Japanese syllabaries	Japanese syllabaries (alias for Hiragana + Katakana)		1.1				JP	Hani	Hira, Kana	Group
+Hira	Hiragana	Hiragana	ひらがな	1.1	か	no	jpn	JP	Hrkt		Individual script
+Hrkt	Japanese syllabaries	Japanese syllabaries (alias for Hiragana + Katakana)		1.1				JP	Jpan	Hira, Kana	Group
 Jpan	Japanese scripts	Japanese (alias for Han + Hiragana + Katakana)		1.1				JP	Hani	Hani, Hira, Kana	Group
-Kana	Katakana	Katakana	カタカナ	1.1	カ	no	jpn	JP	Hani		Individual script
+Kana	Katakana	Katakana	カタカナ	1.1	カ	no	jpn	JP	Hrkt		Individual script
 Kits	Khitan small script	Khitan small script		13	𘱥	no	zkt	CN	Hani		Individual script
 Jurc	Jurchen	Jurchen					juc	CN	Kits		Individual script
 Kitl	Khitan large script	Khitan large script					zkt	CN	Kits		Variation
@@ -170,8 +170,8 @@ Dupl	Duployan	Duployan shorthand, Duployan stenography	𛰜𛰃𛱇𛰚𛱄𛰊�
 Elba	Elbasan	Elbasan		7	𐔀	no	sqi	AL	Invented		Individual script
 Gara	Garay	Garay	Ⴞⴓⴚⴓⴐⴈ	16	𐵝	Yes	wol	SN	Invented		Individual script
 Gonm	Masaram Gondi	Masaram Gondi		10	𑴐	no	esg	IN	Invented		Individual script
-Hang	Hangul	Hangul (Hangŭl, Hangeul)	한글	1.1	가	no	kor	KR	Invented		Individual script
-Jamo	Jamo	Jamo (alias for Jamo subset of Hangul)		1.1			kor	KR	Hang		Variation
+Hang	Hangul	Hangul (Hangŭl, Hangeul)	한글	1.1	가	no	kor	KR	Kore		Individual script
+Jamo	Jamo	Jamo (alias for Jamo subset of Hangul)	ᄌ​ᅡ​ᄆ​ᅩ	1.1			kor	KR	Hang		Variation
 Hmng	Pahawh Hmong	Pahawh Hmong	𖬖𖬰𖬝𖬵 𖬄𖬶𖬟 𖬌𖬣𖬵	7	𖬜	no	hnj	LA	Invented		Individual script
 Hmnp	Nyiakeng Puachue Hmong	Nyiakeng Puachue Hmong	𞄀𞄩𞄰𞄁𞄓𞄱𞄂𞄤𞄳𞄬𞄃𞄤𞄳‎	12	𞄈	no	mww	US	Invented		Individual script
 Kali	Kayah Li	Kayah Li	ꤊꤢꤛꤢ꤭ ꤜꤟꤤ꤬	5.1	ꤊ	no	eky	MM	Invented		Individual script
@@ -189,7 +189,7 @@ Pauc	Pau Cin Hau	Pau Cin Hau		7	𑫀	no	ctd	MM	Invented		Individual script
 Piqd	Klingon	Klingon (KLI pIqaD)	 				tlh	US	Invented		Individual script
 Sara	Sarati	Sarati					qya	GB	Invented		Individual script
 Teng	Tengwar	Tengwar					qya	GB	Sara		Individual script
-Sgnw	SignWriting	SignWriting		8	𝡐	no	ase	US	Invented		Individual script
+Sgnw	Sign Writing	SignWriting		8	𝡐	no	ase	US	Invented		Individual script
 Shaw	Shavian	Shavian (Shaw)	𐑖𐑱𐑝𐑾𐑯 𐑨𐑤𐑓𐑩𐑚𐑧𐑑	4	𐑐	no	eng	GB	Invented		Individual script
 Sora	Sora Sompeng	Sora Sompeng	𑃐𑃦𑃝𑃗 𑃐𑃦𑃖𑃛𑃣𑃗	6.1	𑃐	no	srb	IN	Invented		Individual script
 Sunu	Sunuwar	Sunuwar		16	𑯄	no	suz	NP	Invented		Individual script

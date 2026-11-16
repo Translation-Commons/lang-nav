@@ -1,4 +1,4 @@
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -44,7 +44,8 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
     territoryCode,
     scriptCode,
     variantCodes,
-    officialStatus: (parts[5] || undefined) as OfficialStatus | undefined,
+    // The TSV has padded values like "official_regional " that match no status.
+    officialStatus: (parts[5]?.trim() || undefined) as OfficialStatus | undefined,
     pop: {
       speaking: {
         unadjusted: population,

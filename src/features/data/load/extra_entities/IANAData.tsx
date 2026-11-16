@@ -1,4 +1,4 @@
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
@@ -110,7 +110,7 @@ export function parseIANAVariant(input: string): VariantData | null {
 
 // TODO support complex variants like zh-Latn-pinyin or oc-lengadoc-grclass
 export function addIANAVariantLocales(
-  languagesBCP: LanguageDictionary,
+  languages: LanguageDictionary,
   locales: Record<StandardLocaleCode, LocaleData>,
   variants: VariantDictionary | void,
 ): void {
@@ -121,7 +121,7 @@ export function addIANAVariantLocales(
       if (prefix === 'sgn-ase') return; // known bad data
 
       const localeParts = parseLocaleCode(prefix);
-      const iso639_3 = languagesBCP[localeParts.languageCode]?.ID;
+      const iso639_3 = languages[localeParts.languageCode]?.ID;
       if (!iso639_3) return; // Shouldn't happen, but just in case
       localeParts.languageCode = iso639_3;
 

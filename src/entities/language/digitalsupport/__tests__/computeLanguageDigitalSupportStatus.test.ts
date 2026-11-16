@@ -10,7 +10,7 @@ import {
   getCLDRCoverage,
   getDigitalSupportStatus,
   getDigitalSupportStatusSeverity,
-  getInterfacePlatforms,
+  getTechsForLanguage,
 } from '../computeLanguageDigitalSupportStatus';
 import {
   DigitalSupportDimension,
@@ -19,7 +19,10 @@ import {
   WikipediaStatus,
 } from '../DigitalSupportTypes';
 
-function getPlatformSupport(name: string): TechSupportData {
+function getPlatformSupport(
+  name: string,
+  scope: TechScope = TechScope.OperatingSystem,
+): TechSupportData {
   return {
     languageCodePath: 'tst',
     name,
@@ -30,7 +33,7 @@ function getPlatformSupport(name: string): TechSupportData {
       codeDisplay: name,
       nameDisplay: name,
       names: [name],
-      scope: TechScope.OperatingSystem,
+      scope: scope,
       organizationCode: 'Apple',
     },
   };
@@ -111,10 +114,12 @@ describe('getDigitalSupportStatus', () => {
     });
 
     it('names the provider when supported', () => {
-      const lang = getLanguage({ techSupport: [getPlatformSupport('GTranslate')] });
+      const lang = getLanguage({
+        techSupport: [getPlatformSupport('GTranslate', TechScope.MachineTranslation)],
+      });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.MachineTranslation)).toEqual({
-        status: DigitalSupportStatus.Supported,
-        label: 'Google Translate',
+        status: DigitalSupportStatus.Partial,
+        label: 'GTranslate',
       });
     });
   });
@@ -246,7 +251,7 @@ describe('getDigitalSupportStatus', () => {
     it('is not supported when every category is missing', () => {
       expect(getDigitalSupportStatus(getLanguage(), DigitalSupportDimension.Overall)).toEqual({
         status: DigitalSupportStatus.NotSupported,
-        label: '0 of 5 categories supported',
+        label: '0 of 6 categories supported',
       });
     });
 
@@ -257,20 +262,38 @@ describe('getDigitalSupportStatus', () => {
       });
       expect(getDigitalSupportStatus(lang, DigitalSupportDimension.Overall)).toEqual({
         status: DigitalSupportStatus.Partial,
-        label: '1 of 5 categories supported',
+        label: '1 of 6 categories supported',
       });
     });
   });
 });
 
-describe('getInterfacePlatforms', () => {
+describe('getTechsForLanguage', () => {
   it('lists the four operating systems that the data covers', () => {
-    expect(getInterfacePlatforms(getLanguage()).map(({ techShortName }) => techShortName)).toEqual([
-      'win11',
-      'Android',
-      'macOS',
-      'iOS',
-    ]);
+    const lang = getLanguage({
+      techSupport: [
+        getPlatformSupport('win11'),
+        getPlatformSupport('Android'),
+        getPlatformSupport('macOS'),
+        getPlatformSupport('iOS'),
+      ],
+    });
+    expect(
+      getTechsForLanguage(lang, TechScope.OperatingSystem).map(
+        ({ techShortName }) => techShortName,
+      ),
+    ).toEqual(['win11', 'Android', 'macOS', 'iOS']);
+  });
+
+  it('does not list operating systems that the data does not cover', () => {
+    const lang = getLanguage({
+      techSupport: [getPlatformSupport('win11'), getPlatformSupport('macOS')],
+    });
+    expect(
+      getTechsForLanguage(lang, TechScope.OperatingSystem).map(
+        ({ techShortName }) => techShortName,
+      ),
+    ).toEqual(['win11', 'macOS']);
   });
 });
 

@@ -24,7 +24,7 @@ import useFilters from './useFilters';
 /**
  * Returns a combined function that will filter entites by other entities they are connected to.
  */
-export function getFilterByConnections({
+export function useFilterByConnections({
   lang = true,
   territory = true,
   writing = true,

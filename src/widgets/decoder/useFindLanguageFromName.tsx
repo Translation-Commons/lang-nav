@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import LoadingStage from '@features/data/context/LoadingStage';
 import { useDataContext } from '@features/data/context/useDataContext';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
@@ -17,10 +18,11 @@ type FindLanguage = (searchString: string) => Promise<LanguageData[]>;
 
 const useFindLanguage = (): FindLanguage => {
   const getDecoderSuggestions = useDecoderSuggestions();
-  const { getLanguage } = useDataContext();
+  const { getLanguage, loadingStage } = useDataContext();
 
   const findLanguage: FindLanguage = useCallback(
     async (searchString: string) => {
+      if (loadingStage < LoadingStage.AlgorithmsFinished) return [];
       const searchLower = searchString.toLowerCase().trim();
       if (searchLower === '' || searchLower.startsWith('#')) return [];
 
@@ -42,7 +44,7 @@ const useFindLanguage = (): FindLanguage => {
 
       return suggestions.filter((l) => l != null) as LanguageData[];
     },
-    [getDecoderSuggestions, getLanguage],
+    [getDecoderSuggestions, getLanguage, loadingStage],
   );
 
   return findLanguage;

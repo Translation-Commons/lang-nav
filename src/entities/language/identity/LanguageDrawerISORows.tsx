@@ -25,10 +25,10 @@ const LanguageDrawerISORows: React.FC<Props> = ({ lang }) => {
     <>
       <DrawerDetailsField
         label="ISO Status"
-        hasData={!!ISO.status || ISO.scope === LanguageScope.Family}
+        hasData={ISO.status != null || ISO.scope === LanguageScope.Family}
       >
-        {ISO.status || ISO.scope === LanguageScope.Family
-          ? ISO.status
+        {ISO.status != null || ISO.scope === LanguageScope.Family
+          ? ISO.status != null
             ? getLanguageISOStatusLabel(ISO.status)
             : getLanguageScopeLabel(ISO.scope)
           : 'Not in ISO'}

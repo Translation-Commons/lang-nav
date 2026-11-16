@@ -2,9 +2,11 @@ import React, { ReactNode } from 'react';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
+import { cn } from '@shared/lib/utils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
@@ -15,7 +17,7 @@ import TableValueType from './TableValueType';
 
 type Props<T> = {
   visibleColumns: TableColumn<T>[];
-  ents: T[];
+  ents: (T | undefined)[];
   tableID: TableID;
 };
 
@@ -32,7 +34,7 @@ function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }
         </thead>
         <tbody>
           {ents.map((ent, i) => (
-            <tr key={ent.ID || i}>
+            <tr key={ent?.ID || i}>
               {visibleColumns.map((column, idx) => {
                 const valueType = getValueTypeForColumn(column);
                 // The pin column (idx 0) and the first data column (idx 1) stay pinned to the
@@ -42,10 +44,14 @@ function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }
                 return (
                   <td
                     key={column.key}
-                    className={isSticky ? `${valueType} alwaysVisible` : valueType}
-                    style={{ maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
+                    className={cn(isSticky && `alwaysVisible`, valueType, 'px-2 py-1')}
+                    style={{ maxWidth: MAX_COLUMN_WIDTH }}
                   >
-                    <FormattedContent content={column.render(ent)} valueType={valueType} />
+                    {ent ? (
+                      <FormattedContent content={column.render(ent)} valueType={valueType} />
+                    ) : (
+                      column.key !== 'Pin' && <Skeleton className="my-1 h-4 w-full" />
+                    )}
                   </td>
                 );
               })}

@@ -17,7 +17,7 @@ const CardField: React.FC<Props> = ({ children, field }) => {
   const description = getFieldDescription(field, entType);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em', gap: '0.5em' }}>
+    <div className="flex items-center gap-2">
       <span
         aria-label={(title ?? field) + ': ' + description}
         style={{ display: 'inline-flex', verticalAlign: 'middle' }}

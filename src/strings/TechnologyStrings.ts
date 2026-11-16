@@ -10,10 +10,12 @@ export function parseTechScope(scope: string): TechScope {
     case 'application':
     case 'app':
       return TechScope.Application;
-    case 'machinelearning':
-    case 'machinelearningmodel':
-    case 'ml':
-      return TechScope.MachineLearningModel;
+    case 'machinetranslation':
+    case 'mt':
+      return TechScope.MachineTranslation;
+    case 'artificialintelligence':
+    case 'ai':
+      return TechScope.AI;
     case 'inputmethod':
     case 'input':
       return TechScope.InputMethod;
@@ -33,8 +35,10 @@ export function getTechScopeLabel(scope: TechScope): string {
       return 'Product';
     case TechScope.Application:
       return 'Application';
-    case TechScope.MachineLearningModel:
-      return 'Machine Learning Model';
+    case TechScope.MachineTranslation:
+      return 'Machine Translation';
+    case TechScope.AI:
+      return 'AI';
     case TechScope.InputMethod:
       return 'Input Method';
     case TechScope.Database:

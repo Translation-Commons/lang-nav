@@ -21,19 +21,21 @@ export async function loadOrthographies(): Promise<OrthographyDictionary | void>
         if (!languageCode || !scriptCode || !baseCharacters) return;
 
         // There could be multiple orthographies with the same writing system.
-        const baseID = `${languageCode}_${scriptCode}`;
+        const baseCode = `${languageCode}_${scriptCode}`;
         let instanceCount = 1;
-        let ID = baseID;
-        while (result[ID] != null) {
-          if (result[ID].baseCharacters == baseCharacters) return;
-          ID = `${baseID}_${++instanceCount}`;
+        let code = baseCode;
+        // Prefixed like org. and tech.: a bare srp_Latn would replace the locale in the entity map.
+        while (result[`orth.${code}`] != null) {
+          if (result[`orth.${code}`].baseCharacters == baseCharacters) return;
+          code = `${baseCode}_${++instanceCount}`;
         }
+        const ID = `orth.${code}`;
 
         const nameDisplay = `${languageCode} (${scriptCode})`;
         result[ID] = {
           type: EntityType.Orthography,
           ID,
-          codeDisplay: ID,
+          codeDisplay: code,
           nameDisplay,
           names: [nameDisplay],
           instance: instanceCount,

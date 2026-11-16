@@ -11,7 +11,6 @@ const LanguageSourceSelector: React.FC = () => {
         LanguageSource.Combined,
         LanguageSource.Glottolog,
         LanguageSource.ISO,
-        LanguageSource.BCP,
         LanguageSource.CLDR,
       ]}
       paramKey="languageSource"

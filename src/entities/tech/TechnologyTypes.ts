@@ -6,11 +6,12 @@ import { EntityBase, EntityType } from '@entities/types/EntityTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export enum TechScope {
-  Unknown,
+  Unknown = '',
   OperatingSystem = 'OS', // eg. Android, iOS
   Product = 'Product', // eg. Telegram, Facebook
   Application = 'App', // Telegram for iOS, Facebook for Android
-  MachineLearningModel = 'ML', // eg. Google Translate
+  MachineTranslation = 'MT', // eg. Google Translate
+  AI = 'AI', // eg. Claude
   InputMethod = 'Input', // eg. GBoard
   Database = 'DB', // eg CLDR
 }

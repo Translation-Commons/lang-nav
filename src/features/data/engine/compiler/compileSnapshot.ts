@@ -1,4 +1,4 @@
-import type { LocaleSeparator } from '@features/params/PageParamTypes';
+import type { LocaleSeparator } from '@features/params/LocalStorageParams';
 import { getDefaultParams } from '@features/params/Profiles';
 
 import type { LanguageSource } from '@entities/language/LanguageTypes';

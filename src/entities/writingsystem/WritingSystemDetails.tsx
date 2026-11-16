@@ -5,7 +5,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -23,7 +23,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
     languages,
     localesWhereExplicit,
     parentWritingSystem,
-    populationUpperBound,
+    population,
     primaryLanguage,
     primaryLanguageCode,
     rightToLeft,
@@ -32,7 +32,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
     territoryOfOrigin,
     unicodeVersion,
   } = writingSystem;
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   return (
     <div className="Details">
@@ -44,6 +44,11 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           </DetailsField>
         )}
         {sample && <DetailsField title="Sample">{sample}</DetailsField>}
+        {writingSystem.characters && (
+          <DetailsField title="Characters">
+            {Array.from(writingSystem.characters ?? []).join('\u200B')}
+          </DetailsField>
+        )}
         <DetailsField title="Unicode Support">
           {unicodeVersion != null ? (
             `since version ${unicodeVersion}`
@@ -51,16 +56,15 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             <em>Not supported by Unicode</em>
           )}
         </DetailsField>
-        {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspicious and probably spurious
+        {(population ?? 0) > 100 && ( // Values less than 100 are suspicious and probably spurious
           <DetailsField
             title={
               <>
-                Population (Upper Bound
-                <PopulationWarning />)
+                Population (<PopulationWarning />)
               </>
             }
           >
-            <CountOfPeople count={populationUpperBound} />
+            <CountOfPeople count={population} />
           </DetailsField>
         )}
       </DetailsSection>

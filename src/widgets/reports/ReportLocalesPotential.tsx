@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import usePagination from '@features/pagination/usePagination';
 import useAllFilters from '@features/transforms/filtering/useAllFilters';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import getLocaleExportString from '@entities/locale/potential/getLocaleExportString';
@@ -64,7 +64,7 @@ const SubReport: React.FC<{
 }> = ({ tab, localeSets }) => {
   const locales = localeSets[tab];
   const filter = useAllFilters();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const { getCurrentEntities } = usePagination<LocaleData>();
 
   const getExportLocales = useCallback(

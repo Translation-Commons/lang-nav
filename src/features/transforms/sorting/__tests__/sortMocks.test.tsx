@@ -171,7 +171,6 @@ describe('getSortByParameterized', () => {
     expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       '001',
       '123',
-      'Teng',
       'AM',
       'HA',
       'BE',
@@ -180,6 +179,7 @@ describe('getSortByParameterized', () => {
       'tolkorth', // Potential population same as sjn
       'sjn_123',
       'sjn_001',
+      'Teng',
       'sjn_BE',
       'sjn_Teng_BE',
       'sjn_Teng_123',
@@ -209,6 +209,7 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_123',
       'sjn_Teng_001',
       'sjn_BE', // increased because of the be0590 locale
+      'Teng',
       'sjn',
       'tolkorth',
       'sjn_123',
@@ -217,7 +218,6 @@ describe('getSortByParameterized', () => {
       'be0590',
       'HA',
       'AM',
-      'Teng',
       '123',
       '001',
     ]);
@@ -260,11 +260,11 @@ describe('getSortByParameterized', () => {
     expect(ents.sort(sort).map((ent) => toIDandValue(ent, field))).toEqual([
       '001            48124.0',
       '123            28524.0',
-      'Teng           26500.0',
       'AM             19600.0',
       'HA             15444.0',
       'BE             10800.0',
       'sjn            10194.0',
+      'Teng           10194.0',
       'sjn_123        10194.0',
       'sjn_001        10194.0',
       'sjn_BE         8370.0',
@@ -503,7 +503,6 @@ describe('getSortByParameterized', () => {
       'BE',
       'be0590',
       'sjn_BE',
-      'Teng',
       'sjn_Teng_BE',
       'dori0123',
       'ER', // Eriador
@@ -511,6 +510,7 @@ describe('getSortByParameterized', () => {
       'dori0123_ER',
       'HA', // Harad
       '123', // Middle Earth
+      'Teng',
       'sjn_123',
       'sjn_Teng_123',
       'dori0123_123',
@@ -535,7 +535,6 @@ describe('getSortByParameterized', () => {
       'be0590', // Beleriand
       'sjn_BE',
       'sjn_Teng_BE',
-      'Teng',
       'sjn', // Eriador
       'sjn_ER',
       'dori0123_ER',
@@ -543,6 +542,7 @@ describe('getSortByParameterized', () => {
       'sjn_123', // Middle Earth
       'sjn_Teng_123',
       'dori0123_123',
+      'Teng',
       // All below have no associated territory, stable to input order
       'tolkorth',
     ]);

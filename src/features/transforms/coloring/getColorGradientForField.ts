@@ -57,7 +57,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Endonym:
     case Field.SourceType:
     case Field.Description:
-    case Field.Example:
+    case Field.Characters:
     case Field.Modality:
       // Continuous spectrum
       return ColorGradient.OklabRainbowBlueToRed;

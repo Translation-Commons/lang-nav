@@ -37,23 +37,31 @@ export function connectWritingSystems(
     }
     if (containsWritingSystemsCodes && containsWritingSystemsCodes.length > 0) {
       writingSystem.containsWritingSystems = containsWritingSystemsCodes
-        .map((code) => writingSystems[code])
+        .map((code) => {
+          // Also add reverse edge
+          const containedSystem = writingSystems[code];
+          if (containedSystem.groupedByWritingSystems == null)
+            containedSystem.groupedByWritingSystems = [];
+          if (!containedSystem.groupedByWritingSystems.find((ws) => ws.ID === writingSystem.ID))
+            containedSystem.groupedByWritingSystems.push(writingSystem);
+
+          // Return the contained system for the forward edge
+          return containedSystem;
+        })
         .filter(Boolean);
     }
   });
 
   // Connect languages to their primary writing system
-  Object.values(languages).forEach((language) => {
+  Object.entries(languages).forEach(([languageCode, language]) => {
+    if (languageCode !== language.ID) return; // Skip aliases
+
     const { primaryScriptCode } = language;
     if (primaryScriptCode != null) {
       const primaryWritingSystem = writingSystems[primaryScriptCode];
       if (primaryWritingSystem != null) {
         if (!primaryWritingSystem.languages) primaryWritingSystem.languages = {};
         primaryWritingSystem.languages[language.ID] = language;
-        if (!primaryWritingSystem.populationUpperBound)
-          primaryWritingSystem.populationUpperBound = 0;
-        // TODO use the new language writing estimates
-        primaryWritingSystem.populationUpperBound += language.pop.rough || 0;
         language.primaryWritingSystem = primaryWritingSystem;
         language.writingSystems[primaryWritingSystem.ID] = primaryWritingSystem;
       }

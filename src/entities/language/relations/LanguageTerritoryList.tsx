@@ -13,13 +13,13 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import type { LanguageData } from '../LanguageTypes';
 
 type Props = {
-  lang: LanguageData;
+  lang?: LanguageData;
 };
 
 const LanguageTerritoryList: React.FC<Props> = ({ lang }) => {
   const { territoryScopes } = usePageParams();
   const locales = (
-    lang.locales?.filter(
+    lang?.locales?.filter(
       (loc) =>
         loc.territory?.scope === TerritoryScope.Country ||
         (territoryScopes.includes(TerritoryScope.Dependency) &&

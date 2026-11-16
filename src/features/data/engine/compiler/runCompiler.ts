@@ -1,7 +1,7 @@
 // Node entry point, loaded by scripts/compile-engine-snapshot.mjs through Vite's SSR loader
 import path from 'node:path';
 
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 

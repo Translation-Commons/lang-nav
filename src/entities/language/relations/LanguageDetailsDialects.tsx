@@ -12,7 +12,7 @@ import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { BLANK_FILTER_PARAMS } from '@features/transforms/filtering/FilterParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { useSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { EntityType } from '@entities/types/EntityTypes';
@@ -27,7 +27,7 @@ import { getLanguageTreeNodes } from './LanguageHierarchy';
 
 const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const [sectionView, setSectionView] = useState(View.Map);
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
 
   const dialects = useMemo(
     () =>
@@ -102,7 +102,7 @@ function Table({ dialects }: { dialects: LanguageData[] }) {
 
 function TreeList({ lang }: { lang: LanguageData }) {
   const { languageSource } = usePageParams();
-  const sortFunction = getSortFunction();
+  const sortFunction = useSortFunction();
   const nodes = useMemo(
     () => getLanguageTreeNodes([lang], languageSource, sortFunction),
     [lang, languageSource, sortFunction],

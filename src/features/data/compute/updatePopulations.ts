@@ -4,6 +4,7 @@ import type { LanguageData } from '@entities/language/LanguageTypes';
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import type { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
@@ -12,11 +13,13 @@ import {
   computeRegionalLocalesPopulation,
 } from './computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from './computeLocalesPopulationFromCensuses';
+import { computeWritingSystemsPopulation } from './computeWritingSystemPopulation';
 
 export function updatePopulations(
   languages: LanguageData[],
   locales: LocaleData[],
   world: TerritoryData,
+  writingSystems: WritingSystemData[],
 ): void {
   computeLocalesPopulationFromCensuses(locales);
 
@@ -33,6 +36,8 @@ export function updatePopulations(
   computeLanguagesPopulations(languages);
 
   discountPopulationEstimatesIfSimilarToParent(languages);
+
+  computeWritingSystemsPopulation(writingSystems);
 }
 
 function computeLanguagesPopulations(languages: LanguageData[]): void {

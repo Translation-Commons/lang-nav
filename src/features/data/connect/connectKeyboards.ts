@@ -12,7 +12,6 @@ import { getLessSpecificLocaleTags } from '../compute/searchLocalesForMissingLin
 export function connectKeyboards(
   keyboards: Record<string, KeyboardData>,
   languages: LanguageDictionary,
-  languagesCLDR: LanguageDictionary,
   territoriesByCode: Record<TerritoryCode, TerritoryData>,
   writingSystems: Record<ScriptCode, WritingSystemData>,
   variants: Record<string, VariantData>,
@@ -45,7 +44,7 @@ export function connectKeyboards(
 
     // Connect languages (GBoard: 1 language, Keyman: 1 or more)
     for (const langCode of languageCodes) {
-      const language = languages[langCode] ?? languagesCLDR[langCode] ?? null;
+      const language = languages[langCode] ?? null;
       if (language == null) continue;
       addKeyboardToLanguage(keyboard, language);
 
@@ -58,7 +57,7 @@ export function connectKeyboards(
     // Locale resolution — one locale per language code
     keyboard.locales = [];
     for (const langCodeBase of languageCodes) {
-      const langCode = languages[langCodeBase]?.ID ?? languagesCLDR[langCodeBase]?.ID ?? null;
+      const langCode = languages[langCodeBase]?.ID ?? null;
       const localeTags = {
         languageCode: langCode,
         scriptCode: outputScriptCode,

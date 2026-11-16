@@ -1,21 +1,12 @@
 import { useMemo, useState } from 'react';
 
 import type { CensusData, CensusID } from '@entities/census/CensusTypes';
-import type { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/EntityTypes';
 
 import { type CoreData, getCoreDataArrays, loadCoreDataArrays } from './loadCoreDataArrays';
 
 export type { CoreData, CoreDataArrays } from './loadCoreDataArrays';
-
-export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
-  Combined: {},
-  ISO: {},
-  BCP: {},
-  Glottolog: {},
-  UNESCO: {},
-  CLDR: {},
-};
 
 /**
  * Get core data needed to show the tables -- things like language codes, relationships with other languages.

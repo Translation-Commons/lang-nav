@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
+
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import LoadingStage from './LoadingStage';
@@ -11,7 +13,12 @@ import { useDataContext } from './useDataContext';
  */
 const LoadingStageDisplay: React.FC = () => {
   const { loadingStage } = useDataContext();
-  const isFinished = loadingStage === LoadingStage.AlgorithmsFinished;
+  const { isPending } = useFilteredEntities({});
+  let loadingAndFilteringStage = loadingStage;
+  if (loadingStage === LoadingStage.AlgorithmsFinished && !isPending) {
+    loadingAndFilteringStage = LoadingStage.FilterComplete;
+  }
+  const isFinished = loadingAndFilteringStage === LoadingStage.FilterComplete;
 
   return (
     <div
@@ -19,7 +26,8 @@ const LoadingStageDisplay: React.FC = () => {
       className="LoadingStageDisplay align-center mt-4"
       style={{ color: isFinished ? 'var(--color-background)' : 'inherit' }}
     >
-      Loading stage: {loadingStage + 1} of 5, {getLoadingStageLabel(loadingStage)}
+      Loading stage: {loadingAndFilteringStage + 1} of 6,{' '}
+      {getLoadingStageLabel(loadingAndFilteringStage)}
     </div>
   );
 };
@@ -36,6 +44,8 @@ export function getLoadingStageLabel(stage: LoadingStage): string {
       return 'updating population counts and names';
     case LoadingStage.AlgorithmsFinished:
       return 'algorithms finished';
+    case LoadingStage.FilterComplete:
+      return 'filtering complete';
     default:
       enforceExhaustiveSwitch(stage);
   }

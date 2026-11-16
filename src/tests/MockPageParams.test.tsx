@@ -1,22 +1,28 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
 import { PageParams, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Field from '@features/transforms/fields/Field';
 
+import { LanguageCodeFormat } from '@entities/language/LanguageTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 const mockUpdatePageParams = vi.fn();
 
 export const createMockUsePageParams = (
-  overrides: Partial<PageParams> = {},
+  overrides: Partial<PageParamsContextState> = {},
 ): PageParamsContextState => {
   return {
     ...getDefaultParams(),
     updatePageParams: mockUpdatePageParams,
     brightness: { preference: 'light', setPreference: () => {}, pageBrightness: 'light' },
     paramsLevel: 'global',
+    localeSeparator: LocaleSeparator.Underscore,
+    languageCodeFormat: LanguageCodeFormat.Unset,
+    setLocaleSeparator: () => {},
+    setLanguageCodeFormat: () => {},
     ...overrides,
   };
 };

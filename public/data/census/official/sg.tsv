@@ -35,7 +35,7 @@ mul	Literate	2,977,088				3,359,881
 eng	#English Only	329,194				362,469	229,429		
 zho	#Chinese Only	485,511				438,279			
 zho/cmn	#Mandarin Only						239,997		
-zho/nan/taib1242	#Hokkien Only						46,868		
+zho/nan/hokk1242	#Hokkien Only						46,868		
 zho/nan/chao1238	#Teochew Only						18,601		
 zho/yue	#Cantonese Only						21,423		
 msa/zsm	#Malay Only	47,278				45,753	79,278		
@@ -53,8 +53,8 @@ eng/mul	#English & Other Indian Language						44,949
 eng/mul	#English & Other Language						40,004		
 zho/cmn/eng	#Mandarin & English						239,997		
 zho/cmn/mul	#Mandarin & Chinese Dialect						301,328		
-zho/nan/taib1242/eng	#Hokkien & English						15,511		
-zho/nan/taib1242/cmn	#Hokkien & Mandarin						88,928		
+zho/nan/hokk1242/eng	#Hokkien & English						15,511		
+zho/nan/hokk1242/cmn	#Hokkien & Mandarin						88,928		
 zho/nan/chao1238/eng	#Teochew & English						8,069		
 zho/nan/chao1238/cmn	#Teochew & Mandarin						29,369		
 zho/yue/eng	#Cantonese & English						19,495		
@@ -73,7 +73,7 @@ mul	#Other Three or More Languages	89,147				90,295
 eng	English		1,097,443	70.9	23			1,735,242	644,540
 zho/cmn	Mandarin		1,211,505		35			1,075,172	1,136,936
 zho/mul	Chinese Dialects		487,031		23.8			313,258	125,507
-nan/taib1242	Hokkien		238,843					157,259	
+nan/hokk1242	Hokkien		238,843					157,259	
 nan/chao1238	Teochew		94,302					59,424	
 yue	Cantonese		121,136					79,216	
 mul	Other Chinese Dialects		32,750					17,359	

@@ -181,7 +181,7 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.PopulationPercentInBiggestDescendantLanguage,
         Field.PercentOfOverallLanguageSpeakers,
 
-        Field.Example,
+        Field.Characters,
       ];
     case EntityType.Census:
       return [
@@ -225,11 +225,11 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.Depth,
         Field.UnicodeVersion,
-        Field.Example,
+        Field.Characters,
         // Field.Literacy, Data not available yet
       ];
     case EntityType.Orthography:
-      return [Field.LanguagePrimary, Field.WritingSystem, Field.Example];
+      return [Field.LanguagePrimary, Field.WritingSystem, Field.Characters];
     case EntityType.Variant:
       return [
         Field.VariantType,
@@ -365,6 +365,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguagePrimary,
         Field.LanguageFamily,
         Field.TerritoryPrimary,
+        Field.WritingSystem,
       ];
     case Transform.Scale:
       return [
@@ -413,6 +414,7 @@ export type FilterField = Extract<
   | Field.TerritoryScope
   | Field.ISOStatus
   | Field.Population
+  | Field.DigitalSupport
 >;
 
 // Ordered by preferred UI grouping: search string, then connections, then statuses, then population
@@ -431,6 +433,7 @@ export function getFilterFields(): FilterField[] {
     Field.TerritoryScope,
     Field.ISOStatus,
     Field.Population,
+    Field.DigitalSupport,
   ];
 }
 

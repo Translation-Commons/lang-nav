@@ -15,6 +15,7 @@ import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
+import DigitalSupportFilterSelector from './DigitalSupportFilterSelector';
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
 import OrganizationFilterSelector from './OrganizationFilterSelector';
@@ -73,6 +74,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return <LanguageSourceSelector />;
     case Field.Population:
       return <PopulationFilterSelector />;
+    case Field.DigitalSupport:
+      return <DigitalSupportFilterSelector />;
     case Field.Organization:
       return <OrganizationFilterSelector />;
     default:

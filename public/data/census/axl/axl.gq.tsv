@@ -1,0 +1,31 @@
+#codeDisplay		axl.gq.percs	axl.gq.counts
+#nameDisplay		AXL Equatorial Guinea Percent	AXL Equatorial Guinea Count
+#isoRegionCode	GQ		
+#yearCollected	2005		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Home		
+### Population Surveyed ###			
+#population	500,000		
+#geographicScope	whole country		
+#quantity		percent	count
+### Creator ###			
+#collectorType	Secondary		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/afrique/guinee_equatoriale.htm		
+#datePublished	2025-01-01		
+#dateAccessed	2026-08-10		
+#sectionName			2 Données démolinguistiques
+Language Code	Language	Population %	Population #
+fan	Fang	80	
+bvb	Bubi	10	40,000
+syi	Seke	2	
+fab	Crioulo	1.8	9,000
+fpe	Fernandino		4,000
+nmg	Ngumba	1	
+bnm	Batanga	1	
+nui	Ngumbi	0.8	
+bng	Benga	0.6	400
+spa	Spanish		1,500

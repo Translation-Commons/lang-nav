@@ -1,15 +1,14 @@
 import React from 'react';
 
+import CardExtraFields from '@widgets/cardlists/CardExtraFields';
+import CardField from '@widgets/cardlists/CardField';
+
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
-import useActiveTransforms from '@features/transforms/useActiveTransforms';
 
-import EntityTitle from '@entities/ui/EntityTitle';
-
-import CardField from '@shared/containers/CardField';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
@@ -17,62 +16,78 @@ import TerritoryLanguageList from './TerritoryLanguageList';
 import { TerritoryData, TerritoryScope } from './TerritoryTypes';
 
 interface Props {
-  territory: TerritoryData;
+  territory?: TerritoryData;
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { pop, sovereign, scope, parentUNRegion } = territory;
+  const { pop, sovereign, scope, parentUNRegion } = territory ?? {};
   const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
-  const extraFields = useActiveTransforms([
-    Field.Name,
-    Field.Code,
-    Field.Population,
-    Field.Region,
-    Field.TerritoryScope,
-    Field.LanguageList,
-  ]);
-
   return (
-    <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <EntityTitle ent={territory} />
-      </div>
+    <>
       <CardField field={Field.TerritoryScope}>
-        {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
-        {isDependency && sovereign ? (
+        {territory ? (
           <>
-            {' '}
-            of <HoverableEntityName ent={sovereign} />
+            {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
+            {isDependency && sovereign ? (
+              <>
+                {' '}
+                of <HoverableEntityName ent={sovereign} />
+              </>
+            ) : null}
           </>
-        ) : null}
+        ) : (
+          <Skeleton className="h-4 w-full" />
+        )}
       </CardField>
 
       <CardField field={Field.Region}>
-        {parentUNRegion ? (
-          <HoverableEntityName ent={parentUNRegion} />
-        ) : isWorld ? (
-          <Deemphasized>Global</Deemphasized>
+        {territory ? (
+          parentUNRegion ? (
+            <HoverableEntityName ent={parentUNRegion} />
+          ) : isWorld ? (
+            <Deemphasized>Solar System</Deemphasized>
+          ) : (
+            <Deemphasized>Unknown</Deemphasized>
+          )
         ) : (
-          <Deemphasized>Unknown</Deemphasized>
+          <Skeleton className="h-4 w-full" />
         )}
       </CardField>
 
       <CardField field={Field.Population}>
-        {pop != null ? <CountOfPeople count={pop.overall} /> : <Deemphasized>Unknown</Deemphasized>}
+        {territory ? (
+          pop != null ? (
+            <CountOfPeople count={pop.overall} />
+          ) : (
+            <Deemphasized>Unknown</Deemphasized>
+          )
+        ) : (
+          <Skeleton className="h-4 w-full" />
+        )}
       </CardField>
 
       <CardField field={Field.LanguageList}>
-        <TerritoryLanguageList territory={territory} />
+        {territory ? (
+          <TerritoryLanguageList territory={territory} />
+        ) : (
+          <Skeleton className="h-4 w-full" />
+        )}
       </CardField>
 
-      {extraFields.map((field) => (
-        <CardField key={field} field={field}>
-          <EntityFieldDisplay ent={territory} field={field} />
-        </CardField>
-      ))}
-    </div>
+      <CardExtraFields
+        ent={territory}
+        excludeFields={[
+          Field.Name,
+          Field.Code,
+          Field.Population,
+          Field.Region,
+          Field.TerritoryScope,
+          Field.LanguageList,
+        ]}
+      />
+    </>
   );
 };
 

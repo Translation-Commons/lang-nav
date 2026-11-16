@@ -75,7 +75,7 @@ enum Field {
   // Other
   Date = 'Date',
   Description = 'Description',
-  Example = 'Example',
+  Characters = 'Characters',
 }
 
 export default Field;

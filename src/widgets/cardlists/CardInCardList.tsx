@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
@@ -6,15 +6,31 @@ import { EntityData } from '@entities/types/EntityTypes';
 
 import PinButton from '@shared/ui/PinButton';
 
-import './cardListStyles.css';
+import LargeCard from './LargeCard';
 
 interface Props {
-  children: React.ReactNode;
   getBackgroundColor?: (ent: EntityData) => string | undefined;
   ent: EntityData;
 }
 
-const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) => {
+const CardInCardList: React.FC<PropsWithChildren<Partial<Props>>> = ({
+  children,
+  getBackgroundColor,
+  ent,
+}) => {
+  if (!ent) return <PlaceholderCard>{children}</PlaceholderCard>;
+  return (
+    <InteractiveCard getBackgroundColor={getBackgroundColor} ent={ent}>
+      {children}
+    </InteractiveCard>
+  );
+};
+
+const InteractiveCard: React.FC<PropsWithChildren<Props>> = ({
+  children,
+  getBackgroundColor,
+  ent,
+}) => {
   const { updatePageParams, entID } = usePageParams();
 
   const openEntity = useCallback(() => {
@@ -48,18 +64,27 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
     backgroundColor = 'color-mix(in srgb, ' + backgroundColor + ' 50%, var(--background))';
 
   return (
-    <div
+    <LargeCard
       aria-label={`${ent.nameDisplay} card, click to open details`}
-      className={`text-xs CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
+      selected={ent.ID === entID}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      role="button"
       style={{ backgroundColor }}
-      tabIndex={0}
     >
-      <PinButton className="bg-transparent!" ent={ent} />
+      <PinButton
+        className="invisible group-hover:visible data-pressed:visible absolute top-2 right-2 bg-transparent!"
+        ent={ent}
+      />
       {children}
-    </div>
+    </LargeCard>
+  );
+};
+
+const PlaceholderCard: React.FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <LargeCard>
+      <div className="flex flex-col gap-2">{children}</div>
+    </LargeCard>
   );
 };
 

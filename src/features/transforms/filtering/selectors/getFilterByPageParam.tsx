@@ -31,6 +31,10 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
     case PageParamKey.populationMax:
       return Field.Population;
 
+    case PageParamKey.digitalSupportMin:
+    case PageParamKey.digitalSupportMax:
+      return Field.DigitalSupport;
+
     case PageParamKey.languageSource:
       return Field.SourceForLanguage;
     case PageParamKey.modalityFilter:
@@ -63,7 +67,6 @@ export function getFilterFieldByPageParam(pageParameter: PageParamKey): Field {
     case PageParamKey.columns:
     case PageParamKey.entType:
     case PageParamKey.limit:
-    case PageParamKey.localeSeparator:
     case PageParamKey.page:
     case PageParamKey.profile:
     case PageParamKey.reportID:

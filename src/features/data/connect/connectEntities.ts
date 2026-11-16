@@ -1,5 +1,5 @@
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import type { LanguagesBySource } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
@@ -8,8 +8,8 @@ import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
 import { searchLocalesForMissingLinks } from '../compute/searchLocalesForMissingLinks';
+import { connectStandardLanguages } from '../load/entities/loadMacroStandards';
 import { connectVariants } from '../load/extra_entities/IANAData';
 
 import { connectKeyboards } from './connectKeyboards';
@@ -29,7 +29,7 @@ import { createRegionalLocales } from './createRegionalLocales';
  * It also creates some additional derived entities, such as family locales and regional locales.
  */
 export function connectEntitiesAndCreateDerivedData(
-  languagesBySource: LanguagesBySource,
+  languages: Record<string, LanguageData>,
   territories: Record<string, TerritoryData>,
   writingSystems: Record<string, WritingSystemData>,
   orthographies: Record<string, OrthographyData>,
@@ -39,20 +39,19 @@ export function connectEntitiesAndCreateDerivedData(
   organizations: Record<string, OrganizationData>,
   technologies: Record<string, TechnologyData>,
 ): void {
-  connectLanguagesToParent(languagesBySource);
+  connectLanguagesToParent(languages);
+  connectStandardLanguages(languages);
   connectTerritoriesToParent(territories);
-  connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
-  connectOrthographies(languagesBySource.Combined, writingSystems, Object.values(orthographies));
-  connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-  connectVariants(variants, languagesBySource.BCP, locales);
-  createFamilyLocales(languagesBySource.Combined, locales); // create them before regional locales
+  connectWritingSystems(languages, territories, writingSystems);
+  connectLocales(languages, territories, writingSystems, locales);
+  connectVariants(variants, languages, locales);
+  createFamilyLocales(languages, locales); // create them before regional locales
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
-  computeDescendantPopulation(writingSystems);
+  connectOrthographies(languages, writingSystems, Object.values(orthographies));
   connectKeyboards(
     keyboards,
-    languagesBySource.Combined,
-    languagesBySource.CLDR,
+    languages,
     territories,
     writingSystems,
     variants,

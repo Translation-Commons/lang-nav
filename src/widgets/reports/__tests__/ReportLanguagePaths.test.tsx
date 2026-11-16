@@ -6,10 +6,11 @@ import {
   getMockedDataContext,
 } from '@features/__tests__/MockEntities';
 import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
-import { LocaleSeparator } from '@features/params/PageParamTypes';
+import { LocaleSeparator } from '@features/params/LocalStorageParams';
 
 import {
   getBaseLanguageData,
+  LanguageCodeFormat,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
@@ -67,7 +68,7 @@ describe('ReportLanguagePaths', () => {
 
   it('getExtremeLanguagePaths', () => {
     const ents = generateEntities();
-    const { languages, locales, getTerritory } = getMockedDataContext(ents);
+    const { languages, locales, writingSystems, getTerritory } = getMockedDataContext(ents);
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
@@ -75,7 +76,9 @@ describe('ReportLanguagePaths', () => {
         languages,
         locales,
         getTerritory('001')!,
+        writingSystems,
         languageSource,
+        LanguageCodeFormat.Prefer3LetterISO,
         LocaleSeparator.Underscore,
       );
       const { orphans, longestPaths, cycles, multipleRoutes } = getExtremeLanguagePaths(languages);
@@ -109,8 +112,7 @@ describe('ReportLanguagePaths', () => {
           expect(cycles).toEqual([['sjn', 'dori0123', 'elv', 'sjn']]);
           expect(multipleRoutes).toEqual({});
           break;
-        case LanguageSource.UNESCO: // No connections from these sources, all languages are orphans
-        case LanguageSource.BCP:
+        case LanguageSource.UNESCO:
           expect(orphans.join(' ')).toEqual('sjn dori0123 qya elv');
           expect(longestPaths).toEqual([]);
           expect(cycles).toEqual([]); // there are no cycles

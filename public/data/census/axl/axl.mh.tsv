@@ -1,0 +1,34 @@
+#codeDisplay		axl.mh
+#nameDisplay		AXL Marshall Islands
+#isoRegionCode	MH	
+#yearCollected	2003	
+### Language Criteria ###		
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+### Population Surveyed ###		
+#population	65,239	
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#quantity	count	
+#geographicScope	whole country	
+#nationality	residents	
+#languagesIncluded	All	
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url	https://www.axl.cefan.ulaval.ca/pacifique/marshall.htm	
+#datePublished	2023-12-28	
+#dateAccessed	2026-09-30	
+#documentName	Îles Marshall	
+#sectionName	2 Données démolinguistiques	
+#columnName	Population	
+Language Code 	Language Name	Population
+mah	Marshallese	56,835
+eng	English	4,174
+mul	Others	2,120
+mah	Marshallese	1,210
+jpn	Japanese	400
+fil	Filipino	400
+zho/cmn	Chinese Mandarin	100

@@ -79,7 +79,7 @@ const NavBarBrand: React.FC = () => {
       />
       <span className="hidden text-sm/tight whitespace-nowrap lg:inline">
         <strong className="font-semibold">Lang</strong>uage{' '}
-        <strong className="font-semibold">Nav</strong>igator <em>β</em>
+        <strong className="font-semibold">Nav</strong>igator
       </span>
     </InternalLink>
   );

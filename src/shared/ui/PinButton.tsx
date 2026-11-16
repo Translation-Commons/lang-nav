@@ -5,6 +5,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
+import { cn } from '@shared/lib/utils';
+
 import { Toggle } from './toggle';
 
 interface Props {
@@ -25,11 +27,7 @@ const PinButton: React.FC<Props> = ({ className, ent }) => {
 
   return (
     <Toggle
-      className={
-        'PinButton cursor-pointer px-0 ' +
-        (isPinned ? ' pinned' : '') +
-        (className ? ' ' + className : '')
-      }
+      className={cn('PinButton cursor-pointer px-0 ', isPinned ? ' pinned' : '', className)}
       aria-label={label}
       variant="default"
       pressed={isPinned}

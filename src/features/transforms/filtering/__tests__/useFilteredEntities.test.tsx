@@ -18,9 +18,11 @@ import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 // Mock hooks
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
+const languages = getMockLanguages();
+
 vi.mock('@features/data/context/useDataContext', () => ({
   // Languages: [ine, eng, spa, fra, deu, ita, zho]
-  useDataContext: vi.fn(() => ({ languages: getMockLanguages() })),
+  useDataContext: vi.fn(() => ({ languages })),
 }));
 
 // Helper to get hook result

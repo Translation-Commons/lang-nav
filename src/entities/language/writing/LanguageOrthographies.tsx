@@ -28,8 +28,8 @@ const LanguageOrthographies: React.FC<Props> = ({ lang, view }) => {
       <LocalParamsProvider
         overrides={{
           limit: 12,
-          fieldFocus: Field.Example,
-          sortBy: Field.Example,
+          fieldFocus: Field.Characters,
+          sortBy: Field.Characters,
 
           ...BLANK_FILTER_PARAMS,
           entType: EntityType.Orthography,

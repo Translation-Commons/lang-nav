@@ -54,7 +54,7 @@ test.describe('screenshot tests', () => {
 
     // First wait to finish loading
     await expect(page.locator('.LoadingStageDisplay')).toHaveText(
-      'Loading stage: 5 of 5, algorithms finished',
+      'Loading stage: 6 of 6, filtering complete',
       { timeout: 15_000 },
     );
     await page.waitForTimeout(1000);
@@ -115,5 +115,11 @@ test.describe('screenshot tests', () => {
 
   test('Languages in Census Table', async ({ page }) => {
     await snapshotTable(page, `view=Details&cmpID=cldr.IN`, TableID.LanguagesInCensus);
+  });
+  test('Character Inventory', async ({ page }) => {
+    await snapshotTable(
+      page,
+      `view=Reports&writingSystemFilter=Latin+%5BLatn%5D&reportID=` + ReportID.CharacterInventory,
+    );
   });
 });

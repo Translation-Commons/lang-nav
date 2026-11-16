@@ -1,6 +1,6 @@
 import type { CensusData, CensusID } from '@entities/census/CensusTypes';
 import type { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import type { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
+import type { LanguageData } from '@entities/language/LanguageTypes';
 import type { LocaleData } from '@entities/locale/LocaleTypes';
 import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import type { OrthographyData } from '@entities/orthography/OrthographyTypes';
@@ -10,13 +10,16 @@ import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import type { VariantData } from '@entities/variant/VariantTypes';
 import type { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
+import { uniqueBy } from '@shared/lib/setUtils';
+
 import { connectEntitiesAndCreateDerivedData } from '../connect/connectEntities';
-import { groupLanguagesBySource } from '../connect/connectLanguages';
+import { addAliasesToLanguageDictionary } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
+import { addMacrolanguageStandards, loadMacroStandards } from './entities/loadMacroStandards';
 import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTechnologies } from './entities/loadTechnologies';
 import { loadTerritories } from './entities/loadTerritories';
@@ -35,7 +38,6 @@ import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
   addISOMacrolanguageData,
-  getUniqueISO6392bLanguages,
   loadISOFamiliesToLanguages,
   loadISOLanguageFamilies,
   loadISOLanguages,
@@ -63,7 +65,6 @@ export type CoreData = CoreDataArrays & {
 };
 
 export type LoadedCoreData = {
-  languagesBySource: LanguagesBySource;
   languages: LanguageData[];
   ents: Record<string, EntityData>;
 };
@@ -83,6 +84,7 @@ export async function loadCoreDataArrays(): Promise<LoadedCoreData | undefined> 
     glottologImport,
     glottocodeToISO,
     combinedFamilyOverrides,
+    macroStandards,
     territories,
     locales,
     writingSystems,
@@ -102,6 +104,7 @@ export async function loadCoreDataArrays(): Promise<LoadedCoreData | undefined> 
     loadGlottologLanguages(),
     loadGlottocodeToISO(),
     loadCombinedFamilyOverrides(),
+    loadMacroStandards(),
     loadTerritories(),
     loadLocales(),
     loadWritingSystems(),
@@ -129,19 +132,19 @@ export async function loadCoreDataArrays(): Promise<LoadedCoreData | undefined> 
   }
 
   const keyboards = { ...keyboardsGBoard, ...keyboardsKeyman };
-
-  addISODataToLanguages(initialLangs, isoLangs || []);
-  const languagesBySource = groupLanguagesBySource(initialLangs);
-  addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
-  addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
-  addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
-  addGlottologLanguages(languagesBySource, glottologImport || [], glottocodeToISO || {});
-  applyCombinedFamilyOverrides(languagesBySource, combinedFamilyOverrides || []);
-  addCLDRLanguageDetails(languagesBySource);
-  addIANAVariantLocales(languagesBySource.BCP, locales, variants);
+  const languageDictionary = addAliasesToLanguageDictionary(initialLangs);
+  addISODataToLanguages(languageDictionary, isoLangs || []);
+  addISOLanguageFamilyData(languageDictionary, langFamilies || [], isoLangsToFamilies || {});
+  addISOMacrolanguageData(languageDictionary, macroLangs || []);
+  addISORetirementsToLanguages(languageDictionary, isoRetirements || []);
+  addGlottologLanguages(languageDictionary, glottologImport || [], glottocodeToISO || {});
+  applyCombinedFamilyOverrides(languageDictionary, combinedFamilyOverrides || []);
+  addCLDRLanguageDetails(languageDictionary);
+  addMacrolanguageStandards(languageDictionary, macroStandards);
+  addIANAVariantLocales(languageDictionary, locales, variants);
 
   connectEntitiesAndCreateDerivedData(
-    languagesBySource,
+    languageDictionary,
     territories,
     writingSystems,
     orthographies,
@@ -153,19 +156,14 @@ export async function loadCoreDataArrays(): Promise<LoadedCoreData | undefined> 
   );
 
   return {
-    languagesBySource,
-    languages: Object.values(languagesBySource.Combined),
+    languages: uniqueBy(Object.values(languageDictionary), (lang) => lang.ID),
     ents: {
       // All combined into one big entity map for easy lookup but the ID formats are unique so its OK
-      ...languagesBySource.Glottolog, // aaaa0000
-      ...languagesBySource.ISO, // aaa
-      ...getUniqueISO6392bLanguages(languagesBySource), // ISO 639-2b codes
-      ...languagesBySource.BCP, // aa | aaa
-      ...languagesBySource.Combined, // A few languages like `mol` aren't in those sets but should still be indexed
+      ...languageDictionary, // aa | aaa | aaaa0000
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
-      ...orthographies, // Aaaa.
+      ...orthographies, // Prefixed by orth. since their codes match locale IDs (srp_Latn)
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
       ...organizations, // These should be prefixed by org.

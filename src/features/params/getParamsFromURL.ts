@@ -16,7 +16,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { parseLanguageScope } from '@strings/LanguageScopeStrings';
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
-import { LocaleSeparator, PageParamKey, PageParams, SearchableField, View } from './PageParamTypes';
+import { PageParamKey, PageParams, SearchableField, View } from './PageParamTypes';
 import { ProfileType } from './Profiles';
 
 // Helper function to parse numeric enum arrays from URL strings
@@ -59,6 +59,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.populationMax:
         params.populationMax = parseInt(value) >= 0 ? parseInt(value) : undefined;
         break;
+      case PageParamKey.digitalSupportMin:
+        params.digitalSupportMin = parseFloat(value) >= -1 ? parseFloat(value) : undefined;
+        break;
+      case PageParamKey.digitalSupportMax:
+        params.digitalSupportMax = parseFloat(value) >= 0 ? parseFloat(value) : undefined;
+        break;
 
       // Arrays
       case PageParamKey.languageScopes:
@@ -98,9 +104,6 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.profile:
         params.profile = value as ProfileType;
-        break;
-      case PageParamKey.localeSeparator:
-        params.localeSeparator = value as LocaleSeparator;
         break;
       case PageParamKey.languageSource:
         params.languageSource = value as LanguageSource;

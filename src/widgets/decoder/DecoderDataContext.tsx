@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
+import LoadingStage from '@features/data/context/LoadingStage';
 import { useDataContext } from '@features/data/context/useDataContext';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
@@ -42,7 +43,7 @@ const DecoderDataContext = React.createContext<DecoderDataContextType>({
 export const useDecoderDataContext = () => React.useContext(DecoderDataContext);
 
 export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { getLanguage } = useDataContext();
+  const { getLanguage, loadingStage } = useDataContext();
   const findLanguage = useFindLanguage();
   const { direction } = useDecoderOptionsContext();
 
@@ -118,6 +119,9 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   }, [search, startTransition]);
 
   useEffect(() => {
+    // Wait until the data has finished loading (eg. we have all language names)
+    if (loadingStage < LoadingStage.AlgorithmsFinished) return;
+
     let cancelled = false;
     const linesToSearch = [...new Set(inputLines.map((line) => line.toLowerCase().trim()))];
     const missingLines = linesToSearch.filter((line) => !resultsRef.current[line]);
@@ -135,7 +139,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
     return () => {
       cancelled = true;
     };
-  }, [inputLines, searchAndAdd, searchVersion]);
+  }, [inputLines, searchAndAdd, searchVersion, loadingStage]);
 
   return (
     <DecoderDataContext.Provider

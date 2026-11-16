@@ -54,7 +54,7 @@ async function loadPage(page: Page, paramString: string) {
   await page.goto(`./data?${paramString}`);
   // await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
   await expect(page.locator('.LoadingStageDisplay')).toHaveText(
-    'Loading stage: 5 of 5, algorithms finished',
+    'Loading stage: 6 of 6, filtering complete',
     { timeout: 15_000 },
   );
 }
@@ -83,7 +83,7 @@ test('capture preview.png — full data page with navbar (cards view)', async ({
 
 test('capture cardlist.png — card grid without navbar', async ({ page }) => {
   await loadPage(page, 'view=Cards');
-  const firstCard = page.locator('.CardInCardList').first();
+  const firstCard = page.locator('[data-testid="large-card"]').first();
   await firstCard.waitFor({ state: 'visible' });
   const grid = firstCard.locator('xpath=..');
   const box = await getBox(grid);
