@@ -85,11 +85,14 @@ const ScatterPlot: React.FC = () => {
             ))}
 
             {/* Circles */}
-            {[...ents].reverse().map((ent) => {
+            {[...ents].reverse().map((ent, i) => {
               const fieldXValue = getField(ent, chartX) ?? 0;
               const fieldYValue = getField(ent, chartY) ?? 0;
               const x = xValue.getNormalizedValue(fieldXValue) * 200;
-              const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
+              const rawY = yValue.getNormalizedValue(fieldYValue);
+              // const y = 200 - rawY * 200;
+              // const y = 200 - rawY * 200 + Math.cos(i) * 10;
+              const y = 200 - rawY * 200 + (Math.random() - 0.5) ** 3 * 70;
               const color = coloring.getColor(ent);
               const scale = scaling.getScale(ent);
               return (
