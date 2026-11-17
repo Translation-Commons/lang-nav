@@ -169,7 +169,7 @@ export function getDefaultParams(
       break;
     case View.Chart:
       params.chartX = Field.Population;
-      params.chartY = Field.Literacy;
+      params.chartY = Field.VitalityMetascore;
       if (params.entType === EntityType.Locale) params.chartY = Field.PercentOfTerritoryPopulation;
       if (params.entType === EntityType.Territory) params.chartY = Field.CountOfLanguages;
       if (params.entType === EntityType.WritingSystem) params.chartY = Field.CountOfKeyboards;

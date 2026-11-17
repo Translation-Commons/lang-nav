@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import MapHoverCard from '@features/map/MapHoverCard';
@@ -16,15 +16,21 @@ import getAxisScaleLabel from '@features/transforms/scales/getAxisScaleLabel';
 import getDefaultAxisScale from '@features/transforms/scales/getDefaultAxisScale';
 import useScale from '@features/transforms/scales/useScale';
 import FieldDropdown from '@features/transforms/sorting/FieldDropdown';
-import useNormalizedValues from '@features/transforms/useNormalizedValues';
+import useNormalizedValues, {
+  NormalizingFunctions,
+} from '@features/transforms/useNormalizedValues';
 
 import { EntityData } from '@entities/types/EntityTypes';
 
+import { countOccurrences } from '@shared/lib/setUtils';
+import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 import EnumDropdown from '@shared/ui/EnumDropdown';
+
+const INTERNAL_HEIGHT = 200;
 
 const ScatterPlot: React.FC = () => {
   const { chartX, chartY, scaleBy, colorBy, fieldFocus, updatePageParams } = usePageParams();
-  const { scale } = useDataVizParams();
+  const { scale, disperse } = useDataVizParams();
   const ents = useFilteredEntities({}).filteredEntities;
 
   const xValue = useNormalizedValues({ ents, field: chartX, scale: scale?.[Axis.X] });
@@ -41,6 +47,30 @@ const ScatterPlot: React.FC = () => {
       showHoverCard(<MapHoverCard ent={ent} />, e.clientX, e.clientY);
     },
     [showHoverCard],
+  );
+
+  // Count the prevalence of each normalized value among the entities so we can add dithering when there are too many
+  const yCounts = useMemo(
+    () =>
+      countOccurrences(ents.map((ent) => yValue.getNormalizedValue(getField(ent, chartY) ?? 0))),
+    [ents, yValue, chartY],
+  );
+  const xCounts = useMemo(
+    () =>
+      countOccurrences(ents.map((ent) => xValue.getNormalizedValue(getField(ent, chartX) ?? 0))),
+    [ents, xValue, chartX],
+  );
+
+  const getChartCoordinate = useCallback(
+    (ent: EntityData, norm: NormalizingFunctions, counts: Record<number, number>, seed: number) => {
+      const value = norm.getNormalizedValue(getField(ent, norm.field) ?? 0);
+      // if (counts[value] < 100) return value * 200;
+
+      // If there are more than 100 occurrences of this value, apply dithering to spread them out
+      const offset = (((convertAlphaToNumber(ent.ID + norm.field) * seed) % 43) - 21.5) / 21.5 ** 3;
+      return value * 200 + ((offset * (counts[value] ?? 0)) / ents.length) * (disperse ?? 0) * 2000;
+    },
+    [ents.length, disperse],
   );
 
   return (
@@ -60,7 +90,10 @@ const ScatterPlot: React.FC = () => {
             <path d="M 0 200 h 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
             <path d="M 0 0   v 200" stroke="var(--muted-foreground)" strokeWidth={0.5} />
             {xTicks.map((tick, i) => (
-              <g key={i} transform={`translate(${tick.position * 200}, 200)`}>
+              <g
+                key={i}
+                transform={`translate(${tick.position * INTERNAL_HEIGHT}, ${INTERNAL_HEIGHT})`}
+              >
                 <path d="M 0 5 v -205" stroke="var(--secondary)" strokeWidth={0.5} />
                 <text y={2} fontSize="4" textAnchor="middle" alignmentBaseline="hanging">
                   {tick.label}
@@ -68,7 +101,10 @@ const ScatterPlot: React.FC = () => {
               </g>
             ))}
             {yTicks.map((tick, i) => (
-              <g key={i} transform={`translate(0, ${200 - tick.position * 200})`}>
+              <g
+                key={i}
+                transform={`translate(0, ${INTERNAL_HEIGHT - tick.position * INTERNAL_HEIGHT})`}
+              >
                 <path d="M -5 0 h 205" stroke="var(--secondary)" strokeWidth={0.5} />
                 <text
                   key={i}
@@ -86,10 +122,8 @@ const ScatterPlot: React.FC = () => {
 
             {/* Circles */}
             {[...ents].reverse().map((ent) => {
-              const fieldXValue = getField(ent, chartX) ?? 0;
-              const fieldYValue = getField(ent, chartY) ?? 0;
-              const x = xValue.getNormalizedValue(fieldXValue) * 200;
-              const y = 200 - yValue.getNormalizedValue(fieldYValue) * 200;
+              const x = getChartCoordinate(ent, xValue, xCounts, 131);
+              const y = INTERNAL_HEIGHT - getChartCoordinate(ent, yValue, yCounts, 137);
               const color = coloring.getColor(ent);
               const scale = scaling.getScale(ent);
               return (

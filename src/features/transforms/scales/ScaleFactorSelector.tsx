@@ -6,7 +6,6 @@ import { Slider } from '@shared/ui/slider';
 
 const ScaleFactorSelector: React.FC = () => {
   const { scaleFactor, updatePageParams } = usePageParams();
-  // const [localFactor, setLocalFactor] = React.useState(scaleFactor);
   const [localFactor, setLocalFactor] = React.useState(1);
 
   useEffect(() => {
