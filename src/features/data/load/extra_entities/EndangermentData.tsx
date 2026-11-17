@@ -48,11 +48,29 @@ export async function addEndangermentData(
       if (DEBUG) console.debug('addEndangermentData needs language code for: ', name);
       return;
     }
+
+    // Some entries have complex language codes, right now they are ignored
+    if (languageCode.includes('/')) {
+      if (DEBUG) console.debug('Complex language code ignored: ', name, languageCode);
+      return;
+    }
+
     const lang = getLanguage(languageCode);
     if (!lang) {
       if (DEBUG) console.debug('addEndangermentData needs proper language code for: ', name);
       return;
     }
-    lang[source].endangerment = parseEndangerment(status);
+
+    // Add the endangerment remark
+    if (lang[source].endangerment == null) {
+      lang[source].endangerment = parseEndangerment(status);
+    } else {
+      // If there already is data, often that means there are 2 different areas with the language present
+      // Rarely it may have different endangerment statuses in the 2 places, take the least endangered status
+      const newStatus = parseEndangerment(status);
+      if (newStatus != null && newStatus < lang[source].endangerment) {
+        lang[source].endangerment = newStatus;
+      }
+    }
   });
 }

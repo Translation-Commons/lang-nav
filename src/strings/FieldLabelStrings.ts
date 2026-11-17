@@ -53,7 +53,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.VitalityMetascore:
       return 'Vitality Metascore';
     case Field.Endangerment:
-      return 'Endangerment (Glottolog)';
+      return 'Endangerment';
     case Field.ISOStatus:
       return 'ISO Status';
 
