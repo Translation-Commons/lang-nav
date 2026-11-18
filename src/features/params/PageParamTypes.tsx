@@ -5,7 +5,7 @@ import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -49,6 +49,7 @@ export enum PageParamKey {
   columns = 'columns',
   digitalSupportMax = 'digitalSupportMax',
   digitalSupportMin = 'digitalSupportMin',
+  endangermentFilter = 'endangermentFilter',
   entID = 'entID',
   entType = 'entType',
   fieldFocus = 'fieldFocus',
@@ -103,6 +104,7 @@ export type PageParams = {
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   modalityFilter: LanguageModality[];
+  endangermentFilter: UNESCOEndangerment[];
   orgFilter: string;
   populationMax: number;
   populationMin: number;

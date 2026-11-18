@@ -14,6 +14,7 @@ import {
   buildFilterByWritingSystem,
 } from './filterByConnections';
 import {
+  buildFilterByEndangerment,
   buildFilterByISOStatus,
   buildFilterByLanguageScope,
   buildFilterByLanguageSource,
@@ -30,6 +31,7 @@ import { buildFilterByDigitalSupport, buildFilterByPopulation } from './filterBy
  */
 function useFilters(): Record<Field, FilterFunctionType> {
   const {
+    endangermentFilter,
     isoStatus,
     languageFilter,
     languageFamilyFilter,
@@ -81,6 +83,10 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByOrganization = useMemo(() => buildFilterByOrganization(orgFilter), [orgFilter]);
 
   // Vitality
+  const filterbyEndangerment = useMemo(
+    () => buildFilterByEndangerment(endangermentFilter),
+    [endangermentFilter],
+  );
   const filterByISOStatus = useMemo(() => buildFilterByISOStatus(isoStatus), [isoStatus]);
 
   // Ranges
@@ -104,6 +110,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Modality]: filterByModality,
 
       // Vitality
+      [Field.Endangerment]: filterbyEndangerment,
       [Field.ISOStatus]: filterByISOStatus,
 
       // Connections

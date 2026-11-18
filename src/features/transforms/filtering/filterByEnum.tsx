@@ -1,5 +1,5 @@
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/EntityTypes';
@@ -43,6 +43,20 @@ export function buildFilterByISOStatus(isoStatuses: LanguageISOStatus[]): Filter
     const language = getLanguageForEntity(ent);
     if (!language) return true;
     return language.vitality?.iso != null && isoStatuses.includes(language.vitality.iso);
+  };
+}
+
+export function buildFilterByEndangerment(
+  endangermentFilter: UNESCOEndangerment[],
+): FilterFunctionType {
+  if (endangermentFilter.length === 0) return () => true;
+
+  return (ent: EntityData): boolean => {
+    const language = getLanguageForEntity(ent);
+    if (!language) return true;
+    return (
+      language.vitality?.unesco != null && endangermentFilter.includes(language.vitality.unesco)
+    );
   };
 }
 

@@ -39,6 +39,8 @@ function isFilterActive(field: FilterField, params: PageParams) {
       return params.isoStatus.length > 0;
     case Field.DigitalSupport:
       return params.digitalSupportMin >= 0 || params.digitalSupportMax < DIGITAL_SUPPORT_MAX;
+    case Field.Endangerment:
+      return params.endangermentFilter.length > 0;
     default:
       enforceExhaustiveSwitch(field);
   }

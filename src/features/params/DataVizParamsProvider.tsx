@@ -7,6 +7,8 @@ type DataVizParams = {
   toggleFilterPanel: () => void;
   scale?: Partial<Record<Axis, AxisScale>>;
   setScale?: (axis: Axis, scale: AxisScale) => void;
+  disperse?: number;
+  setDisperse?: (disperse: number) => void;
 };
 
 const DataVizParamsContext = React.createContext<DataVizParams | undefined>(undefined);
@@ -35,6 +37,7 @@ const DataVizParamsProvider: React.FC<ProviderProps> = ({
     },
     [setScaleByAxis],
   );
+  const [disperse, setDisperse] = useState<number>(4);
 
   const providerValue: DataVizParams = useMemo(
     () => ({
@@ -42,8 +45,10 @@ const DataVizParamsProvider: React.FC<ProviderProps> = ({
       toggleFilterPanel,
       scale: scaleByAxis,
       setScale,
+      disperse,
+      setDisperse,
     }),
-    [isFilterPanelOpen, toggleFilterPanel, scaleByAxis, setScale],
+    [isFilterPanelOpen, toggleFilterPanel, scaleByAxis, setScale, disperse, setDisperse],
   );
 
   return (

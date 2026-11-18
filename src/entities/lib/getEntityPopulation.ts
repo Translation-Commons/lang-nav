@@ -4,7 +4,7 @@ import type { OrganizationData } from '@entities/org/OrganizationTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 import { VariantType } from '@entities/variant/VariantTypes';
 
-import { maxBy, sumBy, uniqueBy } from '@shared/lib/setUtils';
+import { maxOf, sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
@@ -36,7 +36,7 @@ export function getEntityPopulation(ent: EntityData): number | undefined {
 }
 
 function getOrganizationPopulation(ent: OrganizationData): number | undefined {
-  const biggestTechnologyPop = maxBy(ent.techs ?? [], (tech) => tech.population);
+  const biggestTechnologyPop = maxOf(ent.techs ?? [], (tech) => tech.population);
   const censusesPerTerritory = uniqueBy(
     (ent.censuses ?? []).sort(sortByPopulation),
     (census) => census.isoRegionCode,

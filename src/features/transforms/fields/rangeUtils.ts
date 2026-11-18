@@ -1,12 +1,12 @@
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityData } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import { maxBy, minBy } from '@shared/lib/setUtils';
+import { maxOf, minOf } from '@shared/lib/setUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './Field';
@@ -16,7 +16,7 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
   if (field == null) return 0; // default min for when no field is selected
   switch (field) {
     case Field.Date:
-      return minBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return minOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Longitude:
       return -180;
     case Field.Latitude:
@@ -26,6 +26,7 @@ export function getMinimumValue(ents: EntityData[], field?: Field, populationMin
     case Field.ISOStatus:
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
+    case Field.Endangerment:
       return -1; // -1 is undefined
     case Field.Population:
       return populationMin ?? -1;
@@ -107,6 +108,8 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.VitalityMetascore:
     case Field.ISOStatus:
       return LanguageISOStatus.Living; // 9;
+    case Field.Endangerment:
+      return UNESCOEndangerment.Safe; // 9
     case Field.LanguageScope:
       return LanguageScope.BroadGrouping; // Larger value = broader scope
     case Field.Latitude:
@@ -121,7 +124,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
       return new Date().getTime(); // Today
     case Field.TerritoryScope:
       // return Not doing "World" as max since its not always shown and can throw off the color scaling
-      return maxBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return maxOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.CountOfLanguages:
     case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
@@ -138,7 +141,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
     case Field.Area:
     case Field.Depth:
     case Field.UnicodeVersion:
-      return maxBy(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
+      return maxOf(ents, (ent) => (getField(ent, field) as number) || 0) || 0;
     case Field.Name:
     case Field.Endonym:
     case Field.Code:

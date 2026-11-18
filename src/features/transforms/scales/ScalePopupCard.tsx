@@ -8,12 +8,19 @@ import Field from '../fields/Field';
 import FieldDropdown from '../sorting/FieldDropdown';
 import TransformOptionsPopup from '../TransformOptionsPopup';
 
+import DisperseSelector from './DisperseSelector';
 import ScaleFactorSelector from './ScaleFactorSelector';
 
 const ScalePopupCard: React.FC = () => {
   const { scaleBy, view } = usePageParams();
 
   if (view !== View.Map && view !== View.Chart) return null;
+
+  const options: Record<string, React.ReactNode> = {
+    'Scale By': <FieldDropdown pageParam="scaleBy" />,
+    'Scale Factor': <ScaleFactorSelector />,
+  };
+  if (view == View.Chart) options['Disperse'] = <DisperseSelector />;
 
   return (
     <TransformOptionsPopup
@@ -26,10 +33,7 @@ const ScalePopupCard: React.FC = () => {
           </div>
         </>
       }
-      options={{
-        'Scale By': <FieldDropdown pageParam="scaleBy" />,
-        'Scale Factor': <ScaleFactorSelector />,
-      }}
+      options={options}
     />
   );
 };

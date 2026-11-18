@@ -1,3 +1,5 @@
+import { sumBy } from '@shared/lib/setUtils';
+
 import type { LanguageData } from '../LanguageTypes';
 
 import { VitalitySource } from './VitalityTypes';
@@ -9,19 +11,20 @@ import { VitalitySource } from './VitalityTypes';
  * of lack of other usable data sources.
  */
 export function getVitalityMetascore(lang: LanguageData): number | undefined {
-  const { iso } = lang.vitality || {};
-
-  if (iso != null) {
-    // Use ISO as fallback
-    return iso;
-  }
-  return undefined;
+  const { iso, unesco, glottolog } = lang.vitality || {};
+  const estimates = [iso, unesco, glottolog].filter((v) => v != null);
+  if (estimates.length === 0) return undefined;
+  return sumBy(estimates, (v) => v) / estimates.length;
 }
 
 export function getVitalityScore(source: VitalitySource, lang: LanguageData): number | undefined {
   switch (source) {
+    case VitalitySource.UNESCO:
+      return lang.vitality?.unesco;
     case VitalitySource.ISO:
       return lang.vitality?.iso;
+    case VitalitySource.Glottolog:
+      return lang.vitality?.glottolog;
     case VitalitySource.Metascore:
       return lang.vitality?.meta;
   }

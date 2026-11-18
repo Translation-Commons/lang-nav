@@ -3,8 +3,11 @@ import { ChevronDownIcon, XIcon } from 'lucide-react';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
-import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
+import {
+  getEndangermentLabel,
+  getLanguageISOStatusLabel,
+} from '@entities/language/vitality/VitalityStrings';
+import { LanguageISOStatus, UNESCOEndangerment } from '@entities/language/vitality/VitalityTypes';
 import { LanguageModality } from '@entities/language/writing/LanguageModality';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -39,8 +42,14 @@ type Props = {
  * [Name matches "n" x]
  */
 function FilterButton({ field }: Props) {
-  const { modalityFilter, languageScopes, updatePageParams, isoStatus, territoryScopes } =
-    usePageParams();
+  const {
+    modalityFilter,
+    endangermentFilter,
+    languageScopes,
+    updatePageParams,
+    isoStatus,
+    territoryScopes,
+  } = usePageParams();
 
   switch (field) {
     case Field.Modality:
@@ -78,6 +87,20 @@ function FilterButton({ field }: Props) {
           options={Object.values(LanguageISOStatus).filter((s) => typeof s === 'number')}
           noneSelectedLabel="Any ISO status"
           allSelectedLabel="Any ISO status"
+          limitWidth={false}
+        />
+      );
+    case Field.Endangerment:
+      return (
+        <EnumDropdownMultiSelect<UNESCOEndangerment>
+          value={endangermentFilter}
+          onChange={(newValue: UNESCOEndangerment[]) =>
+            updatePageParams({ endangermentFilter: newValue })
+          }
+          getLabel={getEndangermentLabel}
+          options={Object.values(UNESCOEndangerment).filter((s) => typeof s === 'number')}
+          noneSelectedLabel="Any endangerment level"
+          allSelectedLabel="Any defined endangerment level"
           limitWidth={false}
         />
       );

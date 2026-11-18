@@ -1,9 +1,13 @@
 import type { LanguageData } from '../LanguageTypes';
 
-import { LanguageISOStatus, VitalitySource } from './VitalityTypes';
+import { LanguageISOStatus, UNESCOEndangerment, VitalitySource } from './VitalityTypes';
 
 export function getVitalityLabel(lang: LanguageData, source: VitalitySource): string | undefined {
   switch (source) {
+    case VitalitySource.UNESCO:
+      return getEndangermentLabel(lang.vitality?.unesco);
+    case VitalitySource.Glottolog:
+      return getEndangermentLabel(lang.vitality?.glottolog);
     case VitalitySource.ISO:
       return getLanguageISOStatusLabel(lang.vitality?.iso);
     case VitalitySource.Metascore:
@@ -25,6 +29,54 @@ export function getLanguageISOStatusLabel(vitality: LanguageISOStatus | undefine
       return 'Extinct';
     case LanguageISOStatus.SpecialCode:
       return 'Special Code';
+    default:
+      return 'Unknown';
+  }
+}
+
+export function parseEndangerment(input: string): UNESCOEndangerment | undefined {
+  switch (input.toLowerCase().replace(' ', '')) {
+    case 'safe':
+      return UNESCOEndangerment.Safe;
+    case 'vulnerable':
+    case 'w':
+    case 'white':
+      return UNESCOEndangerment.Vulnerable;
+    case 'definitelyendangered':
+    case 'y':
+    case 'yellow':
+      return UNESCOEndangerment.DefinitelyEndangered;
+    case 'severelyendangered':
+    case 'o':
+    case 'orange':
+      return UNESCOEndangerment.SeverelyEndangered;
+    case 'criticallyendangered':
+    case 'r':
+    case 'red':
+      return UNESCOEndangerment.CriticallyEndangered;
+    case 'extinct':
+    case 'b':
+    case 'black':
+      return UNESCOEndangerment.Extinct;
+    default:
+      return undefined;
+  }
+}
+
+export function getEndangermentLabel(endangerment: UNESCOEndangerment | undefined): string {
+  switch (endangerment) {
+    case UNESCOEndangerment.Safe:
+      return 'Safe';
+    case UNESCOEndangerment.Vulnerable:
+      return 'Vulnerable';
+    case UNESCOEndangerment.DefinitelyEndangered:
+      return 'Definitely Endangered';
+    case UNESCOEndangerment.SeverelyEndangered:
+      return 'Severely Endangered';
+    case UNESCOEndangerment.CriticallyEndangered:
+      return 'Critically Endangered';
+    case UNESCOEndangerment.Extinct:
+      return 'Extinct';
     default:
       return 'Unknown';
   }

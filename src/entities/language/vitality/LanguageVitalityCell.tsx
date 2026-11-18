@@ -25,7 +25,7 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, src }
 
 function getActivityLevel(score: number | undefined): ActivityLevel {
   if (score == null) return ActivityLevel.Unknown;
-  if (score >= 7) return ActivityLevel.High;
+  if (score >= 8) return ActivityLevel.High;
   if (score >= 4) return ActivityLevel.Medium;
   if (score >= 1) return ActivityLevel.Low;
   return ActivityLevel.Zero;
