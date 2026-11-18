@@ -92,8 +92,9 @@ function getLimitThreshold(view: View): number {
     case View.Details:
       return 20;
     case View.Hierarchy:
-    case View.Reports:
       return 10;
+    case View.Reports:
+      return 100;
   }
 }
 

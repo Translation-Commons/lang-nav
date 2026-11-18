@@ -18,6 +18,7 @@ enum ReportID {
   LanguagePlurals,
   EntitiesMissingFields, // Useful for all entities
   CharacterInventory,
+  DigitalSupportScorecard,
 }
 
 export default ReportID;

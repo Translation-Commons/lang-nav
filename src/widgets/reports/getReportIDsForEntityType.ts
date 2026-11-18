@@ -16,6 +16,7 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
         ReportID.LanguageScopeIssues,
         ReportID.LanguagePlurals,
         ReportID.CharacterInventory,
+        ReportID.DigitalSupportScorecard,
       ];
     case EntityType.Locale:
       return [

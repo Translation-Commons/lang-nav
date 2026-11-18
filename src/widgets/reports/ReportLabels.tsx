@@ -18,6 +18,7 @@ const ReportLabels: Record<ReportID, string> = {
   [ReportID.VariantsAnnotationTool]: 'Annotation Tool',
   [ReportID.WritingSystemsLanguagesWithout]: 'Languages without Writing Systems',
   [ReportID.CharacterInventory]: 'Character Inventory',
+  [ReportID.DigitalSupportScorecard]: 'Digital Support Scorecard',
 };
 
 export default ReportLabels;
