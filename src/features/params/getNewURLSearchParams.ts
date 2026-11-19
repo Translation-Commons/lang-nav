@@ -83,6 +83,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     next.get('profile') as ProfileType,
     next.get('populationFocus') as PopulationFocus,
     next.get('colorBy') as Field,
+    // next.has('reportID') ? (Number(next.get('reportID')) as ReportID) : undefined,
   );
 
   Array.from(next.entries()).forEach(([key, value]) => {
@@ -119,6 +120,7 @@ function clearContextDependentParams(
     prev?.get('profile') as ProfileType,
     prev?.get('populationFocus') as PopulationFocus,
     prev?.get('colorBy') as Field,
+    // prev?.get('reportID') as ReportID | undefined,
   );
 
   if (newParams.view !== undefined && newParams.view !== prevDefault.view) {

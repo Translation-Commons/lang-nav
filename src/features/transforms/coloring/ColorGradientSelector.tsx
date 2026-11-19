@@ -12,17 +12,15 @@ import {
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
-import Field from '../fields/Field';
-
 import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
-  const { colorBy, colorGradient, updatePageParams } = usePageParams();
+  const { colorGradient, updatePageParams } = usePageParams();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        disabled={colorBy == Field.None}
+        // disabled={colorBy == Field.None}
         render={
           <Button className="cursor-pointer" variant="outline">
             <div className="min-w-[4em] w-full h-[16px]">

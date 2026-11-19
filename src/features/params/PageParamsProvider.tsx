@@ -35,6 +35,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       instantiatedParams.profile,
       instantiatedParams.populationFocus,
       instantiatedParams.colorBy,
+      // instantiatedParams.reportID,
     );
 
     Object.keys(instantiatedParams).forEach((key) => {

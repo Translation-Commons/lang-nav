@@ -78,20 +78,21 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
                 </Button>
               </div>
             </th>,
-            ...DigitalSupportTierCategories[tier].map((cat) => (
+            ...DigitalSupportTierCategories[tier].map((cat, index) => (
               <CategoryHeader
                 key={cat}
                 cat={cat}
                 isExpanded={openTiers.includes(tier) && openCats.includes(cat)}
                 showCategory={openTiers.includes(tier)}
                 toggleCat={toggleCat}
+                isLastInTier={index === DigitalSupportTierCategories[tier].length - 1}
               />
             )),
           ])}
       </tr>
       <tr>
-        <th>Code</th>
-        <th>Name</th>
+        <th className="pr-1">Code</th>
+        <th className="px-1">Name</th>
         {visibleColumns.map((column, index) => (
           <FactorHeader key={index} {...column} toggleCat={toggleCat} />
         ))}
@@ -126,9 +127,13 @@ const CategoryHeader: React.FC<{
   showCategory: boolean;
   isExpanded: boolean;
   toggleCat: (cat: DigitalSupportCategory) => void;
-}> = ({ cat, isExpanded, toggleCat, showCategory }) => {
+  isLastInTier: boolean;
+}> = ({ cat, isExpanded, toggleCat, showCategory, isLastInTier }) => {
   return (
-    <th colSpan={getFactorCount(cat) + 1} className="font-medium border-r-2">
+    <th
+      colSpan={getFactorCount(cat) + 1}
+      className={cn('font-medium', isLastInTier ? 'border-r-2' : '')}
+    >
       <div
         className={cn(
           'text-xs flex flex-row items-center truncate transition-all duration-1000',

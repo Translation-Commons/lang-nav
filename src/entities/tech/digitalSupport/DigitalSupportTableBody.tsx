@@ -28,8 +28,8 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
     <tbody>
       {ents.map((ent) => (
         <tr key={ent.ID}>
-          <td>{ent.codeDisplay}</td>
-          <td>{ent.nameDisplay}</td>
+          <td className="pr-1">{ent.codeDisplay}</td>
+          <td className="text-nowrap pr-1">{ent.nameDisplay}</td>
           {visibleColumns.map(({ tier, cat, factor, showData }, index) => (
             <td key={index} className="">
               <div
