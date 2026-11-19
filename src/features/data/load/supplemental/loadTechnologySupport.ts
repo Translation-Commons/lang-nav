@@ -43,9 +43,11 @@ async function loadOneTechnologySupport(file: string, dc: DataGetters): Promise<
       tech.languageSupportLastUpdated = dateAccessed ? new Date(dateAccessed) : undefined;
       tech.languageSupportURL = url;
 
+      const columns = findColumns(lines);
+
       // Add relations to the language
       const languageLines = lines.filter((line) => line.trim() !== '' && !line.startsWith('#'));
-      languageLines.forEach((line) => addSupportToLanguages(tech, line, dc));
+      languageLines.forEach((line) => addSupportToLanguages(tech, line, dc, columns));
     })
     .catch((err) => {
       console.error(`Error loading data from ${file}:`, err);
@@ -61,15 +63,57 @@ function getMetadata(lines: string[], key: string): string | undefined {
   );
 }
 
+type ColIndices = {
+  Code: number;
+  Name: number;
+  Score: number;
+  Territory: number;
+  WritingSystem: number;
+  Notes: number;
+};
+
+function findColumns(lines: string[]): ColIndices {
+  const headerLine = lines.find(
+    (line) => line.startsWith('Language Code') || line.startsWith('Code'),
+  );
+  if (!headerLine)
+    return {
+      Code: -1,
+      Name: -1,
+      Score: -1,
+      Territory: -1,
+      WritingSystem: -1,
+      Notes: -1,
+    };
+
+  const columns = headerLine.split('\t').map((s) => s.trim());
+
+  return {
+    Code: columns.findIndex((col) => col === 'Code' || col === 'Language Code'),
+    Name: columns.findIndex(
+      (col) => col === 'Name' || col === 'Language' || col === 'Language Name',
+    ),
+    Score: columns.findIndex((col) => col === 'Score'),
+    Territory: columns.findIndex((col) => col === 'Territory' || col === 'Locale'),
+    WritingSystem: columns.findIndex((col) => col === 'Writing System' || col === 'Script'),
+    Notes: columns.findIndex((col) => col === 'Notes'),
+  };
+}
+
 /**
  * File format:
  * Language Code\tLanguage\tLocale\tWriting System\tNotes
  */
-function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGetters): void {
+function addSupportToLanguages(
+  tech: TechnologyData,
+  line: string,
+  dc: DataGetters,
+  columns: ColIndices,
+): void {
   const parts = line.split('\t');
   if (parts.length < 2) return;
 
-  const languageCodePath = (parts[0] ?? '').trim();
+  const languageCodePath = (parts[columns.Code] ?? '').trim();
   if (languageCodePath === '' || languageCodePath === 'Language Code') return;
   let locale = undefined;
   if (languageCodePath.match('[_-]')) {
@@ -80,14 +124,17 @@ function addSupportToLanguages(tech: TechnologyData, line: string, dc: DataGette
 
   // Extract fields
   const languageCodes = getLanguageCodes(locale ? locale.languageCode : languageCodePath);
+  const score = (parts[columns.Score] ?? '').trim() || undefined;
 
   const techSupportBase: TechSupportData = {
     techShortName: tech.codeDisplay,
     languageCodePath,
-    name: (parts[1] ?? '').trim(),
-    territoryCode: locale?.territoryCode ?? ((parts[2] ?? '').trim() || undefined),
-    writingSystemCode: locale?.scriptCode ?? ((parts[3] ?? '').trim() || undefined),
-    notes: (parts[4] ?? '').trim() || undefined,
+    name: (parts[columns.Name] ?? '').trim(),
+    territoryCode: locale?.territoryCode ?? ((parts[columns.Territory] ?? '').trim() || undefined),
+    writingSystemCode:
+      locale?.scriptCode ?? ((parts[columns.WritingSystem] ?? '').trim() || undefined),
+    notes: (parts[columns.Notes] ?? '').trim() || undefined,
+    score: score != null ? parseFloat(score) : undefined,
 
     tech,
   };
@@ -118,15 +165,18 @@ function getLanguageCodes(languageCodePath: string): string[] {
   switch (languageCodePath) {
     case 'ara':
     case 'ar':
+    case 'arb':
       return ['ara', 'arb'];
     case 'zh':
     case 'zho':
+    case 'cmn':
       return ['zho', 'cmn'];
     case 'lah':
     case 'pnb':
       return ['lah', 'pnb'];
     case 'ms':
     case 'msa':
+    case 'zsm':
       return ['msa', 'zsm'];
     case 'tl':
     case 'tgl':
@@ -167,6 +217,10 @@ function getLanguageCodes(languageCodePath: string): string[] {
     case 'sqi':
     case 'als':
       return ['sqi', 'als'];
+    case 'fa':
+    case 'fas':
+    case 'pes':
+      return ['fas', 'pes'];
   }
   return languageCodePath.split('/');
 }

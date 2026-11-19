@@ -29,12 +29,21 @@ export const NAV_BAR_TOOLS: NavBarTool[] = [
     params: { entType: EntityType.Census, view: View.Reports, reportID: ReportID.CensusInputTool },
   },
   {
-    label: 'Plurals',
+    label: 'Plural Forms',
     page: LangNavPageName.Data,
     params: {
       entType: EntityType.Language,
       view: View.Reports,
       reportID: ReportID.LanguagePlurals,
+    },
+  },
+  {
+    label: 'Digital Support Scorecard',
+    page: LangNavPageName.Data,
+    params: {
+      entType: EntityType.Language,
+      view: View.Reports,
+      reportID: ReportID.DigitalSupportScorecard,
     },
   },
 ];
