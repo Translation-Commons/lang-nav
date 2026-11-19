@@ -58,8 +58,8 @@ export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): str
       return 'Machine Translation';
     // case DigitalSupportCategory.Speech:
     //   return 'Speech';
-    case DigitalSupportCategory.Recommendation:
-      return 'Recommendation';
+    // case DigitalSupportCategory.Recommendation:
+    //   return 'Recommendation';
     case DigitalSupportCategory.OperatingSystems:
       return 'Operating Systems';
     // case DigitalSupportCategory.SocialMedia:

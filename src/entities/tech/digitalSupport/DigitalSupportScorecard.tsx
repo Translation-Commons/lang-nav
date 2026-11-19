@@ -8,12 +8,12 @@ import DigitalSupportTable from './DigitalSupportTable';
 
 const DigitalSupportScorecard = () => {
   const { getCurrentEntities } = usePagination<LanguageData>();
-  const { filteredEntities, isPending } = useFilteredEntities<LanguageData>({});
+  const { filteredEntities, isPending, allEntities } = useFilteredEntities<LanguageData>({});
   const currentEntities = getCurrentEntities(filteredEntities);
 
   return (
     <div className="flex flex-col gap-4 items-center">
-      <VisibleItemsMeter ents={filteredEntities} />
+      <VisibleItemsMeter ents={allEntities} />
       <DigitalSupportTable ents={currentEntities} isPending={isPending} />
     </div>
   );

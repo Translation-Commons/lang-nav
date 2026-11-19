@@ -4,6 +4,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
+import { Skeleton } from '@shared/ui/skeleton';
 
 import DigitalSupportCellDisplay from './DigitalSupportCellDisplay';
 import {
@@ -45,11 +46,15 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
       {ents.length === 0 && !isPending && (
         <tr>
           <td colSpan={2}>No entities found</td>
+          <td colSpan={visibleColumns.length}></td>
         </tr>
       )}
       {isPending && (
         <tr>
           <td colSpan={2}>Loading...</td>
+          <td colSpan={visibleColumns.length}>
+            <Skeleton className="h-4 w-full" />
+          </td>
         </tr>
       )}
     </tbody>

@@ -3,6 +3,8 @@ import type { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 import { DigitalSupportFactor } from './DigitalSupportTypes';
 
 // Returns a numeric score from 1 to 10
@@ -47,6 +49,9 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
 
     case DigitalSupportFactor.ClaudeSonnet:
       return ent.techSupport?.filter((ts) => ts.techShortName === 'Claude').length ? 10 : 0;
+
+    default:
+      enforceExhaustiveSwitch(factor);
   }
 }
 
