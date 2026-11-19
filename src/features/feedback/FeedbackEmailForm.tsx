@@ -2,6 +2,7 @@ import { MailIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import LinkButton from '@shared/ui/LinkButton';
+import { Textarea } from '@shared/ui/textarea';
 
 import { getFeedbackEmailBody } from './getFeedbackEmailBody';
 
@@ -45,19 +46,12 @@ export function FeedbackEmailForm() {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
         <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Message</label>
-        <textarea
-          rows={5}
+        <Textarea
+          rows={10}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="What did you notice or suggest?"
-          style={{
-            padding: '0.5em',
-            color: 'var(--color-text)',
-            backgroundColor: 'var(--color-background)',
-            border: '1px solid var(--color-shadow)',
-            borderRadius: '0.5em',
-            resize: 'vertical',
-          }}
+          className="field-sizing-fixed"
         />
       </div>
       <LinkButton href={mailtoUrl} title="Send us an email!">

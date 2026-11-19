@@ -13,6 +13,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import { countOccurrences } from '@shared/lib/setUtils';
 import { Badge } from '@shared/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
+import { Textarea } from '@shared/ui/textarea';
 
 enum Section {
   Input = 'Input',
@@ -103,8 +104,8 @@ const ReportCensusInputTool: React.FC = () => {
           Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
           edit changes inline to test them out.
         </div>
-        <textarea
-          className="w-full min-h-[40em] border border-gray-300 rounded p-2 "
+        <Textarea
+          className="h-[40em] field-sizing-fixed"
           onChange={(e) => setInput(e.target.value)}
         />
       </div>
