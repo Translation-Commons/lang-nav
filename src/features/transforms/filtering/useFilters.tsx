@@ -83,7 +83,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByOrganization = useMemo(() => buildFilterByOrganization(orgFilter), [orgFilter]);
 
   // Vitality
-  const filterbyEndangerment = useMemo(
+  const filterByEndangerment = useMemo(
     () => buildFilterByEndangerment(endangermentFilter),
     [endangermentFilter],
   );
@@ -110,7 +110,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       [Field.Modality]: filterByModality,
 
       // Vitality
-      [Field.Endangerment]: filterbyEndangerment,
+      [Field.Endangerment]: filterByEndangerment,
       [Field.ISOStatus]: filterByISOStatus,
 
       // Connections
@@ -187,6 +187,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
       filterByLanguageSource,
       filterByISOStatus,
       filterByPopulation,
+      filterByEndangerment,
     ],
   );
 

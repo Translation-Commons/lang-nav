@@ -114,6 +114,7 @@ export function getDefaultParams(
   profile?: ProfileType | undefined,
   populationFocus?: PopulationFocus | undefined,
   colorBy?: Field,
+  // reportID?: ReportID | undefined,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
 
@@ -131,6 +132,7 @@ export function getDefaultParams(
   if (entType != null) params.entType = entType;
   if (populationFocus != null) params.populationFocus = populationFocus;
   if (colorBy != null) params.colorBy = colorBy;
+  // if (reportID) params.reportID = reportID;
 
   // Apply a few view-specific overrides
   switch (params.view) {
@@ -164,8 +166,12 @@ export function getDefaultParams(
       break;
     case View.Reports:
       // Reports easily become too dense, so we limit them more aggressively by default
-      params.limit = 10;
+      // params.limit = 10;
       params.fieldFocus = Field.Code;
+      // if (params.reportID === ReportID.DigitalSupportScorecard) {
+      params.limit = 100;
+      params.colorGradient = ColorGradient.SequentialBlue;
+      // }
       break;
     case View.Chart:
       params.chartX = Field.Population;
