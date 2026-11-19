@@ -6,7 +6,7 @@ export enum DigitalSupportTier {
 
 export enum DigitalSupportCategory {
   // Communication
-  // Display,
+  Display,
   Keyboards,
   AssistiveTools,
 
@@ -27,7 +27,7 @@ export enum DigitalSupportCategory {
 export enum DigitalSupportFactor {
   /** Communication */
   // Display
-  // UnicodeEncoding,
+  UnicodeEncoding,
 
   // Keyboards
   Keyman,
@@ -70,7 +70,7 @@ export enum DigitalSupportFactor {
 
 export const DigitalSupportTierCategories: Record<DigitalSupportTier, DigitalSupportCategory[]> = {
   [DigitalSupportTier.Communication]: [
-    // DigitalSupportCategory.Display,
+    DigitalSupportCategory.Display,
     DigitalSupportCategory.Keyboards,
     DigitalSupportCategory.AssistiveTools,
   ],
@@ -91,7 +91,7 @@ export const DigitalSupportTierCategories: Record<DigitalSupportTier, DigitalSup
 
 export const DigitalSupportCategoryFactors: Record<DigitalSupportCategory, DigitalSupportFactor[]> =
   {
-    // [DigitalSupportCategory.Display]: [],
+    [DigitalSupportCategory.Display]: [DigitalSupportFactor.UnicodeEncoding],
     [DigitalSupportCategory.Keyboards]: [DigitalSupportFactor.Keyman, DigitalSupportFactor.Gboard],
     [DigitalSupportCategory.AssistiveTools]: [
       DigitalSupportFactor.Grammarly,
