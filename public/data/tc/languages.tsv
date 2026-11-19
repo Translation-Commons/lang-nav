@@ -7646,7 +7646,7 @@ guv	geya1234	Gey					duz	book1242	No	ISO merged this into duz
 hib	hibi1243	Hibito	Šiwi		Latn			hibi1242	No	Extinct language
 hlu	hier1240	Hieroglyphic Luwian			Hluw			luvi1235	Probably not	Historical langauge
 hmk		Maek							Probably not	Historical langauge
-hnm	hain1238	Hainanese		Mostly Spoken		5,000,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
+hnm	hain1238	Hainanese		Mostly Spoken	Hans	5,000,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 hod	holm1250	Holma			Latn			nzan1241	No	Extinct language
 hokk1242	hokk1242	Hokkien		Spoken & Written	Hant	40,000,000		minn1241	Maybe	Contested by different sources as an independent language or a part of general Min-nan
 hom	homa1239	Homa			Latn			ngen1255	No	Extinct language
@@ -7710,7 +7710,7 @@ lnw		Lanima			Latn				No	Extinct language
 lre	laur1250	Laurentian						nort2947	No	Extinct language
 lsg	lyon1239	Lyons Sign Language		Sign				book1242	No	Declared non-existent by ISO
 ltc	midd1344	Late Middle Chinese			Hant			midd1354	Probably not	Historical langauge
-luh	leiz1236	Leizhou Chinese				2,800,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
+luh	leiz1236	Leizhou Chinese			Hans	2,800,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 luvi1235	luvi1235	Luwian						luvi1234		
 mand1471	mand1471	Mandarinic						nort3155	No	Group of multiple languages
 maza1295	maza1295	Macatecan						popo1293		
@@ -7737,7 +7737,7 @@ mwu	mitt1253	Mittu			Latn			gber1234	No	Extinct language
 mwy	mosi1247	Mosiro						okie1247	No	Declared non-existent by ISO
 mxi	moza1249	Mozarabic	مُزَرَب		Latn			unsh1234	Probably not	Historical langauge
 mzg	mona1241	Monastic Sign Language		Sign	Zxxx			auxi1235	Possibly	Sign
-nah	azte1234	Nahuatl	Náhuatl	Spoken & Written					Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
+nah	azte1234	Nahuatl	Náhuatl	Spoken & Written	Latn				Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
 pugl1238	pugl1238	Tarantino						neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
 nci	clas1250	Classical Nahuatl	Nāhuatlahtōlli	Mostly Written	Latn			cent2258	Possibly	Nahuatl has many spoken variations but it appears that most written content (eg. the Nahuatl Wikipedia) is written in Classical Nahuatl since it's the common denominator between the nahua communities.
 ndf		Nadruvian			Cyrl				Probably not	Historical langauge
@@ -8213,3 +8213,4 @@ tvg	tugu1234	Tugunese	Mardijker		Latn	0	crp	mala1533	No	Extinct
 zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New to ISO
 ccq	chau1262	Chaungtha				186000	rki	rakh1245	No	Combined into Rakhine in ISO
 mhv	arak1256	Arakanese					tbq	arak1255	No	Language group, not recognized by ISO anymore
+izie1238	izie1238	Izzi languages			Latn	4,000,000	alv	cent2417	Possibly	Different sources group the languages together

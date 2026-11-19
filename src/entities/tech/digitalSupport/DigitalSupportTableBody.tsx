@@ -1,5 +1,7 @@
 import React from 'react';
 
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
@@ -29,7 +31,9 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
       {ents.map((ent) => (
         <tr key={ent.ID}>
           <td className="pr-1">{ent.codeDisplay}</td>
-          <td className="text-nowrap pr-1">{ent.nameDisplay}</td>
+          <td className="text-nowrap pr-1">
+            <HoverableEntityName ent={ent} />
+          </td>
           {visibleColumns.map(({ tier, cat, factor, showData }, index) => (
             <td key={index} className="">
               <div
