@@ -9,7 +9,7 @@ const DigitalSupportCellDisplay: React.FC<{ score: number }> = ({ score }) => {
       optimum={8} // Functional just not always fully supported -- tells the renderer that high and above is green
       max={10} // Fully supported
       value={score}
-      style={{ width: '100%', minWidth: '8em' }}
+      className="w-full min-w-4"
     />
   );
   {

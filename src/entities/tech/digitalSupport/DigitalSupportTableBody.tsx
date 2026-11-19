@@ -3,7 +3,9 @@ import React from 'react';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
+import { cn } from '@shared/lib/utils';
 
+import DigitalSupportCellDisplay from './DigitalSupportCellDisplay';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
@@ -27,20 +29,15 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
         <tr key={ent.ID}>
           <td>{ent.codeDisplay}</td>
           <td>{ent.nameDisplay}</td>
-          {visibleColumns.map(({ tier, cat, factor }, index) => (
-            <td key={index} className="p-1">
-              <meter
-                min={0} // Extinct
-                low={3} // Rarely supported -- below this, the meter is colored red
-                high={7} // -- below this, the meter is colored yellow
-                optimum={8} // Functional just not always fully supported -- tells the renderer that high and above is green
-                max={10} // Fully supported
-                value={getGroupedDigitalSupportFactorScore(ent, tier, cat, factor)}
-                style={{ width: '100%', minWidth: '8em' }}
-              />
-              {/* <DecimalNumber
-                  num={getGroupedDigitalSupportFactorScore(ent, tier, cat, factor)}
-                /> */}
+          {visibleColumns.map(({ tier, cat, factor, showData }, index) => (
+            <td key={index} className="">
+              <div
+                className={cn('truncate transition-w duration-1000', !showData ? 'w-0' : 'w-20')}
+              >
+                <DigitalSupportCellDisplay
+                  score={getGroupedDigitalSupportFactorScore(ent, tier, cat, factor)}
+                />
+              </div>
             </td>
           ))}
         </tr>

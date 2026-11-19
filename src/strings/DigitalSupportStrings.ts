@@ -44,8 +44,8 @@ export function getDigitalSupportStatusLabel(status: DigitalSupportStatus): stri
 
 export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): string {
   switch (cat) {
-    case DigitalSupportCategory.Display:
-      return 'Display';
+    // case DigitalSupportCategory.Display:
+    //   return 'Display';
     case DigitalSupportCategory.Keyboards:
       return 'Keyboards';
     case DigitalSupportCategory.AssistiveTools:
@@ -53,19 +53,19 @@ export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): str
     case DigitalSupportCategory.Documentation:
       return 'Documentation';
     case DigitalSupportCategory.CurrencyAndDates:
-      return 'Currency and Dates';
+      return 'Currency & Dates';
     case DigitalSupportCategory.MachineTranslation:
       return 'Machine Translation';
-    case DigitalSupportCategory.Speech:
-      return 'Speech';
+    // case DigitalSupportCategory.Speech:
+    //   return 'Speech';
     case DigitalSupportCategory.Recommendation:
       return 'Recommendation';
     case DigitalSupportCategory.OperatingSystems:
       return 'Operating Systems';
-    case DigitalSupportCategory.SocialMedia:
-      return 'Social Media';
-    case DigitalSupportCategory.PopularSoftware:
-      return 'Popular Software';
+    // case DigitalSupportCategory.SocialMedia:
+    //   return 'Social Media';
+    // case DigitalSupportCategory.PopularSoftware:
+    //   return 'Popular Software';
     case DigitalSupportCategory.AIKnowledgeTools:
       return 'AI Knowledge Tools';
     default:

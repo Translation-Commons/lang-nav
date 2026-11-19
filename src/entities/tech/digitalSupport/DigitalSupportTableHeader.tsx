@@ -1,7 +1,9 @@
 import { ChevronLeftIcon } from 'lucide-react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { sumBy } from '@shared/lib/setUtils';
+import { cn } from '@shared/lib/utils';
+import { Button } from '@shared/ui/button';
 import { Toggle } from '@shared/ui/toggle';
 
 import { getDigitalSupportCategoryLabel } from '@strings/DigitalSupportStrings';
@@ -38,14 +40,23 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
     <thead>
       <tr>
         <th colSpan={2}></th>
+        {/* {visibleColumns
+          .filter((column) => column.cat == null)
+          .map((col) => (
+            <TierHeader
+              key={col.tier}
+              tier={col.tier}
+              isExpanded={openTiers.includes(col.tier)}
+              toggleTier={toggleTier}
+            />
+          ))} */}
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .map((tier) => (
             <TierHeader
               key={tier}
               tier={tier}
-              openTiers={openTiers}
-              openCats={openCats}
+              isExpanded={openTiers.includes(tier)}
               toggleTier={toggleTier}
             />
           ))}
@@ -54,23 +65,35 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
         <th colSpan={2}>Language</th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
-          .flatMap((tier) =>
-            openTiers.includes(tier) ? (
-              DigitalSupportTierCategories[tier].map((cat) => (
-                <CategoryHeader key={cat} cat={cat} openCats={openCats} toggleCat={toggleCat} />
-              ))
-            ) : (
-              <th className="p-1 text-sm font-medium text-nowrap">
-                All {DigitalSupportTierCategories[tier].length} categories
-              </th>
-            ),
-          )}
+          .flatMap((tier) => [
+            <th key={`${tier}-cat-head`} className={cn('text-sm font-medium text-nowrap ')}>
+              <div
+                className={cn(
+                  'transition-all truncate duration-1000',
+                  openTiers.includes(tier) ? 'w-0' : 'w-30',
+                )}
+              >
+                <Button variant="ghost" onClick={() => toggleTier(tier)}>
+                  All {DigitalSupportTierCategories[tier].length} categories
+                </Button>
+              </div>
+            </th>,
+            ...DigitalSupportTierCategories[tier].map((cat) => (
+              <CategoryHeader
+                key={cat}
+                cat={cat}
+                isExpanded={openTiers.includes(tier) && openCats.includes(cat)}
+                showCategory={openTiers.includes(tier)}
+                toggleCat={toggleCat}
+              />
+            )),
+          ])}
       </tr>
       <tr>
         <th>Code</th>
         <th>Name</th>
-        {visibleColumns.map(({ tier, cat, factor }, index) => (
-          <FactorHeader key={index} tier={tier} cat={cat} factor={factor} />
+        {visibleColumns.map((column, index) => (
+          <FactorHeader key={index} {...column} toggleCat={toggleCat} />
         ))}
       </tr>
     </thead>
@@ -79,65 +102,79 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
 
 const TierHeader: React.FC<{
   tier: DigitalSupportTier;
-  openTiers: DigitalSupportTier[];
-  openCats: DigitalSupportCategory[];
+  isExpanded: boolean;
   toggleTier: (tier: DigitalSupportTier) => void;
-}> = ({ tier, openTiers, openCats, toggleTier }) => {
-  let colSpan = 1;
-  if (openTiers.includes(tier)) {
-    colSpan = sumBy(DigitalSupportTierCategories[tier], (cat) =>
-      openCats.includes(cat) ? getFactorCount(cat) : 1,
-    );
-  }
+}> = ({ tier, isExpanded, toggleTier }) => {
+  const colSpan =
+    sumBy(DigitalSupportTierCategories[tier], getFactorCount) +
+    DigitalSupportTierCategories[tier].length +
+    1;
   return (
-    <th colSpan={colSpan}>
-      <Toggle
-        pressed={openTiers.includes(tier)}
-        onPressedChange={() => toggleTier(tier)}
-        className="group text-md w-full justify-start"
-      >
+    <th colSpan={colSpan} className="border-r-2">
+      <div className="px-1 flex items-center flex-row gap-1">
         {DigitalSupportTier[tier]}
-        <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
-      </Toggle>
+        <Toggle pressed={isExpanded} onPressedChange={() => toggleTier(tier)} className="group">
+          <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
+        </Toggle>
+      </div>
     </th>
   );
 };
 
 const CategoryHeader: React.FC<{
   cat: DigitalSupportCategory;
-  openCats: DigitalSupportCategory[];
+  showCategory: boolean;
+  isExpanded: boolean;
   toggleCat: (cat: DigitalSupportCategory) => void;
-}> = ({ cat, openCats, toggleCat }) => {
-  const colSpan = openCats.includes(cat) ? getFactorCount(cat) : 1;
-
+}> = ({ cat, isExpanded, toggleCat, showCategory }) => {
   return (
-    <th colSpan={colSpan}>
-      <Toggle
-        pressed={openCats.includes(cat)}
-        onPressedChange={() => toggleCat(cat)}
-        className="group text-sm w-full justify-start"
+    <th colSpan={getFactorCount(cat) + 1} className="font-medium border-r-2">
+      <div
+        className={cn(
+          'text-xs flex flex-row items-center truncate transition-all duration-1000',
+          showCategory ? (isExpanded ? 'max-w-40' : 'w-20') : 'w-0',
+        )}
       >
-        {getDigitalSupportCategoryLabel(cat)}
-        <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
-      </Toggle>
+        <div className="text-wrap">{getDigitalSupportCategoryLabel(cat)}</div>
+        <Toggle
+          pressed={isExpanded}
+          onPressedChange={() => toggleCat(cat)}
+          className="group"
+          size="sm"
+        >
+          <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
+        </Toggle>
+      </div>
     </th>
   );
 };
 
-const FactorHeader: React.FC<{
-  tier: DigitalSupportTier;
-  cat?: DigitalSupportCategory;
-  factor?: DigitalSupportFactor;
-}> = ({ tier, cat, factor }) => {
-  let label = '';
+const FactorHeader: React.FC<
+  DigitalSupportColumn & { toggleCat: (cat: DigitalSupportCategory) => void }
+> = ({ cat, factor, showData, toggleCat }) => {
+  let contents: ReactNode = '';
 
-  if (cat == null)
-    label = `All ${sumBy(DigitalSupportTierCategories[tier], (cat) => getFactorCount(cat))} factors`;
+  if (cat == null) return <th></th>;
   else if (factor == null)
-    label = getFactorCount(cat) > 1 ? `All ${getFactorCount(cat)} factors` : `1 factor`;
-  else label = DigitalSupportFactor[factor];
+    contents = (
+      <Button variant="ghost" onClick={() => toggleCat(cat)}>
+        {getFactorCount(cat) > 1 ? `All ${getFactorCount(cat)} factors` : `1 factor`}
+      </Button>
+    );
+  else contents = DigitalSupportFactor[factor];
 
-  return <th className="p-1 text-xs font-medium text-nowrap">{label}</th>;
+  return (
+    <th className="">
+      <div
+        className={cn(
+          'text-xs font-medium truncate transition-all duration-1000',
+          showData ? 'w-20' : 'w-0',
+        )}
+      >
+        {contents}
+      </div>
+    </th>
+  );
 };
 
 export default DigitalSupportTableHeader;

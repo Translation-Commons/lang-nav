@@ -7,7 +7,7 @@ import DigitalSupportTableHeader from './DigitalSupportTableHeader';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
-  DigitalSupportFactor,
+  DigitalSupportColumn,
   DigitalSupportTier,
   DigitalSupportTierCategories,
 } from './DigitalSupportTypes';
@@ -29,22 +29,21 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
     setOpenCats((prev) => (prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]));
   }, []);
 
-  const visibleColumns: {
-    tier: DigitalSupportTier;
-    cat?: DigitalSupportCategory;
-    factor?: DigitalSupportFactor;
-  }[] = useMemo(() => {
+  const visibleColumns: DigitalSupportColumn[] = useMemo(() => {
     return Object.values(DigitalSupportTier)
       .filter((v) => typeof v === 'number')
-      .flatMap((tier) =>
-        openTiers.includes(tier)
-          ? DigitalSupportTierCategories[tier].flatMap((cat) =>
-              openCats.includes(cat)
-                ? DigitalSupportCategoryFactors[cat].map((factor) => ({ tier, cat, factor }))
-                : [{ tier, cat }],
-            )
-          : [{ tier }],
-      );
+      .flatMap((tier) => [
+        { tier, showData: !openTiers.includes(tier) },
+        ...DigitalSupportTierCategories[tier].flatMap((cat) => [
+          { tier, cat, showData: openTiers.includes(tier) && !openCats.includes(cat) },
+          ...DigitalSupportCategoryFactors[cat].map((factor) => ({
+            tier,
+            cat,
+            factor,
+            showData: openTiers.includes(tier) && openCats.includes(cat),
+          })),
+        ]),
+      ]);
   }, [openTiers, openCats]);
 
   return (
