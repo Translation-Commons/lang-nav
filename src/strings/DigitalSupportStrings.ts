@@ -2,6 +2,7 @@ import {
   DigitalSupportDimension,
   DigitalSupportStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
+import { DigitalSupportCategory } from '@entities/tech/digitalSupport/DigitalSupportTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -38,5 +39,36 @@ export function getDigitalSupportStatusLabel(status: DigitalSupportStatus): stri
       return 'Unknown';
     default:
       enforceExhaustiveSwitch(status);
+  }
+}
+
+export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): string {
+  switch (cat) {
+    // case DigitalSupportCategory.Display:
+    //   return 'Display';
+    case DigitalSupportCategory.Keyboards:
+      return 'Keyboards';
+    case DigitalSupportCategory.AssistiveTools:
+      return 'Assistive Tools';
+    case DigitalSupportCategory.Documentation:
+      return 'Documentation';
+    case DigitalSupportCategory.CurrencyAndDates:
+      return 'Currency & Dates';
+    case DigitalSupportCategory.MachineTranslation:
+      return 'Machine Translation';
+    // case DigitalSupportCategory.Speech:
+    //   return 'Speech';
+    // case DigitalSupportCategory.Recommendation:
+    //   return 'Recommendation';
+    case DigitalSupportCategory.OperatingSystems:
+      return 'Operating Systems';
+    // case DigitalSupportCategory.SocialMedia:
+    //   return 'Social Media';
+    // case DigitalSupportCategory.PopularSoftware:
+    //   return 'Popular Software';
+    case DigitalSupportCategory.AIKnowledgeTools:
+      return 'AI Knowledge Tools';
+    default:
+      enforceExhaustiveSwitch(cat);
   }
 }

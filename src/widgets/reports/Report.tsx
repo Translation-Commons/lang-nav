@@ -9,6 +9,9 @@ import ReportSelector from './ReportSelector';
 const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
 );
+const DigitalSupportScorecard = React.lazy(
+  () => import('@entities/tech/digitalSupport/DigitalSupportScorecard'),
+);
 const ReportCensusCountries = React.lazy(() => import('./ReportCensusCountries'));
 const ReportCensusInputTool = React.lazy(() => import('./ReportCensusInputTool'));
 const ReportEntitiesMissingFields = React.lazy(() => import('./ReportEntitiesMissingFields'));
@@ -78,6 +81,8 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <ReportVariantsAnnotationTool />;
     case ReportID.CharacterInventory:
       return <ReportCharacterInventory />;
+    case ReportID.DigitalSupportScorecard:
+      return <DigitalSupportScorecard />;
     default:
       enforceExhaustiveSwitch(reportID);
   }
