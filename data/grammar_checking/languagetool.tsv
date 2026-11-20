@@ -1,21 +1,25 @@
 ### Metadata ###		
 #tech	LanguageTool
 #topic	Grammar check	
-#url	https://languagetool.org/	
-#dateAccessed	2026-05-26
+#url	https://dev.languagetool.org/languages
+#datePublished	2025-03-27
+#dateAccessed	2026-11-19
 #author	Language Tool	
 #notes		
 		
-Language Code	Language	Locale
+Language Code	Name	Locale
 ara	Arabic	
 ast	Asturian	
 bel	Belarusian	
 bre	Breton	
 cat	Catalan	
-cat	Catalan	(Valencian)
+cat/vale1252	Catalan (Valencian)
+cat/bale1256	Catalan (Balearic)
 zho/cmn	Chinese	
+crh	Crimean Tatar	
 dan	Danish	
 nld	Dutch	
+vls	Dutch (Belgium)	BE
 eng	English 	AU
 eng	English	GB
 eng	English 	CA
@@ -24,6 +28,9 @@ eng	English 	ZA
 eng	English	US
 epo	Esperanto	
 fra	French	
+fra	French (Belgium)	BE
+fra	French (Canada)	CA
+fra	French (Switzerland)	CH
 glg	Galician	
 deu	German 	AT
 deu	German 	DE
@@ -45,6 +52,7 @@ rus	Russian
 slk	Slovak	
 slv	Slovenian	
 spa	Spanish	
+spa	Spanish (voseo)	AR
 swe	Swedish	
 tgl	Tagalog	
 tam	Tamil	
