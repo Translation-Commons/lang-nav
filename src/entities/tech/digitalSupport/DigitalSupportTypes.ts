@@ -4,6 +4,10 @@ export enum DigitalSupportTier {
   Interfaces,
 }
 
+export const AllDigitalSupportTiers = Object.values(DigitalSupportTier).filter(
+  (v) => typeof v === 'number',
+);
+
 export enum DigitalSupportCategory {
   // Communication
   Display,
@@ -23,6 +27,10 @@ export enum DigitalSupportCategory {
   // PopularSoftware,
   AIKnowledgeTools,
 }
+
+export const AllDigitalSupportCategories = Object.values(DigitalSupportCategory).filter(
+  (v) => typeof v === 'number',
+);
 
 export enum DigitalSupportFactor {
   /** Communication */

@@ -21,8 +21,8 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
     <tbody>
       {ents.map((ent) => (
         <tr key={ent.ID}>
-          <td className="pr-1">{ent.codeDisplay}</td>
-          <td className="text-nowrap pr-1">
+          <td className="pr-1 sticky left-0 w-16 bg-background z-5">{ent.codeDisplay}</td>
+          <td className="text-nowrap pr-1 sticky left-16 bg-background z-5">
             <HoverableEntityName ent={ent} />
           </td>
           {visibleColumns.map((column, index) => (

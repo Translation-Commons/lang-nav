@@ -37,9 +37,11 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
   visibleColumns,
 }) => {
   return (
-    <thead>
+    <thead className="sticky top-0 bg-background z-10">
       <tr>
-        <th colSpan={2}>Language</th>
+        <th colSpan={2} className="sticky left-0 bg-background z-15">
+          Language
+        </th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .map((tier) => (
@@ -52,12 +54,12 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
           ))}
       </tr>
       <tr>
-        <th className="pr-1">Code</th>
-        <th className="px-1">Name</th>
+        <th className="pr-1 sticky left-0 w-16 bg-background z-15">Code</th>
+        <th className="px-1 sticky left-16 bg-background z-15">Name</th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .flatMap((tier) => [
-            <th key={`${tier}-cat-head`} className={cn('text-sm font-medium text-nowrap ')}>
+            <th key={`${tier}-cat-head`} className={'text-sm font-medium text-nowrap'}>
               <div
                 className={cn(
                   'transition-all truncate duration-1000',
@@ -69,20 +71,19 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
                 </Button>
               </div>
             </th>,
-            ...DigitalSupportTierCategories[tier].map((cat, index) => (
+            ...DigitalSupportTierCategories[tier].map((cat) => (
               <CategoryHeader
                 key={cat}
                 cat={cat}
                 isExpanded={openTiers.includes(tier) && openCats.includes(cat)}
                 showCategory={openTiers.includes(tier)}
                 toggleCat={toggleCat}
-                isLastInTier={index === DigitalSupportTierCategories[tier].length - 1}
               />
             )),
           ])}
       </tr>
       <tr>
-        <th colSpan={2}></th>
+        <th colSpan={2} className="sticky left-0 bg-background z-15"></th>
         {visibleColumns.map((column, index) => (
           <FactorHeader key={index} {...column} toggleCat={toggleCat} />
         ))}
@@ -101,7 +102,7 @@ const TierHeader: React.FC<{
     DigitalSupportTierCategories[tier].length +
     1;
   return (
-    <th colSpan={colSpan} className="border-r-2">
+    <th colSpan={colSpan} className="border-l-2">
       <div className="px-1 flex items-center flex-row gap-1">
         {DigitalSupportTier[tier]}
         <Toggle pressed={isExpanded} onPressedChange={() => toggleTier(tier)} className="group">
@@ -117,13 +118,9 @@ const CategoryHeader: React.FC<{
   showCategory: boolean;
   isExpanded: boolean;
   toggleCat: (cat: DigitalSupportCategory) => void;
-  isLastInTier: boolean;
-}> = ({ cat, isExpanded, toggleCat, showCategory, isLastInTier }) => {
+}> = ({ cat, isExpanded, toggleCat, showCategory }) => {
   return (
-    <th
-      colSpan={getFactorCount(cat) + 1}
-      className={cn('font-medium', isLastInTier ? 'border-r-2' : '')}
-    >
+    <th colSpan={getFactorCount(cat) + 1} className={cn('font-medium')}>
       <div
         className={cn(
           'text-xs flex flex-row items-center truncate transition-all duration-1000',

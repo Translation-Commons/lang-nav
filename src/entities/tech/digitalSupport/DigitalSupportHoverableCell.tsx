@@ -22,6 +22,14 @@ type Props = DigitalSupportColumn & {
 
 const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
   const { cat, factor } = props;
+  if (factor != null) {
+    return (
+      <div className="p-1">
+        <DigitalSupportCellDisplay {...props} />
+      </div>
+    );
+  }
+
   return (
     <div className="p-1">
       <HoverCard>
@@ -50,8 +58,8 @@ const FullTable: React.FC<Props> = (props) => {
           </td>
         </tr>
         {DigitalSupportTierCategories[tier].map((cat) => (
-          <>
-            <tr key={cat}>
+          <React.Fragment key={cat}>
+            <tr>
               <td className="px-4">{getDigitalSupportCategoryLabel(cat)}</td>
               <td className="px-4">
                 <DigitalSupportCellDisplay {...props} cat={cat} />
@@ -65,7 +73,7 @@ const FullTable: React.FC<Props> = (props) => {
                 </td>
               </tr>
             ))}
-          </>
+          </React.Fragment>
         ))}
       </tbody>
     </table>
