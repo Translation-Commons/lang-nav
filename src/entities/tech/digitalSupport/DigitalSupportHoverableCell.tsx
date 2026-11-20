@@ -8,12 +8,12 @@ import { getDigitalSupportCategoryLabel } from '@strings/DigitalSupportStrings';
 
 import DigitalSupportCellDisplay from './DigitalSupportCellDisplay';
 import {
-    DigitalSupportCategory,
-    DigitalSupportCategoryFactors,
-    DigitalSupportColumn,
-    DigitalSupportFactor,
-    DigitalSupportTier,
-    DigitalSupportTierCategories,
+  DigitalSupportCategory,
+  DigitalSupportCategoryFactors,
+  DigitalSupportColumn,
+  DigitalSupportFactor,
+  DigitalSupportTier,
+  DigitalSupportTierCategories,
 } from './DigitalSupportTypes';
 
 type Props = DigitalSupportColumn & {
