@@ -136,5 +136,5 @@ export type DigitalSupportColumn = {
   tier: DigitalSupportTier;
   cat?: DigitalSupportCategory;
   factor?: DigitalSupportFactor;
-  showData: boolean;
+  showData?: boolean;
 };

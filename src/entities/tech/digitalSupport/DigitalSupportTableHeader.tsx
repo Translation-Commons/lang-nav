@@ -39,17 +39,7 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
   return (
     <thead>
       <tr>
-        <th colSpan={2}></th>
-        {/* {visibleColumns
-          .filter((column) => column.cat == null)
-          .map((col) => (
-            <TierHeader
-              key={col.tier}
-              tier={col.tier}
-              isExpanded={openTiers.includes(col.tier)}
-              toggleTier={toggleTier}
-            />
-          ))} */}
+        <th colSpan={2}>Language</th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .map((tier) => (
@@ -62,7 +52,8 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
           ))}
       </tr>
       <tr>
-        <th colSpan={2}>Language</th>
+        <th className="pr-1">Code</th>
+        <th className="px-1">Name</th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .flatMap((tier) => [
@@ -91,8 +82,7 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
           ])}
       </tr>
       <tr>
-        <th className="pr-1">Code</th>
-        <th className="px-1">Name</th>
+        <th colSpan={2}></th>
         {visibleColumns.map((column, index) => (
           <FactorHeader key={index} {...column} toggleCat={toggleCat} />
         ))}
@@ -175,6 +165,11 @@ const FactorHeader: React.FC<
           'text-xs font-medium truncate transition-all duration-1000',
           showData ? 'w-20' : 'w-0',
         )}
+        title={
+          factor == null
+            ? `Click to show all ${getFactorCount(cat)} factors`
+            : DigitalSupportFactor[factor]
+        }
       >
         {contents}
       </div>
