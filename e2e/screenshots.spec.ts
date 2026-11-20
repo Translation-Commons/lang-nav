@@ -147,6 +147,13 @@ test.describe('screenshot tests', () => {
     await expect(page).toHaveScreenshot('data-page-filters.png');
   });
 
+  test('data page: Digital Support Scorecard', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Reports&reportID=17');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-digital-support-scorecard.png');
+  });
+
   test('decoder page', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto('./decoder');

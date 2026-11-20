@@ -3,13 +3,31 @@ import React from 'react';
 import usePageParams from '@features/params/usePageParams';
 import { getColorGradientFunction } from '@features/transforms/coloring/getColorGradientFunction';
 
-const VERSION: number = 2;
+import { LanguageData } from '@entities/language/LanguageTypes';
 
-const DigitalSupportCellDisplay: React.FC<{ score: number }> = ({ score }) => {
+import { sumBy } from '@shared/lib/setUtils';
+
+import {
+  DigitalSupportCategory,
+  DigitalSupportCategoryFactors,
+  DigitalSupportColumn,
+  DigitalSupportFactor,
+  DigitalSupportTier,
+  DigitalSupportTierCategories,
+} from './DigitalSupportTypes';
+import getDigitalSupportFactorScore from './getDigitalSupportFactorScore';
+
+type Props = DigitalSupportColumn & {
+  design?: '1' | '2';
+  ent: LanguageData;
+};
+
+const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, design = '2' }) => {
   const { colorGradient } = usePageParams();
   const applyColorGradient = getColorGradientFunction(colorGradient);
+  const score = getGroupedDigitalSupportFactorScore(ent, tier, cat, factor);
 
-  if (VERSION === 1) {
+  if (design === '1') {
     return (
       <meter
         min={0} // Extinct
@@ -22,24 +40,39 @@ const DigitalSupportCellDisplay: React.FC<{ score: number }> = ({ score }) => {
       />
     );
   }
-  if (VERSION === 2) {
+  if (design === '2') {
     return (
-      <div className="p-1">
-        <div
-          className="rounded w-full min-w-4 px-2 text-center"
-          style={{ backgroundColor: applyColorGradient(score / 10) }}
-        >
-          {score < 10 && <span className="opacity-0">0</span>}
-          {score.toFixed(0)} <span className="text-xs opacity-20">/10</span>
-        </div>
+      <div
+        className="rounded w-full min-w-4 px-2 text-center"
+        style={{ backgroundColor: applyColorGradient(score / 10) }}
+      >
+        {score < 10 && <span className="opacity-0">0</span>}
+        {score.toFixed(0)} <span className="text-xs opacity-30">/10</span>
       </div>
     );
   }
-  {
-    /* <DecimalNumber
-                  num={getGroupedDigitalSupportFactorScore(ent, tier, cat, factor)}
-                /> */
-  }
 };
+
+function getGroupedDigitalSupportFactorScore(
+  ent: LanguageData,
+  tier: DigitalSupportTier,
+  cat?: DigitalSupportCategory,
+  factor?: DigitalSupportFactor,
+): number {
+  if (cat == null) {
+    return (
+      sumBy(DigitalSupportTierCategories[tier], (c) =>
+        getGroupedDigitalSupportFactorScore(ent, tier, c),
+      ) / DigitalSupportTierCategories[tier].length
+    );
+  }
+  if (factor == null) {
+    return (
+      sumBy(DigitalSupportCategoryFactors[cat], (f) => getDigitalSupportFactorScore(ent, f)) /
+      DigitalSupportCategoryFactors[cat].length
+    );
+  }
+  return getDigitalSupportFactorScore(ent, factor);
+}
 
 export default DigitalSupportCellDisplay;

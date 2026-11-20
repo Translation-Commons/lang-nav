@@ -169,7 +169,7 @@ export function getDefaultParams(
       // params.limit = 10;
       params.fieldFocus = Field.Code;
       // if (params.reportID === ReportID.DigitalSupportScorecard) {
-      params.limit = 100;
+      params.limit = 200;
       params.colorGradient = ColorGradient.SequentialBlue;
       // }
       break;

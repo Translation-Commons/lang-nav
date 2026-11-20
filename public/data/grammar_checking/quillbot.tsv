@@ -1,34 +1,42 @@
-### Metadata ###		
-#tech	Quillbot
-#topic	Grammar check	
-#url	http://quillbot.com	
-#dateAccessed	2026-05-26
-#author	Quillbot	
-#notes		
-		
-Language Code	Language	Locale
-afr	Afrikaans	
-zho/cmn	Chinese (simplified)	
-dan	Danish	
-nld	Dutch	
-eng	English 	AU
-eng	English 	CA
-eng	English 	UK
-eng	English 	US
-fra	French	
-deu	German	
-deu	German 	CH
-hin	Hindi	
-msa/ind	Indonesian	
-ita	Italian	
-jpn	Japanese	
-msa/zsm	Malay	
-pol	Polish	
-por	Portuguese 	BR
-ron	Romanian	
-rus	Russian	
-spa	Spanish	
-swe	Swedish	
-tgl	Tagalog	
-tur	Turkish	
-ukr	Ukrainian	
+### Metadata ###							
+#tech	Quillbot						
+#topic	Grammar check						
+#url	https://help.quillbot.com/hc/en-us/articles/4541525640727-What-languages-does-Quillbot-work-in						
+#dateAccessed	2026-05-26						
+#author	Quillbot						
+Language Code	Language	Locale	Score	Paraphraser	Grammar Checker	Flow, Summarizer, Citation Generator, and Plagiarism Checker	Translator
+ara	Arabic		0.25				y
+afr	Afrikaans		0.25	y			
+ben	Bengali		0.25				y
+ceb	Cebuano		0.25				y
+zho	Chinese		0.5	y			y
+ces	Czech		0.25				y
+dan	Danish		0.5	y			y
+nld	Dutch		0.5	y			y
+eng	English 		1	y	y	y	y
+fin	Finnish		0.25				y
+fra	French		0.75	y	y		y
+deu	German		0.75	y	y		y
+ell	Greek		0.25				y
+heb	Hebrew		0.25				y
+hin	Hindi		0.5	y			y
+hun	Hungarian		0.25				y
+msa/ind	Indonesian		0.5	y			y
+ita	Italian		0.5	y			y
+jpn	Japanese		0.5	y			y
+kor	Korean		0.25				y
+msa/zsm	Malay		0.5	y			y
+nor	Norwegian		0.5	y			y
+fas	Persian		0.25				y
+pol	Polish		0.5	y			y
+por	Portuguese 		0.25				y
+ron	Romanian		0.5	y			y
+rus	Russian		0.5	y			y
+spa	Spanish		0.75	y	y		y
+swe	Swedish		0.5	y			y
+tgl	Tagalog		0.5	y			y
+tur	Turkish		0.5	y			y
+tha	Thai		0.25				y
+ukr	Ukrainian		0.5	y			y
+urd	Urdu		0.25				y
+vie	Vietnamese		0.5	y			y

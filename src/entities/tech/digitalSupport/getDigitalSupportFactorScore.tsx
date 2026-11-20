@@ -11,17 +11,20 @@ import { DigitalSupportFactor } from './DigitalSupportTypes';
 function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportFactor): number {
   switch (factor) {
     // Communication
+    case DigitalSupportFactor.UnicodeEncoding:
+      return getUnicodeEncodingScore(ent);
+
     case DigitalSupportFactor.Keyman:
       return ent.keyboards?.filter((kb) => kb.inputTechCode === 'Keyman').length ? 10 : 0;
     case DigitalSupportFactor.Gboard:
       return ent.keyboards?.filter((kb) => kb.inputTechCode === 'GBoard').length ? 10 : 0;
 
     case DigitalSupportFactor.Grammarly:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'Grammarly').length ? 10 : 0;
+      return getTechSupportScore(ent, 'Grammarly');
     case DigitalSupportFactor.QuillBot:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'Quillbot').length ? 10 : 0;
+      return getTechSupportScore(ent, 'Quillbot');
     case DigitalSupportFactor.LanguageTool:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'LanguageTool').length ? 10 : 0;
+      return getTechSupportScore(ent, 'LanguageTool');
 
     // Content
     case DigitalSupportFactor.Wikipedia:
@@ -33,29 +36,47 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
       return computeCLDRScore(ent);
 
     case DigitalSupportFactor.GTranslate:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'GTranslate').length ? 10 : 0;
+      return getTechSupportScore(ent, 'GTranslate');
     case DigitalSupportFactor.MSTranslator:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'MS Translator').length ? 10 : 0;
+      return getTechSupportScore(ent, 'MS Translator');
 
     // Interfaces
     case DigitalSupportFactor.Android:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'Android').length ? 10 : 0;
+      return getTechSupportScore(ent, 'Android');
     case DigitalSupportFactor.iOS:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'iOS').length ? 10 : 0;
+      return getTechSupportScore(ent, 'iOS');
     case DigitalSupportFactor.macOS:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'macOS').length ? 10 : 0;
+      return getTechSupportScore(ent, 'macOS');
     case DigitalSupportFactor.Win11:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'win11').length ? 10 : 0;
+      return getTechSupportScore(ent, 'win11');
 
     case DigitalSupportFactor.ClaudeSonnet:
-      return ent.techSupport?.filter((ts) => ts.techShortName === 'Claude').length ? 10 : 0;
+      return getTechSupportScore(ent, 'Claude');
 
     default:
       enforceExhaustiveSwitch(factor);
   }
 }
 
-// 0-5
+function getTechSupportScore(ent: LanguageData, techShortName: string): number {
+  const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
+  const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
+  return techScores.length ? Math.max(...techScores) * 10 : 0;
+}
+
+function getUnicodeEncodingScore(lang: LanguageData): number {
+  // Check if the primary writing system is unicode encoded
+  const primaryEncoded = !!lang.primaryWritingSystem?.unicodeVersion;
+  if (primaryEncoded) return 10;
+
+  // Otherwise check alternative writing systems
+  const otherWritingSystems = Object.values(lang.writingSystems ?? {});
+  const otherEncoded = Object.values(lang.writingSystems ?? {})
+    .map((ws) => ws.unicodeVersion)
+    .filter(Boolean);
+  return (otherEncoded.length / otherWritingSystems.length) * 10;
+}
+
 function computeWikipediaScore(lang: LanguageData): number {
   const { wikipedias } = lang;
   if (!wikipedias || wikipedias.length === 0) return 0;

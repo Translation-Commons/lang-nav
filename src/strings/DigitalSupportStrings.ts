@@ -44,8 +44,8 @@ export function getDigitalSupportStatusLabel(status: DigitalSupportStatus): stri
 
 export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): string {
   switch (cat) {
-    // case DigitalSupportCategory.Display:
-    //   return 'Display';
+    case DigitalSupportCategory.Display:
+      return 'Display';
     case DigitalSupportCategory.Keyboards:
       return 'Keyboards';
     case DigitalSupportCategory.AssistiveTools:

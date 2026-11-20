@@ -24,7 +24,7 @@ export type TechSupportData = {
   territoryCode?: string; // ideally a standardized territory code, e.g., "US", "FR"
   writingSystemCode?: string; // ideally a standardized script code, e.g., "Latn", "Cyrl", "Arab"
   notes?: string;
-  // potential room to add "level"
+  score?: number; // A 0 to 1 score indicating the level of support, 1 is "full", 0 is "none", partial would be in between
 
   // References
   tech: TechnologyData;
