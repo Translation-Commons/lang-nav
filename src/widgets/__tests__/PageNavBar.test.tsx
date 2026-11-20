@@ -72,7 +72,8 @@ describe('PageNavBar', () => {
     expect(screen.getAllByRole('menuitem').map((item) => item.textContent)).toEqual([
       'Language Decoder',
       'Census Validation',
-      'Plurals',
+      'Plural Forms',
+      'Digital Support Scorecard',
     ]);
     expect(screen.queryByText('Reports')).toBeNull();
   });
@@ -117,7 +118,8 @@ describe('PageNavBar', () => {
       'Data',
       'Language Decoder',
       'Census Validation',
-      'Plurals',
+      'Plural Forms',
+      'Digital Support Scorecard',
       'About',
     ]);
   });
