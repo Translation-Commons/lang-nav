@@ -84,8 +84,8 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
       <div className="max-w-200 max-h-200 truncate overflow-auto relative">
         <table>
           <colgroup>
-            <col className="sticky left-0 bg-background z-15" />
-            <col className="sticky left-0 bg-background z-15" />
+            <col className="sticky left-0 w-16 bg-background z-15" />
+            <col />
             {visibleColumns.map(({ cat }, index) => (
               <col key={index} className={cat == null ? 'border-l-2' : ''} />
             ))}

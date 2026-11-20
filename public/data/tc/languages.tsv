@@ -860,7 +860,7 @@ wsg	utno1237	Gondi, Adilabad			Telu	300,000	gon	sout2711	Possibly	But probably w
 wxa	waxi1236	Waxianghua			Hani	300,000	sini1245	sini1245	Yes	
 yer	taro1263	Tarok			Latn	300,000		taro1266	Yes	
 nzi	nzim1238	Nzima			Latn	299,000		jwir1243	Yes	
-bmy	bemb1258	Bemba (DRC)				296,000		book1242	No	Declared non-existent by ISO
+bmy	bemb1258	Bemba (DRC)			Latn	296,000		book1242	No	Declared non-existent by ISO
 mde	maba1277	Maba (Chad)			Arab	296,000		nucl1441	Yes	
 kfs	bila1253	Bilaspuri			Deva	295,805		cham1331	Yes	
 twh	taid1250	Tai Dón			Latn	295,000		whit1265	Yes	
@@ -901,7 +901,7 @@ ibg	iban1267	Ibanag			Latn	258,755		iban1268	Yes
 bwx	buna1273	Bu-Nao Bunu			Latn	258,000		buna1280	Yes	
 ijn	kala1381	Kalabari			Latn	258,000		kaki1246	Yes	
 bjs	baja1265	Bajan		Spoken	Latn	256,000		barb1267	Yes	
-ill	iran1262	Iranun				256,000	ilm	dana1253	Probably not	Split into separate language codes
+ill	iran1262	Iranun			Latn	256,000	ilm	dana1253	Probably not	Split into separate language codes
 udm	udmu1245	Udmurt	удмурт	Spoken & Written	Cyrl	255,877		perm1256	Yes	
 tyv	tuvi1240	Tuvinian	Тыва	Spoken & Written	Cyrl	255,353		saya1244	Yes	
 lkb	kabr1240	Lukabaras			Latn	253,000	luy	kaba1294	Possibly	But probably want to use macrolanguage
@@ -1185,7 +1185,7 @@ kjk	high1275	Highland Konjo	bahasa Konjo Pegunungan		Latn	150,000		konj1250	Yes
 kyu	west2409	Western Kayah			Kali	150,000		kaya1317	Yes	
 lnl	sout2787	South Central Banda			Latn	150,000		sout2786	Yes	
 mhy	maan1238	Ma'anyan			Latn	150,000		maan1240	Yes	
-mzb	tumz1238	Tumzabt	تومزابت			150,000		moza1250	Yes	
+mzb	tumz1238	Tumzabt	تومزابت		Arab	150,000		moza1250	Yes	
 ngc	ngom1268	Ngombe (DRC)			Latn	150,000		ngom1274	Yes	
 nyj	nyan1304	Nyanga			Latn	150,000		nyan1317	Yes	
 sur	mwag1236	Mwaghavul			Latn	150,000		west2717	Yes	
@@ -1441,7 +1441,7 @@ tsw	tsis1238	Tsishingini			Latn	100,000		east2739	Yes
 vel	velu1238	Veluws				100,000		west2356	Yes	
 wlc	mwal1237	Mwali Comorian				100,000		como1260	Yes	
 xhe	khet1238	Khetrani			Arab	100,000	lah	sind1279	Possibly	But probably want to use macrolanguage
-xsj	subi1247	Subi				100,000	suj	zinz1238	No	ISO considers this a duplicate of suj
+xsj	subi1247	Subi			Latn	100,000	suj	zinz1238	No	ISO considers this a duplicate of suj
 ygp	gepo1234	Gepo			Plrd	100,000		nasu1237	Yes	
 yih	west2361	Western Yiddish			Hebr	100,000	yid	grea1301	Yes, with caveat	It may not be possible to distinguish but the vocabulary is largely distinct
 yix	axiy1235	Axi Yi				100,000		sani1275	Yes	
@@ -7713,7 +7713,7 @@ ltc	midd1344	Late Middle Chinese			Hant			midd1354	Probably not	Historical langa
 luh	leiz1236	Leizhou Chinese			Hans	2,800,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 luvi1235	luvi1235	Luwian						luvi1234		
 mand1471	mand1471	Mandarinic						nort3155	No	Group of multiple languages
-maza1295	maza1295	Macatecan						popo1293		
+maza1295	maza1295	Macatecan			Latn			popo1293	Probably not	Multiple languages are grouped into this
 mbe	mola1238	Molale							No	Extinct language
 mes	masm1239	Masmaje			Latn			mubi1247	Yes	
 mfw	mula1254	Mulaha			Latn			kwal1257	No	Extinct language
@@ -7807,7 +7807,7 @@ osp	olds1249	Old Spanish			Latn			cast1243	Probably not	Historical langauge
 osx	olds1250	Old Saxon			Latn			alts1234	Probably not	Historical langauge
 otb		Old Tibetan			Tibt				Probably not	Historical langauge
 otk	oldt1247	Old Turkish			Orkh			book1242	Probably not	Historical langauge
-oto	otom1300	Otomi						otom1297	Possibly	Language family -- but more specific information may not be available
+oto	otom1300	Otomi			Latn		otom1297	Possibly	Language family -- but more specific information may not be available
 oty	oldt1248	Old Tamil			Gran			tami1299	Probably not	Historical langauge
 oui	oldu1238	Old Uighur			Ougr			comm1245	Probably not	Historical langauge
 owl	oldw1239	Old Welsh			Latn			oldm1247	Probably not	Historical langauge
@@ -7878,7 +7878,7 @@ sgo	song1304	Songa						book1242	No	Declared non-existent by ISO
 sgw-cha	chah1248	Chaha						seba1251	Probably not	Dialect not always recognized as a separate language
 sht	shas1239	Shasta			Latn			nucl1814	No	Extinct language
 sit	sino1245	Sino-Tibetan							No	Group of multiple languages
-sjc	shao1234	Shaojiang Chinese					zho	minb1244	Yes, with caveat	New to ISO 20250115
+sjc	shao1234	Shaojiang Chinese			Hans		zho	minb1244	Yes, with caveat	New to ISO 20250115
 sjk	kemi1239	Kemi Sami					smi	main1280	No	Extinct language
 sjn	sind1281	Sindarin						arti1236	Possibly	Constructed language
 skw	skep1238	Skepi Creole Dutch			Latn			zeeu1239	No	Extinct language
@@ -8214,3 +8214,6 @@ zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New
 ccq	chau1262	Chaungtha				186000	rki	rakh1245	No	Combined into Rakhine in ISO
 mhv	arak1256	Arakanese					tbq	arak1255	No	Language group, not recognized by ISO anymore
 izie1238	izie1238	Izzi languages			Latn	4,000,000	alv	cent2417	Possibly	Different sources group the languages together
+mixt1427	mixt1427	Mixtec languages			Latn	600,000	omq	mixt1423	Possibly	Different sources group the languages together
+dann1241	dann1241	Dan languages			Latn	1,100,000	dmn	dant1235	Possibly	Different sources group the languages together
+toto1252	toto1252	Totonac languages			Latn	300,000		toto1251	Possibly	Different sources group the languages together

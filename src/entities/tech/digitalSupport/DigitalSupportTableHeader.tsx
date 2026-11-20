@@ -39,8 +39,8 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
   return (
     <thead className="sticky top-0 bg-background z-10">
       <tr>
-        <th colSpan={2} className="sticky left-0 bg-background z-15">
-          Language
+        <th colSpan={2} className="sticky left-0 bg-transparent z-10">
+          <div className="h-full w-fit bg-background">Language</div>
         </th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
@@ -54,8 +54,8 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
           ))}
       </tr>
       <tr>
-        <th className="pr-1 sticky left-0 w-16 bg-background z-15">Code</th>
-        <th className="px-1 sticky left-16 bg-background z-15">Name</th>
+        <th className="pr-1 sticky left-0 bg-background z-15">Code</th>
+        <th className="px-1">Name</th>
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .flatMap((tier) => [
@@ -83,7 +83,8 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
           ])}
       </tr>
       <tr>
-        <th colSpan={2} className="sticky left-0 bg-background z-15"></th>
+        <th className="sticky left-0 bg-background z-15"></th>
+        <th />
         {visibleColumns.map((column, index) => (
           <FactorHeader key={index} {...column} toggleCat={toggleCat} />
         ))}

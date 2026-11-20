@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -17,13 +18,17 @@ type Props = {
 };
 
 const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColumns }) => {
+  const { limit } = usePageParams();
+
   return (
     <tbody>
       {ents.map((ent) => (
         <tr key={ent.ID}>
           <td className="pr-1 sticky left-0 w-16 bg-background z-5">{ent.codeDisplay}</td>
-          <td className="text-nowrap pr-1 sticky left-16 bg-background z-5">
-            <HoverableEntityName ent={ent} />
+          <td className="pr-1">
+            <div className="w-32 truncate overflow-hidden">
+              <HoverableEntityName ent={ent} />
+            </div>
           </td>
           {visibleColumns.map((column, index) => (
             <td key={index} className="">
@@ -39,20 +44,15 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
           ))}
         </tr>
       ))}
-      {ents.length === 0 && !isPending && (
-        <tr>
-          <td colSpan={2}>No entities found</td>
-          <td colSpan={visibleColumns.length}></td>
-        </tr>
-      )}
-      {isPending && (
-        <tr>
-          <td colSpan={2}>Loading...</td>
-          <td colSpan={visibleColumns.length}>
-            <Skeleton className="h-4 w-full" />
-          </td>
-        </tr>
-      )}
+      {ents.length === 0 &&
+        Array.from({ length: limit }).map((_, index) => (
+          <tr key={`loading-${index}`}>
+            <td colSpan={2}>{index === 0 && (isPending ? 'Loading...' : 'No entities found')}</td>
+            <td colSpan={visibleColumns.length} className="py-1">
+              <Skeleton className="h-4 w-full" />
+            </td>
+          </tr>
+        ))}
     </tbody>
   );
 };
