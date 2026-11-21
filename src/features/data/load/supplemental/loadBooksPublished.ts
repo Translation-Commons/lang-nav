@@ -21,7 +21,7 @@ export function loadBooksPublished(
       lines.forEach((line) => {
         const parts = line.split('\t');
         const code = parts[0];
-        const booksPublishedAnnually = parseFloat(parts[2].replace(/,/g, ''));
+        const booksPublishedAnnually = parseInt(parts[2].replace(/,/g, ''));
 
         code.split('/').forEach((languageCode) => {
           if (isIgnoredLanguageCode(languageCode)) return;

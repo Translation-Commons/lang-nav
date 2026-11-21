@@ -128,6 +128,7 @@ export interface LanguageData extends EntityBase {
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
   books?: number; // booksPublishedAnnually
+  booksEst?: number; // estimated books published annually
   techSupport?: TechSupportData[];
 
   latitude?: number;

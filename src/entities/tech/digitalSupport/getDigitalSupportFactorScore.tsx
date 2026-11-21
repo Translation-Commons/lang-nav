@@ -5,6 +5,7 @@ import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+import { computeBooksPublishedScores } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
 
 // Returns a numeric score from 1 to 10
@@ -28,7 +29,7 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
 
     // Content
     case DigitalSupportFactor.BooksPublishedAnnually:
-      return Math.max((ent.books ?? 0) / Math.log10(ent.pop.overall || 1), 1) * 10;
+      return computeBooksPublishedScores(ent.booksEst, ent.pop.overall).score;
     case DigitalSupportFactor.Wikipedia:
       return computeWikipediaScore(ent);
     case DigitalSupportFactor.UDHR:

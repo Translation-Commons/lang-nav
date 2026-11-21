@@ -3,7 +3,7 @@ import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
 import averageCoordinates from '@shared/lib/averageCoordinates';
-import { maxBy, maxOf } from '@shared/lib/setUtils';
+import { maxBy, maxOf, sumBy } from '@shared/lib/setUtils';
 
 /**
  * Compute derived vitality data for all languages, filling in gaps when it doesn't come
@@ -62,6 +62,10 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
 
   // Compute the meta score and store the results in the language entity
   lang.vitality.meta = getVitalityMetascore(lang);
+
+  // Sum up books published by the language's descendents
+  if (lang.books != null) lang.booksEst = lang.books;
+  else lang.booksEst = sumBy(descendants, (child) => child.booksEst ?? 0) || undefined;
 
   // Compute the digital support scores
   lang.digitalSupportScore = computeDigitalSupportScores(lang);

@@ -7,6 +7,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-
 import { getDigitalSupportCategoryLabel } from '@strings/DigitalSupportStrings';
 
 import DigitalSupportCellDisplay from './DigitalSupportCellDisplay';
+import DigitalSupportFactorExplanation from './DigitalSupportFactorExplanation';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
@@ -21,14 +22,7 @@ type Props = DigitalSupportColumn & {
 };
 
 const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
-  const { cat, factor } = props;
-  if (factor != null) {
-    return (
-      <div className="p-1">
-        <DigitalSupportCellDisplay {...props} />
-      </div>
-    );
-  }
+  const { cat, factor, ent } = props;
 
   return (
     <div className="p-1">
@@ -39,7 +33,7 @@ const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
         <HoverCardContent className="w-fit">
           {factor == null && cat == null && <FullTable {...props} />}
           {factor == null && cat != null && <CategoryTable {...props} cat={cat} />}
-          {factor != null && <>TODO add more details</>}
+          {factor != null && <DigitalSupportFactorExplanation ent={ent} factor={factor} />}
         </HoverCardContent>
       </HoverCard>
     </div>
