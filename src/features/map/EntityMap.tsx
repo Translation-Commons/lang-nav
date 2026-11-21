@@ -1,29 +1,33 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import PinnedMiniCardList from '@widgets/cardlists/PinnedMiniCardList';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 import { useSortFunction } from '@features/transforms/sorting/sort';
 
-import type { LanguageData } from '@entities/language/LanguageTypes';
-import { getEntityLocales } from '@entities/lib/getEntityRelatedTerritories';
-import type { LocaleData } from '@entities/locale/LocaleTypes';
-import type { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData, EntityType } from '@entities/types/EntityTypes';
 
-import { uniqueBy } from '@shared/lib/setUtils';
-
 import DrawableData from './DrawableData';
+import getDrawableEntities from './getDrawableEntities';
+import { DOTS_LAYER_ID, TERRITORIES_LAYER_ID } from './mapLayerIds';
 import './map.css';
-import MapCentroids from './MapCentroids';
-import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
-import MapTerritories from './MapTerritories';
-import useMapZoom from './UseMapZoom';
-import computeEntityBounds from './zoom/computeEntityBounds';
+import useMapThemeColors from './style/useMapThemeColors';
+import useMapContent from './useMapContent';
+import getEntityBounds from './view/getEntityBounds';
+import useMapCamera from './view/useMapCamera';
+import useMapPointer from './view/useMapPointer';
+import useRevealInView from './view/useRevealInView';
 import ZoomControls from './ZoomControls';
+
+const MapCanvas = lazy(() => import('./MapCanvas'));
+
+const DOT_LAYERS = [DOTS_LAYER_ID];
+const MAP_AND_DOT_LAYERS = [DOTS_LAYER_ID, TERRITORIES_LAYER_ID];
+const NO_PINS: string[] = [];
 
 type Props = {
   entities: EntityData[];
@@ -38,156 +42,79 @@ const EntityMap: React.FC<Props> = ({
   allowSidebar = false,
   allowColorBar = true,
 }) => {
-  const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
-  const { pageBrightness } = usePageParams().brightness;
+  const { colorBy, entType, limit, pinned, updatePageParams } = usePageParams();
   const sortFunction = useSortFunction();
+  const colors = useMapThemeColors();
+  const container = useContainerWidth();
 
-  const [zoomFactor, setZoomFactor] = useState(1);
-
-  const {
-    containerRef: zoomContainerRef,
-    contentRef,
-    zoomIn,
-    zoomOut,
-    resetTransform,
-    fitBounds,
-  } = useMapZoom({
-    mapWidth: MAP_INTERNAL_WIDTH,
-    mapHeight,
-    onZoom: setZoomFactor,
-  });
-
-  const { colorBy, entType, pinned, updatePageParams } = usePageParams();
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [mapContainerWidth, setMapContainerWidth] = useState(800);
-
-  useEffect(() => {
-    const el = mapContainerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setMapContainerWidth(width);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const sortedEntities = useMemo(() => [...entities].sort(sortFunction), [entities, sortFunction]);
-
-  const drawableEntities = useMemo(() => {
-    if (entType === EntityType.Language) {
-      return sortedEntities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
-    }
-
-    if (entType === EntityType.Locale) {
-      return uniqueBy(
-        sortedEntities.filter(
-          (ent) => ent.type === EntityType.Locale && ent.territory != null,
-        ) as LocaleData[],
-        (l) => l.territory?.ID || '',
-      ) as LocaleData[];
-    }
-
-    return uniqueBy(
-      sortedEntities
-        .flatMap((ent) => {
-          if (ent.type === EntityType.Territory) return ent;
-          if (ent.type === EntityType.Locale) return ent;
-          if (ent.type === EntityType.Census) return ent.territory;
-          if (ent.type === EntityType.WritingSystem)
-            return getEntityLocales(ent).map((l) => l.territory);
-          return undefined;
-        })
-        .filter((t): t is TerritoryData => t !== undefined),
-      (t) => t.ID,
-    ) as TerritoryData[];
-  }, [entType, sortedEntities]);
-
-  // Bounding box (in map coordinates) of the entities that will be drawn as centroids,
-  // so we can zoom the map to fit them instead of always showing the whole world.
-  const entityBounds = useMemo(
-    () => computeEntityBounds(drawableEntities, mapHeight),
-    [drawableEntities, mapHeight],
+  // Coordinates are added to the same entity objects once supplemental data loads, so the
+  // loading stage is what tells us to place everything again.
+  const { loadingStage } = useDataContext();
+  const drawableEntities = useMemo(
+    () => getDrawableEntities([...entities].sort(sortFunction), entType),
+    [entities, sortFunction, entType, loadingStage],
   );
-
-  const hasInitialFitRef = useRef(false);
-  const lastAutoFitBoundsRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (!entityBounds) return;
-    const boundsKey = [
-      entityBounds.minX.toFixed(2),
-      entityBounds.minY.toFixed(2),
-      entityBounds.maxX.toFixed(2),
-      entityBounds.maxY.toFixed(2),
-    ].join(':');
-    if (lastAutoFitBoundsRef.current === boundsKey) return;
-
-    // Instant on first load to avoid a flash from full-map to fitted; animate afterwards
-    // when the visible entities change.
-    fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 400 : 0 });
-    hasInitialFitRef.current = true;
-    lastAutoFitBoundsRef.current = boundsKey;
-  }, [entityBounds, fitBounds]);
-
   const coloringFunctions = useColors({ ents: drawableEntities });
+  const entityBounds = useMemo(() => getEntityBounds(drawableEntities), [drawableEntities]);
+  const camera = useMapCamera(entityBounds);
+  const content = useMapContent({
+    drawableEntities,
+    coloringFunctions,
+    colors,
+    mapWidthPx: container.width,
+    sizeScalar: 1200 / maxWidth,
+  });
 
   const onClick = useCallback(
     (entity: DrawableData) => {
-      if (allowSidebar) {
-        if (pinned.includes(entity.ID)) {
-          updatePageParams({ pinned: pinned.filter((id) => id !== entity.ID) });
-        } else {
-          updatePageParams({ pinned: [...pinned, entity.ID] });
-        }
-      } else {
-        updatePageParams({ entID: entity.ID });
-      }
+      if (!allowSidebar) return updatePageParams({ entID: entity.ID });
+      updatePageParams({
+        pinned: pinned.includes(entity.ID)
+          ? pinned.filter((id) => id !== entity.ID)
+          : [...pinned, entity.ID],
+      });
     },
     [pinned, updatePageParams, allowSidebar],
   );
+  const interactiveLayerIds = content.showTerritories ? MAP_AND_DOT_LAYERS : DOT_LAYERS;
+  const pointer = useMapPointer({
+    getFeatureEntity: content.getFeatureEntity,
+    interactiveLayerIds,
+    onClick,
+    allowSidebar,
+  });
+
+  const pinnedIds = allowSidebar ? pinned : NO_PINS;
+  // Languages are many, so the limit counts the ones in view rather than the whole list.
+  const minOrder = useRevealInView(
+    camera.map,
+    content.dots,
+    limit,
+    entType === EntityType.Language,
+  );
 
   return (
-    <div ref={mapContainerRef} className="EntityMap" style={{ maxWidth: maxWidth }}>
+    <div ref={container.ref} className="EntityMap" style={{ maxWidth: maxWidth }}>
       <ZoomControls
-        zoomIn={zoomIn}
-        zoomOut={zoomOut}
-        resetTransform={resetTransform}
-        containerWidth={mapContainerWidth}
+        zoomIn={camera.zoomIn}
+        zoomOut={camera.zoomOut}
+        resetView={camera.resetView}
+        containerWidth={container.width}
       />
 
       <div className="MapColorBarAndZoomContainer">
-        <div className="MapZoomContainer" ref={zoomContainerRef}>
-          <div
-            ref={contentRef}
-            style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
-          >
-            <img
-              alt="World map"
-              className="MapLayer"
-              src="./data/wiki/map_world.svg"
-              style={{ filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined }}
+        <div className="MapZoomContainer">
+          <Suspense>
+            <MapCanvas
+              content={content}
+              colors={colors}
+              pinnedIds={pinnedIds}
+              minOrder={minOrder}
+              interactiveLayerIds={interactiveLayerIds}
+              onLoad={camera.onLoad}
+              {...pointer}
             />
-
-            {entType !== EntityType.Language && (
-              <MapTerritories
-                drawableEntities={drawableEntities}
-                onClick={onClick}
-                coloringFunctions={coloringFunctions}
-                pinnedIds={allowSidebar ? pinned : []}
-                allowSidebar={allowSidebar}
-              />
-            )}
-
-            <MapCentroids
-              drawableEntities={drawableEntities}
-              onClick={onClick}
-              scalar={1200 / maxWidth}
-              zoomFactor={zoomFactor}
-              coloringFunctions={coloringFunctions}
-              pinnedIds={allowSidebar ? pinned : []}
-              allowSidebar={allowSidebar}
-            />
-          </div>
+          </Suspense>
         </div>
 
         {colorBy !== Field.None && allowColorBar && (
@@ -198,5 +125,21 @@ const EntityMap: React.FC<Props> = ({
     </div>
   );
 };
+
+function useContainerWidth() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(800);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const observer = new ResizeObserver((entries) => {
+      const newWidth = entries[0]?.contentRect.width;
+      if (newWidth) setWidth(newWidth);
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+  return { ref, width };
+}
 
 export default EntityMap;
