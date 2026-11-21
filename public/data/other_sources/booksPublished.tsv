@@ -1,0 +1,536 @@
+#quantity	Annual book production	
+#author	Tomasz Kamusella	
+#datePublished	2023	
+#dateAccessed	2026-10-31	
+#documentName	Global Book-Title Output by Language: Estimated average annual production by country and language: Recent evidence, principally 2019–2023	
+#citation	Kamusella, T. (2026). Global Book-Title Output by Language: Estimated average annual production by country and languag: Recent evidence, principally 2019–2023.	
+Code	Language	Titles Annually
+eng	English	547,732
+zho	Chinese	439,358
+spa	Spanish	166,775
+por	Portuguese	162,066
+tur	Turkish	145,947
+fra	French	133,001
+ita	Italian	125,193
+ind	Indonesian	122,945
+rus	Russian	93,919
+deu	German	87,952
+fas	Persian	81,116
+kor	Korean	71,202
+jpn	Japanese	68,125
+ara	Arabic	58,440
+pol	Polish	38,880
+nld	Dutch	37,033
+vie	Vietnamese	28,996
+hin	Hindi	25,894
+ron	Romanian	21,491
+tha	Thai	15,300
+srp	Serbian	15,095
+ces	Czech	14,497
+ell	Greek	13,981
+ukr	Ukrainian	13,176
+hun	Hungarian	13,064
+ben	Bengali	13,002
+cat	Catalan/Valencian	12,997
+bul	Bulgarian	12,371
+nob	Norwegian Bokmål	11,698
+zlm	Malay	11,341
+dan	Danish	11,204
+sqi	Albanian	9,712
+heb	Hebrew	9,470
+fin	Finnish	9,130
+slv	Slovenian	8,824
+swe	Swedish	8,400
+lit	Lithuanian	8,379
+hrv	Croatian	7,887
+aze	Azerbaijani	7,364
+tam	Tamil	6,740
+slk	Slovak	5,924
+kur	Kurdish	5,554
+mon	Mongolian	5,158
+est	Estonian	4,954
+glg	Galician	4,874
+tel	Telugu	4,765
+mar	Marathi	4,755
+uig	Uyghur	4,173
+bod	Tibetan	4,144
+hye	Armenian	3,916
+mal	Malayalam	3,840
+kat	Georgian	3,382
+urd	Urdu	3,293
+eus	Basque	3,289
+kaz	Kazakh	3,267
+lav	Latvian	2,978
+guj	Gujarati	2,888
+kan	Kannada	2,850
+jav	Javanese	2,676
+bel	Belarusian	2,300
+fil	Filipino	2,027
+mya	Burmese	1,930
+nep	Nepali	1,680
+sin	Sinhala	1,652
+cym	Welsh	1,612
+afr	Afrikaans	1,483
+nno	Norwegian Nynorsk	1,462
+bos	Bosnian	1,374
+khm	Khmer	1,339
+uzb	Uzbek	1,265
+pan	Punjabi	1,242
+ori	Odia	1,140
+isl	Icelandic	1,132
+mkd	Macedonian	1,024
+sun	Sundanese	908
+swa	Swahili	877
+asm	Assamese	855
+mul	Other / residual languages	841
+hau	Hausa	840
+yor	Yoruba	840
+tat	Tatar	835
+que	Quechua	805
+nan/hak/hokk1242	Taiwanese, Hakka and Indigenous languages	800
+tgk	Tajik	768
+kir	Kyrgyz	726
+ibo	Igbo	700
+cnr	Montenegrin	696
+zgh	Tamazight	648
+tuk	Turkmen	602
+mul	Other languages	520
+pus	Pashto	475
+lao	Lao	474
+prs	Dari	450
+ltz	Luxembourgish	444
+amh	Amharic	439
+san	Sanskrit	427
+swa	Kiswahili	421
+bak	Bashkir	408
+mai	Maithili	375
+iii	Yi (Nuosu)	373
+ban	Balinese	347
+zul	isiZulu	345
+gla	Scottish Gaelic	320
+som	Somali	314
+snd	Sindhi	293
+zha	Zhuang	290
+xho	isiXhosa	288
+colo1257	Kichwa	269
+gle	Irish	266
+mul	Indigenous languages	265
+aym	Aymara	253
+bal	Baluchi	252
+mlt	Maltese	237
+ceb	Cebuano	220
+chv	Chuvash	220
+glk	Gilaki	216
+mad	Madurese	214
+mfe	Mauritian Creole	206
+mri	Māori	206
+srd	Sardinian	205
+mzn	Mazandarani	198
+kas	Kashmiri	197
+eng/rus	English and Russian	193
+hat	Haitian Creole	192
+kok	Konkani	190
+mni	Manipuri (Meitei)	190
+che	Chechen	189
+btk	Batak languages	187
+min	Minangkabau	187
+nah	Nahuatl	187
+kin	Kinyarwanda	180
+luri1252	Luri	180
+tsn	Setswana	180
+sot	Sesotho	159
+mul	Ethnic-minority languages	158
+orm	Oromo	155
+fur	Friulian	154
+grn	Guaraní	153
+lug	Luganda	151
+ava	Avar	150
+rom	Romani	148
+sah	Sakha (Yakut)	147
+dzo	Dzongkha	138
+ace	Acehnese	134
+bug	Buginese	134
+cat	Catalan	134
+tpi	Tok Pisin	120
+sco	Scots	115
+nso	Sepedi	115
+chm	Mari languages	110
+udm	Udmurt	110
+sat	Santali	109
+yid	Yiddish	109
+aii	Assyrian Neo-Aramaic	108
+sme	Northern Sami	104
+slv	Slovene	103
+mlg	Malagasy	102
+scn	Sicilian	100
+ilo	Ilocano	99
+mul	Other Indigenous languages	98
+bho	Bhojpuri	95
+brx	Bodo	95
+doi	Dogri	95
+div	Dhivehi	93
+run	Kirundi	90
+lat	Latin	84
+sjo	Xibe	83
+aus	Indigenous Australian languages	82
+fry	Frisian	81
+hil	Hiligaynon	81
+nap	Neapolitan	80
+roh	Romansh	80
+iba	Iban	79
+kom	Komi	74
+tgl	Tagalog	74
+aka	Akan languages	73
+bua	Buryat	73
+efik1246	Efik-Ibibio	72
+sas	Sasak	70
+oci	Occitan	69
+zza	Zaza	68
+syr	Syriac / Neo-Aramaic	67
+tso	XiTsonga	66
+ast	Asturian	65
+yua	Yucatec Maya	65
+tet	Tetum	63
+tiv	Tiv	63
+ful	Fulfulde	62
+kik	Kikuyu	61
+fij	Fijian	60
+mul	Ivorian languages (combined)	60
+mak	Makassarese	60
+vec	Venetian	60
+crh	Crimean Tatar	59
+gag	Gagauz	59
+war	Waray	58
+guc	Wayuu	56
+bjn	Banjarese	55
+bre	Breton	55
+new	Newar (Nepal Bhasa)	55
+ssw	siSwati	55
+dusu1277	Kadazan-Dusun	54
+sna	Shona	54
+bik	Bikol languages	52
+hbs	Bosnian / Croatian / Serbian	51
+quc	K’iche’	51
+lld	Ladin	51
+eng	English and other languages	50
+kau	Kanuri	50
+smo	Samoan	50
+tah	Tahitian	50
+iku	Inuktitut	49
+mul	Other Ghanaian languages	49
+ven	Tshivenda	49
+cre	Cree languages	46
+tir	Tigrinya	46
+gsw	Alsatian	45
+bam	Bambara	45
+deu/fra/spa	German, French, Spanish and other languages	45
+mis	Kanak languages	45
+ljp	Lampung	45
+mord1256	Mordvin languages	45
+mul	Other / residual Indigenous languages	45
+ssw	Swazi	45
+cos	Corsican	44
+hmn	Hmong	44
+bin	Edo	42
+lez	Lezgian	42
+aar	Afar	41
+nut	Tay	41
+nya	Chichewa	40
+xal	Kalmyk	40
+kaa	Karakalpak	40
+maq	Mazatec	40
+xmm	Minahasan languages	40
+pms	Piedmontese	40
+crs	Seychellois Creole	40
+luo	Dholuo	39
+jam	Jamaican Creole	39
+mul	Other Ethiopian languages	39
+ewo	Ewondo	38
+inh	Ingush	38
+kek	Q’eqchi’	38
+ewe	Ewe	37
+oss	Ossetian	37
+nde	isiNdebele	37
+mul	Armenian, Azerbaijani and other languages	36
+hif	Fiji Hindi	36
+mixt1427	Mixtec languages	36
+mul	Other minority and foreign languages	36
+rue	Rusyn	36
+ctu	Chol	35
+cop	Coptic	35
+circ1239/kbd	Kabardian-Cherkess	35
+pam	Kapampangan	35
+kum	Kumyk	35
+lmo	Lombard	35
+mnc	Manchu	35
+arn	Mapudungun	35
+nij	Ngaju	35
+mul	Other Indian languages	35
+raj	Rajasthani	35
+rej	Rejang	35
+nkor1241	Runyankore-Rukiga	35
+sda	Toraja languages	35
+wol	Wolof	33
+arg	Aragonese	32
+pbb	Nasa Yuwe	32
+zap	Zapotec languages	32
+kea	Cape Verdean Creole	31
+ccp	Chakma	31
+kam	Kamba	31
+csb	Kashubian	31
+bew	Betawi	30
+circ1239/kbd	Circassian languages	30
+dar	Dargwa	30
+dua	Duala	30
+eml	Emilian-Romagnol	30
+lzz	Laz	30
+mixe1286	Mixe	30
+lus	Mizo	30
+nxq	Naxi	30
+qxq	Qashqai	30
+tly	Talysh	30
+luy	Luhya languages	29
+asli1243	Orang Asli languages	29
+mul	Other regional, overseas and immigrant languages	29
+ton	Tongan	29
+bal	Balochi	28
+hmx	Hmong/Miao languages	28
+lbe	Lak	28
+tyv	Tuvan	28
+mam	Mam	26
+mwl	Mirandese	26
+oji	Ojibwe	26
+ach	Acholi	25
+kab	Amazigh languages	25
+less1242	Antillean Creole	25
+teo	Ateso	25
+brh	Brahui	25
+chin1484	Chinantec languages	25
+mis	Dai languages	25
+doh	Dong	25
+mul	English Creole, Miskito and other languages	25
+fra	French and other languages	25
+gor	Gorontalo	25
+ijo	Ijaw languages	25
+kha	Khasi	25
+lij	Ligurian	25
+pcm	Nigerian Pidgin	25
+nup	Nupe	25
+rcf	Réunion Creole	25
+mul	Sudanese languages (combined)	25
+bih/thar1284	Tharu languages	25
+mul	Fulfulde, Songhay and Tamasheq	24
+gaa	Ga	24
+jra	Jarai	24
+nde	Ndebele	24
+mul	Other / residual Cameroonian languages	24
+alt	Altai	23
+bis	Bislama	23
+embe1258	Embera languages	23
+kjh	Khakas	23
+kua	Oshiwambo	23
+hus	Huastec	22
+kln	Kalenjin languages	22
+mul	Other / residual Kenyan languages	22
+pis	Solomon Islands Pijin	22
+aib	Ainu	21
+cni	Asháninka	21
+bdq	Bahnar	21
+mul	Other Indonesian languages	21
+abs	Ambonese Malay	20
+eng/ita	English, Italian and other languages	20
+ell	Greek/Griko	20
+haz	Hazaragi	20
+heb	Hebrew / Yiddish	20
+kck	Ikalanga and other languages	20
+cak	Kaqchikel	20
+lki	Laki	20
+lis	Lisu	20
+xog	Lusoga	20
+mul	Mandinka, Wolof and Fula	20
+meph1234	Me’phaa/Tlapanec	20
+nia	Nias	20
+mul	Other / residual Ugandan languages	20
+pmy	Papuan Malay	20
+tcy	Tulu	20
+bas	Basaa	19
+jiv	Shuar	19
+gbr	Gbagyi	18
+jpr	Judeo-Persian	18
+tara1321	Rarámuri/Tarahumara	18
+skr	Saraiki	18
+mul	Other / residual Philippine languages	17
+oto	Otomi	17
+pag	Pangasinan	17
+mos	Mooré	16
+bax	Bamum	15
+bhw	Biak	15
+frp	Franco-Provençal	15
+grt	Garo	15
+gyn	Guyanese Creole and Indigenous languages	15
+hmo	Hiri Motu	15
+krl	Karelian	15
+trp	Kokborok	15
+kri	Krio	15
+swb	Mahoran languages	15
+mul	Mozambican languages (combined)	15
+nyor1247	Runyoro-Rutooro	15
+fuc	Sarnami, Javanese and other languages	15
+smy	Semnani	15
+srn	Sranan Tongo	15
+tama1367	Tamang	15
+ttt	Tat	15
+tzh	Tzeltal	15
+tzo	Tzotzil	15
+wbm	Wa	15
+wls	Wallisian and Futunan	15
+hch	Wixárika/Huichol	15
+cor	Cornish	14
+eng/cab	English, Garifuna and other languages	14
+idu	Idoma	14
+igl	Igala	14
+pap	Papiamento	14
+ryuk1243	Ryukyuan languages	14
+acf	Saint Lucian Creole French	14
+sorb1249	Sorbian languages	14
+sma	Southern Sami	14
+cjm	Cham	12
+chat1268	Chatino	12
+dani1287	Dani languages	12
+gil	Gilbertese	12
+lrl	Larestani	12
+lin	Lingala	12
+mul	Lingala and Kituba	12
+smj	Lule Sami	12
+mah	Marshallese	12
+mtq	Muong	12
+nep	Nepali and other languages	12
+mul	Other Nigerian languages	12
+pli	Pali	12
+como1260	Shikomori	12
+ita	Italian and other languages	11
+rmz	Marma	11
+amuz1254	Amuzgo	10
+bom	Berom	10
+map	Chuukese, Pohnpeian, Yapese and Kosraean	10
+gcr	Guianese Creole	10
+hrx	Hunsrik	10
+kar	Karen languages	10
+lir	Liberian languages (combined)	10
+lif	Limbu	10
+lgg	Lugbara	10
+man/mul	Maninka	10
+unr	Mundari	10
+yrk	Nenets	10
+nor	Norwegian	10
+nut	Nung	10
+csb	Pomeranian	10
+fuf	Pular	10
+kjb	Q’anjob’al	10
+slr	Salar	10
+sag	Sango	10
+cnr	Serbian / Montenegrin	10
+szl	Silesian	10
+zgh	Tamazight and other languages	10
+toj	Tojolabal	10
+tur/tat	Turkish / Tatar	10
+rue	Ukrainian / Rusyn	10
+dyu	Dioula	9
+epo	Esperanto	9
+acf	French Creole	9
+maza1293/maz	Mazahua	9
+fit	Meänkieli	9
+pau	Palauan	9
+tsz	Purépecha	9
+toto1252	Totonac	9
+igb	Ebira	8
+rad	Ede	8
+evn	Evenki	8
+mul	Hindi, Spanish, French Creole and other languages	8
+hind1271	Hindko	8
+hoc	Ho	8
+huv	Huave	8
+juku1259	Jukun languages	8
+rue	Lemko	8
+mfy	Mayo	8
+oci	Occitan/Aranese	8
+set	Sentani	8
+triq1251/trc	Triqui	8
+tzj	Tz’utujil	8
+yaq	Yaqui	8
+gbz	Zoroastrian Dari	8
+cora1260	Cora	7
+pov	Guinea-Bissau Creole	7
+hau/dje	Hausa and Zarma	7
+mul	Indigenous and other languages	7
+mul	Other local languages	7
+popo1294	Popoluca languages	7
+poh	Poqomchi’	7
+tepe1281	Tepehuan	7
+acr	Achi	6
+bzj	Belizean Kriol	6
+daz	Dao	6
+dng	Dungan	6
+ewe/kbp	Ewe and Kabiyè	6
+mul	Gabonese languages (combined)	6
+kon	Kikongo	6
+mul	Other Malawian languages	6
+mul	Other Sami languages	6
+ful	Pulaar and other languages	6
+smi	Sami languages	6
+sus	Susu	6
+lua	Tshiluba	6
+tvl	Tuvaluan	6
+abk	Abkhaz	5
+kmb	Angolan languages (combined)	5
+arw	Arawak languages	5
+cax	Chiquitano	5
+cac	Chuj	5
+bah	Creole and other languages	5
+ixl	Ixil	5
+glv	Manx	5
+mnon1259	Mnong	5
+nau	Nauruan	5
+nuri1243	Nuristani languages	5
+mul	Other Chadian languages	5
+mul	Other French overseas Creoles	5
+mul	Other Sierra Leonean languages	5
+mul	Pulaar, Soninke and Wolof	5
+rap	Rapa Nui	5
+auc	Waorani	5
+bjs	Bajan and other languages	4
+bzd	Bribri	4
+kpm	Coho	4
+fon	Fon	4
+cab	Garifuna	4
+mul	Local languages	4
+mul	Other minority languages	4
+aoc	Pemón	4
+por	Portuguese and other languages	4
+scl	Shina	4
+cap	Uru-Chipaya	4
+vro	Võro	4
+wba	Warao	4
+mul	Zambian languages (combined)	4
+rup	Aromanian	3
+agu	Awakatek	3
+bft	Balti	3
+bru	Bru-Van Kieu	3
+bsk	Burushaski	3
+cjp	Cabécar	3
+moxo1234	Mojeño	3
+psi	Pashayi	3
+tna	Tacana	3
+bfa	Bari and other local languages	2
+rar	Cook Islands Māori	2
+ddn	Dendi	2
+cab/myn	Garifuna, Maya and other languages	2
+niu	Niuean	2
+mul	Other Afghan languages	2
+xin	Xinka	2
+pil/bba	Yom and Baatonu	2
+fan	Fang and other languages	1
+cri	Forro and other languages	1
+acf	French Creole and other languages	1
+tig	Tigre and other languages	1
+tkl	Tokelauan	1

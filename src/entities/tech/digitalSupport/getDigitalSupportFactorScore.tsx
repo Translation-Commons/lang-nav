@@ -27,6 +27,8 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
       return getTechSupportScore(ent, 'LanguageTool');
 
     // Content
+    case DigitalSupportFactor.BooksPublishedAnnually:
+      return Math.max((ent.books ?? 0) / Math.log10(ent.pop.overall || 1), 1) * 10;
     case DigitalSupportFactor.Wikipedia:
       return computeWikipediaScore(ent);
     case DigitalSupportFactor.UDHR:

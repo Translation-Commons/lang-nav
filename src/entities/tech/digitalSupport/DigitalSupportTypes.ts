@@ -48,6 +48,7 @@ export enum DigitalSupportFactor {
 
   /** Content */
   // Documentation
+  BooksPublishedAnnually,
   Wikipedia,
   UDHR, // UniversalDeclarationOfHumanRights
 
@@ -108,6 +109,7 @@ export const DigitalSupportCategoryFactors: Record<DigitalSupportCategory, Digit
     ],
 
     [DigitalSupportCategory.Documentation]: [
+      DigitalSupportFactor.BooksPublishedAnnually,
       DigitalSupportFactor.Wikipedia,
       DigitalSupportFactor.UDHR,
     ],

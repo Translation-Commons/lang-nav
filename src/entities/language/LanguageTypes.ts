@@ -127,6 +127,7 @@ export interface LanguageData extends EntityBase {
   digitalSupportScore?: DigitalSupportScore;
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
+  books?: number; // booksPublishedAnnually
   techSupport?: TechSupportData[];
 
   latitude?: number;

@@ -11,6 +11,7 @@ import {
   loadUnescoEndangerment,
 } from './extra_entities/EndangermentData';
 import { loadCensusData } from './extra_entities/loadCensusData';
+import { loadBooksPublished } from './supplemental/loadBooksPublished';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
@@ -55,6 +56,7 @@ export async function loadSupplementalData(
     loadLanguageScopeOverrides(dataContext.getLanguage),
     loadGlottologEndangerment(dataContext.getLanguage),
     loadUnescoEndangerment(dataContext.getLanguage),
+    loadBooksPublished(dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();
