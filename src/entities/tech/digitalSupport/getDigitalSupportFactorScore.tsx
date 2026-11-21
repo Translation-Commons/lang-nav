@@ -1,4 +1,3 @@
-import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -7,6 +6,8 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import { computeBooksPublishedScores } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
+import { getUnicodeEncodingScore } from './DigitalSupportUnicodeEncoding';
+import { computeWikipediaScore } from './DigitalSupportWikipedia';
 
 // Returns a numeric score from 1 to 10
 function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportFactor): number {
@@ -65,27 +66,6 @@ function getTechSupportScore(ent: LanguageData, techShortName: string): number {
   const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
   const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
   return techScores.length ? Math.max(...techScores) * 10 : 0;
-}
-
-function getUnicodeEncodingScore(lang: LanguageData): number {
-  // Check if the primary writing system is unicode encoded
-  const primaryEncoded = !!lang.primaryWritingSystem?.unicodeVersion;
-  if (primaryEncoded) return 10;
-
-  // Otherwise check alternative writing systems
-  const otherWritingSystems = Object.values(lang.writingSystems ?? {});
-  const otherEncoded = Object.values(lang.writingSystems ?? {})
-    .map((ws) => ws.unicodeVersion)
-    .filter(Boolean);
-  return (otherEncoded.length / otherWritingSystems.length) * 10;
-}
-
-function computeWikipediaScore(lang: LanguageData): number {
-  const { wikipedias } = lang;
-  if (!wikipedias || wikipedias.length === 0) return 0;
-  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Active)) return 10;
-  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Incubator)) return 4; // incubator
-  return 1; // deleted (WikipediaStatus.Closed)
 }
 
 function computeCLDRScore(lang: LanguageData): number {

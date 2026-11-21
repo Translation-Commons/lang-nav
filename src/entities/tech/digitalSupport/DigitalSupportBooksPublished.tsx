@@ -19,9 +19,7 @@ export function BooksPublishedExplanation({ ent }: { ent: LanguageData }) {
       <dt>Books per million speakers:</dt>
       <dd className="ml-4">{perMillion.toLocaleString(undefined, { maximumFractionDigits: 1 })}</dd>
 
-      <dt>
-        Raw Score (log<sub>2</sub>(books per million) * 10):
-      </dt>
+      <dt>Raw Score (square root of books per million)):</dt>
       <dd className="ml-4">{rawScore.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
 
       <dt>Score (Raw * 10, limited to between 0 and 10):</dt>

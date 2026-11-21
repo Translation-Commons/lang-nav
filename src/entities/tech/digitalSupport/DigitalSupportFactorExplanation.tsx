@@ -2,7 +2,6 @@ import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
@@ -12,6 +11,8 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { BooksPublishedExplanation } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
+import { getUnicodeEncodingScore } from './DigitalSupportUnicodeEncoding';
+import { DigitalSupportWikipediaExplanation } from './DigitalSupportWikipedia';
 
 const DigitalSupportFactorExplanation: React.FC<{
   ent: LanguageData;
@@ -46,7 +47,7 @@ const DigitalSupportFactorExplanation: React.FC<{
     case DigitalSupportFactor.BooksPublishedAnnually:
       return <BooksPublishedExplanation ent={ent} />;
     case DigitalSupportFactor.Wikipedia:
-      return computeWikipediaScore(ent);
+      return <DigitalSupportWikipediaExplanation ent={ent} />;
     case DigitalSupportFactor.UDHR:
       return ent.udhr?.length ? 10 : 0;
 
@@ -81,27 +82,6 @@ function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName:
   const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
   const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
   return techScores.length ? Math.max(...techScores) * 10 : 0;
-}
-
-function getUnicodeEncodingScore(lang: LanguageData): number {
-  // Check if the primary writing system is unicode encoded
-  const primaryEncoded = !!lang.primaryWritingSystem?.unicodeVersion;
-  if (primaryEncoded) return 10;
-
-  // Otherwise check alternative writing systems
-  const otherWritingSystems = Object.values(lang.writingSystems ?? {});
-  const otherEncoded = Object.values(lang.writingSystems ?? {})
-    .map((ws) => ws.unicodeVersion)
-    .filter(Boolean);
-  return (otherEncoded.length / otherWritingSystems.length) * 10;
-}
-
-function computeWikipediaScore(lang: LanguageData): number {
-  const { wikipedias } = lang;
-  if (!wikipedias || wikipedias.length === 0) return 0;
-  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Active)) return 10;
-  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Incubator)) return 4; // incubator
-  return 1; // deleted (WikipediaStatus.Closed)
 }
 
 function computeCLDRScore(lang: LanguageData): number {
