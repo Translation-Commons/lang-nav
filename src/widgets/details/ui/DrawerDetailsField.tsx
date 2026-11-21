@@ -52,9 +52,11 @@ const DrawerDetailsField: React.FC<FieldProps> = ({
         <dt className="font-medium text-muted-foreground">{label}</dt>
         <dd className="min-w-0 wrap-break-word text-foreground">
           <div className="flex flex-row gap-1 items-center justify-between">
-            <div className={!hasData ? 'text-muted-foreground italic' : ''}>{children ?? '—'}</div>
+            <div className={'min-w-0 flex-1' + (!hasData ? ' text-muted-foreground italic' : '')}>
+              {children ?? '—'}
+            </div>
             {hasData && (
-              <div onClick={(e) => e.stopPropagation()}>
+              <div className="flex shrink-0 items-center" onClick={(e) => e.stopPropagation()}>
                 <CopyButton getTextToCopy={getText} variant="ghost" />
                 {expandedContent && (
                   <Button
