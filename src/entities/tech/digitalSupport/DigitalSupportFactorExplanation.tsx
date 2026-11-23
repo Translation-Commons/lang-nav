@@ -1,13 +1,18 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import { View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import { Button } from '@shared/ui/button';
+import Deemphasized from '@shared/ui/Deemphasized';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import { BooksPublishedExplanation } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
@@ -24,17 +29,9 @@ const DigitalSupportFactorExplanation: React.FC<{
       return getUnicodeEncodingScore(ent);
 
     case DigitalSupportFactor.Keyman:
-      return (
-        <CommaSeparated>
-          {ent.keyboards
-            ?.filter((kb) => kb.inputTechCode === 'Keyman')
-            .map((kb) => (
-              <HoverableEntityName key={kb.ID} ent={kb} />
-            ))}
-        </CommaSeparated>
-      );
+      return <KeyboardSupport ent={ent} inputTechCode="Keyman" />;
     case DigitalSupportFactor.Gboard:
-      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'GBoard').length ? 10 : 0;
+      return <KeyboardSupport ent={ent} inputTechCode="GBoard" />;
 
     case DigitalSupportFactor.Grammarly:
       return <TechSupport ent={ent} techShortName="Grammarly" />;
@@ -77,11 +74,55 @@ const DigitalSupportFactorExplanation: React.FC<{
   }
 };
 
-// TODO make these tooltips explanations, not just show the score
+function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechCode: string }) {
+  const keyboards = ent.keyboards?.filter((kb) => kb.inputTechCode === inputTechCode);
+  const { updatePageParams } = usePageParams();
+  if (!keyboards?.length) return <Deemphasized>Not supported by {inputTechCode}</Deemphasized>;
+
+  return (
+    <>
+      <ul>
+        {keyboards.slice(0, 10).map((kb) => (
+          <li key={kb.ID}>
+            <HoverableEntityName ent={kb} />
+          </li>
+        ))}
+        {keyboards.length > 10 && <li>and more...</li>}
+      </ul>
+      <Button
+        onClick={() =>
+          updatePageParams({
+            entType: EntityType.Keyboard,
+            view: View.Table,
+            languageFilter: getFilterEntityID(ent),
+          })
+        }
+      >
+        See all in table view
+      </Button>
+    </>
+  );
+}
+
 function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName: string }) {
-  const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
-  const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
-  return techScores.length ? Math.max(...techScores) * 10 : 0;
+  const techSupports = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
+  if (!techSupports?.length) return <Deemphasized>Not supported by {techShortName}</Deemphasized>;
+  const url = techSupports[0].tech.languageSupportURL;
+
+  return (
+    <>
+      <ul>
+        {techSupports?.map((ts) => (
+          <li key={ts.techShortName}>
+            <HoverableEntityName ent={ts.tech} /> for {ts.name}
+            {ts.level != null && ` at level ${ts.level}`}
+            {ts.tech.maxLevel != null && ` out of ${ts.tech.maxLevel}`}
+          </li>
+        ))}
+      </ul>
+      {url && <ExternalLink href={url} showDomainOnly />}
+    </>
+  );
 }
 
 function computeCLDRScore(lang: LanguageData): number {

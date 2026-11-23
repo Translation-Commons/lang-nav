@@ -6,12 +6,12 @@
 #author	Grammarly	
 #notes		
 		
-Language Code	Language	Locale
+Language Code	Name	Locale
 ces	Czech	
 dan	Danish	
 deu	German	
-eng	English 	US
-eng	English 	GB
+eng	English (American)	US
+eng	English (British)	GB
 fin	Finnish	
 fra	French	
 hin	Hindi	
@@ -22,13 +22,13 @@ msa/ind	Indonesian
 nld	Dutch	
 nor	Norwegian	
 pol	Polish	
-por	Portuguese 	BR
-por	Portuguese 	PT
+por	Portuguese (Brazil) 	BR
+por	Portuguese (Portugal) 	PT
 ron	Romanian	
 slk	Slovak	
-spa	Spanish 	MX
-spa	Spanish 	ES
-spa	Spanish 	AR
+spa	Spanish (Mexico) 	MX
+spa	Spanish (Spain) 	ES
+spa	Spanish (Argentina) 	AR
 swe	Swedish	
 tgl	Tagalog	
 tur	Turkish	

@@ -24,7 +24,7 @@ export type TechSupportData = {
   territoryCode?: string; // ideally a standardized territory code, e.g., "US", "FR"
   writingSystemCode?: string; // ideally a standardized script code, e.g., "Latn", "Cyrl", "Arab"
   notes?: string;
-  score?: number; // A 0 to 1 score indicating the level of support, 1 is "full", 0 is "none", partial would be in between
+  level?: number; // A numeric level indicating the degree of support, higher is better, the max is specified by the technology
 
   // References
   tech: TechnologyData;
@@ -42,6 +42,7 @@ export interface TechnologyData extends EntityBase {
 
   population?: number; // The number of users or installations of the tech, if known
   populationSource?: string; // The source of the population data as a URL
+  maxLevel?: number; // The maximum level of support for this technology, when available
 
   // Codes referencing other entities (imported from the tsv)
   organizationCode: string; // The code of the organization responsible for the platform

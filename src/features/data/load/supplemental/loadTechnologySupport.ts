@@ -29,6 +29,7 @@ async function loadOneTechnologySupport(file: string, dc: DataGetters): Promise<
       // Get the metadata
       const techShortName = getMetadata(lines, 'tech');
       const url = getMetadata(lines, 'url');
+      const maxLevel = getMetadata(lines, 'maxLevel');
       const dateAccessed = getMetadata(lines, 'dateAccessed');
       if (!techShortName) {
         console.error(`Missing tech short name in file ${file}.`);
@@ -42,6 +43,7 @@ async function loadOneTechnologySupport(file: string, dc: DataGetters): Promise<
       // TODO: collect metadata in a Document entity of sorts
       tech.languageSupportLastUpdated = dateAccessed ? new Date(dateAccessed) : undefined;
       tech.languageSupportURL = url;
+      tech.maxLevel = maxLevel ? parseInt(maxLevel, 10) : undefined;
 
       const columns = findColumns(lines);
 
@@ -66,7 +68,7 @@ function getMetadata(lines: string[], key: string): string | undefined {
 type ColIndices = {
   Code: number;
   Name: number;
-  Score: number;
+  Level: number;
   Territory: number;
   WritingSystem: number;
   Notes: number;
@@ -80,23 +82,26 @@ function findColumns(lines: string[]): ColIndices {
     return {
       Code: -1,
       Name: -1,
-      Score: -1,
+      Level: -1,
       Territory: -1,
       WritingSystem: -1,
       Notes: -1,
     };
 
-  const columns = headerLine.split('\t').map((s) => s.trim());
+  const columns = headerLine
+    .toLowerCase()
+    .split('\t')
+    .map((s) => s.trim());
 
   return {
-    Code: columns.findIndex((col) => col === 'Code' || col === 'Language Code'),
+    Code: columns.findIndex((col) => col === 'code' || col === 'language code'),
     Name: columns.findIndex(
-      (col) => col === 'Name' || col === 'Language' || col === 'Language Name',
+      (col) => col === 'name' || col === 'language' || col === 'language name',
     ),
-    Score: columns.findIndex((col) => col === 'Score'),
-    Territory: columns.findIndex((col) => col === 'Territory' || col === 'Locale'),
-    WritingSystem: columns.findIndex((col) => col === 'Writing System' || col === 'Script'),
-    Notes: columns.findIndex((col) => col === 'Notes'),
+    Level: columns.findIndex((col) => col === 'score' || col === 'level'),
+    Territory: columns.findIndex((col) => col === 'territory' || col === 'locale'),
+    WritingSystem: columns.findIndex((col) => col === 'writing system' || col === 'script'),
+    Notes: columns.findIndex((col) => col === 'notes'),
   };
 }
 
@@ -124,7 +129,7 @@ function addSupportToLanguages(
 
   // Extract fields
   const languageCodes = getLanguageCodes(locale ? locale.languageCode : languageCodePath);
-  const score = (parts[columns.Score] ?? '').trim() || undefined;
+  const level = (parts[columns.Level] ?? '').trim() || undefined;
 
   const techSupportBase: TechSupportData = {
     techShortName: tech.codeDisplay,
@@ -134,7 +139,7 @@ function addSupportToLanguages(
     writingSystemCode:
       locale?.scriptCode ?? ((parts[columns.WritingSystem] ?? '').trim() || undefined),
     notes: (parts[columns.Notes] ?? '').trim() || undefined,
-    score: score != null ? parseFloat(score) : undefined,
+    level: level != null ? parseFloat(level) : undefined,
 
     tech,
   };
