@@ -8,6 +8,8 @@ type Props = {
   isActive?: boolean;
   label: ReactNode;
   options: Record<string, ReactNode>;
+  /** An icon-only square trigger that opens to the left, for the map's control column. */
+  compactLabel?: string;
 };
 
 const TransformOptionsPopup: React.FC<Props> = ({
@@ -15,20 +17,30 @@ const TransformOptionsPopup: React.FC<Props> = ({
   isActive = true,
   label,
   options,
+  compactLabel,
 }) => {
   return (
     <Popover>
       <PopoverTrigger
         render={
           <Button
-            className="py-2 max-w-60 rounded-md flex items-center text-sm gap-2 cursor-pointer"
-            variant={isActive ? 'default' : 'outline'}
+            aria-label={compactLabel}
+            title={compactLabel}
+            className={
+              compactLabel
+                ? 'cursor-pointer h-8 w-8'
+                : 'py-2 max-w-60 rounded-md flex items-center text-sm gap-2 cursor-pointer'
+            }
+            variant={getTriggerVariant(isActive, compactLabel != null)}
           >
             {label}
           </Button>
         }
       />
-      <PopoverContent className="grid grid-cols-2 gap-2 items-center">
+      <PopoverContent
+        className="grid grid-cols-2 gap-2 items-center"
+        side={compactLabel ? 'left' : 'bottom'}
+      >
         {description && <div className="col-span-2">{description}</div>}
         {Object.entries(options).map(([label, component]) => (
           <React.Fragment key={label}>
@@ -40,5 +52,11 @@ const TransformOptionsPopup: React.FC<Props> = ({
     </Popover>
   );
 };
+
+function getTriggerVariant(isActive: boolean, isCompact: boolean) {
+  // The compact trigger sits with the map's buttons, so it matches their look.
+  if (isCompact) return isActive ? 'active' : 'secondary';
+  return isActive ? 'default' : 'outline';
+}
 
 export default TransformOptionsPopup;

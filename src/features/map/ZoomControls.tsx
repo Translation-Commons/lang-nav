@@ -3,6 +3,7 @@ import React from 'react';
 
 import ZIndex from '@features/layers/ZIndex';
 import usePageParams from '@features/params/usePageParams';
+import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 
 import { Button } from '@shared/ui/button';
 
@@ -17,9 +18,14 @@ const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWi
   const { showMapBorders, setShowMapBorders } = usePageParams();
   const bordersLabel = showMapBorders ? 'Hide country borders' : 'Show country borders';
   const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
+  // Small maps, like the one in a territory's details, are too short for five full-size buttons.
+  const isSmall = containerWidth < 500;
   return (
     <div
-      className="absolute top-2 right-2 flex flex-col gap-2"
+      className={
+        'absolute top-2 right-2 flex flex-col ' +
+        (isSmall ? 'gap-1 [&_button]:size-6 [&_svg]:size-3.5' : 'gap-2')
+      }
       style={{ zIndex: ZIndex.MapZoomControls, fontSize }}
     >
       <Button
@@ -56,6 +62,7 @@ const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWi
       >
         <Grid2x2Icon />
       </Button>
+      <FieldFocusSelector isMapControl />
     </div>
   );
 };
