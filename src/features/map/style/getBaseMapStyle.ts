@@ -10,11 +10,11 @@ import {
 import type { MapThemeColors } from './useMapThemeColors';
 
 /**
- * Ocean, land and borders. Everything is drawn from one countries file we host ourselves, so
- * there is no tile server or API key. Without a `glyphs` URL, labels use the browser's own
- * fonts, which covers every script.
+ * Ocean, land and, when turned on, borders. Everything is drawn from one countries file we host
+ * ourselves, so there is no tile server or API key. Without a `glyphs` URL, labels use the
+ * browser's own fonts, which covers every script.
  */
-export function getBaseMapStyle(colors: MapThemeColors): StyleSpecification {
+export function getBaseMapStyle(colors: MapThemeColors, showBorders: boolean): StyleSpecification {
   return {
     version: 8,
     sources: {
@@ -36,6 +36,7 @@ export function getBaseMapStyle(colors: MapThemeColors): StyleSpecification {
         id: BORDERS_LAYER_ID,
         type: 'line',
         source: COUNTRIES_SOURCE_ID,
+        layout: { visibility: showBorders ? 'visible' : 'none' },
         paint: { 'line-color': colors.border, 'line-width': 0.5 },
       },
       { id: OVERLAYS_START_LAYER_ID, type: 'background', layout: { visibility: 'none' } },

@@ -3,6 +3,8 @@ import type { Map as MapLibreMapInstance, MapLayerMouseEvent, MapMouseEvent } fr
 import React, { useMemo } from 'react';
 import MapLibreMap from 'react-map-gl/maplibre';
 
+import usePageParams from '@features/params/usePageParams';
+
 import MapDotLayers from './dots/MapDotLayers';
 import './style/setUpMapLibre';
 import { getBaseMapStyle } from './style/getBaseMapStyle';
@@ -36,8 +38,9 @@ const MapCanvas: React.FC<Props> = ({
   onLoad,
   ...pointer
 }) => {
-  // A new style only on theme change; react-map-gl re-adds the child layers on top of it.
-  const mapStyle = useMemo(() => getBaseMapStyle(colors), [colors]);
+  // A new style only when the theme or borders change; react-map-gl re-adds the layers below.
+  const { showMapBorders } = usePageParams();
+  const mapStyle = useMemo(() => getBaseMapStyle(colors, showMapBorders), [colors, showMapBorders]);
 
   return (
     <MapLibreMap
@@ -60,6 +63,7 @@ const MapCanvas: React.FC<Props> = ({
           fill={content.territoryFill}
           pinnedIds={pinnedIds}
           outlineColor={colors.text}
+          showOutline={showMapBorders}
         />
       )}
       <MapDotLayers

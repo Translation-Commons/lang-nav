@@ -23,6 +23,8 @@ export const createMockUsePageParams = (
     languageCodeFormat: LanguageCodeFormat.Unset,
     setLocaleSeparator: () => {},
     setLanguageCodeFormat: () => {},
+    showMapBorders: false,
+    setShowMapBorders: () => {},
     ...overrides,
   };
 };

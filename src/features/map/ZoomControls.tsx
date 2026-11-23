@@ -1,7 +1,8 @@
-import { Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
+import { Grid2x2Icon, Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import React from 'react';
 
 import ZIndex from '@features/layers/ZIndex';
+import usePageParams from '@features/params/usePageParams';
 
 import { Button } from '@shared/ui/button';
 
@@ -13,6 +14,8 @@ type Props = {
 };
 
 const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWidth = 800 }) => {
+  const { showMapBorders, setShowMapBorders } = usePageParams();
+  const bordersLabel = showMapBorders ? 'Hide country borders' : 'Show country borders';
   const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
   return (
     <div
@@ -42,6 +45,16 @@ const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWi
         variant="secondary"
       >
         <Maximize2Icon />
+      </Button>
+      <Button
+        aria-label={bordersLabel}
+        title={bordersLabel}
+        aria-pressed={showMapBorders}
+        className="cursor-pointer h-8 w-8"
+        onClick={() => setShowMapBorders(!showMapBorders)}
+        variant={showMapBorders ? 'active' : 'secondary'}
+      >
+        <Grid2x2Icon />
       </Button>
     </div>
   );
