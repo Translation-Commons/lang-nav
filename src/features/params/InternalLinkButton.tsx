@@ -1,10 +1,11 @@
 import { ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
-import { Button } from '@shared/ui/button';
+import { cn } from '@shared/lib/utils';
+import { buttonVariants } from '@shared/ui/button';
 
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { PageParams } from './PageParamTypes';
@@ -13,50 +14,39 @@ type Props = React.PropsWithChildren<{
   className?: string;
   page?: LangNavPageName;
   params?: Partial<PageParams>;
-  style?: React.CSSProperties;
   keepOldParams?: boolean;
   newWindow?: boolean;
+  variant?: 'outline' | 'secondary' | 'default' | 'ghost' | 'active';
+  size?: 'sm' | 'default' | 'lg';
+  showWindowIcon?: boolean;
 }>;
 
-const InternalLink: React.FC<Props> = ({
+const InternalLinkButton: React.FC<Props> = ({
   className,
   page = LangNavPageName.Data,
   params,
   children,
-  style,
   newWindow,
   keepOldParams = false, // Assuming internal link should reset old page parameters by default
+  variant = 'outline',
+  size = 'sm',
+  showWindowIcon = true,
 }) => {
   const [oldParams] = useSearchParams({});
-  const paramsStr = params
-    ? '?' + getNewURLSearchParams(params, keepOldParams ? oldParams : undefined)
-    : '';
-  const to = ['/', page, paramsStr].join('');
-  //   return (
-  //     <Link
-  //       className={className}
-  //       to={to}
-  //       title={to}
-  //       style={style}
-  //       target={newWindow ? '_blank' : undefined}
-  //       rel={newWindow ? 'noopener noreferrer' : undefined}
-  //     >
-  //       {children}
-  //     </Link>
-  //   );
+  const query = params ? getNewURLSearchParams(params, keepOldParams ? oldParams : undefined) : '';
+  const url = useMemo(() => '/' + page + (query ? '?' + query : ''), [query, page]);
+
   return (
-    <Button
-      onClick={() =>
-        updatePageParams({
-          entType: EntityType.Keyboard,
-          view: View.Table,
-          languageFilter: getFilterEntityID(ent),
-        })
-      }
+    <Link
+      to={url}
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size }), className)}
+      target={newWindow ? '_blank' : undefined}
+      rel={newWindow ? 'noopener noreferrer' : undefined}
     >
-      See all in table view {newWindow ? <ArrowRightIcon /> : <ArrowUpRightIcon />}
-    </Button>
+      {children} {showWindowIcon && (newWindow ? <ArrowUpRightIcon /> : <ArrowRightIcon />)}
+    </Link>
   );
 };
 
-export default InternalLink;
+export default InternalLinkButton;

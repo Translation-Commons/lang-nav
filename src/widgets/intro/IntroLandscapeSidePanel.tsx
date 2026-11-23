@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { getDataPageURL } from '@features/params/getDataPageURL';
+import InternalLinkButton from '@features/params/InternalLinkButton';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import useGlobalLanguageStats, {
@@ -14,7 +13,7 @@ import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
-import { Button, buttonVariants } from '@shared/ui/button';
+import { Button } from '@shared/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@shared/ui/card';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
@@ -66,12 +65,9 @@ const TerritoryDossierCard: React.FC<TerritoryDossierCardProps> = ({ territory, 
         <Button variant="link" size="sm" onClick={onClear}>
           Clear selection
         </Button>
-        <Link
-          to={getDataPageURL({ entType: EntityType.Locale, territoryFilter: territory.ID })}
-          className={buttonVariants({ variant: 'outline', size: 'sm' })}
-        >
+        <InternalLinkButton params={{ entType: EntityType.Locale, territoryFilter: territory.ID }}>
           View all languages in {territory.nameDisplay}
-        </Link>
+        </InternalLinkButton>
       </div>
     </LandscapeCard>
   );

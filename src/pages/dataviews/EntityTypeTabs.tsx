@@ -7,6 +7,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 import useAreParamsCurrent from '@widgets/controls/useAreParamsCurrent';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
+import InternalLinkButton from '@features/params/InternalLinkButton';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -14,8 +15,7 @@ import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
-import { cn } from '@shared/lib/utils';
-import { Button, buttonVariants } from '@shared/ui/button';
+import { Button } from '@shared/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
@@ -100,14 +100,14 @@ const EntityTypeTabs: React.FC = () => {
           <div className="flex flex-col gap-1 items-start">
             more types of data...
             {hiddenOptions.map((option) => (
-              <Link
-                to={getNavTo(option)}
+              <InternalLinkButton
+                params={option.urlParams}
                 key={option.label}
-                data-slot="button"
-                className={cn(buttonVariants({ variant: 'ghost' }))}
+                variant="ghost"
+                showWindowIcon={false}
               >
                 {option.label}
-              </Link>
+              </InternalLinkButton>
             ))}
           </div>
         </HoverCardContent>

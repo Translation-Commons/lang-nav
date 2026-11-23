@@ -1,8 +1,8 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import InternalLinkButton from '@features/params/InternalLinkButton';
 import { View } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
 import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
@@ -10,7 +10,6 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import { Button } from '@shared/ui/button';
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
 
@@ -76,7 +75,6 @@ const DigitalSupportFactorExplanation: React.FC<{
 
 function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechCode: string }) {
   const keyboards = ent.keyboards?.filter((kb) => kb.inputTechCode === inputTechCode);
-  const { updatePageParams } = usePageParams();
   if (!keyboards?.length) return <Deemphasized>Not supported by {inputTechCode}</Deemphasized>;
 
   return (
@@ -89,17 +87,16 @@ function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechC
         ))}
         {keyboards.length > 10 && <li>and more...</li>}
       </ul>
-      <Button
-        onClick={() =>
-          updatePageParams({
-            entType: EntityType.Keyboard,
-            view: View.Table,
-            languageFilter: getFilterEntityID(ent),
-          })
-        }
+      <InternalLinkButton
+        newWindow
+        params={{
+          entType: EntityType.Keyboard,
+          view: View.Table,
+          languageFilter: getFilterEntityID(ent),
+        }}
       >
         See all in table view
-      </Button>
+      </InternalLinkButton>
     </>
   );
 }
