@@ -75,7 +75,7 @@ const FullTable: React.FC<Props> = (props) => {
 };
 
 const CategoryTable: React.FC<Props & { cat: DigitalSupportCategory }> = (props) => {
-  const { cat } = props;
+  const { cat, ent } = props;
   return (
     <table>
       <tbody>
@@ -89,7 +89,18 @@ const CategoryTable: React.FC<Props & { cat: DigitalSupportCategory }> = (props)
           <tr key={factor}>
             <td className="px-4">{DigitalSupportFactor[factor]}</td>
             <td className="px-4 w-24">
-              <DigitalSupportCellDisplay {...props} cat={cat} factor={factor} />
+              {factor == null ? (
+                <DigitalSupportCellDisplay {...props} cat={cat} factor={factor} />
+              ) : (
+                <HoverCard>
+                  <HoverCardTrigger delay={100} className="cursor-help">
+                    <DigitalSupportCellDisplay {...props} factor={factor} />
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-fit">
+                    <DigitalSupportFactorExplanation ent={ent} factor={factor} />
+                  </HoverCardContent>
+                </HoverCard>
+              )}
             </td>
           </tr>
         ))}

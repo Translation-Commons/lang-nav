@@ -15,7 +15,7 @@ import ExternalLink from '@shared/ui/ExternalLink';
 
 import { BooksPublishedExplanation } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
-import { getUnicodeEncodingScore } from './DigitalSupportUnicodeEncoding';
+import { UnicodeEncodingExplanation } from './DigitalSupportUnicodeEncoding';
 import { DigitalSupportWikipediaExplanation } from './DigitalSupportWikipedia';
 
 const DigitalSupportFactorExplanation: React.FC<{
@@ -25,7 +25,7 @@ const DigitalSupportFactorExplanation: React.FC<{
   switch (factor) {
     // Communication
     case DigitalSupportFactor.UnicodeEncoding:
-      return getUnicodeEncodingScore(ent);
+      return <UnicodeEncodingExplanation ent={ent} />;
 
     case DigitalSupportFactor.Keyman:
       return <KeyboardSupport ent={ent} inputTechCode="Keyman" />;
@@ -79,13 +79,16 @@ function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechC
 
   return (
     <>
+      <div>
+        {keyboards.length.toLocaleString()} {inputTechCode} keyboards
+      </div>
       <ul>
         {keyboards.slice(0, 10).map((kb) => (
           <li key={kb.ID}>
             <HoverableEntityName ent={kb} />
           </li>
         ))}
-        {keyboards.length > 10 && <li>and more...</li>}
+        {keyboards.length > 10 && <li>and {(keyboards.length - 10).toLocaleString()} more...</li>}
       </ul>
       <InternalLinkButton
         newWindow
