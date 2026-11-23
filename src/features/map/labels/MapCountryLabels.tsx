@@ -11,8 +11,8 @@ import { MapTransform } from '../UseMapZoom';
 import { getLabelMinZooms } from './getLabelMinZooms';
 import { measureLabelText } from './measureLabelText';
 
-// Applied inline below rather than in map.css, so the size measured here for spacing names
-// out is always the size actually drawn.
+// Applied inline below rather than as Tailwind classes, so the size measured here for spacing
+// names out is always the size actually drawn.
 const FONT_PX = 11;
 const FONT_WEIGHT = 600;
 const CHIP_PADDING_X_PX = 8;
@@ -66,7 +66,7 @@ const MapCountryLabels: React.FC<Props> = ({ transform, zoomFactor, mapWidthPx, 
 
   return (
     // Purely visual, so screen readers don't read out dozens of names as the map moves.
-    <div className="MapCountryLabels" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       {names.map(({ territory, mapX, mapY }) => {
         const minZoom = minZooms.get(territory.ID);
         if (minZoom == null || zoomFactor < minZoom) return null;
@@ -75,9 +75,13 @@ const MapCountryLabels: React.FC<Props> = ({ transform, zoomFactor, mapWidthPx, 
         return (
           <div
             key={territory.ID}
-            className="MapCountryLabel"
+            // A solid pill keeps names readable over dots, coloured countries and dark mode.
+            className="absolute box-border flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-solid border-border bg-card/92 leading-none whitespace-nowrap text-foreground shadow-sm animate-in fade-in-0 duration-200 ease-out motion-reduce:animate-none"
             style={{
-              transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
+              // left/top rather than transform: the fade-in animates transform and would
+              // briefly move the chip to the corner.
+              left: x,
+              top: y,
               height: CHIP_HEIGHT_PX,
               padding: `0 ${CHIP_PADDING_X_PX}px`,
               borderWidth: CHIP_BORDER_PX,
