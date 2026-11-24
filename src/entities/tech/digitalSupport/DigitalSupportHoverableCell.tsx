@@ -19,6 +19,7 @@ import {
 
 type Props = DigitalSupportColumn & {
   ent: LanguageData;
+  showValues: boolean;
 };
 
 const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
@@ -41,7 +42,7 @@ const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
 };
 
 const FullTable: React.FC<Props> = (props) => {
-  const { tier } = props;
+  const { tier, ent } = props;
   return (
     <table>
       <tbody>
@@ -63,7 +64,14 @@ const FullTable: React.FC<Props> = (props) => {
               <tr key={factor}>
                 <td className="px-8">{DigitalSupportFactor[factor]}</td>
                 <td className="px-8 w-32">
-                  <DigitalSupportCellDisplay {...props} cat={cat} factor={factor} />
+                  <HoverCard>
+                    <HoverCardTrigger delay={100} className="cursor-help">
+                      <DigitalSupportCellDisplay {...props} cat={cat} factor={factor} />
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-fit">
+                      <DigitalSupportFactorExplanation ent={ent} factor={factor} />
+                    </HoverCardContent>
+                  </HoverCard>
                 </td>
               </tr>
             ))}

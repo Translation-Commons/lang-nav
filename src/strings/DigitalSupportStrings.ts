@@ -2,7 +2,10 @@ import {
   DigitalSupportDimension,
   DigitalSupportStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { DigitalSupportCategory } from '@entities/tech/digitalSupport/DigitalSupportTypes';
+import {
+  DigitalSupportCategory,
+  DigitalSupportFactor,
+} from '@entities/tech/digitalSupport/DigitalSupportTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -70,5 +73,48 @@ export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): str
       return 'AI Knowledge Tools';
     default:
       enforceExhaustiveSwitch(cat);
+  }
+}
+
+export function getDigitalSupportFactorLabel(factor: DigitalSupportFactor): string {
+  switch (factor) {
+    case DigitalSupportFactor.UnicodeEncoding:
+      return 'Unicode Encoding';
+    case DigitalSupportFactor.Keyman:
+      return 'Keyman';
+    case DigitalSupportFactor.Gboard:
+      return 'Gboard - Google Keyboard';
+    case DigitalSupportFactor.Grammarly:
+      return 'Grammarly';
+    case DigitalSupportFactor.QuillBot:
+      return 'QuillBot';
+    case DigitalSupportFactor.LanguageTool:
+      return 'LanguageTool';
+    case DigitalSupportFactor.BooksPublishedAnnually:
+      return 'Books Published Annually';
+    case DigitalSupportFactor.Wikipedia:
+      return 'Wikipedia';
+    case DigitalSupportFactor.UDHR:
+      return 'UDHR - Universal Declaration of Human Rights';
+    case DigitalSupportFactor.CLDR:
+      return 'CLDR - Common Locale Data & Rules';
+    case DigitalSupportFactor.ICU:
+      return 'ICU - International Components for Unicode';
+    case DigitalSupportFactor.GTranslate:
+      return 'Google Translate';
+    case DigitalSupportFactor.MSTranslator:
+      return 'Microsoft Translator';
+    case DigitalSupportFactor.Win11:
+      return 'Windows 11';
+    case DigitalSupportFactor.macOS:
+      return 'macOS - Macintosh Operating System';
+    case DigitalSupportFactor.iOS:
+      return 'iOS - iPhone Operating System';
+    case DigitalSupportFactor.Android:
+      return 'Android';
+    case DigitalSupportFactor.ClaudeSonnet:
+      return 'Claude Sonnet';
+    default:
+      enforceExhaustiveSwitch(factor);
   }
 }

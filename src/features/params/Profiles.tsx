@@ -170,7 +170,7 @@ export function getDefaultParams(
       params.fieldFocus = Field.Code;
       // if (params.reportID === ReportID.DigitalSupportScorecard) {
       params.limit = 20;
-      params.colorGradient = ColorGradient.SequentialBlue;
+      params.colorGradient = ColorGradient.StopLightSunrise;
       // }
       break;
     case View.Chart:
