@@ -23,11 +23,9 @@ type Props = {
 };
 
 const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
-  const [openTiers, setOpenTiers] = useState<DigitalSupportTier[]>(
-    Object.values(DigitalSupportTier).filter((v) => typeof v === 'number'),
-  );
+  const [openTiers, setOpenTiers] = useState<DigitalSupportTier[]>(AllDigitalSupportTiers);
   const [showValues, setShowValues] = useState(false);
-  const [openCats, setOpenCats] = useState<DigitalSupportCategory[]>([]);
+  const [openCats, setOpenCats] = useState<DigitalSupportCategory[]>(AllDigitalSupportCategories);
   const toggleTier = useCallback((tier: DigitalSupportTier) => {
     setOpenTiers((prev) =>
       prev.includes(tier) ? prev.filter((t) => t !== tier) : [...prev, tier],
@@ -121,6 +119,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
             toggleTier={toggleTier}
             toggleCat={toggleCat}
             visibleColumns={visibleColumns}
+            showValues={showValues}
           />
           <DigitalSupportTableBody
             ents={ents}

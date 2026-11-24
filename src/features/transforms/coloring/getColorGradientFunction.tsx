@@ -40,11 +40,6 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
           // White to blue
           const localValue = (value - 0.8) / (1 - 0.8);
           return `hsl(210, 80%, ${100 - 40 * localValue}%)`;
-
-          // // Yellow to blue (via white)
-          // const localValue = (value - 0.7) / (1 - 0.7); // 0 ... 0.25 ... 0.5 ... 0.75 ... 1
-          // const lightValue = 1 - 2 * Math.abs(localValue - 0.5); // 0 ... 0.5 ... 1 ... 0.5 ... 0
-          // return `hsl(${60 + localValue * 180}, ${20 * lightValue + 80}%, ${40 * lightValue + 60}%)`;
         }
       };
     case ColorGradient.HueRainbowBlueToRed:

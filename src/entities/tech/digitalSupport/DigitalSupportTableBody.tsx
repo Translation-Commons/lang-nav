@@ -9,7 +9,11 @@ import { cn } from '@shared/lib/utils';
 import { Skeleton } from '@shared/ui/skeleton';
 
 import DigitalSupportHoverableCell from './DigitalSupportHoverableCell';
-import { DigitalSupportColumn } from './DigitalSupportTypes';
+import {
+  DigitalSupportCategory,
+  DigitalSupportColumn,
+  DigitalSupportFactor,
+} from './DigitalSupportTypes';
 
 type Props = {
   ents: LanguageData[];
@@ -37,11 +41,11 @@ const DigitalSupportTableBody: React.FC<Props> = ({
             </div>
           </td>
           {visibleColumns.map((column, index) => (
-            <td key={index} className="">
+            <td key={index}>
               <div
                 className={cn(
                   'truncate transition-w duration-1000',
-                  !column.showData ? 'w-0' : 'w-20',
+                  getColumnWidth(showValues, column.showData, column.cat, column.factor),
                 )}
               >
                 <DigitalSupportHoverableCell ent={ent} {...column} showValues={showValues} />
@@ -62,5 +66,18 @@ const DigitalSupportTableBody: React.FC<Props> = ({
     </tbody>
   );
 };
+
+export function getColumnWidth(
+  showValues: boolean,
+  showData?: boolean,
+  category?: DigitalSupportCategory,
+  factor?: DigitalSupportFactor,
+) {
+  if (!showData) return 'w-0';
+  if (showValues) return 'w-20'; // Give enough space for them
+  if (category == null) return 'w-32'; // Tier cell
+  if (factor == null) return 'w-12'; // Category cell
+  return 'w-6';
+}
 
 export default DigitalSupportTableBody;
