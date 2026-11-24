@@ -54,6 +54,7 @@ export enum DigitalSupportFactor {
 
   // CurrencyAndDates,
   CLDR,
+  ICU,
 
   // MachineTranslation
   GTranslate,
@@ -113,7 +114,10 @@ export const DigitalSupportCategoryFactors: Record<DigitalSupportCategory, Digit
       DigitalSupportFactor.Wikipedia,
       DigitalSupportFactor.UDHR,
     ],
-    [DigitalSupportCategory.CurrencyAndDates]: [DigitalSupportFactor.CLDR],
+    [DigitalSupportCategory.CurrencyAndDates]: [
+      DigitalSupportFactor.CLDR,
+      DigitalSupportFactor.ICU,
+    ],
     [DigitalSupportCategory.MachineTranslation]: [
       DigitalSupportFactor.GTranslate,
       DigitalSupportFactor.MSTranslator,

@@ -1,12 +1,9 @@
 import { EllipsisIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-
-import { LangNavPageName } from '@app/PageRoutes';
+import React from 'react';
 
 import useAreParamsCurrent from '@widgets/controls/useAreParamsCurrent';
 
-import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
+import InternalLinkButton from '@features/params/InternalLinkButton';
 import { getParamsForLanguageFocus, LanguageFocus } from '@features/params/LanguageFocus';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -15,8 +12,7 @@ import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { partition } from '@shared/lib/setUtils';
-import { cn } from '@shared/lib/utils';
-import { Button, buttonVariants } from '@shared/ui/button';
+import { Button } from '@shared/ui/button';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
@@ -27,15 +23,7 @@ const ITEM_LIMIT = 4;
 
 const LanguageFocusTabs: React.FC = () => {
   const { entType } = usePageParams();
-  const [oldParams] = useSearchParams({});
   const getIsActive = useAreParamsCurrent();
-  const getNavTo = useCallback(
-    (focus: LanguageFocus) => {
-      const newParams = getNewURLSearchParams(getParamsForLanguageFocus(focus), oldParams);
-      return '/' + LangNavPageName.Data + '?' + newParams;
-    },
-    [oldParams],
-  );
 
   if (![EntityType.Language, EntityType.Locale].includes(entType)) return;
 
@@ -66,16 +54,14 @@ const LanguageFocusTabs: React.FC = () => {
     <div className="flex flex-row gap-2 items-center text-xs ml-4">
       <div className="">Language Focus:</div>
       {visibleOptions.map((focus) => (
-        <Link
-          to={getNavTo(focus)}
+        <InternalLinkButton
           key={focus}
-          data-slot="button"
-          className={cn(
-            buttonVariants({ variant: getIsActive(paramsByFocus[focus]) ? 'active' : 'outline' }),
-          )}
+          params={getParamsForLanguageFocus(focus)}
+          variant={getIsActive(paramsByFocus[focus]) ? 'active' : 'outline'}
+          showWindowIcon={false}
         >
           {focus}
-        </Link>
+        </InternalLinkButton>
       ))}
       <HoverCard>
         <HoverCardTrigger delay={100}>
@@ -87,14 +73,14 @@ const LanguageFocusTabs: React.FC = () => {
           <div className="flex flex-col gap-1 items-start">
             <div>other presets...</div>
             {hiddenOptions.map((focus) => (
-              <Link
-                to={getNavTo(focus)}
+              <InternalLinkButton
+                params={getParamsForLanguageFocus(focus)}
                 key={focus}
-                data-slot="button"
-                className={cn(buttonVariants({ variant: 'ghost' }))}
+                variant="ghost"
+                showWindowIcon={false}
               >
                 {focus}
-              </Link>
+              </InternalLinkButton>
             ))}
           </div>
         </HoverCardContent>

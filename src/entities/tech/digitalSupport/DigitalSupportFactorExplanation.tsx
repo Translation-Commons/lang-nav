@@ -1,17 +1,24 @@
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import InternalLinkButton from '@features/params/InternalLinkButton';
+import { View } from '@features/params/PageParamTypes';
+import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
+import LanguageUDHRInfo from '@entities/language/digitalsupport/LanguageUDHRInfo';
 import type { LanguageData } from '@entities/language/LanguageTypes';
-import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
+import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
+import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
+import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import Deemphasized from '@shared/ui/Deemphasized';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import { BooksPublishedExplanation } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
-import { getUnicodeEncodingScore } from './DigitalSupportUnicodeEncoding';
+import { UnicodeEncodingExplanation } from './DigitalSupportUnicodeEncoding';
 import { DigitalSupportWikipediaExplanation } from './DigitalSupportWikipedia';
 
 const DigitalSupportFactorExplanation: React.FC<{
@@ -21,20 +28,12 @@ const DigitalSupportFactorExplanation: React.FC<{
   switch (factor) {
     // Communication
     case DigitalSupportFactor.UnicodeEncoding:
-      return getUnicodeEncodingScore(ent);
+      return <UnicodeEncodingExplanation ent={ent} />;
 
     case DigitalSupportFactor.Keyman:
-      return (
-        <CommaSeparated>
-          {ent.keyboards
-            ?.filter((kb) => kb.inputTechCode === 'Keyman')
-            .map((kb) => (
-              <HoverableEntityName key={kb.ID} ent={kb} />
-            ))}
-        </CommaSeparated>
-      );
+      return <KeyboardSupport ent={ent} inputTechCode="Keyman" />;
     case DigitalSupportFactor.Gboard:
-      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'GBoard').length ? 10 : 0;
+      return <KeyboardSupport ent={ent} inputTechCode="GBoard" />;
 
     case DigitalSupportFactor.Grammarly:
       return <TechSupport ent={ent} techShortName="Grammarly" />;
@@ -49,10 +48,19 @@ const DigitalSupportFactorExplanation: React.FC<{
     case DigitalSupportFactor.Wikipedia:
       return <DigitalSupportWikipediaExplanation ent={ent} />;
     case DigitalSupportFactor.UDHR:
-      return ent.udhr?.length ? 10 : 0;
+      return <LanguageUDHRInfo lang={ent} size="long" />;
 
     case DigitalSupportFactor.CLDR:
-      return computeCLDRScore(ent);
+      return (
+        <div className="flex items-center gap-2">
+          <CLDRWarningNotes ent={ent} />
+          <EntityCLDRCoverageLevel ent={ent} />
+          <EntityCLDRLocaleCount ent={ent} verbose={true} />
+        </div>
+      );
+
+    case DigitalSupportFactor.ICU:
+      return <ICUSupportStatus ent={ent} />;
 
     case DigitalSupportFactor.GTranslate:
       return <TechSupport ent={ent} techShortName="GTranslate" />;
@@ -77,27 +85,56 @@ const DigitalSupportFactorExplanation: React.FC<{
   }
 };
 
-// TODO make these tooltips explanations, not just show the score
-function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName: string }) {
-  const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
-  const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
-  return techScores.length ? Math.max(...techScores) * 10 : 0;
+function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechCode: string }) {
+  const keyboards = ent.keyboards?.filter((kb) => kb.inputTechCode === inputTechCode);
+  if (!keyboards?.length) return <Deemphasized>Not supported by {inputTechCode}</Deemphasized>;
+
+  return (
+    <>
+      <div>
+        {keyboards.length.toLocaleString()} {inputTechCode} keyboards
+      </div>
+      <ul>
+        {keyboards.slice(0, 10).map((kb) => (
+          <li key={kb.ID}>
+            <HoverableEntityName ent={kb} />
+          </li>
+        ))}
+        {keyboards.length > 10 && <li>and {(keyboards.length - 10).toLocaleString()} more...</li>}
+      </ul>
+      <InternalLinkButton
+        newWindow
+        params={{
+          entType: EntityType.Keyboard,
+          view: View.Table,
+          languageFilter: getFilterEntityID(ent),
+        }}
+      >
+        See all in table view
+      </InternalLinkButton>
+    </>
+  );
 }
 
-function computeCLDRScore(lang: LanguageData): number {
-  const {
-    CLDR: { coverage, dataProvider },
-  } = lang;
-  if (coverage == null) {
-    if (dataProvider?.type == EntityType.Language && dataProvider.CLDR.coverage != null)
-      return computeCLDRScore(dataProvider);
-    return 0;
-  }
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Modern) return 10;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Moderate) return 8;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Basic) return 5;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Core) return 2;
-  return 0;
+function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName: string }) {
+  const techSupports = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
+  if (!techSupports?.length) return <Deemphasized>Not supported by {techShortName}</Deemphasized>;
+  const url = techSupports[0].tech.languageSupportURL;
+
+  return (
+    <>
+      <ul>
+        {techSupports?.map((ts) => (
+          <li key={ts.techShortName}>
+            <HoverableEntityName ent={ts.tech} /> for {ts.name}
+            {ts.level != null && ` at level ${ts.level}`}
+            {ts.tech.maxLevel != null && ` out of ${ts.tech.maxLevel}`}
+          </li>
+        ))}
+      </ul>
+      {url && <ExternalLink href={url} showDomainOnly />}
+    </>
+  );
 }
 
 export default DigitalSupportFactorExplanation;
