@@ -79,7 +79,7 @@ aze	azer1255	Azerbaijani	Azərbaycan	Spoken & Written	Latn	21,484,844		nucl1769	
 mag	maga1260	Magahi	मगही	Mostly Spoken	Deva	20,975,677		mait1254	Yes	
 gan	ganc1239	Gan Chinese	贛語	Mostly Spoken	Hans	20,600,000	zho	midd1354	Yes	Established variant of a macrolanguage
 pbu	nort2646	Northern Pashto		Spoken & Written	Arab	20,421,700	pus	nucl1276	Possibly	But probably want to use macrolanguage
-csl	chin1283	Chinese Sign Language	中國手語	Sign	Zxxx	20,040,000		nucl1761	Yes	
+csl	chin1283	Chinese Sign Language	中國手語	Sign	Signed	20,040,000		nucl1761	Yes	
 ron	roma1327	Romanian	română	Spoken & Written	Latn	19,610,518		east2865	Yes	
 xho	xhos1239	Xhosa	isiXhosa	Spoken & Written	Latn	19,169,500		ngun1267	Yes	
 afr	afri1274	Afrikaans	Afrikaans	Spoken & Written	Latn	19,147,812		afri1273	Yes	
@@ -212,7 +212,7 @@ ssw	swat1243	Swati	siSwati	Spoken & Written	Latn	4,377,302		swat1244	Yes
 bik	biko1240	Bikol	Bicol	Spoken & Written	Latn	4,260,675		cent2246	Yes	
 min	mina1268	Minangkabau	Baso Minangkabau	Spoken & Written	Latn	4,240,015	msa	mina1280	Possibly	But probably want to use macrolanguage
 mtr	mewa1249	Mewari		Mostly Spoken	Deva	4,212,262	mwr	mewa1253	Possibly	But probably want to use macrolanguage
-ins	indi1237	Indian Sign Language		Sign	Zxxx	4,100,000		indo1332	Yes	
+ins	indi1237	Indian Sign Language		Sign	Signed	4,100,000		indo1332	Yes	
 bug	bugi1244	Buginese	basa Ogi	Spoken & Written	Latn	4,027,800		bugi1245	Yes	
 tiv	tivv1240	Tiv		Spoken & Written	Latn	4,000,000		tivi1234	Yes	
 gax	bora1271	Borana-Arsi-Guji Oromo		Spoken & Written	Latn	3,949,400	orm	cent2303	Possibly	But probably want to use macrolanguage
@@ -373,7 +373,7 @@ hoc	hooo1248	Ho	𑢹𑣉𑣉 𑣎𑣋𑣜	Spoken & Written	Deva	1,538,535		homu1
 lub	luba1250	Luba-Katanga	Tshiluba	Spoken & Written	Latn	1,512,695		kaon1242	Yes	
 ach	acol1236	Acoli		Spoken & Written	Latn	1,512,165		sout2831	Yes	
 mdh	magu1243	Maguindanaon		Spoken & Written	Latn	1,503,182		dana1253	Yes	
-dse	dutc1253	Dutch Sign Language		Sign	Zxxx	1,500,000		dutc1259	Yes	
+dse	dutc1253	Dutch Sign Language		Sign	Signed	1,500,000		dutc1259	Yes	
 quz	cusc1236	Cusco Quechua		Spoken & Written	Latn	1,500,000	que	cusc1235	Possibly	But probably want to use macrolanguage
 rgn	roma1328	Romagnol	Rumagnòl	Spoken & Written	Latn	1,500,000		emil1243	Yes, with caveat	Emilian and Romagnol are part of a dialect continuum -- from one side of the province to the other the languages are mutually unintelligible but between neighboring towns it is comprehensible
 zgb	guib1245	Guibei Zhuang		Mostly Spoken	Hani	1,500,000	zha	nort3189	Possibly	But probably want to use macrolanguage
@@ -483,7 +483,7 @@ dik	sout2832	Southwestern Dinka		Mostly Spoken	Latn	1,000,000	din	dink1262	Possi
 diq	diml1238	Common Dimli		Spoken & Written	Latn	1,000,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
 dks	sout2834	Southeastern Dinka		Mostly Spoken	Latn	1,000,000	din	dink1262	Possibly	But probably want to use macrolanguage
 ekk	esto1258	Standard Estonian		Spoken & Written	Latn	1,000,000	est	cent2329	Possibly	But probably want to use macrolanguage
-eth	ethi1238	Ethiopian Sign Language		Sign	Zxxx	1,000,000		asli1244	Yes	
+eth	ethi1238	Ethiopian Sign Language		Sign	Signed	1,000,000		asli1244	Yes	
 fuh	west2454	Western Niger Fulfulde		Spoken & Written	Latn	1,000,000	ful	fula1264	Possibly	But probably want to use macrolanguage
 gor	goro1259	Gorontalo	bahasa Gorontalo	Spoken & Written	Latn	1,000,000		goro1273	Yes	
 guw	gunn1250	Gun	Gungbe	Spoken & Written	Latn	1,000,000		fong1244	Yes	
@@ -507,7 +507,7 @@ nyf	giry1241	Kigiryama		Mostly Spoken	Latn	1,000,000		nort3232	Yes
 nyk	nyan1305	Nyaneka		Mostly Spoken	Latn	1,000,000		nyan1320	Yes	
 nyo	nyor1246	Nyoro	Orunyoro	Mostly Spoken	Latn	1,000,000		nyor1247	Yes	
 pga	suda1237	Sudanese Creole Arabic		Spoken	Latn	1,000,000	ara	east2897	Yes, with caveat	To distinguish spoken dialect
-pks	paki1242	Pakistan Sign Language	اشارہ	Sign	Zxxx	1,000,000		indo1332	Yes	
+pks	paki1242	Pakistan Sign Language	اشارہ	Sign	Signed	1,000,000		indo1332	Yes	
 sgw	seba1251	Sebat Bet Gurage		Spoken & Written	Ethi	1,000,000		ttgr1237	Yes	
 skg	saka1291	Sakalava Malagasy		Mostly Spoken	Latn	1,000,000	mlg	saka1299	Possibly	But probably want to use macrolanguage
 sop	song1303	Songe		Spoken & Written	Latn	1,000,000		luba1254	Yes	
@@ -676,7 +676,7 @@ kro		Kru			Latn	480,977			Possibly	Language family
 grb	greb1256	Grebo			Latn	476,167		greb1257	Yes	
 wci	waci1239	Waci Gbe			Latn	476,000		kpes1239	Yes	
 mdr	mand1442	Mandar			Latn	475,000		nort2894	Yes	
-esl	egyp1238	Egypt Sign Language		Sign	Zxxx	474,000		arab1398	Yes	
+esl	egyp1238	Egypt Sign Language		Sign	Signed	474,000		arab1398	Yes	
 kge	kome1238	Komering	Basa Kumoring	Spoken & Written	Latn	470,000		pesi1234	Yes	
 sgd	suri1273	Surigaonon			Latn	468,062		suri1274	Yes	
 szl	sile1253	Silesian	ślōnski	Spoken & Written	Latn	467,145		poli1262	Yes	
@@ -768,7 +768,7 @@ dar	darg1241	Dargwa	дарган		Cyrl	362,156		darg1242	Yes
 old	moch1256	Mochi			Latn	362,000		cent2286	Yes	
 suw	sumb1240	Sumbwa			Latn	361,000		suku1274	Yes	
 adh	adho1243	Adhola			Latn	360,000		adho1242	Yes	
-hsh	hung1263	Hungarian Sign Language		Sign	Zxxx	360,000		nucl1839	Yes	
+hsh	hung1263	Hungarian Sign Language		Sign	Signed	360,000		nucl1839	Yes	
 acf	sain1246	Saint Lucian Creole French	kwéyòl		Latn	359,450		less1242	Yes	
 bap	bant1281	Bantawa			Deva	358,737		bant1280	Yes	
 zmz	mban1263	Mbandja			Latn	352,000		nucl1797	Yes	
@@ -786,7 +786,7 @@ xmf	ming1252	Mingrelian	მარგალური	Spoken & Written	Geor	344,58
 nuj	nyol1238	Nyole			Latn	341,000		saam1286	Yes	
 mfb	bang1365	Bangka	bahasa Bangka		Latn	340,000	msa	bang1370	Possibly	But probably want to use macrolanguage
 rob	taee1237	Tae'	bahasa Tae'		Latn	340,000		tora1260	Yes	
-xki	keny1241	Kenyan Sign Language		Sign	Zxxx	340,000		deaf1237	Yes	
+xki	keny1241	Kenyan Sign Language		Sign	Signed	340,000		deaf1237	Yes	
 rom	roma1329	Romany	Romani chib		Latn	338,917		indo1322	Yes	
 kki	kagu1239	Kagulu			Latn	337,000		ruvu1235	Yes	
 pko	poko1263	Pökoot			Latn	336,000	kln	nort3239	Possibly	But probably want to use macrolanguage
@@ -808,7 +808,7 @@ sbk	safw1238	Safwa			Latn	322,000		mbey1234	Yes
 knx	kend1254	Salako			Latn	321,000		west2821	Yes	
 dip	nort2815	Northeastern Dinka			Latn	320,000	din	dink1262	Possibly	But probably want to use macrolanguage
 kvx	park1237	Parkari Koli			Arab	319,000		indu1243	Yes	
-jsl	japa1238	Japanese Sign Language	日本手話	Sign	Zxxx	317,000		jsli1234	Yes	
+jsl	japa1238	Japanese Sign Language	日本手話	Sign	Signed	317,000		jsli1234	Yes	
 maw	mamp1244	Mampruli			Latn	316,000		mamp1246	Yes	
 gru	kist1241	Kistane			Ethi	315,538		ngro1237	Yes	
 eyo	keiy1238	Keiyo			Latn	314,000	kln	west3004	Possibly	But probably want to use macrolanguage
@@ -867,7 +867,7 @@ twh	taid1250	Tai Dón			Latn	295,000		whit1265	Yes
 kne	kank1243	Kankanaey			Latn	294,349		kank1245	Yes	
 zaj	zara1247	Zaramo			Latn	293,000		kutu1267	Yes	
 lez	lezg1247	Lezghian	Лезги чIал	Spoken & Written	Cyrl	287,878		aghu1259	Yes	
-ase	amer1248	American Sign Language		Sign	Sgnw	287,622		amer1258	Yes	
+ase	amer1248	American Sign Language		Sign	Signed	287,622		amer1258	Yes	
 cja	west2650	Western Cham	ꨌꩌ		Arab	285,050		cham1328	Yes	
 taq	tama1365	Tamasheq	tmahq		Latn	281,200	tmh	sout3263	Possibly	But probably want to use macrolanguage
 naq	nama1264	Nama (Namibia)	Khoekhoegowab		Latn	280,671		nort3245	Yes	
@@ -876,7 +876,7 @@ tcz	thad1238	Thado Chin			Latn	280,069		thad1239	Yes
 ior	inor1238	Inor			Ethi	280,000		inor1239	Yes	
 kzn	koko1267	Kokola			Latn	280,000		lolo1269	Yes	
 wni	ndzw1235	Ndzwani Comorian			Arab	279,196		shin1269	Yes	
-tza	tanz1238	Tanzanian Sign Language		Sign	Zxxx	278,000		deaf1237	Yes	
+tza	tanz1238	Tanzanian Sign Language		Sign	Signed	278,000		deaf1237	Yes	
 nih	nyih1240	Nyiha (Tanzania)			Latn	276,000		mboz1234	Yes	
 sml	cent2092	Central Sama			Latn	275,804		inne1244	Yes	
 krc	kara1465	Karachay-Balkar	Къарачай-Малкъар	Spoken & Written	Cyrl	274,458		kauk1241	Yes	
@@ -947,19 +947,19 @@ spy	saba1262	Sabaot			Latn	241,000	kln	elgo1240	Yes, with caveat	But probably wa
 pdc	penn1240	Pennsylvania German	Pennsylvanisch Deitsch	Spoken & Written	Latn	240,506		pala1355	Yes	
 lns	lamn1239	Lamnso'			Latn	240,000		ring1243	Yes	
 xbr	kamb1299	Kambera	bahasa Kambera		Latn	240,000		kamb1320	Yes	
-rsl	russ1255	Russian Sign Language		Sign	Zxxx	239,930		cent2419	Yes	
+rsl	russ1255	Russian Sign Language		Sign	Signed	239,930		cent2419	Yes	
 wob	weno1238	Wè Northern			Latn	239,000		weea1234	Yes	
 kmj	kuma1274	Kumarbhag Paharia			Deva	238,076		malt1248	Yes	
 xal	kalm1243	Kalmyk	хальмг	Spoken & Written	Cyrl	237,742		mong1331	Yes	
 sip	sikk1242	Sikkimese	འབྲས་ལྗོངས་སྐད་		Tibt	237,674		dzon1238	Yes	
-sfs	sout1404	South African Sign Language	Suid-Afrikaanse Gebaretaal	Sign	Zxxx	235,000		sout3228	Yes	
+sfs	sout1404	South African Sign Language	Suid-Afrikaanse Gebaretaal	Sign	Signed	235,000		sout3228	Yes	
 tzo	tzot1259	Tzotzil			Latn	235,000		tzel1253	Yes	
 jbn	nafu1238	Nafusi			Arab	234,000		berb1260	Yes	
 bkm	komc1235	Kom (Cameroon)			Latn	233,000		komk1239	Yes	
 pll	shwe1236	Shwe Palaung			Mymr	233,000		pala1336	Yes	
 zea	zeeu1238	Zeeuws	Zeêuws	Spoken & Written	Latn	232,000		zeeu1239	Yes	
 ilp	phil1247	Iranun			Latn	231,120		iran1262	Yes
-ecs	ecua1243	Ecuadorian Sign Language		Sign	Zxxx	231,000		west2886	Yes	
+ecs	ecua1243	Ecuadorian Sign Language		Sign	Signed	231,000		west2886	Yes	
 her	here1253	Herero	Otsiherero		Latn	230,523		here1252	Yes	
 enq	enga1252	Enga			Latn	230,000		enga1251	Yes	
 kno	kono1268	Kono (Sierra Leone)			Latn	230,000		vaik1238	Yes	
@@ -982,7 +982,7 @@ klu	klao1243	Klao			Latn	222,620		klao1242	Yes
 ctu	chol1282	Chol			Latn	222,000		chol1281	Yes	
 mfu	mbwe1238	Mbwela			Latn	222,000		mbwe1239	Yes	
 saq	samb1315	Samburu	Kisampur		Latn	222,000		nucl1431	Yes	
-asp	alge1235	Algerian Sign Language		Sign	Zxxx	220,000		lsfi1234	Yes	
+asp	alge1235	Algerian Sign Language		Sign	Signed	220,000		lsfi1234	Yes	
 gso	sout2785	Southwest Gbaya			Latn	220,000	gba	gbay1284	Possibly	But probably want to use macrolanguage
 mzv	manz1243	Manza			Latn	220,000		manz1242	Yes	
 nxd	ngan1302	Ngando (DRC)			Latn	220,000		lomo1242	Yes	
@@ -1017,7 +1017,7 @@ bre	bret1244	Breton	Brezhoneg	Spoken & Written	Latn	206,049		midd1379	Yes
 dtm	tomo1243	Tomo Kan Dogon			Latn	206,000		west2508	Yes	
 kft	kanj1259	Kanjari				206,000		mewa1253	Yes	
 stb	nort2885	Northern Subanen			Latn	205,494		east2769	Yes	
-sqk	alba1271	Albanian Sign Language		Sign	Zxxx	205,000		deaf1237	Yes	
+sqk	alba1271	Albanian Sign Language		Sign	Signed	205,000		deaf1237	Yes	
 zin	zinz1238	Zinza			Latn	205,000		west2841	Yes	
 kxv	kuvi1243	Jatapu	kuvi		Latn	203,205		kuik1244	Yes	
 cyo	cuyo1237	Cuyonon	Koyonon		Latn	202,117		kuya1251	Yes	
@@ -1027,7 +1027,7 @@ lam	lamb1271	Lamba			Latn	200,285		bisa1262	Yes
 ogo	khan1278	Khana			Latn	200,001		taik1252	Yes	
 ank	goem1240	Goemai			Latn	200,000		anga1311	Yes	
 bww	bwaa1238	Bwa			Latn	200,000		paga1238	Yes	
-bzs	braz1236	Brazilian Sign Language		Sign	Zxxx	200,000		lsfi1234	Yes	
+bzs	braz1236	Brazilian Sign Language		Sign	Signed	200,000		lsfi1234	Yes	
 ckl	ciba1236	Cibak			Latn	200,000		bura1297	Yes	
 daq	dand1238	Dandami Maria			Deva	200,000		hill1257	Yes	
 eke	ekit1246	Ekit			Latn	200,000		ekit1245	Yes	
@@ -1101,7 +1101,7 @@ hac	gura1251	Gurani			Arab	180,000		gora1267	Yes
 kel	kela1254	Kela (DRC)			Latn	180,000		yela1238	Yes	
 kez	kuke1242	Kukele			Latn	180,000		kuke1241	Yes	
 ktp	kadu1253	Kaduo			Plrd	180,000		bika1252	Yes	
-mzc	mada1271	Madagascar Sign Language		Sign	Zxxx	180,000		norw1261	Yes	
+mzc	mada1271	Madagascar Sign Language		Sign	Signed	180,000		norw1261	Yes	
 psi	sout2672	Southeast Pashayi			Arab	180,000		east2322	Yes	
 slp	lama1277	Lamaholot	bahasa Lamaholot		Latn	180,000		flor1242	Yes	
 las	lama1275	Lama (Togo)			Latn	177,000		kabi1265	Yes	
@@ -1192,7 +1192,7 @@ sur	mwag1236	Mwaghavul			Latn	150,000		west2717	Yes
 tbt	temb1270	Tembo (Kitembo)			Latn	150,000		fore1272	Yes	
 tnt	tont1239	Tontemboan			Latn	150,000		nort2886	Yes	
 ukw	ukwu1241	Ukwuani-Aboh-Ndoni			Latn	150,000		cent2417	Yes	
-ysm	yang1309	Myanmar Sign Language		Sign	Zxxx	150,000		myan1234	Yes	
+ysm	yang1309	Myanmar Sign Language		Sign	Signed	150,000		myan1234	Yes	
 ywu	wume1235	Wumeng Nasu			Plrd	150,000		nesu1235	Yes	
 kfa	koda1255	Kodava	ಕೊಡವ		Knda	149,199		tami1297	Yes	
 xsm	kase1253	Kasem			Latn	149,000		nuna1234	Yes	
@@ -1261,7 +1261,7 @@ kcg	tyap1238	Tyap	Katab	Spoken & Written	Latn	130,000		kata1275	Yes
 lee	lyel1241	Lyélé			Latn	130,000		nort2782	Yes	
 lmp	limb1268	Limbum			Latn	130,000		nkam1238	Yes	
 med	melp1238	Melpa			Latn	130,000		melp1239	Yes	
-mfs	mexi1237	Mexican Sign Language		Sign	Zxxx	130,000		lsfi1234	Yes	
+mfs	mexi1237	Mexican Sign Language		Sign	Signed	130,000		lsfi1234	Yes	
 tui	tupu1244	Tupuri			Latn	130,000		tupu1245	Yes	
 tvd	tsuv1239	Tsuvadi			Latn	130,000		east2739	Yes	
 mri	maor1246	Māori	te reo Māori	Spoken & Written	Latn	129,483		maor1247	Yes	
@@ -1360,7 +1360,7 @@ bpd	band1343	Banda-Banda			Latn	102,000		cent2022	Yes
 gud	yoco1235	Yocoboué Dida			Latn	102,000		dida1245	Yes	
 lai	lamb1272	Lambya			Latn	102,000		nyik1250	Yes	
 mkz	maka1316	Makasae			Latn	102,000		east2520	Yes	
-ssp	span1263	Spanish Sign Language	lengua de signos española	Sign	Zxxx	102,000		nucl1840	Yes	
+ssp	span1263	Spanish Sign Language	lengua de signos española	Sign	Signed	102,000		nucl1840	Yes	
 trw	torw1241	Torwali	توروالی		Arab	102,000		dirs1236	Yes	
 dsq	tada1238	Tadaksahak			Latn	101,800		nort2823	Yes	
 beh	bial1238	Biali			Latn	101,500		otiv1240	Yes	
@@ -1393,7 +1393,7 @@ duh	dung1251	Dungra Bhil			Deva	100,000		bhil1254	Yes
 ekg	ekar1243	Ekari	bahasa Ekari		Latn	100,000		meew1234	Yes	
 ema	emai1241	Emai-Iuleha-Ora			Latn	100,000		emai1243	Yes	
 fay	sout2645	Southwestern Fars			Arab	100,000		mode1259	Yes	
-fsl	fren1243	French Sign Language	langue des signes française	Sign	Zxxx	100,000		lsfi1234	Yes	
+fsl	fren1243	French Sign Language	langue des signes française	Sign	Signed	100,000		lsfi1234	Yes	
 gas	adiw1235	Adiwasi Garasia			Gujr	100,000		gara1268	Yes	
 gbo	nort2810	Northern Grebo			Latn	100,000	grb	nort3193	Possibly	But probably want to use macrolanguage
 ggn	east2345	Eastern Gurung				100,000	gvr	guru1261	No	ISO merged this into gvr
@@ -1425,7 +1425,7 @@ nto	ntom1248	Ntomba			Latn	100,000		boli1263	Yes
 oog	ongg1239	Ong				100,000		ongt1234	Yes	
 pli	pali1273	Pali	पालि	Mostly Written	Sinh	100,000		biha1245	Possibly	Actively used by few people, may be hard to disambiguate between liturgial use and active use
 psh	sout2671	Southwest Pashayi			Arab	100,000		west2387	Yes	
-psp	phil1239	Philippine Sign Language		Sign	Zxxx	100,000		asli1244	Yes	
+psp	phil1239	Philippine Sign Language		Sign	Signed	100,000		asli1244	Yes	
 qul	nort2976	North Bolivian Quechua	Apulu qhichwa simi		Latn	100,000	que	boli1262	Possibly	But probably want to use macrolanguage
 qxr	cana1262	Cañar Highland Quichua			Latn	100,000	colo1257	ecua1249	Possibly	But probably want to use macrolanguage
 ruk	chee1238	Che			Latn	100,000		ruku1240	Yes	
@@ -1617,7 +1617,7 @@ akp	siwu1238	Siwu			Latn	71,900		lele1263	Yes
 bfx	bant1293	Bantayanon			Latn	71,600		peri1261	Yes	
 btw	butu1244	Butuanon			Latn	71,500		butu1243	Yes	
 xwl	west2456	Western Xwla Gbe			Latn	71,000		west2934	Yes	
-csr	cost1249	Costa Rican Sign Language		Sign	Zxxx	70,701		asli1244	Yes	
+csr	cost1249	Costa Rican Sign Language		Sign	Signed	70,701		asli1244	Yes	
 fao	faro1244	Faroese	føroyskt	Spoken & Written	Latn	70,401		icel1246	Yes	
 kfc	kond1295	Porja			Telu	70,087		kond1294	Yes	
 slr	sala1264	Salar	撒拉语		Latn	70,001		oghu1243	Yes	
@@ -1685,7 +1685,7 @@ sqt	soqo1240	Soqotri			Arab	64,000		east2766	Yes
 alt	sout2694	Altay	Алтай	Spoken & Written	Cyrl	63,818		east2791	Yes	
 cov	caom1238	Cao Miao				63,600		nort2734	Yes	
 dop	lukp1238	Lukpa			Latn	63,600		kabi1265	Yes	
-xms	moro1242	Moroccan Sign Language		Sign	Zxxx	63,400		asli1244	Yes	
+xms	moro1242	Moroccan Sign Language		Sign	Signed	63,400		asli1244	Yes	
 kbq	kama1370	Kamano			Latn	63,200		kama1374	Yes	
 cme	cerm1238	Cerma			Latn	63,100		kirm1250	Yes	
 dau	dars1235	Dar Sila Daju			Latn	63,100		west2501	Yes	
@@ -1758,7 +1758,7 @@ nnp	wanc1238	Wancho Naga			Wcho	59,670		wanc1241	Yes
 cdm	chep1245	Chepang			Deva	59,225		chep1244	Yes	
 bvu	buki1247	Bukit Malay			Latn	59,000	msa	banj1241	Possibly	But probably want to use macrolanguage
 ria	rian1262	Riang (India)			Latn	59,000		tipp1238	Yes	
-xml	mala1412	Malaysian Sign Language		Sign	Zxxx	58,700		mala1548	Yes	
+xml	mala1412	Malaysian Sign Language		Sign	Signed	58,700		mala1548	Yes	
 bgi	gian1241	Giangan			Latn	58,500		bili1253	Yes	
 bfr	bazi1237	Bazigar				58,200		uncl1493	Yes	
 yeu	yeru1240	Yerukula			Telu	58,065		yeru1242	Yes	
@@ -1796,7 +1796,7 @@ toj	tojo1241	Tojolabal			Latn	54,200		chuj1249	Yes
 blr	blan1242	Blang			Latn	54,000		bula1260	Yes	
 byd	beny1237	Benyadu'			Latn	54,000		beny1238	Yes	
 gid	gida1247	Gidar			Latn	54,000		nort3156	Yes	
-ukl	ukra1235	Ukrainian Sign Language	українська жестова мова	Sign	Zxxx	54,000		cent2419	Yes	
+ukl	ukra1235	Ukrainian Sign Language	українська жестова мова	Sign	Signed	54,000		cent2419	Yes	
 yiz	azhe1235	Azhe				54,000		sani1275	Yes	
 mdy	male1284	Male			Ethi	53,800		nort3161	Yes	
 agr	agua1253	Aguaruna	awajun		Latn	53,400		jiva1245	Yes	
@@ -1825,7 +1825,7 @@ kcz	kono1265	Konongo			Latn	51,000		nyam1286	Yes
 klj	turk1303	Turkic Khalaj	Qalayce		Arab	51,000		comm1245	Yes	
 mkb	malp1246	Mal Paharia			Deva	51,000		gaud1238	Yes	
 pmx	poum1235	Poumei Naga			Latn	51,000		poum1236	Yes	
-tsq	thai1240	Thai Sign Language		Sign	Zxxx	51,000		asli1244	Yes	
+tsq	thai1240	Thai Sign Language		Sign	Signed	51,000		asli1244	Yes	
 bni	bang1354	Bangi			Latn	50,900		boba1250	Yes	
 zmq	mitu1240	Mituku			Latn	50,900		mitu1242	Yes	
 dhw	koch1253	Dhanwar (Nepal)			Deva	50,837		kusw1234	Yes	
@@ -1840,14 +1840,14 @@ bkh	bako1249	Bakoko			Latn	50,000		basa1289	Yes
 bux	bogh1241	Boghom			Latn	50,000		bogh1240	Yes	
 bxr	russ1264	Russia Buriat		Spoken & Written	Cyrl	50,000	bua	buri1258	Probably not	It's just a country variant of the macrolanguage
 cen	cenn1238	Cen			Latn	50,000		izer1242	Yes	
-csn	colo1249	Colombian Sign Language		Sign	Zxxx	50,000		west2886	Yes	
+csn	colo1249	Colombian Sign Language		Sign	Signed	50,000		west2886	Yes	
 cuu	taiy1242	Tai Ya			Lana	50,000		wudi1241	Yes	
 dnt	midg1235	Mid Grand Valley Dani			Latn	50,000		gran1246	Yes	
 dts	toro1252	Toro So Dogon			Latn	50,000		esca1235	Yes	
 dur	diii1241	Dii			Latn	50,000		diic1235	Yes	
 ekr	yace1238	Yace			Latn	50,000		yaty1238	Yes	
 frd	ford1242	Fordata	bahasa Fordata		Latn	50,000		keif1237	Yes	
-gsg	germ1281	German Sign Language		Sign	Zxxx	50,000		dgsi1234	Yes	
+gsg	germ1281	German Sign Language		Sign	Signed	50,000		dgsi1234	Yes	
 hrm	horn1235	Horned Miao			Latn	50,000	hmn	firs1234	Possibly	But probably want to use macrolanguage
 ijj	edei1245	Ede Ije			Latn	50,000		sout3186	Yes	
 ikl	ikul1238	Ikulu			Latn	50,000		nucl1832	Yes	
@@ -1926,7 +1926,7 @@ ccl	cutc1238	Cutchi-Swahili			Latn	45,000		momb1256	Yes
 cdr	cind1241	Cinda-Regi-Tiyal			Latn	45,000		kamu1262	Yes	
 ero	horp1239	Horpa				45,000		horp1240	Yes	
 hmt	hamt1247	Hamtai			Latn	45,000		kapa1251	Yes	
-hos	hoch1237	Ho Chi Minh City Sign Language		Sign	Zxxx	45,000		viet1253	Yes	
+hos	hoch1237	Ho Chi Minh City Sign Language		Sign	Signed	45,000		viet1253	Yes	
 kew	west2599	West Kewa			Latn	45,000		kewa1250	Yes	
 kjs	east2516	East Kewa			Latn	45,000		sout3252	Yes	
 mbo	mboc1235	Mbo (Cameroon)			Latn	45,000		mane1268	Yes	
@@ -1975,7 +1975,7 @@ mzw	degg1238	Deg			Latn	42,900		chak1272	Yes
 amf	hame1242	Hamer-Banna			Latn	42,800		hame1241	Yes	
 nkh	khez1235	Khezha Naga			Latn	42,794		anga1244	Yes	
 nwb	nyab1255	Nyabwa			Latn	42,700		weea1234	Yes	
-gss	gree1271	Greek Sign Language		Sign	Zxxx	42,600		lsfi1234	Yes	
+gss	gree1271	Greek Sign Language		Sign	Signed	42,600		lsfi1234	Yes	
 bqk	band1342	Banda-Mbrès			Latn	42,500		cent2022	Yes	
 imo	imbo1238	Imbongu			Latn	42,500		auag1234	Yes	
 mgb	mara1396	Mararit			Latn	42,400		tama1329	Yes	
@@ -2010,13 +2010,13 @@ bau	bada1258	Bada (Nigeria)			Latn	40,000		jara1275	Yes
 bbu	kulu1255	Kulung (Nigeria)			Latn	40,000		nige1254	Yes	
 beq	beem1239	Beembe			Latn	40,000		kiko1234	Yes	
 bfc	nort2724	Northern Bai			Latn	40,000		baic1239	Yes	
-bfi	brit1235	British Sign Language	British Sign Language	Sign	Zxxx	40,000		banz1243	Yes	
+bfi	brit1235	British Sign Language	British Sign Language	Sign	Signed	40,000		banz1243	Yes	
 bip	bila1255	Bila			Latn	40,000		bila1259	Yes	
 bkc	baka1272	Baka (Cameroon)			Latn	40,000		baka1278	Yes	
 czt	zotu1235	Zotung Chin			Latn	40,000		mara1381	Yes	
 etx	eten1239	Eten			Latn	40,000		iten1244	Yes	
 geh	hutt1235	Hutterite German	Hutterisch		Latn	40,000		glob1242	Yes	
-hds	hond1239	Honduras Sign Language		Sign	Zxxx	40,000		cost1251	Yes	
+hds	hond1239	Honduras Sign Language		Sign	Signed	40,000		cost1251	Yes	
 hed	herd1236	Herdé			Latn	40,000		hede1234	Yes	
 hia	lama1288	Lamang			Latn	40,000		lama1287	Yes	
 hlt	ngal1291	Matu Chin			Latn	40,000		choi1241	Yes	
@@ -2054,7 +2054,7 @@ swj	sira1266	Sira			Latn	39,400		sira1270	Yes
 bmw	bomw1238	Bomwali			Latn	39,300		maka1323	Yes	
 oks	okoe1238	Oko-Eni-Osayen			Latn	39,300		benu1247	Yes	
 bbk	baba1266	Babanki			Latn	39,000		cent2275	Yes	
-hab	hano1243	Hanoi Sign Language		Sign	Zxxx	39,000		viet1253	Yes	
+hab	hano1243	Hanoi Sign Language		Sign	Signed	39,000		viet1253	Yes	
 meu	motu1246	Motu			Latn	39,000		west2850	Yes	
 wgi	nucl1620	Wahgi			Latn	39,000		wahg1249	Yes	
 kkw	teke1280	Teke-Kukuya			Latn	38,800		inte1264	Yes	
@@ -2065,7 +2065,7 @@ bil	bile1244	Bile			Latn	38,000		numa1256	Yes
 bnn	bunu1267	Bunun	Bunun		Latn	38,000		aust1307	Yes	
 dec	dagi1241	Dagik			Latn	38,000		ngil1241	Yes	
 jle	ngil1242	Ngile			Latn	38,000		ngil1241	Yes	
-lbs	liby1235	Libyan Sign Language		Sign	Zxxx	38,000		arab1398	Yes	
+lbs	liby1235	Libyan Sign Language		Sign	Signed	38,000		arab1398	Yes	
 lno	lang1322	Lango (Sudan)				38,000		lotu1249	Probably not	Split into separate language codes
 sep	sici1249	Sìcìté Sénoufo			Latn	38,000		supy1238	Yes	
 sym	maya1281	Maya Samo			Latn	38,000		mand1437	Yes	
@@ -2086,7 +2086,7 @@ ngj	ngie1242	Ngie			Latn	37,000		ngie1243	Yes
 ott	temo1245	Temoaya Otomi			Latn	37,000	oto	sout3168	Yes	
 sbx	sebe1242	Seberuang			Latn	37,000		iban1270	Yes	
 tuz	turk1306	Turka			Latn	37,000		kirm1250	Yes	
-wbs	kolk1234	West Bengal Sign Language		Sign	Zxxx	37,000		indi1237	Yes	
+wbs	kolk1234	West Bengal Sign Language		Sign	Signed	37,000		indi1237	Yes	
 ges	gese1240	Geser-Gorom			Latn	36,500		gese1241	Yes	
 krn	sapo1251	Sapo			Latn	36,400		guer1244	Yes	
 snf	noon1242	Noon			Latn	36,300		noon1244	Yes	
@@ -2233,7 +2233,7 @@ npb	nupb1238	Nupbikha			Tibt	30,000		book1242	Yes
 opa	okpa1238	Okpamheri			Latn	30,000		sout3171	Yes	
 pbi	park1239	Parkwa			Latn	30,000		podo1243	Yes	
 pel	peka1242	Pekal	bahasa Pekal		Latn	30,000	msa	mina1280	Possibly	But probably want to use macrolanguage
-pgz	papu1255	Papua New Guinean Sign Language		Sign	Zxxx	30,000		aust1310	Yes	
+pgz	papu1255	Papua New Guinean Sign Language		Sign	Signed	30,000		aust1310	Yes	
 png	pong1250	Pongu			Latn	30,000		shir1275	Yes	
 qvc	caja1238	Cajamarca Quechua	Kashamarkapa qichwashimi		Latn	30,000	que	caja1240	Possibly	But probably want to use macrolanguage
 set	nucl1632	Sentani			Latn	30,000		sent1262	Yes	
@@ -2242,7 +2242,7 @@ sjo	xibe1242	Xibe	ᠰᡞᠪᡝ ᡤᡞᠰᡠᠨ			30,000		manc1251	Yes
 smr	sime1241	Simeulue	bahasa Simeulue		Latn	30,000		suma1277	Yes	
 soz	temi1247	Temi			Latn	30,000		giku1234	Yes	
 ssl	west2465	Western Sisaala			Latn	30,000		nort3229	Yes	
-swl	swed1236	Swedish Sign Language	svenskt teckenspråk	Sign	Zxxx	30,000		swed1257	Yes	
+swl	swed1236	Swedish Sign Language	svenskt teckenspråk	Sign	Signed	30,000		swed1257	Yes	
 tmn	tama1335	Taman (Indonesia)			Latn	30,000		tama1334	Yes	
 tng	toba1280	Tobanga			Latn	30,000		east2722	Yes	
 tul	tula1252	Tula			Latn	30,000		nucl1371	Yes	
@@ -2254,7 +2254,7 @@ wun	bung1265	Bungu			Latn	30,000		mwik1240	Yes
 yik	dong1286	Dongshanba Lalo				30,000		core1258	Yes	
 yip	phol1235	Pholo				30,000		lolo1267	Yes	
 yiq	miqi1235	Miqie				30,000		lipo1244	Yes	
-ysl	yugo1238	Yugoslavian Sign Language		Sign	Zxxx	30,000		yugo1239	Yes	
+ysl	yugo1238	Yugoslavian Sign Language		Sign	Signed	30,000		yugo1239	Yes	
 zkd	kadu1254	Kadu			Latn	30,000		kado1242	Yes	
 mbt	mati1250	Matigsalug Manobo			Latn	29,970		cent2088	Yes	
 bjg	bidy1244	Bidyogo			Latn	29,900		bijo1239	Yes	
@@ -2287,7 +2287,7 @@ hol	holu1245	Holu			Latn	28,200		holu1246	Yes
 lbo	lave1248	Laven			Laoo	28,100		love1237	Yes	
 wba	wara1303	Warao			Latn	28,100			Yes	
 bds	buru1320	Burunge			Latn	28,000		west2720	Yes	
-gsm	guat1249	Guatemalan Sign Language		Sign	Zxxx	28,000		deaf1237	Yes	
+gsm	guat1249	Guatemalan Sign Language		Sign	Signed	28,000		deaf1237	Yes	
 hmy	sout1555	Southern Guiyang Miao			Latn	28,000	hmn	guiy1235	Possibly	But probably want to use macrolanguage
 lkr	pari1256	Päri			Latn	28,000		nort2814	Yes	
 pae	pagi1243	Pagibete			Latn	28,000		paga1238	Yes	
@@ -2501,12 +2501,12 @@ caa	chor1273	Chortí	čorti'		Latn	21,556		chor1272	Yes
 rou	rung1258	Runga			Latn	21,500		rung1257	Yes	
 ukp	ukpe1247	Ukpe-Bayobiri			Latn	21,500		bukp1239	Yes	
 bmv	bumm1238	Bum			Latn	21,400		mmen1239	Yes	
-tse	tuni1249	Tunisian Sign Language		Sign	Zxxx	21,200		ital1288	Yes	
+tse	tuni1249	Tunisian Sign Language		Sign	Signed	21,200		ital1288	Yes	
 ygr	yaga1260	Yagaria			Latn	21,100		kama1374	Yes	
 avi	avik1243	Avikam			Latn	21,000		avik1242	Yes	
 bfn	buna1278	Bunak	bahasa Bunak		Latn	21,000		timo1261	Yes	
 bkp	boko1263	Boko (DRC)			Latn	21,000		loba1240	Yes	
-csg	chil1264	Chilean Sign Language		Sign	Zxxx	21,000		deaf1237	Yes	
+csg	chil1264	Chilean Sign Language		Sign	Signed	21,000		deaf1237	Yes	
 cwb	main1272	Maindo			Latn	21,000		chuw1240	Yes	
 dgd	daga1272	Dagaari Dioula			Latn	21,000		sout3209	Yes	
 gti	gbat1238	Gbati-ri				21,000	nyc	book1242	No	ISO merged this into nyc
@@ -2608,7 +2608,7 @@ ots	esta1236	Estado de México Otomi			Latn	20,000	oto	sout3168	Yes
 oua	taga1278	Tagargrent				20,000		ouar1239	Yes	
 pea	pera1256	Peranakan Indonesian			Latn	20,000		beta1260	Yes	
 ppk	umaa1242	Uma			Latn	20,000		umas1234	Yes	
-psl	puer1237	Puerto Rican Sign Language		Sign	Zxxx	20,000		asli1244	Yes	
+psl	puer1237	Puerto Rican Sign Language		Sign	Signed	20,000		asli1244	Yes	
 pye	pyek1235	Pye Krumen			Latn	20,000		ivor1240	Yes	
 quf	lamb1276	Lambayeque Quechua	Inkawasi-Kañaris qichwashimi		Latn	20,000	que	caja1240	Possibly	But probably want to use macrolanguage
 quw	tena1240	Tena Lowland Quichua			Latn	20,000	colo1257	orie1242	Possibly	But probably want to use macrolanguage
@@ -2625,7 +2625,7 @@ tmm	tait1248	Tai Thanh			Latn	20,000		whit1265	Yes
 tnw	tons1239	Tonsawang	bahasa Tonsawang		Latn	20,000		mina1272	Yes	
 trv	taro1264	Taroko	Kari Seediq	Spoken & Written	Latn	20,000		atay1246	Yes	
 tsc	tswa1255	Tswa			Latn	20,000		tswa1254	Yes	
-tss	taiw1241	Taiwan Sign Language	台灣手語	Sign	Zxxx	20,000		jsli1234	Yes	
+tss	taiw1241	Taiwan Sign Language	台灣手語	Sign	Signed	20,000		jsli1234	Yes	
 twy	tawo1243	Tawoyan	bahasa Taboyan		Latn	20,000		nort2888	Yes	
 txq	tiii1241	Tii	bahasa Tii		Latn	20,000		east2858	Yes	
 umm	umon1238	Umon			Latn	20,000		kohu1243	Yes	
@@ -2689,7 +2689,7 @@ yaq	yaqu1251	Yaqui			Latn	18,240		cahi1243	Yes
 hrk	haru1244	Haruku			Latn	18,200		hatu1247	Yes	
 ani	andi1255	Andi			Cyrl	18,133		andi1254	Yes	
 bdi	buru1301	Burun			Latn	18,000		buru1328	Yes	
-csc	cata1241	Llengua de Signes Catalana	llengua de signes catalana	Sign	Zxxx	18,000		nucl1840	Yes	
+csc	cata1241	Llengua de Signes Catalana	llengua de signes catalana	Sign	Signed	18,000		nucl1840	Yes	
 itt	maen1235	Maeng Itneg			Latn	18,000		maen1236	Yes	
 jwi	jwir1241	Jwira-Pepesa			Latn	18,000		jwir1243	Yes	
 kcf	ukaa1243	Ukaan			Latn	18,000		benu1247	Yes	
@@ -2837,7 +2837,7 @@ nlx	naha1261	Nahali			Deva	15,000		paur1240	Yes
 nsv	sout3128	Southwestern Nisu			Yiii	15,000		book1242	Yes	
 oyd	oyda1235	Oyda			Latn	15,000		cent2046	Yes	
 prf	para1306	Paranan			Latn	15,000		para1320	Yes	
-pys	para1318	Paraguayan Sign Language		Sign	Zxxx	15,000		deaf1237	Yes	
+pys	para1318	Paraguayan Sign Language		Sign	Signed	15,000		deaf1237	Yes	
 qvs	sanm1289	San Martín Quechua	llakwash runasimi		Latn	15,000	que	sanm1306	Possibly	But probably want to use macrolanguage
 rro	waim1251	Waima			Latn	15,000		nucl1506	Yes	
 sdb	shab1251	Shabak			Arab	15,000		shab1250	Yes	
@@ -2957,7 +2957,7 @@ ngt	ngeq1245	Ngeq			Laoo	12,900		taoi1247	Yes
 nou	ewag1241	Ewage-Notu			Latn	12,900		coas1297	Yes	
 hsb	uppe1395	Upper Sorbian	Hornjoserbšćina	Spoken & Written	Latn	12,889	wen	sorb1249	Yes	
 blh	kuwa1247	Kuwaa			Latn	12,800		grea1300	Yes	
-sqs	sril1237	Sri Lankan Sign Language		Sign	Zxxx	12,800		bsli1234	Yes	
+sqs	sril1237	Sri Lankan Sign Language		Sign	Signed	12,800		bsli1234	Yes	
 nra	ngom1270	Ngom			Latn	12,770		akel1234	Yes	
 dry	dara1250	Darai			Deva	12,747		kusw1234	Yes	
 pbp	bady1239	Badyara			Latn	12,730		jaad1234	Yes	
@@ -2998,7 +2998,7 @@ bqt	bamu1254	Bamukumbit			Latn	12,000		nunm1234	Yes
 buk	buga1250	Bugawac			Latn	12,000		nort2858	Yes	
 cek	east2779	Eastern Khumi Chin			Latn	12,000		khom1240	Yes	
 cjo	ashe1273	Ashéninka Pajonal			Latn	12,000		ashe1274	Yes	
-cse	czec1253	Czech Sign Language		Sign	Zxxx	12,000		nucl1839	Yes	
+cse	czec1253	Czech Sign Language		Sign	Signed	12,000		nucl1839	Yes	
 cua	cuaa1241	Cua			Latn	12,000		bahn1264	Yes	
 doa	domm1246	Dom			Latn	12,000		kuma1279	Yes	
 epi	epie1238	Epie			Latn	12,000		delt1252	Yes	
@@ -3138,8 +3138,8 @@ kyf	kouy1238	Kouya			Latn	10,100		east2416	Yes
 ncb	cent1990	Central Nicobarese			Latn	10,100		cent2305	Yes	
 aax	mand1444	Mandobo Atas			Latn	10,000		mand1473	Yes	
 adb	adab1235	Adabe	Adabe		Latn	10,000		book1242	Yes	
-aed	arge1236	Argentine Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
-aen	arme1259	Armenian Sign Language		Sign	Zxxx	10,000		auxi1235	Yes	
+aed	arge1236	Argentine Sign Language		Sign	Signed	10,000		deaf1237	Yes	
+aen	arme1259	Armenian Sign Language		Sign	Signed	10,000		auxi1235	Yes	
 aia	aros1241	Arosi			Latn	10,000		sanc1243	Yes	
 alk	alak1253	Alak			Laoo	10,000		west2399	Yes	
 aot	aton1241	A'tong			Beng	10,000		koch1249	Yes	
@@ -3155,15 +3155,15 @@ bhs	buwa1243	Buwal			Latn	10,000		buwa1244	Yes
 bkk	brok1247	Brokskat			Tibt	10,000		shin1270	Yes	
 bma	lame1257	Lame			Latn	10,000		nige1254	Yes	
 bmu	buru1306	Somba-Siawari			Latn	10,000		koso1246	Yes	
-bog	bama1249	Bamako Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+bog	bama1249	Bamako Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 bpx	paly1238	Palya Bareli			Deva	10,000		rath1244	Yes	
 bqh	baim1244	Baima				10,000		east2771	Yes	
-bqn	bulg1240	Bulgarian Sign Language	Български жестомимичен език	Sign	Zxxx	10,000		cent2306	Yes	
+bqn	bulg1240	Bulgarian Sign Language	Български жестомимичен език	Sign	Signed	10,000		cent2306	Yes	
 brr	bira1254	Birao			Latn	10,000		sout2854	Yes	
 bui	bong1284	Bongili			Latn	10,000		moki1244	Yes	
 bvc	bael1237	Baelelea			Latn	10,000		nort3284	Yes	
 bvd	baeg1237	Baeggu			Latn	10,000		nort3284	Yes	
-bvl	boli1236	Bolivian Sign Language		Sign	Zxxx	10,000		west2886	Yes	
+bvl	boli1236	Bolivian Sign Language		Sign	Signed	10,000		west2886	Yes	
 bvw	boga1251	Boga			Latn	10,000		east2649	Yes	
 bvy	bayb1234	Baybayanon			Latn	10,000		sama1315	Yes	
 bwz	bwis1242	Bwisi			Latn	10,000		lumb1252	Yes	
@@ -3174,7 +3174,7 @@ ckm	chak1265	Chakavian			Latn	10,000		sout1528	Yes
 ckq	kaja1254	Kajakse			Latn	10,000		mubi1247	Yes	
 cmi	embe1262	Emberá-Chamí			Latn	10,000		uppe1440	Yes	
 cnr	mont1282	Montenegrin	crnogorski		Latn	10,000	hbs	east2821	Yes, with caveat	Some countries only group this as "Serbo-Croatian" and the member languages are largely intelligible but for political reasons they are separated. Try to categorize these separately if possible
-csf	cuba1235	Cuba Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+csf	cuba1235	Cuba Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 dbj	idaa1241	Ida'an			Latn	10,000		nort3172	Yes	
 deg	dege1246	Degema			Latn	10,000		dege1249	Yes	
 deq	dend1242	Dendi (Central African Republic)			Latn	10,000		nucl1737	Yes	
@@ -3183,7 +3183,7 @@ dgu	dega1238	Degaru				10,000		book1242	Probably not	Declared Non-existent from 
 dkg	vagh1248	Kadung			Latn	10,000		vagh1250	Yes	
 dma	duma1253	Duma			Latn	10,000		ndja1235	Yes	
 dmx	dema1235	Dema			Latn	10,000		unun9914	Yes	
-doq	domi1236	Dominican Sign Language		Sign	Zxxx	10,000		amer1258	Yes	
+doq	domi1236	Dominican Sign Language		Sign	Signed	10,000		amer1258	Yes	
 drt	dren1238	Drents			Latn	10,000		west2356	Yes	
 dwk	dawi1234	Dawik Kui			Orya	10,000		pend1244	Yes	
 dwz	dhan1265	Dewas Rai			Deva	10,000		kusw1234	Yes	
@@ -3201,14 +3201,14 @@ gha	ghad1239	Ghadamès			Arab	10,000		berb1260	Yes
 gho	ghom1257	Ghomara			Tfng	10,000		nort3248	Yes	
 ghr	gher1238	Ghera			Arab	10,000		gher1240	Yes	
 gii	giri1245	Girirra				10,000		east2653	Yes	
-gus	guin1250	Guinean Sign Language		Sign	Zxxx	10,000		asli1244	Yes	
+gus	guin1250	Guinean Sign Language		Sign	Signed	10,000		asli1244	Yes	
 hbn	heib1243	Heiban			Latn	10,000		eban1242	Yes	
 hca	anda1280	Andaman Creole Hindi				10,000		hind1270	Yes	
 hkh	khah1234	Khah			Arab	10,000		kash1285	Yes	
 hma	sout1556	Southern Mashan Miao			Latn	10,000	hmn	mash1238	Possibly	But probably want to use macrolanguage
 hng	hung1280	Hungu			Latn	10,000		sout3354	Yes	
-hps	hawa1235	Hawai'i Pidgin Sign Language	Hoailona ʻŌlelo o Hawaiʻi	Sign	Zxxx	10,000		deaf1237	Yes	
-hsl	haus1246	Hausa Sign Language	Maganar hannu	Sign	Zxxx	10,000		deaf1237	Yes	
+hps	hawa1235	Hawai'i Pidgin Sign Language	Hoailona ʻŌlelo o Hawaiʻi	Sign	Signed	10,000		deaf1237	Yes	
+hsl	haus1246	Hausa Sign Language	Maganar hannu	Sign	Signed	10,000		deaf1237	Yes	
 ibe	akpe1248	Akpes			Latn	10,000		akpe1249	Yes	
 ibn	ibin1241	Ibino			Latn	10,000		ibin1242	Yes	
 ifm	teke1274	Teke-Fuumu			Latn	10,000		inte1264	Yes	
@@ -3217,16 +3217,16 @@ imt	imot1234	Imotong			Latn	10,000		lang1322	Yes
 ino	inok1238	Inoke-Yate			Latn	10,000		kama1374	Yes	
 irr	irrr1240	Ir				10,000		book1242	Yes	
 iry	iray1237	Iraya			Latn	10,000		nort2873	Yes	
-ise	ital1275	Italian Sign Language		Sign	Zxxx	10,000		ital1288	Yes	
-isg	iris1235	Irish Sign Language	Teanga Chomharthaíochta na hÉireann	Sign	Zxxx	10,000		lsfi1234	Yes	
-isr	isra1236	Israeli Sign Language		Sign	Zxxx	10,000		dgsi1234	Yes	
+ise	ital1275	Italian Sign Language		Sign	Signed	10,000		ital1288	Yes	
+isg	iris1235	Irish Sign Language	Teanga Chomharthaíochta na hÉireann	Sign	Signed	10,000		lsfi1234	Yes	
+isr	isra1236	Israeli Sign Language		Sign	Signed	10,000		dgsi1234	Yes	
 iyx	yaka1274	Yaka (Congo)			Latn	10,000		laal1244	Yes	
 jaq	yaqa1246	Yaqay			Latn	10,000		yaqa1245	Yes	
 jbm	biji1246	Bijim			Latn	10,000		vagh1250	Yes	
 jim	jimi1254	Jimi (Cameroon)			Latn	10,000		gude1248	Yes	
 jiu	youl1235	Youle Jinuo			Latn	10,000		jino1236	Yes	
 job	joba1238	Joba			Latn	10,000		fuli1242	Yes	
-jos	jord1238	Jordanian Sign Language	لغة الإشارة الأردنية	Sign	Zxxx	10,000		leva1240	Yes	
+jos	jord1238	Jordanian Sign Language	لغة الإشارة الأردنية	Sign	Signed	10,000		leva1240	Yes	
 kbx	apma1241	Ap Ma			Latn	10,000		east2864	Yes	
 kci	kama1358	Kamantan			Latn	10,000		gyon1234	Yes	
 kem	kema1243	Kemak	bahasa Kemak		Latn	10,000		west2547	Yes	
@@ -3239,7 +3239,7 @@ kpw	kobo1249	Kobon			Latn	10,000		kala1404	Yes
 ksq	kwaa1269	Kwaami			Latn	10,000		kwam1256	Yes	
 kth	kara1484	Karanga			Latn	10,000		nucl1441	Yes	
 kvb	kubu1239	Kubu	bahasa Kubu		Latn	10,000	msa	cent2391	Possibly	But probably want to use macrolanguage
-kvk	kore1273	Korean Sign Language	한국 수화 언어	Sign	Zxxx	10,000		jsli1234	Yes	
+kvk	kore1273	Korean Sign Language	한국 수화 언어	Sign	Signed	10,000		jsli1234	Yes	
 kwj	kwan1278	Kwanga			Latn	10,000		kwan1286	Yes	
 kwu	kwak1266	Kwakum			Latn	10,000		maka1327	Yes	
 kxf	manu1255	Manumanaw Karen			Mymr	10,000		kaya1316	Yes	
@@ -3260,12 +3260,12 @@ lmk	lamk1238	Lamkang			Latn	10,000		anal1240	Yes
 loo	lomb1260	Lombo			Latn	10,000		kele1265	Yes	
 lou	loui1240	Louisiana Creole French	Kouri-Vini		Latn	10,000		circ1240	Yes	
 lqr	logi1239	Logir			Latn	10,000		lang1322	Yes	
-lsb	buru1325	Burundian Sign Language		Sign	Zxxx	10,000		amer1248	Yes	
-lso	laos1235	Laos Sign Language		Sign	Zxxx	10,000		book1242	Yes	
+lsb	buru1325	Burundian Sign Language		Sign	Signed	10,000		amer1248	Yes	
+lso	laos1235	Laos Sign Language		Sign	Signed	10,000		book1242	Yes	
 lth	labw1238	Thur			Latn	10,000		acol1236	Yes	
 lur	laur1249	Laura	bahasa Laura		Latn	10,000		weje1237	Yes	
 lvl	lwel1234	Lwel			Latn	10,000		lwer1234	Yes	
-lws	mala1549	Malawian Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+lws	mala1549	Malawian Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 mbf	baba1267	Baba Malay			Latn	10,000		vehi1234	Yes	
 mcq	esee1247	Ese			Latn	10,000		bara1376	Yes	
 meq	mere1246	Merey			Latn	10,000		dugw1240	Yes	
@@ -3276,11 +3276,11 @@ mjb	makl1245	Makalero			Latn	10,000		maka1316	Yes
 mlw	molo1266	Moloko			Latn	10,000		toko1243	Yes	
 mps	dadi1250	Dadibi			Latn	10,000		tebe1251	Yes	
 mqu	mand1425	Mandari			Latn	10,000		bari1283	Yes	
-msr	mong1264	Mongolian Sign Language		Sign	Zxxx	10,000		nucl1824	Yes	
+msr	mong1264	Mongolian Sign Language		Sign	Signed	10,000		nucl1824	Yes	
 mvd	mamb1305	Mamboru	bahasa Mamboru		Latn	10,000		kamb1320	Yes	
 mvm		Muya				10,000			Probably not	Split into separate language codes
 mvo	maro1244	Marovo			Latn	10,000		maro1247	Yes	
-mzy	moza1235	Mozambican Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+mzy	moza1235	Mozambican Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 ncq	nort3270	Northern Katang			Laoo	10,000		kata1264	Yes	
 ndx	ndug1245	Nduga			Latn	10,000		ngal1299	Yes	
 ngw	ngwa1251	Ngwaba			Latn	10,000		bium1271	Yes	
@@ -3289,7 +3289,7 @@ nkv	nyik1246	Nyika (Malawi and Zambia)			Latn	10,000		cent2285	Yes
 nml	ndem1249	Ndemli			Latn	10,000		narr1282	Yes	
 nnn	nget1241	Ngete			Latn	10,000		hede1234	Yes	
 nnz	ndan1241	Nda'nda'			Latn	10,000		east2862	Yes	
-nsi	nige1240	Nigerian Sign Language		Sign	Zxxx	10,000		amer1258	Yes	
+nsi	nige1240	Nigerian Sign Language		Sign	Signed	10,000		amer1258	Yes	
 nyr	nyih1239	Nyiha (Malawi)			Latn	10,000		mboz1234	Yes	
 ofu	efut1242	Efutop			Latn	10,000		ndee1247	Yes	
 ogg	ogbo1242	Ogbogolo			Latn	10,000		uncl1542	Yes	
@@ -3310,30 +3310,30 @@ phl	phal1254	Phalura	پالُولہ		Arab	10,000		palu1255	Yes
 phm	phim1238	Phimbi			Latn	10,000		sena1270	Yes	
 ple	palu1252	Palu'e	bahasa Palue		Latn	10,000		ngad1265	Yes	
 pnd	mpin1234	Mpinda			Latn	10,000		mbun1247	Yes	
-prl	peru1235	Peruvian Sign Language		Sign	Zxxx	10,000		peru1236	Yes	
-psc	pers1244	Persian Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+prl	peru1235	Peruvian Sign Language		Sign	Signed	10,000		peru1236	Yes	
+psc	pers1244	Persian Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 pze	polc1243	Pesse			Latn	10,000		polc1245	Yes	
 qvo	napo1242	Napo Lowland Quechua			Latn	10,000	colo1257	orie1242	Possibly	But probably want to use macrolanguage
 qvz	nort2973	Northern Pastaza Quichua			Latn	10,000	colo1257	past1249	Possibly	But probably want to use macrolanguage
 qxa	chiq1249	Chiquián Ancash Quechua			Latn	10,000	que	apam1237	Possibly	But probably want to use macrolanguage
 qxt	sant1433	Santa Ana de Tusi Pasco Quechua			Latn	10,000	que	yana1272	Possibly	But probably want to use macrolanguage
-rms	roma1324	Romanian Sign Language		Sign	Zxxx	10,000		cent2306	Yes	
+rms	roma1324	Romanian Sign Language		Sign	Signed	10,000		cent2306	Yes	
 rsk	pann1240	Ruthenian	Руски	Spoken & Written	Cyrl	10,000		rusy1239	Yes	
-rsn	rwan1246	Rwandan Sign Language		Sign	Zxxx	10,000		unun9986	Yes	
+rsn	rwan1246	Rwandan Sign Language		Sign	Signed	10,000		unun9986	Yes	
 ryn	nort2935	Northern Amami-Oshima				10,000		oshi1235	Yes	
 sct	sout3251	Southern Katang			Laoo	10,000		kata1264	Yes	
-sdl	saud1238	Saudi Arabian Sign Language		Sign	Zxxx	10,000		arab1398	Yes	
+sdl	saud1238	Saudi Arabian Sign Language		Sign	Signed	10,000		arab1398	Yes	
 sdq	nucl1557	Semandang	bahasa Kualan-Semandang		Latn	10,000		sema1269	Yes	
 sea	sema1266	Semai			Latn	10,000		seno1278	Yes	
 sgi	suga1248	Suga			Latn	10,000		niza1234	Yes	
 sgs	samo1265	Samogitian	Žemaitiu ruoda	Spoken & Written	Latn	10,000		lith1251	Yes	
-sgx	sier1246	Sierra Leone Sign Language		Sign	Zxxx	10,000		asli1244	Yes	
+sgx	sier1246	Sierra Leone Sign Language		Sign	Signed	10,000		asli1244	Yes	
 smv	samv1238	Samvedi				10,000		mode1268	Yes	
 soy	miyo1238	Miyobe			Latn	10,000		uncl1526	Yes	
 sqo	sork1239	Sorkhei			Arab	10,000		komi1276	Yes	
 ssq	cent2074	So'a	bahasa So'a		Latn	10,000		ngad1261	Yes	
 sty	sibe1250	Siberian Tatar			Cyrl	10,000		nort2696	Yes	
-svk	slov1263	Slovakian Sign Language		Sign	Zxxx	10,000		nucl1839	Yes	
+svk	slov1263	Slovakian Sign Language		Sign	Signed	10,000		nucl1839	Yes	
 szb	ngal1298	Ngalum	bahasa Ngalum		Latn	10,000		okkk1242	Yes	
 tal	tall1250	Tal			Latn	10,000		tali1264	Yes	
 tbk	cala1258	Calamian Tagbanwa			Tagb	10,000		kala1389	Yes	
@@ -3342,14 +3342,14 @@ thc	taih1245	Tai Hang Tong				10,000	tpo	book1242	No	ISO merged this into tpo
 tja	taju1238	Tajuasohn			Latn	10,000		klao1242	Yes	
 tpo	taip1250	Tai Pao				10,000		taim1254	Yes	
 tsl	tsun1242	Ts'ün-Lao			Latn	10,000		wenm1239	Yes	
-tsm	turk1288	Turkish Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+tsm	turk1288	Turkish Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 tsr	akei1237	Akei			Latn	10,000		west2845	Yes	
 ttb	gaaa1245	Gaa			Latn	10,000		tiba1234	Yes	
 twd	twen1241	Twents			Latn	10,000		west2356	Yes	
 txa	tomb1244	Tombonuo			Latn	10,000		pait1248	Yes	
 txx	tata1257	Tatana			Latn	10,000		grea1294	Yes	
 uda	udaa1238	Uda			Latn	10,000		enwa1244	Yes	
-ugn	ugan1238	Ugandan Sign Language		Sign	Zxxx	10,000		asli1244	Yes	
+ugn	ugan1238	Ugandan Sign Language		Sign	Signed	10,000		asli1244	Yes	
 ukv	kuku1285	Kuku			Latn	10,000		nucl1796	Yes	
 ulb	uluk1257	Ulukwumi			Latn	10,000		nucl1747	Yes	
 usk	usag1244	Usaghade			Latn	10,000		nucl1838	Yes	
@@ -3357,7 +3357,7 @@ utr	etul1245	Etulo			Latn	10,000		etul1246	Yes
 vem	vemg1240	Vemgo-Mabas			Latn	10,000		lama1287	Yes	
 vin	vinz1238	Vinza			Latn	10,000		rwan1241	Yes	
 vkz	koro1324	Koro Zuba			Latn	10,000		nupo1239	Yes	
-vsl	vene1237	Venezuelan Sign Language		Sign	Zxxx	10,000		span1269	Yes	
+vsl	vene1237	Venezuelan Sign Language		Sign	Signed	10,000		span1269	Yes	
 wkb	kumb1267	Kumbaran				10,000		book1242	Yes	
 wle	wola1253	Wolane			Ethi	10,000		silt1239	Yes	
 wmg	west2417	Western Minyag				10,000		muya1239	Yes	
@@ -3379,12 +3379,12 @@ ypn	anip1235	Ani Phowa				10,000		anil1235	Yes
 yva	nucl1454	Yawa	bahasa Yawa		Latn	10,000		yawa1259	Yes	
 zcd	lasd1234	Las Delicias Zapotec				10,000	zap	rinc1236	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 zhi	zhir1238	Zhire			Latn	10,000		zhir1241	Yes	
-zib	zimb1247	Zimbabwe Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+zib	zimb1247	Zimbabwe Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 zla	zula1235	Zula			Latn	10,000		luba1254	Yes	
 zmx	bomi1238	Bomitaba			Latn	10,000		impf1234	Yes	
 zoc	copa1236	Copainalá Zoque			Latn	10,000		chia1265	Yes	
 zpo	amat1238	Amatlán Zapotec			Latn	10,000	zap	amat1239	Possibly	Will be hard to find specific data, may be better to use macrolanguage
-zsl	zamb1239	Zambian Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
+zsl	zamb1239	Zambian Sign Language		Sign	Signed	10,000		deaf1237	Yes	
 xte	kete1254	Ketengban	bahasa Ketengban		Latn	9,970		east2504	Yes	
 quv	saca1238	Sacapulteco			Latn	9,949		core1251	Yes	
 kxb	krob1245	Krobu			Latn	9,920		tano1248	Yes	
@@ -3410,7 +3410,7 @@ nye	nyen1257	Nyengo			Latn	9,380		sima1262	Yes
 bku	buhi1245	Buhid			Latn	9,370		buhi1244	Yes	
 aws	sout2941	South Awyu	bahasa Awyu selatan		Latn	9,340		awyu1264	Yes	
 vaa	vaag1238	Vaagri Booli			Taml	9,300		bhil1254	Yes	
-pso	poli1259	Polish Sign Language		Sign	Zxxx	9,267		cent2306	Yes	
+pso	poli1259	Polish Sign Language		Sign	Signed	9,267		cent2306	Yes	
 kvu	yinb1236	Yinbaw Karen				9,240		nort2703	Yes	
 kca	khan1273	Khanty	ханты		Cyrl	9,230		nort3264	Yes	
 keb	kele1257	Kélé			Latn	9,230		akel1234	Yes	
@@ -3433,7 +3433,7 @@ dgz	daga1275	Daga			Latn	9,000		sout3381	Yes
 dir	diri1253	Dirim			Latn	9,000		diri1260	Yes	
 gdi	gund1247	Gundi			Latn	9,000		baka1271	Yes	
 gmx	mago1246	Magoma			Latn	9,000		king1258	Yes	
-hks	hong1241	Hong Kong Sign Language		Sign	Zxxx	9,000		nucl1761	Yes	
+hks	hong1241	Hong Kong Sign Language		Sign	Signed	9,000		nucl1761	Yes	
 iti	inla1260	Inlaod Itneg			Latn	9,000		itne1252	Yes	
 lbc	lakk1238	Lakkia				9,000		lakk1237	Yes	
 nmg	kwas1243	Kwasio	Kwasio		Latn	9,000		kwas1245	Yes	
@@ -3521,7 +3521,7 @@ gbj	bodo1267	Bodo Gadaba			Orya	8,000		guto1244	Yes
 gbz	zoro1242	Zoroastrian Dari	دَرِي		Arab	8,000		yazd1241	Yes	
 gmm	gbay1281	Gbaya-Mbodomo			Latn	8,000	gba	mbod1237	Possibly	But probably want to use macrolanguage
 ify	kele1259	Keley-I Kallahan			Latn	8,000		kall1244	Yes	
-inl	indo1291	Indonesian Sign Language	Bahasa Isyarat Indonesia	Sign	Zxxx	8,000		indo1333	Yes	
+inl	indo1291	Indonesian Sign Language	Bahasa Isyarat Indonesia	Sign	Signed	8,000		indo1333	Yes	
 kcp	kang1288	Kanga			Latn	8,000		katc1251	Yes	
 kgq	kamo1255	Kamoro	bahasa Kamoro		Latn	8,000		asma1256	Yes	
 kkf	kala1376	Kalaktang Monpa			Tibt	8,000		tsha1247	Yes	
@@ -3546,7 +3546,7 @@ opm	oksa1245	Oksapmin	nuxule meŋ		Latn	8,000		okok1235	Yes
 plr	pala1342	Palaka Senoufo			Latn	8,000		sout3153	Yes	
 pqa	paaa1242	Pa'a			Latn	8,000		west2998	Yes	
 prn	pras1239	Prasuni				8,000		nuri1243	Yes	
-psr	port1277	Portuguese Sign Language	língua gestual portuguesa	Sign	Zxxx	8,000		swed1257	Yes	
+psr	port1277	Portuguese Sign Language	língua gestual portuguesa	Sign	Signed	8,000		swed1257	Yes	
 rnl	rang1267	Ranglong			Latn	8,000		oldk1252	Yes	
 sak	sake1247	Sake			Latn	8,000		sake1249	Yes	
 slu	sela1259	Selaru			Latn	8,000		sout2890	Yes	
@@ -3583,12 +3583,12 @@ awu	cent2118	Central Awyu			Latn	7,500		mapp1234	Yes
 bqg	bago1245	Bago-Kusuntu			Latn	7,500		bago1247	Yes	
 cae	leha1242	Lehar			Latn	7,500		noon1244	Yes	
 enl	nort2971	Enlhet Norte			Latn	7,500		leng1262	Yes	
-esn	salv1237	Salvadoran Sign Language		Sign	Zxxx	7,500		deaf1237	Yes	
+esn	salv1237	Salvadoran Sign Language		Sign	Signed	7,500		deaf1237	Yes	
 fap	palo1243	Palor			Latn	7,500		palo1244	Yes	
 faz	nort2640	Northwestern Fars			Arab	7,500		book1242	Yes	
 itb	bino1237	Binongan Itneg			Latn	7,500		itne1252	Yes	
 jje	jeju1234	Jejueo	제주말		Hang	7,500		kore1284	Yes	
-jls	jama1263	Jamaican Sign Language		Sign	Zxxx	7,500		amer1258	Yes	
+jls	jama1263	Jamaican Sign Language		Sign	Signed	7,500		amer1258	Yes	
 kgf	kube1244	Kube			Latn	7,500		pind1245	Yes	
 kif	east2354	Eastern Parbate Kham			Deva	7,500		parb1234	Yes	
 lgq	logb1245	Logba			Latn	7,500		nato1234	Yes	
@@ -3621,7 +3621,7 @@ dwa	diri1259	Diri			Latn	7,200		west2712	Yes
 tmp	taim1250	Tai Mène				7,200	tyj	taid1248	No	ISO merged this into tyj
 wos	hang1263	Hanga Hundi			Latn	7,200		ambu1246	Yes	
 noz	nayi1243	Nayi				7,188		dizo1235	Yes	
-asf	aust1271	Australian Sign Language		Sign	Zxxx	7,150		aust1310	Yes	
+asf	aust1271	Australian Sign Language		Sign	Signed	7,150		aust1310	Yes	
 kxj	kulf1238	Kulfa			Latn	7,110		koul1239	Yes	
 ciw	chip1241	Chippewa	Anishinaabemowin		Latn	7,035	oji	cent2252	Possibly	But probably want to use macrolanguage
 bsg	bash1263	Bashkardi				7,030		mode1259	Yes	
@@ -3671,7 +3671,7 @@ skj	seke1240	Seke (Nepal)			Deva	7,000		tama1367	Yes
 spl	sele1250	Selepet			Latn	7,000		sele1251	Yes	
 tex	tenn1246	Tennet			Latn	7,000		didi1256	Yes	
 ttd	taua1242	Tauade			Latn	7,000			Yes	
-ugy	urug1238	Uruguayan Sign Language		Sign	Zxxx	7,000		deaf1237	Yes	
+ugy	urug1238	Uruguayan Sign Language		Sign	Signed	7,000		deaf1237	Yes	
 wha	manu1258	Manusela			Latn	7,000		manu1263	Yes	
 zpm	mixt1426	Mixtepec Zapotec			Latn	7,000	zap	mixt1428	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 nda	ndas1238	Ndasa			Latn	6,990		ndas1240	Yes	
@@ -3742,7 +3742,7 @@ mav	sate1243	Sateré-Mawé			Latn	6,220		mawe1252	Yes
 nac	nara1264	Narak			Latn	6,220		kand1306	Yes	
 cwt	kuwa1246	Kuwaataay			Latn	6,210		kwat1245	Yes	
 ntp	nort2959	Northern Tepehuan			Latn	6,200		tepe1281	Yes	
-fcs	queb1245	Quebec Sign Language	langue des signes québécoise	Sign	Zxxx	6,195		asli1244	Yes	
+fcs	queb1245	Quebec Sign Language	langue des signes québécoise	Sign	Signed	6,195		asli1244	Yes	
 ebk	east2881	Eastern Bontok			Latn	6,170	bnc	fina1242	Possibly	But probably want to use macrolanguage
 mie	ocot1243	Ocotepec Mixtec			Latn	6,170		west2824	Yes	
 nxr	ning1274	Ninggerum	bahasa Kasiwa		Latn	6,150		lowl1259	Yes	
@@ -3775,7 +3775,7 @@ gdg	gada1258	Ga'dang			Latn	6,000		caga1242	Yes
 gji		Geji				6,000			Probably not	Split into separate language codes
 gna	kaan1246	Kaansa			Latn	6,000		gand1254	Yes	
 gqi	guiq1238	Guiqiong				6,000		naqi1236	Yes	
-gse	ghan1235	Ghanaian Sign Language		Sign	Zxxx	6,000		amer1258	Yes	
+gse	ghan1235	Ghanaian Sign Language		Sign	Signed	6,000		amer1258	Yes	
 gun	mbya1239	Mbyá Guaraní			Latn	6,000	grn	tupi1282	Possibly	But probably want to use macrolanguage
 hyw	homs1234	Armenian, Western	արեւմտահայերէն		Armn	6,000		east2768	Yes	
 kdf	mamu1254	Mamusi			Latn	6,000		mamu1256	Yes	
@@ -3802,7 +3802,7 @@ put	puto1237	Putoh			Latn	6,000		book1242	Yes
 qxc	chin1483	Chincha Quechua			Latn	6,000	que	huan1255	Possibly	But probably want to use macrolanguage
 rao	raoo1244	Rao			Latn	6,000		ramu1234	Yes	
 rjg	rajo1237	Rajong			Latn	6,000		waer1238	Yes	
-sgg	swis1240	Swiss-German Sign Language	Deutschschweizer Gebärdensprache	Sign	Zxxx	6,000		dgsi1234	Yes	
+sgg	swis1240	Swiss-German Sign Language	Deutschschweizer Gebärdensprache	Sign	Signed	6,000		dgsi1234	Yes	
 sie	sima1258	Simaa			Latn	6,000		sima1262	Yes	
 sjb	saja1241	Sajau Basap			Latn	6,000		puna1281	Yes	
 skq	sini1242	Sininkere			Latn	6,000		soni1258	Yes	
@@ -3813,7 +3813,7 @@ tgc	tiga1245	Tigak			Latn	6,000		tung1294	Yes
 tjo	tema1243	Temacine Tamazight			Arab	6,000		ouar1239	Yes	
 tkz	taku1254	Takua			Latn	6,000		nort3150	Yes	
 twq	tasa1240	Tasawaq	Tasawaq senni		Latn	6,000		nort2823	Yes	
-vgt	vlaa1235	Vlaamse Gebarentaal	Vlaamse Gebarentaal	Sign	Zxxx	6,000		belg1242	Yes	
+vgt	vlaa1235	Vlaamse Gebarentaal	Vlaamse Gebarentaal	Sign	Signed	6,000		belg1242	Yes	
 viv	idun1242	Iduna			Latn	6,000		bwai1244	Yes	
 wca	yano1262	Yanomámi	Yąnomamɨ		Latn	6,000		yano1267	Yes	
 weo	nort2864	Wemale			Latn	6,000		thre1238	Yes	
@@ -3934,13 +3934,13 @@ dim	dime1235	Dime				5,000		sout2845	Yes
 dme	dugw1239	Dugwor			Latn	5,000		dugw1240	Yes	
 doh	dong1293	Dong	leec Gaeml		Latn	5,000		tiba1234	Yes	
 dre	dolp1239	Dolpo			Tibt	5,000		dolp1238	Yes	
-dsl	dani1246	Danish Sign Language		Sign	Zxxx	5,000		dani1289	Yes	
+dsl	dani1246	Danish Sign Language		Sign	Signed	5,000		dani1289	Yes	
 duw	dusu1267	Dusun Witu	bahasa Dusun Witu		Latn	5,000		sout2919	Yes	
 ebg	ebug1241	Ebughu			Latn	5,000		ebug1242	Yes	
 eki	ekii1241	Eki			Latn	5,000		uncl1543	Yes	
 era	erav1242	Eravallan			Taml	5,000		mala1550	Yes	
 eze	uzek1238	Uzekwe			Latn	5,000		kuke1241	Yes	
-fse	finn1310	Finnish Sign Language		Sign	Zxxx	5,000		finn1319	Yes	
+fse	finn1310	Finnish Sign Language		Sign	Signed	5,000		finn1319	Yes	
 gaw	nobo1238	Nobonob			Latn	5,000		garu1247	Yes	
 gdu	gudu1250	Gudu			Latn	5,000		bium1271	Yes	
 gwg	mooo1239	Moo			Latn	5,000		bamb1263	Yes	
@@ -4016,7 +4016,7 @@ wul	sili1249	Silimo	bahasa Silimo		Latn	5,000		ngal1299	Yes
 xug	kuni1268	Kunigami	山原言葉			5,000		okin1244	Yes	
 yac	pass1247	Pass Valley Yali			Latn	5,000		yali1257	Yes	
 yad	yagu1244	Yagua	Nijyamïï Nikyejaada		Latn	5,000		peba1241	Yes	
-ygs	yoln1234	Yolŋu Sign Language		Sign	Zxxx	5,000		deaf1237	Yes	
+ygs	yoln1234	Yolŋu Sign Language		Sign	Signed	5,000		deaf1237	Yes	
 ykn	kuan1249	Kua-nsi				5,000		kuan1252	Yes	
 ykt	kath1251	Kathu				5,000		mond1269	Yes	
 zad	cajo1238	Cajonos Zapotec			Latn	5,000	zap	cajo1239	Possibly	Will be hard to find specific data, may be better to use macrolanguage
@@ -4073,7 +4073,7 @@ bbp	west2458	West Central Banda			Latn	4,500		nucl1797	Yes
 bdo	moro1281	Morom			Latn	4,500		bayo1261	Yes	
 bty	bobo1254	Bobot			Latn	4,500		east2748	Yes	
 duq	dusu1269	Dusun Malang			Latn	4,500		grea1283	Yes	
-eso	esto1238	Estonian Sign Language		Sign	Zxxx	4,500		russ1270	Yes	
+eso	esto1238	Estonian Sign Language		Sign	Signed	4,500		russ1270	Yes	
 fai	faiw1243	Faiwol			Latn	4,500		faiw1245	Yes	
 ign	igna1246	Ignaciano			Latn	4,500		moxo1234	Yes	
 klc	kolb1240	Kolbila			Latn	4,500		leko1246	Yes	
@@ -4183,7 +4183,7 @@ mgj	abur1244	Abureni			Latn	4,000		uncl1542	Yes
 mqt	mokk1243	Mok				4,000		sout3232	Yes	
 mwt	moke1242	Moken			Mymr	4,000		moke1241	Yes	
 nrm	naro1251	Narom		Spoken & Written	Latn	4,000		cent2273	Yes	
-nsl	norw1255	Norwegian Sign Language	norsk tegnspråk	Sign	Zxxx	4,000		norw1261	Yes	
+nsl	norw1255	Norwegian Sign Language	norsk tegnspråk	Sign	Signed	4,000		norw1261	Yes	
 nti	nati1243	Natioro			Latn	4,000		samu1243	Yes	
 ntx	burm1267	Tangkhul Naga (Myanmar)			Latn	4,000		pend1244	Yes	
 pai	peee1238	Pe			Latn	4,000		taro1266	Yes	
@@ -4435,7 +4435,7 @@ mko	ming1254	Mingang Doso			Latn	3,000		doso1240	Yes
 mmx	mada1285	Madak			Latn	3,000		mada1284	Yes	
 nbp	nnam1238	Nnam			Latn	3,000		nnam1239	Yes	
 ncl	mich1245	Michoacán Nahuatl		Spoken	Latn	3,000		west2825	Yes	
-ncs	nica1238	Nicaraguan Sign Language	Idioma de Señas de Nicaragua	Sign	Zxxx	3,000		deaf1237	Yes	
+ncs	nica1238	Nicaraguan Sign Language	Idioma de Señas de Nicaragua	Sign	Signed	3,000		deaf1237	Yes	
 ndn	ngun1270	Ngundi			Latn	3,000		bwam1249	Yes	
 nkd	koir1240	Koireng			Latn	3,000		kolh1241	Yes	
 npu	puim1234	Puimei Naga			Latn	3,000		book1242	Yes	
@@ -4456,7 +4456,7 @@ sbw	simb1254	Simba			Latn	3,000		himb1234	Yes
 scw	shaa1247	Sha			Latn	3,000		roni1235	Yes	
 sde	suru1258	Surubu			Latn	3,000		vori1234	Yes	
 sgz	surs1246	Sursurunga			Latn	3,000		stge1234	Yes	
-sls	sing1237	Singapore Sign Language		Sign	Zxxx	3,000		book1242	Yes	
+sls	sing1237	Singapore Sign Language		Sign	Signed	3,000		book1242	Yes	
 smz	sime1242	Simeku			Latn	3,000		sime1243	Yes	
 ste	lian1255	Liana-Seti			Latn	3,000		seti1249	Yes	
 swt	sawi1256	Sawila	bahasa Sawila		Latn	3,000		sawi1258	Yes	
@@ -4514,7 +4514,7 @@ cbs	cash1254	Cashinahua			Latn	2,820		head1239	Yes
 rkh	raka1237	Rakahanga-Manihiki			Latn	2,820		sout3383	Yes	
 din	dink1262	Dinka	Thuɔŋjäŋ	Spoken & Written	Latn	4,200,000		dink1261	Yes	
 bmk	ghay1237	Ghayavi			Latn	2,810		boan1246	Yes	
-cds	chad1238	Chadian Sign Language		Sign	Zxxx	2,800		amer1258	Yes	
+cds	chad1238	Chadian Sign Language		Sign	Signed	2,800		amer1258	Yes	
 dmr	east2472	East Damar			Latn	2,800		sout3382	Yes	
 foi	foii1241	Foi			Latn	2,800		east2499	Yes	
 kfg	kudi1237	Kudiya			Knda	2,800		tulu1263	Yes	
@@ -4553,7 +4553,7 @@ aim	aimo1244	Aimol			Latn	2,640		cent2411	Yes
 kpy	kory1246	Koryak	нымылг'эн йилыйыл, чав'чывэн йилыйил		Cyrl	2,633		jkor1234	Yes	
 pni	aohe1237	Aoheng	bahasa Aoheng		Latn	2,630		mull1247	Yes	
 gar	gale1257	Galeya			Latn	2,620		bose1238	Yes	
-nsp	nepa1250	Nepalese Sign Language		Sign	Zxxx	2,612		indo1331	Yes	
+nsp	nepa1250	Nepalese Sign Language		Sign	Signed	2,612		indo1331	Yes	
 mbq	mais1250	Maisin			Latn	2,610		aret1241	Yes	
 ckt	chuk1273	Chukot	Ԓыгъоравэтԓьэн йиԓыйиԓ		Cyrl	2,607		rkor1234	Yes	
 add	dzod1238	Dzodinka			Latn	2,600		nkam1238	Yes	
@@ -4807,7 +4807,7 @@ lau	laba1241	Laba			Latn	2,000		book1242	Yes
 let	lesi1239	Lesing-Gelimi			Latn	2,000		east2763	Yes	
 ley	lemo1243	Lemolang			Latn	2,000		bada1265	Yes	
 liu	logo1261	Logorik			Latn	2,000		east2428	Yes	
-lst	trin1277	Trinidad and Tobago Sign Language		Sign	Zxxx	2,000		amer1258	Yes	
+lst	trin1277	Trinidad and Tobago Sign Language		Sign	Signed	2,000		amer1258	Yes	
 mae	boru1244	Bo-Rukul			Latn	2,000		sout2800	Yes	
 mpm	yoso1239	Yosondúa Mixtec			Latn	2,000		chal1278	Yes	
 mqf	momu1241	Momuna	bahasa Momuna		Latn	2,000		soma1242	Yes	
@@ -4911,7 +4911,7 @@ ceg	cham1315	Chamacoco	Ishír		Latn	1,800		zamu1243	Yes
 cly	east2558	Eastern Highland Chatino			Latn	1,800		east2736	Yes	
 don	tour1243	Toura (Papua New Guinea)			Latn	1,800		nucl1506	Yes	
 grm	kota1279	Kota Marudu Talantang			Latn	1,800		dusu1277	Yes	
-haf	haip1238	Haiphong Sign Language		Sign	Zxxx	1,800		viet1253	Yes	
+haf	haip1238	Haiphong Sign Language		Sign	Signed	1,800		viet1253	Yes	
 low	tamp1254	Tampias Lobu			Latn	1,800		uppe1426	Yes	
 njj	njen1238	Njen			Latn	1,800		mund1338	Yes	
 nlu	nchu1238	Nchumbulu			Latn	1,800		nchu1239	Yes	
@@ -4951,7 +4951,7 @@ mvr	mara1397	Marau	bahasa Marau		Latn	1,700		ansu1238	Yes
 nis	nimi1240	Nimi			Latn	1,700		sauk1253	Yes	
 ptp	pate1247	Patep			Latn	1,700		zena1251	Yes	
 rmm	roma1332	Roma			Latn	1,700		kisa1265	Yes	
-ssr	swis1241	Swiss-French Sign Language		Sign	Zxxx	1,700		lsfi1234	Yes	
+ssr	swis1241	Swiss-French Sign Language		Sign	Signed	1,700		lsfi1234	Yes	
 glv	manx1243	Manx	Gaelg	Spoken & Written	Latn	1,690		east2734	Yes	
 piu	pint1250	Pintupi-Luritja			Latn	1,680		nucl1724	Yes	
 etr	edol1239	Edolo			Latn	1,670		etor1234	Yes	
@@ -5011,7 +5011,7 @@ bgb	bobo1255	Bobongko	bahasa Bobongko		Latn	1,500		salu1252	Yes
 bvz	bauz1241	Bauzi			Latn	1,500		geel1240	Yes	
 bzp	kemb1235	Kemberano			Latn	1,500		kemb1251	Yes	
 cbo	izor1238	Izora			Latn	1,500		chok1248	Yes	
-csx	camb1244	Cambodian Sign Language		Sign	Zxxx	1,500		deaf1237	Yes	
+csx	camb1244	Cambodian Sign Language		Sign	Signed	1,500		deaf1237	Yes	
 dbf	edop1238	Edopi	bahasa Dosobou		Latn	1,500		cent2110	Yes	
 dkk	dakk1238	Dakka	bahasa Dakka		Latn	1,500		pitu1237	Yes	
 dox	buss1239	Bussa			Ethi	1,500		gido1236	Yes	
@@ -5043,7 +5043,7 @@ nec	nede1245	Nedebang	bahasa Nedebang		Latn	1,500		pant1258	Yes
 nxl	sout2895	South Nuaulu			Latn	1,500		nuau1240	Yes	
 ojg	east2542	Eastern Ojibwa	Nishnaabemwin (Jibwemwin)			1,500	oji	cent2252	Possibly	But probably want to use macrolanguage
 pla	mian1254	Miani			Latn	1,500		kauk1240	Yes	
-prz	prov1243	Providencia Sign Language		Sign	Zxxx	1,500		prov1248	Yes	
+prz	prov1243	Providencia Sign Language		Sign	Signed	1,500		prov1248	Yes	
 pzn	para1302	Para Naga			Latn	1,500		yimc1239	Yes	
 sgk	sang1320	Sangkong				1,500		biso1241	Yes	
 skc	sauk1252	Ma Manda			Latn	1,500		sauk1253	Yes	
@@ -5232,7 +5232,7 @@ ikt	west2618	Western Canadian Inuktitut			Latn	1,140	iku	inui1246	Possibly	But p
 yuj	kark1258	Karkar-Yuri			Latn	1,140		east2530	Yes	
 git	gitx1241	Gitxsan	Gitx̱sanimx̱		Latn	1,135		nish1242	Yes	
 bnj	east2482	Eastern Tawbuid			Latn	1,130		bata1318	Yes	
-bqy	beng1239	Bengkala Sign Language		Sign		1,125		deaf1237	Yes	
+bqy	beng1239	Bengkala Sign Language		Sign	Signed	1,125		deaf1237	Yes	
 gvo	gavi1246	Gavião Do Jiparaná			Latn	1,120		gavi1248	Yes	
 mxr	muri1259	Murik (Malaysia)			Latn	1,120		kaya1336	Yes	
 opo	opao1240	Opao			Latn	1,120		west2573	Yes	
@@ -5301,7 +5301,7 @@ see	sene1264	Seneca	Onõtowáka		Latn	1,015		nort2947	Yes
 phd	phud1238	Phudagi			Deva	1,010		west2963	Yes	
 sru	suru1262	Suruí			Latn	1,010		mond1266	Yes	
 abo	abon1238	Abon			Latn	1,000		nort3192	Yes	
-afg	afgh1239	Afghan Sign Language		Sign	Zxxx	1,000		deaf1237	Yes	
+afg	afgh1239	Afghan Sign Language		Sign	Signed	1,000		deaf1237	Yes	
 ago	tain1253	Tainae			Latn	1,000		tain1255	Yes	
 agy	sout2905	Southern Alta			Latn	1,000		meso1254	Yes	
 air	airo1242	Airoran	bahasa Adora		Latn	1,000		west1486	Yes	
@@ -5409,7 +5409,7 @@ nxa	naue1237	Nauete			Latn	1,000		kawa1289	Yes
 onp	sart1249	Sartang			Latn	1,000		sher1256	Yes	
 oue	oung1239	Oune			Latn	1,000		cent2394	Yes	
 pnx	phon1246	Phong-Kniang				1,000		pram1235	Yes	
-psg	pena1248	Penang Sign Language		Sign	Zxxx	1,000		deaf1237	Yes	
+psg	pena1248	Penang Sign Language		Sign	Signed	1,000		deaf1237	Yes	
 pty	path1235	Pathiya				1,000		kala1406	Yes	
 pyu	puyu1239	Puyuma	Pinuyumayan		Latn	1,000		aust1307	Yes	
 rys	yaey1239	Yaeyama				1,000		macr1267	Yes	
@@ -5543,7 +5543,7 @@ tyu	kuaa1238	Kua			Latn	820		tshw1239	Yes
 asx	mura1271	Muratayak			Latn	810		nucl1777	Yes	
 hob	mari1429	Mari (Madang Province)			Latn	810		moun1250	Yes	
 kxr	bowa1234	Koro (Papua New Guinea)			Latn	810		koro1314	Yes	
-rnb	brun1247	Brunca Sign Language		Sign	Zxxx	808		deaf1237	Yes	
+rnb	brun1247	Brunca Sign Language		Sign	Signed	808		deaf1237	Yes	
 tok	toki1239	Toki Pona	toki pona	Mostly Written	Latn	806		arti1236	Possibly	Constructed language
 nez	nezp1238	Nez Perce			Latn	805		saha1239	Yes	
 anz	anem1249	Anem			Latn	800			Yes	
@@ -5819,7 +5819,7 @@ mxz	cent2072	Central Masela			Latn	510		mase1249	Yes
 sry	sera1260	Sera			Latn	510		sera1271	Yes	
 thp	thom1243	Thompson	Nłeʼkepmxcin		Latn	510		thom1244	Yes	
 wtf	dump1243	Watiwa			Latn	510		evap1240	Yes	
-uks	urub1243	Urubú-Kaapor Sign Language		Sign	Zxxx	507		deaf1237	Yes	
+uks	urub1243	Urubú-Kaapor Sign Language		Sign	Signed	507		deaf1237	Yes	
 ulc	ulch1241	Ulch	Нāн'и хэсэни		Cyrl	506		ulch1242	Yes	
 tsi	nucl1649	Tsimshian	Sm’algyax̣		Latn	505		tsim1258	Yes	
 pih	pitc1234	Pitcairn-Norfolk	Pitkern		Latn	502		macr1271	Yes	
@@ -5845,7 +5845,7 @@ jku	labi1245	Labir			Latn	500		jaku1245	Yes
 jrt	jort1240	Jorto			Latn	500		kofy1244	Yes	
 kag	kaja1250	Kajaman			Latn	500		kaja1256	Yes	
 kch	vono1238	Vono			Latn	500		atla1280	Yes	
-kgi	sela1253	Selangor Sign Language		Sign	Zxxx	500		mala1548	Yes	
+kgi	sela1253	Selangor Sign Language		Sign	Signed	500		mala1548	Yes	
 kkd	kinu1239	Kinuku			Latn	500		kaur1268	Yes	
 kll	kaga1255	Kagan Kalagan			Latn	500		kaga1259	Yes	
 kly	kala1394	Kalao	bahasa Kalao		Latn	500		kala1393	Yes	
@@ -5880,7 +5880,7 @@ tax	tamk1242	Tamki			Latn	500		saba1281	Yes
 tcm	tana1288	Tanahmerah			Latn	500			Yes	
 tlc	yecu1235	Yecuatla Totonac			Latn	500		toto1252	Yes	
 trt	tung1293	Tunggare			Latn	500		bura1294	Yes	
-tsy	tebu1240	Tebul Sign Language		Sign	Zxxx	500		deaf1237	Yes	
+tsy	tebu1240	Tebul Sign Language		Sign	Signed	500		deaf1237	Yes	
 vnm	vinm1237	Vinmavis			Latn	500		cent2316	Yes	
 whu	waha1239	Wahau Kayan			Latn	500		book1242	Yes	
 wtw	wotu1240	Wotu	bahasa Wotu		Latn	500		wotu1239	Yes	
@@ -5959,7 +5959,7 @@ mez	meno1252	Menominee	Omāēqnomenew		Latn	405		algo1257	Yes
 afd	anda1283	Andai			Latn	400		araf1243	Yes	
 aww	awun1245	Awun			Latn	400		yell1247	Yes	
 azd	east2695	Eastern Durango Nahuatl		Spoken	Latn	400		dura1246	Yes	
-bfk	bank1251	Ban Khor Sign Language		Sign	Zxxx	400		deaf1237	Yes	
+bfk	bank1251	Ban Khor Sign Language		Sign	Signed	400		deaf1237	Yes	
 brb	lave1249	Lave			Khmr	400		nucl1299	Yes	
 bvk	buka1261	Bukat			Latn	400		buka1263	Yes	
 bxd	pela1242	Pela				400		maru1254	Yes	
@@ -5982,13 +5982,13 @@ lpa	lele1267	Lelepa			Latn	400		nort3222	Yes
 mmq	musa1266	Musak			Latn	400		aisi1234	Yes	
 mmw	emae1237	Emae			Latn	400		vanu1245	Yes	
 mnl	tial1239	Tiale			Latn	400		tial1241	Yes	
-msd	yuca1236	Yucatec Maya Sign Language		Sign	Zxxx	400		meem1234	Yes	
+msd	yuca1236	Yucatec Maya Sign Language		Sign	Signed	400		meem1234	Yes	
 myj	mang1387	Mangayat			Latn	400		fero1243	Yes	
 noh	nomu1240	Nomu			Latn	400		dall1240	Yes	
 opk	kopk1238	Kopkaka	bahasa Kopka		Latn	400		kwer1266	Yes	
 ost	osat1238	Osatu			Latn	400		sout3181	Yes	
 pas	papa1269	Papasena	bahasa Papasena		Latn	400		dout1239	Yes	
-rib	brib1244	Bribri Sign Language		Sign	Zxxx	400		deaf1237	Yes	
+rib	brib1244	Bribri Sign Language		Sign	Signed	400		deaf1237	Yes	
 sac	mesk1242	Meskwaki			Latn	400		foxx1245	Yes	
 sii	shom1245	Shom Peng			Latn	400			Yes	
 siq	soni1260	Sonia			Latn	400		kalu1249	Yes	
@@ -6144,7 +6144,7 @@ pay	pech1241	Pech			Latn	300		chib1249	Yes
 prq	ashe1272	Ashéninka Perené			Latn	300		ashe1271	Yes	
 ruo	istr1245	Istro Romanian	istroromånă		Latn	300		nort3361	Yes	
 sjd	kild1236	Kildin Sami	кӣллт са̄мь кӣлл		Cyrl	300	smi	peni1240	Yes	
-slf	swis1235	Swiss-Italian Sign Language		Sign	Zxxx	300		ital1288	Yes	
+slf	swis1235	Swiss-Italian Sign Language		Sign	Signed	300		ital1288	Yes	
 sma	sout2674	Southern Sami	åarjelsaemien gïele		Latn	300	smi	sout3150	Yes	
 smn	inar1241	Inari Sami	anarâškielâ	Spoken & Written	Latn	300	smi	main1280	Yes	
 sso	siss1243	Sissano			Latn	300		siss1245	Yes	
@@ -6395,7 +6395,7 @@ bki	baki1244	Baki			Latn	150		baki1243	Yes
 cby	cara1245	Carabayo			Latn	150		uncl1493	Yes	
 cub	cube1242	Cubeo	pãmié		Latn	150		cube1243	Yes	
 drc	mind1263	Minderico			Latn	150		gali1263	Yes	
-fss	finl1235	suomenruotsalainen viittomakieli		Sign	Zxxx	150		finn1319	Yes	
+fss	finl1235	suomenruotsalainen viittomakieli		Sign	Signed	150		finn1319	Yes	
 gbb	kayt1238	Kaytetye			Latn	150		aran1267	Yes	
 gob	play1240	Playero			Latn	150		guah1254	Yes	
 kbb	kaxu1237	Kaxuiâna			Latn	150		paru1239	Yes, with caveat	Some sources report this as extinct, some as active
@@ -6406,7 +6406,7 @@ myh	maka1318	Makah			Latn	150		maka1326	Yes
 nby	ning1275	Ningera			Latn	150		bewa1242	Yes	
 okk	kwam1254	Kwamtim One			Latn	150		onee1245	Yes	
 onj	onjo1240	Onjob			Latn	150		daga1274	Yes	
-syy	alsa1242	Al-Sayyid Bedouin Sign Language		Sign	Zxxx	150		deaf1237	Yes	
+syy	alsa1242	Al-Sayyid Bedouin Sign Language		Sign	Signed	150		deaf1237	Yes	
 tba	aika1237	Aikanã			Latn	150			Yes	
 tpr	tupa1250	Tuparí			Latn	150		wayo1240	Yes	
 vis	vish1243	Vishavan				150		mala1541	Yes	
@@ -6481,7 +6481,7 @@ djn	djau1244	Djauan			Latn	100		west2432	Yes
 dyr	dyar1234	Dyarim			Latn	100		zaks1240	Yes	
 gnr	gure1255	Gureng Gureng			Latn	100		east2717	Yes, with caveat	Some sources report this as extinct, some as active
 hoh	hoby1242	Hobyót			Arab	100		hoby1243	Yes	
-jhs	jhan1234	Jhankot Sign Language		Sign	Zxxx	100		deaf1237	Yes	
+jhs	jhan1234	Jhankot Sign Language		Sign	Signed	100		deaf1237	Yes	
 jie	jilb1238	Jilbe			Latn	100		unun9878	Yes	
 kaq	capa1241	Capanahua			Latn	100		ship1253	Yes	
 kbs	kand1300	Kande			Latn	100		nort3213	Yes	
@@ -6495,7 +6495,7 @@ kwr	kwer1265	Kwer	bahasa Kwer		Latn	100		kwer1267	Yes
 mcj	mvan1238	Mvanip			Latn	100		mvan1239	Yes	
 mnq	minr1238	Minriq			Latn	100		menr1235	Yes	
 nmi	nyam1285	Nyam			Latn	100		unun9876	Yes	
-nsr	mari1381	Maritime Sign Language		Sign	Zxxx	100		bsli1234	Yes	
+nsr	mari1381	Maritime Sign Language		Sign	Signed	100		bsli1234	Yes	
 ocu	atzi1235	Atzingo Matlatzinca			Latn	100		matl1258	Yes	
 pin	piam1243	Piame			Latn	100		hewa1240	Yes	
 pix	piuu1237	Piu			Latn	100		buan1245	Yes	
@@ -6571,7 +6571,7 @@ lix	liab1237	Liabuku	bahasa Liabuku		Latn	75		west2847	Yes
 lui	luis1253	Luiseño			Latn	75		cupa1239	Yes, with caveat	Some sources report this as extinct, some as active
 mhm	makh1265	Makhuwa-Moniga			Latn	75		maku1279	Yes	
 ono	onon1246	Onondaga	Onǫta’kéka’		Latn	75		nort2947	Yes	
-psd	plai1235	Plains Indian Sign Language		Sign	Zxxx	75		auxi1235	Yes	
+psd	plai1235	Plains Indian Sign Language		Sign	Signed	75		auxi1235	Yes	
 rga	rori1237	Roria			Latn	75		sout3339	Yes	
 awr	awer1241	Awera	bahasa Awera		Latn	70		farw1236	Yes	
 bdx	budo1241	Budong-Budong	bahasa Budong-Budong		Latn	70		pana1302	Yes	
@@ -6597,7 +6597,7 @@ cbc	cara1272	Carapana			Latn	63		pisa1247	Yes
 ciy	chai1253	Chaima			Latn	63		coas1302	Yes	
 xrw	kara1495	Karawa			Latn	63		pouy1239	Yes	
 aok	arho1237	Arhö			Latn	62		houa1234	Yes	
-lsv	sivi1235	Sivia Sign Language		Sign	Zxxx	62		deaf1237	Yes	
+lsv	sivi1235	Sivia Sign Language		Sign	Signed	62		deaf1237	Yes	
 ket	kett1243	Ket			Cyrl	61		nort2746	Yes	
 awm	araw1272	Arawum			Latn	60		kabe1245	Yes	
 gge	gura1252	Guragone			Latn	60		bure1238	Yes	
@@ -6689,19 +6689,19 @@ jig	djin1251	Djingili			Latn	43		mirn1241	Yes
 oac	oroc1248	Oroch			Cyrl	43		oroc1249	Yes	
 atx	arut1244	Arutani			Latn	42			Yes	
 kov	kudu1241	Kudu-Camo			Latn	42		ning1277	Yes	
-ads	adam1238	Adamorobe Sign Language		Sign	Zxxx	41		deaf1237	Yes	
+ads	adam1238	Adamorobe Sign Language		Sign	Signed	41		deaf1237	Yes	
 aip	buru1307	Burumakok	bahasa Burumakok		Latn	40		kwer1267	Yes	
 bck	buna1275	Bunaba			Latn	40		buna1274	Yes	
 bpl	broo1238	Broome Pearling Lugger Pidgin			Latn	40		mala1547	Yes	
 bso	buso1242	Buso			Latn	40		book1242	Yes	
 ccd	cafu1238	Cafundo Creole			Latn	40		braz1247	Yes	
 cto	embe1260	Emberá-Catío			Latn	40		atra1235	Yes	
-dsz	mard1245	Mardin Sign Language		Sign	Zxxx	40		deaf1237	Yes	
+dsz	mard1245	Mardin Sign Language		Sign	Signed	40		deaf1237	Yes	
 hir	hima1247	Himarimã			Latn	40		araw1289	Yes	
 huc	hoaa1235	Amkoe			Latn	40		kxaa1236	Yes	
-iks	inui1247	Inuit Sign Language		Sign	Zxxx	40		deaf1237	Yes	
+iks	inui1247	Inuit Sign Language		Sign	Signed	40		deaf1237	Yes	
 jbt	djeo1235	Jabutí			Latn	40		jabu1249	Yes	
-jcs	jama1256	Jamaican Country Sign Language		Sign	Zxxx	40		deaf1237	Yes	
+jcs	jama1256	Jamaican Country Sign Language		Sign	Signed	40		deaf1237	Yes	
 kuu	uppe1438	Upper Kuskokwim			Latn	40		tana1298	Yes	
 rkb	rikb1245	Rikbaktsa			Latn	40		nucl1710	Yes	
 uwa	kuku1280	Kuku-Uwanh			Latn	40		pama1253	Yes, with caveat	Some sources report this as extinct, some as active
@@ -6798,7 +6798,7 @@ bvh	bure1242	Bure			Latn	20		unun9876	Yes
 bym	bidy1243	Bidyara			Latn	20		bidy1245	Yes, with caveat	Some sources report this as extinct, some as active
 cup	cupe1243	Cupeño	Kuupangaxwichem		Latn	20		cahu1263	Yes, with caveat	Some sources report this as extinct, some as active
 gae	guar1293	Guarequena			Latn	20		pare1275	Yes	
-gds	ghan1245	Ghandruk Sign Language		Sign	Zxxx	20		deaf1237	Yes	
+gds	ghan1245	Ghandruk Sign Language		Sign	Signed	20		deaf1237	Yes	
 gih	cond1242	Githabul			Latn	20		inla1268	Yes	
 kkp	gugu1254	Gugubera			Latn	20		dhaw1234	Yes	
 lec	leco1242	Leco			Latn	20			Yes	
@@ -6816,7 +6816,7 @@ xkw	kemb1250	Kembra	bahasa Kembra		Latn	20		lepk1239	Yes
 xmh	kuku1283	Kuku-Muminh			Latn	20		pama1253	Yes	
 zmj	mari1421	Maridjabin			Latn	20		mari1420	Yes	
 zmy	mari1423	Mariyedi			Latn	20		mari1420	Yes	
-csd	chia1237	Chiangmai Sign Language		Sign	Zxxx	19		oldc1250	Yes	
+csd	chia1237	Chiangmai Sign Language		Sign	Signed	19		oldc1250	Yes	
 lby	lamu1254	Lamu-Lamu			Latn	19		coas1321	No	Extinct language
 wlg	kunb1251	Kunbarlang			Latn	19		gunw1250	Yes	
 hbo	anci1244	Ancient Hebrew	עִבְרִית מִקְרָאִית		Hebr	18		hebr1246	Probably not	Historical langauge
@@ -6870,7 +6870,7 @@ ako	akur1238	Akurio			Latn	10		tiri1260	Yes
 akq	akkk1240	Ak			Latn	10		yell1247	Yes	
 alc	qawa1238	Qawasqar	alacalufe		Latn	10		nort1506	Yes	
 aqk	anin1242	Aninka			Latn	10		ninz1247	Yes	
-asq	aust1252	Austrian Sign Language	Österreichische Gebärdensprache	Sign	Zxxx	10		nucl1839	Yes	
+asq	aust1252	Austrian Sign Language	Österreichische Gebärdensprache	Sign	Signed	10		nucl1839	Yes	
 aua	asum1237	Asumboa			Latn	10		utup1238	Yes	
 ayk	akuk1235	Akuku			Latn	10		okpe1251	Yes	
 bpc	mbuk1244	Mbuk			Latn	10		cung1239	Yes	
@@ -6881,13 +6881,13 @@ cbd	cari1279	Carijona	tsahá		Latn	10		tara1324	Yes
 cnq	cung1238	Chung			Latn	10		cung1239	Yes	
 cob	chic1271	Chicomuceltec			Latn	10		huas1241	Yes, with caveat	Some sources report this as extinct, some as active
 cpg	capp1239	Cappadocian Greek			Grek	10		pont1257	Yes, with caveat	Some sources report this as extinct, some as active
-csq	croa1242	Croatia Sign Language	hrvatski znakovni jezik	Sign	Zxxx	10		yugo1239	Yes	
+csq	croa1242	Croatia Sign Language	hrvatski znakovni jezik	Sign	Signed	10		yugo1239	Yes	
 cty	maun1243	Moundadan Chetty			Taml	10		kann1259	Yes	
 dda	dadi1251	Dadi Dadi			Latn	10		lowe1403	Yes, with caveat	Some sources report this as extinct, some as active
 dif	dier1241	Dieri			Latn	10		dier1240	Yes, with caveat	Some sources report this as extinct, some as active
 dzd	daza1244	Daza			Latn	10		giiw1237	Yes, with caveat	Reinstated now, but at one point was retired
 ebc	begi1237	Beginci	bahasa Beginci		Latn	10		mala1480	Yes	
-ehs	miya1268	Miyakubo Sign Language	宮窪手話	Sign	Zxxx	10		deaf1237	Yes	
+ehs	miya1268	Miyakubo Sign Language	宮窪手話	Sign	Signed	10		deaf1237	Yes	
 faj	fait1240	Faita			Latn	10		east2767	Yes	
 fnb	orko1234	Fanbak			Latn	10		port1292	Yes	
 fng	fana1235	Fanagalo			Latn	10		zulu1250	Yes	
@@ -6899,14 +6899,14 @@ hax	sout2956	Southern Haida			Latn	10	hai	haid1248	Possibly	But probably want to
 hti	hoti1237	Hoti	bahasa Hoti		Latn	10		seti1249	No	Extinct language
 huk	hulu1246	Hulung			Latn	10		nort3221	No	Extinct language
 ibh	biha1246	Bih			Latn	10		rade1241	Yes	
-icl	icel1236	Icelandic Sign Language	íslenskt táknmál	Sign	Zxxx	10		dani1289	Yes	
+icl	icel1236	Icelandic Sign Language	íslenskt táknmál	Sign	Signed	10		dani1289	Yes	
 ikh	ikhi1234	Ikhin-Arokho			Latn	10		emai1243	Yes	
 ism	masi1265	Masimasi	bahasa Masimasi		Latn	10		sobe1239	Yes	
 izm	kiza1239	Kizamani			Latn	10		kaur1268	Yes	
 jaj	zaza1245	Zazao			Latn	10		zaza1247	Yes	
 jas	newc1244	New Caledonian Javanese			Latn	10		glob1245	Yes	
 jng	yang1288	Yangman			Latn	10		yang1287	Yes, with caveat	Some sources report this as extinct, some as active
-jus	juml1239	Jumla Sign Language		Sign	Zxxx	10		deaf1237	Yes	
+jus	juml1239	Jumla Sign Language		Sign	Signed	10		deaf1237	Yes	
 keh	keak1239	Keak			Latn	10		sawo1234	Yes	
 kgl	kung1258	Kunggari			Latn	10		sout2765	Yes, with caveat	Some sources report this as extinct, some as active
 khd	badi1247	Bädi Kanum			Latn	10		ngka1236	Yes	
@@ -6917,23 +6917,23 @@ kuq	kari1317	Karipuna			Latn	10		cent2421	Yes
 kvs	kung1262	Kunggara				10	gdj	book1242	No	ISO considers this a duplicate of gdj
 kzx	kama1362	Kamarian	bahasa Kamarian		Latn	10		ulia1238	Yes, with caveat	Some sources report this as extinct, some as active
 leo	leti1245	Leti (Cameroon)			Latn	10		sana1278	Yes	
-lgs	guin1260	Guinea-Bissau Sign Language		Sign	Zxxx	10		deaf1237	Yes	
+lgs	guin1260	Guinea-Bissau Sign Language		Sign	Signed	10		deaf1237	Yes	
 llf	herm1237	Hermit			Latn	10		west2848	No	Extinct language
 llj	ladj1234	Ladji Ladji			Latn	10		west2443	Yes, with caveat	Some sources report this as extinct, some as active
-lls	lith1236	Lithuanian Sign Language		Sign	Zxxx	10		nucl1824	Yes	
-lsc	alba1273	Albarradas Sign Language		Sign	Zxxx	10		deaf1237	Yes	
-lsl	latv1245	Latvian Sign Language		Sign	Zxxx	10		deaf1237	Yes	
-lsn	tibe1277	Tibetan Sign Language		Sign	Zxxx	10		deaf1237	Yes	
-lsp	pana1308	Panamanian Sign Language		Sign	Zxxx	10		cost1251	Yes	
-lsw	seyc1234	Seychelles Sign Language		Sign	Zxxx	10		deaf1237	Yes	
-lsy	maur1240	Mauritian Sign Language		Sign	Zxxx	10		deaf1237	Yes	
+lls	lith1236	Lithuanian Sign Language		Sign	Signed	10		nucl1824	Yes	
+lsc	alba1273	Albarradas Sign Language		Sign	Signed	10		deaf1237	Yes	
+lsl	latv1245	Latvian Sign Language		Sign	Signed	10		deaf1237	Yes	
+lsn	tibe1277	Tibetan Sign Language		Sign	Signed	10		deaf1237	Yes	
+lsp	pana1308	Panamanian Sign Language		Sign	Signed	10		cost1251	Yes	
+lsw	seyc1234	Seychelles Sign Language		Sign	Signed	10		deaf1237	Yes	
+lsy	maur1240	Mauritian Sign Language		Sign	Signed	10		deaf1237	Yes	
 ltn	latu1238	Latundê			Latn	10		roos1235	Yes	
 mdg	mass1262	Massalat			Latn	10		masa1301	Yes	
-mdl	malt1238	Maltese Sign Language		Sign	Zxxx	10		deaf1237	Yes	
+mdl	malt1238	Maltese Sign Language		Sign	Signed	10		deaf1237	Yes	
 mhq	mand1446	Mandan	Rų́ʼeta:re		Latn	10		core1249	Yes	
 mpw	mapi1252	Mapidian			Latn	10		mapi1253	Yes	
 msz	moma1243	Momare			Latn	10		moma1244	Yes	
-nbs	nami1249	Namibian Sign Language		Sign	Zxxx	10		sout3228	Yes	
+nbs	nami1249	Namibian Sign Language		Sign	Signed	10		sout3228	Yes	
 nhf	nhuw1239	Nhuwala			Latn	10		ngay1241	Yes	
 nju	ngad1258	Ngadjunmaya			Latn	10		mirn1243	Yes	
 nql	ngen1257	Ngendelengo			Latn	10		cimb1239	Yes	
@@ -6943,7 +6943,7 @@ nxo	ndam1254	Ndambomo			Latn	10		sake1249	Yes
 nxu	nara1265	Narau	bahasa Narau			10	bpp	book1242	No	ISO merged this into bpp
 nyp	nyan1313	Nyang'i			Latn	10		ngan1305	Yes, with caveat	Some sources report this as extinct, some as active
 nzr	lund1276	Dir-Nyamzak-Mbarimi			Latn	10		zuli1234	Yes	
-nzs	newz1236	New Zealand Sign Language	New Zealand Sign Language	Sign	Zxxx	10		banz1243	Yes	
+nzs	newz1236	New Zealand Sign Language	New Zealand Sign Language	Sign	Signed	10		banz1243	Yes	
 olm	olom1241	Oloma			Latn	10		sout3171	Yes	
 ovd	elfd1234	Elfdalian			Latn	10		ovan1234	Yes	
 pey	petj1238	Petjo			Latn	10		glob1241	Yes	
@@ -6954,15 +6954,15 @@ rmg	trav1236	Traveller Norwegian			Latn	10	rom	scan1239	Possibly	But probably wa
 rsw	rish1234	Rishiwa			Latn	10		vori1234	Yes	
 rwl	ruwi1234	Ruwila			Latn	10		kono1265	Yes	
 sej	sene1263	Sene			Latn	10		huon1247	Yes, with caveat	Some sources report this as extinct, some as active
-sfb	lang1248	Langue des signes de Belgique Francophone	langue des signes de Belgique francophone	Sign		10		belg1242	Yes	
+sfb	lang1248	Langue des signes de Belgique Francophone	langue des signes de Belgique francophone	Sign	Signed	10		belg1242	Yes	
 sis	sius1254	Siuslaw			Latn	10			Yes, with caveat	Some sources report this as extinct, some as active
 sno	snoh1241	Snohomish			Latn	10		lush1252	Yes	
-sqx	kafr1234	Kufr Qassem Sign Language		Sign	Zxxx	10		deaf1237	Yes	
+sqx	kafr1234	Kufr Qassem Sign Language		Sign	Signed	10		deaf1237	Yes	
 ssu	susu1251	Susuami			Latn	10		kama1359	Yes	
 stl	stel1238	Stellingwerfs			Latn	10		west2356	Yes	
 sxr	saar1237	Saaroa			Latn	10		kana1292	Yes	
 syx	osam1235	Samay			Latn	10		ndas1239	Yes	
-szs	solo1262	Solomon Islands Sign Language		Sign	Zxxx	10		aust1310	Yes	
+szs	solo1262	Solomon Islands Sign Language		Sign	Signed	10		aust1310	Yes	
 szy	saki1247	Sakizaya	Sakizaya	Spoken & Written	Latn	10		cent2103	Yes	
 tjj	yang1305	Tjungundji			Latn	10		angu1244	Yes	
 tjp	pini1245	Tjupany			Latn	10		unun9966	Yes	
@@ -6976,8 +6976,8 @@ urc	urni1239	Urningangg			Latn	10		urni1238	No	Extinct language
 uun	nort2899	Kulon-Pazeh				10			Probably not	Split into separate language codes
 vkn	koro1323	Koro Nulu			Latn	10		uncl1532	Yes	
 vku	kurr1243	Kurrama			Latn	10		yind1249	Yes	
-vsi	mold1243	Moldova Sign Language		Sign	Zxxx	10		cent2419	Yes	
-vsv	vale1251	Valencian Sign Language		Sign	Zxxx	10		nucl1840	Yes	
+vsi	mold1243	Moldova Sign Language		Sign	Signed	10		cent2419	Yes	
+vsv	vale1251	Valencian Sign Language		Sign	Signed	10		nucl1840	Yes	
 wga	waga1260	Wagaya			Latn	10		ngar1291	No	Extinct language
 wlh	wela1235	Welaun			Latn	10		west2945	Yes	
 wny	wany1247	Wanyi			Latn	10		garr1260	Yes	
@@ -6986,7 +6986,7 @@ xat	kata1270	Katawixi			Latn	10		katu1274	Yes
 xdo	kwan1289	Kwandu			Latn	10		cimb1239	Yes	
 xjb	twee1234	Minjungbal			Latn	10		coas1320	Yes, with caveat	Some sources report this as extinct, some as active
 xny	nija1241	Nyiyaparli			Latn	10		cent2248	Yes	
-yhs		Yan-nhaŋu Sign Language		Sign	Zxxx	10			Yes	
+yhs		Yan-nhaŋu Sign Language		Sign	Signed	10			Yes	
 yii	yidi1250	Yidiny			Latn	10		yidi1249	Yes	
 ykh	kham1281	Khamnigan Mongol			Cyrl	10		oira1260	Yes	
 yol	east2834	Yola			Latn	10	enm	merc1242	No	Merged with Middle English [enm]
@@ -7125,7 +7125,7 @@ kyr	kuru1309	Kuruáya			Latn	3		mund1329	Yes
 lgb	lagh1246	Laghu			Latn	3		west2523	Yes, with caveat	Some sources report this as extinct, some as active
 myr	muni1258	Muniche			Latn	3			Yes	
 nji	ngar1283	Gudanji			Latn	3		guda1245	Yes, with caveat	Some sources report this as extinct, some as active
-rsm	miri1273	Miriwoong Sign Language		Sign	Zxxx	3		deaf1237	Yes	
+rsm	miri1273	Miriwoong Sign Language		Sign	Signed	3		deaf1237	Yes	
 scf	sanm1305	San Miguel Creole French			Latn	3		sain1246	Yes, with caveat	Some sources report this as extinct, some as active
 wao	wapp1239	Wappo				3		yuki1242	Yes, with caveat	Some sources report this as extinct, some as active
 wgy	warr1255	Warrgamay			Latn	3		pama1250	Yes	
@@ -7253,7 +7253,7 @@ ile	inte1260	Interlingue	Interlingue	Mostly Written	Latn	1		arti1236	Possibly	Co
 jan	jand1248	Jandai			Latn	1		yaga1256	No	Extinct language
 jbi	badj1244	Badjiri			Latn	1		badj1246	No	Extinct language
 jbw	yawi1239	Yawijibaya			Latn	1		worr1237	Yes, with caveat	Some sources report this as extinct, some as active
-jks	amam1247	Amami Koniya Sign Language		Sign	Zxxx	1		deaf1237	Yes	
+jks	amam1247	Amami Koniya Sign Language		Sign	Signed	1		deaf1237	Yes	
 juc	jurc1239	Jurchen				1		manc1250	Probably not	Historical langauge
 jut	juti1236	Jutish	Jysk		Latn	1		sout3248	Possibly	Some sources consider it a dialect of Danish, some say its an historical language
 jvd	javi1237	Javindo			Latn	1		glob1241	Yes	
@@ -7286,7 +7286,7 @@ mhj	mogh1245	Mogholi			Arab	1		mong1329	Yes
 mjq	mala1466	Malaryan			Mlym	1		mala1541	Yes, with caveat	Some sources report this as extinct, some as active
 mmv	miri1270	Miriti			Latn	1		arap1281	Yes, with caveat	Some sources report this as extinct, some as active
 mpy	mapi1250	Mapia	bahasa Mapia		Latn	1		nucl1749	Possibly	Different sources consider this living or extinct
-mre	mart1251	Martha's Vineyard Sign Language		Sign	Zxxx	1		oksl1234	No	Extinct language
+mre	mart1251	Martha's Vineyard Sign Language		Sign	Signed	1		oksl1234	No	Extinct language
 msp	mari1442	Maritsauá			Latn	1		unun9935	No	Extinct language
 mys	mesm1243	Mesmes				1		inor1239	Yes, with caveat	Some sources report this as extinct, some as active
 myz	clas1253	Classical Mandaic		Written	Mand	1		mand1468	Probably not	Historical langauge
@@ -7343,7 +7343,7 @@ rat	raza1238	Razajerdi				1		rama1272	Yes
 rdb	rudb1238	Rudbari			Arab	1		gila1242	Yes	
 rgk	rang1266	Rangkas				1		pith1234	Yes, with caveat	Some sources report this as extinct, some as active
 rnr	nari1241	Nari Nari			Latn	1		west2443	No	Extinct language
-rsi	renn1236	Rennellese Sign Language		Sign		1		arti1236	No	Declared non-existent by ISO
+rsi	renn1236	Rennellese Sign Language		Sign	Signed	1		arti1236	No	Declared non-existent by ISO
 ruh	ruga1238	Ruga				1		koch1249	Yes	
 sar	sara1331	Saraveca			Latn	1		pare1273	No	Extinct language
 sbo	sabu1253	Sabüm			Latn	1		lano1247	Yes	
@@ -7512,7 +7512,7 @@ aaq	east2544	Eastern Abnaki			Latn			aben1250	Yes, with caveat	Some sources repo
 aben1250	aben1250	Abenaki						nort3414		
 adp	adap1234	Adap					dzo	book1242	No	ISO merged this into dz
 aes	alse1251	Alsea							No	Extinct language
-ajs	ghar1240	Algerian Jewish Sign Language		Sign	Zxxx			deaf1237	Yes	
+ajs	ghar1240	Algerian Jewish Sign Language		Sign	Signed			deaf1237	Yes	
 ajw	ajaw1236	Ajawa			Latn			west2998	No	Extinct language
 akk	akka1240	Akkadian	𒀝 𒅗 𒁺 𒌑		Xsux			east2678	Probably not	Historical langauge
 ana	anda1286	Andaqui			Latn				Yes, with caveat	Some sources report this as extinct, some as active
@@ -7524,7 +7524,7 @@ apv	alap1235	Alapmunte			Latn			namb1301	No	Extinct language
 aqp	atak1252	Atakapa							No	Extinct language
 arc	impe1235	Imperial Aramaic	ܐܪܡܝܐ	Spoken & Written	Armi			impe1236	Probably not	Historical langauge
 aru	arua1263	Aruá (Amazonas State)			Latn			araw1282	No	Extinct language
-asw	aust1253	Australian Aborigines Sign Language		Sign	Zxxx			auxi1235	Yes	
+asw	aust1253	Australian Aborigines Sign Language		Sign	Signed			auxi1235	Yes	
 atc	atsa1242	Atsahuaca			Latn			madr1238	No	Extinct language
 auo	auyo1240	Auyokawa			Latn			shir1276	No	Extinct language
 auv	auve1240	Occitan - Auvergnat	Auvernhat				oci	book1242	Probably not	Deprecated ISO code, merged with Occitan
@@ -7657,7 +7657,7 @@ iff	ifoo1237	Ifo			Latn			erro1239	No	Extinct language
 igs	inte1261	Interglossa			Latn			arti1236	Possibly	Constructed language
 ihw	gana1268	Bidhawal			Latn			gana1279	No	Extinct language
 ijo		Ijaw								
-ils	inte1259	International Sign		Sign	Zxxx			pidg1253	Yes	
+ils	inte1259	International Sign		Sign	Signed			pidg1253	Yes	
 iml	milu1241	Miluk			Latn			coos1248	No	Extinct language
 ims		Marsian			Latn				Probably not	Historical langauge
 imy	mily1238	Milyan			Lyci			mily1239	Probably not	Historical langauge
@@ -7708,7 +7708,7 @@ lnc	lang1334	Languedocien	Lengadocian				oci	book1242	No	ISO merged this into oc
 lng		Langobardic			Latn				Probably not	Historical langauge
 lnw		Lanima			Latn				No	Extinct language
 lre	laur1250	Laurentian						nort2947	No	Extinct language
-lsg	lyon1239	Lyons Sign Language		Sign				book1242	No	Declared non-existent by ISO
+lsg	lyon1239	Lyons Sign Language		Sign	Signed			book1242	No	Declared non-existent by ISO
 ltc	midd1344	Late Middle Chinese			Hant			midd1354	Probably not	Historical langauge
 luh	leiz1236	Leizhou Chinese			Hans	2,800,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 luvi1235	luvi1235	Luwian						luvi1234		
@@ -7736,7 +7736,7 @@ mvl	mbar1254	Mbara (Australia)			Latn			pama1251	No	Extinct language
 mwu	mitt1253	Mittu			Latn			gber1234	No	Extinct language
 mwy	mosi1247	Mosiro						okie1247	No	Declared non-existent by ISO
 mxi	moza1249	Mozarabic	مُزَرَب		Latn			unsh1234	Probably not	Historical langauge
-mzg	mona1241	Monastic Sign Language		Sign	Zxxx			auxi1235	Possibly	Sign
+mzg	mona1241	Monastic Sign Language		Sign	Signed			auxi1235	Possibly	Sign
 nah	azte1234	Nahuatl	Náhuatl	Spoken & Written	Latn				Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
 pugl1238	pugl1238	Tarantino						neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
 nci	clas1250	Classical Nahuatl	Nāhuatlahtōlli	Mostly Written	Latn			cent2258	Possibly	Nahuatl has many spoken variations but it appears that most written content (eg. the Nahuatl Wikipedia) is written in Classical Nahuatl since it's the common denominator between the nahua communities.
@@ -7785,7 +7785,7 @@ oge	oldg1234	Old Georgian						geor1253	Probably not	Historical langauge
 oht		Old Hittite			Xsux				Probably not	Historical langauge
 ohu	oldh1242	Old Hungarian			Latn			hung1287	Probably not	Historical langauge
 ojp	oldj1239	Old Japanese						japa1256	Probably not	Historical langauge
-okl	oldk1238	Old Kentish Sign Language		Sign	Zxxx			oksl1234	No	Extinct language
+okl	oldk1238	Old Kentish Sign Language		Sign	Signed			oksl1234	No	Extinct language
 okm		Middle Korean (10th-16th cent.)	중세 한국어		Hang				Probably not	Historical langauge
 oko		Old Korean (3rd-9th cent.)	고대 한국어		Hani				Probably not	Historical langauge
 okz		Old Khmer			Khmr				Probably not	Historical langauge
@@ -8165,7 +8165,7 @@ xyl	yala1242	Yalakalore			Latn			namb1301	No	Extinct language
 xzh	zhan1239	Zhang-Zhung			Marc			zhan1241	Probably not	Historical langauge
 xzm	zemg1234	Zemgalian						latv1249	No	Extinct language
 xzp		Ancient Zapotec			Latn		zap		Possibly	Will be hard to find specific data, may be better to use macrolanguage
-yds	yidd1241	Yiddish Sign Language		Sign				book1242	No	Declared non-existent by ISO
+yds	yidd1241	Yiddish Sign Language		Sign	Signed			book1242	No	Declared non-existent by ISO
 yei	yeni1253	Yeni			Latn			njer1241	No	Extinct language
 ygi		Yiningayi			Latn				No	Extinct language
 ygu	yugu1250	Yugul			Latn			mang1435	Yes, with caveat	Some sources report this as extinct, some as active
@@ -8204,13 +8204,13 @@ zrp	zarp1238	Zarphatic			Hebr			book1242	No	Extinct language
 zsk		Kaskean							Probably not	Historical langauge
 zxx		Not applicable	no linguistic content						No	Control code
 mol	mold1248	Moldavian		Spoken & Written	Latn			east2865	Probably not	Old ISO system considered it its own language. Now it is just considered a dialect of Romanian by ISO
-bvs	belg1242	Belgian Sign Language		Sign			sgn	dutc1259	No	Deprecated from ISO
-dyl	bhut1234	Bhutanese Sign Language		Sign			sgn	bhut1234	Yes, with caveat	New to ISO
+bvs	belg1242	Belgian Sign Language		Sign	Signed		sgn	dutc1259	No	Deprecated from ISO
+dyl	bhut1234	Bhutanese Sign Language		Sign	Signed		sgn	bhut1234	Yes, with caveat	New to ISO
 lfb	buuu1246	Buu (Cameroon)	Nubabo			100	bnt	jiii1234	Yes, with caveat	New to ISO
 osd	digo1242	Digor Ossetic	дигорон ӕвзаг		Cyrl	100,000	ira	osse1243	Yes, with caveat	New to ISO
 scz	shet1241	Shaetlan	Shaetlan		Latn	10,000			Yes, with caveat	New to ISO
 tvg	tugu1234	Tugunese	Mardijker		Latn	0	crp	mala1533	No	Extinct
-zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New to ISO
+zhk	kurd1260	Kurdish Sign Language		Sign	Signed	1000	sgn	leva1240	Yes, with caveat	New to ISO
 ccq	chau1262	Chaungtha				186000	rki	rakh1245	No	Combined into Rakhine in ISO
 mhv	arak1256	Arakanese					tbq	arak1255	No	Language group, not recognized by ISO anymore
 izie1238	izie1238	Izzi languages			Latn	4,000,000	alv	cent2417	Possibly	Different sources group the languages together

@@ -1,346 +1,370 @@
-From https://www.unicode.org/cldr/charts/latest/supplemental/locale_coverage.html
-Last accessed 2025-05-07
 Language	English Name	Native Name	Script	Default Region	№ Locales	Target Level	≟	Computed Level	ICU	Confirmed	🄼%	ⓜ%	ⓑ%	ⓒ%	Missing Features
-en	English	English	Latn	US	118	modern	≡	modern	ICU	100.00%	100.00%	100.00%	100.00%	100.00%	
-fil	Filipino	Filipino	Latn	PH	1	modern	≡	modern	ICU	100.00%	100.00%	100.00%	100.00%	100.00%	
-gd	Scottish Gaelic	Gàidhlig	Latn	GB	1	modern	≡	modern	ICU	100.00%	100.00%	100.00%	100.00%	100.00%	ⓜ collation, 🄼 grammar
-nn	Norwegian Nynorsk	norsk nynorsk	Latn	NO	1	modern	≡	modern	ICU	99.90%	99.90%	100.00%	100.00%	100.00%	🄼 ordinals
-ar	Arabic	‫العربية‬	Arab	EG	28	modern	≡	modern	ICU	99.40%	99.50%	99.90%	100.00%	100.00%	
-cy	Welsh	Cymraeg	Latn	GB	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-ga	Irish	Gaeilge	Latn	IE	2	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-ja	Japanese	日本語	Jpan	JP	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ta	Tamil	தமிழ்	Taml	IN	4	modern	≡	modern	ICU	99.80%	99.80%	99.90%	100.00%	100.00%	
-lv	Latvian	latviešu	Latn	LV	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-bs	Bosnian	bosanski	Latn	BA	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-ur	Urdu	‫اردو‬	Arab	PK	2	modern	≡	modern	ICU	99.70%	99.80%	99.90%	100.00%	100.00%	
-bn	Bangla	বাংলা	Beng	BD	2	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ps	Pashto	‫پښتو‬	Arab	AF	2	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-hi_Latn	Hindi (Latin)	Hindi [Latin]	Latn	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ml	Malayalam	മലയാളം	Mlym	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-hi	Hindi	हिन्दी	Deva	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-tr	Turkish	Türkçe	Latn	TR	2	modern	≡	modern	ICU	99.70%	99.80%	99.90%	100.00%	100.00%	
-mr	Marathi	मराठी	Deva	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-am	Amharic	አማርኛ	Ethi	ET	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-gu	Gujarati	ગુજરાતી	Gujr	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-kn	Kannada	ಕನ್ನಡ	Knda	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-te	Telugu	తెలుగు	Telu	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-or	Odia	ଓଡ଼ିଆ	Orya	IN	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-zh_Hant	Chinese (Traditional)	繁體中文	Hant	TW	0	modern	≡	modern	ICU	99.80%	99.80%	99.90%	100.00%	100.00%	🄼 grammar
-zh	Chinese	中文	Hans	CN	5	modern	≡	modern	ICU	99.80%	99.90%	99.90%	100.00%	100.00%	
-si	Sinhala	සිංහල	Sinh	LK	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-mk	Macedonian	македонски	Cyrl	MK	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-nl	Dutch	Nederlands	Latn	NL	7	modern	≡	modern	ICU	99.70%	99.80%	99.90%	100.00%	100.00%	
-zu	Zulu	isiZulu	Latn	ZA	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-af	Afrikaans	Afrikaans	Latn	ZA	2	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ms	Malay	Melayu	Latn	MY	4	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-chr	Cherokee	ᏣᎳᎩ	Cher	US	1	‡modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar, 🄼 ordinals, 🄼 romanization
-ko	Korean	한국어	Kore	KR	3	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-id	Indonesian	Indonesia	Latn	ID	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-th	Thai	ไทย	Thai	TH	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-lo	Lao	ລາວ	Laoo	LA	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-km	Khmer	ខ្មែរ	Khmr	KH	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	🄼 grammar
-yo	Yoruba	Èdè Yorùbá	Latn	NG	2	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar, 🄼 ordinals
-ig	Igbo	Igbo	Latn	NG	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar, 🄼 ordinals
-he	Hebrew	‫עברית‬	Hebr	IL	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-pl	Polish	polski	Latn	PL	1	modern	≡	modern	ICU	99.60%	99.70%	99.90%	100.00%	100.00%	
-lt	Lithuanian	lietuvių	Latn	LT	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-cs	Czech	čeština	Latn	CZ	1	modern	≡	modern	ICU	99.60%	99.70%	99.90%	100.00%	100.00%	
-sk	Slovak	slovenčina	Latn	SK	1	modern	≡	modern	ICU	99.60%	99.70%	99.90%	100.00%	100.00%	
-sl	Slovenian	slovenščina	Latn	SI	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ru	Russian	русский	Cyrl	RU	6	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-uk	Ukrainian	українська	Cyrl	UA	1	modern	≡	modern	ICU	99.60%	99.70%	99.90%	100.00%	100.00%	
-hsb	Upper Sorbian	hornjoserbšćina	Latn	DE	1	‡modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-be	Belarusian	беларуская	Cyrl	BY	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-sr	Serbian	српски	Cyrl	RS	4	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-sr_Latn	Serbian (Latin)	srpski (latinica)	Latn	RS	4	‡modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-dsb	Lower Sorbian	dolnoserbšćina	Latn	DE	1	‡modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-ro	Romanian	română	Latn	RO	2	modern	≡	modern	ICU	99.60%	99.70%	99.90%	100.00%	100.00%	
-hr	Croatian	hrvatski	Latn	HR	2	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-az	Azeri	azərbaycan	Latn	AZ	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-fa	Persian	‫فارسی‬	Arab	IR	2	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-uz	Uzbek	o‘zbek	Latn	UZ	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-fr	French	français	Latn	FR	46	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-so	Somali	Soomaali	Latn	SO	4	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	ⓜ collation, 🄼 grammar, 🄼 ordinals
-kk	Kazakh	қазақ тілі	Cyrl	KZ	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-pt	Portuguese	português	Latn	BR	12	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-ne	Nepali	नेपाली	Deva	NP	2	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-ha	Hausa	Hausa	Latn	NG	3	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar, 🄼 ordinals
-sq	Albanian	shqip	Latn	AL	3	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-tk	Turkmen	türkmen dili	Latn	TM	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-mn	Mongolian	монгол	Cyrl	MN	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-es	Spanish	español	Latn	ES	28	modern	≡	modern	ICU	99.90%	99.90%	99.90%	100.00%	100.00%	
-fi	Finnish	suomi	Latn	FI	1	modern	≡	modern	ICU	99.70%	99.80%	99.90%	100.00%	100.00%	
-as	Assamese	অসমীয়া	Beng	IN	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-ca	Catalan	català	Latn	ES	4	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-bg	Bulgarian	български	Cyrl	BG	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-ky	Kyrgyz	кыргызча	Cyrl	KG	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-eu	Basque	euskara	Latn	ES	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	ⓜ collation, 🄼 grammar
-de	German	Deutsch	Latn	DE	7	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-gl	Galician	galego	Latn	ES	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-hu	Hungarian	magyar	Latn	HU	1	modern	≡	modern	ICU	99.70%	99.80%	99.90%	100.00%	100.00%	
-sv	Swedish	svenska	Latn	SE	3	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-it	Italian	italiano	Latn	IT	4	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-da	Danish	dansk	Latn	DK	2	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-et	Estonian	eesti	Latn	EE	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-sw	Swahili	Kiswahili	Latn	TZ	4	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-hy	Armenian	հայերեն	Armn	AM	1	modern	≡	modern	ICU	100.00%	100.00%	99.90%	100.00%	100.00%	
-ka	Georgian	ქართული	Geor	GE	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	🄼 grammar
-el	Greek	Ελληνικά	Grek	GR	2	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-is	Icelandic	íslenska	Latn	IS	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-no	Norwegian	norsk	Latn	NO	0	modern	≡	modern	ICU	99.70%	99.70%	99.90%	100.00%	100.00%	
-yue	Cantonese	粵語	Hant	HK	3	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	ⓜ collation, 🄼 grammar
-yue_Hans	Cantonese (Simplified)	粤语 (简体)	Hans	CN	0	‡modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	ⓜ collation, 🄼 grammar
-kok	Konkani	कोंकणी	Deva	IN	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	ⓜ plurals, 🄼 grammar, 🄼 ordinals
-my	Burmese	မြန်မာ	Mymr	MM	1	modern	≡	modern	ICU	100.00%	99.90%	99.90%	100.00%	100.00%	
-vi	Vietnamese	Tiếng Việt	Latn	VN	1	modern	≡	modern	ICU	99.80%	99.80%	99.90%	100.00%	100.00%	
-pa	Punjabi	ਪੰਜਾਬੀ	Guru	IN	1	modern	≡	modern	ICU	100.00%	99.90%	99.80%	100.00%	100.00%	
-sd	Sindhi	‫سنڌي‬	Arab	PK	1	modern	≡	modern	ICU	100.00%	99.90%	99.80%	100.00%	100.00%	ⓜ collation, 🄼 grammar
-pcm	Nigerian Pidgin	Naijíriá Píjin	Latn	NG	1	modern	≡	modern	ICU	100.00%	99.90%	99.80%	100.00%	100.00%	ⓜ casing, ⓜ collation, 🄼 grammar, 🄼 ordinals
-jv	Javanese	Jawa	Latn	ID	1	modern	≡	modern	ICU	100.00%	99.90%	99.70%	100.00%	100.00%	ⓜ casing, ⓜ collation, 🄼 grammar, 🄼 ordinals
-ti	Tigrinya	ትግርኛ	Ethi	ET	2	moderate	<	modern	ICU	100.00%	100.00%	100.00%	100.00%	100.00%	ⓜ collation, 🄼 grammar, 🄼 ordinals
-ceb	Cebuano	Cebuano	Latn	PH	1	moderate	≡	moderate	ICU	99.30%	54.70%	99.90%	100.00%	100.00%	
-xh	Xhosa	IsiXhosa	Latn	ZA	1	moderate	≡	moderate	ICU	98.40%	67.80%	99.90%	100.00%	100.00%	
-fo	Faroese	føroyskt	Latn	FO	2	‡moderate	≡	moderate	ICU	100.00%	95.50%	99.90%	100.00%	100.00%	
-sc	Sardinian	sardu	Latn	IT	1	‡moderate	≡	moderate	ICU	100.00%	85.00%	99.90%	100.00%	100.00%	ⓜ collation
-ak	Akan	Akan	Latn	GH	1	moderate	≡	moderate	ICU	100.00%	97.40%	99.90%	100.00%	100.00%	ⓜ collation
-wo	Wolof	Wolof	Latn	SN	1	moderate	≡	moderate	ICU	100.00%	84.20%	99.80%	100.00%	100.00%	ⓜ casing
-tg	Tajik	тоҷикӣ	Cyrl	TJ	1	moderate	≡	moderate	ICU	99.90%	74.40%	99.80%	100.00%	100.00%	ⓜ plurals, ⓜ collation
-mi	Māori	Māori	Latn	NZ	1	moderate	≡	moderate	ICU	100.00%	79.70%	99.70%	100.00%	100.00%	ⓜ casing, ⓜ plurals, ⓜ collation
-tt	Tatar	татар	Cyrl	RU	1	moderate	≡	moderate	ICU	100.00%	46.20%	99.70%	100.00%	100.00%	ⓜ casing, ⓜ plurals, ⓜ collation
-br	Breton	brezhoneg	Latn	FR	1	‡moderate	≡	moderate	ICU	98.40%	84.50%	99.50%	100.00%	100.00%	
-qu	Quechua	Runasimi	Latn	PE	3	‡modern	>	moderate	ICU	100.00%	98.00%	99.80%	100.00%	100.00%	ⓜ plurals, ⓜ collation
-bal_Latn	Baluchi (Latin)	Balóchi [Látin]	Latn	PK	1		<	moderate		100.00%	52.70%	99.90%	100.00%	100.00%	
-ia	Interlingua	interlingua	Latn	1	1	‡basic	<	moderate	ICU	100.00%	62.30%	99.90%	100.00%	100.00%	ⓜ collation
-ku	Kurdish	kurdî [kurmancî]	Latn	TR	1		<	moderate	ICU	99.80%	52.20%	99.80%	100.00%	100.00%	ⓜ casing
-vec	Venetian	veneto	Latn	IT	1		<	moderate	ICU	100.00%	59.70%	99.80%	100.00%	100.00%	ⓜ casing, ⓜ collation
-bs_Cyrl	Bosnian (Cyrillic)	босански (ћирилица)	Cyrl	BA	1	‡basic	≡	basic	ICU	99.90%	53.30%	97.90%	100.00%	100.00%	
-brx	Bodo	बर’	Deva	IN	1	basic	≡	basic	ICU	99.50%	47.90%	97.50%	100.00%	100.00%	
-ks	Kashmiri	‫کٲشُر‬	Arab	IN	1	basic	≡	basic	ICU	96.60%	39.70%	92.50%	100.00%	100.00%	
-ee	Ewe	eʋegbe	Latn	GH	2	basic	≡	basic	ICU	96.30%	42.70%	92.10%	100.00%	100.00%	
-om	Oromo	Oromoo	Latn	ET	2	basic	≡	basic	ICU	99.30%	54.70%	90.10%	100.00%	100.00%	
-mai	Maithili	मैथिली	Deva	IN	1	basic	≡	basic	ICU	100.00%	39.50%	83.10%	100.00%	100.00%	
-kea	Kabuverdianu	kabuverdianu	Latn	CV	1	‡basic	≡	basic	ICU	98.70%	43.80%	79.60%	100.00%	100.00%	
-rm	Romansh	rumantsch	Latn	CH	1	‡basic	≡	basic	ICU	98.20%	36.70%	79.10%	100.00%	100.00%	
-uz_Cyrl	Uzbek (Cyrillic)	ўзбекча (Кирил)	Cyrl	UZ	1	‡basic	≡	basic	ICU	93.30%	31.00%	62.10%	100.00%	100.00%	
-doi	Dogri	डोगरी	Deva	IN	1	basic	≡	basic	ICU	99.80%	17.40%	30.90%	100.00%	100.00%	
-su	Sundanese	Basa Sunda	Latn	ID	1	basic	≡	basic	ICU	98.90%	10.70%	30.40%	100.00%	100.00%	
-rw	Kinyarwanda	Ikinyarwanda	Latn	RW	1	basic	≡	basic	ICU	99.50%	40.40%	28.20%	100.00%	100.00%	
-sa	Sanskrit	संस्कृत भाषा	Deva	IN	1	basic	≡	basic	ICU	95.70%	11.20%	27.80%	100.00%	100.00%	
-tn	Tswana	Setswana	Latn	ZA	2	basic	≡	basic	ICU	97.40%	37.00%	27.00%	100.00%	100.00%	
-st	Southern Sotho	Sesotho	Latn	ZA	2	basic	≡	basic	ICU	80.00%	8.30%	26.80%	100.00%	100.00%	
-nso	Northern Sotho	Sesotho sa Leboa	Latn	ZA	1	basic	≡	basic	ICU	100.00%	36.80%	26.70%	100.00%	100.00%	
-ks_Deva	Kashmiri (Devanagari)	कॉशुर (देवनागरी)	Deva	IN	1	basic	≡	basic	ICU	100.00%	10.10%	26.20%	100.00%	100.00%	
-sat	Santali	ᱥᱟᱱᱛᱟᱲᱤ	Olck	IN	1	basic	≡	basic	ICU	25.00%	10.20%	26.00%	100.00%	100.00%	
-mni	Manipuri	মৈতৈলোন্	Beng	IN	1	basic	≡	basic	ICU	100.00%	9.90%	25.00%	100.00%	100.00%	
-sd_Deva	Sindhi (Devanagari)	सिन्धी (देवनागिरी)	Deva	IN	0	basic	≡	basic	ICU	100.00%	9.30%	24.30%	100.00%	100.00%	
-gaa	Ga	Gã	Latn	GH	1	basic	≡	basic	ICU	6.90%	3.10%	9.40%	100.00%	100.00%	
-bgc	Haryanvi	हरियाणवी	Deva	IN	1	basic	≡	basic	ICU	100.00%	3.10%	9.30%	100.00%	100.00%	
-raj	Rajasthani	राजस्थानी	Deva	IN	1	basic	≡	basic	ICU	100.00%	3.10%	9.30%	100.00%	100.00%	
-bho	Bhojpuri	भोजपुरी	Deva	IN	1	basic	≡	basic	ICU	100.00%	2.80%	8.60%	100.00%	100.00%	
-kgp	Kaingang	kanhgág	Latn	BR	1	‡moderate	>	basic	ICU	99.40%	60.50%	99.00%	100.00%	100.00%	
-yrl	Nheengatu	nheẽgatu	Latn	BR	3	‡moderate	>	basic	ICU	99.40%	60.50%	99.00%	100.00%	100.00%	
-ff_Adlm	Fula (Adlam)	‫𞤆𞤵𞤤𞤢𞤪 (𞤀𞤁𞤂𞤢𞤃)‬	Adlm	GN	12	‡moderate	>	basic	ICU	99.20%	64.60%	98.30%	100.00%	100.00%	
-ast	Asturian	asturianu	Latn	ES	1	‡moderate	>	basic	ICU	99.50%	57.30%	95.60%	100.00%	100.00%	
-to	Tongan	lea fakatonga	Latn	TO	1	‡moderate	>	basic	ICU	92.20%	90.60%	92.30%	100.00%	100.00%	
-xnr	Kangri	कांगड़ी	Deva	IN	1		<	basic	ICU	100.00%	48.70%	99.50%	100.00%	100.00%	
-cv	Chuvash	чӑваш	Cyrl	RU	1		<	basic	ICU	25.10%	40.30%	97.80%	100.00%	100.00%	
-blo	Anii	anii kagɩja	Latn	BJ	1		<	basic	ICU	100.00%	57.00%	96.80%	100.00%	100.00%	
-lb	Luxembourgish	Lëtzebuergesch	Latn	LU	1		<	basic	ICU	99.40%	73.20%	89.80%	100.00%	100.00%	
-nqo	N’Ko	‫ߒߞߏ‬	Nkoo	GN	1		<	basic	ICU	99.90%	38.40%	83.60%	100.00%	100.00%	
-syr	Syriac	‫ܣܘܪܝܝܐ‬	Syrc	IQ	2		<	basic	ICU	97.80%	52.10%	82.40%	100.00%	100.00%	
-fy	Western Frisian	Frysk	Latn	NL	1		<	basic	ICU	77.10%	40.00%	81.00%	100.00%	100.00%	
-kxv	Kuvi	kuvi	Latn	IN	1		<	basic	ICU	100.00%	34.50%	79.10%	100.00%	100.00%	
-kxv_Deva	Kuvi (Devanagari)	कुवि (देवनागरी)	Deva	IN	1		<	basic	ICU	100.00%	31.80%	73.00%	100.00%	100.00%	
-kxv_Orya	Kuvi (Odia)	କୁୱି (ଅଡ଼ିଆ)	Orya	IN	1		<	basic	ICU	100.00%	31.70%	72.60%	100.00%	100.00%	
-kxv_Telu	Kuvi (Telugu)	కువి (తెలుగు)	Telu	IN	1		<	basic	ICU	100.00%	31.10%	71.30%	100.00%	100.00%	
-ug	Uyghur	‫ئۇيغۇرچە‬	Arab	CN	1		<	basic	ICU	97.00%	59.50%	71.00%	100.00%	100.00%	
-mt	Maltese	Malti	Latn	MT	1		<	basic	ICU	96.00%	49.00%	62.60%	100.00%	100.00%	
-kok_Latn	Konkani (Latin)	Konknni (Romi)	Latn	IN	1		<	basic	ICU	100.00%	15.80%	36.30%	100.00%	100.00%	
-sah	Yakut	саха тыла	Cyrl	RU	1		<	basic	ICU	93.80%	17.30%	33.70%	100.00%	100.00%	
-ie	Interlingue	Interlingue	Latn	EE	1		<	basic	ICU	13.20%	9.30%	23.50%	100.00%	100.00%	
-ii	Sichuan Yi	ꆈꌠꉙ	Yiii	CN	1		<	basic	ICU	96.50%	9.10%	23.10%	100.00%	100.00%	
-csw	Swampy Cree	ᓀᐦᐃᓇᐍᐏᐣ	Cans	CA	1		<	basic	ICU	100.00%	10.20%	21.70%	100.00%	100.00%	
-eo	Esperanto	Esperanto	Latn	1	1		<	basic	ICU	15.30%	8.70%	19.30%	100.00%	100.00%	
-oc	Occitan	occitan	Latn	FR	2		<	basic	ICU	7.10%	5.90%	15.30%	100.00%	100.00%	
-vmw	Makhuwa	emakhuwa	Latn	MZ	1		<	basic	ICU	100.00%	2.70%	10.10%	100.00%	100.00%	
-lmo	Lombard	Lombard	Latn	IT	1		<	basic	ICU	90.10%	2.70%	10.00%	100.00%	100.00%	
-nds	Low German	Neddersass’sch	Latn	DE	2		<	basic	ICU	7.30%	2.80%	9.90%	100.00%	100.00%	
-za	Zhuang	Vahcuengh	Latn	CN	1		<	basic	ICU	14.70%	2.60%	9.50%	100.00%	100.00%	
-szl	Silesian	ślōnski	Latn	PL	1		<	basic	ICU	2.90%	2.50%	8.00%	100.00%	100.00%	
-lij	Ligurian	ligure	Latn	IT	1		<	basic	ICU	1.20%	2.40%	7.20%	100.00%	100.00%	
-prg	Prussian	prūsiskan	Latn	PL	1		≡		ICU	14.50%	2.40%	9.40%	98.70%	100.00%	
-lld	Ladin	ladin	Latn	IT	1		≡			96.40%	44.90%	95.60%	97.40%	100.00%	
-ksh	Colognian	Kölsch	Latn	DE	1		≡		ICU	96.30%	29.70%	65.80%	94.80%	100.00%	
-se	Northern Sami	davvisámegiella	Latn	NO	3		≡		ICU	82.80%	23.00%	52.70%	92.40%	100.00%	
-os	Ossetic	ирон	Cyrl	GE	2		≡		ICU	94.30%	9.20%	23.00%	92.20%	100.00%	
-dz	Dzongkha	རྫོང་ཁ	Tibt	BT	1		≡		ICU	89.10%	25.40%	58.10%	90.70%	100.00%	
-ccp	Chakma	𑄌𑄋𑄴𑄟𑄳𑄦	Cakm	BD	2		≡		ICU	88.00%	53.50%	86.80%	84.50%	100.00%	
-gsw	Swiss German	Schwiizertüütsch	Latn	CH	3		≡		ICU	79.70%	28.10%	66.60%	84.40%	100.00%	
-pis	Pijin	Pijin	Latn	SB	1		≡			100.00%	2.20%	8.40%	84.40%	100.00%	
-smn	Inari Sami	anarâškielâ	Latn	FI	1		≡		ICU	95.50%	17.00%	49.10%	82.70%	100.00%	
-fur	Friulian	furlan	Latn	IT	1		≡		ICU	93.10%	19.60%	51.70%	81.80%	100.00%	
-tpi	Tok Pisin	Tok Pisin	Latn	PG	1		≡			73.90%	2.80%	10.00%	80.50%	100.00%	
-ce	Chechen	нохчийн	Cyrl	RU	1		≡		ICU	99.80%	40.60%	82.80%	80.00%	100.00%	
-en_Dsrt	English (Deseret)	𐐀𐑍𐑊𐐮𐑇 (𐐔𐐯𐑆𐐲𐑉𐐯𐐻)	Dsrt	US	1		≡			99.80%	11.60%	26.90%	78.90%	100.00%	
-ckb	Central Kurdish	‫کوردیی ناوەندی‬	Arab	IQ	2		≡		ICU	83.30%	15.60%	34.50%	78.40%	100.00%	
-mgo	Metaʼ	metaʼ	Latn	CM	1		≡		ICU	88.00%	6.10%	18.80%	77.90%	100.00%	
-sn	Shona	chiShona	Latn	ZW	1		≡		ICU	92.60%	15.30%	45.70%	77.30%	100.00%	
-mg	Malagasy	Malagasy	Latn	MG	1		≡		ICU	92.60%	15.10%	45.00%	77.30%	100.00%	
-zgh	Standard Moroccan Tamazight	ⵜⴰⵎⴰⵣⵉⵖⵜ	Tfng	MA	1		≡		ICU	97.30%	14.20%	34.20%	77.30%	100.00%	
-jgo	Ngomba	Ndaꞌa	Latn	CM	1		≡		ICU	90.40%	7.70%	23.20%	76.60%	100.00%	
-yi	Yiddish	‫ייִדיש‬	Hebr	UA	1		≡		ICU	84.10%	13.30%	31.40%	75.30%	100.00%	
-haw	Hawaiian	ʻŌlelo Hawaiʻi	Latn	US	1		≡		ICU	84.70%	8.60%	26.10%	74.70%	100.00%	
-wae	Walser	Walser	Latn	CH	1		≡		ICU	97.30%	18.90%	50.00%	70.70%	100.00%	
-ln	Lingala	lingála	Latn	CD	4		≡		ICU	59.20%	11.10%	32.20%	70.50%	100.00%	
-ewo	Ewondo	ewondo	Latn	CM	1		≡		ICU	97.20%	11.80%	33.70%	68.00%	100.00%	
-mua	Mundang	MUNDAŊ	Latn	CM	1		≡		ICU	94.30%	11.70%	33.60%	68.00%	100.00%	
-bas	Basaa	Ɓàsàa	Latn	CM	1		≡		ICU	97.10%	11.70%	33.50%	68.00%	100.00%	
-agq	Aghem	Aghem	Latn	CM	1		≡		ICU	96.90%	11.70%	33.40%	68.00%	100.00%	
-sbp	Sangu	Ishisangu	Latn	TZ	1		≡		ICU	96.90%	11.50%	33.00%	68.00%	100.00%	
-rn	Rundi	Ikirundi	Latn	BI	1		≡		ICU	96.80%	11.30%	32.40%	68.00%	100.00%	
-twq	Tasawaq	Tasawaq senni	Latn	NE	1		≡		ICU	97.00%	11.50%	32.00%	68.00%	100.00%	
-dje	Zarma	Zarmaciine	Latn	NE	1		≡		ICU	97.00%	11.50%	32.00%	68.00%	100.00%	
-yav	Yangben	nuasue	Latn	CM	1		≡		ICU	96.70%	10.80%	30.90%	68.00%	100.00%	
-lu	Luba-Katanga	Tshiluba	Latn	CD	1		≡		ICU	96.90%	11.70%	33.70%	66.70%	100.00%	
-ksf	Bafia	rikpa	Latn	CM	1		≡		ICU	97.10%	11.40%	32.70%	66.70%	100.00%	
-nmg	Kwasio	Kwasio	Latn	CM	1		≡		ICU	96.90%	11.40%	32.70%	66.70%	100.00%	
-ts	Tsonga	Xitsonga	Latn	ZA	1		≡			91.10%	7.30%	22.90%	66.70%	100.00%	ⓑ own_regions
-dua	Duala	duálá	Latn	CM	1		≡		ICU	92.60%	4.50%	14.20%	66.70%	100.00%	
-dyo	Jola-Fonyi	joola	Latn	SN	1		≡		ICU	96.10%	8.00%	23.20%	65.30%	100.00%	
-nus	Nuer	Thok Nath	Latn	SS	1		≡		ICU	89.80%	6.30%	18.50%	65.30%	100.00%	ⓑ own_regions
-nnh	Ngiemboon	Shwóŋò ngiembɔɔn	Latn	CM	1		≡		ICU	87.10%	4.30%	14.10%	64.00%	100.00%	
-lrc	Northern Luri	‫لۊری شومالی‬	Arab	IR	2		≡		ICU	99.80%	8.60%	17.80%	62.50%	100.00%	ⓑ own_regions
-dav	Taita	Kitaita	Latn	KE	1		≡		ICU	94.30%	11.70%	33.30%	61.30%	100.00%	
-ebu	Embu	Kĩembu	Latn	KE	1		≡		ICU	94.30%	11.70%	33.30%	61.30%	100.00%	
-bez	Bena	Hibena	Latn	TZ	1		≡		ICU	94.70%	11.00%	32.80%	61.30%	100.00%	
-asa	Asu	Kipare	Latn	TZ	1		≡		ICU	94.80%	11.00%	32.70%	61.30%	100.00%	
-bem	Bemba	Ichibemba	Latn	ZM	1		≡		ICU	77.90%	4.30%	13.30%	61.30%	100.00%	
-mas	Masai	Maa	Latn	KE	2		≡		ICU	89.70%	10.70%	31.90%	60.50%	100.00%	
-tzm	Central Atlas Tamazight	Tamaziɣt n laṭlaṣ	Latn	MA	1		≡		ICU	94.80%	10.60%	30.60%	60.50%	100.00%	
-vai	Vai	ꕙꔤ	Vaii	LR	1		≡		ICU	94.40%	10.80%	26.40%	60.30%	100.00%	
-luy	Luyia	Luluhia	Latn	KE	1		≡		ICU	95.00%	11.60%	33.10%	60.00%	100.00%	
-teo	Teso	Kiteso	Latn	UG	2		≡		ICU	89.90%	10.90%	32.50%	59.20%	100.00%	
-kde	Makonde	Chimakonde	Latn	TZ	1		≡		ICU	94.20%	11.60%	33.10%	58.70%	100.00%	
-guz	Gusii	Ekegusii	Latn	KE	1		≡		ICU	94.20%	11.60%	33.00%	58.70%	100.00%	
-kam	Kamba	Kikamba	Latn	KE	1		≡		ICU	94.20%	11.60%	33.00%	58.70%	100.00%	
-kln	Kalenjin	Kalenjin	Latn	KE	1		≡		ICU	94.20%	11.60%	33.00%	58.70%	100.00%	
-luo	Luo	Dholuo	Latn	KE	1		≡		ICU	96.90%	11.60%	32.90%	58.70%	100.00%	
-ki	Kikuyu	Gikuyu	Latn	KE	1		≡		ICU	94.20%	11.50%	32.90%	58.70%	100.00%	
-mer	Meru	Kĩmĩrũ	Latn	KE	1		≡		ICU	94.20%	11.50%	32.70%	58.70%	100.00%	
-rof	Rombo	Kihorombo	Latn	TZ	1		≡		ICU	90.30%	10.90%	32.50%	58.70%	100.00%	
-saq	Samburu	Kisampur	Latn	KE	1		≡		ICU	89.90%	10.90%	32.50%	58.70%	100.00%	
-ksb	Shambala	Kishambaa	Latn	TZ	1		≡		ICU	94.60%	10.90%	32.40%	58.70%	100.00%	
-rwk	Rwa	Kiruwa	Latn	TZ	1		≡		ICU	94.60%	10.90%	32.40%	58.70%	100.00%	
-jmc	Machame	Kimachame	Latn	TZ	1		≡		ICU	90.30%	10.90%	32.40%	58.70%	100.00%	
-vun	Vunjo	Kyivunjo	Latn	TZ	1		≡		ICU	90.30%	10.90%	32.40%	58.70%	100.00%	
-xog	Soga	Olusoga	Latn	UG	1		≡		ICU	94.80%	10.90%	32.30%	58.70%	100.00%	
-cgg	Chiga	Rukiga	Latn	UG	1		≡		ICU	90.40%	10.80%	32.20%	58.70%	100.00%	
-naq	Nama	Khoekhoegowab	Latn	NA	1		≡		ICU	86.30%	10.30%	32.00%	58.70%	100.00%	
-mgh	Makhuwa-Meetto	Makua	Latn	MZ	1		≡		ICU	96.40%	8.00%	22.90%	58.70%	100.00%	
-az_Cyrl	Azeri (Cyrillic)	азәрбајҹан (Кирил)	Cyrl	AZ	1		≡		ICU	96.30%	13.60%	30.40%	57.60%	100.00%	
-ses	Koyraboro Senni	Koyraboro senni	Latn	ML	1		≡		ICU	96.90%	11.50%	32.60%	57.30%	100.00%	
-sg	Sango	Sängö	Latn	CF	1		≡		ICU	94.70%	11.40%	32.50%	57.30%	100.00%	
-khq	Koyra Chiini	Koyra ciini	Latn	ML	1		≡		ICU	96.90%	11.40%	32.50%	57.30%	100.00%	
-lag	Langi	Kɨlaangi	Latn	TZ	1		≡		ICU	92.70%	10.30%	31.80%	57.30%	100.00%	
-seh	Sena	sena	Latn	MZ	1		≡		ICU	94.50%	10.60%	31.50%	57.30%	100.00%	
-ff	Fula	Pulaar	Latn	SN	12		≡		ICU	94.80%	10.80%	30.80%	57.30%	100.00%	
-kab	Kabyle	Taqbaylit	Latn	DZ	1		≡		ICU	9.90%	10.10%	20.50%	57.10%	100.00%	
-kkj	Kako	kakɔ	Latn	CM	1		≡		ICU	86.70%	4.00%	13.20%	57.10%	100.00%	
-lg	Ganda	Luganda	Latn	UG	1		≡		ICU	94.60%	10.80%	32.10%	56.00%	100.00%	
-nyn	Nyankole	Runyankore	Latn	UG	1		≡		ICU	90.20%	10.80%	32.10%	56.00%	100.00%	
-nd	North Ndebele	isiNdebele	Latn	ZW	1		≡		ICU	89.80%	10.70%	32.00%	56.00%	100.00%	
-bo	Tibetan	བོད་སྐད་	Tibt	CN	2		≡		ICU	42.60%	4.10%	10.40%	55.70%	100.00%	
-bm	Bambara	bamanakan	Latn	ML	1		≡		ICU	94.20%	11.30%	32.00%	53.90%	100.00%	
-mfe	Morisyen	kreol morisien	Latn	MU	1		≡		ICU	97.30%	11.30%	32.00%	53.30%	100.00%	
-kaa	Kara-Kalpak	қарақалпақша	Cyrl	UZ	1		≡			99.40%	12.00%	29.30%	52.60%	100.00%	
-mzn	Mazanderani	‫مازرونی‬	Arab	IR	1		≡		ICU	99.70%	22.70%	36.40%	51.60%	100.00%	
-kl	Kalaallisut	kalaallisut	Latn	GL	1		≡		ICU	65.70%	29.40%	9.80%	50.60%	100.00%	
-pap	Papiamento	Papiamentu	Latn	CW	2		≡			3.10%	1.20%	4.50%	50.00%	100.00%	
-vai_Latn	Vai (Latin)	Vai (Latn)	Latn	LR	1		≡		ICU	93.40%	9.90%	28.00%	48.70%	100.00%	
-gv	Manx	Gaelg	Latn	IM	1		≡		ICU	32.00%	1.50%	6.00%	48.00%	100.00%	
-kw	Cornish	kernewek	Latn	GB	1		≡		ICU	45.30%	1.40%	5.60%	48.00%	100.00%	
-lkt	Lakota	Lakȟólʼiyapi	Latn	US	1		≡		ICU	84.40%	4.60%	8.90%	46.70%	100.00%	
-osa	Osage	𐓏𐓘𐓻𐓘𐓻𐓟	Osge	US	1		≡			65.80%	2.00%	5.50%	45.30%	100.00%	
-mus	Muscogee	Mvskoke	Latn	US	1		≡			56.20%	1.50%	5.20%	45.30%	100.00%	
-cic	Chickasaw	Chikashshanompaʼ	Latn	US	1		≡			48.70%	1.20%	4.30%	45.30%	100.00%	
-shi_Latn	Tachelhit (Latin)	Tashelḥiyt (Latn)	Latn	MA	1		≡		ICU	92.20%	9.70%	28.40%	45.30%	100.00%	
-shi	Tachelhit	ⵜⴰⵛⵍⵃⵉⵜ	Tfng	MA	1		≡		ICU	92.10%	8.90%	22.70%	45.30%	100.00%	
-uz_Arab	Uzbek (Arabic)	‫اوزبیک (عربی)‬	Arab	AF	0		≡		ICU	60.40%	1.70%	4.90%	43.90%	100.00%	
-cad	Caddo	Caddo	Latn	US	1		≡			44.90%	1.10%	4.00%	42.70%	100.00%	
-gn	Guarani	avañe’ẽ	Latn	PY	1		≡			36.40%	1.00%	4.00%	42.70%	100.00%	
-pa_Arab	Punjabi (Arabic)	‫پنجابی (عربی)‬	Arab	PK	0		≡		ICU	99.10%	26.80%	5.40%	40.20%	100.00%	
-bss	Akoose	Akoose	Latn	CM	1		≡			100.00%	1.40%	4.90%	38.70%	100.00%	
-ms_Arab	Malay (Arabic)	‫بهاس ملايو (عرب)‬	Arab	MY	2		≡			57.70%	4.90%	10.90%	37.10%	100.00%	
-hnj	Hmong Njua	𞄀𞄄𞄰𞄩𞄍𞄜𞄰	Hmnp	US	1		≡			99.00%	2.50%	6.60%	32.60%	100.00%	
-cho	Choctaw	Chahta	Latn	US	1		≡			100.00%	0.70%	2.80%	30.70%	100.00%	
-rhg	Rohingya	‫𐴌𐴗𐴥𐴝𐴙𐴚𐴒𐴙𐴝‬	Rohg	MM	2		≡			100.00%	16.40%	6.80%	29.50%	100.00%	ⓑ own_regions
-bgn	Western Balochi	‫بلوچی [رخشانی]‬	Arab	PK	5		≡			100.00%	8.80%	14.70%	27.30%	100.00%	ⓑ own_regions
-az_Arab	Azeri (Arabic)	‫تۆرکجه‬	Arab	IR	0		≡			100.00%	2.00%	3.70%	25.70%	100.00%	ⓑ own_regions
-ss	Swati	siSwati	Latn	ZA	2		≡			28.80%	0.60%	2.30%	25.00%	100.00%	ⓑ own_regions
-bal	Baluchi	‫بلۆچی‬	Arab	PK	1		≡			9.40%	0.70%	2.20%	24.20%	100.00%	
-iu	Inuktitut	ᐃᓄᒃᑎᑐᑦ	Cans	CA	1		≡			70.50%	1.50%	4.40%	23.70%	100.00%	
-nr	South Ndebele	isiNdebele	Latn	ZA	1		≡			25.00%	0.50%	2.10%	22.70%	100.00%	ⓑ own_regions
-ve	Venda	Tshivenḓa	Latn	ZA	1		≡			22.70%	0.50%	2.10%	22.70%	100.00%	ⓑ own_regions
-sms	Skolt Sami	sääʹmǩiõll	Latn	FI	1		≡			7.70%	0.50%	2.00%	22.70%	100.00%	
-shn	Shan	တႆး	Mymr	MM	2		≡			100.00%	0.40%	1.50%	21.10%	100.00%	
-ann	Obolo	Obolo	Latn	NG	1		≡			100.00%	0.50%	1.80%	20.80%	100.00%	ⓑ own_regions
-mn_Mong	Mongolian (Mongolian)	mn (Mong)	Mong	CN	0		≡			100.00%	0.90%	2.60%	19.00%	100.00%	ⓑ own_language, ⓑ own_regions
-sdh	Southern Kurdish	‫کوردی خوارگ‬	Arab	IR	2		≡			100.00%	0.60%	1.90%	18.80%	100.00%	ⓑ own_regions
-la	Latin	Latina	Latn	VA	1		≡			1.60%	0.40%	1.70%	18.20%	100.00%	
-byn	Blin	ብሊን	Ethi	ER	1		≡			3.90%	0.40%	1.30%	18.20%	100.00%	
-tig	Tigre	ትግረ	Ethi	ER	1		≡			3.90%	0.40%	1.30%	18.20%	100.00%	
-wal	Wolaytta	ወላይታቱ	Ethi	ET	1		≡			5.20%	0.40%	1.30%	18.20%	100.00%	
-sat_Deva	Santali (Devanagari)	सानताड़ी (देवानागारी)	Deva	IN	1		≡			66.70%	0.50%	1.60%	17.90%	100.00%	ⓑ own_regions
-mni_Mtei	Manipuri (Meitei Mayek)	ꯃꯤꯇꯩꯂꯣꯟ (ꯃꯤꯇꯩ ꯃꯌꯦꯛ)	Mtei	IN	1		≡			63.60%	0.50%	1.50%	17.90%	100.00%	ⓑ own_regions
-en_Shaw	English (Shavian)	en (Shaw)	Shaw	GB	1		≡			97.00%	2.10%	5.40%	17.50%	100.00%	ⓑ own_language, ⓑ own_regions
-ssy	Saho	Saho	Latn	ER	1		≡			14.90%	0.40%	1.60%	17.30%	100.00%	
-wbp	Warlpiri	Warlpiri	Latn	AU	1		≡			100.00%	0.40%	1.40%	17.30%	100.00%	ⓑ own_regions
-cu	Church Slavic	церковнослове́нскїй	Cyrl	RU	1		≡			2.40%	0.40%	1.20%	17.10%	100.00%	
-dv	Divehi	‫ދިވެހިބަސް‬	Thaa	MV	1		≡			39.30%	0.30%	1.10%	17.10%	100.00%	
-ab	Abkhazian	Аԥсшәа	Cyrl	GE	1		≡			1.20%	0.60%	1.70%	16.90%	100.00%	
-an	Aragonese	aragonés	Latn	ES	1		≡			1.00%	0.40%	1.50%	16.90%	100.00%	
-co	Corsican	corsu	Latn	FR	1		≡			1.40%	0.40%	1.30%	16.90%	100.00%	
-myv	Erzya	эрзянь кель	Cyrl	RU	1		≡			2.50%	0.30%	1.20%	16.90%	100.00%	
-scn	Sicilian	sicilianu	Latn	IT	1		≡			0.60%	0.40%	1.10%	16.90%	100.00%	
-frr	Northern Frisian	Nordfriisk	Latn	DE	1		≡			0.10%	0.30%	1.00%	16.90%	100.00%	
-rif	Riffian	Tarifit	Latn	MA	1		≡			0.60%	0.30%	1.10%	16.70%	100.00%	
-ny	Nyanja	Nyanja	Latn	MW	1		≡			25.00%	0.40%	1.60%	16.00%	100.00%	ⓑ own_regions
-kaj	Jju	Kaje	Latn	NG	1		≡			19.10%	0.40%	1.60%	16.00%	100.00%	ⓑ own_regions
-kcg	Tyap	Katab	Latn	NG	1		≡			20.30%	0.40%	1.60%	16.00%	100.00%	ⓑ own_regions
-moh	Mohawk	Kanienʼkéha	Latn	CA	1		≡			100.00%	0.40%	1.60%	16.00%	100.00%	ⓑ own_regions
-cch	Atsam	Atsam	Latn	NG	1		≡			19.00%	0.40%	1.60%	16.00%	100.00%	ⓑ own_regions
-quc	Kʼicheʼ	Kʼicheʼ	Latn	GT	1		≡			100.00%	30.70%	1.40%	16.00%	100.00%	ⓑ own_regions
-jbo	Lojban	la .lojban.	Latn	1	1		≡			69.20%	0.30%	1.40%	16.00%	100.00%	ⓑ own_regions
-io	Ido	Ido	Latn	1	1		≡			100.00%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-wa	Walloon	walon	Latn	BE	1		≡			100.00%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-arn	Mapuche	Mapudungun	Latn	CL	1		≡			100.00%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-mic	Mi'kmaw	Lʼnuiʼsuti	Latn	CA	1		≡			47.10%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-nv	Navajo	Diné Bizaad	Latn	US	1		≡			100.00%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-ken	Kenyang	Kɛnyaŋ	Latn	CM	1		≡			100.00%	0.30%	1.30%	16.00%	100.00%	ⓑ own_regions
-ltg	Latgalian	latgalīšu	Latn	LV	1		≡			9.30%	0.30%	1.30%	16.00%	100.00%	
-sid	Sidamo	Sidaamu Afo	Latn	ET	1		≡			15.70%	0.30%	1.20%	16.00%	100.00%	
-trv	Taroko	patas Taroko	Latn	TW	1		≡			5.70%	0.40%	1.20%	16.00%	100.00%	ⓑ own_regions
-blt	Tai Dam	ꪼꪕꪒꪾ	Tavt	VN	1		≡			100.00%	0.30%	1.10%	16.00%	100.00%	ⓑ own_regions
-ba	Bashkir	башҡорт теле	Cyrl	RU	1		≡			100.00%	0.30%	1.00%	16.00%	100.00%	ⓑ own_regions
-mdf	Moksha	мокшень кяль	Cyrl	RU	1		≡			12.30%	0.30%	1.00%	16.00%	100.00%	ⓑ own_regions
-bew	Betawi	Betawi	Latn	ID	1		≡			0.20%	0.30%	0.90%	16.00%	100.00%	
-kpe	Kpelle	Kpɛlɛɛ	Latn	LR	2		≡			100.00%	0.40%	1.60%	15.80%	100.00%	ⓑ own_regions
-sma	Southern Sami	Åarjelsaemien gïele	Latn	SE	2		≡			100.00%	0.30%	1.40%	15.80%	100.00%	ⓑ own_regions
-smj	Lule Sami	julevsámegiella	Latn	SE	2		≡			100.00%	0.30%	1.40%	15.80%	100.00%	ⓑ own_regions
-gez	Geez	ግዕዝኛ	Ethi	ET	2		≡			2.90%	0.30%	1.00%	15.80%	100.00%	
-aa	Afar	Qafar	Latn	ET	3		≡			15.20%	0.50%	1.50%	15.60%	100.00%	
-bm_Nkoo	Bambara (N’Ko)	bm (Nkoo)	Nkoo	ML	1		≡			14.50%	0.30%	1.10%	15.40%	100.00%	ⓑ own_language, ⓑ own_regions
-skr	Saraiki	‫سرائیکی‬	Arab	PK	1		≡			13.50%	0.30%	1.10%	13.70%	100.00%	
-trw	Torwali	‫توروالی‬	Arab	PK	1		≡			0.30%	0.30%	1.00%	13.70%	100.00%	
-mhn	Mócheno	mhn	Latn	IT	1		≡			100.00%	0.30%	1.00%	13.30%	100.00%	ⓑ own_language, ⓑ own_regions
-tyv	Tuvinian	tyv	Cyrl	RU	1		≡			100.00%	0.20%	0.80%	13.30%	100.00%	ⓑ own_language, ⓑ own_regions
-cop	Coptic	cop	Copt	EG	1		≡			100.00%	0.20%	0.70%	13.30%	100.00%	ⓑ own_language, ⓑ own_regions
-iu_Latn	Inuktitut (Latin)	iu (Latn)	Latn	CA	1		≡			100.00%	0.30%	1.10%	13.20%	100.00%	ⓑ own_language, ⓑ own_regions
-kaa_Latn	Kara-Kalpak (Latin)	kaa (Latn)	Latn	UZ	1		≡			100.00%	0.20%	1.00%	13.20%	100.00%	ⓑ own_language, ⓑ own_regions
-apc	Levantine Arabic	‫العامية‬	Arab	SY	1		≡			12.90%	0.30%	1.00%	12.60%	100.00%	ⓑ own_regions
-kk_Arab	Kazakh (Arabic)	‫قازاق ءتىلى [توتە]‬	Arab	CN	0		≡			0.20%	0.50%	1.30%	12.40%	100.00%	
-zh_Latn	Chinese (Latin)	zh (Latn)	Latn	CN	1		≡			100.00%	0.30%	1.00%	12.00%	100.00%	ⓑ own_language, ⓑ own_regions
-ha_Arab	Hausa (Arabic)	ha (Arab)	Arab	NG	2		≡			17.50%	0.30%	1.00%	11.20%	100.00%	ⓑ own_language, ⓑ own_regions
-tok	Toki Pona	toki pona	Latn	1	1		≡		ICU	31.70%	2.80%	10.40%	97.40%	80.00%	ⓒ country_data
-ht	Haitian Creole	Kreyòl Ayisyen	Latn	HT	1		≡			100.00%	0.30%	1.00%	18.20%	80.00%	ⓒ time_cycle, ⓑ own_regions
-vo	Volapük	Volapük	Latn	1	1		≡			4.20%	0.30%	1.10%	12.00%	80.00%	ⓒ country_data, ⓑ own_regions
+#url	https://www.unicode.org/cldr/charts/latest/supplemental/locale_coverage.html														
+#datePublished	2026-10-13														
+#dateAccessed	2026-11-23														
+#version	49.0														
+af	Afrikaans	Afrikaans	Latn	ZA	2	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+am	Amharic	አማርኛ	Ethi	ET	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ar	Arabic	‫العربية‬	Arab	EG	28	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+az	Azeri	azərbaycan	Latn	AZ	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+bn	Bangla	বাংলা	Beng	BD	2	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ca	Catalan	català	Latn	ES	4	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+el	Greek	Ελληνικά	Grek	GR	2	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+en	English	English	Latn	US	124	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+es	Spanish	español	Latn	ES	28	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+fil	Filipino	Filipino	Latn	PH	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+fr	French	français	Latn	FR	46	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+gu	Gujarati	ગુજરાતી	Gujr	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+he	Hebrew	‫עברית‬	Hebr	IL	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+hi	Hindi	हिन्दी	Deva	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+id	Indonesian	Indonesia	Latn	ID	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+it	Italian	italiano	Latn	IT	4	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ja	Japanese	日本語	Jpan	JP	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+kk	Kazakh	қазақ тілі	Cyrl	KZ	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+kn	Kannada	ಕನ್ನಡ	Knda	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ko	Korean	한국어	Kore	KR	3	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ky	Kyrgyz	кыргызча	Cyrl	KG	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+lo	Lao	ລາວ	Laoo	LA	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ml	Malayalam	മലയാളം	Mlym	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+mr	Marathi	मराठी	Deva	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ms	Malay	Melayu	Latn	MY	4	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+nl	Dutch	Nederlands	Latn	NL	7	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+pa	Punjabi	ਪੰਜਾਬੀ	Guru	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+pt	Portuguese	português	Latn	BR	12	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ro	Romanian	română	Latn	RO	2	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ru	Russian	русский	Cyrl	RU	6	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+sv	Swedish	svenska	Latn	SE	3	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ta	Tamil	தமிழ்	Taml	IN	4	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+te	Telugu	తెలుగు	Telu	IN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+th	Thai	ไทย	Thai	TH	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+uk	Ukrainian	українська	Cyrl	UA	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+ur	Urdu	‫اردو‬	Arab	PK	2	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+vi	Vietnamese	Tiếng Việt	Latn	VN	1	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+zh	Chinese	中文	Hans	CN	5	modern	 ≡	modern	ICU	1.0	1.0	1.0	1.0	1.0	
+pl	Polish	polski	Latn	PL	1	modern	 ≡	modern	ICU	1.0	0.9999399651798043	1.0	1.0	1.0	🄼 digits_ordinals
+cs	Czech	čeština	Latn	CZ	1	modern	 ≡	modern	ICU	1.0	0.9999394783029716	1.0	1.0	1.0	🄼 digits_ordinals
+sk	Slovak	slovenčina	Latn	SK	1	modern	 ≡	modern	ICU	1.0	0.999939379243453	1.0	1.0	1.0	🄼 digits_ordinals
+sl	Slovenian	slovenščina	Latn	SI	1	modern	 ≡	modern	ICU	1.0	0.9999391727493917	1.0	1.0	1.0	🄼 digits_ordinals
+lt	Lithuanian	lietuvių	Latn	LT	1	modern	 ≡	modern	ICU	1.0	0.9999389201075006	1.0	1.0	1.0	🄼 digits_ordinals
+sr	Serbian	српски	Cyrl	RS	4	modern	 ≡	modern	ICU	1.0	0.9999294283697954	1.0	1.0	1.0	🄼 digits_ordinals
+hr	Croatian	hrvatski	Latn	HR	2	modern	 ≡	modern	ICU	1.0	0.9999285510145756	1.0	1.0	1.0	🄼 digits_ordinals
+de	German	Deutsch	Latn	DE	7	modern	 ≡	modern	ICU	1.0	0.9999221426346933	1.0	1.0	1.0	🄼 digits_ordinals
+fi	Finnish	suomi	Latn	FI	1	modern	 ≡	modern	ICU	1.0	0.999921160517187	1.0	1.0	1.0	🄼 digits_ordinals
+hu	Hungarian	magyar	Latn	HU	1	modern	 ≡	modern	ICU	1.0	0.999920898591995	1.0	1.0	1.0	🄼 digits_ordinals
+da	Danish	dansk	Latn	DK	2	modern	 ≡	modern	ICU	1.0	0.9999171774059964	1.0	1.0	1.0	🄼 digits_ordinals
+no	Norwegian	norsk	Latn	NO	0	modern	 ≡	modern	ICU	1.0	0.9999171774059964	1.0	1.0	1.0	🄼 digits_ordinals
+tr	Turkish	Türkçe	Latn	TR	2	modern	 ≡	modern	ICU	1.0	0.9999158390843292	1.0	1.0	1.0	🄼 digits_ordinals
+ne	Nepali	नेपाली	Deva	NP	2	modern	 ≡	modern	ICU	1.0	0.9999154119438335	1.0	1.0	1.0	🄼 digits_ordinals
+or	Odia	ଓଡ଼ିଆ	Orya	IN	1	modern	 ≡	modern	ICU	1.0	0.9999150237933379	1.0	1.0	1.0	🄼 grammar
+bg	Bulgarian	български	Cyrl	BG	1	modern	 ≡	modern	ICU	1.0	0.99991452260877	1.0	1.0	1.0	🄼 grammar
+zh_Hant	Chinese (Traditional)	繁體中文	Hant	TW	0	modern	 ≡	modern	ICU	1.0	0.9999106504646176	1.0	1.0	1.0	🄼 grammar
+my	Burmese	မြန်မာ	Mymr	MM	1	modern	 ≡	modern	ICU	1.0	0.9999055088349239	1.0	1.0	1.0	🄼 digits_ordinals
+km	Khmer	ខ្មែរ	Khmr	KH	1	modern	 ≡	modern	ICU	1.0	0.9999054105183504	1.0	1.0	1.0	🄼 grammar
+ga	Irish	Gaeilge	Latn	IE	2	modern	 ≡	modern	ICU	1.0	0.9998657988324499	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 grammar
+lv	Latvian	latviešu	Latn	LV	1	modern	 ≡	modern	ICU	1.0	0.9998602278286394	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals
+sr_Latn	Serbian (Latin)	srpski (latinica)	Latn	RS	4	modern	 ≡	modern	ICU	1.0	0.9998588567395907	1.0	1.0	1.0	🄼 digits_ordinals, 🄼 grammar
+be	Belarusian	беларуская	Cyrl	BY	1	modern	 ≡	modern	ICU	1.0	0.9998544078037417	1.0	1.0	1.0	🄼 digits_ordinals, 🄼 grammar
+hy	Armenian	հայերեն	Armn	AM	1	modern	 ≡	modern	ICU	1.0	0.9998407643312102	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals
+is	Icelandic	íslenska	Latn	IS	1	modern	 ≡	modern	ICU	1.0	0.9998399615907818	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals
+fa	Persian	‫فارسی‬	Arab	IR	2	modern	 ≡	modern	ICU	1.0	0.9998343822457767	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals
+sw	Swahili	Kiswahili	Latn	TZ	4	modern	 ≡	modern	ICU	1.0	0.9998284145504461	1.0	1.0	1.0	🄼 digits_ordinals, 🄼 grammar
+cy	Welsh	Cymraeg	Latn	GB	1	modern	 ≡	modern	ICU	1.0	0.9998133283554228	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+bs	Bosnian	bosanski	Latn	BA	1	modern	 ≡	modern	ICU	1.0	0.9997641509433962	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+uz	Uzbek	o‘zbek	Latn	UZ	1	modern	 ≡	modern	ICU	1.0	0.9997507063320592	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals
+sq	Albanian	shqip	Latn	AL	3	modern	 ≡	modern	ICU	1.0	0.9997463431132155	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+mk	Macedonian	македонски	Cyrl	MK	1	modern	 ≡	modern	ICU	1.0	0.9997436554729556	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+si	Sinhala	සිංහල	Sinh	LK	1	modern	 ≡	modern	ICU	1.0	0.9997429526175992	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals
+et	Estonian	eesti	Latn	EE	1	modern	 ≡	modern	ICU	1.0	0.9997421129545259	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+ka	Georgian	ქართული	Geor	GE	1	modern	 ≡	modern	ICU	1.0	0.9997419354838709	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+ps	Pashto	‫پښتو‬	Arab	AF	2	modern	 ≡	modern	ICU	1.0	0.9996663329996663	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+tk	Turkmen	türkmen dili	Latn	TM	1	modern	 ≡	modern	ICU	1.0	0.9996635828427249	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+mn	Mongolian	монгол	Cyrl	MN	1	modern	 ≡	modern	ICU	1.0	0.9996619337390128	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+kok	Konkani	कोंकणी	Deva	IN	1	modern	 ≡	modern	ICU	1.0	0.9996615046119997	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+as	Assamese	অসমীয়া	Beng	IN	1	modern	 ≡	modern	ICU	1.0	0.9996597771540359	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+gl	Galician	galego	Latn	ES	1	modern	 ≡	modern	ICU	1.0	0.9996575342465753	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+zu	Zulu	isiZulu	Latn	ZA	1	modern	 ≡	modern	ICU	1.0	0.99965656392204	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+ha	Hausa	Hausa	Latn	NG	3	modern	 ≡	modern	ICU	1.0	0.9995782370307887	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+ig	Igbo	Asụsụ Igbo	Latn	NG	1	modern	 ≡	modern	ICU	1.0	0.9995229462837516	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+yo	Yoruba	Èdè Yorùbá	Latn	NG	2	modern	 ≡	modern	ICU	1.0	0.9995225818772081	1.0	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+gd	Scottish Gaelic	Gàidhlig	Latn	GB	1	modern	 ≡	modern	ICU	1.0	0.9995652488950076	0.9996398991717681	1.0	1.0	ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+sd	Sindhi	‫سنڌي‬	Arab	PK	1	modern	 ≡	modern	ICU	1.0	0.99949924887331	0.9996133023975251	1.0	1.0	ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+so	Somali	Soomaali	Latn	SO	4	modern	 ≡	modern	ICU	1.0	0.9994135880036861	0.9996064541519087	1.0	1.0	ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+hi_Latn	Hindi (Latin)	Hindi [Latin]	Latn	IN	1	modern	 ≡	modern	ICU	1.0	0.9998320738874895	0.9996044303797469	1.0	1.0	
+eu	Basque	euskara	Latn	ES	1	modern	 ≡	modern	ICU	1.0	0.9994855084891099	0.9995888157894737	1.0	1.0	ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+nn	Norwegian Nynorsk	norsk nynorsk	Latn	NO	1	modern	 ≡	modern	ICU	0.9991714995857498	0.9990882718607542	0.9995845450768591	1.0	1.0	🄼 digits_ordinals, 🄼 ordinals
+yue	Cantonese	粵語	Hant	HK	3	modern	 ≡	modern	ICU	1.0	0.9997210859055411	0.9995684074233924	1.0	1.0	ⓜ collation, 🄼 grammar
+pcm	Nigerian Pidgin	Naijíriá Píjin	Latn	NG	1	modern	 ≡	modern	ICU	1.0	0.9992222606291047	0.9991575400168492	1.0	1.0	ⓜ casing, ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+jv	Javanese	Jawa	Latn	ID	1	modern	 ≡	modern	ICU	1.0	0.9991565135895033	0.999116217410517	1.0	1.0	ⓜ casing, ⓜ collation, 🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+qu	Quechua	Runasimi	Latn	PE	3	modern	 ≡	modern	ICU	1.0	0.9987523992322457	0.9990783410138249	1.0	1.0	ⓜ plurals, ⓜ collation, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+chr	Cherokee	ᏣᎳᎩ	Cher	US	1		 <	modern	ICU	1.0	0.9995687424529929	1.0	1.0	1.0	🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 ordinals, 🄼 romanization, 🄼 grammar
+ak	Akan	Akan	Latn	GH	1	moderate	 <	modern	ICU	1.0	0.9995661605206074	0.9995793016407236	1.0	1.0	ⓜ collation, 🄼 digits_ordinals, 🄼 ordinals, 🄼 grammar
+hsb	Upper Sorbian	hornjoserbšćina	Latn	DE	1		 <	modern	ICU	1.0	0.999405425492382	0.9992797983435362	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+dsb	Lower Sorbian	dolnoserbšćina	Latn	DE	1		 <	modern	ICU	1.0	0.9993979983444955	0.9992576095025983	1.0	1.0	🄼 spellout_cardinal, 🄼 spellout_ordinal, 🄼 digits_ordinals, 🄼 grammar
+cv	Chuvash	чӑваш чӗлхи	Cyrl	RU	1		 <	modern	ICU	1.0	0.9995224830879427	0.9992211838006231	1.0	1.0	ⓜ casing, ⓜ collation, 🄼 digits_ordinals, 🄼 grammar
+kk_Arab	Kazakh (Arabic)	‫قازاق ءتىلى [توتە]‬	Arab	CN	0		 <	modern	ICU	1.0	0.9995767016593295	0.9992069785884219	1.0	1.0	🄼 grammar
+yue_Hans	Cantonese (Simplified)	粤语 (简体)	Hans	CN	0		 <	modern	ICU	0.9994073722887282	0.998977314986984	0.9982736296935693	1.0	1.0	ⓜ collation, 🄼 grammar
+xh	Xhosa	IsiXhosa	Latn	ZA	1	moderate	 ≡	moderate	ICU	1.0	0.8549578517424177	1.0	1.0	1.0	
+ceb	Cebuano	Cebuano	Latn	PH	1	moderate	 ≡	moderate	ICU	0.9932942162615256	0.5397302715509386	1.0	1.0	1.0	
+ti	Tigrinya	ትግርኛ	Ethi	ET	2	moderate	 ≡	moderate	ICU	0.9997836668469443	0.9899193548387096	0.9996066089693155	1.0	1.0	ⓜ collation
+wo	Wolof	Wolof	Latn	SN	1	moderate	 ≡	moderate	ICU	1.0	0.8219521604938271	0.9995383194829178	1.0	1.0	ⓜ casing
+mi	Māori	Māori	Latn	NZ	1	moderate	 ≡	moderate	ICU	1.0	0.7808894586332709	0.9986162361623616	1.0	1.0	ⓜ casing, ⓜ plurals, ⓜ collation
+tt	Tatar	татар	Cyrl	RU	1	moderate	 ≡	moderate	ICU	0.7881162259222984	0.45314200890648193	0.9986162361623616	1.0	1.0	ⓜ casing, ⓜ plurals, ⓜ collation
+br	Breton	brezhoneg	Latn	FR	1		 <	moderate	ICU	0.9997136584900258	0.9131114130434783	1.0	1.0	1.0	
+eo	Esperanto	Esperanto	Latn	001	1		 <	moderate	ICU	1.0	0.6227308602999211	1.0	1.0	1.0	
+blo	Anii	anii kagɩja	Latn	BJ	1		 <	moderate	ICU	1.0	0.7508502728782726	0.9996164173379364	1.0	1.0	ⓜ casing
+rm	Romansh	rumantsch	Latn	CH	1		 <	moderate	ICU	1.0	0.9879768186143068	0.9995828118481435	1.0	1.0	ⓜ collation
+cop	Coptic	ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ	Copt	EG	1		 <	moderate		0.9997398543184183	0.5989649448296065	0.9973878972572922	1.0	1.0	ⓜ casing, ⓜ plurals, ⓜ collation
+shn	Shan	တႆး	Mymr	MM	2		 <	moderate	ICU	1.0	0.9912893653680482	0.9954128440366973	1.0	1.0	ⓜ plurals, ⓜ collation
+brx	Bodo	बर’	Deva	IN	1	basic	 ≡	basic	ICU	0.9928647877274349	0.4591966557615413	0.9295659295659295	1.0	1.0	
+ee	Ewe	eʋegbe	Latn	GH	2	basic	 ≡	basic	ICU	0.9556188925081434	0.40978789826462214	0.8913226621735467	1.0	1.0	
+ks	Kashmiri	‫کٲشُر‬	Arab	IN	1	basic	 ≡	basic	ICU	0.9636963696369637	0.36272200072490035	0.79279643868879	1.0	1.0	
+om	Oromo	Oromoo	Latn	ET	2	basic	 ≡	basic	ICU	0.9940749235474006	0.6417978345919388	0.7606732348111659	1.0	1.0	
+mai	Maithili	मैथिली	Deva	IN	1	basic	 ≡	basic	ICU	0.9975538160469667	0.3679666567430783	0.7474249888042992	1.0	1.0	
+rw	Kinyarwanda	Ikinyarwanda	Latn	RW	1	basic	 ≡	basic	ICU	0.9936960849369608	0.381972826687286	0.2691860465116279	1.0	1.0	
+su	Sundanese	Basa Sunda	Latn	ID	1	basic	 ≡	basic	ICU	0.9849785407725322	0.1021835000537808	0.2685995623632385	1.0	1.0	
+doi	Dogri	डोगरी	Deva	IN	1	basic	 ≡	basic	ICU	0.9937332139659804	0.1575002257744062	0.26220016542597185	1.0	1.0	
+sa	Sanskrit	संस्कृत भाषा	Deva	IN	1	basic	 ≡	basic	ICU	0.9483747609942639	0.10499156494988587	0.251679355127631	1.0	1.0	
+mni	Manipuri	মৈতৈলোন্	Beng	IN	1	basic	 ≡	basic	ICU	0.9953703703703703	0.09286209286209286	0.22617987533392697	1.0	1.0	
+ks_Deva	Kashmiri (Devanagari)	कॉशुर (देवनागरी)	Deva	IN	1	basic	 ≡	basic	ICU	0.9956989247311828	0.09200289487968157	0.22338709677419355	1.0	1.0	
+tn	Tswana	Setswana	Latn	ZA	2	basic	 ≡	basic	ICU	0.9728997289972899	0.33239123851821945	0.220997375328084	1.0	1.0	
+nso	Northern Sotho	Sesotho sa Leboa	Latn	ZA	1	basic	 ≡	basic	ICU	0.9982608695652174	0.3319200484554815	0.21953781512605042	1.0	1.0	
+st	Southern Sotho	Sesotho	Latn	ZA	2	basic	 ≡	basic	ICU	0.7952380952380952	0.07499747653174522	0.2146981627296588	1.0	1.0	
+sd_Deva	Sindhi (Devanagari)	सिन्धी (देवनागिरी)	Deva	IN	0	basic	 ≡	basic	ICU	0.9977528089887641	0.0880671668453019	0.2134698700275699	1.0	1.0	
+sat	Santali	ᱥᱟᱱᱛᱟᱲᱤ	Olck	IN	1	basic	 ≡	basic	ICU	0.25514600287218764	0.09182813816343724	0.21066565809379728	1.0	1.0	
+gaa	Ga	Gã	Latn	GH	1	basic	 ≡	basic	ICU	0.08165829145728644	0.03330956504023633	0.09425837320574162	1.0	1.0	
+bgc	Haryanvi	हरियाणवी	Deva	IN	1	basic	 ≡	basic	ICU	0.981651376146789	0.029321141039658084	0.0844943820224719	1.0	1.0	
+raj	Rajasthani	राजस्थानी	Deva	IN	1	basic	 ≡	basic	ICU	0.981651376146789	0.029321141039658084	0.0844943820224719	1.0	1.0	
+bho	Bhojpuri	भोजपुरी	Deva	IN	1	basic	 ≡	basic	ICU	0.9805825242718447	0.02547187099138721	0.07347447073474471	1.0	1.0	
+tg	Tajik	тоҷикӣ	Cyrl	TJ	1	moderate	 >	basic	ICU	0.9982469809115699	0.7206731239604736	0.9790301441677588	1.0	1.0	
+to	Tongan	lea fakatonga	Latn	TO	1	moderate	 >	basic	ICU	0.8914147828295657	0.846978837498803	0.8383838383838383	1.0	1.0	
+ba	Bashkir	башҡорт	Cyrl	RU	1		 <	basic	ICU	0.9979084645669292	0.9864436111912316	0.9912361623616236	1.0	1.0	
+ia	Interlingua	interlingua	Latn	001	1		 <	basic	ICU	0.9993426818580193	0.6075302001587162	0.9835304054054054	1.0	1.0	
+sc	Sardinian	sardu	Latn	IT	1		 <	basic	ICU	0.9993050729673384	0.8285515562510868	0.9831932773109243	1.0	1.0	
+fo	Faroese	føroyskt	Latn	FO	2		 <	basic	ICU	0.9996385542168674	0.9235845779784647	0.9794807370184254	1.0	1.0	
+vec	Venetian	veneto	Latn	IT	1		 <	basic	ICU	0.9992894362861203	0.5772013410975825	0.9760504201680672	1.0	1.0	
+bal_Latn	Baluchi (Latin)	Balóchi [Látin]	Latn	PK	1		 <	basic		0.9990794722307457	0.505090194677621	0.9642426677380475	1.0	1.0	
+kgp	Kaingang	kanhgág	Latn	BR	1		 <	basic	ICU	0.9934908389585342	0.5835902085222121	0.962993762993763	1.0	1.0	
+yrl	Nheengatu	nheẽgatu	Latn	BR	3		 <	basic	ICU	0.9934829833454019	0.5833257733829266	0.9629629629629629	1.0	1.0	
+scn	Sicilian	sicilianu	Latn	IT	1		 <	basic	ICU	0.9988267500977708	0.446845526966395	0.9623500206868019	1.0	1.0	
+xnr	Kangri	कांगड़ी	Deva	IN	1		 <	basic	ICU	0.9988344988344988	0.46738592497278036	0.9602678571428571	1.0	1.0	
+lld	Ladin	ladin	Latn	IT	1		 <	basic		0.9660350375402217	0.4582297135488625	0.9566498316498316	1.0	1.0	
+ku	Kurdish	kurdî [kurmancî]	Latn	TR	3		 <	basic	ICU	0.983300862788756	0.524614576033637	0.9552703228315831	1.0	1.0	
+bs_Cyrl	Bosnian (Cyrillic)	босански (ћирилица)	Cyrl	BA	1		 <	basic	ICU	0.9986180210060807	0.5140084388185654	0.9534436321662177	1.0	1.0	
+ff_Adlm	Fula (Adlam)	‫𞤆𞤵𞤤𞤢𞤪 (𞤀𞤁𞤂𞤢𞤃)‬	Adlm	GN	12		 <	basic	ICU	0.9911021233569262	0.6196847038772901	0.9506816359262229	1.0	1.0	
+ast	Asturian	asturianu	Latn	ES	1		 <	basic	ICU	0.9937888198757764	0.5505817568167688	0.926284751474305	1.0	1.0	
+lb	Luxembourgish	Lëtzebuergesch	Latn	LU	1		 <	basic	ICU	0.9900883041989548	0.701466615206484	0.8684596577017115	1.0	1.0	
+syr	Syriac	‫ܣܘܪܝܝܐ‬	Syrc	IQ	2		 <	basic	ICU	0.989593417231365	0.5228842832469776	0.8067295855560115	1.0	1.0	
+nqo	N’Ko	‫ߒߞߏ‬	Nkoo	GN	1		 <	basic	ICU	0.9989621172807472	0.3677238057005219	0.8050925925925926	1.0	1.0	
+fy	Western Frisian	Frysk	Latn	NL	1		 <	basic	ICU	0.7715868361029652	0.38804439056234263	0.7895200352267724	1.0	1.0	
+kea	Kabuverdianu	kabuverdianu	Latn	CV	1		 <	basic	ICU	0.9933411672542107	0.4120512548978079	0.7257632565613283	1.0	1.0	
+kxv	Kuvi	kuvi	Latn	IN	1		 <	basic	ICU	0.9981873111782478	0.3210909807010634	0.7119469026548673	1.0	1.0	
+ug	Uyghur	‫ئۇيغۇرچە‬	Arab	CN	1		 <	basic	ICU	0.9694513715710723	0.5719557195571956	0.6886715566422168	1.0	1.0	
+kxv_Deva	Kuvi (Devanagari)	कुवि (देवनागरी)	Deva	IN	1		 <	basic	ICU	0.9980211081794196	0.2954635108481262	0.6567759078830824	1.0	1.0	
+kxv_Orya	Kuvi (Odia)	କୁୱି (ଅଡ଼ିଆ)	Orya	IN	1		 <	basic	ICU	0.9980119284294234	0.2940828402366864	0.6536758193091231	1.0	1.0	
+kxv_Telu	Kuvi (Telugu)	కువి (తెలుగు)	Telu	IN	1		 <	basic	ICU	0.9979770734996628	0.28895463510848124	0.6421612046058459	1.0	1.0	
+uz_Cyrl	Uzbek (Cyrillic)	ўзбекча (Кирил)	Cyrl	UZ	1		 <	basic	ICU	0.9446958270487682	0.29054350689261565	0.5546935608999224	1.0	1.0	
+kok_Latn	Konkani (Latin)	Konknni (Romi)	Latn	IN	1		 <	basic	ICU	0.9984268484530676	0.29141580889493107	0.5361681329423265	1.0	1.0	
+ksh	Colognian	Kölsch	Latn	DE	1		 <	basic	ICU	0.9618689581095596	0.2665950013437248	0.531628532974428	1.0	1.0	
+kek	Qʼeqchiʼ	Qʼeqchiʼ	Latn	GT	1		 <	basic		1.0	0.2059982486865149	0.48198970840480276	1.0	1.0	
+mt	Maltese	Malti	Latn	MT	1		 <	basic	ICU	0.9532502226179875	0.41459952181709503	0.439015939015939	1.0	1.0	
+ki	Kikuyu	Gĩgĩkũyũ	Latn	KE	1		 <	basic	ICU	0.9554531490015361	0.14162806088682992	0.38488372093023254	1.0	1.0	
+lij	Ligurian	ligure	Latn	IT	1		 <	basic	ICU	0.18624539731559567	0.21014930525589023	0.3590062111801242	1.0	1.0	
+tyv	Tuvinian	Тыва	Cyrl	RU	1		 <	basic	ICU	0.9953488372093023	0.13678912934071463	0.3317908375751967	1.0	1.0	
+ckb	Central Kurdish	‫کوردیی ناوەندی‬	Arab	IQ	2		 <	basic	ICU	0.7897923875432526	0.15557537912578057	0.3270365997638725	1.0	1.0	
+sah	Yakut	саха тыла	Cyrl	RU	1		 <	basic	ICU	0.9352941176470588	0.16094614997483644	0.3005591798695247	1.0	1.0	
+ie	Interlingue	Interlingue	Latn	EE	1		 <	basic	ICU	0.20950155763239875	0.10087559284932507	0.24139396515087122	1.0	1.0	
+ii	Sichuan Yi	ꆈꌠꉙ	Yiii	CN	1		 <	basic	ICU	0.9580246913580247	0.08410470787299691	0.20613441587731168	1.0	1.0	
+csw	Swampy Cree	ᓀᐦᐃᓇᐍᐏᐣ	Cans	CA	1		 <	basic	ICU	1.0	0.09198923234010953	0.1800684345594525	1.0	1.0	
+oc	Occitan	occitan	Latn	FR	2		 <	basic	ICU	0.07477426636568849	0.05794013191273465	0.1471861471861472	1.0	1.0	
+quc	Kʼicheʼ	kʼicheʼ	Latn	GT	1		 <	basic		1.0	0.321957146012812	0.13662790697674418	1.0	1.0	
+pms	Piedmontese	piemontèis	Latn	IT	1		 <	basic	ICU	1.0	0.03127763041556145	0.10388856645385955	1.0	1.0	
+bua	Buriat	буряад	Cyrl	RU	1		 <	basic	ICU	0.9763779527559056	0.03240834514887583	0.09201877934272301	1.0	1.0	
+ady	Adyghe	адыгабзэ	Cyrl	RU	3		 <	basic		1.0	0.03109786388474913	0.08803611738148984	1.0	1.0	
+vmw	Makhuwa	emakhuwa	Latn	MZ	1		 <	basic	ICU	1.0	0.024676330640699348	0.08703271028037383	1.0	1.0	
+nds	Low German	Neddersass’sch	Latn	DE	2		 <	basic	ICU	0.07384341637010676	0.025725232621784347	0.08685714285714285	1.0	1.0	
+lmo	Lombard	Lombard	Latn	IT	1		 <	basic	ICU	0.9012345679012346	0.02442528735632184	0.08589669181659895	1.0	1.0	
+za	Zhuang	Vahcuengh	Latn	CN	1		 <	basic	ICU	0.145748987854251	0.023786249592701206	0.0817575083426029	1.0	1.0	
+kbd	Kabardian	къэбэрдеибзэ	Cyrl	RU	2		 <	basic		1.0	0.028225004969191017	0.081374321880651	1.0	1.0	
+suz_Sunu	Sunwar (Sunuwar)	𑯒𑯅𑯍𑯅𑯓𑯖𑯄 (𑯒𑯅𑯍𑯅𑯓𑯖𑯄)	Sunu	NP	1		 <	basic		1.0	0.02581686163775716	0.07946096654275094	1.0	1.0	
+prg	Prussian	prūsiskan	Latn	PL	1		 <	basic	ICU	0.14794007490636704	0.021414066826656822	0.07179727827311122	1.0	1.0	
+szl	Silesian	ślōnski	Latn	PL	1		 <	basic	ICU	0.02967032967032967	0.023652694610778444	0.07165824529168581	1.0	1.0	
+se	Northern Sami	davvisámegiella	Latn	NO	3		 ≡		ICU	0.8269689737470167	0.20133381398702235	0.39423523942352395	0.9230769230769231	1.0	
+os	Ossetic	ирон	Cyrl	GE	2		 ≡		ICU	0.9433962264150944	0.08324816500975564	0.19133419133419133	0.9210526315789473	1.0	
+dz	Dzongkha	རྫོང་ཁ	Tibt	BT	1		 ≡		ICU	0.8888081395348837	0.23525273841824942	0.517113783533765	0.9058823529411765	1.0	
+gsw	Swiss German	Schwiizertüütsch	Latn	CH	3		 ≡		ICU	0.7970540098199672	0.2695373250388802	0.6381322957198443	0.8552631578947368	1.0	
+ccp	Chakma	𑄌𑄋𑄴𑄟𑄳𑄦	Cakm	BD	2		 ≡		ICU	0.8798180512329423	0.5194446916436771	0.8435427233710495	0.84375	1.0	
+pis	Pijin	Pijin	Latn	SB	1		 ≡			1.0	0.020247842443018367	0.07184579439252337	0.8421052631578947	1.0	
+smn	Inari Sami	anarâškielâ	Latn	FI	1		 ≡		ICU	0.9521094640820981	0.14855978512549783	0.3642823306489815	0.8378378378378378	1.0	
+mrh	Mara	Mara	Latn	IN	2		 ≡			1.0	0.10477624784853701	0.2319956019791094	0.8311688311688312	1.0	ⓑ own_regions
+fur	Friulian	furlan	Latn	IT	1		 ≡		ICU	0.9287833827893175	0.17730923694779116	0.42739018087855296	0.8289473684210527	1.0	
+tpi	Tok Pisin	Tok Pisin	Latn	PG	1		 ≡			0.743801652892562	0.026554547466253596	0.08761682242990654	0.8157894736842105	1.0	
+ce	Chechen	нохчийн	Cyrl	RU	1		 ≡		ICU	0.9982942430703625	0.38950097213220997	0.7991434689507495	0.7972972972972973	1.0	
+en_Dsrt	English (Deseret)	𐐀𐑍𐑊𐐮𐑇 (𐐔𐐯𐑆𐐲𐑉𐐯𐐻)	Dsrt	US	1		 ≡			0.9982758620689656	0.10318728450088302	0.22873279209318742	0.7929292929292929	1.0	
+sn	Shona	chiShona	Latn	ZW	1		 ≡		ICU	0.9222222222222223	0.1367065687556584	0.3642557651991614	0.7837837837837838	1.0	
+mg	Malagasy	Malagasy	Latn	MG	1		 ≡		ICU	0.922752808988764	0.1351894662780179	0.3598326359832636	0.7837837837837838	1.0	
+zgh	Standard Moroccan Tamazight	ⵜⴰⵎⴰⵣⵉⵖⵜ	Tfng	MA	1		 ≡		ICU	0.9688427299703264	0.13232082588842564	0.3065825067628494	0.7837837837837838	1.0	
+mgo	Metaʼ	metaʼ	Latn	CM	1		 ≡		ICU	0.8797250859106529	0.05437304549581358	0.14840062926061878	0.7763157894736842	1.0	
+yi	Yiddish	‫ייִדיש‬	Hebr	UA	1		 ≡		ICU	0.8376383763837638	0.1207293489271572	0.2645947081058379	0.7631578947368421	1.0	
+jgo	Ngomba	Ndaꞌa	Latn	CM	1		 ≡		ICU	0.9038461538461539	0.06844336765596608	0.18329831932773108	0.7631578947368421	1.0	
+haw	Hawaiian	ʻŌlelo Hawaiʻi	Latn	US	1		 ≡		ICU	0.8410138248847926	0.07634202840165173	0.20684210526315788	0.7567567567567568	1.0	
+wae	Walser	Walser	Latn	CH	1		 ≡		ICU	0.9700214132762313	0.16932171125137763	0.4043321299638989	0.7162162162162162	1.0	
+ln	Lingala	lingála	Latn	CD	4		 ≡		ICU	0.5929951690821256	0.10170174201993756	0.27229800629590767	0.7142857142857143	1.0	
+lzz	Laz	Lazuri	Latn	TR	1		 ≡			1.0	0.032107603861590193	0.09670206819452208	0.7027027027027027	1.0	
+ewo	Ewondo	ewondo	Latn	CM	1		 ≡		ICU	0.9717171717171718	0.10884203554476211	0.2932636469221835	0.6891891891891891	1.0	
+bas	Basaa	Ɓàsàa	Latn	CM	1		 ≡		ICU	0.9715447154471545	0.10817971078485485	0.29152148664343785	0.6891891891891891	1.0	
+mua	Mundang	MUNDAŊ	Latn	CM	1		 ≡		ICU	0.9428007889546351	0.10801278518681803	0.2913522925130586	0.6891891891891891	1.0	
+agq	Aghem	Aghem	Latn	CM	1		 ≡		ICU	0.9693877551020408	0.10749365412206158	0.289611143354614	0.6891891891891891	1.0	
+sbp	Sangu	Ishisangu	Latn	TZ	1		 ≡		ICU	0.9688796680497925	0.10587975243147657	0.28613053613053613	0.6891891891891891	1.0	
+rn	Rundi	Ikirundi	Latn	BI	1		 ≡		ICU	0.9682875264270613	0.10389036251105217	0.28088578088578087	0.6891891891891891	1.0	
+twq	Tasawaq	Tasawaq senni	Latn	NE	1		 ≡		ICU	0.9695740365111561	0.10600324499729584	0.27904391328515843	0.6891891891891891	1.0	
+dje	Zarma	Zarmaciine	Latn	NE	1		 ≡		ICU	0.9695121951219512	0.10578691184424013	0.2784880489160645	0.6891891891891891	1.0	
+yav	Yangben	nuasue	Latn	CM	1		 ≡		ICU	0.9669603524229075	0.09956948890606027	0.2688734030197445	0.6891891891891891	1.0	
+lu	Luba-Katanga	Tshiluba	Latn	CD	1		 ≡		ICU	0.9694501018329938	0.10797966401414677	0.291958041958042	0.6756756756756757	1.0	
+ksf	Bafia	rikpa	Latn	CM	1		 ≡		ICU	0.970954356846473	0.105838207703344	0.2849680789320952	0.6756756756756757	1.0	
+nmg	Kwasio	Kwasio	Latn	CM	1		 ≡		ICU	0.9688796680497925	0.10561748151418165	0.2843876958792803	0.6756756756756757	1.0	
+ts	Tsonga	Xitsonga	Latn	ZA	1		 ≡			0.9027355623100304	0.06494293505706494	0.18210526315789474	0.6756756756756757	1.0	ⓑ own_regions
+dua	Duala	duálá	Latn	CM	1		 ≡		ICU	0.9265536723163842	0.04160688665710186	0.12362159024956472	0.6756756756756757	1.0	
+dyo	Jola-Fonyi	joola	Latn	SN	1		 ≡		ICU	0.9616519174041298	0.07449160035366932	0.20279720279720279	0.6621621621621622	1.0	
+nus	Nuer	Thok Nath	Latn	SS	1		 ≡		ICU	0.8975265017667845	0.05849889624724062	0.16083916083916083	0.6621621621621622	1.0	ⓑ own_regions
+nnh	Ngiemboon	Shwóŋò ngiembɔɔn	Latn	CM	1		 ≡		ICU	0.8711340206185567	0.03860887096774194	0.11204188481675392	0.6486486486486487	1.0	
+lrc	Northern Luri	‫لۊری شومالی‬	Arab	IR	2		 ≡		ICU	0.9977827050997783	0.08005822416302766	0.1605308219178082	0.631578947368421	1.0	ⓑ own_regions
+dav	Taita	Kitaita	Latn	KE	1		 ≡		ICU	0.9426877470355731	0.1073477493380406	0.28870779976717115	0.6216216216216216	1.0	
+ebu	Embu	Kĩembu	Latn	KE	1		 ≡		ICU	0.9426877470355731	0.1073477493380406	0.28870779976717115	0.6216216216216216	1.0	
+asa	Asu	Kipare	Latn	TZ	1		 ≡		ICU	0.9484126984126984	0.09843513377082282	0.26130389064143006	0.6216216216216216	1.0	
+bez	Bena	Hibena	Latn	TZ	1		 ≡		ICU	0.9465346534653465	0.09843513377082282	0.26130389064143006	0.6216216216216216	1.0	
+bem	Bemba	Ichibemba	Latn	ZM	1		 ≡		ICU	0.7787234042553192	0.038775304663108065	0.10620399579390116	0.6216216216216216	1.0	
+mas	Masai	Maa	Latn	KE	2		 ≡		ICU	0.8974854932301741	0.09540600443280274	0.2540768016833246	0.6133333333333333	1.0	
+tzm	Central Atlas Tamazight	Tamaziɣt n laṭlaṣ	Latn	MA	1		 ≡		ICU	0.948	0.09559114274416766	0.24736578023080782	0.6133333333333333	1.0	
+vai	Vai	ꕙꔤ	Vaii	LR	1		 ≡		ICU	0.9437984496124031	0.10013082419241219	0.23605947955390336	0.6103896103896104	1.0	
+luy	Luyia	Luluhia	Latn	KE	1		 ≡		ICU	0.9502982107355865	0.10750551876379691	0.289044289044289	0.6081081081081081	1.0	
+teo	Teso	Kiteso	Latn	UG	2		 ≡		ICU	0.8994307400379506	0.09732016925246827	0.25881115202524985	0.6	1.0	
+kde	Makonde	Chimakonde	Latn	TZ	1		 ≡		ICU	0.9424603174603174	0.10673289183222959	0.2867132867132867	0.5945945945945946	1.0	
+guz	Gusii	Ekegusii	Latn	KE	1		 ≡		ICU	0.9423459244532804	0.1065121412803532	0.28613053613053613	0.5945945945945946	1.0	
+kam	Kamba	Kikamba	Latn	KE	1		 ≡		ICU	0.9423459244532804	0.1065121412803532	0.28613053613053613	0.5945945945945946	1.0	
+kln	Kalenjin	Kalenjin	Latn	KE	1		 ≡		ICU	0.9423459244532804	0.1065121412803532	0.28613053613053613	0.5945945945945946	1.0	
+luo	Luo	Dholuo	Latn	KE	1		 ≡		ICU	0.9692622950819673	0.10643236074270557	0.28554778554778554	0.5945945945945946	1.0	
+mer	Meru	Kĩmĩrũ	Latn	KE	1		 ≡		ICU	0.9418837675350702	0.10562913907284768	0.2837995337995338	0.5945945945945946	1.0	
+xog	Soga	Olusoga	Latn	UG	1		 ≡		ICU	0.948	0.09746490253509746	0.25842105263157894	0.5945945945945946	1.0	
+rof	Rombo	Kihorombo	Latn	TZ	1		 ≡		ICU	0.9028571428571428	0.09722921914357682	0.25842105263157894	0.5945945945945946	1.0	
+saq	Samburu	Kisampur	Latn	KE	1		 ≡		ICU	0.8994307400379506	0.09722921914357682	0.25842105263157894	0.5945945945945946	1.0	
+ksb	Shambala	Kishambaa	Latn	TZ	1		 ≡		ICU	0.946	0.09726290273709726	0.2578947368421053	0.5945945945945946	1.0	
+rwk	Rwa	Kiruwa	Latn	TZ	1		 ≡		ICU	0.946	0.09726290273709726	0.2578947368421053	0.5945945945945946	1.0	
+jmc	Machame	Kimachame	Latn	TZ	1		 ≡		ICU	0.9026717557251909	0.09702770780856423	0.2578947368421053	0.5945945945945946	1.0	
+vun	Vunjo	Kyivunjo	Latn	TZ	1		 ≡		ICU	0.9026717557251909	0.09702770780856423	0.2578947368421053	0.5945945945945946	1.0	
+cgg	Chiga	Rukiga	Latn	UG	1		 ≡		ICU	0.9040307101727447	0.09658575888810556	0.2565720294426919	0.5945945945945946	1.0	
+naq	Nama	Khoekhoegowab	Latn	NA	1		 ≡		ICU	0.8633879781420765	0.08943466172381835	0.2356046065259117	0.5945945945945946	1.0	
+mgh	Makhuwa-Meetto	Makua	Latn	MZ	1		 ≡		ICU	0.9642857142857143	0.07349690539345712	0.1987179487179487	0.5945945945945946	1.0	
+az_Cyrl	Azeri (Cyrillic)	азәрбајҹан (Кирил)	Cyrl	AZ	1		 ≡		ICU	0.9593175853018373	0.12372142666548075	0.2573099415204678	0.5816326530612245	1.0	
+sg	Sango	Sängö	Latn	CF	1		 ≡		ICU	0.9481037924151696	0.10657546337157987	0.28579743888242143	0.581081081081081	1.0	
+ses	Koyraboro Senni	Koyraboro senni	Latn	ML	1		 ≡		ICU	0.9691991786447639	0.10600706713780919	0.2837209302325581	0.581081081081081	1.0	
+khq	Koyra Chiini	Koyra ciini	Latn	ML	1		 ≡		ICU	0.9691358024691358	0.10578621908127209	0.28313953488372096	0.581081081081081	1.0	
+seh	Sena	sena	Latn	MZ	1		 ≡		ICU	0.9447852760736196	0.09482497730253203	0.25078698845750264	0.581081081081081	1.0	
+lag	Langi	Kɨlaangi	Latn	TZ	1		 ≡		ICU	0.9274509803921569	0.08945508647944951	0.23464491362763915	0.581081081081081	1.0	
+ff	Fula	Pulaar	Latn	SN	12		 ≡		ICU	0.9497098646034816	0.0982204306361223	0.2506166748889985	0.5789473684210527	1.0	
+kab	Kabyle	Taqbaylit	Latn	DZ	1		 ≡		ICU	0.11289833080424887	0.11346418732782369	0.23304912708079578	0.5789473684210527	1.0	
+kkj	Kako	kakɔ	Latn	CM	1		 ≡		ICU	0.8674033149171271	0.03605332256109877	0.10515247108307045	0.5789473684210527	1.0	
+lg	Ganda	Luganda	Latn	UG	1		 ≡		ICU	0.9456740442655935	0.09645490354509645	0.25526315789473686	0.5675675675675675	1.0	
+nyn	Nyankole	Runyankore	Latn	UG	1		 ≡		ICU	0.9021113243761996	0.09622166246851385	0.25526315789473686	0.5675675675675675	1.0	
+nd	North Ndebele	isiNdebele	Latn	ZW	1		 ≡		ICU	0.8984674329501916	0.09602015113350126	0.25473684210526315	0.5675675675675675	1.0	
+bo	Tibetan	བོད་སྐད་	Tibt	CN	2		 ≡		ICU	0.4261501210653753	0.03826580544137796	0.09351892127011745	0.5584415584415584	1.0	
+bm	Bambara	bamanakan	Latn	ML	1		 ≡		ICU	0.9418837675350702	0.1047660882934329	0.27896253602305476	0.5466666666666666	1.0	
+mfe	Morisyen	kreol morisien	Latn	MU	1		 ≡		ICU	0.9729166666666667	0.10457155477031801	0.27906976744186046	0.5405405405405406	1.0	
+kaa	Kara-Kalpak	қарақалпақша	Cyrl	UZ	1		 ≡			0.1265497076023392	0.10585457979225685	0.2577777777777778	0.5194805194805194	1.0	
+kl	Kalaallisut	kalaallisut	Latn	GL	1		 ≡		ICU	0.6559418785677218	0.2635970940506578	0.0809278350515464	0.5131578947368421	1.0	
+mzn	Mazanderani	‫مازرونی‬	Arab	IR	1		 ≡		ICU	0.9965034965034965	0.2166473317865429	0.34886703719538265	0.5106382978723404	1.0	
+pap	Papiamento	Papiamentu	Latn	CW	2		 ≡			0.0603882099209202	0.01780821917808219	0.04782820888238165	0.5064935064935064	1.0	
+vai_Latn	Vai (Latin)	Vai (Latn)	Latn	LR	1		 ≡		ICU	0.9339407744874715	0.09130864740138446	0.2427912341407151	0.4935064935064935	1.0	
+gv	Manx	Gaelg	Latn	IM	1		 ≡		ICU	0.3197969543147208	0.012745408486383787	0.03907496012759171	0.4864864864864865	1.0	
+kw	Cornish	kernewek	Latn	GB	1		 ≡		ICU	0.453125	0.011208249271463798	0.03444402845376263	0.4864864864864865	1.0	
+lkt	Lakota	Lakȟólʼiyapi	Latn	US	1		 ≡		ICU	0.8448844884488449	0.04289662797125484	0.07728337236533958	0.47297297297297297	1.0	
+osa	Osage	𐓏𐓘𐓻𐓘𐓻𐓟	Osge	US	1		 ≡			0.6581196581196581	0.01833839918946302	0.048895157498824636	0.4594594594594595	1.0	
+mus	Muscogee	Mvskoke	Latn	US	1		 ≡			0.5617977528089888	0.014061116031886626	0.045081967213114756	0.4594594594594595	1.0	
+cic	Chickasaw	Chikashshanompaʼ	Latn	US	1		 ≡			0.4868421052631579	0.011182462356067317	0.03747072599531616	0.4594594594594595	1.0	
+shi_Latn	Tachelhit (Latin)	Tashelḥiyt (Latn)	Latn	MA	1		 ≡		ICU	0.9218436873747495	0.0847135487374423	0.21470455570590888	0.4574468085106383	1.0	
+shi	Tachelhit	ⵜⴰⵛⵍⵃⵉⵜ	Tfng	MA	1		 ≡		ICU	0.9216867469879518	0.07867059318468658	0.18064516129032257	0.4574468085106383	1.0	
+uz_Arab	Uzbek (Arabic)	‫اوزبیک (عربی)‬	Arab	AF	0		 ≡		ICU	0.6106194690265486	0.015693267944716895	0.04196078431372549	0.44329896907216493	1.0	
+cad	Caddo	Caddo	Latn	US	1		 ≡			0.4492753623188406	0.009964570416297608	0.03454332552693208	0.43243243243243246	1.0	
+gn	Guarani	avañe’ẽ	Latn	PY	1		 ≡			0.36363636363636365	0.009632418069087689	0.03454332552693208	0.43243243243243246	1.0	
+pa_Arab	Punjabi (Arabic)	‫پنجابی (عربی)‬	Arab	PK	0		 ≡		ICU	0.9908779931584949	0.24210900684627013	0.0453125	0.40625	1.0	
+bss	Akoose	Akoose	Latn	CM	1		 ≡			1.0	0.013259668508287293	0.0425160163075131	0.3918918918918919	1.0	
+sus	Susu	sus	Latn	GN	2		 ≡			1.0	0.008635004981733644	0.0310122878876536	0.38666666666666666	1.0	ⓑ own_language, ⓑ own_regions
+ms_Arab	Malay (Arabic)	‫بهاس ملايو (عرب)‬	Arab	MY	2		 ≡			0.5775656324582339	0.04577803423735334	0.0986093552465234	0.375	1.0	
+hnj	Hmong Njua	𞄀𞄄𞄰𞄩𞄍𞄜𞄰	Hmnp	US	1		 ≡			0.9900990099009901	0.02295379039565086	0.05925925925925926	0.32941176470588235	1.0	
+cho	Choctaw	Chahta	Latn	US	1		 ≡			1.0	0.006643046944198406	0.024004683840749413	0.3108108108108108	1.0	
+rhg	Rohingya	‫𐴌𐴗𐴥𐴝𐴙𐴚𐴒𐴙𐴝‬	Rohg	MM	2		 ≡			1.0	0.15280387696568093	0.0612153708668454	0.2987012987012987	1.0	ⓑ own_regions
+bgn	Western Balochi	‫بلوچی [رخشانی]‬	Arab	PK	5		 ≡			1.0	0.08247722426826905	0.13276231263383298	0.2755102040816326	1.0	ⓑ own_regions
+az_Arab	Azeri (Arabic)	‫تۆرکجه‬	Arab	IR	0		 ≡			1.0	0.018733907484684363	0.031444099378881984	0.26	1.0	ⓑ own_regions
+ss	Swati	siSwati	Latn	ZA	2		 ≡			0.288135593220339	0.005259963584867489	0.018489170628631802	0.25333333333333335	1.0	ⓑ own_regions
+bal	Baluchi	‫بلۆچی‬	Arab	PK	1		 ≡			0.09363295880149813	0.006451026712702162	0.018837018837018837	0.24468085106382978	1.0	
+iu	Inuktitut	ᐃᓄᒃᑎᑐᑦ	Cans	CA	1		 ≡			0.7052631578947368	0.013112491373360938	0.03394568690095846	0.24	1.0	
+nr	South Ndebele	isiNdebele	Latn	ZA	1		 ≡			0.25	0.0046535154274152755	0.01638477801268499	0.22972972972972974	1.0	ⓑ own_regions
+ve	Venda	Tshivenḓa	Latn	ZA	1		 ≡			0.22727272727272727	0.0046535154274152755	0.01638477801268499	0.22972972972972974	1.0	ⓑ own_regions
+sms	Skolt Sami	sääʹmǩiõll	Latn	FI	1		 ≡			0.07650273224043716	0.004093404037584892	0.014374700527072353	0.22972972972972974	1.0	
+ht	Haitian Creole	Kreyòl Ayisyen	Latn	HT	1		 ≡			1.0	0.004317980513728964	0.015807962529274005	0.21621621621621623	1.0	ⓑ own_regions
+ann	Obolo	Obolo	Latn	NG	1		 ≡			1.0	0.0043132050431320505	0.015734265734265736	0.21052631578947367	1.0	ⓑ own_regions
+mn_Mong	Mongolian (Mongolian)	mn (Mong)	Mong	CN	0		 ≡			1.0	0.008463008463008462	0.02169463774048301	0.19230769230769232	1.0	ⓑ own_language, ⓑ own_regions
+sdh	Southern Kurdish	‫کوردی خوارگ‬	Arab	IR	2		 ≡			1.0	0.005737851891698046	0.015891934843067144	0.18947368421052632	1.0	ⓑ own_regions
+la	Latin	Latina	Latn	VA	1		 ≡			0.07253269916765755	0.011925411968777104	0.02803203661327231	0.18421052631578946	1.0	
+hrx	Hunsrik	Hunsrückisch	Latn	BR	1		 ≡			0.0821917808219178	0.004073095552619991	0.01440922190201729	0.18421052631578946	1.0	
+byn	Blin	ብሊን	Ethi	ER	1		 ≡			0.03857566765578635	0.0038740439058309326	0.011732851985559567	0.18421052631578946	1.0	
+wal	Wolaytta	ወላይታቱ	Ethi	ET	1		 ≡			0.05172413793103448	0.0036867277799920288	0.011296882060551287	0.18421052631578946	1.0	
+tig	Tigre	ትግረ	Ethi	ER	1		 ≡			0.03869047619047619	0.0035714285714285713	0.010833333333333334	0.18421052631578946	1.0	
+sgs	Samogitian	sgs	Latn	LT	1		 ≡			0.6190476190476191	0.003105837381540177	0.010370961308336658	0.18421052631578946	1.0	ⓑ own_language, ⓑ own_regions
+mni_Mtei	Manipuri (Meitei Mayek)	ꯃꯤꯇꯩꯂꯣꯟ (ꯃꯤꯇꯩ ꯃꯌꯦꯛ)	Mtei	IN	1		 ≡			0.6363636363636364	0.004456327985739751	0.013814616755793227	0.18085106382978725	1.0	ⓑ own_regions
+sat_Deva	Santali (Devanagari)	सानताड़ी (देवानागारी)	Deva	IN	1		 ≡			0.6666666666666666	0.004066418163334463	0.01225114854517611	0.18085106382978725	1.0	ⓑ own_regions
+ssy	Saho	Saho	Latn	ER	1		 ≡			0.14893617021276595	0.0039706174310105225	0.013164556962025316	0.17567567567567569	1.0	
+wbp	Warlpiri	Warlpiri	Latn	AU	1		 ≡			1.0	0.003321523472099203	0.012295081967213115	0.17567567567567569	1.0	ⓑ own_regions
+en_Shaw	English (Shavian)	𐑦𐑙𐑜𐑤𐑦𐑖 (Shaw)	Shaw	GB	1		 ≡			0.09487666034155598	0.019335398007868085	0.04598104598104598	0.175	1.0	
+cu	Church Slavic	церковнослове́нскїй	Cyrl	RU	1		 ≡			0.028761061946902654	0.003842653453331985	0.01169864295741694	0.17333333333333334	1.0	
+dv	Divehi	‫ދިވެހިބަސް‬	Thaa	MV	1		 ≡			0.46875	0.003838420764028514	0.011231281198003328	0.17333333333333334	1.0	
+ab	Abkhazian	Аԥсшәа	Cyrl	GE	1		 ≡			0.012799109627156371	0.0058350100603621734	0.016181229773462782	0.17105263157894737	1.0	
+an	Aragonese	aragonés	Latn	ES	1		 ≡			0.012987012987012988	0.004102051025512757	0.013360739979445015	0.17105263157894737	1.0	
+co	Corsican	corsu	Latn	FR	1		 ≡			0.013398294762484775	0.003684039440892838	0.0126861555432984	0.17105263157894737	1.0	
+frr	Northern Frisian	Nordfriisk	Latn	DE	1		 ≡			0.002551640340218712	0.004511422537915147	0.011932078935291418	0.17105263157894737	1.0	
+myv	Erzya	эрзянь кель	Cyrl	RU	1		 ≡			0.025252525252525252	0.0032408345148875837	0.010328638497652582	0.17105263157894737	1.0	
+rif	Riffian	Tarifit	Latn	MA	1		 ≡			0.015952597994530537	0.0068945139367674576	0.015534842432312472	0.16883116883116883	1.0	
+suz	Sunwar	suz	Deva	NP	1		 ≡			1.0	0.0035317860746720484	0.0111731843575419	0.16666666666666666	1.0	ⓑ own_language, ⓑ own_regions
+moh	Mohawk	Kanienʼkéha	Latn	CA	1		 ≡			1.0	0.00387511071744907	0.013466042154566744	0.16216216216216217	1.0	ⓑ own_regions
+cch	Atsam	Atsam	Latn	NG	1		 ≡			0.19047619047619047	0.003873395307658256	0.013434579439252336	0.16216216216216217	1.0	ⓑ own_regions
+ny	Nyanja	Nyanja	Latn	MW	1		 ≡			0.25	0.003743045017703591	0.012684989429175475	0.16216216216216217	1.0	ⓑ own_regions
+kaj	Jju	Kaje	Latn	NG	1		 ≡			0.19117647058823528	0.003741530994033775	0.012658227848101266	0.16216216216216217	1.0	ⓑ own_regions
+kcg	Tyap	Katab	Latn	NG	1		 ≡			0.203125	0.003741530994033775	0.012658227848101266	0.16216216216216217	1.0	ⓑ own_regions
+jbo	Lojban	la .lojban.	Latn	001	1		 ≡			0.6923076923076923	0.003210806023029229	0.0117096018735363	0.16216216216216217	1.0	ⓑ own_regions
+arn	Mapuche	Mapudungun	Latn	CL	1		 ≡			1.0	0.0029893711248892827	0.011124121779859485	0.16216216216216217	1.0	ⓑ own_regions
+mic	Mi'kmaw	Lʼnuiʼsuti	Latn	CA	1		 ≡			0.47058823529411764	0.0029893711248892827	0.011124121779859485	0.16216216216216217	1.0	ⓑ own_regions
+nv	Navajo	Diné Bizaad	Latn	US	1		 ≡			1.0	0.0029893711248892827	0.011124121779859485	0.16216216216216217	1.0	ⓑ own_regions
+ken	Kenyang	Kɛnyaŋ	Latn	CM	1		 ≡			1.0	0.0029850746268656717	0.011078717201166181	0.16216216216216217	1.0	ⓑ own_regions
+ltg	Latgalian	latgalīšu	Latn	LV	1		 ≡			0.09411764705882353	0.0029830957905203847	0.011027278003482298	0.16216216216216217	1.0	
+sid	Sidamo	Sidaamu Afo	Latn	ET	1		 ≡			0.1568627450980392	0.0029379760609358	0.010626398210290829	0.16216216216216217	1.0	
+io	Ido	Ido	Latn	001	1		 ≡			1.0	0.0029337379868487608	0.010570824524312896	0.16216216216216217	1.0	ⓑ own_regions
+wa	Walloon	walon	Latn	BE	1		 ≡			1.0	0.0029304769603880356	0.010509721492380452	0.16216216216216217	1.0	ⓑ own_regions
+trv	Taroko	patas Taroko	Latn	TW	1		 ≡			0.05660377358490566	0.003665768194070081	0.010474090407938258	0.16216216216216217	1.0	ⓑ own_regions
+blt	Tai Dam	ꪼꪕꪒꪾ	Tavt	VN	1		 ≡			1.0	0.0028363047001620746	0.009398496240601503	0.16216216216216217	1.0	ⓑ own_regions
+mdf	Moksha	мокшень кяль	Cyrl	RU	1		 ≡			0.12307692307692308	0.0027361167409809487	0.008936970837253057	0.16216216216216217	1.0	ⓑ own_regions
+bew	Betawi	Betawi	Latn	ID	1		 ≡			0.002005515166708448	0.002610461181475394	0.008849557522123894	0.16216216216216217	1.0	
+kpe	Kpelle	Kpɛlɛɛ	Latn	LR	2		 ≡			1.0	0.004096092106719805	0.014043300175541252	0.16	1.0	ⓑ own_regions
+oka	Okanagan	n̓səl̓xcin̓	Latn	CA	2		 ≡			1.0	0.0029890401859847225	0.011117612638970159	0.16	1.0	ⓑ own_regions
+sma	Southern Sami	Åarjelsaemien gïele	Latn	SE	2		 ≡			1.0	0.0028837209302325583	0.010057471264367816	0.16	1.0	ⓑ own_regions
+smj	Lule Sami	julevsámegiella	Latn	SE	2		 ≡			1.0	0.0028837209302325583	0.010057471264367816	0.16	1.0	ⓑ own_regions
+gez	Geez	ግዕዝኛ	Ethi	ET	2		 ≡			0.028481012658227847	0.0028381287923272655	0.008726003490401396	0.16	1.0	
+aa	Afar	Qafar	Latn	ET	3		 ≡			0.15217391304347827	0.004157339302846178	0.013347570742124934	0.15789473684210525	1.0	
+bm_Nkoo	Bambara (N’Ko)	bm (Nkoo)	Nkoo	ML	1		 ≡			0.171875	0.003421900161030596	0.010662957811775614	0.15584415584415584	1.0	ⓑ own_language, ⓑ own_regions
+mww	Hmong Daw	mww	Hmnp	US	1		 ≡			0.6224489795918368	0.013493102406605579	0.033827618164967564	0.1411764705882353	1.0	ⓑ own_language
+skr	Saraiki	‫سرائیکی‬	Arab	PK	1		 ≡			0.136986301369863	0.003156441112645492	0.009777777777777778	0.13829787234042554	1.0	
+brh	Brahui	‫براہوئی‬	Arab	PK	1		 ≡			0.009115770282588878	0.003150226422524119	0.009734513274336283	0.13829787234042554	1.0	
+trw	Torwali	‫توروالی‬	Arab	PK	1		 ≡			0.0029850746268656717	0.003088504970562687	0.00960698689956332	0.13829787234042554	1.0	
+pi	Pali	pi	Latn	GB	1		 ≡			1.0	0.002325066430469442	0.008782201405152224	0.13513513513513514	1.0	ⓑ own_language, ⓑ own_regions
+mhn	Mòcheno	mhn	Latn	IT	1		 ≡			1.0	0.002322238195289174	0.008726003490401396	0.13513513513513514	1.0	ⓑ own_language, ⓑ own_regions
+xdq	Kaitag	xdq	Cyrl	RU	1		 ≡			1.0	0.002128090798540738	0.0070555032925682035	0.13513513513513514	1.0	ⓑ own_language, ⓑ own_regions
+kaa_Latn	Kara-Kalpak (Latin)	kaa (Latn)	Latn	UZ	1		 ≡			1.0	0.00227765726681128	0.008379888268156424	0.13333333333333333	1.0	ⓑ own_language, ⓑ own_regions
+iu_Latn	Inuktitut (Latin)	iu (Latn)	Latn	CA	1		 ≡			1.0	0.0023277467411545625	0.008180943214629451	0.13333333333333333	1.0	ⓑ own_language, ⓑ own_regions
+bqi	Bakhtiari	‫لوری بختیاری‬	Arab	IR	1		 ≡			0.005739514348785872	0.0035707392395290484	0.010156580617858655	0.1276595744680851	1.0	
+apc	Levantine Arabic	‫العامية‬	Arab	SY	1		 ≡			0.13043478260869565	0.0028605247583349774	0.008888888888888889	0.1276595744680851	1.0	ⓑ own_regions
+zh_Latn	Chinese (Latin)	zh (Latn)	Latn	CN	1		 ≡			1.0	0.0031847133757961785	0.009164969450101833	0.12195121951219512	1.0	ⓑ own_language, ⓑ own_regions
+ha_Arab	Hausa (Arabic)	ha (Arab)	Arab	NG	2		 ≡			0.17543859649122806	0.0027287611424413314	0.008200082000820008	0.1134020618556701	1.0	ⓑ own_language, ⓑ own_regions
+ary	Moroccan Arabic	ary	Arab	MA	1		 ≡			1.0	0.0022700355309909197	0.007123775601068566	0.10869565217391304	1.0	ⓑ own_language, ⓑ own_regions
+ku_Arab	Kurdish (Arabic)	ku (Arab)	Arab	IQ	0		 ≡			1.0	0.0024236983842010774	0.00716275368085953	0.10204081632653061	1.0	ⓑ own_language, ⓑ own_regions
+tok	Toki Pona	toki pona	Latn	001	1		 ≡		ICU	0.8555008210180624	0.10828935795954266	0.2665134979896611	0.9736842105263158	0.8	ⓒ country_data
+isv	Interslavic	Medžuslovjansky	Latn	001	1		 ≡			1.0	0.0025462194176906895	0.009362200117027502	0.13333333333333333	0.8	ⓒ country_data, ⓑ own_regions
+isv_Cyrl	Interslavic (Cyrillic)	Меджусловјанскы (Cyrl)	Cyrl	001	1		 ≡			1.0	0.0023305299422433884	0.007522331922896097	0.13333333333333333	0.8	ⓒ country_data, ⓑ own_regions
+vo	Volapük	Volapük	Latn	001	1		 ≡			0.04205607476635514	0.002625997374002626	0.008952080042127435	0.12162162162162163	0.8	ⓒ country_data, ⓑ own_regions

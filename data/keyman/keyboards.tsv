@@ -504,7 +504,7 @@ keyman_greek_tonizo	Greek Tonizo	el	Grek	Grek	131	1627	windows,macos,linux,deskt
 keyman_greekclassical	Greek Classical	cpg,el,grc,pnt,tsd,yej	Grek	Grek	502	22301	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_grkpoly2	Greek Polytonic Unicode	el,grc,cop	Copt	Copt	275	10332	windows,desktopWeb,ios,android,macos
 keyman_haida_u	Haida Unicode	hdn			25	266	windows,macos
-keyman_hainam	hainam	nan	Hans	Hans	16	740	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_hainam	hainam	hnm	Hans	Hans	16	740	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_hakka	hakka	hak	Hans	Hans	22	714	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_hanifi_rohingya	Hanifi Rohingya	rhg	Rohg	Rohg	50	1125	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_hanunoo	Hanunoo	hnn,tl,bku,tgt,tbk,tbw	Latn	Latn	42	1149	windows,macos,linux,desktopWeb,ios,android,mobileWeb
@@ -1005,10 +1005,10 @@ keyman_tagbanwa_inscript	Tagbanwa Inscript	tgt	Latn	Latn	24	679	windows,macos,li
 keyman_tai_lanna_thai	Tai Lanna (Thai Layout)	nod	Lana	Lana	56	631	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_tai_tham_my	Tai Tham MY	khb	Talu	Talu	170	4273	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_taichow	taichow	wuu	Hans	Hans	22	846	windows,macos,linux,desktopWeb,ios,android,mobileWeb
-keyman_taigi_poj	PhahTaigi POJ	nan	Hans	Hans	74	1906	windows,macos,linux,desktopWeb,ios,android,mobileWeb
-keyman_taigi_sdwxv	Taigi SDWXV	nan	Hans	Hans	23	632	windows,macos,linux,desktopWeb,ios,android,mobileWeb
-keyman_taigi_telex	Taigi Telex	nan	Hans	Hans	28	737	windows,macos,linux,desktopWeb,ios,android,mobileWeb
-keyman_taigi_viet_telex	Taigi Viet Telex	nan	Hans	Hans	44	1132	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_taigi_poj	PhahTaigi POJ	nan,hokk1242	Hans	Hans	74	1906	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_taigi_sdwxv	Taigi SDWXV	nan,hokk1242	Hans	Hans	23	632	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_taigi_telex	Taigi Telex	nan,hokk1242	Hans	Hans	28	737	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_taigi_viet_telex	Taigi Viet Telex	nan,hokk1242	Hans	Hans	44	1132	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_tainua	Tai Nua	tdd	Tale	Tale	47	1596	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_taiwan_austronesian	Taiwan Austronesian	ami	Latn	Latn	39	696	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_takri	Takri	xnr	Deva	Deva	10	511	windows,macos,linux,desktopWeb,ios,android,mobileWeb
@@ -1020,7 +1020,7 @@ keyman_teggargrent_lat	Teggargrent	oua			42	599	windows,macos,linux,desktopWeb,i
 keyman_tem_kdh	Clavier Tem	kdh	Latn	Latn	32	1101	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_tengwar	Tengwar	sjn,qya	Latn	Latn	62	3851	windows,macos
 keyman_tengwar_quenya	Tengwar	qya,sjn	Latn	Latn	120	1507	windows,macos,linux,desktopWeb,ios,android,mobileWeb
-keyman_teochew	teochew	nan	Hans	Hans	28	682	windows,macos,linux,desktopWeb,ios,android,mobileWeb
+keyman_teochew	teochew	nan,chao1238	Hans	Hans	28	682	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_tfnalgonquin	Timiskaming FN Algonquin	alq	Latn	Latn	16	116	windows,macos,linux,desktopWeb,ios,android,mobileWeb
 keyman_thai-uni	Thai Unicode	th	Thai	Thai	221	10012	windows,macos
 keyman_thamizha_anjal_paangu	அஞ்சல் பாங்கு | Anjal Paangu	ta	Taml	Taml	406	22205	windows,macos,linux,desktopWeb,ios,android,mobileWeb
