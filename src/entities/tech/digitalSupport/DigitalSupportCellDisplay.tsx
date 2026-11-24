@@ -57,7 +57,7 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({
         {showValues ? (
           <>
             {score < 10 && <span className="opacity-0">0</span>}
-            {score.toFixed(0)} <span className="text-xs opacity-30">/10</span>
+            {score.toFixed(1)} <span className="text-xs opacity-30">/10</span>
           </>
         ) : (
           <div className="h-4" />

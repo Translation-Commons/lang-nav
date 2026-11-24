@@ -6,6 +6,8 @@ export enum ColorGradient {
   DivergingGreenToRed = 4, // Green - White - Red
   StopLightRedToGreen = 11, // Red - Yellow - Green
   StopLightGreenToRed = 12, // Green - Yellow - Red
+  StopLightSunrise = 13, // Black - Red - Orange - Yellow - Blue
+  StopLightSunset = 14, // Blue - Yellow - Orange - Red - Black
   HueRainbowBlueToRed = 21, // Blue - Green - Yellow - Orange - Red
   HueRainbowRedToBlue = 22, // Red - Orange - Yellow - Green - Blue
   OklabRainbowBlueToRed = 23, // Blue - Green - Yellow - Orange - Red with more even perceptual spacing (via Oklab interpolation)

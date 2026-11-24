@@ -22,6 +22,31 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
       return (value: number) => {
         return `hsl(${value * 120}, 80%, ${80 - Math.abs(value - 0.5) * 40}%)`;
       };
+    case ColorGradient.StopLightSunrise:
+      return (value: number) => {
+        if (value < 0.2) {
+          // Black to red
+          const localValue = value / 0.2;
+          return `hsl(0,  ${localValue * 80}%, ${localValue * 30 + 30}%)`;
+        } else if (value < 0.6) {
+          // Red to yellow
+          const localValue = (value - 0.2) / (0.6 - 0.2);
+          return `hsl(${0 + localValue * 60}, 80%, 60%)`;
+        } else if (value < 0.8) {
+          // Yellow to white
+          const localValue = (value - 0.6) / (0.8 - 0.6);
+          return `hsl(60, ${20 * localValue + 80}%, ${40 * localValue + 60}%)`;
+        } else {
+          // White to blue
+          const localValue = (value - 0.8) / (1 - 0.8);
+          return `hsl(210, 80%, ${100 - 40 * localValue}%)`;
+
+          // // Yellow to blue (via white)
+          // const localValue = (value - 0.7) / (1 - 0.7); // 0 ... 0.25 ... 0.5 ... 0.75 ... 1
+          // const lightValue = 1 - 2 * Math.abs(localValue - 0.5); // 0 ... 0.5 ... 1 ... 0.5 ... 0
+          // return `hsl(${60 + localValue * 180}, ${20 * lightValue + 80}%, ${40 * lightValue + 60}%)`;
+        }
+      };
     case ColorGradient.HueRainbowBlueToRed:
       // hsl(240, 90%, 60%) -> hsl(180, 80%, 60%) -> hsl(120, 90%, 60%) -> hsl(60, 90%, 60%) -> hsl(0, 90%, 60%)
       // No purples (hues between 240 and 360) because then high & low values would look similar
@@ -59,6 +84,8 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
     case ColorGradient.StopLightGreenToRed:
       return (value: number) =>
         getColorGradientFunction(ColorGradient.StopLightRedToGreen)(1 - value);
+    case ColorGradient.StopLightSunset:
+      return (value: number) => getColorGradientFunction(ColorGradient.StopLightSunrise)(1 - value);
     case ColorGradient.HueRainbowRedToBlue:
       return (value: number) =>
         getColorGradientFunction(ColorGradient.HueRainbowBlueToRed)(1 - value);
