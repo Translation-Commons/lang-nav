@@ -121,7 +121,7 @@ const TierHeader: React.FC<{
         <Button
           variant="ghost"
           onClick={() => toggleTier(tier)}
-          className="w-full  font-bold text-md"
+          className="w-full font-bold text-md"
         >
           {DigitalSupportTier[tier]}
           <ChevronLeftIcon

@@ -25,7 +25,7 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
     case ColorGradient.StopLightSunrise:
       return (value: number) => {
         if (value < 0.2) {
-          // Black to red
+          // Dark gray to red
           const localValue = value / 0.2;
           return `hsl(0,  ${localValue * 80}%, ${localValue * 30 + 30}%)`;
         } else if (value < 0.6) {

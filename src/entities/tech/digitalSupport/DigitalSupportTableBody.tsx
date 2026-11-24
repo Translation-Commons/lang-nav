@@ -44,7 +44,7 @@ const DigitalSupportTableBody: React.FC<Props> = ({
             <td key={index}>
               <div
                 className={cn(
-                  'truncate transition-w duration-1000',
+                  'truncate transition-[width] duration-1000',
                   getColumnWidth(showValues, column.showData, column.cat, column.factor),
                 )}
               >
