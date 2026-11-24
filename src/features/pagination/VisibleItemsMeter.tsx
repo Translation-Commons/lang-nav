@@ -14,9 +14,11 @@ import PaginationControls from './PaginationControls';
 
 interface Props {
   ents: EntityData[];
+  /** On a map the limit counts what is in view, so there are no pages to step through. */
+  isLimitPerMapView?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
+const VisibleItemsMeter: React.FC<Props> = ({ ents, isLimitPerMapView = false }) => {
   const { page: pageParam, limit, paramsLevel } = usePageParams();
   const filterFunction = useAllFilters();
 
@@ -44,11 +46,15 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents }) => {
       <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
         <div className="flex flex-nowrap gap-2 text-sm items-center">
           Showing up to <LimitInput showTitle={false} />
-          {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
+          {isLimitPerMapView ? (
+            <>results in the map view, out of {nFiltered.toLocaleString()}.</>
+          ) : (
+            <>{nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.</>
+          )}
         </div>
         {/* Providing a local way to set filters if we are inside a context rather than the page view */}
         {paramsLevel === 'local' && <FiltersPopover />}
-        {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
+        {nPages > 1 && !isLimitPerMapView && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>
   );

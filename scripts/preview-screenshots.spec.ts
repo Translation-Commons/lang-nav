@@ -107,10 +107,8 @@ test('capture hierarchy.png — hierarchy/tree view', async ({ page }) => {
 
 test('capture map.png — territory map colored by number of languages', async ({ page }) => {
   await loadPage(page, 'view=Map&entType=Territory&colorBy=%23+of+Languages');
-  const mapImg = page.locator('img[alt="World map"]');
-  await mapImg.waitFor({ state: 'visible' });
-  // grandparent = the bordered map container div
-  const mapContainer = mapImg.locator('xpath=../..');
+  const mapContainer = page.locator('.MapZoomContainer').first();
+  await page.locator('.maplibregl-map[data-map-idle="true"]').first().waitFor();
   const box = await getBox(mapContainer);
   await screenshotClip(page, 'map', { x: box.x - 5 + 300, y: box.y - 5 });
 });

@@ -50,7 +50,7 @@ function ViewMap() {
   return (
     <MapContainer>
       <div>{getMapDescription(entType)}</div>
-      {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
+      {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} isLimitPerMapView />}
       <EntityMap
         entities={filteredEntities}
         allowSidebar={false /* turned off until we have a better UX plan for the sidebar */}
