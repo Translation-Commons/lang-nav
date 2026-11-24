@@ -1,7 +1,7 @@
 import type { Map as MapLibreMap } from 'maplibre-gl';
 import { useEffect } from 'react';
 
-import { applyZoomLimits, WORLD_BOUNDS } from './zoomLimits';
+import { applyZoomLimits, showWholeWorld } from './zoomLimits';
 
 /** Keeps showing the same area when the map is resized, by zooming with its width. */
 function useKeepViewOnResize(map: MapLibreMap | null) {
@@ -18,7 +18,7 @@ function useKeepViewOnResize(map: MapLibreMap | null) {
       if (map.isMoving()) return;
       const zoomChange = Math.log2(width / lastWidth);
       lastWidth = width;
-      if (wasShowingWorld) map.fitBounds(WORLD_BOUNDS, { duration: 0 });
+      if (wasShowingWorld) showWholeWorld(map, 0);
       else map.setZoom(map.getZoom() + zoomChange);
     };
     map.on('resize', onResize);

@@ -10,10 +10,16 @@ import ZoomControls from '../ZoomControls';
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 const setShowMapBorders = vi.fn();
+const setShowMapAsGlobe = vi.fn();
 
-function renderControls(showMapBorders: boolean) {
+function renderControls(showMapBorders: boolean, showMapAsGlobe = false) {
   vi.mocked(usePageParams).mockReturnValue(
-    createMockUsePageParams({ showMapBorders, setShowMapBorders }),
+    createMockUsePageParams({
+      showMapBorders,
+      setShowMapBorders,
+      showMapAsGlobe,
+      setShowMapAsGlobe,
+    }),
   );
   render(<ZoomControls zoomIn={vi.fn()} zoomOut={vi.fn()} resetView={vi.fn()} />);
 }
@@ -35,5 +41,23 @@ describe('ZoomControls borders button', () => {
     expect(button).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(button);
     expect(setShowMapBorders).toHaveBeenCalledWith(false);
+  });
+});
+
+describe('ZoomControls globe button', () => {
+  beforeEach(() => setShowMapAsGlobe.mockClear());
+
+  it('switches between the flat map and the globe', () => {
+    renderControls(false, false);
+    fireEvent.click(screen.getByRole('button', { name: 'Show as a globe' }));
+    expect(setShowMapAsGlobe).toHaveBeenCalledWith(true);
+  });
+
+  it('shows as pressed while the globe is on', () => {
+    renderControls(false, true);
+    const button = screen.getByRole('button', { name: 'Show as a flat map' });
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(button);
+    expect(setShowMapAsGlobe).toHaveBeenCalledWith(false);
   });
 });

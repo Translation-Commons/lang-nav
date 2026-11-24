@@ -14,9 +14,14 @@ import type { MapThemeColors } from './useMapThemeColors';
  * ourselves, so there is no tile server or API key. Without a `glyphs` URL, labels use the
  * browser's own fonts, which covers every script.
  */
-export function getBaseMapStyle(colors: MapThemeColors, showBorders: boolean): StyleSpecification {
+export function getBaseMapStyle(
+  colors: MapThemeColors,
+  showBorders: boolean,
+  isGlobe: boolean,
+): StyleSpecification {
   return {
     version: 8,
+    projection: { type: isGlobe ? 'globe' : 'mercator' },
     sources: {
       [COUNTRIES_SOURCE_ID]: {
         type: 'geojson',

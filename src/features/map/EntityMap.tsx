@@ -42,7 +42,7 @@ const EntityMap: React.FC<Props> = ({
   allowSidebar = false,
   allowColorBar = true,
 }) => {
-  const { colorBy, entType, limit, pinned, updatePageParams } = usePageParams();
+  const { colorBy, entType, limit, pinned, showMapAsGlobe, updatePageParams } = usePageParams();
   const sortFunction = useSortFunction();
   const colors = useMapThemeColors();
   const container = useContainerWidth();
@@ -56,7 +56,7 @@ const EntityMap: React.FC<Props> = ({
   );
   const coloringFunctions = useColors({ ents: drawableEntities });
   const entityBounds = useMemo(() => getEntityBounds(drawableEntities), [drawableEntities]);
-  const camera = useMapCamera(entityBounds);
+  const camera = useMapCamera(entityBounds, showMapAsGlobe);
   const content = useMapContent({
     drawableEntities,
     coloringFunctions,

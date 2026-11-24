@@ -1,4 +1,4 @@
-import { Grid2x2Icon, Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
+import { GlobeIcon, Grid2x2Icon, Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import React from 'react';
 
 import ZIndex from '@features/layers/ZIndex';
@@ -15,10 +15,11 @@ type Props = {
 };
 
 const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWidth = 800 }) => {
-  const { showMapBorders, setShowMapBorders } = usePageParams();
+  const { showMapBorders, setShowMapBorders, showMapAsGlobe, setShowMapAsGlobe } = usePageParams();
+  const globeLabel = showMapAsGlobe ? 'Show as a flat map' : 'Show as a globe';
   const bordersLabel = showMapBorders ? 'Hide country borders' : 'Show country borders';
   const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
-  // Small maps, like the one in a territory's details, are too short for five full-size buttons.
+  // Small maps, like the one in a territory's details, are too short for six full-size buttons.
   const isSmall = containerWidth < 500;
   return (
     <div
@@ -51,6 +52,16 @@ const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetView, containerWi
         variant="secondary"
       >
         <Maximize2Icon />
+      </Button>
+      <Button
+        aria-label={globeLabel}
+        title={globeLabel}
+        aria-pressed={showMapAsGlobe}
+        className="cursor-pointer h-8 w-8"
+        onClick={() => setShowMapAsGlobe(!showMapAsGlobe)}
+        variant={showMapAsGlobe ? 'active' : 'secondary'}
+      >
+        <GlobeIcon />
       </Button>
       <Button
         aria-label={bordersLabel}

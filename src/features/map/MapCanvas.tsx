@@ -38,9 +38,13 @@ const MapCanvas: React.FC<Props> = ({
   onLoad,
   ...pointer
 }) => {
-  // A new style only when the theme or borders change; react-map-gl re-adds the layers below.
-  const { showMapBorders } = usePageParams();
-  const mapStyle = useMemo(() => getBaseMapStyle(colors, showMapBorders), [colors, showMapBorders]);
+  // A new style only when the theme, borders or projection change; react-map-gl then re-adds
+  // the layers below.
+  const { showMapBorders, showMapAsGlobe } = usePageParams();
+  const mapStyle = useMemo(
+    () => getBaseMapStyle(colors, showMapBorders, showMapAsGlobe),
+    [colors, showMapBorders, showMapAsGlobe],
+  );
 
   return (
     <MapLibreMap

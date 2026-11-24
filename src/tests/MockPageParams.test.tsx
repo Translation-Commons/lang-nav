@@ -25,6 +25,8 @@ export const createMockUsePageParams = (
     setLanguageCodeFormat: () => {},
     showMapBorders: false,
     setShowMapBorders: () => {},
+    showMapAsGlobe: false,
+    setShowMapAsGlobe: () => {},
     ...overrides,
   };
 };
