@@ -1,1 +1,0 @@
-import{X as e}from"./index-L8lVA_m4.js";import{H as a}from"./LanguageRetirementReason-B5WCoSt6.js";const d=({lang:r,className:t})=>!r.standardLanguage||r.ID===r.standardLanguage.ID?null:e.jsxs("span",{className:t,children:["Most writers use the standard register: ",e.jsx(a,{entRef:r.standardLanguage}),"."]});export{d as L};
