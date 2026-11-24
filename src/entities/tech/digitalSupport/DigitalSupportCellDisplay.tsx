@@ -20,9 +20,17 @@ import getDigitalSupportFactorScore from './getDigitalSupportFactorScore';
 type Props = DigitalSupportColumn & {
   design?: '1' | '2';
   ent: LanguageData;
+  showValues: boolean;
 };
 
-const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, design = '2' }) => {
+const DigitalSupportCellDisplay: React.FC<Props> = ({
+  ent,
+  tier,
+  cat,
+  factor,
+  design = '2',
+  showValues = true,
+}) => {
   const { colorGradient } = usePageParams();
   const applyColorGradient = getColorGradientFunction(colorGradient);
   const score = getGroupedDigitalSupportFactorScore(ent, tier, cat, factor);
@@ -46,11 +54,23 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, de
         className="rounded w-full min-w-4 px-2 text-center"
         style={{ backgroundColor: applyColorGradient(score / 10) }}
       >
-        {score < 10 && <span className="opacity-0">0</span>}
-        {score.toFixed(0)} <span className="text-xs opacity-30">/10</span>
+        {showValues ? (
+          <>
+            {score < 10 && <span className="opacity-0">0</span>}
+            {score.toFixed(0)} <span className="text-xs opacity-30">/10</span>
+          </>
+        ) : (
+          <div className="h-4" />
+        )}
       </div>
     );
   }
+  // if (design === '3') {
+  //   // pie chart
+  //   return <svg>
+
+  //   </svg>;
+  // }
 };
 
 function getGroupedDigitalSupportFactorScore(

@@ -1,3 +1,4 @@
+import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback, useMemo, useState } from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -25,6 +26,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
   const [openTiers, setOpenTiers] = useState<DigitalSupportTier[]>(
     Object.values(DigitalSupportTier).filter((v) => typeof v === 'number'),
   );
+  const [showValues, setShowValues] = useState(true);
   const [openCats, setOpenCats] = useState<DigitalSupportCategory[]>([]);
   const toggleTier = useCallback((tier: DigitalSupportTier) => {
     setOpenTiers((prev) =>
@@ -54,7 +56,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
 
   return (
     <>
-      <div>
+      <div className="flex items-center gap-2">
         <Button
           variant="ghost"
           onClick={() =>
@@ -63,9 +65,18 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
             )
           }
         >
+          {openTiers.length === AllDigitalSupportTiers.length ? (
+            <SquareCheckIcon />
+          ) : openTiers.length === 0 ? (
+            <SquareIcon />
+          ) : (
+            <SquareMinusIcon />
+          )}
           {openTiers.length === AllDigitalSupportTiers.length
-            ? 'Collapse all tiers'
-            : 'Expand all tiers'}
+            ? 'All tiers expanded'
+            : openTiers.length === 0
+              ? 'All tiers collapsed'
+              : 'Some tiers expanded'}
         </Button>
         <Button
           variant="ghost"
@@ -76,9 +87,23 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
           }
           disabled={openTiers.length === 0}
         >
+          {openCats.length === AllDigitalSupportCategories.length ? (
+            <SquareCheckIcon />
+          ) : openCats.length === 0 ? (
+            <SquareIcon />
+          ) : (
+            <SquareMinusIcon />
+          )}
+
           {openCats.length === AllDigitalSupportCategories.length
-            ? 'Collapse all categories'
-            : 'Expand all categories'}
+            ? 'All categories expanded'
+            : openCats.length === 0
+              ? 'All categories collapsed'
+              : 'Some categories expanded'}
+        </Button>
+        <Button variant="ghost" onClick={() => setShowValues((prev) => !prev)}>
+          {showValues ? <SquareCheckIcon /> : <SquareIcon />}
+          {showValues ? 'Showing values' : 'Hiding values'}
         </Button>
       </div>
       <div className="max-w-200 max-h-200 truncate overflow-auto relative">
@@ -101,6 +126,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
             ents={ents}
             isPending={isPending}
             visibleColumns={visibleColumns}
+            showValues={showValues}
           />
         </table>
       </div>

@@ -15,9 +15,15 @@ type Props = {
   ents: LanguageData[];
   isPending: boolean;
   visibleColumns: DigitalSupportColumn[];
+  showValues: boolean;
 };
 
-const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColumns }) => {
+const DigitalSupportTableBody: React.FC<Props> = ({
+  ents,
+  isPending,
+  visibleColumns,
+  showValues,
+}) => {
   const { limit } = usePageParams();
 
   return (
@@ -38,7 +44,7 @@ const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending, visibleColu
                   !column.showData ? 'w-0' : 'w-20',
                 )}
               >
-                <DigitalSupportHoverableCell ent={ent} {...column} />
+                <DigitalSupportHoverableCell ent={ent} {...column} showValues={showValues} />
               </div>
             </td>
           ))}

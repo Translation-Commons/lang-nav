@@ -19,6 +19,7 @@ import {
 
 type Props = DigitalSupportColumn & {
   ent: LanguageData;
+  showValues: boolean;
 };
 
 const DigitalSupportHoverableCell: React.FC<Props> = (props) => {
