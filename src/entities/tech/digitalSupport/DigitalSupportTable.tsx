@@ -106,7 +106,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
           {showValues ? 'Showing values' : 'Hiding values'}
         </Button>
       </div>
-      <div className="max-w-200 max-h-200 truncate overflow-auto relative">
+      <div className="max-h-200 truncate overflow-auto relative">
         <table>
           <colgroup>
             <col className="sticky left-0 w-16 bg-background z-15" />

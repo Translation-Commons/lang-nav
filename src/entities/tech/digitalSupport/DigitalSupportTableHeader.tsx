@@ -4,10 +4,11 @@ import React, { ReactNode } from 'react';
 import { sumBy } from '@shared/lib/setUtils';
 import { cn } from '@shared/lib/utils';
 import { Button } from '@shared/ui/button';
-import { Toggle } from '@shared/ui/toggle';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getDigitalSupportCategoryLabel } from '@strings/DigitalSupportStrings';
 
+import { DigitalSupportCategoryIcon } from './DigitalSupportIcons';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
@@ -105,10 +106,12 @@ const TierHeader: React.FC<{
   return (
     <th colSpan={colSpan} className="border-l-2">
       <div className="px-1 flex items-center flex-row gap-1">
-        {DigitalSupportTier[tier]}
-        <Toggle pressed={isExpanded} onPressedChange={() => toggleTier(tier)} className="group">
-          <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
-        </Toggle>
+        <Button variant="ghost" onClick={() => toggleTier(tier)} className="w-full">
+          {DigitalSupportTier[tier]}
+          <ChevronLeftIcon
+            className={cn('transition-transform', isExpanded && 'rotate-[-90deg]')}
+          />
+        </Button>
       </div>
     </th>
   );
@@ -124,19 +127,34 @@ const CategoryHeader: React.FC<{
     <th colSpan={getFactorCount(cat) + 1} className={cn('font-medium')}>
       <div
         className={cn(
-          'text-xs flex flex-row items-center truncate transition-all duration-1000',
+          'w-full text-xs flex flex-row items-center truncate transition-all duration-1000 @container',
           showCategory ? (isExpanded ? 'max-w-40' : 'w-20') : 'w-0',
         )}
       >
-        <div className="text-wrap">{getDigitalSupportCategoryLabel(cat)}</div>
-        <Toggle
-          pressed={isExpanded}
-          onPressedChange={() => toggleCat(cat)}
-          className="group"
-          size="sm"
-        >
-          <ChevronLeftIcon className="group-aria-pressed:rotate-[-90deg] transition-transform" />
-        </Toggle>
+        <HoverCard>
+          <HoverCardTrigger
+            delay={200}
+            render={
+              <Button
+                onClick={() => toggleCat(cat)}
+                variant="ghost"
+                aria-label={getDigitalSupportCategoryLabel(cat) + ', click to toggle category'}
+              >
+                <DigitalSupportCategoryIcon cat={cat} />
+                <div className="hidden @min-[120px]:block shrink truncate">
+                  {getDigitalSupportCategoryLabel(cat)}
+                </div>
+                <ChevronLeftIcon
+                  className={cn('transition-transform', isExpanded && 'rotate-[-90deg]')}
+                />
+              </Button>
+            }
+          />
+          <HoverCardContent className="w-fit">
+            <strong>{getDigitalSupportCategoryLabel(cat)}</strong>
+            <div>Click to {isExpanded ? 'hide' : 'show'} factors in the category</div>
+          </HoverCardContent>
+        </HoverCard>
       </div>
     </th>
   );
