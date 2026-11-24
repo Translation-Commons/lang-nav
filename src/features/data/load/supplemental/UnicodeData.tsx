@@ -203,10 +203,11 @@ export async function loadCLDRCoverage(
   return await fetch('data/unicode/cldrCoverage.tsv')
     .then((res) => res.text())
     .then((text) => {
-      const SKIP_THREE_HEADER_ROWS = 3;
       const cldrCoverage = text
         .split('\n')
-        .slice(SKIP_THREE_HEADER_ROWS)
+        .filter(
+          (line) => !line.startsWith('#') && line.trim() !== '' && !line.startsWith('Language	'),
+        )
         .map(parseCLDRCoverageLine);
       cldrCoverage.forEach((cldrCov) => {
         const lang = getCLDRLanguage(cldrCov.languageCode);
@@ -249,11 +250,11 @@ function parseCLDRCoverageLine(line: string): CLDRCoverageImport {
     targetCoverageLevel: parseCoverageLevel(parts[6]),
     actualCoverageLevel: parseCoverageLevel(parts[8]),
     inICU: parts[9] === 'ICU',
-    percentOfValuesConfirmed: Number.parseFloat(parts[10]),
-    percentOfModernValuesComplete: Number.parseFloat(parts[11]),
-    percentOfModerateValuesComplete: Number.parseFloat(parts[12]),
-    percentOfBasicValuesComplete: Number.parseFloat(parts[13]),
-    percentOfCoreValuesComplete: Number.parseFloat(parts[14]),
+    percentOfValuesConfirmed: Number.parseFloat(parts[10]) * 100,
+    percentOfModernValuesComplete: Number.parseFloat(parts[11]) * 100,
+    percentOfModerateValuesComplete: Number.parseFloat(parts[12]) * 100,
+    percentOfBasicValuesComplete: Number.parseFloat(parts[13]) * 100,
+    percentOfCoreValuesComplete: Number.parseFloat(parts[14]) * 100,
     missingFeatures: parts[15]?.split(', '),
   };
 }

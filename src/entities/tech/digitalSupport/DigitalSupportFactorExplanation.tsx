@@ -6,8 +6,10 @@ import { View } from '@features/params/PageParamTypes';
 import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
-import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
+import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
+import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
+import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -48,7 +50,16 @@ const DigitalSupportFactorExplanation: React.FC<{
       return ent.udhr?.length ? 10 : 0;
 
     case DigitalSupportFactor.CLDR:
-      return computeCLDRScore(ent);
+      return (
+        <div className="flex items-center gap-2">
+          <CLDRWarningNotes ent={ent} />
+          <EntityCLDRCoverageLevel ent={ent} />
+          <EntityCLDRLocaleCount ent={ent} verbose={true} />
+        </div>
+      );
+
+    case DigitalSupportFactor.ICU:
+      return <ICUSupportStatus ent={ent} />;
 
     case DigitalSupportFactor.GTranslate:
       return <TechSupport ent={ent} techShortName="GTranslate" />;
@@ -123,22 +134,6 @@ function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName:
       {url && <ExternalLink href={url} showDomainOnly />}
     </>
   );
-}
-
-function computeCLDRScore(lang: LanguageData): number {
-  const {
-    CLDR: { coverage, dataProvider },
-  } = lang;
-  if (coverage == null) {
-    if (dataProvider?.type == EntityType.Language && dataProvider.CLDR.coverage != null)
-      return computeCLDRScore(dataProvider);
-    return 0;
-  }
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Modern) return 10;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Moderate) return 8;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Basic) return 5;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Core) return 2;
-  return 0;
 }
 
 export default DigitalSupportFactorExplanation;

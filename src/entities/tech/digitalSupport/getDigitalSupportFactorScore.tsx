@@ -38,6 +38,14 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
 
     case DigitalSupportFactor.CLDR:
       return computeCLDRScore(ent);
+    case DigitalSupportFactor.ICU:
+      if (ent.CLDR.coverage?.inICU) return 10;
+      if (
+        ent.CLDR.dataProvider?.type === EntityType.Language &&
+        ent.CLDR.dataProvider?.CLDR.coverage?.inICU
+      )
+        return 10;
+      return 0;
 
     case DigitalSupportFactor.GTranslate:
       return getTechSupportScore(ent, 'GTranslate');
@@ -64,11 +72,14 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
 
 function getTechSupportScore(ent: LanguageData, techShortName: string): number {
   const techSupport = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
-  const techScores = techSupport?.map((ts) => ts.score ?? 1) ?? [];
+  const techScores =
+    techSupport?.map((ts) =>
+      ts.level != null ? (ts.tech.maxLevel ? ts.level / ts.tech.maxLevel : 1) : 1,
+    ) ?? [];
   return techScores.length ? Math.max(...techScores) * 10 : 0;
 }
 
-function computeCLDRScore(lang: LanguageData): number {
+export function computeCLDRScore(lang: LanguageData): number {
   const {
     CLDR: { coverage, dataProvider },
   } = lang;

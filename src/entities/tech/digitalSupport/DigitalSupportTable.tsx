@@ -80,7 +80,7 @@ const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
             ? 'Collapse all categories'
             : 'Expand all categories'}
         </Button>
-      </div>{' '}
+      </div>
       <div className="max-w-200 max-h-200 truncate overflow-auto relative">
         <table>
           <colgroup>
