@@ -5,6 +5,7 @@ import InternalLinkButton from '@features/params/InternalLinkButton';
 import { View } from '@features/params/PageParamTypes';
 import { getFilterEntityID } from '@features/transforms/filtering/FilterEntityID';
 
+import LanguageUDHRInfo from '@entities/language/digitalsupport/LanguageUDHRInfo';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
@@ -47,7 +48,7 @@ const DigitalSupportFactorExplanation: React.FC<{
     case DigitalSupportFactor.Wikipedia:
       return <DigitalSupportWikipediaExplanation ent={ent} />;
     case DigitalSupportFactor.UDHR:
-      return ent.udhr?.length ? 10 : 0;
+      return <LanguageUDHRInfo lang={ent} size="long" />;
 
     case DigitalSupportFactor.CLDR:
       return (
