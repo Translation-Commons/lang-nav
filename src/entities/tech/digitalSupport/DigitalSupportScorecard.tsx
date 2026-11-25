@@ -5,6 +5,8 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
+import { DigitalSupportProvider } from './DigitalSupportContext';
+import DigitalSupportOptions from './DigitalSupportOptions';
 import DigitalSupportTable from './DigitalSupportTable';
 
 const DigitalSupportScorecard = () => {
@@ -14,16 +16,21 @@ const DigitalSupportScorecard = () => {
 
   return (
     <div className="flex flex-col gap-4 items-center">
-      <div>
-        Everything is given a score of 0 to 10 -- most factors are binary but some have steps to
-        indicate partial support.
-      </div>
-      <div className="flex items-center gap-2">
-        Color gradient:
-        <ColorGradientSelector />
-      </div>
-      <VisibleItemsMeter ents={allEntities} />
-      <DigitalSupportTable ents={currentEntities} isPending={isPending} />
+      <DigitalSupportProvider>
+        <div>
+          Everything is given a score of 0 to 10 -- most factors are binary but some have steps to
+          indicate partial support.
+        </div>
+        <div className="flex items-center gap-2">
+          <div>
+            Color gradient:
+            <ColorGradientSelector />
+          </div>
+        </div>
+        <DigitalSupportOptions />
+        <VisibleItemsMeter ents={allEntities} />
+        <DigitalSupportTable ents={currentEntities} isPending={isPending} />
+      </DigitalSupportProvider>
     </div>
   );
 };

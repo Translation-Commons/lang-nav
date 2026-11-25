@@ -8,27 +8,18 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { cn } from '@shared/lib/utils';
 import { Skeleton } from '@shared/ui/skeleton';
 
+import { useDigitalSupportContext } from './DigitalSupportContext';
 import DigitalSupportHoverableCell from './DigitalSupportHoverableCell';
-import {
-  DigitalSupportCategory,
-  DigitalSupportColumn,
-  DigitalSupportFactor,
-} from './DigitalSupportTypes';
+import { DigitalSupportCategory, DigitalSupportFactor } from './DigitalSupportTypes';
 
 type Props = {
   ents: LanguageData[];
   isPending: boolean;
-  visibleColumns: DigitalSupportColumn[];
-  showValues: boolean;
 };
 
-const DigitalSupportTableBody: React.FC<Props> = ({
-  ents,
-  isPending,
-  visibleColumns,
-  showValues,
-}) => {
+const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending }) => {
   const { limit } = usePageParams();
+  const { visibleColumns, showValues } = useDigitalSupportContext();
 
   return (
     <tbody>
@@ -48,7 +39,7 @@ const DigitalSupportTableBody: React.FC<Props> = ({
                   getColumnWidth(showValues, column.showData, column.cat, column.factor),
                 )}
               >
-                <DigitalSupportHoverableCell ent={ent} {...column} showValues={showValues} />
+                <DigitalSupportHoverableCell ent={ent} {...column} />
               </div>
             </td>
           ))}

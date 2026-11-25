@@ -8,6 +8,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { sumBy } from '@shared/lib/setUtils';
 import Pie from '@shared/ui/Pie';
 
+import { useDigitalSupportContext } from './DigitalSupportContext';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
@@ -21,18 +22,11 @@ import getDigitalSupportFactorScore from './getDigitalSupportFactorScore';
 type Props = DigitalSupportColumn & {
   design?: '1' | '2' | '3' | '4';
   ent: LanguageData;
-  showValues: boolean;
 };
 
-const DigitalSupportCellDisplay: React.FC<Props> = ({
-  ent,
-  tier,
-  cat,
-  factor,
-  design = '3',
-  showValues = true,
-}) => {
+const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, design = '3' }) => {
   const { colorGradient } = usePageParams();
+  const { showValues } = useDigitalSupportContext();
   const applyColorGradient = getColorGradientFunction(colorGradient);
   const score = getGroupedDigitalSupportFactorScore(ent, tier, cat, factor);
 
