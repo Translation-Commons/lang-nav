@@ -2,20 +2,21 @@ import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React from 'react';
 
 import { Button } from '@shared/ui/button';
+import EnumDropdown from '@shared/ui/EnumDropdown';
 
-import { useDigitalSupportContext } from './DigitalSupportContext';
+import { CellDesign, useDigitalSupportContext } from './DigitalSupportContext';
 import { AllDigitalSupportCategories, AllDigitalSupportTiers } from './DigitalSupportTypes';
 
 const DigitalSupportOptions: React.FC = () => {
   const {
     openTiers,
     setOpenTiers,
-
     openCats,
     setOpenCats,
-
     showValues,
     setShowValues,
+    cellDesign,
+    setCellDesign,
   } = useDigitalSupportContext();
 
   return (
@@ -66,8 +67,13 @@ const DigitalSupportOptions: React.FC = () => {
       </Button>
       <Button variant="ghost" onClick={() => setShowValues((prev) => !prev)}>
         {showValues ? <SquareCheckIcon /> : <SquareIcon />}
-        {showValues ? 'Showing values' : 'Hiding values'}
+        {showValues ? 'Showing numbers' : 'Hiding numbers'}
       </Button>
+      <EnumDropdown
+        value={cellDesign}
+        options={Object.values(CellDesign)}
+        onChange={setCellDesign}
+      />
     </div>
   );
 };

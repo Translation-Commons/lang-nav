@@ -1,14 +1,21 @@
 import React, { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 
 import {
-    AllDigitalSupportCategories,
-    AllDigitalSupportTiers,
-    DigitalSupportCategory,
-    DigitalSupportCategoryFactors,
-    DigitalSupportColumn,
-    DigitalSupportTier,
-    DigitalSupportTierCategories,
+  AllDigitalSupportCategories,
+  AllDigitalSupportTiers,
+  DigitalSupportCategory,
+  DigitalSupportCategoryFactors,
+  DigitalSupportColumn,
+  DigitalSupportTier,
+  DigitalSupportTierCategories,
 } from './DigitalSupportTypes';
+
+export enum CellDesign {
+  Meter = 'Meter',
+  ColoredDiv = 'Colored Rectangle',
+  Pie = 'Pie',
+  SimplePie = 'Quarter Pie',
+}
 
 type DigitalSupportContextType = {
   openTiers: DigitalSupportTier[];
@@ -19,10 +26,12 @@ type DigitalSupportContextType = {
   setOpenCats: React.Dispatch<React.SetStateAction<DigitalSupportCategory[]>>;
   toggleCat: (cat: DigitalSupportCategory) => void;
 
+  visibleColumns: DigitalSupportColumn[];
+
   showValues: boolean;
   setShowValues: React.Dispatch<React.SetStateAction<boolean>>;
-
-  visibleColumns: DigitalSupportColumn[];
+  cellDesign: CellDesign;
+  setCellDesign: React.Dispatch<React.SetStateAction<CellDesign>>;
 };
 
 const DigitalSupportContext = React.createContext<DigitalSupportContextType>({
@@ -38,11 +47,14 @@ const DigitalSupportContext = React.createContext<DigitalSupportContextType>({
 
   showValues: false,
   setShowValues: () => {},
+  cellDesign: CellDesign.ColoredDiv,
+  setCellDesign: () => {},
 });
 
 export const DigitalSupportProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTiers, setOpenTiers] = useState<DigitalSupportTier[]>(AllDigitalSupportTiers);
   const [showValues, setShowValues] = useState(false);
+  const [cellDesign, setCellDesign] = useState(CellDesign.ColoredDiv);
   const [openCats, setOpenCats] = useState<DigitalSupportCategory[]>(AllDigitalSupportCategories);
   const toggleTier = useCallback((tier: DigitalSupportTier) => {
     setOpenTiers((prev) =>
@@ -85,6 +97,8 @@ export const DigitalSupportProvider: React.FC<PropsWithChildren> = ({ children }
 
         showValues,
         setShowValues,
+        cellDesign,
+        setCellDesign,
       }}
     >
       {children}

@@ -27,12 +27,7 @@ const getFactorCount = (cat: DigitalSupportCategory) => {
 };
 
 const DigitalSupportTableHeader: React.FC = () => {
-  const {
-    openTiers,
-    toggleTier,
-
-    visibleColumns,
-  } = useDigitalSupportContext();
+  const { openTiers, toggleTier, visibleColumns } = useDigitalSupportContext();
 
   return (
     <thead className="sticky top-0 bg-background z-10">
@@ -112,7 +107,7 @@ const CategoryHeader: React.FC<{
   tier: DigitalSupportTier;
   cat: DigitalSupportCategory;
 }> = ({ tier, cat }) => {
-  const { openTiers, openCats, toggleCat, showValues } = useDigitalSupportContext();
+  const { openTiers, openCats, toggleCat, showValues, cellDesign } = useDigitalSupportContext();
   const tierIsOpen = openTiers.includes(tier);
   const isExpanded = tierIsOpen && openCats.includes(cat);
 
@@ -124,7 +119,7 @@ const CategoryHeader: React.FC<{
           tierIsOpen
             ? isExpanded
               ? 'max-w-40'
-              : getColumnWidth(showValues, tierIsOpen, cat)
+              : getColumnWidth(cellDesign, showValues, tierIsOpen, cat)
             : 'w-0',
         )}
       >
@@ -162,7 +157,7 @@ const CategoryHeader: React.FC<{
 };
 
 const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showData }) => {
-  const { openTiers, toggleCat, showValues } = useDigitalSupportContext();
+  const { openTiers, toggleCat, showValues, cellDesign } = useDigitalSupportContext();
   const tierIsOpen = openTiers.includes(tier);
 
   let contents: ReactNode = '';
@@ -209,7 +204,7 @@ const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showD
       <div
         className={cn(
           'text-xs font-medium truncate transition-all duration-1000 justify-items-center',
-          getColumnWidth(showValues, showData, cat, factor),
+          getColumnWidth(cellDesign, showValues, showData, cat, factor),
           tierIsOpen ? 'max-h-8' : 'max-h-0',
         )}
         title={

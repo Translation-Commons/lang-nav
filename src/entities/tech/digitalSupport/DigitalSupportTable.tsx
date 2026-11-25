@@ -14,7 +14,7 @@ type Props = {
 const DigitalSupportTable: React.FC<Props> = ({ ents, isPending }) => {
   const { visibleColumns } = useDigitalSupportContext();
   return (
-    <div className="max-h-200 truncate overflow-auto relative">
+    <div className="max-h-200 max-w-300 truncate overflow-auto relative">
       <table>
         <colgroup>
           <col className="sticky left-0 w-16 bg-background z-15" />

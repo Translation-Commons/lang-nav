@@ -8,7 +8,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { sumBy } from '@shared/lib/setUtils';
 import Pie from '@shared/ui/Pie';
 
-import { useDigitalSupportContext } from './DigitalSupportContext';
+import { CellDesign, useDigitalSupportContext } from './DigitalSupportContext';
 import {
   DigitalSupportCategory,
   DigitalSupportCategoryFactors,
@@ -20,30 +20,35 @@ import {
 import getDigitalSupportFactorScore from './getDigitalSupportFactorScore';
 
 type Props = DigitalSupportColumn & {
-  design?: '1' | '2' | '3' | '4';
   ent: LanguageData;
 };
 
-const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, design = '3' }) => {
+const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) => {
   const { colorGradient } = usePageParams();
-  const { showValues } = useDigitalSupportContext();
+  const { showValues, cellDesign } = useDigitalSupportContext();
   const applyColorGradient = getColorGradientFunction(colorGradient);
   const score = getGroupedDigitalSupportFactorScore(ent, tier, cat, factor);
 
-  if (design === '1') {
+  if (cellDesign === CellDesign.Meter) {
     return (
-      <meter
-        min={0} // Extinct
-        low={3} // Rarely supported -- below this, the meter is colored red
-        high={7} // -- below this, the meter is colored yellow
-        optimum={8} // Functional just not always fully supported -- tells the renderer that high and above is green
-        max={10} // Fully supported
-        value={score}
-        className="w-full min-w-4"
-      />
+      <>
+        <meter
+          min={0} // Extinct
+          low={3} // Rarely supported -- below this, the meter is colored red
+          high={7} // -- below this, the meter is colored yellow
+          optimum={8} // Functional just not always fully supported -- tells the renderer that high and above is green
+          max={10} // Fully supported
+          value={score}
+          className="w-full min-w-4"
+        >
+          {/* {showValues && score.toFixed(1)} */}
+          {/* <span className="sr-only">{score.toFixed(1)} / 10</span> */}
+        </meter>
+        {showValues && <div className="mt-[-4px] text-xs opacity-30">{score.toFixed(1)} / 10</div>}
+      </>
     );
   }
-  if (design === '2') {
+  if (cellDesign === CellDesign.ColoredDiv) {
     return (
       <div
         className="rounded w-full min-w-4 px-2 text-center"
@@ -60,14 +65,22 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor, de
       </div>
     );
   }
-  if (design === '3') {
+  if (cellDesign === CellDesign.Pie) {
     // pie chart
-    return <Pie fraction={score / 10} size={16} color={applyColorGradient(score / 10)} />;
+    return (
+      <Pie
+        fraction={score / 10}
+        size={showValues ? 24 : 16}
+        color={applyColorGradient(score / 10)}
+        label={showValues ? score.toFixed(1) : ''}
+      />
+    );
   }
-  if (design === '4') {
+
+  if (cellDesign === CellDesign.SimplePie) {
     return (
       <div
-        className="rounded w-full min-w-4 text-center"
+        className="rounded w-full min-w-4 text-center leading-4"
         style={{ color: applyColorGradient(score / 10) }}
       >
         {getPartiallyFilledCircleChar(score)}
