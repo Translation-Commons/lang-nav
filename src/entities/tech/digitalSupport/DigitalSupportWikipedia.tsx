@@ -69,7 +69,7 @@ export function DigitalSupportWikipediaExplanation({ ent }: { ent: LanguageData 
           <dd className="ml-4">
             {Math.sqrt(articlesPerMillion).toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </dd>
-          <dt>Score (Raw, limited to between 3 and 10)</dt>
+          <dt>Score (Bounded to between 3 (3 = min for active wikipedias) and 10)</dt>
           <dd className="ml-4">
             {Math.min(Math.max(Math.sqrt(articlesPerMillion), 3), 10).toLocaleString(undefined, {
               maximumFractionDigits: 1,
