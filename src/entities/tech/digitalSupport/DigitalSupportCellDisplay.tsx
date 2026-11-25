@@ -6,6 +6,7 @@ import { getColorGradientFunction } from '@features/transforms/coloring/getColor
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
+import Pie from '@shared/ui/Pie';
 
 import {
   DigitalSupportCategory,
@@ -18,7 +19,7 @@ import {
 import getDigitalSupportFactorScore from './getDigitalSupportFactorScore';
 
 type Props = DigitalSupportColumn & {
-  design?: '1' | '2';
+  design?: '1' | '2' | '3' | '4';
   ent: LanguageData;
   showValues: boolean;
 };
@@ -28,7 +29,7 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({
   tier,
   cat,
   factor,
-  design = '2',
+  design = '3',
   showValues = true,
 }) => {
   const { colorGradient } = usePageParams();
@@ -65,13 +66,29 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({
       </div>
     );
   }
-  // if (design === '3') {
-  //   // pie chart
-  //   return <svg>
-
-  //   </svg>;
-  // }
+  if (design === '3') {
+    // pie chart
+    return <Pie fraction={score / 10} size={16} color={applyColorGradient(score / 10)} />;
+  }
+  if (design === '4') {
+    return (
+      <div
+        className="rounded w-full min-w-4 text-center"
+        style={{ color: applyColorGradient(score / 10) }}
+      >
+        {getPartiallyFilledCircleChar(score)}
+      </div>
+    );
+  }
 };
+
+function getPartiallyFilledCircleChar(score: number) {
+  if (score === 0) return '○';
+  if (score <= 2.5) return '◔';
+  if (score <= 5) return '◑';
+  if (score <= 7.5) return '◕';
+  return '●';
+}
 
 function getGroupedDigitalSupportFactorScore(
   ent: LanguageData,

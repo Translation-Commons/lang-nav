@@ -25,21 +25,21 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
     case ColorGradient.StopLightSunrise:
       return (value: number) => {
         if (value < 0.2) {
-          // Dark gray to red
+          // dark gray to red
           const localValue = value / 0.2;
           return `hsl(0,  ${localValue * 80}%, ${localValue * 30 + 30}%)`;
         } else if (value < 0.6) {
-          // Red to yellow
+          // red to yellow
           const localValue = (value - 0.2) / (0.6 - 0.2);
           return `hsl(${0 + localValue * 60}, 80%, 60%)`;
         } else if (value < 0.8) {
-          // Yellow to white
+          // yellow to lightgrey
           const localValue = (value - 0.6) / (0.8 - 0.6);
-          return `hsl(60, ${20 * localValue + 80}%, ${40 * localValue + 60}%)`;
+          return `hsl(60, 80%, ${20 * localValue + 60}%)`;
         } else {
-          // White to blue
+          // light grey to blue
           const localValue = (value - 0.8) / (1 - 0.8);
-          return `hsl(210, 80%, ${100 - 40 * localValue}%)`;
+          return `hsl(210, 80%, ${80 - 20 * localValue}%)`;
         }
       };
     case ColorGradient.HueRainbowBlueToRed:
