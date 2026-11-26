@@ -18,7 +18,7 @@ const DigitalSupportScorecard = () => {
     <div className="flex flex-col gap-4 items-center">
       <DigitalSupportProvider>
         <div>
-          Everything is given a score of 0 to 10 -- most factors are binary but some have steps to
+          Everything is given a score of 0 to 100 -- most factors are binary but some have steps to
           indicate partial support.
         </div>
         <div className="flex items-center gap-2">

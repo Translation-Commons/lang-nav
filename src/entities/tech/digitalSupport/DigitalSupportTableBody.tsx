@@ -75,7 +75,7 @@ export function getColumnWidth(
   if (cellDesign === CellDesign.Pie || cellDesign === CellDesign.SimplePie) {
     return showNumbers ? 'w-8' : 'w-6';
   } // Always round
-  if (showNumbers) return 'w-20'; // Give enough space for them
+  if (showNumbers) return 'w-12'; // Give enough space for them
   if (category == null) return 'w-32'; // Tier cell
   if (factor == null) return 'w-12'; // Category cell
   return 'w-6';

@@ -40,11 +40,8 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
           max={10} // Fully supported
           value={score}
           className="w-full min-w-4"
-        >
-          {/* {showValues && score.toFixed(1)} */}
-          {/* <span className="sr-only">{score.toFixed(1)} / 10</span> */}
-        </meter>
-        {showValues && <div className="mt-[-4px] text-xs opacity-30">{score.toFixed(1)} / 10</div>}
+        ></meter>
+        {showValues && <div className="mt-[-4px] text-xs opacity-30">{score.toFixed(0)}</div>}
       </>
     );
   }
@@ -56,8 +53,9 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
       >
         {showValues ? (
           <>
+            {score < 100 && <span className="opacity-0">0</span>}
             {score < 10 && <span className="opacity-0">0</span>}
-            {score.toFixed(1)} <span className="text-xs opacity-30">/10</span>
+            {score.toFixed(0)}
           </>
         ) : (
           <div className="h-4" />
@@ -69,10 +67,10 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
     // pie chart
     return (
       <Pie
-        fraction={score / 10}
+        fraction={score / 100}
         size={showValues ? 24 : 16}
-        color={applyColorGradient(score / 10)}
-        label={showValues ? score.toFixed(1) : ''}
+        color={applyColorGradient(score / 100)}
+        label={showValues ? score.toFixed(0) : ''}
       />
     );
   }
@@ -81,7 +79,7 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
     return (
       <div
         className="rounded w-full min-w-4 text-center leading-4"
-        style={{ color: applyColorGradient(score / 10) }}
+        style={{ color: applyColorGradient(score / 100) }}
       >
         {getPartiallyFilledCircleChar(score)}
       </div>
@@ -91,9 +89,9 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
 
 function getPartiallyFilledCircleChar(score: number) {
   if (score === 0) return '○';
-  if (score <= 2.5) return '◔';
-  if (score <= 5) return '◑';
-  if (score <= 7.5) return '◕';
+  if (score <= 25) return '◔';
+  if (score <= 50) return '◑';
+  if (score <= 75) return '◕';
   return '●';
 }
 

@@ -13,10 +13,10 @@ export function computeWikipediaScore(lang: LanguageData): number {
   const bestWiki = getBestWikipedia(wikipedias);
   if (bestWiki?.status === WikipediaStatus.Active) {
     const articlesPerMillion = bestWiki.articles / ((lang.pop.overall ?? 1) / 100_000);
-    return Math.min(Math.max(Math.sqrt(articlesPerMillion), 3), 10);
+    return Math.min(Math.max(Math.sqrt(articlesPerMillion) * 10, 25), 100);
   }
-  if (bestWiki?.status === WikipediaStatus.Incubator) return 3; // incubator
-  return 1; // deleted (WikipediaStatus.Closed)
+  if (bestWiki?.status === WikipediaStatus.Incubator) return 25; // incubator
+  return 10; // deleted (WikipediaStatus.Closed)
 }
 
 function getBestWikipedia(wikipedias?: WikipediaData[]): WikipediaData | undefined {
@@ -28,11 +28,11 @@ function getBestWikipedia(wikipedias?: WikipediaData[]): WikipediaData | undefin
 function getWikipediaStatusRank(status: WikipediaStatus): number {
   switch (status) {
     case WikipediaStatus.Active:
-      return 3;
+      return 100;
     case WikipediaStatus.Incubator:
-      return 2;
+      return 25;
     case WikipediaStatus.Closed:
-      return 1;
+      return 10;
     default:
       return 0;
   }
@@ -69,18 +69,16 @@ export function DigitalSupportWikipediaExplanation({ ent }: { ent: LanguageData 
           <dd className="ml-4">
             {Math.sqrt(articlesPerMillion).toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </dd>
-          <dt>Score (Bounded to between 3 (3 = min for active wikipedias) and 10)</dt>
+          <dt>Score (*10 and bounded to between 25 (25 = min for active wikipedias) and 100)</dt>
           <dd className="ml-4">
-            {Math.min(Math.max(Math.sqrt(articlesPerMillion), 3), 10).toLocaleString(undefined, {
-              maximumFractionDigits: 1,
-            })}
+            {Math.min(Math.max(Math.sqrt(articlesPerMillion) * 10, 25), 100).toFixed(0)}
           </dd>
         </>
       ) : (
         <>
           <dt>Score by status</dt>
           <dd className="ml-4">
-            {wiki.status === WikipediaStatus.Incubator ? '3 (Incubator)' : '1 (Closed)'}
+            {wiki.status === WikipediaStatus.Incubator ? '25 (Incubator)' : '10 (Closed)'}
           </dd>
         </>
       )}

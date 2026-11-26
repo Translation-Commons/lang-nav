@@ -22,8 +22,8 @@ export function BooksPublishedExplanation({ ent }: { ent: LanguageData }) {
       <dt>Raw Score (square root of books per million)):</dt>
       <dd className="ml-4">{rawScore.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
 
-      <dt>Score (Bounded to between 0 and 10):</dt>
-      <dd className="ml-4">{score.toLocaleString(undefined, { maximumFractionDigits: 1 })}</dd>
+      <dt>Score (x10 & bounded to between 0 and 100):</dt>
+      <dd className="ml-4">{score.toLocaleString(undefined, { maximumFractionDigits: 0 })}</dd>
     </dl>
   );
 }
@@ -32,8 +32,7 @@ export function computeBooksPublishedScores(books?: number, pop?: number) {
   if (!books || !pop) return { perMillion: 0, rawScore: 0, score: 0 };
   if (!pop) return { perMillion: books, rawScore: 0, score: 0 };
   const perMillion = books / (pop / 1_000_000);
-  // const rawScore = Math.log(perMillion) / Math.log(3);
   const rawScore = perMillion ** 0.5;
-  const score = Math.min(Math.max(rawScore, 0), 10);
+  const score = Math.min(Math.max(rawScore * 10, 0), 100);
   return { perMillion, rawScore, score };
 }
