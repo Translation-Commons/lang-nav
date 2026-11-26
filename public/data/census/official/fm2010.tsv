@@ -1,0 +1,48 @@
+#codeDisplay		fm2010.home			fm2010.usual	
+#nameDisplay		Micronesia 2010 Non-English Language at Home	Micronesia 2010 Second Language	Micronesia 2010 First or Second Language	Micronesia 2010 Usual Language	Micronesia 2010 Literacy
+#isoRegionCode	FM					
+#yearCollected	2010					
+### Language Criteria ###						
+#languageUse		Speaks	Speaks	Speaks	Speaks	Writes
+#acquisitionOrder	Any	L1	L2	Any		Any
+#domain		Home				
+### Population Surveyed ###						
+#population	95,544					102,843
+#populationWithPositiveResponses		79,969			95544	
+#age						5+
+#responsesPerIndividual		1	1	1+	1	1+
+### Data Constraints ###						
+#geographicScope	whole country					
+#languagesIncluded		Non-English languages			All reported language categories	All reported language categories
+#quantity	count					percent
+### Creator ###						
+#collectorType	Government					
+#collectorName	Federated States of Micronesia Statistics Division					
+#collectorNameShort	FSM Statistics					
+### Source Document ###						
+#url	https://www.pacificweb.org/DOCS/fsm/census/html/FSM2010.htm					https://stats.gov.fm/wp-content/uploads/2023/12/2010-Summary-Analysis-Key-Indicators.pdf
+#datePublished	2010					
+#dateAccessed	2026-11-09					
+#documentName	FSM 2010 Census					SUMMARY ANALYSIS OF KEY INDICATORS from the FSM 2010 Census of Population and Housing
+#tableName	Table 9. Sex and Language (non-English) Spoken at Home, Sex and Language2, Sex and Usual Language by States-Urban-Rural					Key Indicators
+#columnName		Total — Language (non-English) spoken at home	Total — Lanugage2		Total — Usual Language	FSM
+#notes	There are more languages available by the census but public access is limited to larger groups		Yes, the word Language is mispelled in the official report			
+Language Code	Language	Population				
+yap	Yapese	4,928	321	5,249		5.4
+mul	Other Islands	3,969	1164	5,133		
+mul	Outer Islands languages					6.6
+chk	Chuukese	39,029	1020	40,049		44.5
+mrl	Mortlockese	1,354		1,354		
+und	Western Is	14		14		
+pon	Pohnpeian	23,659	6035	29,694		25
+mul	Polynesian	0	408	408		
+kos	Kosraean	5,529	396	5,925		6.1
+eng	English		0		1,401	75.9
+micr1243/mul	Micronesian languages				92,947	
+mul	Asian	1,044		1,044		
+jpn	Japanese		467	467		
+mul	Other Pacific	332		332		
+fil	Filipino		139	139		
+zho	Chinese/Taiwanese		47	47		
+kor	Korean		131	131		
+mul	Others	111	1,472		1,196	3.8

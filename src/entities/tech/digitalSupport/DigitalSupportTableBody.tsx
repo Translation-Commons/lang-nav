@@ -8,27 +8,18 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { cn } from '@shared/lib/utils';
 import { Skeleton } from '@shared/ui/skeleton';
 
+import { CellDesign, useDigitalSupportContext } from './DigitalSupportContext';
 import DigitalSupportHoverableCell from './DigitalSupportHoverableCell';
-import {
-  DigitalSupportCategory,
-  DigitalSupportColumn,
-  DigitalSupportFactor,
-} from './DigitalSupportTypes';
+import { DigitalSupportCategory, DigitalSupportFactor } from './DigitalSupportTypes';
 
 type Props = {
   ents: LanguageData[];
   isPending: boolean;
-  visibleColumns: DigitalSupportColumn[];
-  showValues: boolean;
 };
 
-const DigitalSupportTableBody: React.FC<Props> = ({
-  ents,
-  isPending,
-  visibleColumns,
-  showValues,
-}) => {
+const DigitalSupportTableBody: React.FC<Props> = ({ ents, isPending }) => {
   const { limit } = usePageParams();
+  const { visibleColumns, showValues, cellDesign } = useDigitalSupportContext();
 
   return (
     <tbody>
@@ -45,10 +36,16 @@ const DigitalSupportTableBody: React.FC<Props> = ({
               <div
                 className={cn(
                   'truncate transition-[width] duration-1000',
-                  getColumnWidth(showValues, column.showData, column.cat, column.factor),
+                  getColumnWidth(
+                    cellDesign,
+                    showValues,
+                    column.showData,
+                    column.cat,
+                    column.factor,
+                  ),
                 )}
               >
-                <DigitalSupportHoverableCell ent={ent} {...column} showValues={showValues} />
+                <DigitalSupportHoverableCell ent={ent} {...column} />
               </div>
             </td>
           ))}
@@ -68,13 +65,17 @@ const DigitalSupportTableBody: React.FC<Props> = ({
 };
 
 export function getColumnWidth(
-  showValues: boolean,
-  showData?: boolean,
+  cellDesign: CellDesign,
+  showNumbers: boolean,
+  showContents?: boolean,
   category?: DigitalSupportCategory,
   factor?: DigitalSupportFactor,
 ) {
-  if (!showData) return 'w-0';
-  if (showValues) return 'w-20'; // Give enough space for them
+  if (!showContents) return 'w-0';
+  if (cellDesign === CellDesign.Pie) {
+    return showNumbers ? 'w-8' : 'w-6';
+  } // Always round
+  if (showNumbers) return 'w-12'; // Give enough space for them
   if (category == null) return 'w-32'; // Tier cell
   if (factor == null) return 'w-12'; // Category cell
   return 'w-6';

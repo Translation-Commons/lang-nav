@@ -11,6 +11,7 @@ import {
   getDigitalSupportFactorLabel,
 } from '@strings/DigitalSupportStrings';
 
+import { useDigitalSupportContext } from './DigitalSupportContext';
 import { DigitalSupportCategoryIcon, DigitalSupportFactorIcon } from './DigitalSupportIcons';
 import { getColumnWidth } from './DigitalSupportTableBody';
 import {
@@ -25,23 +26,9 @@ const getFactorCount = (cat: DigitalSupportCategory) => {
   return DigitalSupportCategoryFactors[cat].length || 1;
 };
 
-type Props = {
-  openTiers: DigitalSupportTier[];
-  openCats: DigitalSupportCategory[];
-  toggleTier: (tier: DigitalSupportTier) => void;
-  toggleCat: (cat: DigitalSupportCategory) => void;
-  visibleColumns: DigitalSupportColumn[];
-  showValues: boolean;
-};
+const DigitalSupportTableHeader: React.FC = () => {
+  const { openTiers, toggleTier, visibleColumns } = useDigitalSupportContext();
 
-const DigitalSupportTableHeader: React.FC<Props> = ({
-  openTiers,
-  openCats,
-  toggleTier,
-  toggleCat,
-  visibleColumns,
-  showValues,
-}) => {
   return (
     <thead className="sticky top-0 bg-background z-10">
       <tr>
@@ -51,12 +38,7 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
         {Object.values(DigitalSupportTier)
           .filter((v) => typeof v === 'number')
           .map((tier) => (
-            <TierHeader
-              key={tier}
-              tier={tier}
-              isExpanded={openTiers.includes(tier)}
-              toggleTier={toggleTier}
-            />
+            <TierHeader key={tier} tier={tier} />
           ))}
       </tr>
       <tr>
@@ -78,14 +60,7 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
               </div>
             </th>,
             ...DigitalSupportTierCategories[tier].map((cat) => (
-              <CategoryHeader
-                key={cat}
-                cat={cat}
-                isExpanded={openTiers.includes(tier) && openCats.includes(cat)}
-                showCategory={openTiers.includes(tier)}
-                toggleCat={toggleCat}
-                showValues={showValues}
-              />
+              <CategoryHeader key={cat} tier={tier} cat={cat} />
             )),
           ])}
       </tr>
@@ -93,13 +68,7 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
         <th className="sticky left-0 bg-background z-15"></th>
         <th />
         {visibleColumns.map((column, index) => (
-          <FactorHeader
-            key={index}
-            {...column}
-            toggleCat={toggleCat}
-            showValues={showValues}
-            showTier={openTiers.includes(column.tier)}
-          />
+          <FactorHeader key={index} {...column} />
         ))}
       </tr>
     </thead>
@@ -108,9 +77,10 @@ const DigitalSupportTableHeader: React.FC<Props> = ({
 
 const TierHeader: React.FC<{
   tier: DigitalSupportTier;
-  isExpanded: boolean;
-  toggleTier: (tier: DigitalSupportTier) => void;
-}> = ({ tier, isExpanded, toggleTier }) => {
+}> = ({ tier }) => {
+  const { openTiers, toggleTier } = useDigitalSupportContext();
+  const isExpanded = openTiers.includes(tier);
+
   const colSpan =
     sumBy(DigitalSupportTierCategories[tier], getFactorCount) +
     DigitalSupportTierCategories[tier].length +
@@ -134,21 +104,22 @@ const TierHeader: React.FC<{
 };
 
 const CategoryHeader: React.FC<{
+  tier: DigitalSupportTier;
   cat: DigitalSupportCategory;
-  showCategory: boolean;
-  isExpanded: boolean;
-  toggleCat: (cat: DigitalSupportCategory) => void;
-  showValues: boolean;
-}> = ({ cat, isExpanded, toggleCat, showCategory, showValues }) => {
+}> = ({ tier, cat }) => {
+  const { openTiers, openCats, toggleCat, showValues, cellDesign } = useDigitalSupportContext();
+  const tierIsOpen = openTiers.includes(tier);
+  const isExpanded = tierIsOpen && openCats.includes(cat);
+
   return (
     <th colSpan={getFactorCount(cat) + 1} className={cn('font-medium')}>
       <div
         className={cn(
           'w-full text-xs flex flex-row items-center truncate transition-all duration-1000 @container',
-          showCategory
+          tierIsOpen
             ? isExpanded
               ? 'max-w-40'
-              : getColumnWidth(showValues, showCategory, cat)
+              : getColumnWidth(cellDesign, showValues, tierIsOpen, cat)
             : 'w-0',
         )}
       >
@@ -185,13 +156,10 @@ const CategoryHeader: React.FC<{
   );
 };
 
-const FactorHeader: React.FC<
-  DigitalSupportColumn & {
-    toggleCat: (cat: DigitalSupportCategory) => void;
-    showValues: boolean;
-    showTier: boolean;
-  }
-> = ({ cat, factor, showData, toggleCat, showValues, showTier }) => {
+const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showData }) => {
+  const { openTiers, toggleCat, showValues, cellDesign } = useDigitalSupportContext();
+  const tierIsOpen = openTiers.includes(tier);
+
   let contents: ReactNode = '';
 
   if (cat == null) return <th></th>;
@@ -236,8 +204,8 @@ const FactorHeader: React.FC<
       <div
         className={cn(
           'text-xs font-medium truncate transition-all duration-1000 justify-items-center',
-          getColumnWidth(showValues, showData, cat, factor),
-          showTier ? 'max-h-8' : 'max-h-0',
+          getColumnWidth(cellDesign, showValues, showData, cat, factor),
+          tierIsOpen ? 'max-h-8' : 'max-h-0',
         )}
         title={
           factor == null

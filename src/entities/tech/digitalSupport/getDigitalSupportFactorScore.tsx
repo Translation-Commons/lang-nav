@@ -9,7 +9,7 @@ import { DigitalSupportFactor } from './DigitalSupportTypes';
 import { getUnicodeEncodingScore } from './DigitalSupportUnicodeEncoding';
 import { computeWikipediaScore } from './DigitalSupportWikipedia';
 
-// Returns a numeric score from 1 to 10
+// Returns a numeric score from 1 to 100
 function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportFactor): number {
   switch (factor) {
     // Communication
@@ -17,9 +17,9 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
       return getUnicodeEncodingScore(ent);
 
     case DigitalSupportFactor.Keyman:
-      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'Keyman').length ? 10 : 0;
+      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'Keyman').length ? 100 : 0;
     case DigitalSupportFactor.Gboard:
-      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'GBoard').length ? 10 : 0;
+      return ent.keyboards?.filter((kb) => kb.inputTechCode === 'GBoard').length ? 100 : 0;
 
     case DigitalSupportFactor.Grammarly:
       return getTechSupportScore(ent, 'Grammarly');
@@ -34,17 +34,17 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
     case DigitalSupportFactor.Wikipedia:
       return computeWikipediaScore(ent);
     case DigitalSupportFactor.UDHR:
-      return ent.udhr?.length ? 10 : 0;
+      return ent.udhr?.length ? 100 : 0;
 
     case DigitalSupportFactor.CLDR:
       return computeCLDRScore(ent);
     case DigitalSupportFactor.ICU:
-      if (ent.CLDR.coverage?.inICU) return 10;
+      if (ent.CLDR.coverage?.inICU) return 100;
       if (
         ent.CLDR.dataProvider?.type === EntityType.Language &&
         ent.CLDR.dataProvider?.CLDR.coverage?.inICU
       )
-        return 10;
+        return 100;
       return 0;
 
     case DigitalSupportFactor.GTranslate:
@@ -76,7 +76,7 @@ function getTechSupportScore(ent: LanguageData, techShortName: string): number {
     techSupport?.map((ts) =>
       ts.level != null ? (ts.tech.maxLevel ? ts.level / ts.tech.maxLevel : 1) : 1,
     ) ?? [];
-  return techScores.length ? Math.max(...techScores) * 10 : 0;
+  return techScores.length ? Math.max(...techScores) * 100 : 0;
 }
 
 export function computeCLDRScore(lang: LanguageData): number {
@@ -88,10 +88,10 @@ export function computeCLDRScore(lang: LanguageData): number {
       return computeCLDRScore(dataProvider);
     return 0;
   }
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Modern) return 10;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Moderate) return 8;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Basic) return 5;
-  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Core) return 2;
+  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Modern) return 100;
+  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Moderate) return 75;
+  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Basic) return 50;
+  if (coverage.actualCoverageLevel === CLDRCoverageLevel.Core) return 25;
   return 0;
 }
 
