@@ -12,9 +12,9 @@ import {
 
 export enum CellDesign {
   Meter = 'Meter',
-  ColoredDiv = 'Colored Rectangle',
+  PartialRectangle = 'Partial Rectangle',
+  FullRectangle = 'Full Rectangle',
   Pie = 'Pie',
-  SimplePie = 'Quarter Pie',
 }
 
 type DigitalSupportContextType = {
@@ -47,14 +47,14 @@ const DigitalSupportContext = React.createContext<DigitalSupportContextType>({
 
   showValues: false,
   setShowValues: () => {},
-  cellDesign: CellDesign.ColoredDiv,
+  cellDesign: CellDesign.Pie,
   setCellDesign: () => {},
 });
 
 export const DigitalSupportProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTiers, setOpenTiers] = useState<DigitalSupportTier[]>(AllDigitalSupportTiers);
   const [showValues, setShowValues] = useState(false);
-  const [cellDesign, setCellDesign] = useState(CellDesign.ColoredDiv);
+  const [cellDesign, setCellDesign] = useState(CellDesign.Pie);
   const [openCats, setOpenCats] = useState<DigitalSupportCategory[]>(AllDigitalSupportCategories);
   const toggleTier = useCallback((tier: DigitalSupportTier) => {
     setOpenTiers((prev) =>

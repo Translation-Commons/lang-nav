@@ -72,7 +72,7 @@ export function getColumnWidth(
   factor?: DigitalSupportFactor,
 ) {
   if (!showContents) return 'w-0';
-  if (cellDesign === CellDesign.Pie || cellDesign === CellDesign.SimplePie) {
+  if (cellDesign === CellDesign.Pie) {
     return showNumbers ? 'w-8' : 'w-6';
   } // Always round
   if (showNumbers) return 'w-12'; // Give enough space for them

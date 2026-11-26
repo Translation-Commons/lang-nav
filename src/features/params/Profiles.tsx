@@ -166,12 +166,9 @@ export function getDefaultParams(
       break;
     case View.Reports:
       // Reports easily become too dense, so we limit them more aggressively by default
-      // params.limit = 10;
-      params.fieldFocus = Field.Code;
-      // if (params.reportID === ReportID.DigitalSupportScorecard) {
       params.limit = 20;
-      params.colorGradient = ColorGradient.StopLightSunrise;
-      // }
+      params.fieldFocus = Field.Code;
+      params.colorGradient = ColorGradient.StopLightSunriseOkLab;
       break;
     case View.Chart:
       params.chartX = Field.Population;

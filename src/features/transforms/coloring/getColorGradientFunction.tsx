@@ -27,19 +27,41 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
         if (value < 0.2) {
           // dark gray to red
           const localValue = value / 0.2;
-          return `hsl(0,  ${localValue * 80}%, ${localValue * 30 + 30}%)`;
+          return `hsl(0, ${localValue * 95}%, ${localValue * 30 + 30}%)`;
         } else if (value < 0.6) {
           // red to yellow
           const localValue = (value - 0.2) / (0.6 - 0.2);
-          return `hsl(${0 + localValue * 60}, 80%, 60%)`;
+          return `hsl(${0 + localValue * 60}, 95%, 60%)`;
         } else if (value < 0.8) {
           // yellow to lightgrey
           const localValue = (value - 0.6) / (0.8 - 0.6);
-          return `hsl(60, 80%, ${20 * localValue + 60}%)`;
+          return `hsl(60, ${90 - 45 * localValue}%, ${60 + 20 * localValue}%)`;
         } else {
           // light grey to blue
           const localValue = (value - 0.8) / (1 - 0.8);
-          return `hsl(210, 80%, ${80 - 20 * localValue}%)`;
+          return `hsl(210, ${50 + 45 * localValue}%, ${80 - 20 * localValue}%)`;
+        }
+      };
+    case ColorGradient.StopLightSunriseOkLab:
+      return (value: number) => {
+        if (value < 0.2) {
+          // dark gray to red
+          const localValue = value / 0.2;
+          // return `hsl(0,  ${localValue * 80}%, ${localValue * 30 + 30}%)`;
+          return `oklab(${0.85 * localValue} 0.3 0.2)`;
+        } else if (value < 0.6) {
+          // red to yellow
+          const localValue = (value - 0.2) / (0.6 - 0.2);
+          // return `hsl(${0 + localValue * 60}, 80%, 60%)`;
+          return `oklab(0.85 ${0.3 - 0.35 * localValue} 0.2)`;
+        } else if (value < 0.9) {
+          // yellow to lightgrey
+          const localValue = (value - 0.6) / (0.9 - 0.6);
+          return `oklab(0.85 ${-0.05 + 0.05 * localValue} ${0.2 - 0.2 * localValue})`;
+        } else {
+          // light grey to blue
+          const localValue = (value - 0.9) / (1 - 0.9);
+          return `oklab(0.85 ${0 - 0.1 * localValue} ${0 - 0.5 * localValue})`;
         }
       };
     case ColorGradient.HueRainbowBlueToRed:
@@ -81,6 +103,9 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
         getColorGradientFunction(ColorGradient.StopLightRedToGreen)(1 - value);
     case ColorGradient.StopLightSunset:
       return (value: number) => getColorGradientFunction(ColorGradient.StopLightSunrise)(1 - value);
+    case ColorGradient.StopLightSunsetOkLab:
+      return (value: number) =>
+        getColorGradientFunction(ColorGradient.StopLightSunriseOkLab)(1 - value);
     case ColorGradient.HueRainbowRedToBlue:
       return (value: number) =>
         getColorGradientFunction(ColorGradient.HueRainbowBlueToRed)(1 - value);

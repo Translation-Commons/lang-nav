@@ -34,10 +34,10 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
       <>
         <meter
           min={0} // Extinct
-          low={3} // Rarely supported -- below this, the meter is colored red
-          high={7} // -- below this, the meter is colored yellow
-          optimum={8} // Functional just not always fully supported -- tells the renderer that high and above is green
-          max={10} // Fully supported
+          low={30} // Rarely supported -- below this, the meter is colored red
+          high={75} // -- below this, the meter is colored yellow
+          optimum={85} // Functional just not always fully supported -- tells the renderer that high and above is green
+          max={100} // Fully supported
           value={score}
           className="w-full min-w-4"
         ></meter>
@@ -45,11 +45,33 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
       </>
     );
   }
-  if (cellDesign === CellDesign.ColoredDiv) {
+  if (cellDesign === CellDesign.PartialRectangle) {
+    return (
+      <div className="rounded w-full min-w-4 px-2 text-center relative">
+        <div
+          className="h-full absolute top-0 left-0 -z-10 rounded"
+          style={{
+            width: score + '%',
+            backgroundColor: applyColorGradient(score / 100),
+          }}
+        />
+        {showValues ? (
+          <div>
+            {score < 100 && <span className="opacity-0">0</span>}
+            {score < 10 && <span className="opacity-0">0</span>}
+            {score.toFixed(0)}
+          </div>
+        ) : (
+          <div className="h-4" />
+        )}
+      </div>
+    );
+  }
+  if (cellDesign === CellDesign.FullRectangle) {
     return (
       <div
         className="rounded w-full min-w-4 px-2 text-center"
-        style={{ backgroundColor: applyColorGradient(score / 10) }}
+        style={{ backgroundColor: applyColorGradient(score / 100) }}
       >
         {showValues ? (
           <>
@@ -74,26 +96,7 @@ const DigitalSupportCellDisplay: React.FC<Props> = ({ ent, tier, cat, factor }) 
       />
     );
   }
-
-  if (cellDesign === CellDesign.SimplePie) {
-    return (
-      <div
-        className="rounded w-full min-w-4 text-center leading-4"
-        style={{ color: applyColorGradient(score / 100) }}
-      >
-        {getPartiallyFilledCircleChar(score)}
-      </div>
-    );
-  }
 };
-
-function getPartiallyFilledCircleChar(score: number) {
-  if (score === 0) return '○';
-  if (score <= 25) return '◔';
-  if (score <= 50) return '◑';
-  if (score <= 75) return '◕';
-  return '●';
-}
 
 function getGroupedDigitalSupportFactorScore(
   ent: LanguageData,

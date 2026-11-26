@@ -14,10 +14,14 @@ type Props = {
 
 const Pie: React.FC<Props> = ({ label, fraction, size = 32, color }) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 16 16" className="w-full">
+    <svg width={size} height={size} viewBox="0 0 16 16" className="w-full transition-all">
       <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="var(--muted)" />
 
-      <Slice startingAngle={0} arcAngle={fraction} color={color ?? `hsl(${fraction}, 60%, 60%)`} />
+      <Slice
+        startingAngle={0}
+        arcAngle={fraction}
+        color={color ?? `hsl(${fraction * 120}, 60%, 60%)`}
+      />
       {label && (
         <text x={CENTER} y={CENTER} textAnchor="middle" dominantBaseline="central" fontSize="0.5em">
           {label}
@@ -56,16 +60,8 @@ const Slice: React.FC<{
 
   return (
     <g fill={color}>
+      <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="none" stroke={color} />
       {path}
-      <line
-        x1={CENTER}
-        y1={CENTER}
-        x2={endX}
-        y2={endY}
-        stroke={color}
-        strokeWidth="0.5"
-        filter="brightness(0.8)"
-      />
     </g>
   );
 };
