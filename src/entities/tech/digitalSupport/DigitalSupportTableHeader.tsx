@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from 'lucide-react';
+import { ChevronLeftIcon, ExpandIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 import { sumBy } from '@shared/lib/setUtils';
@@ -11,7 +11,7 @@ import {
   getDigitalSupportFactorLabel,
 } from '@strings/DigitalSupportStrings';
 
-import { useDigitalSupportContext } from './DigitalSupportContext';
+import { CellDesign, useDigitalSupportContext } from './DigitalSupportContext';
 import { DigitalSupportCategoryIcon, DigitalSupportFactorIcon } from './DigitalSupportIcons';
 import { getColumnWidth } from './DigitalSupportTableBody';
 import {
@@ -163,7 +163,8 @@ const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showD
   let contents: ReactNode = '';
 
   if (cat == null) return <th></th>;
-  else if (factor == null)
+  else if (factor == null) {
+    const factorCount = getFactorCount(cat);
     contents = (
       <HoverCard>
         <HoverCardTrigger
@@ -171,8 +172,10 @@ const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showD
           aria-label={`Click to show all ${getDigitalSupportCategoryLabel(cat)} factors`}
           render={
             <Button variant="ghost" onClick={() => toggleCat(cat)}>
-              {showValues && getFactorCount(cat) > 1 && 'All '}
-              {getFactorCount(cat) > 1 ? `${getFactorCount(cat)} factors` : `1 factor`}
+              {cellDesign === CellDesign.Pie && <ExpandIcon />}
+              {showValues && cellDesign != CellDesign.Pie && factorCount > 1 && 'All '}
+              {factorCount}
+              {cellDesign != CellDesign.Pie && (factorCount > 1 ? ' factors' : ' factor')}
             </Button>
           }
         />
@@ -182,7 +185,7 @@ const FactorHeader: React.FC<DigitalSupportColumn> = ({ tier, cat, factor, showD
         </HoverCardContent>
       </HoverCard>
     );
-  else {
+  } else {
     contents = (
       <HoverCard>
         <HoverCardTrigger

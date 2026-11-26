@@ -8,6 +8,7 @@ import {
   MonitorIcon,
   MonitorPcIcon,
   SpellCheckIcon,
+  UsersRoundCollaborationIcon,
 } from 'lucide-react';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -35,6 +36,8 @@ export function DigitalSupportCategoryIcon({ cat }: { cat: DigitalSupportCategor
     // Interface
     case DigitalSupportCategory.OperatingSystems:
       return <MonitorPcIcon />;
+    case DigitalSupportCategory.SocialMedia:
+      return <UsersRoundCollaborationIcon />;
     case DigitalSupportCategory.AIKnowledgeTools:
       return <BotIcon />;
     default:
@@ -105,7 +108,15 @@ function getDigitalSupportFactorIconURL({ factor }: { factor: DigitalSupportFact
     case DigitalSupportFactor.Android:
       return 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Android_robot_%282014-2019%29.svg';
 
+    case DigitalSupportFactor.Facebook:
+      return 'https://static.xx.fbcdn.net/rsrc.php/y1/r/ay1hV6OlegS.ico';
+    case DigitalSupportFactor.Instagram:
+      return 'https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp';
+
     case DigitalSupportFactor.ClaudeSonnet:
       return 'https://claude.com/icon.svg';
+
+    default:
+      enforceExhaustiveSwitch(factor);
   }
 }

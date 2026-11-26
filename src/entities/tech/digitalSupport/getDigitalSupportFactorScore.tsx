@@ -3,6 +3,7 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { EntityType } from '@entities/types/EntityTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { sumBy } from '@shared/lib/setUtils';
 
 import { computeBooksPublishedScores } from './DigitalSupportBooksPublished';
 import { DigitalSupportFactor } from './DigitalSupportTypes';
@@ -62,12 +63,22 @@ function getDigitalSupportFactorScore(ent: LanguageData, factor: DigitalSupportF
     case DigitalSupportFactor.Win11:
       return getTechSupportScore(ent, 'win11');
 
+    case DigitalSupportFactor.Facebook:
+      return getAggregatedTechScore(ent, ['fbweb', 'fb4a', 'fblite', 'fbios']);
+    case DigitalSupportFactor.Instagram:
+      return getAggregatedTechScore(ent, ['igweb', 'ig4a', 'igios']);
+
     case DigitalSupportFactor.ClaudeSonnet:
       return getTechSupportScore(ent, 'Claude');
 
     default:
       enforceExhaustiveSwitch(factor);
   }
+}
+
+function getAggregatedTechScore(ent: LanguageData, techShortNames: string[]): number {
+  const scores = techShortNames.map((name) => getTechSupportScore(ent, name));
+  return sumBy(scores, (s) => s) / scores.length;
 }
 
 function getTechSupportScore(ent: LanguageData, techShortName: string): number {

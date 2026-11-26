@@ -65,8 +65,8 @@ export function getDigitalSupportCategoryLabel(cat: DigitalSupportCategory): str
     //   return 'Recommendation';
     case DigitalSupportCategory.OperatingSystems:
       return 'Operating Systems';
-    // case DigitalSupportCategory.SocialMedia:
-    //   return 'Social Media';
+    case DigitalSupportCategory.SocialMedia:
+      return 'Social Media';
     // case DigitalSupportCategory.PopularSoftware:
     //   return 'Popular Software';
     case DigitalSupportCategory.AIKnowledgeTools:
@@ -90,6 +90,7 @@ export function getDigitalSupportFactorLabel(factor: DigitalSupportFactor): stri
       return 'QuillBot';
     case DigitalSupportFactor.LanguageTool:
       return 'LanguageTool';
+
     case DigitalSupportFactor.BooksPublishedAnnually:
       return 'Books Published Annually';
     case DigitalSupportFactor.Wikipedia:
@@ -104,6 +105,7 @@ export function getDigitalSupportFactorLabel(factor: DigitalSupportFactor): stri
       return 'Google Translate';
     case DigitalSupportFactor.MSTranslator:
       return 'Microsoft Translator';
+
     case DigitalSupportFactor.Win11:
       return 'Windows 11';
     case DigitalSupportFactor.macOS:
@@ -112,6 +114,10 @@ export function getDigitalSupportFactorLabel(factor: DigitalSupportFactor): stri
       return 'iOS - iPhone Operating System';
     case DigitalSupportFactor.Android:
       return 'Android';
+    case DigitalSupportFactor.Facebook:
+      return 'Facebook';
+    case DigitalSupportFactor.Instagram:
+      return 'Instagram';
     case DigitalSupportFactor.ClaudeSonnet:
       return 'Claude Sonnet';
     default:
