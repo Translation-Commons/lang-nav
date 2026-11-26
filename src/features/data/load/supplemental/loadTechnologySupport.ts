@@ -226,6 +226,10 @@ function getLanguageCodes(languageCodePath: string): string[] {
     case 'fas':
     case 'pes':
       return ['fas', 'pes'];
+    case 'lv':
+    case 'lav':
+    case 'lvs':
+      return ['lav', 'lvs'];
   }
   return languageCodePath.split('/');
 }

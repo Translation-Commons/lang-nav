@@ -19,6 +19,7 @@ import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLangTags } from './supplemental/loadLangTags';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadLanguageScopeOverrides } from './supplemental/loadLanguageScopeOverrides';
+import { loadMetaPlatforms } from './supplemental/loadMetaPlatforms';
 import { loadTechnologySupport } from './supplemental/loadTechnologySupport';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
@@ -50,6 +51,7 @@ export async function loadSupplementalData(
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
     loadTechnologySupport(dataContext),
+    loadMetaPlatforms(dataContext),
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadLangTags(dataContext.getLanguage),

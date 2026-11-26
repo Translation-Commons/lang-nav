@@ -1,0 +1,126 @@
+#name	Meta Platforms language support		Facebook for Web	Facebook for Android	Facebook Lite	Facebook for iOS	Instagram for Web	Instagram for Android	Instagram for iOS
+#tech			fbweb	fb4a	fblite	fbios	igweb	ig4a	igios
+#dateAccessed			2026-11-26	2026-11-26			2026-11-26	2026-11-26	
+#url			https://www.facebook.com/settings/?tab=language	App settings	App settings	App settings	https://www.instagram.com/language/preferences/	App settings	App settings
+Code	Name	Facebook Code	fbweb	fb4a	fblite	fbios	igweb	ig4a	ig4ios
+af_ZA	Afrikaans	af_ZA	y	y	y		y	y	
+am_Ethi_ET	Amharic	am_ET	y		y				
+ar_Arab_001	Arabic	ar_AR	y	y	y	y	y	y	
+as_Beng_IN	Assamese	as_IN	y	y	y				
+az_Latn_AZ	Azerbaijani	az_AZ	y	y	y				
+be_Cyrl_BY	Belarusian	be_BY	y	y					
+bg_Cyrl_BG	Bulgarian	bg_BG	y	y	y		y	y	
+bn_Beng_IN	Bengali	bn_IN	y	y	y		y	y	
+br_FR	Breton	br_FR	y						
+hbs_Latn_BA/bs_Latn_BA	Bosnian	bs_BA	y	y	y				
+ca_ES	Catalan	ca_ES	y	y	y				
+ku_Arab_IQ/ckb_IQ	Central Kurdish (Sorani)	cb_IQ	y	y					
+co_FR	Corsican	co_FR	y						
+cs_CZ	Czech	cs_CZ	y	y	y	y	y	y	y
+ceb_PH	Cebuano	cx_PH	y		y				
+cy_GB	Welsh	cy_GB	y						
+da_DK	Danish	da_DK	y	y	y	y	y	y	y
+de_DE	German	de_DE	y	y	y	y	y	y	y
+el_Grek_GR	Greek	el_GR	y	y	y	y	y	y	y
+en_GB	English (UK)	en_GB	y	y	y	y	y	y	y
+en_US	English (US)	en_US	y	y	y	y	y	y	y
+eo_001	Esperanto	eo_EO	y						
+es_ES	Spanish (Spain)	es_ES	y	y	y	y	y	y	y
+es_419	Spanish	es_LA	y	y	y	y	y	y	y
+et_EE	Estonian	et_EE	y	y	y				
+eu_ES	Basque	eu_ES	y						
+fa_Arab_IR/pes_Arab_IR	Persian	fa_IR	y	y	y		y	y	
+ful_NG/fuv_NG	Fula	ff_NG	y						
+fi_FI	Finnish	fi_FI	y	y	y	y	y	y	y
+fur_IT	Friulian	fn_IT	y						
+fo_FO	Faroese	fo_FO	y						
+fr_CA	French (Canada)	fr_CA	y				y	y	y
+fr_FR	French (France)	fr_FR	y	y	y	y	y	y	y
+fy_NL	Frisian	fy_NL	y						
+ga_Latn_IE	Irish	ga_IE	y						
+gl_ES	Galician	gl_ES	y						
+gn_PY/gug_PY	Guarani	gn_PY	y		y				
+gu_Gujr_IN	Gujarati	gu_IN	y	y	y		y	y	
+ha_NG	Hausa	ha_NG	y		y				
+he_Hebr_IL	Hebrew	he_IL	y	y	y	y	y	y	
+hi_Deva_IN	Hindi	hi_IN	y	y	y	y	y	y	y
+hbs_Latn_HR/hr_Latn_HR	Croatian	hr_HR	y	y	y	y	y	y	y
+ht_HT	Haitian Creole	ht_HT	y		y				
+hu_HU	Hungarian	hu_HU	y	y	y	y	y	y	y
+hy_Armn_AM	Armenian	hy_AM	y	y	y				
+msa_ID/id_ID	Indonesian	id_ID	y	y	y	y	y	y	y
+iu_Latn_US/ik_Latn_US	Inupiaq	ik_US	y						
+is_IS	Icelandic	is_IS	y						
+it_IT	Italian	it_IT	y	y	y	y	y	y	y
+iu_Latn_CA/ike_Latn_CA/sout3269_Latn_CA	Inuktitut	iu_CA	y						
+ja_JP	Japanese	ja_JP	y	y	y	y	y	y	y
+ja_JP	Japanese (Kansai)	ja_KS	y						
+jv_Latn_ID	Javanese	jv_ID	y	y	y				
+ka_Geor_GE	Georgian	ka_GE	y	y	y				
+kk_Cyrl_KZ	Kazakh	kk_KZ	y	y	y				
+km_KH	Khmer	km_KH	y	y	y				
+kn_Knda_IN	Kannada	kn_IN	y	y	y		y	y	
+ko_KR	Korean	ko_KR	y	y	y	y	y	y	y
+ku_Latn_TR/kmr_Latn_TR	Northern Kurdish (Kurmanji)	ku_TR	y	y					
+ky_Cyrl_KG	Kyrgyz	ky_KG	y	y	y				
+ln_CD	Lingala	ln_CD			y				
+lo_LA	Lao	lo_LA	y	y					
+lt_LT	Lithuanian	lt_LT	y	y	y				
+lv_LV/lvs_LV	Latvian	lv_LV	y	y	y				
+mg_MG/plt_MG	Malagasy	mg_MG	y		y				
+mk_Cyrl_MK	Macedonian	mk_MK	y	y	y				
+ml_Mlym_IN	Malayalam	ml_IN	y	y	y		y		
+mn_Cyrl_MN	Mongolian	mn_MN	y	y	y				
+mr_Deva_IN	Marathi	mr_IN	y	y	y		y	y	
+ms_MY/zsm_MY	Malay	ms_MY	y	y	y	y	y	y	y
+mt_MT	Maltese	mt_MT	y						
+my_Mymr_MM	Burmese	my_MM	y	y	y				
+no_NO/nb_NO	Norwegian (bokmal)	nb_NO	y	y	y	y	y	y	y
+ne_Deva_NP/npi_Deva_NP	Nepali	ne_NP	y	y	y		y		
+nl_BE	Flemish	nl_BE	y						
+nl_NL	Dutch	nl_NL	y	y	y	y	y	y	y
+no_NO/nn_NO	Norwegian (nynorsk)	nn_NO	y						
+om_ET	Oromo	om_ET			y				
+or_Orya_IN/ory_Orya_IN	Oriya	or_IN	y		y				
+pa_Guru_IN	Punjabi	pa_IN	y	y	y		y		
+pl_PL	Polish	pl_PL	y	y	y	y	y	y	y
+ps_Arab_AF	Pashto	ps_AF	y	y	y				
+pt_BR	Portuguese (Brazil)	pt_BR	y	y	y	y	y	y	y
+pt_PT	Portuguese (Portugal)	pt_PT	y	y	y	y	y	y	y
+rn_BI	Kirundi	rn_BI			y				
+ro_RO	Romanian	ro_RO	y	y	y	y	y	y	y
+ru_Cyrl_RU	Russian	ru_RU	y	y	y	y	y	y	y
+rw_RW	Kinyarwanda	rw_RW	y		y				
+sc_IT	Sardinian	sc_IT	y						
+si_Sinh_LK	Sinhala	si_LK	y	y	y		y		
+sk_SK	Slovak	sk_SK	y	y	y	y	y	y	y
+sl_SI	Slovenian	sl_SI	y	y	y				
+sn_ZW	Shona	sn_ZW	y		y				
+so_SO	Somali	so_SO	y	y	y				
+sq_AL	Albanian	sq_AL	y	y	y				
+hbs_Cyrl_RS/sr_Cyrl_RS	Serbian	sr_RS	y	y	y		y	y	
+ss_SZ	Swazi	ss_SZ			y				
+st_ZA	Southern Sotho	st_ZA			y				
+sv_SE	Swedish	sv_SE	y	y	y	y	y	y	y
+sw_KE	Swahili	sw_KE	y	y	y				
+syr_SY	Syriac	sy_SY	y						
+szl_PL	Silesian	sz_PL	y						
+ta_Taml_IN	Tamil	ta_IN	y	y	y		y	y	
+te_Telu_IN	Telugu	te_IN	y	y	y		y	y	
+tg_Cyrl_TJ	Tajik	tg_TJ	y	y					
+th_TH	Thai	th_TH	y	y	y	y	y	y	y
+fil_PH	Filipino	tl_PH	y	y	y		y	y	y
+tn_BW	Tswana	tn_BW			y				
+tr_TR	Turkish	tr_TR	y	y	y	y	y	y	y
+tt_Cyrl_RU	Tatar	tt_RU	y						
+tzm_MA/zgh_MA	Tamazight	tz_MA	y						
+uk_Cyrl_UA	Ukrainian	uk_UA	y	y	y	y	y	y	y
+ur_Arab_PK	Urdu	ur_PK	y	y	y		y		
+uz_Latn_UZ/uzn_Latn_UZ	Uzbek	uz_UZ	y	y	y				
+vi_VN	Vietnamese	vi_VN	y	y	y	y	y	y	y
+xh_ZA	Xhosa	xh_ZA			y				
+zh_Hans_CN/cmn_Hans_CN	Simplified Chinese (China)	zh_CN	y	y	y	y	y	y	y
+zh_Hant_HK/yue_Hant_HK	Traditional Chinese (Hong Kong)	zh_HK	y	y	y	y	y	y	y
+zh_Hant_TW/cmn_Hant_TW	Traditional Chinese (Taiwan)	zh_TW	y	y	y	y	y	y	y
+zu_ZA	Zulu	zu_ZA			y				
+zza_TR	Zaza	zz_TR	y						
