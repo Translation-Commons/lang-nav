@@ -177,6 +177,12 @@
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+
+  /* Explicit scrollbar styling opts out of auto-hiding overlay scrollbars */
+  textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted-foreground) transparent;
+  }
 }
 
 @utility bg-checkered {
