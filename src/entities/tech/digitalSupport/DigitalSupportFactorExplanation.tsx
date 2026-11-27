@@ -151,7 +151,7 @@ function TechSupport({ ent, techShortName }: TechSupportProps) {
           </li>
         ))}
       </ul>
-      {url && <ExternalLink href={url} showDomainOnly />}
+      {url && url.startsWith('http') && <ExternalLink href={url} showDomainOnly />}
     </>
   );
 }
