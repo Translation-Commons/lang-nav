@@ -118,7 +118,10 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         params.secondarySortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
         break;
       case PageParamKey.colorGradient:
-        params.colorGradient = parseInt(value) as ColorGradient;
+        // Only if it is a valid gradient
+        if (Object.values(ColorGradient).includes(parseInt(value))) {
+          params.colorGradient = parseInt(value) as ColorGradient;
+        }
         break;
       case PageParamKey.reportID:
         params.reportID = parseInt(value) as ReportID;

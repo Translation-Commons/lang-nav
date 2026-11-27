@@ -6,9 +6,11 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import { Button } from '@shared/ui/button';
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
@@ -16,6 +18,7 @@ import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
   const { colorGradient, updatePageParams } = usePageParams();
+  const direction = colorGradient > 0 ? 'forward' : 'reverse';
 
   return (
     <DropdownMenu>
@@ -36,6 +39,7 @@ const ColorGradientSelector: React.FC = () => {
         >
           {Object.values(ColorGradient)
             .filter((cg) => typeof cg === 'number')
+            .filter((cg) => (direction === 'forward' ? cg > 0 : cg < 0))
             .map((cg) => (
               <DropdownMenuRadioItem key={cg} value={cg}>
                 <div className="min-w-[4em] w-full h-[16px]">
@@ -44,6 +48,18 @@ const ColorGradientSelector: React.FC = () => {
               </DropdownMenuRadioItem>
             ))}
         </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={direction === 'reverse'}
+          onCheckedChange={(checked) => {
+            const newDirection = checked ? 'reverse' : 'forward';
+            const newColorGradient =
+              Math.abs(colorGradient) * (newDirection === 'forward' ? 1 : -1);
+            updatePageParams({ colorGradient: newColorGradient });
+          }}
+        >
+          Reverse
+        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
