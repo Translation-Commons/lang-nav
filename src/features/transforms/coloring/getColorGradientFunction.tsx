@@ -1,11 +1,12 @@
-import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-
 import { ColorGradient } from './ColorTypes';
 
 /**
  * Return a function that maps a normalized value (0 to 1) to a color string, based on the selected color gradient.
  */
 export function getColorGradientFunction(colorGradient: ColorGradient): (value: number) => string {
+  if (colorGradient < 0)
+    return (value: number) => getColorGradientFunction(-colorGradient)(1 - value);
+
   switch (colorGradient) {
     case ColorGradient.DivergingBlueToOrange:
       //   hsl(240, 90%, 60%) -> hsl(135, 90%, 100%) -> hsl(30, 90%, 60%)
@@ -85,37 +86,23 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
       return (value: number) => {
         return `hsl(211, 80%, ${95 - value * 50}%)`;
       };
+    case ColorGradient.SequentialBlueFromDark:
+      // Same blue as the primary button color
+      // hsl(211, 80%, 0%) -> hsl(211, 80%, 25%) -> hsl(211, 80%, 50%)
+      return (value: number) => {
+        return `hsl(211, 80%, ${5 + value * 50}%)`;
+      };
     case ColorGradient.SequentialOrange:
       // hsl(30, 80%, 100%) -> hsl(30, 80%, 75%) -> hsl(30, 80%, 50%)
       return (value: number) => {
         return `hsl(30, 80%, ${95 - value * 50}%)`;
       };
 
-    // Inverses
-    case ColorGradient.DivergingOrangeToBlue:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.DivergingBlueToOrange)(1 - value);
-    case ColorGradient.DivergingGreenToRed:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.DivergingRedToGreen)(1 - value);
-    case ColorGradient.StopLightGreenToRed:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.StopLightRedToGreen)(1 - value);
-    case ColorGradient.StopLightSunset:
-      return (value: number) => getColorGradientFunction(ColorGradient.StopLightSunrise)(1 - value);
-    case ColorGradient.StopLightSunsetOkLab:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.StopLightSunriseOkLab)(1 - value);
-    case ColorGradient.HueRainbowRedToBlue:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.HueRainbowBlueToRed)(1 - value);
-    case ColorGradient.OklabRainbowRedToBlue:
-      return (value: number) =>
-        getColorGradientFunction(ColorGradient.OklabRainbowBlueToRed)(1 - value);
-    case ColorGradient.SequentialBlueReverse:
-      return (value: number) => getColorGradientFunction(ColorGradient.SequentialBlue)(1 - value);
-    case ColorGradient.SequentialOrangeReverse:
-      return (value: number) => getColorGradientFunction(ColorGradient.SequentialOrange)(1 - value);
+    case ColorGradient.SequentialOrangeFromDark:
+      // hsl(30, 80%, 0%) -> hsl(30, 80%, 25%) -> hsl(30, 80%, 50%)
+      return (value: number) => {
+        return `hsl(30, 80%, ${5 + value * 50}%)`;
+      };
 
     // Categorical
     case ColorGradient.ScatteredOklab:
@@ -136,6 +123,6 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
         return `rgb(${red * 255}, ${green * 255}, ${blue * 255})`;
       };
     default:
-      enforceExhaustiveSwitch(colorGradient);
+      throw new Error(`Unsupported color gradient: ${colorGradient}`);
   }
 }

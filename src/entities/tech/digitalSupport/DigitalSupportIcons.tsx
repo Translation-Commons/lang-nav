@@ -58,8 +58,19 @@ export function DigitalSupportFactorIcon({ factor }: { factor: DigitalSupportFac
       className="size-4"
       src={getDigitalSupportFactorIconURL({ factor })}
       alt={DigitalSupportFactor[factor]}
+      style={shouldFlipIconDarkMode({ factor }) ? { filter: 'invert(1) hue-rotate(180deg)' } : {}}
     />
   );
+}
+
+function shouldFlipIconDarkMode({ factor }: { factor: DigitalSupportFactor }) {
+  switch (factor) {
+    case DigitalSupportFactor.iOS:
+    case DigitalSupportFactor.macOS:
+      return true;
+    default:
+      return false;
+  }
 }
 
 function getDigitalSupportFactorIconURL({ factor }: { factor: DigitalSupportFactor }) {
