@@ -17,3 +17,9 @@ Claude	Claude Sonnet	AI	Anthropic			245,000,000	https://gpt-insights.de/en/geo-w
 Grammarly	Grammarly	AI	Grammarly			40,000,000	https://www.grammarly.com/blog/company/grammarly-announces-growth-financing/
 LanguageTool	LanguageTool	AI	LanguageTool			6,000,000	https://languagetool.org/about
 Quillbot	QuillBot	AI	Quillbot			35,000,000	https://amplitude.com/case-studies/quillbot
+fbweb	Facebook for Web	App	Meta	FB		354,000,000	computed from stat 11.5% of FB users use the iOS app
+fblite	Facebook Lite for Android	App	Meta	FB	Android	652,000,000	computed from stat 21.2% of FB users use the iOS app
+IG	Instagram	Product	Meta			3,000,000,000	https://en.wikipedia.org/wiki/List_of_most_popular_social_platforms
+igweb	Instagram for Web	App	Meta	IG		1,260,000,000	computed from stat 42% of IG users use the Desktop Web app
+igios	Instagram for iOS	App	Meta	IG	iOS	999,000,000	computed from stat 33.3% of IG users use the iOS app
+ig4a	Instagram for Android	App	Meta	IG	Android	1,859,000,000	computed from stat 62% of IG users use the iOS app

@@ -177,9 +177,9 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
             />
           );
         return (
-          <span className="truncate ellipsis" title={fieldValue}>
+          <div className="truncate ellipsis" title={fieldValue}>
             {fieldValue}
-          </span>
+          </div>
         );
       }
       return fieldValue;

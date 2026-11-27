@@ -77,6 +77,11 @@ const DigitalSupportFactorExplanation: React.FC<{
     case DigitalSupportFactor.Win11:
       return <TechSupport ent={ent} techShortName="win11" />;
 
+    case DigitalSupportFactor.Facebook:
+      return <TechSupport ent={ent} techShortName={['fbweb', 'fb4a', 'fblite', 'fbios']} />;
+    case DigitalSupportFactor.Instagram:
+      return <TechSupport ent={ent} techShortName={['igweb', 'ig4a', 'igios']} />;
+
     case DigitalSupportFactor.ClaudeSonnet:
       return <TechSupport ent={ent} techShortName="Claude" />;
 
@@ -116,23 +121,37 @@ function KeyboardSupport({ ent, inputTechCode }: { ent: LanguageData; inputTechC
   );
 }
 
-function TechSupport({ ent, techShortName }: { ent: LanguageData; techShortName: string }) {
-  const techSupports = ent.techSupport?.filter((ts) => ts.techShortName === techShortName);
-  if (!techSupports?.length) return <Deemphasized>Not supported by {techShortName}</Deemphasized>;
+type TechSupportProps = {
+  ent: LanguageData;
+  techShortName: string | string[];
+};
+
+function TechSupport({ ent, techShortName }: TechSupportProps) {
+  const techSupports = ent.techSupport?.filter((ts) =>
+    Array.isArray(techShortName)
+      ? techShortName.includes(ts.techShortName)
+      : ts.techShortName === techShortName,
+  );
+  if (!techSupports?.length)
+    return (
+      <Deemphasized>
+        Not supported by {Array.isArray(techShortName) ? techShortName.join(', ') : techShortName}
+      </Deemphasized>
+    );
   const url = techSupports[0].tech.languageSupportURL;
 
   return (
     <>
       <ul>
         {techSupports?.map((ts) => (
-          <li key={ts.techShortName}>
+          <li key={ts.techShortName + ts.languageCodePath}>
             <HoverableEntityName ent={ts.tech} /> for {ts.name}
             {ts.level != null && ` at level ${ts.level}`}
             {ts.tech.maxLevel != null && ` out of ${ts.tech.maxLevel}`}
           </li>
         ))}
       </ul>
-      {url && <ExternalLink href={url} showDomainOnly />}
+      {url && url.startsWith('http') && <ExternalLink href={url} showDomainOnly />}
     </>
   );
 }

@@ -23,7 +23,7 @@ export enum DigitalSupportCategory {
 
   // Interfaces
   OperatingSystems,
-  // SocialMedia,
+  SocialMedia,
   // PopularSoftware,
   AIKnowledgeTools,
 }
@@ -71,6 +71,8 @@ export enum DigitalSupportFactor {
   Android,
 
   // SocialMedia
+  Facebook,
+  Instagram,
 
   // PopularSoftware
 
@@ -93,7 +95,7 @@ export const DigitalSupportTierCategories: Record<DigitalSupportTier, DigitalSup
   ],
   [DigitalSupportTier.Interfaces]: [
     DigitalSupportCategory.OperatingSystems,
-    // DigitalSupportCategory.SocialMedia,
+    DigitalSupportCategory.SocialMedia,
     // DigitalSupportCategory.PopularSoftware,
     DigitalSupportCategory.AIKnowledgeTools,
   ],
@@ -131,7 +133,10 @@ export const DigitalSupportCategoryFactors: Record<DigitalSupportCategory, Digit
       DigitalSupportFactor.iOS,
       DigitalSupportFactor.Android,
     ],
-    // [DigitalSupportCategory.SocialMedia]: [],
+    [DigitalSupportCategory.SocialMedia]: [
+      DigitalSupportFactor.Facebook,
+      DigitalSupportFactor.Instagram,
+    ],
     // [DigitalSupportCategory.PopularSoftware]: [],
     [DigitalSupportCategory.AIKnowledgeTools]: [DigitalSupportFactor.ClaudeSonnet],
   };

@@ -75,7 +75,11 @@ const TechnologyDetails: React.FC<Props> = ({ tech }) => {
           )}
           {languageSupportURL && (
             <DetailsField title="Source URL">
-              <ExternalLink href={languageSupportURL} showDomainOnly />
+              {languageSupportURL.startsWith('http') ? (
+                <ExternalLink href={languageSupportURL} showDomainOnly />
+              ) : (
+                languageSupportURL
+              )}
             </DetailsField>
           )}
         </DetailsSection>
